@@ -15,9 +15,6 @@ function setUserCookie(data) {
 }
 
 function removeCookie() {
-    console.log('====================================');
-    console.log('remove');
-    console.log('====================================');
     const cookies = new Cookies();
     cookies.remove("esports");
 }
