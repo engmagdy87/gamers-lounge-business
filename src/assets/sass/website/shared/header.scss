@@ -1,0 +1,184 @@
+@import "../color-palette.scss";
+@import "../variables.scss";
+@import "../mixins.scss";
+
+.header-wrapper {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5) 80%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: $header-height;
+  z-index: 100;
+  &--desktop {
+    display: none;
+    width: 100%;
+    @include is-large-desktop {
+      display: block;
+      margin-right: 20px;
+    }
+    @include is-extra-large-desktop {
+      display: block;
+      margin-right: 20px;
+    }
+  }
+  &--mobile {
+    display: block;
+    @include is-large-desktop {
+      display: none;
+    }
+    @include is-extra-large-desktop {
+      display: none;
+    }
+  }
+  @include is-mobile {
+    height: $header-height-mobile;
+  }
+  &__logo {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    margin-right: auto;
+    margin-left: 40px;
+    width: 300px;
+    @include is-mobile {
+      width: 150px;
+      margin-left: 10px;
+    }
+    img {
+      display: block;
+      width: 150px;
+      margin-right: 20px;
+      padding-bottom: 20px;
+      @include is-mobile {
+        margin-right: 5px;
+        width: 90px;
+        padding-bottom: 10px;
+      }
+    }
+    p {
+      display: inline-block;
+      font-size: 2rem;
+      @include is-mobile {
+        font-size: 1rem;
+      }
+    }
+  }
+  &__navLinks {
+    list-style: none;
+    margin-bottom: 0;
+    margin-left: -20%;
+    text-align: center;
+    li {
+      display: inline-block;
+      cursor: pointer;
+      a {
+        padding: 20px 10px;
+        transition: all 0.3s ease 0s;
+        color: $inactive-header-link;
+        font-size: 1.2rem;
+        font-weight: lighter;
+        font-family: "Open Sans";
+      }
+      &:hover {
+        a {
+          color: $primary;
+        }
+      }
+    }
+    &--active a {
+      color: $primary !important;
+    }
+  }
+}
+.hi-active {
+  color: $primary !important;
+}
+.hamburger-menu {
+  font-size: 30px;
+  cursor: pointer;
+  color: white !important;
+  position: absolute;
+  top: calc(#{$header-height} / 2.5);
+  right: 24px;
+  @include is-mobile {
+    top: calc(#{$header-height-mobile} / 3.5);
+  }
+}
+
+.overlay {
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 500;
+  top: 0;
+  left: 0;
+  background-color: black;
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: calc(100% - 50px);
+  text-align: left;
+  margin-top: 30px;
+  padding-left: 50px;
+  list-style: none;
+  @include is-mobile {
+    top: 15%;
+  }
+  &__text {
+    &--active {
+      color: $primary !important;
+    }
+    @include is-mobile {
+      font-size: 1.6rem !important;
+    }
+  }
+}
+
+.overlay li a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay li a:hover,
+.overlay li a:focus {
+  color: $primary;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  cursor: pointer;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay {
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+  }
+  .overlay a {
+    font-size: 20px;
+  }
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}

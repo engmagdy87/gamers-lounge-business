@@ -1,17 +1,20 @@
-import Home from '../website/layout/Home.vue'
-import DashboardLayout from '../dashboard/layout/DashboardLayout.vue'
+// Website containers
+import Home from '../website/containers/Home.vue'
+
 // GeneralViews
 import NotFound from '../dashboard/pages/NotFoundPage.vue'
+
+// Admin container
+import DashboardLayout from '../dashboard/layout/DashboardLayout.vue'
 
 // Admin pages
 import Overview from 'src/dashboard/pages/Overview.vue'
 import UserProfile from 'src/dashboard/pages/UserProfile.vue'
 import TableList from 'src/dashboard/pages/TableList.vue'
-import Typography from 'src/dashboard/pages/Typography.vue'
 import Icons from 'src/dashboard/pages/Icons.vue'
-import Maps from 'src/dashboard/pages/Maps.vue'
 import Notifications from 'src/dashboard/pages/Notifications.vue'
-import Upgrade from 'src/dashboard/pages/Upgrade.vue'
+
+import { getUserCookie } from '../website/helpers/CookieHelper'
 
 const routes = [
   {
@@ -20,9 +23,14 @@ const routes = [
     component: Home,
   },
   {
-    path: '/admin',
+    path: '/dashboard',
     component: DashboardLayout,
-    redirect: '/admin/overview',
+    redirect: '/dashboard/overview',
+    beforeEnter(to, from, next) {
+      const token = getUserCookie()
+      if (!token || !token.is_admin) next('/');
+      else next();
+    },
     children: [
       {
         path: 'overview',
@@ -40,29 +48,14 @@ const routes = [
         component: TableList
       },
       {
-        path: 'typography',
-        name: 'Typography',
-        component: Typography
-      },
-      {
         path: 'icons',
         name: 'Icons',
         component: Icons
       },
       {
-        path: 'maps',
-        name: 'Maps',
-        component: Maps
-      },
-      {
         path: 'notifications',
         name: 'Notifications',
         component: Notifications
-      },
-      {
-        path: 'upgrade',
-        name: 'Upgrade to PRO',
-        component: Upgrade
       }
     ]
   },
