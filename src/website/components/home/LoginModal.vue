@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 import types from "../../../store/types";
 
 export default {
@@ -72,13 +72,26 @@ export default {
     ...mapActions({
       fetchUserPersona: types.user.actions.FETCH_USER_PERSONA
     }),
+    ...mapMutations({
+      setSpinnerFlag: types.home.mutations.SET_SPINNER_FLAG
+    }),
+    notifyVue(message, color) {
+      this.$notifications.notify({
+        message: `<span>${message}</span>`,
+        horizontalAlign: "right",
+        verticalAlign: "top",
+        type: color
+      });
+    },
     async getUserPersona() {
       const payload = { username: this.username, password: this.password };
       const isValidRequest = await this.fetchUserPersona(payload);
+      this.setSpinnerFlag(false);
       if (isValidRequest) {
         this.username = "";
         this.password = "";
-      }
+        this.notifyVue("Successful Login", "success");
+      } else this.notifyVue("Something wrong happen!", "danger");
     },
     closeModal() {
       this.setShowLoginModal(false);

@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <div class="menu-view-wrapper">
     <div class="row">
-      <div class="col" v-for="(card, index) in data" :key="index">
+      <div class="col p-0" v-for="(card, index) in data" :key="index">
         <HexaCard :card="card" />
       </div>
     </div>
     <div class="row">
-      <div class="col" v-for="(card, index) in data" :key="index">
+      <div class="col p-0" v-for="(card, index) in data" :key="index">
         <HexaCard :card="card" />
       </div>
     </div>
     <div class="row">
-      <div class="col" v-for="(card, index) in data" :key="index">
+      <div class="col p-0" v-for="(card, index) in data" :key="index">
         <HexaCard :card="card" />
       </div>
     </div>
@@ -28,3 +28,5 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped></style>

@@ -1,5 +1,6 @@
 // Website containers
 import Home from '../website/containers/Home.vue'
+import Story from '../website/containers/Story.vue'
 
 // GeneralViews
 import NotFound from '../dashboard/pages/NotFoundPage.vue'
@@ -23,6 +24,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home,
+  },
+  {
+    path: '/story',
+    name: 'story',
+    component: Story,
   },
   {
     path: '/dashboard',

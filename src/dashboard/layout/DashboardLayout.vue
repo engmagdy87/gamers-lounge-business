@@ -27,8 +27,6 @@
       <top-navbar></top-navbar>
 
       <dashboard-content @click="toggleSidebar"> </dashboard-content>
-
-      <content-footer></content-footer>
     </div>
     <Spinner :smallLoader="false" />
   </div>

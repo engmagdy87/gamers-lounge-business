@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN_USER, REGISTER_USER, CREATE_SUMMIT } from '../constants/APIs';
+import { LOGIN_USER, REGISTER_USER, CREATE_SUMMIT, GET_STORY } from '../constants/APIs';
 import { getUserCookie } from '../helpers/CookieHelper';
 
 async function loadUserPersona(payload) {
@@ -29,10 +29,19 @@ async function createSummit(payload) {
     return response.data;
 }
 
+async function getStory() {
+    const response = await get(
+        GET_STORY
+    );
+
+    return response.data;
+}
+
 export {
     loadUserPersona,
     setUserPersona,
-    createSummit
+    createSummit,
+    getStory
 };
 
 async function post(data, url) {
@@ -58,6 +67,21 @@ async function postMultipart(data, url) {
             'Authorization': `Bearer ${adminToken.access_token}`
         }
     });
+    if (
+        (response.status !== 200 && response.status !== 304) ||
+        response.data.errors !== undefined
+    )
+        throw new Error(
+            `response status code ${
+            response.status
+            }`
+        );
+
+    return response;
+}
+
+async function get(url) {
+    const response = await axios.get(url);
     if (
         (response.status !== 200 && response.status !== 304) ||
         response.data.errors !== undefined

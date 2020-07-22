@@ -1,5 +1,10 @@
 <template>
-  <header class="header-wrapper">
+  <header
+    :class="[
+      'header-wrapper',
+      isSolidHeader ? 'header-wrapper--solid' : 'header-wrapper--gradient'
+    ]"
+  >
     <div class="header-wrapper__logo">
       <img src="website/img/ess-logo.png" alt="medaf typeface" />
     </div>
@@ -32,7 +37,7 @@
             activeItem === 'story' ? 'header-wrapper__navLinks--active' : ''
           ]"
         >
-          <a href="#">Our Story</a>
+          <a href="/story">Our Story</a>
         </li>
         <li
           :class="[
@@ -150,7 +155,12 @@ import types from "../../store/types";
 import { removeCookie } from "../helpers/CookieHelper";
 
 export default {
-  props: ["activeItem", "setShowRegisterModal", "setShowLoginModal"],
+  props: [
+    "activeItem",
+    "setShowRegisterModal",
+    "setShowLoginModal",
+    "isSolidHeader"
+  ],
   methods: {
     openNav() {
       this.$refs.myNav.style.height = "100%";

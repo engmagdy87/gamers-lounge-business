@@ -18,7 +18,17 @@ const home = {
     }
 };
 
+const story = {
+    mutations: {
+        SET_STORY_DATA: 'story/mutations/SET_STORY_DATA',
+    },
+    actions: {
+        FETCH_STORY: 'story/actions/FETCH_STORY',
+    }
+};
+
 export default {
     user,
-    home
+    home,
+    story
 };

@@ -147,7 +147,9 @@
         <div class="row">
           <div class="col-12">
             <div>
-              <label class="mr-5" for="media-images">Choose Cover Images</label>
+              <label class="mr-5" for="media-images"
+                >Choose Cover Main Images</label
+              >
               <input
                 type="file"
                 id="media-images"
@@ -186,6 +188,7 @@
                 accept="image/png, image/jpeg"
                 multiple
                 @change="e => setFile(e, 'img_card', true)"
+                ref="mm"
               />
             </div>
           </div>
@@ -256,9 +259,12 @@ export default {
 
       if (!isMultipleFiles) this.summit[key] = files[0];
       else {
-        for (var i = 0; i < files.length; i++) {
-          this.summit[key].push(files[i]);
-        }
+        console.log("====================================");
+        console.log(files);
+        console.log("====================================");
+        this.summit[key].push(files);
+        // for (var i = 0; i < files.length; i++) {
+        // }
       }
     },
     postSummit: async function() {
@@ -275,12 +281,21 @@ export default {
       formData.append("vid_initial", this.summit.vid_initial);
       formData.append("img_logo", this.summit.img_logo);
       formData.append("img_cover_over", this.summit.img_cover_over);
-      formData.append("img_media", JSON.stringify(this.summit.img_media));
-      formData.append(
-        "img_cover_main",
-        JSON.stringify(this.summit.img_cover_main)
-      );
-      formData.append("img_card", JSON.stringify(this.summit.img_card));
+      formData.append("img_media", this.summit.img_media);
+      formData.append("img_cover_main", this.summit.img_cover_main);
+
+      // let c = [];
+      for (var i = 0; i < this.$refs.mm.files.length; i++) {
+        let file = this.$refs.mm.files[i];
+        console.log(file);
+        formData.append("img_card[]", file);
+        // c.push(file);
+      }
+      // console.log("====================================");
+      // console.log(c);
+      // console.log("====================================");
+      // // formData.append("img_card", c);
+
       try {
         store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
         const response = await createSummit(formData);
