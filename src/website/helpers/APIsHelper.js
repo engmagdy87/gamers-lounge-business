@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { LOGIN_USER, REGISTER_USER } from '../constants/APIs';
+import { LOGIN_USER, REGISTER_USER, CREATE_SUMMIT } from '../constants/APIs';
+import { getUserCookie } from '../helpers/CookieHelper';
 
 async function loadUserPersona(payload) {
     const response = await post(
@@ -19,13 +20,44 @@ async function setUserPersona(payload) {
     return response.data;
 }
 
+async function createSummit(payload) {
+    const response = await postMultipart(
+        payload,
+        CREATE_SUMMIT
+    );
+
+    return response.data;
+}
+
 export {
     loadUserPersona,
-    setUserPersona
+    setUserPersona,
+    createSummit
 };
 
 async function post(data, url) {
     const response = await axios.post(url, data);
+    if (
+        (response.status !== 200 && response.status !== 304) ||
+        response.data.errors !== undefined
+    )
+        throw new Error(
+            `response status code ${
+            response.status
+            }`
+        );
+
+    return response;
+}
+
+async function postMultipart(data, url) {
+    const adminToken = getUserCookie()
+    const response = await axios.post(url, data, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${adminToken.access_token}`
+        }
+    });
     if (
         (response.status !== 200 && response.status !== 304) ||
         response.data.errors !== undefined

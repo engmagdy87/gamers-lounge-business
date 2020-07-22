@@ -59,8 +59,8 @@
   </div>
 </template>
 <script>
-import LTable from "src/dashboard/components/Table.vue";
 import Card from "src/dashboard/components/Cards/Card.vue";
+import LTable from "src/dashboard/components/Table.vue";
 const tableColumns = ["Id", "Name", "Salary", "Country", "City"];
 const tableData = [
   {

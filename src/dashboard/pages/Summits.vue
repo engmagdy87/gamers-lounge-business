@@ -3,7 +3,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <edit-profile-form> </edit-profile-form>
+          <transition name="fade" mode="out-in">
+            <router-view></router-view>
+          </transition>
         </div>
         <!-- <div class="col-md-4">
           <user-card>
@@ -13,13 +15,4 @@
     </div>
   </div>
 </template>
-<script>
-import EditProfileForm from "./UserProfile/EditProfileForm.vue";
-
-export default {
-  components: {
-    EditProfileForm
-  }
-};
-</script>
 <style></style>

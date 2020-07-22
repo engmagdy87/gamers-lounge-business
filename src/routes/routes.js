@@ -9,7 +9,9 @@ import DashboardLayout from '../dashboard/layout/DashboardLayout.vue'
 
 // Admin pages
 import Overview from 'src/dashboard/pages/Overview.vue'
-import UserProfile from 'src/dashboard/pages/UserProfile.vue'
+import Summits from 'src/dashboard/pages/Summits.vue'
+import SummitsList from 'src/dashboard/pages/Summits/SummitsList.vue'
+import SummitAddEdit from 'src/dashboard/pages/Summits/SummitAddEdit.vue'
 import TableList from 'src/dashboard/pages/TableList.vue'
 import Icons from 'src/dashboard/pages/Icons.vue'
 import Notifications from 'src/dashboard/pages/Notifications.vue'
@@ -38,9 +40,27 @@ const routes = [
         component: Overview
       },
       {
-        path: 'user',
-        name: 'User',
-        component: UserProfile
+        path: 'summits',
+        name: 'Summits',
+        redirect: '/dashboard/summits/list',
+        component: Summits,
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: SummitsList
+          },
+          {
+            path: 'create',
+            name: 'Create',
+            component: SummitAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit',
+            component: SummitAddEdit
+          }
+        ]
       },
       {
         path: 'table-list',

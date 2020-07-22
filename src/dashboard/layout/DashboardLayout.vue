@@ -6,7 +6,7 @@
         <i class="nc-icon nc-chart-pie-35"></i>
         <p>Dashboard</p>
       </sidebar-link>
-      <sidebar-link to="/dashboard/user">
+      <sidebar-link to="/dashboard/summits">
         <i class="nc-icon nc-controller-modern"></i>
         <p>Summits</p>
       </sidebar-link>
@@ -30,6 +30,7 @@
 
       <content-footer></content-footer>
     </div>
+    <Spinner :smallLoader="false" />
   </div>
 </template>
 <style lang="scss"></style>
@@ -38,12 +39,15 @@ import TopNavbar from "./TopNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
 import DashboardContent from "./Content.vue";
 import MobileMenu from "./MobileMenu.vue";
+import Spinner from "../../website/shared/Spinner";
+
 export default {
   components: {
     TopNavbar,
     ContentFooter,
     DashboardContent,
-    MobileMenu
+    MobileMenu,
+    Spinner
   },
   methods: {
     toggleSidebar() {
