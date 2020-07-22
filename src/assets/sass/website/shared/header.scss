@@ -3,7 +3,7 @@
 @import "../mixins.scss";
 
 .header-wrapper {
-  position: absolute;
+  position: sticky;
   top: 0;
   width: 100%;
   background: linear-gradient(
@@ -73,7 +73,7 @@
   &__navLinks {
     list-style: none;
     margin-bottom: 0;
-    margin-left: -20%;
+    margin-left: -10%;
     text-align: center;
     li {
       display: inline-block;
@@ -84,7 +84,6 @@
         color: $inactive-header-link;
         font-size: 1.2rem;
         font-weight: lighter;
-        font-family: "Open Sans";
       }
       &:hover {
         a {
