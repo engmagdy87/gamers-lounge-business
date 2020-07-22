@@ -28,7 +28,8 @@ export default {
     width: 10%;
     display: flex;
     img {
-      width: 100%;
+      max-width: 100%;
+      max-height: 100px;
       margin-top: auto;
       margin-bottom: auto;
     }

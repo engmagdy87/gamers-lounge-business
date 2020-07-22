@@ -1,7 +1,7 @@
 <template>
   <header class="header-wrapper">
     <div class="header-wrapper__logo">
-      <!-- <img src={} alt="medaf typeface" /> -->
+      <img src="website/img/ess-logo.png" alt="medaf typeface" />
     </div>
     <!-- DESKTOP UI -->
     <nav class="header-wrapper--desktop">

@@ -11,19 +11,37 @@
       <div class="row">
         <div class="col">
           <ul class="home-wrapper__navLinks">
-            <li class="home-wrapper__navLinks--active">Games</li>
-            <li>Tournament</li>
+            <li
+              :class="[isGamesActive ? 'home-wrapper__navLinks--active' : '']"
+              @click="setIsGamesActive(true)"
+            >
+              Games
+            </li>
+            <li
+              :class="[!isGamesActive ? 'home-wrapper__navLinks--active' : '']"
+              @click="setIsGamesActive(false)"
+            >
+              Tournament
+            </li>
           </ul>
         </div>
-        <div class="col d-flex justify-content-end">
+        <div class="col d-flex justify-content-end align-items-center">
           <CustomSwitch
             :isMenuActive="isMenuActive"
-            :toggleIsMenuActive="toggleIsMenuActive"
+            :setIsMenuActive="setIsMenuActive"
           />
         </div>
       </div>
-      <MenuView :data="data" v-if="isMenuActive" />
-      <ListView :data="data" v-else />
+      <div class="row" v-if="!isGamesActive">
+        <div class="col">
+          <CustomButton
+            :isMenuActive="isMenuActive"
+            :setIsMenuActive="setIsMenuActive"
+          />
+        </div>
+      </div>
+      <MenuView :data="getCorrespondingData" v-if="isMenuActive" />
+      <ListView :data="getCorrespondingData" v-else />
     </div>
     <LoginModal
       :showFlag="showLoginModal"
@@ -49,39 +67,47 @@ import RegisterModal from "../components/home/RegisterModal";
 import MenuView from "../components/home/MenuView";
 import ListView from "../components/home/ListView";
 import CustomSwitch from "../shared/CustomSwitch";
+import CustomButton from "../shared/CustomButton";
+
+const rawData = [
+  {
+    background: "website/img/fifa-bg.jpg",
+    logo: "website/img/fifa-logo.png",
+    name: "FIFA 2020",
+    tournament: 6
+  },
+  {
+    background: "website/img/hearthstone-bg.jpg",
+    logo: "website/img/hearthstone-logo.png",
+    name: "Hearthstone",
+    tournament: 6
+  },
+  {
+    background: "website/img/dota-bg.png",
+    logo: "website/img/dota-logo.png",
+    name: "DOTA 2",
+    tournament: 12
+  }
+];
 
 export default {
   data() {
     return {
+      isGamesActive: true,
       isMenuActive: true,
       showLoginModal: false,
       showRegisterModal: false,
-      data: [
-        {
-          background: "website/img/fifa-bg.jpg",
-          logo: "website/img/fifa-logo.png",
-          name: "FIFA 2020",
-          tournament: 6
-        },
-        {
-          background: "website/img/hearthstone-bg.jpg",
-          logo: "website/img/hearthstone-logo.png",
-          name: "Hearthstone",
-          tournament: 6
-        },
-        {
-          background: "website/img/dota-bg.png",
-          logo: "website/img/dota-logo.png",
-          name: "DOTA 2",
-          tournament: 12
-        }
-      ]
+      games: rawData,
+      tournament: [...rawData].reverse()
     };
   },
   computed: {
     ...mapGetters({
       isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
-    })
+    }),
+    getCorrespondingData() {
+      return this.isGamesActive ? this.games : this.tournament;
+    }
   },
   watch: {
     isUserLoggedIn() {
@@ -98,8 +124,12 @@ export default {
     setShowRegisterModal(value = false) {
       this.showRegisterModal = value;
     },
-    toggleIsMenuActive() {
-      this.isMenuActive = !this.isMenuActive;
+    setIsMenuActive(flag) {
+      this.isMenuActive = flag;
+    },
+    setIsGamesActive(flag) {
+      this.isGamesActive = flag;
+      this.isMenuActive = true;
     }
   },
   components: {
@@ -110,7 +140,8 @@ export default {
     CustomSwitch,
     MenuView,
     ListView,
-    Footer
+    Footer,
+    CustomButton
   }
 };
 </script>

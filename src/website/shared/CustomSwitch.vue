@@ -8,7 +8,7 @@
             isMenuActive ? 'custom-switch-wrapper__inside__icon--active' : ''
           ]"
           role="button"
-          @click="toggleIsMenuActive"
+          @click="setIsMenuActive(true)"
         >
           <img :src="isMenuActive ? activeMenuIcon : inactiveMenuIcon" />
         </div>
@@ -18,7 +18,7 @@
             !isMenuActive ? 'custom-switch-wrapper__inside__icon--active' : ''
           ]"
           role="button"
-          @click="toggleIsMenuActive"
+          @click="setIsMenuActive(false)"
         >
           <img :src="!isMenuActive ? activeListIcon : inactiveListIcon" />
         </div>
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  props: ["isMenuActive", "toggleIsMenuActive"],
+  props: ["isMenuActive", "setIsMenuActive"],
   data() {
     return {
       activeListIcon: "website/img/active-list.svg",
