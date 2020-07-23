@@ -18,7 +18,7 @@
         class="story-wrapper__inside"
         :style="
           storyData.img_cover_main !== undefined
-            ? `backgroundImage: url(${storyData.img_cover_main[0]})`
+            ? `backgroundImage: url(${storyData.img_cover_main[0].path})`
             : ''
         "
       ></div>
@@ -94,13 +94,7 @@ export default {
     Spinner
   },
   mounted() {
-    console.log("====================================");
-    console.log(!this.storyData.img_cover_main);
-    console.log("====================================");
     this.fetchStory();
-    console.log("====================================");
-    console.log(this.storyData.img_cover_main);
-    console.log("====================================");
   }
 };
 </script>

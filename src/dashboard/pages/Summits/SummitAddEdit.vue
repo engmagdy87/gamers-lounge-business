@@ -10,225 +10,215 @@
         </li>
       </ol>
     </nav>
-    <card>
-      <h4 slot="header" class="card-title">{{ operation }} Summit</h4>
-      <form>
-        <div class="row">
-          <div class="col-md-6">
-            <base-input
-              type="text"
-              label="Initial Title"
-              placeholder="Enter Initial Title"
-              v-model="summit.initial_title"
-            >
-            </base-input>
-          </div>
-          <div class="col-md-6">
-            <base-input
-              type="text"
-              label="Final Title"
-              placeholder="Enter Final Title"
-              v-model="summit.final_title"
-            >
-            </base-input>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col">
-            <div class="form-group">
-              <label>Initial Description</label>
-              <textarea
-                rows="5"
-                class="form-control border-input"
-                placeholder="Enter Initial Description"
-                v-model="summit.initial_description"
-              >
-              </textarea>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <base-input
-              type="text"
-              label="Final Description"
-              placeholder="Enter Final Description"
-              v-model="summit.final_description"
-            >
-            </base-input>
-          </div>
-          <div class="col-md-6">
-            <base-input
-              type="number"
-              label="Attendess"
-              placeholder="Enter Attendess"
-              v-model="summit.attendess"
-              min="0"
-            >
-            </base-input>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <base-input
-              type="text"
-              label="Location"
-              placeholder="Enter Location"
-              v-model="summit.location"
-            >
-            </base-input>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-4">
-            <base-input
-              type="date"
-              label="Start Date"
-              placeholder="Enter Start Date"
-              v-model="summit.start_date"
-              :min="minDate"
-            >
-            </base-input>
-          </div>
-          <div class="col-md-4">
-            <base-input
-              type="date"
-              label="End Date"
-              placeholder="Enter End Date"
-              v-model="summit.end_date"
-              :min="minDate"
-            >
-            </base-input>
-          </div>
-          <div class="col-md-2 offset-1 m-auto">
-            <div class="custom-control custom-switch">
-              <input
-                type="checkbox"
-                class="custom-control-input"
-                id="customSwitch1"
-                v-model="summit.active"
-              />
-              <label class="custom-control-label" for="customSwitch1"
-                >Active</label
-              >
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div>
-              <label for="logo" class="mr-5">Choose Logo Image</label>
-              <input
-                type="file"
-                id="logo"
-                accept="image/png, image/jpeg"
-                @change="e => setFile(e, 'img_logo')"
-                ref="img_logo"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div>
-              <label class="mr-5" for="media-images">Choose Media Images</label>
-              <input
-                type="file"
-                id="media-images"
-                accept="image/png, image/jpeg"
-                multiple
-                ref="img_media"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div>
-              <label class="mr-5" for="media-images"
-                >Choose Cover Main Images</label
-              >
-              <input
-                type="file"
-                id="media-images"
-                accept="image/png, image/jpeg"
-                multiple
-                ref="img_cover_main"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div>
-              <label class="mr-5" for="media-images"
-                >Choose Cover Over Image</label
-              >
-              <input
-                type="file"
-                id="media-images"
-                accept="image/png, image/jpeg"
-                @change="e => setFile(e, 'img_cover_over')"
-                ref="img_cover_over"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12">
-            <div>
-              <label class="mr-5" for="media-images1"
-                >Choose Cards Images</label
-              >
-              <input
-                type="file"
-                id="media-images1"
-                accept="image/png, image/jpeg"
-                multiple
-                ref="img_card"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12">
-            <base-input
-              type="text"
-              label="Initial Video"
-              placeholder="Enter Initial Video"
-              v-model="summit.vid_initial"
-            >
-            </base-input>
-          </div>
-        </div>
-        <div class="text-center">
-          <button
-            type="button"
-            class="btn btn-info btn-fill float-right"
-            @click="postSummit"
+    <h4 slot="header" class="card-title">{{ operation }} Summit</h4>
+    <form>
+      <div class="row">
+        <div class="col-md-6">
+          <base-input
+            type="text"
+            label="Initial Title"
+            placeholder="Enter Initial Title"
+            v-model="summit.initial_title"
           >
-            Save
-          </button>
+          </base-input>
         </div>
-        <div class="clearfix"></div>
-      </form>
-    </card>
+        <div class="col-md-6">
+          <base-input
+            type="text"
+            label="Final Title"
+            placeholder="Enter Final Title"
+            v-model="summit.final_title"
+          >
+          </base-input>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Initial Description</label>
+            <textarea
+              rows="5"
+              class="form-control border-input"
+              placeholder="Enter Initial Description"
+              v-model="summit.initial_description"
+            >
+            </textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <base-input
+            type="text"
+            label="Final Description"
+            placeholder="Enter Final Description"
+            v-model="summit.final_description"
+          >
+          </base-input>
+        </div>
+        <div class="col-md-6">
+          <base-input
+            type="number"
+            label="Attendess"
+            placeholder="Enter Attendess"
+            v-model="summit.attendess"
+            min="0"
+          >
+          </base-input>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <base-input
+            type="text"
+            label="Location"
+            placeholder="Enter Location"
+            v-model="summit.location"
+          >
+          </base-input>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <base-input
+            type="date"
+            label="Start Date"
+            placeholder="Enter Start Date"
+            v-model="summit.start_date"
+            :min="minDate"
+          >
+          </base-input>
+        </div>
+        <div class="col-md-4">
+          <base-input
+            type="date"
+            label="End Date"
+            placeholder="Enter End Date"
+            v-model="summit.end_date"
+            :min="minDate"
+          >
+          </base-input>
+        </div>
+        <div class="col-md-2 offset-1 m-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customSwitch1"
+              v-model="summit.active"
+            />
+            <label class="custom-control-label" for="customSwitch1"
+              >Active</label
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3 mb-3">
+        <div class="col-6">
+          <div>
+            <label for="logo" class="mr-5">Choose Logo Image</label>
+            <input
+              type="file"
+              id="logo"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_logo')"
+              ref="img_logo"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div>
+            <label class="mr-5" for="media-images">Choose Media Images</label>
+            <input
+              type="file"
+              id="media-images"
+              accept="image/png, image/jpeg"
+              multiple
+              ref="img_media"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <div>
+            <label class="mr-5" for="media-images"
+              >Choose Cover Main Images</label
+            >
+            <input
+              type="file"
+              id="media-images"
+              accept="image/png, image/jpeg"
+              multiple
+              ref="img_cover_main"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div>
+            <label class="mr-5" for="media-images"
+              >Choose Cover Over Image</label
+            >
+            <input
+              type="file"
+              id="media-images"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_cover_over')"
+              ref="img_cover_over"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-6">
+          <div>
+            <label class="mr-5" for="media-images1">Choose Cards Images</label>
+            <input
+              type="file"
+              id="media-images1"
+              accept="image/png, image/jpeg"
+              multiple
+              ref="img_card"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <base-input
+            type="text"
+            label="Initial Video"
+            placeholder="Enter Initial Video"
+            v-model="summit.vid_initial"
+          >
+          </base-input>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button
+          type="button"
+          class="btn btn-info btn-fill float-right"
+          @click="postSummit"
+        >
+          Save
+        </button>
+      </div>
+      <div class="clearfix"></div>
+    </form>
   </div>
 </template>
 <script>
 import store from "../../../store/index";
 import types from "../../../store/types";
-import Card from "src/dashboard/components/Cards/Card.vue";
+// import Card from "src/dashboard/components/Cards/Card.vue";
 import { createSummit } from "../../../website/helpers/APIsHelper.js";
 
 export default {
   components: {
-    Card
+    // Card
   },
   data() {
     return {

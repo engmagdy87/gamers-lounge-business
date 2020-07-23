@@ -13,6 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 2px;
     clip-path: polygon(
       0 0,
       98% 0,
@@ -27,11 +28,12 @@
   }
 
   &__inside {
-    width: calc(100% - 4px);
-    height: calc($hero-image-height - 4px);
+    width: calc(100% - 2px);
+    height: calc(#{$hero-image-height} - 4px);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    margin: auto;
     clip-path: polygon(
       0 0,
       98% 0,
