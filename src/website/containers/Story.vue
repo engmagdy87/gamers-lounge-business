@@ -9,7 +9,7 @@
     <div
       class="story-wrapper__outside"
       :style="
-        storyData.img_cover_main !== undefined
+        storyData.images.img_cover_main !== undefined
           ? `display:block;`
           : 'display:none;'
       "
@@ -17,8 +17,8 @@
       <div
         class="story-wrapper__inside"
         :style="
-          storyData.img_cover_main !== undefined
-            ? `backgroundImage: url(${storyData.img_cover_main[0].path})`
+          storyData.images.img_cover_main !== undefined
+            ? `backgroundImage: url(${storyData.images.img_cover_main[0].path})`
             : ''
         "
       ></div>
@@ -95,6 +95,11 @@ export default {
   },
   mounted() {
     this.fetchStory();
+  },
+  updated() {
+    console.log("====================================");
+    console.log(this.storyData);
+    console.log("====================================");
   }
 };
 </script>
