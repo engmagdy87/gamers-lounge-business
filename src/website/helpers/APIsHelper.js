@@ -63,7 +63,6 @@ async function postMultipart(data, url) {
     const adminToken = getUserCookie()
     const response = await axios.post(url, data, {
         headers: {
-            'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${adminToken.access_token}`
         }
     });

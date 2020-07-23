@@ -125,7 +125,8 @@
                 type="file"
                 id="logo"
                 accept="image/png, image/jpeg"
-                @change="e => setFile(e, 'img_logo', false)"
+                @change="e => setFile(e, 'img_logo')"
+                ref="img_logo"
               />
             </div>
           </div>
@@ -139,7 +140,7 @@
                 id="media-images"
                 accept="image/png, image/jpeg"
                 multiple
-                @change="e => setFile(e, 'img_media', true)"
+                ref="img_media"
               />
             </div>
           </div>
@@ -155,7 +156,7 @@
                 id="media-images"
                 accept="image/png, image/jpeg"
                 multiple
-                @change="e => setFile(e, 'img_cover_main', true)"
+                ref="img_cover_main"
               />
             </div>
           </div>
@@ -170,7 +171,8 @@
                 type="file"
                 id="media-images"
                 accept="image/png, image/jpeg"
-                @change="e => setFile(e, 'img_cover_over', false)"
+                @change="e => setFile(e, 'img_cover_over')"
+                ref="img_cover_over"
               />
             </div>
           </div>
@@ -187,8 +189,7 @@
                 id="media-images1"
                 accept="image/png, image/jpeg"
                 multiple
-                @change="e => setFile(e, 'img_card', true)"
-                ref="mm"
+                ref="img_card"
               />
             </div>
           </div>
@@ -244,28 +245,17 @@ export default {
         active: false,
         vid_initial: "",
         img_logo: "",
-        img_cover_over: "",
-        img_media: [],
-        img_cover_main: [],
-        img_card: []
+        img_cover_over: ""
       }
     };
   },
   methods: {
-    setFile(e, key, isMultipleFiles) {
+    setFile(e, key) {
       const files = e.target.files;
 
       if (!files.length) return;
 
-      if (!isMultipleFiles) this.summit[key] = files[0];
-      else {
-        console.log("====================================");
-        console.log(files);
-        console.log("====================================");
-        this.summit[key].push(files);
-        // for (var i = 0; i < files.length; i++) {
-        // }
-      }
+      this.summit[key] = files[0];
     },
     postSummit: async function() {
       let formData = new FormData();
@@ -281,20 +271,19 @@ export default {
       formData.append("vid_initial", this.summit.vid_initial);
       formData.append("img_logo", this.summit.img_logo);
       formData.append("img_cover_over", this.summit.img_cover_over);
-      formData.append("img_media", this.summit.img_media);
-      formData.append("img_cover_main", this.summit.img_cover_main);
 
-      // let c = [];
-      for (var i = 0; i < this.$refs.mm.files.length; i++) {
-        let file = this.$refs.mm.files[i];
-        console.log(file);
-        formData.append("img_card[]", file);
-        // c.push(file);
+      for (var i = 0; i < this.$refs.img_media.files.length; i++) {
+        let file = this.$refs.img_media.files[i];
+        formData.append("img_media[]", file);
       }
-      // console.log("====================================");
-      // console.log(c);
-      // console.log("====================================");
-      // // formData.append("img_card", c);
+      for (var i = 0; i < this.$refs.img_cover_main.files.length; i++) {
+        let file = this.$refs.img_cover_main.files[i];
+        formData.append("img_cover_main[]", file);
+      }
+      for (var i = 0; i < this.$refs.img_card.files.length; i++) {
+        let file = this.$refs.img_card.files[i];
+        formData.append("img_card[]", file);
+      }
 
       try {
         store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
@@ -320,9 +309,11 @@ export default {
       this.summit.vid_initial = "";
       this.summit.img_logo = "";
       this.summit.img_cover_over = "";
-      this.summit.img_media = [];
-      this.summit.img_cover_main = [];
-      this.summit.img_card = [];
+      this.$refs.img_logo.value = null;
+      this.$refs.img_cover_over.value = null;
+      this.$refs.img_media.value = null;
+      this.$refs.img_cover_main.value = null;
+      this.$refs.img_card.value = null;
     },
     notifyVue(message, color) {
       this.$notifications.notify({

@@ -5,15 +5,50 @@
 .story-wrapper {
   background-image: url("~/website/img/hexagone-pattern.png");
   background-repeat: repeat;
-  //   height: 100vh;
-  &__hero-img {
-    // object-fit: cover;
-    width: 100%;
+  &__outside {
+    position: relative;
+    width: calc(100% - 2px);
+    height: $hero-image-height;
+    background: #0a5990;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    clip-path: polygon(
+      0 0,
+      98% 0,
+      100% 4%,
+      100% 92%,
+      98% 95%,
+      66% 95%,
+      62% 100%,
+      2% 100%,
+      0 96%
+    );
   }
+
+  &__inside {
+    width: calc(100% - 4px);
+    height: calc($hero-image-height - 4px);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    clip-path: polygon(
+      0 0,
+      98% 0,
+      100% 4%,
+      100% 92%,
+      98% 95%,
+      66% 95%,
+      62% 100%,
+      2% 100%,
+      0 96%
+    );
+  }
+
   &__content {
     width: 100%;
-    min-height: 80vh;
-    padding: 5% 15%;
+    padding: 5vh 15%;
+    min-height: calc(100vh - 12vh);
     @include is-mobile {
       min-height: 82vh;
     }

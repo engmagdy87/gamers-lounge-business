@@ -6,7 +6,23 @@
       :setShowRegisterModal="setShowRegisterModal"
       :setShowLoginModal="setShowLoginModal"
     />
-    <img src="website/img/story-hero.png" class="story-wrapper__hero-img" />
+    <div
+      class="story-wrapper__outside"
+      :style="
+        storyData.img_cover_main !== undefined
+          ? `display:block;`
+          : 'display:none;'
+      "
+    >
+      <div
+        class="story-wrapper__inside"
+        :style="
+          storyData.img_cover_main !== undefined
+            ? `backgroundImage: url(${storyData.img_cover_main[0]})`
+            : ''
+        "
+      ></div>
+    </div>
     <div class="story-wrapper__content">
       <div class="row">
         <div class="col-12">
@@ -78,7 +94,13 @@ export default {
     Spinner
   },
   mounted() {
+    console.log("====================================");
+    console.log(!this.storyData.img_cover_main);
+    console.log("====================================");
     this.fetchStory();
+    console.log("====================================");
+    console.log(this.storyData.img_cover_main);
+    console.log("====================================");
   }
 };
 </script>
