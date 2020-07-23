@@ -1,21 +1,21 @@
 <template>
   <div v-if="isSummitsFetched">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm">
-          <h2 class="heading-margin">Summits ({{ summitsData.length }})</h2>
-        </div>
-        <div class="col-sm">
-          <router-link to="/dashboard/summits/create">
-            <button
-              type="button"
-              class="btn btn-secondary d-block ml-auto heading-margin"
-            >
-              Add Summit
-            </button>
-          </router-link>
-        </div>
+    <!-- <div class="container"> -->
+    <div class="row">
+      <div class="col-sm">
+        <h2 class="heading-margin">Summits ({{ summitsData.length }})</h2>
       </div>
+      <div class="col-sm">
+        <router-link to="/dashboard/summits/create">
+          <button
+            type="button"
+            class="btn btn-secondary d-block ml-auto heading-margin"
+          >
+            Add Summit
+          </button>
+        </router-link>
+      </div>
+      <!-- </div> -->
     </div>
     <LTable
       class="table-hover table-striped"

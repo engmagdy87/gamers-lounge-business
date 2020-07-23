@@ -1,10 +1,12 @@
 <template>
   <div class="table-responsive">
     <table class="table">
-      <thead>
+      <thead class="thead-dark">
         <slot name="columns">
           <tr>
-            <th v-for="column in columns" :key="column">{{ column }}</th>
+            <th scope="col" v-for="column in columns" :key="column">
+              {{ column }}
+            </th>
           </tr>
         </slot>
       </thead>
