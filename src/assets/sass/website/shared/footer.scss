@@ -1,3 +1,5 @@
+@import "../mixins.scss";
+
 .footer-wrapper {
   height: 120px;
   background-color: #121828;
@@ -6,5 +8,9 @@
   img {
     max-width: 90px;
     margin: 15px 80px 0;
+    @include is-mobile {
+      max-width: 60px;
+      margin: 30px 15px;
+    }
   }
 }

@@ -19,6 +19,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../../assets/sass/website/variables.scss";
+@import "../../../assets/sass/website/mixins.scss";
+
 .list-view-wrapper {
   height: 120px;
   width: 100%;
@@ -32,6 +35,10 @@ export default {
       max-height: 100px;
       margin-top: auto;
       margin-bottom: auto;
+      @include is-mobile {
+        max-width: fit-content;
+        max-height: 70px;
+      }
     }
   }
   &__content {
@@ -40,6 +47,9 @@ export default {
     color: white;
     margin-top: auto;
     margin-bottom: auto;
+    @include is-mobile {
+      padding-left: 40%;
+    }
     h1 {
       font-size: 1.5rem;
       margin-top: 20px;

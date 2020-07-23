@@ -120,7 +120,7 @@
               activeItem === 'story' ? 'header-wrapper__navLinks--active' : ''
             ]"
           >
-            <a href="#" @click="closeNav">Our Story</a>
+            <a href="/story" @click="closeNav">Our Story</a>
           </li>
           <li
             :class="[
@@ -137,6 +137,30 @@
             ]"
           >
             <a href="#" @click="closeNav">Contact Us</a>
+          </li>
+          <li
+            class="float-lg-right"
+            @click="setShowRegisterModal(true)"
+            v-if="!isUserLoggedIn"
+          >
+            <a href="#" @click="closeNav">Register</a>
+          </li>
+          <li
+            class="float-lg-right"
+            @click="setShowLoginModal(true)"
+            v-if="!isUserLoggedIn"
+          >
+            <a href="#" @click="closeNav">Login</a>
+          </li>
+          <li class="float-lg-right" v-if="isUserLoggedIn" @click="logoutUser">
+            <a href="#">
+              Logout
+            </a>
+          </li>
+          <li class="float-lg-right" v-if="isUserLoggedIn && isUserAdmin">
+            <a href="/dashboard">
+              Dashboard
+            </a>
           </li>
         </div>
       </div>
@@ -171,6 +195,7 @@ export default {
     logoutUser() {
       removeCookie();
       store.commit(types.user.mutations.SET_USER_PERSONA, {});
+      this.closeNav();
     }
   },
   computed: {

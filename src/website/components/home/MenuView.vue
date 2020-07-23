@@ -1,17 +1,29 @@
 <template>
   <div class="menu-view-wrapper">
     <div class="row">
-      <div class="col p-0" v-for="(card, index) in data" :key="index">
+      <div
+        class="col-12 col-lg-4 p-0"
+        v-for="(card, index) in data"
+        :key="index"
+      >
         <HexaCard :card="card" />
       </div>
     </div>
     <div class="row">
-      <div class="col p-0" v-for="(card, index) in data" :key="index">
+      <div
+        class="col-12 col-lg-4 p-0"
+        v-for="(card, index) in data"
+        :key="index"
+      >
         <HexaCard :card="card" />
       </div>
     </div>
     <div class="row">
-      <div class="col p-0" v-for="(card, index) in data" :key="index">
+      <div
+        class="col-12 col-lg-4 p-0"
+        v-for="(card, index) in data"
+        :key="index"
+      >
         <HexaCard :card="card" />
       </div>
     </div>

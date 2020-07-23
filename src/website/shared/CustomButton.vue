@@ -21,8 +21,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/sass/website/color-palette.scss";
 @import "../../assets/sass/website/variables.scss";
-
-$notchSize: 10px;
+@import "../../assets/sass/website/mixins.scss";
 
 .custom-button-wrapper {
   width: 190px;
@@ -35,16 +34,7 @@ $notchSize: 10px;
     width: 100%;
     height: 100%;
     background: $primary;
-    clip-path: polygon(
-      0% $notchSize,
-      $notchSize 0%,
-      calc(100% - #{$notchSize}) 0%,
-      100% $notchSize,
-      100% calc(100% - #{$notchSize}),
-      calc(100% - #{$notchSize}) 100%,
-      $notchSize 100%,
-      0% calc(100% - #{$notchSize})
-    );
+    @include create-hexagone-shape(10px);
   }
 
   &__inside {
@@ -61,16 +51,7 @@ $notchSize: 10px;
     justify-content: center;
     align-items: center;
     transition: all 0.2s ease;
-    clip-path: polygon(
-      0% $notchSize,
-      $notchSize 0%,
-      calc(100% - #{$notchSize}) 0%,
-      100% $notchSize,
-      100% calc(100% - #{$notchSize}),
-      calc(100% - #{$notchSize}) 100%,
-      $notchSize 100%,
-      0% calc(100% - #{$notchSize})
-    );
+    @include create-hexagone-shape(10px);
     &:hover {
       background: rgba($color: #000000, $alpha: 0.95);
     }

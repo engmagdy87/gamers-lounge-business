@@ -124,3 +124,16 @@
     @content;
   }
 }
+
+@mixin create-hexagone-shape($notchSize) {
+  clip-path: polygon(
+    0% $notchSize,
+    $notchSize 0%,
+    calc(100% - #{$notchSize}) 0%,
+    100% $notchSize,
+    100% calc(100% - #{$notchSize}),
+    calc(100% - #{$notchSize}) 100%,
+    $notchSize 100%,
+    0% calc(100% - #{$notchSize})
+  );
+}
