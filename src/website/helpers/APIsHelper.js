@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN_USER, REGISTER_USER, CREATE_SUMMIT, GET_STORY } from '../constants/APIs';
+import { LOGIN_USER, REGISTER_USER, CREATE_SUMMIT, GET_STORY, GET_SUMMITS } from '../constants/APIs';
 import { getUserCookie } from '../helpers/CookieHelper';
 
 async function loadUserPersona(payload) {
@@ -37,11 +37,20 @@ async function getStory() {
     return response.data;
 }
 
+async function getSummits() {
+    const response = await getDashboardData(
+        GET_SUMMITS
+    );
+
+    return response.data;
+}
+
 export {
     loadUserPersona,
     setUserPersona,
     createSummit,
-    getStory
+    getStory,
+    getSummits
 };
 
 async function post(data, url) {
@@ -81,6 +90,26 @@ async function postMultipart(data, url) {
 
 async function get(url) {
     const response = await axios.get(url);
+    if (
+        (response.status !== 200 && response.status !== 304) ||
+        response.data.errors !== undefined
+    )
+        throw new Error(
+            `response status code ${
+            response.status
+            }`
+        );
+
+    return response;
+}
+
+async function getDashboardData(url) {
+    const adminToken = getUserCookie()
+    const response = await axios.get(url, {
+        headers: {
+            'Authorization': `Bearer ${adminToken.access_token}`
+        }
+    });
     if (
         (response.status !== 200 && response.status !== 304) ||
         response.data.errors !== undefined

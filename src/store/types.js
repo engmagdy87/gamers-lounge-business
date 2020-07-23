@@ -27,8 +27,19 @@ const story = {
     }
 };
 
+const summits = {
+    mutations: {
+        SET_SUMMITS_DATA: 'summits/mutations/SET_SUMMITS_DATA',
+        SET_IS_SUMMITS_FETCHED: 'summits/mutations/SET_IS_SUMMITS_FETCHED',
+    },
+    actions: {
+        FETCH_SUMMITS: 'summits/actions/FETCH_SUMMITS',
+    }
+};
+
 export default {
     user,
     home,
-    story
+    story,
+    summits
 };

@@ -7,9 +7,9 @@
   >
     <div class="sidebar-wrapper">
       <div class="logo">
-        <a href="#" class="simple-text logo__container">
+        <a href="/" class="simple-text logo__container">
           <div class="logo-img">
-            <img src="img/vue-logo.png" alt="" />
+            <img src="../../../../public/website/img/ess-logo.png" alt="logo" />
           </div>
           {{ title }}
         </a>

@@ -181,7 +181,7 @@
               type="file"
               id="media-images1"
               accept="image/png, image/jpeg"
-              multiple
+              @change="e => setFile(e, 'img_card')"
               ref="img_card"
             />
           </div>
@@ -235,7 +235,8 @@ export default {
         active: false,
         vid_initial: "",
         img_logo: "",
-        img_cover_over: ""
+        img_cover_over: "",
+        img_card: ""
       }
     };
   },
@@ -261,6 +262,7 @@ export default {
       formData.append("vid_initial", this.summit.vid_initial);
       formData.append("img_logo", this.summit.img_logo);
       formData.append("img_cover_over", this.summit.img_cover_over);
+      formData.append("img_card", this.summit.img_card);
 
       for (var i = 0; i < this.$refs.img_media.files.length; i++) {
         let file = this.$refs.img_media.files[i];
@@ -270,10 +272,6 @@ export default {
         let file = this.$refs.img_cover_main.files[i];
         formData.append("img_cover_main[]", file);
       }
-      for (var i = 0; i < this.$refs.img_card.files.length; i++) {
-        let file = this.$refs.img_card.files[i];
-        formData.append("img_card[]", file);
-      }
 
       try {
         store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
@@ -281,6 +279,7 @@ export default {
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
         this.resetFields();
         this.notifyVue("Summit Created Successfully", "success");
+        this.$router.push("/dashboard/summits/list");
       } catch (error) {
         this.notifyVue("Error Happened", "danger");
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
@@ -299,6 +298,7 @@ export default {
       this.summit.vid_initial = "";
       this.summit.img_logo = "";
       this.summit.img_cover_over = "";
+      this.summit.img_card = "";
       this.$refs.img_logo.value = null;
       this.$refs.img_cover_over.value = null;
       this.$refs.img_media.value = null;
@@ -328,4 +328,11 @@ export default {
   }
 };
 </script>
-<style></style>
+<style lang="scss" scoped>
+@import "../../../assets/sass/website/color-palette.scss";
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: $primary !important;
+  background-color: $primary !important;
+}
+</style>

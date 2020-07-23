@@ -1,41 +1,35 @@
 <template>
-  <table class="table">
-    <thead>
-      <slot name="columns">
-        <tr>
-          <th v-for="column in columns" :key="column">{{ column }}</th>
-        </tr>
-      </slot>
-    </thead>
-    <tbody>
-      <tr v-for="(item, index) in data" :key="index">
-        <slot :row="item">
-          <td
-            v-for="column in columns"
-            :key="column"
-            v-if="hasValue(item, column)"
-          >
-            {{ itemValue(item, column) }}
-          </td>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <slot name="columns">
+          <tr>
+            <th v-for="column in columns" :key="column">{{ column }}</th>
+          </tr>
         </slot>
-      </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <TabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+        >
+        </TabelRow>
+      </tbody>
+    </table>
+  </div>
 </template>
 <script>
+import TabelRow from "./TabelRow";
 export default {
   name: "l-table",
   props: {
     columns: Array,
     data: Array
   },
-  methods: {
-    hasValue(item, column) {
-      return item[column.toLowerCase()] !== "undefined";
-    },
-    itemValue(item, column) {
-      return item[column.toLowerCase()];
-    }
+  components: {
+    TabelRow
   }
 };
 </script>

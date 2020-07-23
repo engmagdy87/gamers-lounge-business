@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div v-if="isSummitsFetched">
     <div class="container">
       <div class="row">
         <div class="col-sm">
-          <h2 class="heading-margin">Summits ({{ table.data.length }})</h2>
+          <h2 class="heading-margin">Summits ({{ summitsData.length }})</h2>
         </div>
         <div class="col-sm">
           <router-link to="/dashboard/summits/create">
@@ -20,63 +20,65 @@
     <LTable
       class="table-hover table-striped"
       :columns="table.columns"
-      :data="table.data"
+      :data="summitsData"
     >
     </LTable>
   </div>
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+import types from "../../../store/types";
 import LTable from "src/dashboard/components/Table.vue";
-const tableColumns = ["Id", "Name", "Salary", "Country", "City"];
-const tableData = [
-  {
-    id: 1,
-    name: "Dakota Rice",
-    salary: "$36.738",
-    country: "Niger",
-    city: "Oud-Turnhout"
-  },
-  {
-    id: 2,
-    name: "Minerva Hooper",
-    salary: "$23,789",
-    country: "Curaçao",
-    city: "Sinaai-Waas"
-  },
-  {
-    id: 3,
-    name: "Sage Rodriguez",
-    salary: "$56,142",
-    country: "Netherlands",
-    city: "Baileux"
-  },
-  {
-    id: 4,
-    name: "Philip Chaney",
-    salary: "$38,735",
-    country: "Korea, South",
-    city: "Overland Park"
-  },
-  {
-    id: 5,
-    name: "Doris Greene",
-    salary: "$63,542",
-    country: "Malawi",
-    city: "Feldkirchen in Kärnten"
-  }
-];
+
 export default {
   data() {
     return {
       table: {
-        columns: [...tableColumns],
-        data: [...tableData]
+        columns: [
+          "Id",
+          "Initial Title",
+          "Final Title",
+          "Initial Description",
+          "Final Description",
+          "Attendess",
+          "Year",
+          "Location",
+          "Card Image",
+          "Cover Main Image",
+          "Cover Over Image",
+          "Logo Image",
+          "Media Image",
+          "Video URL",
+          "Active"
+        ]
       }
     };
   },
+  computed: {
+    ...mapState({
+      summitsData: state => state.summits.summitsData,
+      isSummitsFetched: state => state.summits.isSummitsFetched
+    })
+  },
+  methods: {
+    ...mapActions({
+      fetchSummits: types.summits.actions.FETCH_SUMMITS
+    }),
+    notifyVue(message, color) {
+      this.$notifications.notify({
+        message: `<span>${message}</span>`,
+        horizontalAlign: "right",
+        verticalAlign: "top",
+        type: color
+      });
+    }
+  },
   components: {
     LTable
+  },
+  mounted() {
+    this.fetchSummits();
   }
 };
 </script>
