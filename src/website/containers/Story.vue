@@ -6,14 +6,7 @@
       :setShowRegisterModal="setShowRegisterModal"
       :setShowLoginModal="setShowLoginModal"
     />
-    <div
-      class="story-wrapper__outside"
-      :style="
-        storyData.images.img_cover_main !== undefined
-          ? `display:block;`
-          : 'display:none;'
-      "
-    >
+    <div class="story-wrapper__outside" v-if="!isDataEmpty">
       <div
         class="story-wrapper__inside"
         :style="
@@ -66,7 +59,10 @@ export default {
     }),
     ...mapState({
       storyData: state => state.story.storyData
-    })
+    }),
+    isDataEmpty() {
+      return Object.keys(this.storyData).length === 0;
+    }
   },
   watch: {
     isUserLoggedIn() {
@@ -95,11 +91,6 @@ export default {
   },
   mounted() {
     this.fetchStory();
-  },
-  updated() {
-    console.log("====================================");
-    console.log(this.storyData);
-    console.log("====================================");
   }
 };
 </script>

@@ -14,17 +14,7 @@
     justify-content: center;
     align-items: center;
     padding: 2px;
-    clip-path: polygon(
-      0 0,
-      98% 0,
-      100% 4%,
-      100% 92%,
-      98% 95%,
-      66% 95%,
-      62% 100%,
-      2% 100%,
-      0 96%
-    );
+    @include create-hero-header-shape();
   }
 
   &__inside {
@@ -34,17 +24,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     margin: auto;
-    clip-path: polygon(
-      0 0,
-      98% 0,
-      100% 4%,
-      100% 92%,
-      98% 95%,
-      66% 95%,
-      62% 100%,
-      2% 100%,
-      0 96%
-    );
+    @include create-hero-header-shape();
   }
 
   &__content {
