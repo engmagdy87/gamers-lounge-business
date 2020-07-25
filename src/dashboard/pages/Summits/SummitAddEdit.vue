@@ -48,12 +48,26 @@
         </div>
       </div>
       <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Final Description</label>
+            <textarea
+              rows="5"
+              class="form-control border-input"
+              placeholder="Enter Final Description"
+              v-model="summit.final_description"
+            >
+            </textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-6">
           <base-input
             type="text"
-            label="Final Description"
-            placeholder="Enter Final Description"
-            v-model="summit.final_description"
+            label="Location"
+            placeholder="Enter Location"
+            v-model="summit.location"
           >
           </base-input>
         </div>
@@ -64,18 +78,6 @@
             placeholder="Enter Attendess"
             v-model="summit.attendess"
             min="0"
-          >
-          </base-input>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <base-input
-            type="text"
-            label="Location"
-            placeholder="Enter Location"
-            v-model="summit.location"
           >
           </base-input>
         </div>
@@ -152,7 +154,7 @@
               type="file"
               id="media-images"
               accept="image/png, image/jpeg"
-              multiple
+              @change="e => setFile(e, 'img_cover_main')"
               ref="img_cover_main"
             />
           </div>
@@ -176,7 +178,7 @@
       <div class="row mb-3">
         <div class="col-6">
           <div>
-            <label class="mr-5" for="media-images1">Choose Cards Images</label>
+            <label class="mr-5" for="media-images1">Choose Card Image</label>
             <input
               type="file"
               id="media-images1"
@@ -236,7 +238,8 @@ export default {
         vid_initial: "",
         img_logo: "",
         img_cover_over: "",
-        img_card: ""
+        img_card: "",
+        img_cover_main: ""
       }
     };
   },
@@ -263,14 +266,11 @@ export default {
       formData.append("img_logo", this.summit.img_logo);
       formData.append("img_cover_over", this.summit.img_cover_over);
       formData.append("img_card", this.summit.img_card);
+      formData.append("img_cover_main", this.summit.img_cover_main);
 
       for (var i = 0; i < this.$refs.img_media.files.length; i++) {
         let file = this.$refs.img_media.files[i];
         formData.append("img_media[]", file);
-      }
-      for (var i = 0; i < this.$refs.img_cover_main.files.length; i++) {
-        let file = this.$refs.img_cover_main.files[i];
-        formData.append("img_cover_main[]", file);
       }
 
       try {
@@ -299,6 +299,7 @@ export default {
       this.summit.img_logo = "";
       this.summit.img_cover_over = "";
       this.summit.img_card = "";
+      this.summit.img_cover_main = "";
       this.$refs.img_logo.value = null;
       this.$refs.img_cover_over.value = null;
       this.$refs.img_media.value = null;

@@ -6,7 +6,7 @@
     ]"
   >
     <div class="header-wrapper__logo">
-      <img src="website/img/ess-logo.png" alt="medaf typeface" />
+      <img src="/website/img/ess-logo.png" alt="ess logo" />
     </div>
     <!-- DESKTOP UI -->
     <nav class="header-wrapper--desktop">
@@ -23,7 +23,7 @@
             activeItem === 'events' ? 'header-wrapper__navLinks--active' : ''
           ]"
         >
-          <a href="#">Events</a>
+          <a href="/events">Events</a>
         </li>
         <li
           :class="[
@@ -104,7 +104,7 @@
               activeItem === 'events' ? 'header-wrapper__navLinks--active' : ''
             ]"
           >
-            <a href="#" @click="closeNav">Events</a>
+            <a href="/events" @click="closeNav">Events</a>
           </li>
           <li
             :class="[

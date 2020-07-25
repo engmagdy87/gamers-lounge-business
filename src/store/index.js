@@ -5,6 +5,7 @@ import userModule from './modules/user';
 import homeModule from './modules/home';
 import storyModule from './modules/story';
 import summitModule from './modules/summit';
+import eventModule from './modules/event';
 
 Vue.use(Vuex);
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
         user: userModule,
         home: homeModule,
         story: storyModule,
-        summits: summitModule
+        summits: summitModule,
+        events: eventModule
     }
 });

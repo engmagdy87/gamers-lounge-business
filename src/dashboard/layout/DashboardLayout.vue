@@ -10,6 +10,10 @@
         <i class="nc-icon nc-controller-modern"></i>
         <p>Summits</p>
       </sidebar-link>
+      <sidebar-link to="/dashboard/events">
+        <i class="nc-icon nc-notification-70"></i>
+        <p>Events</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>

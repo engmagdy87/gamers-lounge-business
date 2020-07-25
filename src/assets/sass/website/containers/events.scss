@@ -2,9 +2,10 @@
 @import "../variables.scss";
 @import "../mixins.scss";
 
-.story-wrapper {
+.events-wrapper {
   background-image: url("~/website/img/hexagone-pattern.png");
   background-repeat: repeat;
+  position: relative;
   height: 100vh;
   overflow-y: auto;
   &::-webkit-scrollbar {
@@ -33,57 +34,27 @@
   &__inside {
     width: calc(100% - 2px);
     height: calc(#{$hero-image-height} - 4px);
+    background-image: url("~/website/img/story-hero.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     margin: auto;
     @include create-hero-header-shape();
   }
-
   &__content {
     width: 100%;
-    padding: 5vh 15%;
-    min-height: calc(100vh - 12vh);
-    @include is-mobile {
-      min-height: 82vh;
-    }
-    h1,
-    p {
-      color: white;
-    }
-    h1 {
-      margin: 0;
+    min-height: 80vh;
+    max-height: 80vh;
+    padding: 0% 15%;
+    h2 {
+      margin: 80px 0;
       color: white;
       font-size: 2rem;
-      margin-bottom: 50px;
-    }
-    p {
-      font-size: 1.2rem;
     }
     .row {
       .col {
         padding: 5px;
       }
-    }
-  }
-  &__navLinks {
-    list-style: none;
-    color: white;
-    padding: 20px;
-    margin-bottom: 0;
-    li {
-      display: inline-block;
-      cursor: pointer;
-      padding-right: 20px;
-      transition: all 0.3s ease 0s;
-      color: $inactive-header-link;
-      font-size: 1.5rem;
-      font-weight: lighter;
-    }
-    &--active {
-      color: $primary !important;
-      text-decoration: underline;
-      font-family: "Roboto Bold";
     }
   }
 }

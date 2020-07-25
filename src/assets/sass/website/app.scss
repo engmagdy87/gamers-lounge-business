@@ -1,18 +1,5 @@
 @import "./color-palette.scss";
 
-html {
-  &::-webkit-scrollbar {
-    width: 5px !important;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: $primary !important;
-    border-radius: 20px !important;
-  }
-  &::-webkit-scrollbar {
-    background-color: $accent !important;
-    border-radius: 20px !important;
-  }
-}
 .app-wrapper {
   font-family: "Roboto";
 }

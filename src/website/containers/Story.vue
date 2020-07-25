@@ -10,7 +10,8 @@
       <div
         class="story-wrapper__inside"
         :style="
-          storyData.images.img_cover_main !== undefined
+          storyData.images.img_cover_main !== null &&
+          storyData.images.img_cover_main.length !== 0
             ? `backgroundImage: url(${storyData.images.img_cover_main[0].path})`
             : ''
         "
@@ -61,7 +62,9 @@ export default {
       storyData: state => state.story.storyData
     }),
     isDataEmpty() {
-      return Object.keys(this.storyData).length === 0;
+      return (
+        this.storyData !== undefined && Object.keys(this.storyData).length === 0
+      );
     }
   },
   watch: {
