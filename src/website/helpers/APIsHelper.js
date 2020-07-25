@@ -82,7 +82,7 @@ async function getEventsTypes() {
 }
 
 async function getMainEvents() {
-    const response = await getDashboardData(
+    const response = await get(
         APIs.GET_MAIN_EVENTS
     );
 
@@ -90,7 +90,7 @@ async function getMainEvents() {
 }
 
 async function getSubEvents() {
-    const response = await getDashboardData(
+    const response = await get(
         APIs.GET_SUB_EVENTS
     );
 
