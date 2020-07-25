@@ -106,7 +106,7 @@ async function getEventCoverTypes() {
 }
 
 async function getEvent(eventId) {
-    const response = await getDashboardData(
+    const response = await get(
         `${APIs.GET_EVENT_DETAILS}/${eventId}`
     );
 
