@@ -27,6 +27,21 @@ const story = {
     }
 };
 
+const sponsors = {
+    mutations: {
+        SET_SPONSORS_DATA: 'sponsors/mutations/SET_SPONSORS_DATA',
+        SET_IS_SPONSORS_DATA_FETCHED: 'sponsors/mutations/SET_IS_SPONSORS_DATA_FETCHED',
+        SET_DASHBOARD_SPONSORS_DATA: 'sponsors/mutations/SET_DASHBOARD_SPONSORS_DATA',
+        SET_IS_DASHBOARD_SPONSORS_DATA_FETCHED: 'sponsors/mutations/SET_IS_DASHBOARD_SPONSORS_DATA_FETCHED',
+    },
+    actions: {
+        FETCH_SPONSORS: 'sponsors/actions/FETCH_SPONSORS',
+        FETCH_MAIN_SPONSORS: 'sponsors/actions/FETCH_MAIN_SPONSORS',
+        FETCH_SUB_SPONSORS: 'sponsors/actions/FETCH_SUB_SPONSORS',
+        FETCH_SPONSORS_FOR_DASHBOARD: 'sponsors/actions/FETCH_SPONSORS_FOR_DASHBOARD',
+    }
+};
+
 const summits = {
     mutations: {
         SET_SUMMITS_DATA: 'summits/mutations/SET_SUMMITS_DATA',
@@ -70,5 +85,6 @@ export default {
     home,
     story,
     summits,
-    events
+    events,
+    sponsors
 };

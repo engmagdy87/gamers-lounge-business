@@ -1,5 +1,12 @@
 <template>
-  <div v-if="isSummitsListFetched && isEventTypeFetched">
+  <div
+    v-if="
+      isSummitsListFetched &&
+        isEventTypeFetched &&
+        isEventCoverTypesFetched &&
+        isDashboardSponsorsDataFetched
+    "
+  >
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -85,10 +92,11 @@
             <select class="form-control" v-model="event.cover_type">
               <option value="-1">--Please select cover type</option>
               <option
-                v-for="(type, index) in ['Image', 'Video']"
-                :selected="event.cover_type === type"
+                v-for="(type, index) in eventCoverTypes"
+                :selected="event.cover_type === type.value"
                 :key="index"
-                >{{ type }}</option
+                :value="type.value"
+                >{{ type.label }}</option
               >
             </select>
           </div>
@@ -104,6 +112,44 @@
                 :key="index"
                 :value="type.value"
                 >{{ type.label }}</option
+              >
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="eventType">Main Sponsors</label>
+            <select
+              class="form-control"
+              name="main_sponsors_ids"
+              multiple
+              v-model="event.main_sponsors_ids"
+            >
+              <option
+                v-for="(sponsor, index) in dashboardSponsorsData"
+                :key="index"
+                :value="sponsor.id"
+                >{{ sponsor.name }}</option
+              >
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="eventType">Sub Sponsors</label>
+            <select
+              class="form-control"
+              name="sub_sponsors_ids"
+              multiple
+              v-model="event.sub_sponsors_ids"
+            >
+              <option
+                v-for="(sponsor, index) in dashboardSponsorsData"
+                :key="index"
+                :value="sponsor.id"
+                >{{ sponsor.name }}</option
               >
             </select>
           </div>
@@ -276,6 +322,7 @@
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
+import Multiselect from "vue-multiselect";
 import store from "../../../store/index";
 import types from "../../../store/types";
 // import Card from "src/dashboard/components/Cards/Card.vue";
@@ -305,14 +352,18 @@ export default {
         img_logo: "",
         img_card: "",
         vid_initial: "",
-        vid_final: ""
+        vid_final: "",
+        main_sponsors_ids: [],
+        sub_sponsors_ids: []
       }
     };
   },
   methods: {
     ...mapActions({
       fetchSummitsList: types.summits.actions.FETCH_SUMMITS_LIST,
-      fetchEventType: types.events.actions.FETCH_EVENT_TYPE
+      fetchEventType: types.events.actions.FETCH_EVENT_TYPE,
+      fetchCoverTypes: types.events.actions.FETCH_EVENT_COVER_TYPES,
+      fetchSponsorsData: types.sponsors.actions.FETCH_SPONSORS_FOR_DASHBOARD
     }),
     setFile(e, key) {
       const files = e.target.files;
@@ -341,6 +392,12 @@ export default {
       formData.append("vid_initial", this.event.vid_initial);
       formData.append("vid_final", this.event.vid_final);
 
+      for (var i = 0; i < this.event.main_sponsors_ids.length; i++) {
+        formData.append("main_sponsors_ids[]", this.event.main_sponsors_ids[i]);
+      }
+      for (var i = 0; i < this.event.sub_sponsors_ids.length; i++) {
+        formData.append("sub_sponsors_ids[]", this.event.sub_sponsors_ids[i]);
+      }
       for (var i = 0; i < this.$refs.img_media.files.length; i++) {
         let file = this.$refs.img_media.files[i];
         formData.append("img_media[]", file);
@@ -380,6 +437,8 @@ export default {
       this.event.img_card = "";
       this.event.vid_initial = "";
       this.event.vid_final = "";
+      this.event.main_sponsors_ids = [];
+      this.event.sub_sponsors_ids = [];
 
       this.$refs.img_logo.value = null;
       this.$refs.img_cover_over.value = null;
@@ -401,7 +460,12 @@ export default {
       summitsListData: state => state.summits.summitsListData,
       isSummitsListFetched: state => state.summits.isSummitsListFetched,
       eventsTypes: state => state.events.eventsTypes,
-      isEventTypeFetched: state => state.events.isEventTypeFetched
+      isEventTypeFetched: state => state.events.isEventTypeFetched,
+      eventCoverTypes: state => state.events.eventCoverTypes,
+      isEventCoverTypesFetched: state => state.events.isEventCoverTypesFetched,
+      dashboardSponsorsData: state => state.sponsors.dashboardSponsorsData,
+      isDashboardSponsorsDataFetched: state =>
+        state.sponsors.isDashboardSponsorsDataFetched
     }),
     minDate() {
       var today = new Date();
@@ -412,16 +476,24 @@ export default {
         "-" +
         today.getDate();
       return date;
+    },
+    getSonsors() {
+      return this.dashboardSponsorsData.map(sponsor => sponsor.name);
     }
   },
   mounted() {
     store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
     this.fetchSummitsList();
     this.fetchEventType();
+    this.fetchCoverTypes();
+    this.fetchSponsorsData();
   },
   updated() {
     if (this.isSummitsListFetched && this.isEventTypeFetched)
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+  },
+  components: {
+    Multiselect
   }
 };
 </script>

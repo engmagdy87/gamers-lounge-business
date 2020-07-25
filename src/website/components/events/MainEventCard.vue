@@ -26,7 +26,7 @@
                   ><img src="website/img/group.svg" alt="group icon" />{{
                     card.tournaments.count
                   }}
-                  teams</span
+                  tournaments</span
                 >
                 <img
                   class="main-event-card-wrapper__content__game-logo"

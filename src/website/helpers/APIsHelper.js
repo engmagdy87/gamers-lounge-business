@@ -113,6 +113,32 @@ async function getEvent(eventId) {
     return response.data;
 }
 
+//Sponsors
+async function getSponsorsForDashboard() {
+    const response = await getDashboardData(
+        APIs.GET_LIST_SPONSORS
+    );
+
+    return response.data;
+}
+
+async function getSponsors() {
+    const response = await getDashboardData(
+        APIs.GET_SPONSORS
+    );
+
+    return response.data;
+}
+
+async function createSponsor(payload) {
+    const response = await post(
+        payload,
+        APIs.CREATE_SPONSOR
+    );
+
+    return response.data;
+}
+
 export {
     loadUserPersona,
     setUserPersona,
@@ -126,7 +152,10 @@ export {
     getMainEvents,
     getSubEvents,
     getEventCoverTypes,
-    getEvent
+    getEvent,
+    getSponsorsForDashboard,
+    getSponsors,
+    createSponsor
 };
 
 async function post(data, url) {

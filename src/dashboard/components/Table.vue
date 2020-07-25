@@ -28,18 +28,29 @@
         >
         </EventTabelRow>
       </tbody>
+      <tbody v-else-if="tableType === 'sponsors'">
+        <SponsorTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+        >
+        </SponsorTabelRow>
+      </tbody>
     </table>
   </div>
 </template>
 <script>
 import SummitTabelRow from "./SummitTabelRow";
 import EventTabelRow from "./EventTabelRow";
+import SponsorTabelRow from "./SponsorTabelRow";
 export default {
   name: "l-table",
   props: ["columns", "data", "tableType"],
   components: {
     SummitTabelRow,
-    EventTabelRow
+    EventTabelRow,
+    SponsorTabelRow
   }
 };
 </script>

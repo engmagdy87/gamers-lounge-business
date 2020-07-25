@@ -1,5 +1,5 @@
 <template>
-  <div class="sub-event-card-wrapper">
+  <div class="sub-event-card-wrapper" @click="redirectTo">
     <div class="sub-event-card-wrapper__outside">
       <div class="sub-event-card-wrapper__inside">
         <img
@@ -22,7 +22,7 @@
               ><img src="website/img/group.svg" alt="group icon" />{{
                 card.tournaments.count
               }}
-              teams</span
+              tournaments</span
             >
             <br />
             <span
@@ -40,7 +40,16 @@
 
 <script>
 export default {
-  props: ["card"]
+  props: ["card"],
+  methods: {
+    redirectTo() {
+      if (this.card.is_external) window.open(this.card.external_link, "_blank");
+      else
+        this.$router.push({
+          path: `/events/event/${this.card.id}`
+        });
+    }
+  }
 };
 </script>
 

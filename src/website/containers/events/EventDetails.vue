@@ -48,8 +48,20 @@
             <div class="row">
               <div
                 class="col d-flex justify-content-end align-items-center mb-4"
+                v-if="eventDetails.sponsors !== undefined"
               >
-                SPONSORS
+                <a
+                  v-for="(sponsor, index) in eventDetails.sponsors.main"
+                  :key="index"
+                  :href="sponsor.link"
+                >
+                  <img
+                    class="event-details-wrapper__content__main-sponsor"
+                    v-if="sponsor.images.img_logo !== null"
+                    :src="sponsor.images.img_logo.path"
+                    :alt="sponsor.name"
+                  />
+                </a>
               </div>
             </div>
             <div class="row">
@@ -64,9 +76,23 @@
             Event Tournaments
           </div>
           <div class="col d-flex justify-content-end align-items-center">
-            <div class="event-details-wrapper__content__cutom-btn-outside">
-              <div class="event-details-wrapper__content__cutom-btn-inside">
-                SPONSORS
+            <div class="event-details-wrapper__content__custom-btn-outside">
+              <div
+                class="event-details-wrapper__content__custom-btn-inside"
+                v-if="eventDetails.sponsors !== undefined"
+              >
+                <a
+                  v-for="(sponsor, index) in eventDetails.sponsors.sub"
+                  :key="index"
+                  :href="sponsor.link"
+                >
+                  <img
+                    class="event-details-wrapper__content__sub-sponsor"
+                    v-if="sponsor.images.img_logo !== null"
+                    :src="sponsor.images.img_logo.path"
+                    :alt="sponsor.name"
+                  />
+                </a>
               </div>
             </div>
           </div>

@@ -16,8 +16,14 @@ import Summits from 'src/dashboard/pages/Summits.vue'
 import SummitsList from 'src/dashboard/pages/Summits/SummitsList.vue'
 import SummitAddEdit from 'src/dashboard/pages/Summits/SummitAddEdit.vue'
 import Events from 'src/dashboard/pages/Events.vue'
+import Sponsors from 'src/dashboard/pages/Sponsors.vue'
+
 import EventsList from 'src/dashboard/pages/Events/EventsList.vue'
 import EventsAddEdit from 'src/dashboard/pages/Events/EventsAddEdit.vue'
+
+import SponsorsList from 'src/dashboard/pages/Sponsors/SponsorsList.vue'
+import SponsorAddEdit from 'src/dashboard/pages/Sponsors/SponsorAddEdit.vue'
+
 import TableList from 'src/dashboard/pages/TableList.vue'
 import Icons from 'src/dashboard/pages/Icons.vue'
 import Notifications from 'src/dashboard/pages/Notifications.vue'
@@ -103,6 +109,29 @@ const routes = [
             path: 'edit',
             name: 'Edit',
             component: EventsAddEdit
+          }
+        ]
+      },
+      {
+        path: 'sponsors',
+        name: 'Sponsors',
+        redirect: '/dashboard/sponsors/list',
+        component: Sponsors,
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: SponsorsList
+          },
+          {
+            path: 'create',
+            name: 'Create',
+            component: SponsorAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit',
+            component: SponsorAddEdit
           }
         ]
       },

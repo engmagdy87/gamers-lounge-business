@@ -11,13 +11,18 @@ const GET_SUMMITS_LIST = `${API_URL}/summits/list`
 const GET_STORY = `${API_URL}/summits/story`
 
 // Events
-const CREATE_EVENT = `${API_URL}/admin/events`
+const CREATE_EVENT = `${API_URL}/events`
 const GET_EVENT_TYPES = `${API_URL}/events/constants/types`
 const GET_EVENT_COVER_TYPES = `${API_URL}/events/constants/cover-types`
 const GET_EVENTS = `${API_URL}/events`
 const GET_MAIN_EVENTS = `${API_URL}/events/main`
 const GET_SUB_EVENTS = `${API_URL}/events/sub`
 const GET_EVENT_DETAILS = `${API_URL}/events`
+
+// SPONSORS
+const GET_SPONSORS = `${API_URL}/sponsors`
+const CREATE_SPONSOR = `${API_URL}/sponsors`
+const GET_LIST_SPONSORS = `${API_URL}/sponsors/list`
 
 export {
     API_URL,
@@ -33,5 +38,8 @@ export {
     GET_MAIN_EVENTS,
     GET_SUB_EVENTS,
     GET_EVENT_COVER_TYPES,
-    GET_EVENT_DETAILS
+    GET_EVENT_DETAILS,
+    GET_SPONSORS,
+    CREATE_SPONSOR,
+    GET_LIST_SPONSORS
 };

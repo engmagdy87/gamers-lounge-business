@@ -95,11 +95,8 @@ const getSubEventsData = async ({ commit }) => {
 
 const getEventCoverTypesData = async ({ commit }) => {
     const response = await getEventCoverTypes().then((response) => {
-        console.log('====================================');
-        console.log(response);
-        console.log('====================================');
-        // commit(types.events.mutations.SET_EVENT_COVER_TYPES, response.data.events);
-        // commit(types.events.mutations.SET_IS_EVENT_COVER_TYPES_FETCHED, true);
+        commit(types.events.mutations.SET_EVENT_COVER_TYPES, response.data.types);
+        commit(types.events.mutations.SET_IS_EVENT_COVER_TYPES_FETCHED, true);
         return true
     }).catch(() => false);
     return response
