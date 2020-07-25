@@ -3,7 +3,7 @@
     <!-- <div class="container"> -->
     <div class="row">
       <div class="col-sm">
-        <h2 class="heading-margin">Events (0)</h2>
+        <h2 class="heading-margin">Events ({{ eventsData.length }})</h2>
       </div>
       <div class="col-sm">
         <router-link to="/dashboard/events/create">
@@ -17,12 +17,13 @@
       </div>
       <!-- </div> -->
     </div>
-    <!-- <LTable
+    <LTable
       class="table-hover table-striped"
       :columns="table.columns"
-      :data="summitsData"
+      :data="eventsData"
+      tableType="events"
     >
-    </LTable> -->
+    </LTable>
   </div>
 </template>
 
@@ -41,30 +42,30 @@ export default {
           "Final Title",
           "Initial Description",
           "Final Description",
-          "Attendess",
-          "Year",
-          "Location",
+          "Summit",
+          "Start Date",
+          "End Date",
+          "Type",
           "Card Image",
           "Cover Main Image",
           "Cover Over Image",
           "Logo Image",
           "Media Image",
-          "Video URL",
-          "Active"
+          "Video URL"
         ]
       }
     };
   },
   computed: {
-    // ...mapState({
-    //   summitsData: state => state.events.summitsData,
-    //   isSummitsFetched: state => state.events.isSummitsFetched
-    // })
+    ...mapState({
+      eventsData: state => state.events.eventsData,
+      isEventsFetched: state => state.events.isEventsFetched
+    })
   },
   methods: {
-    // ...mapActions({
-    //   fetchSummits: types.events.actions.FETCH_SUMMITS
-    // }),
+    ...mapActions({
+      fetchEvents: types.events.actions.FETCH_EVENTS
+    }),
     notifyVue(message, color) {
       this.$notifications.notify({
         message: `<span>${message}</span>`,
@@ -75,10 +76,10 @@ export default {
     }
   },
   components: {
-    // LTable
+    LTable
   },
   mounted() {
-    // this.fetchSummits();
+    this.fetchEvents();
   }
 };
 </script>

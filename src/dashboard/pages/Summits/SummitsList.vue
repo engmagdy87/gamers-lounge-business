@@ -21,6 +21,7 @@
       class="table-hover table-striped"
       :columns="table.columns"
       :data="summitsData"
+      tableType="summits"
     >
     </LTable>
   </div>
