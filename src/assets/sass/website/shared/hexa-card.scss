@@ -4,9 +4,10 @@
 
 .hexa-card-wrapper {
   position: relative;
-  height: 200px;
+  height: 150px;
   margin: 5px;
   filter: drop-shadow(0 0 4px #175e90);
+  cursor: pointer;
   &__outside {
     position: relative;
     width: 100%;
@@ -28,9 +29,6 @@
     align-items: center;
     transition: all 0.2s ease;
     @include create-hexagone-shape(12px);
-    &:hover {
-      background: rgba($color: #000000, $alpha: 0.95);
-    }
   }
   &__bg-img,
   &__overlay {
@@ -49,6 +47,10 @@
     color: white;
     padding: 2%;
     display: flex;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: rgba($color: #000000, $alpha: 0.8);
+    }
   }
   &__logo {
     width: 30%;

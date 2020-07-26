@@ -42,6 +42,45 @@ const sponsors = {
     }
 };
 
+const games = {
+    mutations: {
+        SET_GAMES_DATA: 'games/mutations/SET_GAMES_DATA',
+        SET_IS_GAMES_DATA_FETCHED: 'games/mutations/SET_IS_GAMES_DATA_FETCHED',
+        SET_DASHBOARD_GAMES_DATA: 'games/mutations/SET_DASHBOARD_GAMES_DATA',
+        SET_IS_DASHBOARD_GAMES_DATA_FETCHED: 'games/mutations/SET_IS_DASHBOARD_GAMES_DATA_FETCHED',
+    },
+    actions: {
+        FETCH_GAMES: 'games/actions/FETCH_GAMES',
+        FETCH_GAMES_FOR_DASHBOARD: 'games/actions/FETCH_GAMES_FOR_DASHBOARD',
+    }
+};
+
+const platforms = {
+    mutations: {
+        SET_PLATFORMS_DATA: 'platforms/mutations/SET_PLATFORMS_DATA',
+        SET_IS_PLATFORMS_DATA_FETCHED: 'platforms/mutations/SET_IS_PLATFORMS_DATA_FETCHED',
+        SET_DASHBOARD_PLATFORMS_DATA: 'platforms/mutations/SET_DASHBOARD_PLATFORMS_DATA',
+        SET_IS_DASHBOARD_PLATFORMS_DATA_FETCHED: 'platforms/mutations/SET_IS_DASHBOARD_PLATFORMS_DATA_FETCHED',
+    },
+    actions: {
+        FETCH_PLATFORMS: 'platforms/actions/FETCH_PLATFORMS',
+        FETCH_PLATFORMS_FOR_DASHBOARD: 'platforms/actions/FETCH_PLATFORMS_FOR_DASHBOARD',
+    }
+};
+
+const regions = {
+    mutations: {
+        SET_REGIONS_DATA: 'regions/mutations/SET_REGIONS_DATA',
+        SET_IS_REGIONS_DATA_FETCHED: 'regions/mutations/SET_IS_REGIONS_DATA_FETCHED',
+        SET_DASHBOARD_REGIONS_DATA: 'regions/mutations/SET_DASHBOARD_REGIONS_DATA',
+        SET_IS_DASHBOARD_REGIONS_DATA_FETCHED: 'regions/mutations/SET_IS_DASHBOARD_REGIONS_DATA_FETCHED',
+    },
+    actions: {
+        FETCH_REGIONS: 'regions/actions/FETCH_REGIONS',
+        FETCH_REGIONS_FOR_DASHBOARD: 'regions/actions/FETCH_REGIONS_FOR_DASHBOARD',
+    }
+};
+
 const summits = {
     mutations: {
         SET_SUMMITS_DATA: 'summits/mutations/SET_SUMMITS_DATA',
@@ -86,5 +125,8 @@ export default {
     story,
     summits,
     events,
-    sponsors
+    sponsors,
+    games,
+    platforms,
+    regions
 };

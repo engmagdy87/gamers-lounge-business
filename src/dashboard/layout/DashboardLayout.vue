@@ -7,7 +7,7 @@
         <p>Dashboard</p>
       </sidebar-link>
       <sidebar-link to="/dashboard/summits">
-        <i class="nc-icon nc-controller-modern"></i>
+        <i class="nc-icon nc-planet"></i>
         <p>Summits</p>
       </sidebar-link>
       <sidebar-link to="/dashboard/events">
@@ -17,6 +17,18 @@
       <sidebar-link to="/dashboard/sponsors">
         <i class="nc-icon nc-money-coins"></i>
         <p>Sponsors</p>
+      </sidebar-link>
+      <sidebar-link to="/dashboard/games">
+        <i class="nc-icon nc-controller-modern"></i>
+        <p>Games</p>
+      </sidebar-link>
+      <sidebar-link to="/dashboard/platforms">
+        <i class="nc-icon nc-tv-2"></i>
+        <p>Platforms</p>
+      </sidebar-link>
+      <sidebar-link to="/dashboard/regions">
+        <i class="nc-icon nc-pin-3"></i>
+        <p>Regions</p>
       </sidebar-link>
     </side-bar>
     <div class="main-panel">

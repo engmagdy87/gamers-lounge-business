@@ -335,6 +335,15 @@ export default {
   data() {
     return {
       operation: this.$route.name,
+      value: [],
+      options: [
+        { name: "Vue.js", language: "JavaScript" },
+        { name: "Adonis", language: "JavaScript" },
+        { name: "Rails", language: "Ruby" },
+        { name: "Sinatra", language: "Ruby" },
+        { name: "Laravel", language: "PHP" },
+        { name: "Phoenix", language: "Elixir" }
+      ],
       event: {
         initial_title: "",
         final_title: "",

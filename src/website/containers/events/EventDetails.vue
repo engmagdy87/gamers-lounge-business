@@ -9,7 +9,10 @@
     <div class="event-details-wrapper__outside" v-if="showDetailsHero">
       <div
         class="event-details-wrapper__inside"
-        v-if="eventDetails.images.img_cover_main.length !== 0"
+        v-if="
+          eventDetails.images.img_cover_main !== null &&
+            eventDetails.images.img_cover_main.length !== 0
+        "
         :style="
           eventDetails.cover_type === 'img'
             ? `backgroundImage: url(${eventDetails.images.img_cover_main[0].path})`
@@ -30,7 +33,7 @@
         </video>
       </div>
     </div>
-    <div class="event-details-wrapper__content">
+    <div class="event-details-wrapper__content" v-if="showDetailsHero">
       <div class="event-details-wrapper__content__breadcrumb">
         <a href="/events">Event</a>
         <span> > {{ eventDetails.initial_title }}</span>
@@ -39,7 +42,7 @@
         <div class="row">
           <div class="col-3 event-details-wrapper__content__logo">
             <img
-              v-if="showDetailsHero"
+              v-if="eventDetails.images.img_logo !== null"
               :src="eventDetails.images.img_logo.path"
               :alt="eventDetails.initial_title"
             />

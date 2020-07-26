@@ -40,8 +40,16 @@
           />
         </div>
       </div>
-      <MenuView :data="getCorrespondingData" v-if="isMenuActive" />
-      <ListView :data="getCorrespondingData" v-else />
+      <MenuView
+        :data="getCorrespondingData"
+        :isGamesActive="isGamesActive"
+        v-if="isMenuActive"
+      />
+      <ListView
+        :data="getCorrespondingData"
+        :isGamesActive="isGamesActive"
+        v-else
+      />
     </div>
     <LoginModal
       :showFlag="showLoginModal"

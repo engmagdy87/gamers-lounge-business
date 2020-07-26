@@ -2,7 +2,9 @@
 import Home from '../website/containers/Home.vue'
 import Story from '../website/containers/Story.vue'
 import EventsContainer from '../website/containers/Events.vue'
-import EventsDetails from '../website/containers/events/EventDetails.vue'
+import EventDetails from '../website/containers/events/EventDetails.vue'
+
+import GameDetails from '../website/containers/events/EventDetails.vue'
 
 // GeneralViews
 import NotFound from '../dashboard/pages/NotFoundPage.vue'
@@ -12,17 +14,30 @@ import DashboardLayout from '../dashboard/layout/DashboardLayout.vue'
 
 // Admin pages
 import Overview from 'src/dashboard/pages/Overview.vue'
+
 import Summits from 'src/dashboard/pages/Summits.vue'
 import SummitsList from 'src/dashboard/pages/Summits/SummitsList.vue'
 import SummitAddEdit from 'src/dashboard/pages/Summits/SummitAddEdit.vue'
-import Events from 'src/dashboard/pages/Events.vue'
-import Sponsors from 'src/dashboard/pages/Sponsors.vue'
 
+import Events from 'src/dashboard/pages/Events.vue'
 import EventsList from 'src/dashboard/pages/Events/EventsList.vue'
 import EventsAddEdit from 'src/dashboard/pages/Events/EventsAddEdit.vue'
 
+import Sponsors from 'src/dashboard/pages/Sponsors.vue'
 import SponsorsList from 'src/dashboard/pages/Sponsors/SponsorsList.vue'
 import SponsorAddEdit from 'src/dashboard/pages/Sponsors/SponsorAddEdit.vue'
+
+import Games from 'src/dashboard/pages/Games.vue'
+import GamesList from 'src/dashboard/pages/Games/GamesList.vue'
+import GameAddEdit from 'src/dashboard/pages/Games/GameAddEdit.vue'
+
+import Platforms from 'src/dashboard/pages/Platforms.vue'
+import PlatformsList from 'src/dashboard/pages/Platforms/PlatformsList.vue'
+import PlatformAddEdit from 'src/dashboard/pages/Platforms/PlatformAddEdit.vue'
+
+import Regions from 'src/dashboard/pages/Regions.vue'
+import RegionsList from 'src/dashboard/pages/Regions/RegionsList.vue'
+import RegionAddEdit from 'src/dashboard/pages/Regions/RegionAddEdit.vue'
 
 import TableList from 'src/dashboard/pages/TableList.vue'
 import Icons from 'src/dashboard/pages/Icons.vue'
@@ -49,7 +64,12 @@ const routes = [
   {
     path: '/events/event/:eventId',
     name: 'event',
-    component: EventsDetails,
+    component: EventDetails,
+  },
+  {
+    path: '/games/game/:gameId',
+    name: 'game',
+    component: GameDetails,
   },
   {
     path: '/dashboard',
@@ -132,6 +152,75 @@ const routes = [
             path: 'edit',
             name: 'Edit',
             component: SponsorAddEdit
+          }
+        ]
+      },
+      {
+        path: 'games',
+        name: 'Games',
+        redirect: '/dashboard/games/list',
+        component: Games,
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: GamesList
+          },
+          {
+            path: 'create',
+            name: 'Create',
+            component: GameAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit',
+            component: GameAddEdit
+          }
+        ]
+      },
+      {
+        path: 'platforms',
+        name: 'Platforms',
+        redirect: '/dashboard/platforms/list',
+        component: Platforms,
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: PlatformsList
+          },
+          {
+            path: 'create',
+            name: 'Create',
+            component: PlatformAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit',
+            component: PlatformAddEdit
+          }
+        ]
+      },
+      {
+        path: 'regions',
+        name: 'Regions',
+        redirect: '/dashboard/regions/list',
+        component: Regions,
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: RegionsList
+          },
+          {
+            path: 'create',
+            name: 'Create',
+            component: RegionAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit',
+            component: RegionAddEdit
           }
         ]
       },

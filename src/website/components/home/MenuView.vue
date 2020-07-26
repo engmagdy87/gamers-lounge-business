@@ -34,7 +34,7 @@
 import HexaCard from "../../shared/HexaCard";
 
 export default {
-  props: ["data"],
+  props: ["data", "isGamesActive"],
   components: {
     HexaCard
   }

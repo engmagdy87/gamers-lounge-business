@@ -6,7 +6,7 @@ import { getUserCookie } from '../helpers/CookieHelper';
 async function loadUserPersona(payload) {
     const response = await post(
         payload,
-        APIs.LOGIN_USER
+        APIs.LOGIN_WEBSITE_USER
     );
 
     return response.data;
@@ -15,7 +15,7 @@ async function loadUserPersona(payload) {
 async function setUserPersona(payload) {
     const response = await post(
         payload,
-        APIs.REGISTER_USER
+        APIs.REGISTER_WEBSITE_USER
     );
 
     return response.data;
@@ -33,7 +33,7 @@ async function createSummit(payload) {
 
 async function getStory() {
     const response = await get(
-        APIs.GET_STORY
+        APIs.GET_WEBSITE_STORY
     );
 
     return response.data;
@@ -83,7 +83,7 @@ async function getEventsTypes() {
 
 async function getMainEvents() {
     const response = await get(
-        APIs.GET_MAIN_EVENTS
+        APIs.GET_WEBSITE_MAIN_EVENTS
     );
 
     return response.data;
@@ -91,7 +91,15 @@ async function getMainEvents() {
 
 async function getSubEvents() {
     const response = await get(
-        APIs.GET_SUB_EVENTS
+        APIs.GET_WEBSITE_SUB_EVENTS
+    );
+
+    return response.data;
+}
+
+async function getEvent(eventId) {
+    const response = await get(
+        `${APIs.GET_WEBSITE_EVENT_DETAILS}/${eventId}`
     );
 
     return response.data;
@@ -100,14 +108,6 @@ async function getSubEvents() {
 async function getEventCoverTypes() {
     const response = await getDashboardData(
         APIs.GET_EVENT_COVER_TYPES
-    );
-
-    return response.data;
-}
-
-async function getEvent(eventId) {
-    const response = await get(
-        `${APIs.GET_EVENT_DETAILS}/${eventId}`
     );
 
     return response.data;
@@ -131,9 +131,87 @@ async function getSponsors() {
 }
 
 async function createSponsor(payload) {
-    const response = await post(
+    const response = await postMultipart(
         payload,
         APIs.CREATE_SPONSOR
+    );
+
+    return response.data;
+}
+
+//Games
+async function getGamesForDashboard() {
+    const response = await getDashboardData(
+        APIs.GET_LIST_GAMES
+    );
+
+    return response.data;
+}
+
+async function getGames() {
+    const response = await getDashboardData(
+        APIs.GET_GAMES
+    );
+
+    return response.data;
+}
+
+async function createGame(payload) {
+    const response = await postMultipart(
+        payload,
+        APIs.CREATE_GAME
+    );
+
+    return response.data;
+}
+
+//Platforms
+async function getPlatformsForDashboard() {
+    const response = await getDashboardData(
+        APIs.GET_LIST_WEBSITE_PLATFORMS
+    );
+
+    return response.data;
+}
+
+async function getPlatforms() {
+    const response = await getDashboardData(
+        APIs.GET_PLATFORMS
+    );
+
+    return response.data;
+}
+
+async function createPlatform(payload) {
+    const response = await postMultipart(
+        payload,
+        APIs.CREATE_PLATFORM
+    );
+
+    return response.data;
+}
+
+//Regions
+async function getRegionsForDashboard() {
+    const response = await getDashboardData(
+        APIs.GET_LIST_WEBSITE_REGIONS
+    );
+
+    return response.data;
+}
+
+async function getRegions() {
+    const response = await getDashboardData(
+        APIs.GET_REGIONS
+    );
+
+    return response.data;
+}
+
+async function createRegion(payload) {
+    const response = await postMultipart(
+        payload,
+        APIs.CREATE_REGION
     );
 
     return response.data;
@@ -155,7 +233,16 @@ export {
     getEvent,
     getSponsorsForDashboard,
     getSponsors,
-    createSponsor
+    createSponsor,
+    getGamesForDashboard,
+    getGames,
+    createGame,
+    getPlatformsForDashboard,
+    getPlatforms,
+    createPlatform,
+    getRegionsForDashboard,
+    getRegions,
+    createRegion
 };
 
 async function post(data, url) {

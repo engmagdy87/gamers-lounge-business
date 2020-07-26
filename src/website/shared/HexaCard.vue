@@ -1,5 +1,5 @@
 <template>
-  <div class="hexa-card-wrapper">
+  <div class="hexa-card-wrapper" @click="redirectTo">
     <div class="hexa-card-wrapper__outside">
       <div class="hexa-card-wrapper__inside">
         <img
@@ -23,7 +23,19 @@
 
 <script>
 export default {
-  props: ["card"]
+  props: ["card"],
+  methods: {
+    redirectTo() {
+      // this.$router.push({
+      //   path: `/games/game/${data.id}`
+      // });
+    }
+  },
+  mounted() {
+    console.log("====================================");
+    console.log(this.card);
+    console.log("====================================");
+  }
 };
 </script>
 

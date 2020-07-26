@@ -37,6 +37,33 @@
         >
         </SponsorTabelRow>
       </tbody>
+      <tbody v-else-if="tableType === 'games'">
+        <GamesTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+        >
+        </GamesTabelRow>
+      </tbody>
+      <tbody v-else-if="tableType === 'platforms'">
+        <PlatformsTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+        >
+        </PlatformsTabelRow>
+      </tbody>
+      <tbody v-else-if="tableType === 'regions'">
+        <RegionsTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+        >
+        </RegionsTabelRow>
+      </tbody>
     </table>
   </div>
 </template>
@@ -44,13 +71,20 @@
 import SummitTabelRow from "./SummitTabelRow";
 import EventTabelRow from "./EventTabelRow";
 import SponsorTabelRow from "./SponsorTabelRow";
+import GamesTabelRow from "./GamesTabelRow";
+import PlatformsTabelRow from "./PlatformsTabelRow";
+import RegionsTabelRow from "./RegionsTabelRow";
+
 export default {
   name: "l-table",
   props: ["columns", "data", "tableType"],
   components: {
     SummitTabelRow,
     EventTabelRow,
-    SponsorTabelRow
+    SponsorTabelRow,
+    GamesTabelRow,
+    PlatformsTabelRow,
+    RegionsTabelRow
   }
 };
 </script>
