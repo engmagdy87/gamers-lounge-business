@@ -457,7 +457,6 @@ export default {
       this.tournament.vid_stream = "";
       this.$refs.img_logo.value = null;
       this.$refs.img_cover_over.value = null;
-      this.$refs.img_media.value = null;
       this.$refs.img_cover_main.value = null;
       this.$refs.img_card.value = null;
     },

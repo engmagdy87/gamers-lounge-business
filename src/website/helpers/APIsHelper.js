@@ -217,7 +217,7 @@ async function createPlatform(payload) {
 
 //Regions
 async function getRegionsForDashboard() {
-    const response = await getDashboardData(
+    const response = await get(
         APIs.GET_LIST_REGIONS
     );
 
