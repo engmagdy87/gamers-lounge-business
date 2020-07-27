@@ -66,6 +66,7 @@ import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
 import Spinner from "../../shared/Spinner";
 import Tabs from "../../shared/Tabs";
+import { getUserCookie } from "../../helpers/CookieHelper";
 
 export default {
   data() {
@@ -105,8 +106,20 @@ export default {
       this.showRegisterModal = value;
     },
     redirectTo() {
-      if (this.tournamentDetails.is_register_available)
+      const token = getUserCookie();
+      if (!token)
+        this.notifyVue("Please login to register to tournament", "danger");
+      else if (this.tournamentDetails.is_register_available)
         window.open(this.tournamentDetails.register_link, "_blank");
+      else this.notifyVue("Register was closed", "danger");
+    },
+    notifyVue(message, color) {
+      this.$notifications.notify({
+        message: `<span>${message}</span>`,
+        horizontalAlign: "right",
+        verticalAlign: "top",
+        type: color
+      });
     }
   },
   components: {

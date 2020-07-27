@@ -11,9 +11,9 @@
         <div class="tournament-card-wrapper__overlay">
           <div class="tournament-card-wrapper__logo">
             <img
-              v-if="card.images.img_loog !== null"
-              :src="card.images.img_logo.path"
-              :alt="card.images.img_logo.id + 'logo'"
+              v-if="card.game.images.img_logo !== null"
+              :src="card.game.images.img_logo.path"
+              :alt="card.game.images.img_logo.id + 'logo'"
             />
           </div>
           <div class="tournament-card-wrapper__content">

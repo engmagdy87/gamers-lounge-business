@@ -22,7 +22,7 @@
           <div class="form-group">
             <label for="region">Games</label>
             <select class="form-control" v-model="gameId">
-              <option value="-1">--Please select game</option>
+              <option value="null">--Please select game</option>
               <option
                 v-for="(game, index) in gamesData"
                 :selected="gameId === game.id"
@@ -35,7 +35,7 @@
           <div class="form-group">
             <label for="region">Regions</label>
             <select class="form-control" v-model="regionId">
-              <option value="-1">--Please select region</option>
+              <option value="null">--Please select region</option>
               <option
                 v-for="(region, index) in regionsData"
                 :selected="regionId === region.id"
@@ -66,8 +66,8 @@ import types from "../../../store/types";
 export default {
   data() {
     return {
-      gameId: -1,
-      regionId: -1
+      gameId: null,
+      regionId: null
     };
   },
   props: ["showFlag", "setShowFiltersModal", "gamesData", "regionsData"],
@@ -89,7 +89,7 @@ export default {
     },
     async getFilteredData() {
       const payload = { region_id: this.regionId, game_id: this.gameId };
-      if (this.regionId === -1 || this.gameId === -1) {
+      if (this.regionId === null && this.gameId === null) {
         this.notifyVue("Please select at least one filter", "danger");
       } else {
         const isValidRequest = await this.fetchFilteredTournaments(payload);
@@ -102,8 +102,8 @@ export default {
     },
     closeModal() {
       this.setShowFiltersModal(false);
-      this.gameId = -1;
-      this.regionId = -1;
+      this.gameId = null;
+      this.regionId = null;
     }
   }
 };

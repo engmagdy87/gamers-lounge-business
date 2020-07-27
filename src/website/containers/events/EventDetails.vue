@@ -7,13 +7,6 @@
       :setShowLoginModal="setShowLoginModal"
     />
     <div class="event-details-wrapper__outside" v-if="showDetailsHero">
-      <img
-        v-if="
-          eventDetails.has_cover_over &&
-            eventDetails.images.img_cover_over !== null
-        "
-        :src="eventDetails.images.img_cover_over.path"
-      />
       <div
         class="event-details-wrapper__inside"
         v-if="
@@ -26,6 +19,13 @@
             : ''
         "
       >
+        <img
+          v-if="
+            !eventDetails.has_cover_over &&
+              eventDetails.images.img_cover_over !== null
+          "
+          :src="eventDetails.images.img_cover_over.path"
+        />
         <video
           autoplay
           muted
