@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-button-wrapper">
+  <div class="custom-button-wrapper" @click="setShowFiltersModal(true)">
     <div class="custom-button-wrapper__outside">
       <div class="custom-button-wrapper__inside">
         <img :src="filterIcon" class="custom-button-wrapper__icon" /> Filter by
@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  props: ["setShowFiltersModal"],
   data() {
     return {
       filterIcon: "website/img/filter-icon.svg"

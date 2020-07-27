@@ -2,7 +2,7 @@
 @import "../../variables.scss";
 @import "../../mixins.scss";
 
-.event-details-wrapper {
+.game-details-wrapper {
   background-image: url("~/website/img/hexagone-pattern.png");
   background-repeat: repeat;
   height: 100vh;
@@ -32,7 +32,6 @@
   }
 
   &__inside {
-    position: relative;
     width: calc(100% - 2px);
     height: calc(#{$half-page-hero-image-height} - 4px);
     background-position: center center;
@@ -43,9 +42,6 @@
     video {
       object-fit: cover;
     }
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   &__content {

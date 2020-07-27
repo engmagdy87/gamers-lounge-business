@@ -15,7 +15,7 @@
 
 <script>
 import SubEventCard from "../../components/events/SubEventCard";
-import TournamentCard from "../../components/events/TournamentCard";
+import TournamentCard from "../../shared/TournamentCard";
 
 export default {
   props: ["data", "route"],

@@ -15,6 +15,7 @@ const GET_EVENTS = `${API_URL}/admin/events`
 const CREATE_EVENT = `${API_URL}/admin/events`
 const GET_EVENT_TYPES = `${API_URL}/admin/events/constants/types`
 const GET_EVENT_COVER_TYPES = `${API_URL}/admin/events/constants/cover-types`
+const GET_LIST_WEBSITE_EVENTS = `${API_URL}/admin/events/list`
 const GET_WEBSITE_MAIN_EVENTS = `${API_URL}/events/main`
 const GET_WEBSITE_SUB_EVENTS = `${API_URL}/events/sub`
 const GET_WEBSITE_EVENT_DETAILS = `${API_URL}/events`
@@ -27,25 +28,28 @@ const GET_LIST_SPONSORS = `${API_URL}/admin/sponsors/list`
 // GAMES
 const GET_GAMES = `${API_URL}/admin/games`
 const CREATE_GAME = `${API_URL}/admin/games`
-const GET_LIST_GAMES = `${API_URL}/admin/games/list`
+const GET_LIST_GAMES = `${API_URL}/admin/games/list`    // used for both dashboard and website
 const GET_LIST_WEBSITE_GAMES = `${API_URL}/games/view`
+const GET_WEBSITE_GAME_DETAILS = `${API_URL}/games`
 
 // TOURNAMENTS
 const GET_TOURNAMENTS = `${API_URL}/admin/tournaments`
 const CREATE_TOURNAMENT = `${API_URL}/admin/tournaments`
 const GET_LIST_WEBSITE_TOURNAMENTS = `${API_URL}/tournaments/view`
+const GET_WEBSITE_TOURNAMENT_DETAILS = `${API_URL}/tournaments`
 
 // PLATFORM
 const GET_PLATFORMS = `${API_URL}/admin/platforms`
 const CREATE_PLATFORM = `${API_URL}/admin/platforms`
-const GET_LIST_WEBSITE_PLATFORMS = `${API_URL}/platforms/list`
+const GET_LIST_WEBSITE_PLATFORMS = `${API_URL}/admin/platforms/list`
 const DELETE_PLATFORM = `${API_URL}/admin/platforms`
 
 // REGION
 const GET_REGIONS = `${API_URL}/admin/regions`
 const CREATE_REGION = `${API_URL}/admin/regions`
-const GET_LIST_WEBSITE_REGIONS = `${API_URL}/regions/list`
+const GET_LIST_REGIONS = `${API_URL}/admin/regions/list`    // used for both dashboard and website
 const DELETE_REGION = `${API_URL}/admin/regions`
+// const GET_LIST_WEBSITE_GAMES = `${API_URL}/games/view`
 
 export {
     API_URL,
@@ -58,6 +62,7 @@ export {
     CREATE_EVENT,
     GET_EVENT_TYPES,
     GET_SUMMITS_LIST,
+    GET_LIST_WEBSITE_EVENTS,
     GET_WEBSITE_MAIN_EVENTS,
     GET_WEBSITE_SUB_EVENTS,
     GET_EVENT_COVER_TYPES,
@@ -66,11 +71,13 @@ export {
     CREATE_SPONSOR,
     GET_LIST_SPONSORS,
     GET_GAMES,
+    GET_WEBSITE_GAME_DETAILS,
     CREATE_GAME,
     GET_LIST_GAMES,
     GET_LIST_WEBSITE_GAMES,
     GET_TOURNAMENTS,
     CREATE_TOURNAMENT,
+    GET_WEBSITE_TOURNAMENT_DETAILS,
     GET_LIST_WEBSITE_TOURNAMENTS,
     GET_PLATFORMS,
     CREATE_PLATFORM,
@@ -78,6 +85,6 @@ export {
     DELETE_PLATFORM,
     GET_REGIONS,
     CREATE_REGION,
-    GET_LIST_WEBSITE_REGIONS,
+    GET_LIST_REGIONS,
     DELETE_REGION
 };

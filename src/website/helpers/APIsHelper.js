@@ -73,6 +73,14 @@ async function getEvents() {
     return response.data;
 }
 
+async function getEventsList() {
+    const response = await getDashboardData(
+        APIs.GET_LIST_WEBSITE_EVENTS
+    );
+
+    return response.data;
+}
+
 async function getEventsTypes() {
     const response = await getDashboardData(
         APIs.GET_EVENT_TYPES
@@ -141,8 +149,16 @@ async function createSponsor(payload) {
 
 //Games
 async function getGamesForDashboard() {
-    const response = await getDashboardData(
+    const response = await get(
         APIs.GET_LIST_GAMES
+    );
+
+    return response.data;
+}
+
+async function getGamesCardsView() {
+    const response = await get(
+        APIs.GET_LIST_WEBSITE_GAMES
     );
 
     return response.data;
@@ -151,6 +167,14 @@ async function getGamesForDashboard() {
 async function getGames() {
     const response = await getDashboardData(
         APIs.GET_GAMES
+    );
+
+    return response.data;
+}
+
+async function getGameDetails(gameId) {
+    const response = await get(
+        `${APIs.GET_WEBSITE_GAME_DETAILS}/${gameId}`
     );
 
     return response.data;
@@ -194,7 +218,7 @@ async function createPlatform(payload) {
 //Regions
 async function getRegionsForDashboard() {
     const response = await getDashboardData(
-        APIs.GET_LIST_WEBSITE_REGIONS
+        APIs.GET_LIST_REGIONS
     );
 
     return response.data;
@@ -217,6 +241,54 @@ async function createRegion(payload) {
     return response.data;
 }
 
+//Tournaments
+async function getTournamentsForDashboard() {
+    const response = await getDashboardData(
+        APIs.GET_TOURNAMENTS
+    );
+
+    return response.data;
+}
+
+async function getTournaments() {
+    const response = await get(
+        APIs.GET_LIST_WEBSITE_TOURNAMENTS
+    );
+
+    return response.data;
+}
+
+async function getFilteredTournaments(data) {
+    const response = await get(
+        APIs.GET_LIST_WEBSITE_TOURNAMENTS,
+        {
+            params: {
+                ...data
+            }
+        }
+    );
+
+    return response.data;
+}
+
+async function createTournament(payload) {
+    const response = await postMultipart(
+        payload,
+        APIs.CREATE_TOURNAMENT
+    );
+
+    return response.data;
+}
+
+async function getTournamentDetails(tournamentId) {
+    const response = await get(
+        `${APIs.GET_WEBSITE_TOURNAMENT_DETAILS}/${tournamentId}`
+    );
+
+    return response.data;
+}
+
+
 export {
     loadUserPersona,
     setUserPersona,
@@ -231,18 +303,26 @@ export {
     getSubEvents,
     getEventCoverTypes,
     getEvent,
+    getEventsList,
     getSponsorsForDashboard,
     getSponsors,
     createSponsor,
     getGamesForDashboard,
+    getGameDetails,
     getGames,
+    getGamesCardsView,
     createGame,
     getPlatformsForDashboard,
     getPlatforms,
     createPlatform,
     getRegionsForDashboard,
     getRegions,
-    createRegion
+    createRegion,
+    getTournamentsForDashboard,
+    getFilteredTournaments,
+    getTournamentDetails,
+    getTournaments,
+    createTournament
 };
 
 async function post(data, url) {
@@ -280,8 +360,8 @@ async function postMultipart(data, url) {
     return response;
 }
 
-async function get(url) {
-    const response = await axios.get(url);
+async function get(url, params) {
+    const response = await axios.get(url, params);
     if (
         (response.status !== 200 && response.status !== 304) ||
         response.data.errors !== undefined

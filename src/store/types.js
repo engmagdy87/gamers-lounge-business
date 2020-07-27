@@ -45,13 +45,19 @@ const sponsors = {
 const games = {
     mutations: {
         SET_GAMES_DATA: 'games/mutations/SET_GAMES_DATA',
+        SET_GAMES_CARDS_VIEW: 'games/mutations/SET_GAMES_CARDS_VIEW',
         SET_IS_GAMES_DATA_FETCHED: 'games/mutations/SET_IS_GAMES_DATA_FETCHED',
+        SET_IS_GAMES_CARDS_VIEW_FETCHED: 'games/mutations/SET_IS_GAMES_CARDS_VIEW_FETCHED',
         SET_DASHBOARD_GAMES_DATA: 'games/mutations/SET_DASHBOARD_GAMES_DATA',
         SET_IS_DASHBOARD_GAMES_DATA_FETCHED: 'games/mutations/SET_IS_DASHBOARD_GAMES_DATA_FETCHED',
+        SET_GAME_DETAILS_DATA: 'games/mutations/SET_GAME_DETAILS_DATA',
+        SET_IS_GAME_DETAILS_DATA_FETCHED: 'games/mutations/SET_IS_GAME_DETAILS_DATA_FETCHED',
     },
     actions: {
         FETCH_GAMES: 'games/actions/FETCH_GAMES',
         FETCH_GAMES_FOR_DASHBOARD: 'games/actions/FETCH_GAMES_FOR_DASHBOARD',
+        FETCH_GAMES_CARD_VIEW: 'games/actions/FETCH_GAMES_CARD_VIEW',
+        FETCH_GAME_DETAILS: 'games/actions/FETCH_GAME_DETAILS',
     }
 };
 
@@ -81,6 +87,25 @@ const regions = {
     }
 };
 
+const tournaments = {
+    mutations: {
+        SET_TOURNAMENTS_DATA: 'tournaments/mutations/SET_TOURNAMENTS_DATA',
+        SET_IS_TOURNAMENTS_DATA_FETCHED: 'tournaments/mutations/SET_IS_TOURNAMENTS_DATA_FETCHED',
+        SET_DASHBOARD_TOURNAMENTS_DATA: 'tournaments/mutations/SET_DASHBOARD_TOURNAMENTS_DATA',
+        SET_FILTERED_TOURNAMENTS_DATA: 'tournaments/mutations/SET_FILTERED_TOURNAMENTS_DATA',
+        SET_IS_DASHBOARD_TOURNAMENTS_DATA_FETCHED: 'tournaments/mutations/SET_IS_DASHBOARD_TOURNAMENTS_DATA_FETCHED',
+        SET_TOURNAMENT_DETAILS_DATA: 'games/mutations/SET_TOURNAMENT_DETAILS_DATA',
+        SET_IS_TOURNAMENT_DETAILS_DATA_FETCHED: 'games/mutations/SET_IS_TOURNAMENT_DETAILS_DATA_FETCHED',
+        SET_IS_FILTERED_TOURNAMENT_DATA_FETCHED: 'games/mutations/SET_IS_FILTERED_TOURNAMENT_DATA_FETCHED',
+    },
+    actions: {
+        FETCH_TOURNAMENTS: 'tournaments/actions/FETCH_TOURNAMENTS',
+        FETCH_TOURNAMENTS_FOR_DASHBOARD: 'tournaments/actions/FETCH_TOURNAMENTS_FOR_DASHBOARD',
+        FETCH_TOURNAMENTS_DETAILS: 'games/actions/FETCH_TOURNAMENTS_DETAILS',
+        FETCH_FILTERED_TOURNAMENTS: 'games/actions/FETCH_FILTERED_TOURNAMENTS',
+    }
+};
+
 const summits = {
     mutations: {
         SET_SUMMITS_DATA: 'summits/mutations/SET_SUMMITS_DATA',
@@ -102,7 +127,9 @@ const events = {
         SET_SUB_EVENTS_DATA: 'events/mutations/SET_SUB_EVENTS_DATA',
         SET_EVENT_COVER_TYPES: 'events/mutations/SET_EVENT_COVER_TYPES',
         SET_EVENT_DETAILS: 'events/mutations/SET_EVENT_DETAILS',
+        SET_EVENTS_LIST: 'events/mutations/SET_EVENTS_LIST',
         SET_IS_EVENTS_FETCHED: 'events/mutations/SET_IS_EVENTS_FETCHED',
+        SET_IS_EVENTS_LIST_FETCHED: 'events/mutations/SET_IS_EVENTS_LIST_FETCHED',
         SET_IS_EVENT_TYPE_FETCHED: 'events/mutations/SET_IS_EVENT_TYPE_FETCHED',
         SET_IS_MAIN_EVENTS_FETCHED: 'events/mutations/SET_IS_MAIN_EVENTS_FETCHED',
         SET_IS_SUB_EVENTS_FETCHED: 'events/mutations/SET_IS_SUB_EVENTS_FETCHED',
@@ -116,6 +143,7 @@ const events = {
         FETCH_SUB_EVENTS: 'events/actions/FETCH_SUB_EVENTS',
         FETCH_EVENT_COVER_TYPES: 'events/actions/FETCH_EVENT_COVER_TYPES',
         FETCH_EVENT_DETAILS: 'events/actions/FETCH_EVENT_DETAILS',
+        FETCH_EVENT_LIST: 'events/actions/FETCH_EVENT_LIST',
     }
 };
 
@@ -128,5 +156,6 @@ export default {
     sponsors,
     games,
     platforms,
-    regions
+    regions,
+    tournaments
 };

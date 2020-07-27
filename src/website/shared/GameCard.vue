@@ -3,17 +3,22 @@
     <div class="hexa-card-wrapper__outside">
       <div class="hexa-card-wrapper__inside">
         <img
-          :src="card.background"
-          :alt="card.name + 'background'"
+          v-if="card.images.img_card !== null"
+          :src="card.images.img_card.path"
+          :alt="card.title + 'background'"
           class="hexa-card-wrapper__bg-img"
         />
         <div class="hexa-card-wrapper__overlay">
           <div class="hexa-card-wrapper__logo">
-            <img :src="card.logo" :alt="card.name + 'logo'" />
+            <img
+              v-if="card.images.img_logo !== null"
+              :src="card.images.img_logo.path"
+              :alt="card.title + 'logo'"
+            />
           </div>
           <div class="hexa-card-wrapper__content">
-            <h1>{{ card.name }}</h1>
-            <p>{{ card.tournament }} Tournaments</p>
+            <h1>{{ card.title || card.initial_title }}</h1>
+            <p>{{ card.tournaments.count }} Tournaments</p>
           </div>
         </div>
       </div>
@@ -23,18 +28,13 @@
 
 <script>
 export default {
-  props: ["card"],
+  props: ["card", "isGamesActive"],
   methods: {
     redirectTo() {
-      // this.$router.push({
-      //   path: `/games/game/${data.id}`
-      // });
+      this.$router.push({
+        path: `/games/game/${this.card.id}`
+      });
     }
-  },
-  mounted() {
-    console.log("====================================");
-    console.log(this.card);
-    console.log("====================================");
   }
 };
 </script>

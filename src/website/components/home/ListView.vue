@@ -1,12 +1,26 @@
 <template>
   <div>
-    <div class="list-view-wrapper" v-for="(card, index) in data" :key="index">
+    <div
+      class="list-view-wrapper"
+      v-for="(card, index) in data"
+      :key="index"
+      role="button"
+      @click="redirectTo(card.id)"
+    >
       <div class="list-view-wrapper__img">
-        <img :src="card.logo" :alt="card.name + 'logo'" />
+        <img
+          :src="card.images.img_logo.path"
+          :alt="card.title || card.initial_title + 'logo'"
+        />
       </div>
       <div class="list-view-wrapper__content">
-        <h1>{{ card.name }}</h1>
-        <p>{{ card.tournament }} Tournaments</p>
+        <h1>{{ card.title || card.initial_title }}</h1>
+        <p v-if="isGamesActive">{{ card.tournaments.count }} Tournaments</p>
+        <span v-else class="badge badge-pill"
+          ><img src="/website/img/calendar.svg" alt="calendar icon" />{{
+            card.kick_off_date
+          }}</span
+        >
       </div>
     </div>
   </div>
@@ -14,7 +28,17 @@
 
 <script>
 export default {
-  props: ["data", "isGamesActive"]
+  props: ["data", "isGamesActive"],
+  methods: {
+    redirectTo(id) {
+      let path = "";
+      if (this.isGamesActive) path = path = `/games/game/${id}`;
+      else path = `/tournaments/tournament/${id}`;
+      this.$router.push({
+        path
+      });
+    }
+  }
 };
 </script>
 

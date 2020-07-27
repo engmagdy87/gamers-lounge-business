@@ -2,9 +2,6 @@
 import Home from '../website/containers/Home.vue'
 import Story from '../website/containers/Story.vue'
 import EventsContainer from '../website/containers/Events.vue'
-import EventDetails from '../website/containers/events/EventDetails.vue'
-
-import GameDetails from '../website/containers/events/EventDetails.vue'
 
 // GeneralViews
 import NotFound from '../dashboard/pages/NotFoundPage.vue'
@@ -22,6 +19,7 @@ import SummitAddEdit from 'src/dashboard/pages/Summits/SummitAddEdit.vue'
 import Events from 'src/dashboard/pages/Events.vue'
 import EventsList from 'src/dashboard/pages/Events/EventsList.vue'
 import EventsAddEdit from 'src/dashboard/pages/Events/EventsAddEdit.vue'
+import EventDetails from '../website/containers/events/EventDetails.vue'
 
 import Sponsors from 'src/dashboard/pages/Sponsors.vue'
 import SponsorsList from 'src/dashboard/pages/Sponsors/SponsorsList.vue'
@@ -30,10 +28,17 @@ import SponsorAddEdit from 'src/dashboard/pages/Sponsors/SponsorAddEdit.vue'
 import Games from 'src/dashboard/pages/Games.vue'
 import GamesList from 'src/dashboard/pages/Games/GamesList.vue'
 import GameAddEdit from 'src/dashboard/pages/Games/GameAddEdit.vue'
+import GameDetails from '../website/containers/games/GameDetails.vue'
 
 import Platforms from 'src/dashboard/pages/Platforms.vue'
 import PlatformsList from 'src/dashboard/pages/Platforms/PlatformsList.vue'
 import PlatformAddEdit from 'src/dashboard/pages/Platforms/PlatformAddEdit.vue'
+
+import Tournaments from 'src/dashboard/pages/Tournaments.vue'
+import TournamentsList from 'src/dashboard/pages/Tournaments/TournamentsList.vue'
+import TournamentAddEdit from 'src/dashboard/pages/Tournaments/TournamentAddEdit.vue'
+import TournamentDetails from '../website/containers/tournaments/TournamentDetails.vue'
+
 
 import Regions from 'src/dashboard/pages/Regions.vue'
 import RegionsList from 'src/dashboard/pages/Regions/RegionsList.vue'
@@ -70,6 +75,11 @@ const routes = [
     path: '/games/game/:gameId',
     name: 'game',
     component: GameDetails,
+  },
+  {
+    path: '/tournaments/tournament/:tournamentId',
+    name: 'tournament',
+    component: TournamentDetails,
   },
   {
     path: '/dashboard',
@@ -221,6 +231,29 @@ const routes = [
             path: 'edit',
             name: 'Edit',
             component: RegionAddEdit
+          }
+        ]
+      },
+      {
+        path: 'tournaments',
+        name: 'Tournament',
+        redirect: '/dashboard/tournaments/list',
+        component: Tournaments,
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: TournamentsList
+          },
+          {
+            path: 'create',
+            name: 'Create',
+            component: TournamentAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit',
+            component: TournamentAddEdit
           }
         ]
       },

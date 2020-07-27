@@ -1,51 +1,49 @@
 <template>
-  <div class="game-details-wrapper">
+  <div class="tournament-details-wrapper">
     <Header
-      activeItem="games"
+      activeItem="tournaments"
       :isSolidHeader="true"
       :setShowRegisterModal="setShowRegisterModal"
       :setShowLoginModal="setShowLoginModal"
     />
-    <div class="game-details-wrapper__outside" v-if="showDetailsHero">
+    <div class="tournament-details-wrapper__outside" v-if="showDetailsHero">
       <div
-        class="game-details-wrapper__inside"
+        class="tournament-details-wrapper__inside"
         v-if="
-          gameDetails.images.img_cover_main !== null &&
-            gameDetails.images.img_cover_main.length !== 0
+          tournamentDetails.images.img_cover_main !== null &&
+            tournamentDetails.images.img_cover_main.length !== 0
         "
         :style="
-          `backgroundImage: url(${gameDetails.images.img_cover_main[0].path})`
+          `backgroundImage: url(${tournamentDetails.images.img_cover_main[0].path})`
         "
       ></div>
     </div>
-    <div class="game-details-wrapper__content" v-if="showDetailsHero">
-      <div class="game-details-wrapper__content__breadcrumb">
-        <a href="/games">game</a>
-        <span> > {{ gameDetails.title }}</span>
-      </div>
+    <div class="tournament-details-wrapper__content" v-if="showDetailsHero">
       <div class="container">
         <div class="row">
-          <div class="col game-details-wrapper__content__logo">
-            <img
-              v-if="gameDetails.images.img_logo !== null"
-              :src="gameDetails.images.img_logo.path"
-              :alt="gameDetails.title"
-            />
+          <div class="col-8">
+            <div class="tournament-details-wrapper__content__breadcrumb">
+              <a href="/tournaments">Tournament</a>
+              <span> > {{ tournamentDetails.initial_title }}</span>
+            </div>
           </div>
-          <div class="col-9">
-            <div class="row">
-              <div class="col">{{ gameDetails.description }}</div>
+          <div
+            class="col-4 d-flex align-items-center justify-content-end tournament-details-wrapper__custom-button-wrapper"
+            role="button"
+          >
+            <div
+              class="tournament-details-wrapper__custom-button-wrapper__outside"
+              @click="redirectTo"
+            >
+              Register now
             </div>
           </div>
         </div>
-      </div>
-      <div class="container">
-        <div class="row game-details-wrapper__content__tournaments mb-5">
+        <div class="row">
           <div class="col">
-            Tournaments
+            <Tabs :data="tournamentDetails" />
           </div>
         </div>
-        <MenuView :data="gameDetails.tournaments" :isGamesActive="false" />
       </div>
     </div>
     <LoginModal
@@ -64,10 +62,10 @@
 import { mapGetters, mapActions, mapState } from "vuex";
 import types from "../../../store/types";
 import Header from "../../shared/Header";
-import MenuView from "../../components/home/MenuView";
 import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
 import Spinner from "../../shared/Spinner";
+import Tabs from "../../shared/Tabs";
 
 export default {
   data() {
@@ -81,10 +79,10 @@ export default {
       isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
     }),
     ...mapState({
-      gameDetails: state => state.games.gameDetailsData
+      tournamentDetails: state => state.tournaments.tournamentDetailsData
     }),
     showDetailsHero() {
-      return Object.keys(this.gameDetails).length !== 0;
+      return Object.keys(this.tournamentDetails).length !== 0;
     }
   },
   watch: {
@@ -97,13 +95,18 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchGameDetails: types.games.actions.FETCH_GAME_DETAILS
+      fetchTournamentDetails:
+        types.tournaments.actions.FETCH_TOURNAMENTS_DETAILS
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
     },
     setShowRegisterModal(value = false) {
       this.showRegisterModal = value;
+    },
+    redirectTo() {
+      if (this.tournamentDetails.is_register_available)
+        window.open(this.tournamentDetails.register_link, "_blank");
     }
   },
   components: {
@@ -111,19 +114,16 @@ export default {
     LoginModal,
     RegisterModal,
     Spinner,
-    MenuView
+    Tabs
   },
   mounted() {
-    this.fetchGameDetails(this.$router.history.current.params.gameId);
-  },
-  updated() {
-    console.log("====================================");
-    console.log(this.gameDetails);
-    console.log("====================================");
+    this.fetchTournamentDetails(
+      this.$router.history.current.params.tournamentId
+    );
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/sass/website/containers/games/game-details.scss";
+@import "../../../assets/sass/website/containers/tournaments/tournament-details.scss";
 </style>

@@ -64,6 +64,15 @@
         >
         </RegionsTabelRow>
       </tbody>
+      <tbody v-else-if="tableType === 'tournaments'">
+        <TournamentTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+        >
+        </TournamentTabelRow>
+      </tbody>
     </table>
   </div>
 </template>
@@ -74,6 +83,7 @@ import SponsorTabelRow from "./SponsorTabelRow";
 import GamesTabelRow from "./GamesTabelRow";
 import PlatformsTabelRow from "./PlatformsTabelRow";
 import RegionsTabelRow from "./RegionsTabelRow";
+import TournamentTabelRow from "./TournamentTabelRow";
 
 export default {
   name: "l-table",
@@ -84,7 +94,8 @@ export default {
     SponsorTabelRow,
     GamesTabelRow,
     PlatformsTabelRow,
-    RegionsTabelRow
+    RegionsTabelRow,
+    TournamentTabelRow
   }
 };
 </script>

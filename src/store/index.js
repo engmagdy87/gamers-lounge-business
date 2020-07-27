@@ -9,7 +9,8 @@ import eventModule from './modules/event';
 import sponsorModule from './modules/sponsor';
 import gamesModule from './modules/games';
 import platformsModule from './modules/platforms';
-import regionsModule from './modules/regions.js';
+import regionsModule from './modules/regions';
+import tournamentsModule from './modules/tournaments';
 
 Vue.use(Vuex);
 
@@ -24,5 +25,6 @@ export default new Vuex.Store({
         games: gamesModule,
         platforms: platformsModule,
         regions: regionsModule,
+        tournaments: tournamentsModule,
     }
 });

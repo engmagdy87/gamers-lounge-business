@@ -1,42 +1,35 @@
 <template>
   <div class="menu-view-wrapper">
-    <div class="row">
+    <div class="row" v-if="isGamesActive">
       <div
         class="col-12 col-lg-4 p-0"
         v-for="(card, index) in data"
         :key="index"
       >
-        <HexaCard :card="card" />
+        <GameCard :card="card" />
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="!isGamesActive">
       <div
         class="col-12 col-lg-4 p-0"
         v-for="(card, index) in data"
         :key="index"
       >
-        <HexaCard :card="card" />
-      </div>
-    </div>
-    <div class="row">
-      <div
-        class="col-12 col-lg-4 p-0"
-        v-for="(card, index) in data"
-        :key="index"
-      >
-        <HexaCard :card="card" />
+        <TournamentCard :card="card" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import HexaCard from "../../shared/HexaCard";
+import GameCard from "../../shared/GameCard";
+import TournamentCard from "../../shared/TournamentCard";
 
 export default {
   props: ["data", "isGamesActive"],
   components: {
-    HexaCard
+    GameCard,
+    TournamentCard
   }
 };
 </script>

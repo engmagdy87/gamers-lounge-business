@@ -34,20 +34,19 @@
       </div>
       <div class="row" v-if="!isGamesActive">
         <div class="col">
-          <CustomButton
-            :isMenuActive="isMenuActive"
-            :setIsMenuActive="setIsMenuActive"
-          />
+          <CustomButton :setShowFiltersModal="setShowFiltersModal" />
         </div>
       </div>
       <MenuView
         :data="getCorrespondingData"
         :isGamesActive="isGamesActive"
-        v-if="isMenuActive"
+        v-if="isMenuActive && isGamesDataFetched && isTournamentsDataFetched"
       />
       <ListView
         :data="getCorrespondingData"
-        :isGamesActive="isGamesActive"
+        :isGamesActive="
+          isGamesActive && isGamesDataFetched && isTournamentsDataFetched
+        "
         v-else
       />
     </div>
@@ -59,44 +58,31 @@
       :showFlag="showRegisterModal"
       :setShowRegisterModal="setShowRegisterModal"
     />
+    <Filters
+      :showFlag="showFiltersModal"
+      :setShowFiltersModal="setShowFiltersModal"
+      :gamesData="gamesData"
+      :regionsData="regionsData"
+    />
     <Spinner :smallLoader="false" />
     <Footer />
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState, mapActions } from "vuex";
+import store from "../../store/index";
 import types from "../../store/types";
 import Header from "../shared/Header";
 import Footer from "../shared/Footer";
 import Spinner from "../shared/Spinner";
 import LoginModal from "../components/home/LoginModal";
 import RegisterModal from "../components/home/RegisterModal";
+import Filters from "../components/tournaments/Filters";
 import MenuView from "../components/home/MenuView";
 import ListView from "../components/home/ListView";
 import CustomSwitch from "../shared/CustomSwitch";
 import CustomButton from "../shared/CustomButton";
-
-const rawData = [
-  {
-    background: "website/img/fifa-bg.jpg",
-    logo: "website/img/fifa-logo.png",
-    name: "FIFA 2020",
-    tournament: 6
-  },
-  {
-    background: "website/img/hearthstone-bg.jpg",
-    logo: "website/img/hearthstone-logo.png",
-    name: "Hearthstone",
-    tournament: 6
-  },
-  {
-    background: "website/img/dota-bg.png",
-    logo: "website/img/dota-logo.png",
-    name: "DOTA 2",
-    tournament: 12
-  }
-];
 
 export default {
   data() {
@@ -105,16 +91,25 @@ export default {
       isMenuActive: true,
       showLoginModal: false,
       showRegisterModal: false,
-      games: rawData,
-      tournament: [...rawData].reverse()
+      showFiltersModal: false
     };
   },
   computed: {
+    ...mapState({
+      tournamentsData: state => state.tournaments.filteredTournamentsData,
+      isTournamentsDataFetched: state =>
+        state.tournaments.isTournamentsDataFetched,
+      gamesData: state => state.games.gamesCardViewData,
+      isGamesDataFetched: state => state.games.isGamesCardsViewDataFetched,
+      regionsData: state => state.regions.dashboardRegionsData,
+      isDashboardRegionsDataFetched: state =>
+        state.regions.isDashboardRegionsDataFetched
+    }),
     ...mapGetters({
       isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
     }),
     getCorrespondingData() {
-      return this.isGamesActive ? this.games : this.tournament;
+      return this.isGamesActive ? this.gamesData : this.tournamentsData;
     }
   },
   watch: {
@@ -126,11 +121,19 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      fetchGames: types.games.actions.FETCH_GAMES_CARD_VIEW,
+      fetchTournaments: types.tournaments.actions.FETCH_TOURNAMENTS,
+      fetchRegions: types.regions.actions.FETCH_REGIONS_FOR_DASHBOARD
+    }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
     },
     setShowRegisterModal(value = false) {
       this.showRegisterModal = value;
+    },
+    setShowFiltersModal(value = false) {
+      this.showFiltersModal = value;
     },
     setIsMenuActive(flag) {
       this.isMenuActive = flag;
@@ -149,7 +152,22 @@ export default {
     MenuView,
     ListView,
     Footer,
-    CustomButton
+    CustomButton,
+    Filters
+  },
+  mounted() {
+    store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    this.fetchGames();
+    this.fetchTournaments();
+    this.fetchRegions();
+  },
+  updated() {
+    if (
+      this.isGamesDataFetched &&
+      this.isTournamentsDataFetched &&
+      this.isDashboardRegionsDataFetched
+    )
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   }
 };
 </script>

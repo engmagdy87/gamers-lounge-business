@@ -27,8 +27,12 @@
         <p>Platforms</p>
       </sidebar-link>
       <sidebar-link to="/dashboard/regions">
-        <i class="nc-icon nc-pin-3"></i>
+        <i class="nc-icon nc-square-pin"></i>
         <p>Regions</p>
+      </sidebar-link>
+      <sidebar-link to="/dashboard/tournaments">
+        <i class="nc-icon nc-puzzle-10"></i>
+        <p>Tournaments</p>
       </sidebar-link>
     </side-bar>
     <div class="main-panel">

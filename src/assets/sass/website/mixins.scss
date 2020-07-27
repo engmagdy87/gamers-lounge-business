@@ -125,6 +125,18 @@
   }
 }
 
+@mixin create-hexagone-shape-tab($notchSize) {
+  clip-path: polygon(
+    0% $notchSize,
+    0% 0%,
+    calc(100% - #{$notchSize}) 0%,
+    100% $notchSize,
+    100% 100%,
+    100% 100%,
+    $notchSize 100%,
+    0% 100%
+  );
+}
 @mixin create-hexagone-shape($notchSize) {
   clip-path: polygon(
     0% $notchSize,
@@ -172,6 +184,33 @@
     99% 92%,
     66% 92%,
     62% 100%,
+    2% 100%,
+    0 93%
+  );
+  @include is-mobile {
+    clip-path: polygon(
+      0 0,
+      98% 0,
+      100% 4%,
+      100% 92%,
+      98% 95%,
+      66% 95%,
+      62% 100%,
+      2% 100%,
+      0 96%
+    );
+  }
+}
+
+@mixin create-hexa-shape-tabs-body() {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 4%,
+    100% 85%,
+    99% 92%,
+    66% 92%,
+    65% 100%,
     2% 100%,
     0 93%
   );

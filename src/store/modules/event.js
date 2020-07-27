@@ -1,4 +1,4 @@
-import { getEvents, getEventsTypes, getMainEvents, getSubEvents, getEventCoverTypes, getEvent } from '../../website/helpers/APIsHelper';
+import { getEvents, getEventsTypes, getMainEvents, getSubEvents, getEventCoverTypes, getEvent, getEventsList } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -8,7 +8,9 @@ const state = {
     subEventsData: [],
     eventCoverTypes: [],
     eventDetails: {},
+    eventsList: [],
     isEventsFetched: false,
+    isEventsListFetched: false,
     isEventTypeFetched: false,
     isMainEventsFetched: false,
     isSubEventsFetched: false,
@@ -19,6 +21,9 @@ const state = {
 const mutations = {
     [types.events.mutations.SET_EVENTS_DATA]: (currentState, payload) => {
         currentState.eventsData = payload;
+    },
+    [types.events.mutations.SET_EVENTS_LIST]: (currentState, payload) => {
+        currentState.eventsList = payload;
     },
     [types.events.mutations.SET_EVENT_TYPE_DATA]: (currentState, payload) => {
         currentState.eventsTypes = payload;
@@ -37,6 +42,9 @@ const mutations = {
     },
     [types.events.mutations.SET_IS_EVENTS_FETCHED]: (currentState, payload) => {
         currentState.isEventsFetched = payload;
+    },
+    [types.events.mutations.SET_IS_EVENTS_LIST_FETCHED]: (currentState, payload) => {
+        currentState.isEventsListFetched = payload;
     },
     [types.events.mutations.SET_IS_EVENT_TYPE_FETCHED]: (currentState, payload) => {
         currentState.isEventTypeFetched = payload;
@@ -113,6 +121,15 @@ const getEventDetails = async ({ commit }, eventId) => {
     return response
 };
 
+const getEventsListForDashboard = async ({ commit }) => {
+    const response = await getEventsList().then((response) => {
+        commit(types.events.mutations.SET_EVENTS_LIST, response.data.events);
+        commit(types.events.mutations.SET_IS_EVENTS_LIST_FETCHED, true);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.events.actions.FETCH_EVENTS]: getEventsData,
     [types.events.actions.FETCH_EVENT_TYPE]: getEventTypes,
@@ -120,6 +137,7 @@ const actions = {
     [types.events.actions.FETCH_SUB_EVENTS]: getSubEventsData,
     [types.events.actions.FETCH_EVENT_COVER_TYPES]: getEventCoverTypesData,
     [types.events.actions.FETCH_EVENT_DETAILS]: getEventDetails,
+    [types.events.actions.FETCH_EVENT_LIST]: getEventsListForDashboard,
 };
 
 export default {
