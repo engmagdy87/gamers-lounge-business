@@ -120,19 +120,6 @@
           >
           </base-input>
         </div>
-        <!-- <div class="col-md-2 offset-1 m-auto">
-          <div class="custom-control custom-switch">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="customSwitch1"
-              v-model="tournament.active"
-            />
-            <label class="custom-control-label" for="customSwitch1"
-              >Active</label
-            >
-          </div>
-        </div> -->
       </div>
       <div class="row">
         <div class="col-md-6">

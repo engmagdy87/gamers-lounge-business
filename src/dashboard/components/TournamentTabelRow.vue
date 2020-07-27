@@ -3,7 +3,11 @@
     <th scope="row">{{ id }}</th>
     <td>{{ rowData.initial_title }}</td>
     <td>{{ rowData.final_title }}</td>
-    <td>{{ rowData.initial_description }}</td>
+    <td>
+      <div class="description">
+        {{ rowData.initial_description }}
+      </div>
+    </td>
     <td>{{ rowData.final_description }}</td>
     <td>{{ rowData.format }}</td>
     <td>{{ rowData.register_link }}</td>
@@ -44,43 +48,87 @@
           : rowData.contacts.content
       }}
     </td>
-    <td v-if="rowData.images !== undefined">
-      <a :href="rowData.images.img_logo.path" target="_blank">Img</a>
-    </td>
-    <td v-if="rowData.images !== undefined">
-      <a
-        v-for="(img, index) in rowData.images.img_cover_main"
-        :key="index"
-        :href="img.path"
-        target="_blank"
-        >Img{{ index + 1 }}</a
+    <td>
+      <span
+        v-if="
+          rowData.images.img_logo !== undefined &&
+            rowData.images.img_logo !== null
+        "
       >
+        <a :href="rowData.images.img_logo.path" target="_blank">Img</a>
+      </span>
     </td>
-    <td v-if="rowData.images !== undefined">
-      <a :href="rowData.images.img_cover_over.path" target="_blank">Img</a>
+    <td>
+      <span
+        v-if="
+          rowData.images.img_card !== undefined &&
+            rowData.images.img_card !== null
+        "
+      >
+        <a :href="rowData.images.img_card.path" target="_blank">Img</a>
+      </span>
     </td>
-    <td v-if="rowData.images !== undefined">
-      <a :href="rowData.images.img_card.path" target="_blank">Img</a>
+    <td>
+      <span v-for="(img, index) in rowData.images.img_cover_main" :key="index">
+        <a
+          v-if="img !== undefined && img !== null"
+          :href="img.path"
+          target="_blank"
+          >Img{{ index + 1 }}</a
+        >
+      </span>
     </td>
-    <td v-if="rowData.images !== undefined">
-      <a :href="rowData.videos.vid_stream.path" target="_blank">Vid</a>
+    <td>
+      <span
+        v-if="
+          rowData.images.img_cover_over !== undefined &&
+            rowData.images.img_cover_over !== null
+        "
+      >
+        <a :href="rowData.images.img_cover_over.path" target="_blank">Img</a>
+      </span>
+    </td>
+
+    <td>
+      <span
+        v-if="
+          rowData.videos.vid_stream !== undefined &&
+            rowData.videos.vid_stream !== null
+        "
+      >
+        <a :href="rowData.videos.vid_stream.path" target="_blank">Vid</a>
+      </span>
     </td>
   </tr>
 </template>
 
 <script>
 export default {
-  props: ["id", "rowData"],
-  mounted() {
-    console.log("====================================");
-    console.log(this.rowData);
-    console.log("====================================");
-  }
+  props: ["id", "rowData"]
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/sass/website/color-palette.scss";
+@import "../../assets/sass/website/variables.scss";
 tr td a {
   margin-right: 5px;
+}
+
+.description {
+  height: 200px !important;
+  overflow-y: auto;
+  padding: 8px;
+  &::-webkit-scrollbar {
+    width: 5px !important;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary !important;
+    border-radius: 20px !important;
+  }
+  &::-webkit-scrollbar {
+    background-color: $accent !important;
+    border-radius: 20px !important;
+  }
 }
 </style>

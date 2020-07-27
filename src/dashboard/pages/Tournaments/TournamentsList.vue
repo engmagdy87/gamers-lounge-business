@@ -94,11 +94,6 @@ export default {
   },
   mounted() {
     this.fetchTournaments();
-  },
-  updated() {
-    console.log("====================================");
-    console.log(this.tournamentsData);
-    console.log("====================================");
   }
 };
 </script>

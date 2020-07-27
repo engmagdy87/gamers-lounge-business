@@ -115,11 +115,6 @@ export default {
   },
   mounted() {
     this.fetchGameDetails(this.$router.history.current.params.gameId);
-  },
-  updated() {
-    console.log("====================================");
-    console.log(this.gameDetails);
-    console.log("====================================");
   }
 };
 </script>
