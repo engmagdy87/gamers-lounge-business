@@ -71,7 +71,9 @@
                     : 'tab-wrapper__details__register--close'
                 ]"
               ></div>
-              <span v-if="data.is_register_available"></span>
+              <span v-if="data.is_register_available"
+                >Registeration is now open</span
+              >
               <span v-else>Register was closed</span>
             </div>
           </div>
