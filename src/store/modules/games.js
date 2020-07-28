@@ -18,7 +18,6 @@ const state = {
     isGamesCardsViewDataFetched: false,
     gameDetailsData: [],
     isGameDetailsDataFetched: false,
-    isGameEdited: false,
 };
 
 const mutations = {
@@ -48,8 +47,6 @@ const mutations = {
     },
     [types.games.mutations.REMOVE_DELETED_GAME]: (currentState, index) => {
         currentState.gamesData.splice(index, 1);
-    }, [types.games.mutations.SET_IS_GAME_EDITED_FETCHED]: (currentState, payload) => {
-        currentState.isGameEdited = payload;
     },
 };
 
@@ -119,7 +116,6 @@ const editGameData = async ({ commit }, payload) => {
     const { gameId, data } = payload
     commit(types.home.mutations.SET_SPINNER_FLAG, true);
     const response = await editGame(gameId, data).then(() => {
-        commit(types.games.mutations.SET_IS_GAME_EDITED_FETCHED, true);
         commit(types.home.mutations.SET_SPINNER_FLAG, false);
         return true
     }).catch(() => false);

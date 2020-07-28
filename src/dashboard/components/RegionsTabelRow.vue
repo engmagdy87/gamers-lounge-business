@@ -3,7 +3,7 @@
     <th scope="row">{{ id }}</th>
     <td>{{ rowData.title }}</td>
     <td class="table-actions">
-      <img src="/website/img/edit.svg" alt="edit" />
+      <img src="/website/img/edit.svg" alt="edit" @click="redirectTo" />
       <img
         src="/website/img/delete.svg"
         alt="delete"
@@ -15,7 +15,15 @@
 
 <script>
 export default {
-  props: ["id", "rowData", "setShowDeleteDialogFlag"]
+  props: ["id", "rowData", "setShowDeleteDialogFlag"],
+  methods: {
+    redirectTo() {
+      this.$router.push({
+        name: "Edit Region",
+        params: { data: this.rowData }
+      });
+    }
+  }
 };
 </script>
 

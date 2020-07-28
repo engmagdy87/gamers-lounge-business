@@ -52,10 +52,13 @@
             <ImagePreview
               v-if="
                 editData !== undefined &&
-                  (operation === 'Edit Game' || editData.images !== null)
+                  operation === 'Edit Game' &&
+                  editData.images !== null &&
+                  editData.images.img_logo !== null
               "
               :image="editData.images.img_logo"
               :setShowDeleteDialogFlag="setShowFlag"
+              openedFor="img_logo"
             />
           </div>
         </div>
@@ -71,6 +74,22 @@
               multiple
               ref="img_cover_main"
             />
+            <div
+              v-if="
+                editData !== undefined &&
+                  (operation === 'Edit Game' || editData.images !== null)
+              "
+              class="image-preview-list"
+            >
+              <ImagePreview
+                v-for="(img, index) in editData.images.img_cover_main"
+                :key="index"
+                :image="img"
+                :setShowDeleteDialogFlag="setShowFlag"
+                openedFor="img_cover_main"
+                :imageIndex="index"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -79,7 +98,7 @@
         <button
           type="button"
           class="btn btn-info btn-fill float-right"
-          @click="postGame"
+          @click="clickAction"
         >
           Save
         </button>
@@ -100,7 +119,7 @@ import store from "../../../store/index";
 import types from "../../../store/types";
 import ImagePreview from "../../../website/shared/ImagePreview.vue";
 import DeleteDialog from "../../../website/shared/DeleteDialog";
-import { createGame } from "../../../website/helpers/APIsHelper.js";
+import { createGame, editGame } from "../../../website/helpers/APIsHelper.js";
 
 export default {
   components: {
@@ -109,6 +128,8 @@ export default {
   },
   data() {
     return {
+      openedFor: "",
+      imageIndex: null,
       showFlag: false,
       imageId: null,
       editData: this.$router.history.current.params.data || { images: null },
@@ -124,9 +145,16 @@ export default {
     ...mapActions({
       deleteImage: types.games.actions.DELETE_GAME_IMAGE
     }),
-    setShowFlag(flag, imageId) {
+    clickAction() {
+      this.operation === "Edit Game"
+        ? this.saveData(editGame, "Game Updated Successfully")
+        : this.saveData(createGame, "Game Created Successfully");
+    },
+    setShowFlag(flag, imageId, openedFor, imageIndex) {
       this.showFlag = flag;
       this.imageId = imageId;
+      this.openedFor = openedFor;
+      this.imageIndex = imageIndex;
     },
     setFile(e, key) {
       const files = e.target.files;
@@ -135,34 +163,30 @@ export default {
 
       this.game[key] = files[0];
     },
-    postGame: async function() {
+    saveData: async function(saveFunction, successMessage) {
       let formData = new FormData();
       formData.append("title", this.game.title);
       formData.append("description", this.game.description);
       formData.append("img_logo", this.game.img_logo);
 
-      for (var i = 0; i < this.$refs.img_cover_main.files.length; i++) {
+      for (let i = 0; i < this.$refs.img_cover_main.files.length; i++) {
         let file = this.$refs.img_cover_main.files[i];
         formData.append("img_cover_main[]", file);
       }
       try {
         store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
-        const response = await createGame(formData);
+
+        if (this.operation === "Edit Game")
+          await saveFunction(this.editData.id, formData);
+        else await saveFunction(formData);
+
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-        this.resetFields();
-        this.notifyVue("Game Created Successfully", "success");
+        this.notifyVue(successMessage, "success");
         this.$router.push("/dashboard/games/list");
       } catch (error) {
         this.notifyVue("Error Happened", "danger");
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
       }
-    },
-    resetFields() {
-      this.game.title = "";
-      this.game.description = "";
-      this.game.img_logo = "";
-      this.$refs.img_logo.value = null;
-      this.$refs.img_cover_main.value = null;
     },
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -175,9 +199,23 @@ export default {
     removeImage: async function() {
       const payload = { gameId: this.editData.id, imageId: this.imageId };
       const response = await this.deleteImage(payload);
-      console.log("====================================");
-      console.log(response);
-      console.log("====================================");
+
+      switch (this.openedFor) {
+        case "img_logo":
+          this.editData.images.img_logo = null;
+          break;
+
+        case "img_cover_main":
+          this.editData.images.img_cover_main.splice(this.imageIndex, 1);
+          break;
+
+        default:
+          break;
+      }
+
+      this.notifyVue("Image Deleted Successfully", "success");
+      this.setShowFlag(false);
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
     }
   },
   beforeMount() {

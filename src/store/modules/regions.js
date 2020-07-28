@@ -1,7 +1,8 @@
 import {
     getRegionsForDashboard,
     getRegions,
-    removeRegion
+    removeRegion,
+    editRegion
 } from '../../website/helpers/APIsHelper';
 import types from '../types';
 

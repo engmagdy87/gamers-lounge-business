@@ -9,10 +9,15 @@
 
 <script>
 export default {
-  props: ["image", "setShowDeleteDialogFlag"],
+  props: ["image", "setShowDeleteDialogFlag", "openedFor", "imageIndex"],
   methods: {
     fireDeleteModal() {
-      this.setShowDeleteDialogFlag(true, this.image.id);
+      this.setShowDeleteDialogFlag(
+        true,
+        this.image.id,
+        this.openedFor,
+        this.imageIndex
+      );
     }
   }
 };
@@ -20,11 +25,16 @@ export default {
 
 <style lang="scss" scoped>
 .preview-image {
-  width: 200px;
-  object-fit: cover;
-  margin-top: 20px;
+  width: 150px;
+  max-width: 150px;
+  min-width: 150px;
+  display: inline-block;
+  margin: 5px;
+  background-color: gainsboro;
   img {
-    width: 100%;
+    object-fit: cover;
+    height: 150px;
+    width: 150px;
   }
 }
 

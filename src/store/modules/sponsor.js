@@ -1,7 +1,8 @@
 import {
     getSponsorsForDashboard,
     getSponsors,
-    removeSponsor
+    removeSponsor,
+    removeSponsorImage
 } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
@@ -61,10 +62,21 @@ const deleteSponsor = async ({ commit }, payload) => {
     return response
 };
 
+const deleteSponsorImage = async ({ commit }, payload) => {
+    const { sponsorId, imageId } = payload
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removeSponsorImage(sponsorId, imageId).then(() => {
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.sponsors.actions.FETCH_SPONSORS]: getSponsorsData,
     [types.sponsors.actions.FETCH_SPONSORS_FOR_DASHBOARD]: getSponsorsDataForDashboard,
     [types.sponsors.actions.DELETE_SPONSOR]: deleteSponsor,
+    [types.sponsors.actions.DELETE_SPONSOR_IMAGE]: deleteSponsorImage,
 };
 
 export default {

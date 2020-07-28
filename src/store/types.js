@@ -41,6 +41,8 @@ const sponsors = {
         FETCH_SUB_SPONSORS: 'sponsors/actions/FETCH_SUB_SPONSORS',
         FETCH_SPONSORS_FOR_DASHBOARD: 'sponsors/actions/FETCH_SPONSORS_FOR_DASHBOARD',
         DELETE_SPONSOR: 'sponsors/actions/DELETE_SPONSOR',
+        EDIT_SPONSOR: 'sponsors/actions/EDIT_SPONSOR',
+        DELETE_SPONSOR_IMAGE: 'sponsors/actions/DELETE_SPONSOR_IMAGE',
     }
 };
 
@@ -54,7 +56,6 @@ const games = {
         SET_IS_DASHBOARD_GAMES_DATA_FETCHED: 'games/mutations/SET_IS_DASHBOARD_GAMES_DATA_FETCHED',
         SET_GAME_DETAILS_DATA: 'games/mutations/SET_GAME_DETAILS_DATA',
         SET_IS_GAME_DETAILS_DATA_FETCHED: 'games/mutations/SET_IS_GAME_DETAILS_DATA_FETCHED',
-        SET_IS_GAME_EDITED_FETCHED: 'games/mutations/SET_IS_GAME_EDITED_FETCHED',
         REMOVE_DELETED_GAME: 'games/mutations/REMOVE_DELETED_GAME',
     },
     actions: {
@@ -63,8 +64,8 @@ const games = {
         FETCH_GAMES_CARD_VIEW: 'games/actions/FETCH_GAMES_CARD_VIEW',
         FETCH_GAME_DETAILS: 'games/actions/FETCH_GAME_DETAILS',
         DELETE_GAME: 'games/actions/DELETE_GAME',
-        EDIT_GAME: 'games/actions/EDIT_GAME',
         DELETE_GAME_IMAGE: 'games/actions/DELETE_GAME_IMAGE',
+        EDIT_GAME: 'games/actions/EDIT_GAME',
     }
 };
 
@@ -80,6 +81,7 @@ const platforms = {
         FETCH_PLATFORMS: 'platforms/actions/FETCH_PLATFORMS',
         FETCH_PLATFORMS_FOR_DASHBOARD: 'platforms/actions/FETCH_PLATFORMS_FOR_DASHBOARD',
         DELETE_PLATFORM: 'platforms/actions/DELETE_PLATFORM',
+        EDIT_PLATFORM: 'platforms/actions/EDIT_PLATFORM',
     }
 };
 
@@ -95,6 +97,7 @@ const regions = {
         FETCH_REGIONS: 'regions/actions/FETCH_REGIONS',
         FETCH_REGIONS_FOR_DASHBOARD: 'regions/actions/FETCH_REGIONS_FOR_DASHBOARD',
         DELETE_REGION: 'region/actions/DELETE_REGION',
+        EDIT_REGION: 'region/actions/EDIT_REGION',
     }
 };
 
@@ -116,6 +119,7 @@ const tournaments = {
         FETCH_TOURNAMENTS_DETAILS: 'games/actions/FETCH_TOURNAMENTS_DETAILS',
         FETCH_FILTERED_TOURNAMENTS: 'games/actions/FETCH_FILTERED_TOURNAMENTS',
         DELETE_TOURNAMENT: 'tournaments/actions/DELETE_TOURNAMENT',
+        EDIT_TOURNAMENT: 'tournaments/actions/EDIT_TOURNAMENT',
     }
 };
 
@@ -131,6 +135,7 @@ const summits = {
         FETCH_SUMMITS: 'summits/actions/FETCH_SUMMITS',
         FETCH_SUMMITS_LIST: 'summits/actions/FETCH_SUMMITS_LIST',
         DELETE_SUMMIT: 'summits/actions/DELETE_SUMMIT',
+        EDIT_SUMMIT: 'summits/actions/EDIT_SUMMIT',
     }
 };
 
@@ -161,6 +166,7 @@ const events = {
         FETCH_EVENT_DETAILS: 'events/actions/FETCH_EVENT_DETAILS',
         FETCH_EVENT_LIST: 'events/actions/FETCH_EVENT_LIST',
         DELETE_EVENT: 'events/actions/DELETE_EVENT',
+        EDIT_EVENT: 'events/actions/EDIT_EVENT',
     }
 };
 

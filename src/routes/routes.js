@@ -109,12 +109,12 @@ const routes = [
           },
           {
             path: 'create',
-            name: 'Create',
+            name: 'Create Summit',
             component: SummitAddEdit
           },
           {
             path: 'edit',
-            name: 'Edit',
+            name: 'Edit Summit',
             component: SummitAddEdit
           }
         ]
@@ -132,12 +132,12 @@ const routes = [
           },
           {
             path: 'create',
-            name: 'Create',
+            name: 'Create Event',
             component: EventsAddEdit
           },
           {
             path: 'edit',
-            name: 'Edit',
+            name: 'Edit Event',
             component: EventsAddEdit
           }
         ]
@@ -155,12 +155,12 @@ const routes = [
           },
           {
             path: 'create',
-            name: 'Create',
+            name: 'Create Sponsor',
             component: SponsorAddEdit
           },
           {
             path: 'edit',
-            name: 'Edit',
+            name: 'Edit Sponsor',
             component: SponsorAddEdit
           }
         ]
@@ -201,12 +201,12 @@ const routes = [
           },
           {
             path: 'create',
-            name: 'Create',
+            name: 'Create Platform',
             component: PlatformAddEdit
           },
           {
             path: 'edit',
-            name: 'Edit',
+            name: 'Edit Platform',
             component: PlatformAddEdit
           }
         ]
@@ -224,19 +224,19 @@ const routes = [
           },
           {
             path: 'create',
-            name: 'Create',
+            name: 'Create Region',
             component: RegionAddEdit
           },
           {
             path: 'edit',
-            name: 'Edit',
+            name: 'Edit Region',
             component: RegionAddEdit
           }
         ]
       },
       {
         path: 'tournaments',
-        name: 'Tournament',
+        name: 'Tournaments',
         redirect: '/dashboard/tournaments/list',
         component: Tournaments,
         children: [
@@ -247,12 +247,12 @@ const routes = [
           },
           {
             path: 'create',
-            name: 'Create',
+            name: 'Create Tournament',
             component: TournamentAddEdit
           },
           {
             path: 'edit',
-            name: 'Edit',
+            name: 'Edit Tournament',
             component: TournamentAddEdit
           }
         ]

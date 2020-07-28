@@ -64,6 +64,15 @@ async function removeSummit(id) {
 }
 
 
+async function editSummit(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_SUMMIT}/${id}`
+    );
+
+    return response;
+}
+
 // Events
 async function createEvent(payload) {
     const response = await postMultipart(
@@ -138,6 +147,15 @@ async function removeEvent(id) {
     return response;
 }
 
+async function editEvent(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_EVENT}/${id}`
+    );
+
+    return response;
+}
+
 //Sponsors
 async function getSponsorsForDashboard() {
     const response = await getDashboardData(
@@ -167,6 +185,15 @@ async function createSponsor(payload) {
 async function removeSponsor(id) {
     const response = await deleteData(
         `${APIs.DELETE_SPONSOR}/${id}`
+    );
+
+    return response;
+}
+
+async function editSponsor(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_SPONSOR}/${id}`
     );
 
     return response;
@@ -224,7 +251,15 @@ async function removeGame(id) {
 
 async function removeGameImage(id, imageId) {
     const response = await deleteData(
-        `${APIs.DELETE_IMAGE_IN_GAME}/${id}/image/${imageId}`
+        `${APIs.DELETE_IMAGE_IN_GAME}/${id}/images/${imageId}`
+    );
+
+    return response;
+}
+
+async function removeSponsorImage(id, imageId) {
+    const response = await deleteData(
+        `${APIs.DELETE_IMAGE_IN_SPONSOR}/${id}/images/${imageId}`
     );
 
     return response;
@@ -273,6 +308,15 @@ async function removePlatform(id) {
     return response;
 }
 
+async function editPlatform(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_PLATFORM}/${id}`
+    );
+
+    return response;
+}
+
 //Regions
 async function getRegionsForDashboard() {
     const response = await get(
@@ -301,6 +345,15 @@ async function createRegion(payload) {
 async function removeRegion(id) {
     const response = await deleteData(
         `${APIs.DELETE_REGION}/${id}`
+    );
+
+    return response;
+}
+
+async function editRegion(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_REGION}/${id}`
     );
 
     return response;
@@ -361,6 +414,16 @@ async function removeTournament(id) {
     return response;
 }
 
+
+async function editTournament(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_TOURNAMENT}/${id}`
+    );
+
+    return response;
+}
+
 export {
     loadUserPersona,
     setUserPersona,
@@ -402,8 +465,15 @@ export {
     removeSponsor,
     removeRegion,
     removePlatform,
+    removeGameImage,
+    removeSponsorImage,
     editGame,
-    removeGameImage
+    editPlatform,
+    editEvent,
+    editSponsor,
+    editSummit,
+    editRegion,
+    editTournament,
 };
 
 async function post(data, url) {
