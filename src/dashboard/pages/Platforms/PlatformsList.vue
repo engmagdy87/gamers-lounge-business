@@ -29,7 +29,6 @@
       :showFlag="showFlag"
       :setShowDeleteDialogFlag="setShowFlag"
       item="Platform"
-      :targetId="targetId"
       :deleteAction="removePlatform"
     />
   </div>

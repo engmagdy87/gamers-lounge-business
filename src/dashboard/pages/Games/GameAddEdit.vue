@@ -6,11 +6,11 @@
           <a href="/dashboard/games">Games</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
-          Create Game
+          {{ operation }}
         </li>
       </ol>
     </nav>
-    <h4 slot="header" class="card-name">{{ operation }} Game</h4>
+    <h4 slot="header" class="card-name">{{ operation }}</h4>
     <form>
       <div class="row">
         <div class="col">
@@ -49,6 +49,14 @@
               @change="e => setFile(e, 'img_logo')"
               ref="img_logo"
             />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  (operation === 'Edit Game' || editData.images !== null)
+              "
+              :image="editData.images.img_logo"
+              :setShowDeleteDialogFlag="setShowFlag"
+            />
           </div>
         </div>
         <div class="col">
@@ -77,21 +85,33 @@
         </button>
       </div>
       <div class="clearfix"></div>
+      <DeleteDialog
+        :showFlag="showFlag"
+        :setShowDeleteDialogFlag="setShowFlag"
+        item="Image"
+        :deleteAction="removeImage"
+      />
     </form>
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 import store from "../../../store/index";
 import types from "../../../store/types";
-// import Card from "src/dashboard/components/Cards/Card.vue";
+import ImagePreview from "../../../website/shared/ImagePreview.vue";
+import DeleteDialog from "../../../website/shared/DeleteDialog";
 import { createGame } from "../../../website/helpers/APIsHelper.js";
 
 export default {
   components: {
-    // Card
+    ImagePreview,
+    DeleteDialog
   },
   data() {
     return {
+      showFlag: false,
+      imageId: null,
+      editData: this.$router.history.current.params.data || { images: null },
       operation: this.$route.name,
       game: {
         title: "",
@@ -101,6 +121,13 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      deleteImage: types.games.actions.DELETE_GAME_IMAGE
+    }),
+    setShowFlag(flag, imageId) {
+      this.showFlag = flag;
+      this.imageId = imageId;
+    },
     setFile(e, key) {
       const files = e.target.files;
 
@@ -144,6 +171,28 @@ export default {
         verticalAlign: "top",
         type: color
       });
+    },
+    removeImage: async function() {
+      const payload = { gameId: this.editData.id, imageId: this.imageId };
+      const response = await this.deleteImage(payload);
+      console.log("====================================");
+      console.log(response);
+      console.log("====================================");
+    }
+  },
+  beforeMount() {
+    if (
+      !this.$router.history.current.params.data &&
+      this.$route.name === "Edit Game"
+    )
+      this.$router.push({
+        path: "/dashboard/games"
+      });
+  },
+  mounted() {
+    if (this.$route.name === "Edit Game") {
+      this.game.title = this.editData.title;
+      this.game.description = this.editData.description;
     }
   }
 };

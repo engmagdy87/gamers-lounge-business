@@ -29,7 +29,6 @@
       :showFlag="showFlag"
       :setShowDeleteDialogFlag="setShowFlag"
       item="Game"
-      :targetId="targetId"
       :deleteAction="removeGame"
     />
     </LTable>

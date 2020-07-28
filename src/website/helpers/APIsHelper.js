@@ -222,6 +222,23 @@ async function removeGame(id) {
     return response;
 }
 
+async function removeGameImage(id, imageId) {
+    const response = await deleteData(
+        `${APIs.DELETE_IMAGE_IN_GAME}/${id}/image/${imageId}`
+    );
+
+    return response;
+}
+
+async function editGame(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_GAME}/${id}`
+    );
+
+    return response;
+}
+
 //Platforms
 async function getPlatformsForDashboard() {
     const response = await getDashboardData(
@@ -384,7 +401,9 @@ export {
     removeSummit,
     removeSponsor,
     removeRegion,
-    removePlatform
+    removePlatform,
+    editGame,
+    removeGameImage
 };
 
 async function post(data, url) {

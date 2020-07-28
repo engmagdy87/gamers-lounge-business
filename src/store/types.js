@@ -54,6 +54,7 @@ const games = {
         SET_IS_DASHBOARD_GAMES_DATA_FETCHED: 'games/mutations/SET_IS_DASHBOARD_GAMES_DATA_FETCHED',
         SET_GAME_DETAILS_DATA: 'games/mutations/SET_GAME_DETAILS_DATA',
         SET_IS_GAME_DETAILS_DATA_FETCHED: 'games/mutations/SET_IS_GAME_DETAILS_DATA_FETCHED',
+        SET_IS_GAME_EDITED_FETCHED: 'games/mutations/SET_IS_GAME_EDITED_FETCHED',
         REMOVE_DELETED_GAME: 'games/mutations/REMOVE_DELETED_GAME',
     },
     actions: {
@@ -62,6 +63,8 @@ const games = {
         FETCH_GAMES_CARD_VIEW: 'games/actions/FETCH_GAMES_CARD_VIEW',
         FETCH_GAME_DETAILS: 'games/actions/FETCH_GAME_DETAILS',
         DELETE_GAME: 'games/actions/DELETE_GAME',
+        EDIT_GAME: 'games/actions/EDIT_GAME',
+        DELETE_GAME_IMAGE: 'games/actions/DELETE_GAME_IMAGE',
     }
 };
 

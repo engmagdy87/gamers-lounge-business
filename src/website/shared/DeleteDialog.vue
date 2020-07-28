@@ -46,18 +46,7 @@
 
 <script>
 export default {
-  props: [
-    "showFlag",
-    "setShowDeleteDialogFlag",
-    "item",
-    "targetId",
-    "deleteAction"
-  ],
-  methods: {
-    // deleteItem() {
-    //   deleteAction();
-    // }
-  }
+  props: ["showFlag", "setShowDeleteDialogFlag", "item", "deleteAction"]
 };
 </script>
 

@@ -29,7 +29,6 @@
       :showFlag="showFlag"
       :setShowDeleteDialogFlag="setShowFlag"
       item="Event"
-      :targetId="targetId"
       :deleteAction="removeEvent"
     />
   </div>

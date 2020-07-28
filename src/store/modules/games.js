@@ -3,7 +3,9 @@ import {
     getGames,
     getGamesCardsView,
     getGameDetails,
-    removeGame
+    removeGame,
+    editGame,
+    removeGameImage
 } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
@@ -16,6 +18,7 @@ const state = {
     isGamesCardsViewDataFetched: false,
     gameDetailsData: [],
     isGameDetailsDataFetched: false,
+    isGameEdited: false,
 };
 
 const mutations = {
@@ -45,7 +48,9 @@ const mutations = {
     },
     [types.games.mutations.REMOVE_DELETED_GAME]: (currentState, index) => {
         currentState.gamesData.splice(index, 1);
-    }
+    }, [types.games.mutations.SET_IS_GAME_EDITED_FETCHED]: (currentState, payload) => {
+        currentState.isGameEdited = payload;
+    },
 };
 
 const getGamesData = async ({ commit },) => {
@@ -100,12 +105,35 @@ const deleteGame = async ({ commit }, payload) => {
     return response
 };
 
+const deleteGameImage = async ({ commit }, payload) => {
+    const { gameId, imageId } = payload
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removeGameImage(gameId, imageId).then(() => {
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
+const editGameData = async ({ commit }, payload) => {
+    const { gameId, data } = payload
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await editGame(gameId, data).then(() => {
+        commit(types.games.mutations.SET_IS_GAME_EDITED_FETCHED, true);
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.games.actions.FETCH_GAMES]: getGamesData,
     [types.games.actions.FETCH_GAMES_FOR_DASHBOARD]: getGamesDataForDashboard,
     [types.games.actions.FETCH_GAMES_CARD_VIEW]: getGamesCardsViewData,
     [types.games.actions.FETCH_GAME_DETAILS]: getGameDetailsData,
     [types.games.actions.DELETE_GAME]: deleteGame,
+    [types.games.actions.EDIT_GAME]: editGameData,
+    [types.games.actions.DELETE_GAME_IMAGE]: deleteGameImage,
 };
 
 export default {

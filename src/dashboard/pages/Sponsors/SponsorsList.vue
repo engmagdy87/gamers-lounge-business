@@ -29,7 +29,6 @@
       :showFlag="showFlag"
       :setShowDeleteDialogFlag="setShowFlag"
       item="Sponsor"
-      :targetId="targetId"
       :deleteAction="removeSponsor"
     />
   </div>

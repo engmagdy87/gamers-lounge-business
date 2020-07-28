@@ -31,7 +31,6 @@
       :showFlag="showFlag"
       :setShowDeleteDialogFlag="setShowFlag"
       item="Tournament"
-      :targetId="targetId"
       :deleteAction="removeTournament"
     />
   </div>

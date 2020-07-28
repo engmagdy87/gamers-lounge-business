@@ -29,7 +29,6 @@
       :showFlag="showFlag"
       :setShowDeleteDialogFlag="setShowFlag"
       item="Summit"
-      :targetId="targetId"
       :deleteAction="removeSummit"
     />
   </div>

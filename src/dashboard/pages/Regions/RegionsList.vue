@@ -29,7 +29,6 @@
       :showFlag="showFlag"
       :setShowDeleteDialogFlag="setShowFlag"
       item="Region"
-      :targetId="targetId"
       :deleteAction="removeRegion"
     />
   </div>

@@ -178,12 +178,12 @@ const routes = [
           },
           {
             path: 'create',
-            name: 'Create',
+            name: 'Create Game',
             component: GameAddEdit
           },
           {
             path: 'edit',
-            name: 'Edit',
+            name: 'Edit Game',
             component: GameAddEdit
           }
         ]
