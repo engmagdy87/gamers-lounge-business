@@ -22,8 +22,16 @@
       :columns="table.columns"
       :data="summitsData"
       tableType="summits"
+      :setShowDeleteDialogFlag="setShowFlag"
     >
     </LTable>
+    <DeleteDialog
+      :showFlag="showFlag"
+      :setShowDeleteDialogFlag="setShowFlag"
+      item="Summit"
+      :targetId="targetId"
+      :deleteAction="removeSummit"
+    />
   </div>
 </template>
 
@@ -31,10 +39,14 @@
 import { mapActions, mapState } from "vuex";
 import types from "../../../store/types";
 import LTable from "src/dashboard/components/Table.vue";
+import DeleteDialog from "../../../website/shared/DeleteDialog";
 
 export default {
   data() {
     return {
+      showFlag: false,
+      targetId: null,
+      locationInDataArray: null,
       table: {
         columns: [
           "Id",
@@ -45,13 +57,14 @@ export default {
           "Attendess",
           "Year",
           "Location",
-          "Card Image",
-          "Cover Main Image",
-          "Cover Over Image",
           "Logo Image",
           "Media Image",
+          "Cover Main Image",
+          "Cover Over Image",
+          "Card Image",
           "Video URL",
-          "Active"
+          "Active",
+          "Actions"
         ]
       }
     };
@@ -64,7 +77,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchSummits: types.summits.actions.FETCH_SUMMITS
+      fetchSummits: types.summits.actions.FETCH_SUMMITS,
+      deleteSummit: types.summits.actions.DELETE_SUMMIT
     }),
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -73,10 +87,34 @@ export default {
         verticalAlign: "top",
         type: color
       });
+    },
+    setShowFlag(flag, id, locationInDataArray) {
+      this.showFlag = flag;
+      this.targetId = id;
+      this.locationInDataArray = locationInDataArray;
+    },
+    async removeSummit() {
+      const payload = {
+        summitId: this.targetId,
+        locationInDataArray: this.locationInDataArray
+      };
+      try {
+        await this.deleteSummit(payload);
+        this.resetFields();
+        this.notifyVue("Summit Deleted Successfully", "success");
+      } catch (error) {
+        this.notifyVue("Error Happened", "danger");
+      }
+    },
+    resetFields() {
+      this.showFlag = false;
+      this.targetId = null;
+      this.locationInDataArray = null;
     }
   },
   components: {
-    LTable
+    LTable,
+    DeleteDialog
   },
   mounted() {
     this.fetchSummits();

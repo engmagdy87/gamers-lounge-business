@@ -55,6 +55,15 @@ async function getSummitsList() {
     return response.data;
 }
 
+async function removeSummit(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_SUMMIT}/${id}`
+    );
+
+    return response;
+}
+
+
 // Events
 async function createEvent(payload) {
     const response = await postMultipart(
@@ -121,6 +130,14 @@ async function getEventCoverTypes() {
     return response.data;
 }
 
+async function removeEvent(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_EVENT}/${id}`
+    );
+
+    return response;
+}
+
 //Sponsors
 async function getSponsorsForDashboard() {
     const response = await getDashboardData(
@@ -145,6 +162,14 @@ async function createSponsor(payload) {
     );
 
     return response.data;
+}
+
+async function removeSponsor(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_SPONSOR}/${id}`
+    );
+
+    return response;
 }
 
 //Games
@@ -189,6 +214,14 @@ async function createGame(payload) {
     return response.data;
 }
 
+async function removeGame(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_GAME}/${id}`
+    );
+
+    return response;
+}
+
 //Platforms
 async function getPlatformsForDashboard() {
     const response = await getDashboardData(
@@ -215,6 +248,14 @@ async function createPlatform(payload) {
     return response.data;
 }
 
+async function removePlatform(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_PLATFORM}/${id}`
+    );
+
+    return response;
+}
+
 //Regions
 async function getRegionsForDashboard() {
     const response = await get(
@@ -239,6 +280,13 @@ async function createRegion(payload) {
     );
 
     return response.data;
+}
+async function removeRegion(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_REGION}/${id}`
+    );
+
+    return response;
 }
 
 //Tournaments
@@ -288,6 +336,13 @@ async function getTournamentDetails(tournamentId) {
     return response.data;
 }
 
+async function removeTournament(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_TOURNAMENT}/${id}`
+    );
+
+    return response;
+}
 
 export {
     loadUserPersona,
@@ -322,7 +377,14 @@ export {
     getFilteredTournaments,
     getTournamentDetails,
     getTournaments,
-    createTournament
+    createTournament,
+    removeEvent,
+    removeGame,
+    removeTournament,
+    removeSummit,
+    removeSponsor,
+    removeRegion,
+    removePlatform
 };
 
 async function post(data, url) {
@@ -364,6 +426,26 @@ async function get(url, params) {
     const response = await axios.get(url, params);
     if (
         (response.status !== 200 && response.status !== 304) ||
+        response.data.errors !== undefined
+    )
+        throw new Error(
+            `response status code ${
+            response.status
+            }`
+        );
+
+    return response;
+}
+
+async function deleteData(url) {
+    const adminToken = getUserCookie()
+    const response = await axios.delete(url, {
+        headers: {
+            'Authorization': `Bearer ${adminToken.access_token}`
+        }
+    });
+    if (
+        (response.status !== 200 && response.status !== 202 && response.status !== 304) ||
         response.data.errors !== undefined
     )
         throw new Error(

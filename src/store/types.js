@@ -33,12 +33,14 @@ const sponsors = {
         SET_IS_SPONSORS_DATA_FETCHED: 'sponsors/mutations/SET_IS_SPONSORS_DATA_FETCHED',
         SET_DASHBOARD_SPONSORS_DATA: 'sponsors/mutations/SET_DASHBOARD_SPONSORS_DATA',
         SET_IS_DASHBOARD_SPONSORS_DATA_FETCHED: 'sponsors/mutations/SET_IS_DASHBOARD_SPONSORS_DATA_FETCHED',
+        REMOVE_DELETED_SPONSOR: 'sponsors/mutations/REMOVE_DELETED_SPONSOR',
     },
     actions: {
         FETCH_SPONSORS: 'sponsors/actions/FETCH_SPONSORS',
         FETCH_MAIN_SPONSORS: 'sponsors/actions/FETCH_MAIN_SPONSORS',
         FETCH_SUB_SPONSORS: 'sponsors/actions/FETCH_SUB_SPONSORS',
         FETCH_SPONSORS_FOR_DASHBOARD: 'sponsors/actions/FETCH_SPONSORS_FOR_DASHBOARD',
+        DELETE_SPONSOR: 'sponsors/actions/DELETE_SPONSOR',
     }
 };
 
@@ -52,12 +54,14 @@ const games = {
         SET_IS_DASHBOARD_GAMES_DATA_FETCHED: 'games/mutations/SET_IS_DASHBOARD_GAMES_DATA_FETCHED',
         SET_GAME_DETAILS_DATA: 'games/mutations/SET_GAME_DETAILS_DATA',
         SET_IS_GAME_DETAILS_DATA_FETCHED: 'games/mutations/SET_IS_GAME_DETAILS_DATA_FETCHED',
+        REMOVE_DELETED_GAME: 'games/mutations/REMOVE_DELETED_GAME',
     },
     actions: {
         FETCH_GAMES: 'games/actions/FETCH_GAMES',
         FETCH_GAMES_FOR_DASHBOARD: 'games/actions/FETCH_GAMES_FOR_DASHBOARD',
         FETCH_GAMES_CARD_VIEW: 'games/actions/FETCH_GAMES_CARD_VIEW',
         FETCH_GAME_DETAILS: 'games/actions/FETCH_GAME_DETAILS',
+        DELETE_GAME: 'games/actions/DELETE_GAME',
     }
 };
 
@@ -67,10 +71,12 @@ const platforms = {
         SET_IS_PLATFORMS_DATA_FETCHED: 'platforms/mutations/SET_IS_PLATFORMS_DATA_FETCHED',
         SET_DASHBOARD_PLATFORMS_DATA: 'platforms/mutations/SET_DASHBOARD_PLATFORMS_DATA',
         SET_IS_DASHBOARD_PLATFORMS_DATA_FETCHED: 'platforms/mutations/SET_IS_DASHBOARD_PLATFORMS_DATA_FETCHED',
+        REMOVE_DELETED_PLATFORM: 'platforms/mutations/REMOVE_DELETED_PLATFORM',
     },
     actions: {
         FETCH_PLATFORMS: 'platforms/actions/FETCH_PLATFORMS',
         FETCH_PLATFORMS_FOR_DASHBOARD: 'platforms/actions/FETCH_PLATFORMS_FOR_DASHBOARD',
+        DELETE_PLATFORM: 'platforms/actions/DELETE_PLATFORM',
     }
 };
 
@@ -80,10 +86,12 @@ const regions = {
         SET_IS_REGIONS_DATA_FETCHED: 'regions/mutations/SET_IS_REGIONS_DATA_FETCHED',
         SET_DASHBOARD_REGIONS_DATA: 'regions/mutations/SET_DASHBOARD_REGIONS_DATA',
         SET_IS_DASHBOARD_REGIONS_DATA_FETCHED: 'regions/mutations/SET_IS_DASHBOARD_REGIONS_DATA_FETCHED',
+        REMOVE_DELETED_REGION: 'region/mutations/REMOVE_DELETED_REGION',
     },
     actions: {
         FETCH_REGIONS: 'regions/actions/FETCH_REGIONS',
         FETCH_REGIONS_FOR_DASHBOARD: 'regions/actions/FETCH_REGIONS_FOR_DASHBOARD',
+        DELETE_REGION: 'region/actions/DELETE_REGION',
     }
 };
 
@@ -97,12 +105,14 @@ const tournaments = {
         SET_TOURNAMENT_DETAILS_DATA: 'games/mutations/SET_TOURNAMENT_DETAILS_DATA',
         SET_IS_TOURNAMENT_DETAILS_DATA_FETCHED: 'games/mutations/SET_IS_TOURNAMENT_DETAILS_DATA_FETCHED',
         SET_IS_FILTERED_TOURNAMENT_DATA_FETCHED: 'games/mutations/SET_IS_FILTERED_TOURNAMENT_DATA_FETCHED',
+        REMOVE_DELETED_TOURNAMENT: 'tournaments/mutations/REMOVE_DELETED_TOURNAMENT',
     },
     actions: {
         FETCH_TOURNAMENTS: 'tournaments/actions/FETCH_TOURNAMENTS',
         FETCH_TOURNAMENTS_FOR_DASHBOARD: 'tournaments/actions/FETCH_TOURNAMENTS_FOR_DASHBOARD',
         FETCH_TOURNAMENTS_DETAILS: 'games/actions/FETCH_TOURNAMENTS_DETAILS',
         FETCH_FILTERED_TOURNAMENTS: 'games/actions/FETCH_FILTERED_TOURNAMENTS',
+        DELETE_TOURNAMENT: 'tournaments/actions/DELETE_TOURNAMENT',
     }
 };
 
@@ -112,10 +122,12 @@ const summits = {
         SET_SUMMITS_LIST_DATA: 'summits/mutations/SET_SUMMITS_LIST_DATA',
         SET_IS_SUMMITS_FETCHED: 'summits/mutations/SET_IS_SUMMITS_FETCHED',
         SET_IS_SUMMITS_LIST_FETCHED: 'summits/mutations/SET_IS_SUMMITS_LIST_FETCHED',
+        REMOVE_DELETED_SUMMIT: 'summits/mutations/REMOVE_DELETED_SUMMIT',
     },
     actions: {
         FETCH_SUMMITS: 'summits/actions/FETCH_SUMMITS',
         FETCH_SUMMITS_LIST: 'summits/actions/FETCH_SUMMITS_LIST',
+        DELETE_SUMMIT: 'summits/actions/DELETE_SUMMIT',
     }
 };
 
@@ -128,6 +140,7 @@ const events = {
         SET_EVENT_COVER_TYPES: 'events/mutations/SET_EVENT_COVER_TYPES',
         SET_EVENT_DETAILS: 'events/mutations/SET_EVENT_DETAILS',
         SET_EVENTS_LIST: 'events/mutations/SET_EVENTS_LIST',
+        REMOVE_DELETED_EVENT: 'events/mutations/REMOVE_DELETED_EVENT',
         SET_IS_EVENTS_FETCHED: 'events/mutations/SET_IS_EVENTS_FETCHED',
         SET_IS_EVENTS_LIST_FETCHED: 'events/mutations/SET_IS_EVENTS_LIST_FETCHED',
         SET_IS_EVENT_TYPE_FETCHED: 'events/mutations/SET_IS_EVENT_TYPE_FETCHED',
@@ -144,6 +157,7 @@ const events = {
         FETCH_EVENT_COVER_TYPES: 'events/actions/FETCH_EVENT_COVER_TYPES',
         FETCH_EVENT_DETAILS: 'events/actions/FETCH_EVENT_DETAILS',
         FETCH_EVENT_LIST: 'events/actions/FETCH_EVENT_LIST',
+        DELETE_EVENT: 'events/actions/DELETE_EVENT',
     }
 };
 

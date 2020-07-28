@@ -24,8 +24,16 @@
       :columns="table.columns"
       :data="tournamentsData"
       tableType="tournaments"
+      :setShowDeleteDialogFlag="setShowFlag"
     >
     </LTable>
+    <DeleteDialog
+      :showFlag="showFlag"
+      :setShowDeleteDialogFlag="setShowFlag"
+      item="Tournament"
+      :targetId="targetId"
+      :deleteAction="removeTournament"
+    />
   </div>
 </template>
 
@@ -33,10 +41,14 @@
 import { mapActions, mapState } from "vuex";
 import types from "../../../store/types";
 import LTable from "src/dashboard/components/Table.vue";
+import DeleteDialog from "../../../website/shared/DeleteDialog";
 
 export default {
   data() {
     return {
+      showFlag: false,
+      targetId: null,
+      locationInDataArray: null,
       table: {
         columns: [
           "Id",
@@ -52,7 +64,7 @@ export default {
           "Region",
           "Platform",
           "Game",
-          "Event",
+          "Tournament",
           "Tournament Rules",
           "Rule Title",
           "Rule Description",
@@ -63,7 +75,8 @@ export default {
           "Card Image",
           "Cover Main Images",
           "Cover Over Image",
-          "Video Stream URL"
+          "Video Stream URL",
+          "Actions"
         ]
       }
     };
@@ -78,7 +91,8 @@ export default {
   methods: {
     ...mapActions({
       fetchTournaments:
-        types.tournaments.actions.FETCH_TOURNAMENTS_FOR_DASHBOARD
+        types.tournaments.actions.FETCH_TOURNAMENTS_FOR_DASHBOARD,
+      deleteTournament: types.tournaments.actions.DELETE_TOURNAMENT
     }),
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -87,10 +101,34 @@ export default {
         verticalAlign: "top",
         type: color
       });
+    },
+    setShowFlag(flag, id, locationInDataArray) {
+      this.showFlag = flag;
+      this.targetId = id;
+      this.locationInDataArray = locationInDataArray;
+    },
+    async removeTournament() {
+      const payload = {
+        tournamentId: this.targetId,
+        locationInDataArray: this.locationInDataArray
+      };
+      try {
+        await this.deleteTournament(payload);
+        this.resetFields();
+        this.notifyVue("Tournament Deleted Successfully", "success");
+      } catch (error) {
+        this.notifyVue("Error Happened", "danger");
+      }
+    },
+    resetFields() {
+      this.showFlag = false;
+      this.targetId = null;
+      this.locationInDataArray = null;
     }
   },
   components: {
-    LTable
+    LTable,
+    DeleteDialog
   },
   mounted() {
     this.fetchTournaments();

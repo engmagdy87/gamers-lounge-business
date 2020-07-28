@@ -8,43 +8,20 @@
     <td>{{ rowData.attendess }}</td>
     <td>{{ rowData.year }}</td>
     <td>{{ rowData.location }}</td>
-    <td v-if="rowData.images !== undefined">
+    <td>
       <a
-        v-for="(img, index) in rowData.images.img_card"
-        :key="index"
-        :href="img.path"
+        v-if="
+          rowData.images.img_logo !== undefined &&
+            rowData.images.img_logo !== null
+        "
+        :href="rowData.images.img_logo.path"
         target="_blank"
-        >Img{{ index + 1 }}</a
+        >Img</a
       >
     </td>
-    <td v-if="rowData.images !== undefined">
-      <a
-        v-for="(img, index) in rowData.images.img_cover_main"
-        :key="index"
-        :href="img.path"
-        target="_blank"
-        >Img{{ index + 1 }}</a
-      >
-    </td>
-    <td v-if="rowData.images !== undefined">
-      <a
-        v-for="(img, index) in rowData.images.img_cover_over"
-        :key="index"
-        :href="img.path"
-        target="_blank"
-        >Img{{ index + 1 }}</a
-      >
-    </td>
-    <td v-if="rowData.images !== undefined">
-      <a
-        v-for="(img, index) in rowData.images.img_logo"
-        :key="index"
-        :href="img.path"
-        target="_blank"
-        >Img{{ index + 1 }}</a
-      >
-    </td>
-    <td v-if="rowData.images !== undefined">
+    <td
+      v-if="rowData.images !== undefined && rowData.images.img_media !== null"
+    >
       <a
         v-for="(img, index) in rowData.images.img_media"
         :key="index"
@@ -53,7 +30,47 @@
         >Img{{ index + 1 }}</a
       >
     </td>
-    <td v-if="rowData.images !== undefined">
+    <td v-else></td>
+    <td
+      v-if="
+        rowData.images !== undefined && rowData.images.img_cover_main !== null
+      "
+    >
+      <a
+        v-for="(img, index) in rowData.images.img_cover_main"
+        :key="index"
+        :href="img.path"
+        target="_blank"
+        >Img{{ index + 1 }}</a
+      >
+    </td>
+    <td v-else></td>
+    <td>
+      <a
+        v-if="
+          rowData.images.img_cover_over !== undefined &&
+            rowData.images.img_cover_over !== null
+        "
+        :href="rowData.images.img_cover_over.path"
+        target="_blank"
+        >Img</a
+      >
+    </td>
+    <td>
+      <a
+        v-if="
+          rowData.images.img_card !== undefined &&
+            rowData.images.img_card !== null
+        "
+        :href="rowData.images.img_card.path"
+        target="_blank"
+        >Img</a
+      >
+    </td>
+
+    <td
+      v-if="rowData.images !== undefined && rowData.images.vid_initial !== null"
+    >
       <a
         v-for="(vid, index) in rowData.images.vid_initial"
         :key="index"
@@ -62,18 +79,34 @@
         >Vid{{ index + 1 }}</a
       >
     </td>
+    <td v-else></td>
     <td>{{ rowData.active }}</td>
+    <td class="table-actions">
+      <img src="/website/img/edit.svg" alt="edit" />
+      <img
+        src="/website/img/delete.svg"
+        alt="delete"
+        @click="setShowDeleteDialogFlag(true, rowData.id, id - 1)"
+      />
+    </td>
   </tr>
 </template>
 
 <script>
 export default {
-  props: ["id", "rowData"]
+  props: ["id", "rowData", "setShowDeleteDialogFlag"]
 };
 </script>
 
 <style lang="scss" scoped>
 tr td a {
   margin-right: 5px;
+}
+.table-actions {
+  display: flex;
+  img {
+    margin: 5px 10px;
+    cursor: pointer;
+  }
 }
 </style>

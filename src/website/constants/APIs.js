@@ -9,6 +9,7 @@ const CREATE_SUMMIT = `${API_URL}/admin/summits`
 const GET_SUMMITS = `${API_URL}/admin/summits`
 const GET_SUMMITS_LIST = `${API_URL}/admin/summits/list`
 const GET_WEBSITE_STORY = `${API_URL}/summits/story`
+const DELETE_SUMMIT = `${API_URL}/admin/summits`
 
 // Events
 const GET_EVENTS = `${API_URL}/admin/events`
@@ -19,11 +20,13 @@ const GET_LIST_WEBSITE_EVENTS = `${API_URL}/admin/events/list`
 const GET_WEBSITE_MAIN_EVENTS = `${API_URL}/events/main`
 const GET_WEBSITE_SUB_EVENTS = `${API_URL}/events/sub`
 const GET_WEBSITE_EVENT_DETAILS = `${API_URL}/events`
+const DELETE_EVENT = `${API_URL}/admin/events`
 
 // SPONSORS
 const GET_SPONSORS = `${API_URL}/admin/sponsors`
 const CREATE_SPONSOR = `${API_URL}/admin/sponsors`
 const GET_LIST_SPONSORS = `${API_URL}/admin/sponsors/list`
+const DELETE_SPONSOR = `${API_URL}/admin/sponsors`
 
 // GAMES
 const GET_GAMES = `${API_URL}/admin/games`
@@ -31,12 +34,14 @@ const CREATE_GAME = `${API_URL}/admin/games`
 const GET_LIST_GAMES = `${API_URL}/admin/games/list`    // used for both dashboard and website
 const GET_LIST_WEBSITE_GAMES = `${API_URL}/games/view`
 const GET_WEBSITE_GAME_DETAILS = `${API_URL}/games`
+const DELETE_GAME = `${API_URL}/admin/games`
 
 // TOURNAMENTS
 const GET_TOURNAMENTS = `${API_URL}/admin/tournaments`
 const CREATE_TOURNAMENT = `${API_URL}/admin/tournaments`
 const GET_LIST_WEBSITE_TOURNAMENTS = `${API_URL}/tournaments/view`
 const GET_WEBSITE_TOURNAMENT_DETAILS = `${API_URL}/tournaments`
+const DELETE_TOURNAMENT = `${API_URL}/admin/tournaments`
 
 // PLATFORM
 const GET_PLATFORMS = `${API_URL}/admin/platforms`
@@ -86,5 +91,10 @@ export {
     GET_REGIONS,
     CREATE_REGION,
     GET_LIST_REGIONS,
-    DELETE_REGION
+    DELETE_REGION,
+    DELETE_EVENT,
+    DELETE_TOURNAMENT,
+    DELETE_SPONSOR,
+    DELETE_SUMMIT,
+    DELETE_GAME
 };

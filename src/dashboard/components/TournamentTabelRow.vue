@@ -99,12 +99,20 @@
         <a :href="rowData.videos.vid_stream.path" target="_blank">Vid</a>
       </span>
     </td>
+    <td class="table-actions">
+      <img src="/website/img/edit.svg" alt="edit" />
+      <img
+        src="/website/img/delete.svg"
+        alt="delete"
+        @click="setShowDeleteDialogFlag(true, rowData.id, id - 1)"
+      />
+    </td>
   </tr>
 </template>
 
 <script>
 export default {
-  props: ["id", "rowData"]
+  props: ["id", "rowData", "setShowDeleteDialogFlag"]
 };
 </script>
 
@@ -114,7 +122,13 @@ export default {
 tr td a {
   margin-right: 5px;
 }
-
+.table-actions {
+  display: flex;
+  img {
+    margin: 5px 10px;
+    cursor: pointer;
+  }
+}
 .description {
   height: 200px !important;
   overflow-y: auto;

@@ -22,7 +22,16 @@
       :columns="table.columns"
       :data="gamesData"
       tableType="games"
+      :setShowDeleteDialogFlag="setShowFlag"
     >
+    </LTable>
+    <DeleteDialog
+      :showFlag="showFlag"
+      :setShowDeleteDialogFlag="setShowFlag"
+      item="Game"
+      :targetId="targetId"
+      :deleteAction="removeGame"
+    />
     </LTable>
   </div>
 </template>
@@ -31,17 +40,22 @@
 import { mapActions, mapState } from "vuex";
 import types from "../../../store/types";
 import LTable from "src/dashboard/components/Table.vue";
+import DeleteDialog from "../../../website/shared/DeleteDialog";
 
 export default {
   data() {
     return {
+       showFlag: false,
+      targetId: null,
+      locationInDataArray: null,
       table: {
         columns: [
           "Id",
           "Title",
           "Description",
           "Logo Image",
-          "Main Cover Image"
+          "Main Cover Image",
+          "Actions"
         ]
       }
     };
@@ -54,7 +68,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchGames: types.games.actions.FETCH_GAMES
+      fetchGames: types.games.actions.FETCH_GAMES,
+      deleteGame: types.games.actions.DELETE_GAME
     }),
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -63,10 +78,34 @@ export default {
         verticalAlign: "top",
         type: color
       });
+    },
+    setShowFlag(flag, id, locationInDataArray) {
+      this.showFlag = flag;
+      this.targetId = id;
+      this.locationInDataArray = locationInDataArray;
+    },
+    async removeGame() {
+      const payload = {
+        gameId: this.targetId,
+        locationInDataArray: this.locationInDataArray
+      };
+      try {
+        await this.deleteGame(payload);
+        this.resetFields();
+        this.notifyVue("Game Deleted Successfully", "success");
+      } catch (error) {
+        this.notifyVue("Error Happened", "danger");
+      }
+    },
+    resetFields() {
+      this.showFlag = false;
+      this.targetId = null;
+      this.locationInDataArray = null;
     }
   },
   components: {
-    LTable
+    LTable,
+    DeleteDialog
   },
   mounted() {
     this.fetchGames();

@@ -1,6 +1,7 @@
 import {
     getRegionsForDashboard,
-    getRegions
+    getRegions,
+    removeRegion
 } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
@@ -23,6 +24,9 @@ const mutations = {
     },
     [types.regions.mutations.SET_IS_DASHBOARD_REGIONS_DATA_FETCHED]: (currentState, payload) => {
         currentState.isDashboardRegionsDataFetched = payload;
+    },
+    [types.regions.mutations.REMOVE_DELETED_REGION]: (currentState, index) => {
+        currentState.regionsData.splice(index, 1);
     }
 };
 
@@ -46,9 +50,21 @@ const getRegionsDataForDashboard = async ({ commit },) => {
     return response
 };
 
+const deleteRegion = async ({ commit }, payload) => {
+    const { regionId, locationInDataArray } = payload
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removeRegion(regionId).then(() => {
+        commit(types.regions.mutations.REMOVE_DELETED_REGION, locationInDataArray);
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.regions.actions.FETCH_REGIONS]: getRegionsData,
     [types.regions.actions.FETCH_REGIONS_FOR_DASHBOARD]: getRegionsDataForDashboard,
+    [types.regions.actions.DELETE_REGION]: deleteRegion,
 };
 
 export default {

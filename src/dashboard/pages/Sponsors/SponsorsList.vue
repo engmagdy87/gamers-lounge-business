@@ -22,8 +22,16 @@
       :columns="table.columns"
       :data="sponsorsData"
       tableType="sponsors"
+      :setShowDeleteDialogFlag="setShowFlag"
     >
     </LTable>
+    <DeleteDialog
+      :showFlag="showFlag"
+      :setShowDeleteDialogFlag="setShowFlag"
+      item="Sponsor"
+      :targetId="targetId"
+      :deleteAction="removeSponsor"
+    />
   </div>
 </template>
 
@@ -31,12 +39,16 @@
 import { mapActions, mapState } from "vuex";
 import types from "../../../store/types";
 import LTable from "src/dashboard/components/Table.vue";
+import DeleteDialog from "../../../website/shared/DeleteDialog";
 
 export default {
   data() {
     return {
+      showFlag: false,
+      targetId: null,
+      locationInDataArray: null,
       table: {
-        columns: ["Id", "Name", "Link", "Logo Image"]
+        columns: ["Id", "Name", "Link", "Logo Image", "Actions"]
       }
     };
   },
@@ -48,7 +60,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchSponsors: types.sponsors.actions.FETCH_SPONSORS
+      fetchSponsors: types.sponsors.actions.FETCH_SPONSORS,
+      deleteSponsor: types.sponsors.actions.DELETE_SPONSOR
     }),
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -57,10 +70,34 @@ export default {
         verticalAlign: "top",
         type: color
       });
+    },
+    setShowFlag(flag, id, locationInDataArray) {
+      this.showFlag = flag;
+      this.targetId = id;
+      this.locationInDataArray = locationInDataArray;
+    },
+    async removeSponsor() {
+      const payload = {
+        sponsorId: this.targetId,
+        locationInDataArray: this.locationInDataArray
+      };
+      try {
+        await this.deleteSponsor(payload);
+        this.resetFields();
+        this.notifyVue("Sponsor Deleted Successfully", "success");
+      } catch (error) {
+        this.notifyVue("Error Happened", "danger");
+      }
+    },
+    resetFields() {
+      this.showFlag = false;
+      this.targetId = null;
+      this.locationInDataArray = null;
     }
   },
   components: {
-    LTable
+    LTable,
+    DeleteDialog
   },
   mounted() {
     this.fetchSponsors();

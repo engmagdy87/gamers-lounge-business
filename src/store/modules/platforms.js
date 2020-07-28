@@ -1,6 +1,7 @@
 import {
     getPlatformsForDashboard,
-    getPlatforms
+    getPlatforms,
+    removePlatform
 } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
@@ -23,7 +24,10 @@ const mutations = {
     },
     [types.platforms.mutations.SET_IS_DASHBOARD_PLATFORMS_DATA_FETCHED]: (currentState, payload) => {
         currentState.isDashboardPlatformsDataFetched = payload;
-    }
+    },
+    [types.platforms.mutations.REMOVE_DELETED_PLATFORM]: (currentState, index) => {
+        currentState.platformsData.splice(index, 1);
+    },
 };
 
 const getPlatformsData = async ({ commit },) => {
@@ -46,9 +50,21 @@ const getPlatformsDataForDashboard = async ({ commit },) => {
     return response
 };
 
+const deletePlatform = async ({ commit }, payload) => {
+    const { platformId, locationInDataArray } = payload
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removePlatform(platformId).then(() => {
+        commit(types.platforms.mutations.REMOVE_DELETED_PLATFORM, locationInDataArray);
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.platforms.actions.FETCH_PLATFORMS]: getPlatformsData,
     [types.platforms.actions.FETCH_PLATFORMS_FOR_DASHBOARD]: getPlatformsDataForDashboard,
+    [types.platforms.actions.DELETE_PLATFORM]: deletePlatform,
 };
 
 export default {

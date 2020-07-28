@@ -22,8 +22,16 @@
       :columns="table.columns"
       :data="regionsData"
       tableType="regions"
+      :setShowDeleteDialogFlag="setShowFlag"
     >
     </LTable>
+    <DeleteDialog
+      :showFlag="showFlag"
+      :setShowDeleteDialogFlag="setShowFlag"
+      item="Region"
+      :targetId="targetId"
+      :deleteAction="removeRegion"
+    />
   </div>
 </template>
 
@@ -31,12 +39,16 @@
 import { mapActions, mapState } from "vuex";
 import types from "../../../store/types";
 import LTable from "src/dashboard/components/Table.vue";
+import DeleteDialog from "../../../website/shared/DeleteDialog";
 
 export default {
   data() {
     return {
+      showFlag: false,
+      targetId: null,
+      locationInDataArray: null,
       table: {
-        columns: ["Id", "Title"]
+        columns: ["Id", "Title", "Actions"]
       }
     };
   },
@@ -48,7 +60,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchRegions: types.regions.actions.FETCH_REGIONS
+      fetchRegions: types.regions.actions.FETCH_REGIONS,
+      deleteRegion: types.regions.actions.DELETE_REGION
     }),
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -57,10 +70,34 @@ export default {
         verticalAlign: "top",
         type: color
       });
+    },
+    setShowFlag(flag, id, locationInDataArray) {
+      this.showFlag = flag;
+      this.targetId = id;
+      this.locationInDataArray = locationInDataArray;
+    },
+    async removeRegion() {
+      const payload = {
+        regionId: this.targetId,
+        locationInDataArray: this.locationInDataArray
+      };
+      try {
+        await this.deleteRegion(payload);
+        this.resetFields();
+        this.notifyVue("Region Deleted Successfully", "success");
+      } catch (error) {
+        this.notifyVue("Error Happened", "danger");
+      }
+    },
+    resetFields() {
+      this.showFlag = false;
+      this.targetId = null;
+      this.locationInDataArray = null;
     }
   },
   components: {
-    LTable
+    LTable,
+    DeleteDialog
   },
   mounted() {
     this.fetchRegions();

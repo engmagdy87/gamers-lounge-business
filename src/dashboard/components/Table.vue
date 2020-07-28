@@ -16,6 +16,7 @@
           :key="index"
           :rowData="item"
           :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
         >
         </SummitTabelRow>
       </tbody>
@@ -25,6 +26,7 @@
           :key="index"
           :rowData="item"
           :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
         >
         </EventTabelRow>
       </tbody>
@@ -34,6 +36,7 @@
           :key="index"
           :rowData="item"
           :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
         >
         </SponsorTabelRow>
       </tbody>
@@ -43,6 +46,7 @@
           :key="index"
           :rowData="item"
           :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
         >
         </GamesTabelRow>
       </tbody>
@@ -52,6 +56,7 @@
           :key="index"
           :rowData="item"
           :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
         >
         </PlatformsTabelRow>
       </tbody>
@@ -61,6 +66,7 @@
           :key="index"
           :rowData="item"
           :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
         >
         </RegionsTabelRow>
       </tbody>
@@ -70,6 +76,7 @@
           :key="index"
           :rowData="item"
           :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
         >
         </TournamentTabelRow>
       </tbody>
@@ -87,7 +94,7 @@ import TournamentTabelRow from "./TournamentTabelRow";
 
 export default {
   name: "l-table",
-  props: ["columns", "data", "tableType"],
+  props: ["columns", "data", "tableType", "setShowDeleteDialogFlag"],
   components: {
     SummitTabelRow,
     EventTabelRow,

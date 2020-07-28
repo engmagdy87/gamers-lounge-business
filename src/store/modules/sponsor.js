@@ -1,6 +1,7 @@
 import {
     getSponsorsForDashboard,
-    getSponsors
+    getSponsors,
+    removeSponsor
 } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
@@ -23,7 +24,10 @@ const mutations = {
     },
     [types.sponsors.mutations.SET_IS_DASHBOARD_SPONSORS_DATA_FETCHED]: (currentState, payload) => {
         currentState.isDashboardSponsorsDataFetched = payload;
-    }
+    },
+    [types.sponsors.mutations.REMOVE_DELETED_SPONSOR]: (currentState, index) => {
+        currentState.sponsorsData.splice(index, 1);
+    },
 };
 
 const getSponsorsData = async ({ commit },) => {
@@ -46,9 +50,21 @@ const getSponsorsDataForDashboard = async ({ commit },) => {
     return response
 };
 
+const deleteSponsor = async ({ commit }, payload) => {
+    const { sponsorId, locationInDataArray } = payload
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removeSponsor(sponsorId).then(() => {
+        commit(types.sponsors.mutations.REMOVE_DELETED_SPONSOR, locationInDataArray);
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.sponsors.actions.FETCH_SPONSORS]: getSponsorsData,
     [types.sponsors.actions.FETCH_SPONSORS_FOR_DASHBOARD]: getSponsorsDataForDashboard,
+    [types.sponsors.actions.DELETE_SPONSOR]: deleteSponsor,
 };
 
 export default {

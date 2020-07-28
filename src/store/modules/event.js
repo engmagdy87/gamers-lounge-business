@@ -1,4 +1,4 @@
-import { getEvents, getEventsTypes, getMainEvents, getSubEvents, getEventCoverTypes, getEvent, getEventsList } from '../../website/helpers/APIsHelper';
+import { getEvents, getEventsTypes, getMainEvents, getSubEvents, getEventCoverTypes, getEvent, getEventsList, removeEvent } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -60,6 +60,9 @@ const mutations = {
     },
     [types.events.mutations.SET_IS_EVENT_DETAILS_FETCHED]: (currentState, payload) => {
         currentState.isEventDetailsFetched = payload;
+    },
+    [types.events.mutations.REMOVE_DELETED_EVENT]: (currentState, index) => {
+        currentState.eventsData.splice(index, 1);
     },
 };
 
@@ -130,6 +133,17 @@ const getEventsListForDashboard = async ({ commit }) => {
     return response
 };
 
+const deleteEvent = async ({ commit }, payload) => {
+    const { eventId, locationInDataArray } = payload
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removeEvent(eventId).then(() => {
+        commit(types.events.mutations.REMOVE_DELETED_EVENT, locationInDataArray);
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.events.actions.FETCH_EVENTS]: getEventsData,
     [types.events.actions.FETCH_EVENT_TYPE]: getEventTypes,
@@ -138,6 +152,7 @@ const actions = {
     [types.events.actions.FETCH_EVENT_COVER_TYPES]: getEventCoverTypesData,
     [types.events.actions.FETCH_EVENT_DETAILS]: getEventDetails,
     [types.events.actions.FETCH_EVENT_LIST]: getEventsListForDashboard,
+    [types.events.actions.DELETE_EVENT]: deleteEvent,
 };
 
 export default {

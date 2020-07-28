@@ -1,4 +1,4 @@
-import { getSummits, getSummitsList } from '../../website/helpers/APIsHelper';
+import { getSummits, getSummitsList, removeSummit } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -20,6 +20,9 @@ const mutations = {
     },
     [types.summits.mutations.SET_IS_SUMMITS_LIST_FETCHED]: (currentState, payload) => {
         currentState.isSummitsListFetched = payload;
+    },
+    [types.summits.mutations.REMOVE_DELETED_SUMMIT]: (currentState, index) => {
+        currentState.summitsData.splice(index, 1);
     },
 };
 
@@ -43,9 +46,21 @@ const getSummitsListSummary = async ({ commit }) => {
     return response
 };
 
+const deleteSummit = async ({ commit }, payload) => {
+    const { summitId, locationInDataArray } = payload
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removeSummit(summitId).then(() => {
+        commit(types.summits.mutations.REMOVE_DELETED_SUMMIT, locationInDataArray);
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.summits.actions.FETCH_SUMMITS]: getSummitsData,
     [types.summits.actions.FETCH_SUMMITS_LIST]: getSummitsListSummary,
+    [types.summits.actions.DELETE_SUMMIT]: deleteSummit,
 };
 
 export default {

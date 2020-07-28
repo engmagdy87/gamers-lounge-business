@@ -2,17 +2,32 @@
   <tr>
     <th scope="row">{{ id }}</th>
     <td>{{ rowData.title }}</td>
+    <td class="table-actions">
+      <img src="/website/img/edit.svg" alt="edit" />
+      <img
+        src="/website/img/delete.svg"
+        alt="delete"
+        @click="setShowDeleteDialogFlag(true, rowData.id, id - 1)"
+      />
+    </td>
   </tr>
 </template>
 
 <script>
 export default {
-  props: ["id", "rowData"]
+  props: ["id", "rowData", "setShowDeleteDialogFlag"]
 };
 </script>
 
 <style lang="scss" scoped>
 tr td a {
   margin-right: 5px;
+}
+.table-actions {
+  display: flex;
+  img {
+    margin: 5px 10px;
+    cursor: pointer;
+  }
 }
 </style>

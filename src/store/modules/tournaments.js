@@ -1,4 +1,4 @@
-import { getTournaments, getTournamentsForDashboard, getTournamentDetails, getFilteredTournaments } from '../../website/helpers/APIsHelper';
+import { getTournaments, getTournamentsForDashboard, getTournamentDetails, getFilteredTournaments, removeTournament } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -37,6 +37,9 @@ const mutations = {
     },
     [types.tournaments.mutations.SET_IS_FILTERED_TOURNAMENT_DATA_FETCHED]: (currentState, payload) => {
         currentState.isFilteredTournamentsDataFetched = payload;
+    },
+    [types.tournaments.mutations.REMOVE_DELETED_TOURNAMENT]: (currentState, index) => {
+        currentState.dashboardTournamentsData.splice(index, 1);
     },
 };
 
@@ -81,11 +84,23 @@ const getFilteredTournamentsData = async ({ commit }, payload) => {
     return response
 };
 
+const deleteTournament = async ({ commit }, payload) => {
+    const { tournamentId, locationInDataArray } = payload
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removeTournament(tournamentId).then(() => {
+        commit(types.tournaments.mutations.REMOVE_DELETED_TOURNAMENT, locationInDataArray);
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.tournaments.actions.FETCH_TOURNAMENTS]: getTournamentsData,
     [types.tournaments.actions.FETCH_TOURNAMENTS_FOR_DASHBOARD]: getTournamentsListSummary,
     [types.tournaments.actions.FETCH_TOURNAMENTS_DETAILS]: getTournamentDetailsData,
     [types.tournaments.actions.FETCH_FILTERED_TOURNAMENTS]: getFilteredTournamentsData,
+    [types.tournaments.actions.DELETE_TOURNAMENT]: deleteTournament,
 };
 
 export default {
