@@ -33,6 +33,7 @@
           loop
           id="myVideo"
           v-if="eventDetails.cover_type !== 'img'"
+          style="width: 100%;"
         >
           <source
             :src="eventDetails.videos.vid_cover_main.path"
