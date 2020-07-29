@@ -6,11 +6,11 @@
           <a href="/dashboard/summits">Summits</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
-          Create Summit
+          {{ operation }}
         </li>
       </ol>
     </nav>
-    <h4 slot="header" class="card-title">{{ operation }} Summit</h4>
+    <h4 slot="header" class="card-title">{{ operation }}</h4>
     <form>
       <div class="row">
         <div class="col-md-6">
@@ -129,6 +129,17 @@
               @change="e => setFile(e, 'img_logo')"
               ref="img_logo"
             />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Summit' &&
+                  editData.images !== null &&
+                  editData.images.img_logo !== null
+              "
+              :image="editData.images.img_logo"
+              :setShowDeleteDialogFlag="setShowFlag"
+              openedFor="img_logo"
+            />
           </div>
         </div>
         <div class="col-6">
@@ -141,6 +152,21 @@
               multiple
               ref="img_media"
             />
+            <div
+              v-if="
+                editData !== undefined &&
+                  (operation === 'Edit Summit' || editData.images !== null)
+              "
+            >
+              <ImagePreview
+                v-for="(img, index) in editData.images.img_media"
+                :key="index"
+                :image="img"
+                :setShowDeleteDialogFlag="setShowFlag"
+                openedFor="img_media"
+                :imageIndex="index"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -157,6 +183,17 @@
               @change="e => setFile(e, 'img_cover_main')"
               ref="img_cover_main"
             />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Summit' &&
+                  editData.images !== null &&
+                  editData.images.img_cover_main !== null
+              "
+              :image="editData.images.img_cover_main"
+              :setShowDeleteDialogFlag="setShowFlag"
+              openedFor="img_cover_main"
+            />
           </div>
         </div>
         <div class="col-6">
@@ -170,6 +207,17 @@
               accept="image/png, image/jpeg"
               @change="e => setFile(e, 'img_cover_over')"
               ref="img_cover_over"
+            />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Summit' &&
+                  editData.images !== null &&
+                  editData.images.img_cover_over !== null
+              "
+              :image="editData.images.img_cover_over"
+              :setShowDeleteDialogFlag="setShowFlag"
+              openedFor="img_cover_over"
             />
           </div>
         </div>
@@ -185,6 +233,17 @@
               accept="image/png, image/jpeg"
               @change="e => setFile(e, 'img_card')"
               ref="img_card"
+            />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Summit' &&
+                  editData.images !== null &&
+                  editData.images.img_card !== null
+              "
+              :image="editData.images.img_card"
+              :setShowDeleteDialogFlag="setShowFlag"
+              openedFor="img_card"
             />
           </div>
         </div>
@@ -203,27 +262,44 @@
         <button
           type="button"
           class="btn btn-info btn-fill float-right"
-          @click="postSummit"
+          @click="clickAction"
         >
           Save
         </button>
       </div>
       <div class="clearfix"></div>
+      <DeleteDialog
+        :showFlag="showFlag"
+        :setShowDeleteDialogFlag="setShowFlag"
+        item="Image"
+        :deleteAction="removeImage"
+      />
     </form>
   </div>
 </template>
 <script>
+import { mapActions, mapState } from "vuex";
+import ImagePreview from "../../../website/shared/ImagePreview.vue";
+import DeleteDialog from "../../../website/shared/DeleteDialog";
 import store from "../../../store/index";
 import types from "../../../store/types";
-// import Card from "src/dashboard/components/Cards/Card.vue";
-import { createSummit } from "../../../website/helpers/APIsHelper.js";
+import {
+  createSummit,
+  editSummit
+} from "../../../website/helpers/APIsHelper.js";
 
 export default {
   components: {
-    // Card
+    ImagePreview,
+    DeleteDialog
   },
   data() {
     return {
+      openedFor: "",
+      imageIndex: null,
+      showFlag: false,
+      imageId: null,
+      editData: this.$router.history.current.params.data || { images: null },
       operation: this.$route.name,
       summit: {
         initial_title: "",
@@ -244,6 +320,20 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      deleteImage: types.summits.actions.DELETE_SUMMIT_IMAGE
+    }),
+    clickAction() {
+      this.operation === "Edit Summit"
+        ? this.saveData(editSummit, "Summit Updated Successfully")
+        : this.saveData(createSummit, "Summit Created Successfully");
+    },
+    setShowFlag(flag, imageId, openedFor, imageIndex) {
+      this.showFlag = flag;
+      this.imageId = imageId;
+      this.openedFor = openedFor;
+      this.imageIndex = imageIndex;
+    },
     setFile(e, key) {
       const files = e.target.files;
 
@@ -251,7 +341,7 @@ export default {
 
       this.summit[key] = files[0];
     },
-    postSummit: async function() {
+    saveData: async function(saveFunction, successMessage) {
       let formData = new FormData();
       formData.append("initial_title", this.summit.initial_title);
       formData.append("final_title", this.summit.final_title);
@@ -275,10 +365,13 @@ export default {
 
       try {
         store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
-        const response = await createSummit(formData);
+
+        if (this.operation === "Edit Summit")
+          await saveFunction(this.editData.id, formData);
+        else await saveFunction(formData);
+
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-        this.resetFields();
-        this.notifyVue("Summit Created Successfully", "success");
+        this.notifyVue(successMessage, "success");
         this.$router.push("/dashboard/summits/list");
       } catch (error) {
         this.notifyVue("Error Happened", "danger");
@@ -295,11 +388,14 @@ export default {
       this.summit.start_date = "";
       this.summit.end_date = "";
       this.summit.active = false;
-      this.summit.vid_initial = "";
+
       this.summit.img_logo = "";
       this.summit.img_cover_over = "";
       this.summit.img_card = "";
       this.summit.img_cover_main = "";
+
+      this.summit.vid_initial = "";
+
       this.$refs.img_logo.value = null;
       this.$refs.img_cover_over.value = null;
       this.$refs.img_media.value = null;
@@ -313,6 +409,39 @@ export default {
         verticalAlign: "top",
         type: color
       });
+    },
+    removeImage: async function() {
+      const payload = { summitId: this.editData.id, imageId: this.imageId };
+      const response = await this.deleteImage(payload);
+
+      switch (this.openedFor) {
+        case "img_logo":
+          this.editData.images.img_logo = null;
+          break;
+
+        case "img_cover_main":
+          this.editData.images.img_cover_main = null;
+          break;
+
+        case "img_cover_over":
+          this.editData.images.img_cover_over = null;
+          break;
+
+        case "img_card":
+          this.editData.images.img_card = null;
+          break;
+
+        case "img_media":
+          this.editData.images.img_media.splice(this.imageIndex, 1);
+          break;
+
+        default:
+          break;
+      }
+
+      this.notifyVue("Image Deleted Successfully", "success");
+      this.setShowFlag(false);
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
     }
   },
   computed: {
@@ -325,6 +454,37 @@ export default {
         "-" +
         today.getDate();
       return date;
+    }
+  },
+  beforeMount() {
+    if (
+      !this.$router.history.current.params.data &&
+      this.$route.name === "Edit Summit"
+    )
+      this.$router.push({
+        path: "/dashboard/summits"
+      });
+  },
+  mounted() {
+    if (this.$route.name === "Edit Summit") {
+      this.summit.initial_title = this.editData.initial_title || "";
+      this.summit.final_title = this.editData.final_title || "";
+      this.summit.initial_description = this.editData.initial_description || "";
+      this.summit.final_description = this.editData.final_description || "";
+      this.summit.attendess = this.editData.attendess || 0;
+      this.summit.location = this.editData.location || "";
+      this.summit.start_date = this.editData.start_date.split(" ")[0];
+      this.summit.end_date = this.editData.end_date.split(" ")[0];
+
+      this.summit.active = this.editData.active || false;
+      this.summit.img_logo = this.editData.images.img_logo;
+      this.summit.img_cover_main = this.editData.images.img_cover_main;
+      this.summit.img_cover_over = this.editData.images.img_cover_over;
+      this.summit.img_card = this.editData.images.img_card;
+
+      this.summit.vid_initial = this.editData.videos.vid_initial
+        ? this.editData.videos.vid_initial.path || ""
+        : "";
     }
   }
 };

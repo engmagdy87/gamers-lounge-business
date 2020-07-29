@@ -79,7 +79,6 @@
                 editData !== undefined &&
                   (operation === 'Edit Game' || editData.images !== null)
               "
-              class="image-preview-list"
             >
               <ImagePreview
                 v-for="(img, index) in editData.images.img_cover_main"

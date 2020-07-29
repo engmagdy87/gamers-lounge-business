@@ -1,4 +1,4 @@
-import { getTournaments, getTournamentsForDashboard, getTournamentDetails, getFilteredTournaments, removeTournament } from '../../website/helpers/APIsHelper';
+import { getTournaments, getTournamentsForDashboard, getTournamentDetails, getFilteredTournaments, removeTournament, removeTournamentImage } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -95,12 +95,23 @@ const deleteTournament = async ({ commit }, payload) => {
     return response
 };
 
+const deleteTournamentImage = async ({ commit }, payload) => {
+    const { tournamentId, imageId } = payload
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removeTournamentImage(tournamentId, imageId).then(() => {
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.tournaments.actions.FETCH_TOURNAMENTS]: getTournamentsData,
     [types.tournaments.actions.FETCH_TOURNAMENTS_FOR_DASHBOARD]: getTournamentsListSummary,
     [types.tournaments.actions.FETCH_TOURNAMENTS_DETAILS]: getTournamentDetailsData,
     [types.tournaments.actions.FETCH_FILTERED_TOURNAMENTS]: getFilteredTournamentsData,
     [types.tournaments.actions.DELETE_TOURNAMENT]: deleteTournament,
+    [types.tournaments.actions.DELETE_TOURNAMENT_IMAGE]: deleteTournamentImage,
 };
 
 export default {

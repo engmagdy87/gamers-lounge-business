@@ -73,6 +73,14 @@ async function editSummit(id, data) {
     return response;
 }
 
+async function removeSummitImage(id, imageId) {
+    const response = await deleteData(
+        `${APIs.DELETE_IMAGE_IN_SUMMIT}/${id}/images/${imageId}`
+    );
+
+    return response;
+}
+
 // Events
 async function createEvent(payload) {
     const response = await postMultipart(
@@ -156,6 +164,14 @@ async function editEvent(id, data) {
     return response;
 }
 
+async function removeEventImage(id, imageId) {
+    const response = await deleteData(
+        `${APIs.DELETE_IMAGE_IN_EVENT}/${id}/images/${imageId}`
+    );
+
+    return response;
+}
+
 //Sponsors
 async function getSponsorsForDashboard() {
     const response = await getDashboardData(
@@ -194,6 +210,15 @@ async function editSponsor(id, data) {
     const response = await postMultipart(
         data,
         `${APIs.EDIT_SPONSOR}/${id}`
+    );
+
+    return response;
+}
+
+
+async function removeSponsorImage(id, imageId) {
+    const response = await deleteData(
+        `${APIs.DELETE_IMAGE_IN_SPONSOR}/${id}/images/${imageId}`
     );
 
     return response;
@@ -252,14 +277,6 @@ async function removeGame(id) {
 async function removeGameImage(id, imageId) {
     const response = await deleteData(
         `${APIs.DELETE_IMAGE_IN_GAME}/${id}/images/${imageId}`
-    );
-
-    return response;
-}
-
-async function removeSponsorImage(id, imageId) {
-    const response = await deleteData(
-        `${APIs.DELETE_IMAGE_IN_SPONSOR}/${id}/images/${imageId}`
     );
 
     return response;
@@ -424,6 +441,14 @@ async function editTournament(id, data) {
     return response;
 }
 
+async function removeTournamentImage(id, imageId) {
+    const response = await deleteData(
+        `${APIs.DELETE_IMAGE_IN_TOURNAMENT}/${id}/images/${imageId}`
+    );
+
+    return response;
+}
+
 export {
     loadUserPersona,
     setUserPersona,
@@ -467,6 +492,9 @@ export {
     removePlatform,
     removeGameImage,
     removeSponsorImage,
+    removeEventImage,
+    removeSummitImage,
+    removeTournamentImage,
     editGame,
     editPlatform,
     editEvent,

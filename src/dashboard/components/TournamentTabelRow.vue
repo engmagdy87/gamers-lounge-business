@@ -14,38 +14,38 @@
     <td>{{ rowData.register_start_at }}</td>
     <td>{{ rowData.register_end_at }}</td>
     <td>{{ rowData.kick_off_date }}</td>
-    <td>{{ rowData.region_id }}</td>
-    <td>{{ rowData.platform_id }}</td>
-    <td>{{ rowData.game_id }}</td>
-    <td>{{ rowData.event_id }}</td>
+    <td>{{ rowData.region.title }}</td>
+    <td>{{ rowData.platform.title }}</td>
+    <td>{{ rowData.game.title }}</td>
+    <td>{{ rowData.event.initial_title }}</td>
     <td>{{ rowData.has_rules }}</td>
     <td>
       {{
-        rowData.rules === null || rowData.rules === undefined
+        rowData.rule === null || rowData.rule === undefined
           ? ""
-          : rowData.rules.title
+          : rowData.rule.title
       }}
     </td>
     <td>
       {{
-        rowData.rules === null || rowData.rules === undefined
+        rowData.rule === null || rowData.rule === undefined
           ? ""
-          : rowData.rules.content
+          : rowData.rule.content
       }}
     </td>
     <td>{{ rowData.winner }}</td>
     <td>
       {{
-        rowData.contacts === null || rowData.contacts === undefined
+        rowData.contact === null || rowData.contact === undefined
           ? ""
-          : rowData.contacts.title
+          : rowData.contact.title
       }}
     </td>
     <td>
       {{
-        rowData.contacts === null || rowData.contacts === undefined
+        rowData.contact === null || rowData.contact === undefined
           ? ""
-          : rowData.contacts.content
+          : rowData.contact.content
       }}
     </td>
     <td>
@@ -100,7 +100,7 @@
       </span>
     </td>
     <td class="table-actions">
-      <img src="/website/img/edit.svg" alt="edit" />
+      <img src="/website/img/edit.svg" alt="edit" @click="redirectTo" />
       <img
         src="/website/img/delete.svg"
         alt="delete"
@@ -112,7 +112,15 @@
 
 <script>
 export default {
-  props: ["id", "rowData", "setShowDeleteDialogFlag"]
+  props: ["id", "rowData", "setShowDeleteDialogFlag"],
+  methods: {
+    redirectTo() {
+      this.$router.push({
+        name: "Edit Tournament",
+        params: { data: this.rowData }
+      });
+    }
+  }
 };
 </script>
 
@@ -130,7 +138,7 @@ tr td a {
   }
 }
 .description {
-  height: 200px !important;
+  max-height: 200px !important;
   overflow-y: auto;
   padding: 8px;
   &::-webkit-scrollbar {

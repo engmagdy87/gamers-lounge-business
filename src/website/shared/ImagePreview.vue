@@ -32,7 +32,7 @@ export default {
   margin: 5px;
   background-color: gainsboro;
   img {
-    object-fit: cover;
+    object-fit: contain;
     height: 150px;
     width: 150px;
   }

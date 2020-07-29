@@ -13,11 +13,11 @@
           <a href="/dashboard/events">Events</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
-          Create Event
+          {{ operation }}
         </li>
       </ol>
     </nav>
-    <h4 slot="header" class="card-title">{{ operation }} Event</h4>
+    <h4 slot="header" class="card-title">{{ operation }}</h4>
     <form>
       <div class="row">
         <div class="col-md-6">
@@ -227,6 +227,17 @@
               @change="e => setFile(e, 'img_cover_over')"
               ref="img_cover_over"
             />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Event' &&
+                  editData.images !== null &&
+                  editData.images.img_cover_over !== null
+              "
+              :image="editData.images.img_cover_over"
+              :setShowDeleteDialogFlag="setShowFlag"
+              openedFor="img_cover_over"
+            />
           </div>
         </div>
       </div>
@@ -242,6 +253,17 @@
               @change="e => setFile(e, 'img_logo')"
               ref="img_logo"
             />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Event' &&
+                  editData.images !== null &&
+                  editData.images.img_logo !== null
+              "
+              :image="editData.images.img_logo"
+              :setShowDeleteDialogFlag="setShowFlag"
+              openedFor="img_logo"
+            />
           </div>
         </div>
         <div class="col-6">
@@ -254,6 +276,21 @@
               multiple
               ref="img_media"
             />
+            <div
+              v-if="
+                editData !== undefined &&
+                  (operation === 'Edit Event' || editData.images !== null)
+              "
+            >
+              <ImagePreview
+                v-for="(img, index) in editData.images.img_media"
+                :key="index"
+                :image="img"
+                :setShowDeleteDialogFlag="setShowFlag"
+                openedFor="img_media"
+                :imageIndex="index"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -270,6 +307,21 @@
               multiple
               ref="img_cover_main"
             />
+            <div
+              v-if="
+                editData !== undefined &&
+                  (operation === 'Edit Event' || editData.images !== null)
+              "
+            >
+              <ImagePreview
+                v-for="(img, index) in editData.images.img_cover_main"
+                :key="index"
+                :image="img"
+                :setShowDeleteDialogFlag="setShowFlag"
+                openedFor="img_cover_main"
+                :imageIndex="index"
+              />
+            </div>
           </div>
         </div>
         <div class="col-6">
@@ -281,6 +333,17 @@
               accept="image/png, image/jpeg"
               @change="e => setFile(e, 'img_card')"
               ref="img_card"
+            />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Event' &&
+                  editData.images !== null &&
+                  editData.images.img_card !== null
+              "
+              :image="editData.images.img_card"
+              :setShowDeleteDialogFlag="setShowFlag"
+              openedFor="img_card"
             />
           </div>
         </div>
@@ -311,29 +374,38 @@
         <button
           type="button"
           class="btn btn-info btn-fill float-right"
-          @click="postEvent"
+          @click="clickAction"
         >
           Save
         </button>
       </div>
       <div class="clearfix"></div>
+      <DeleteDialog
+        :showFlag="showFlag"
+        :setShowDeleteDialogFlag="setShowFlag"
+        item="Image"
+        :deleteAction="removeImage"
+      />
     </form>
   </div>
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
 import Multiselect from "vue-multiselect";
+import ImagePreview from "../../../website/shared/ImagePreview.vue";
+import DeleteDialog from "../../../website/shared/DeleteDialog";
 import store from "../../../store/index";
 import types from "../../../store/types";
-// import Card from "src/dashboard/components/Cards/Card.vue";
-import { createEvent } from "../../../website/helpers/APIsHelper.js";
+import { createEvent, editEvent } from "../../../website/helpers/APIsHelper.js";
 
 export default {
-  components: {
-    // Card
-  },
   data() {
     return {
+      openedFor: "",
+      imageIndex: null,
+      showFlag: false,
+      imageId: null,
+      editData: this.$router.history.current.params.data || { images: null },
       operation: this.$route.name,
       value: [],
       options: [
@@ -369,11 +441,23 @@ export default {
   },
   methods: {
     ...mapActions({
+      deleteImage: types.events.actions.DELETE_EVENT_IMAGE,
       fetchSummitsList: types.summits.actions.FETCH_SUMMITS_LIST,
       fetchEventType: types.events.actions.FETCH_EVENT_TYPE,
       fetchCoverTypes: types.events.actions.FETCH_EVENT_COVER_TYPES,
       fetchSponsorsData: types.sponsors.actions.FETCH_SPONSORS_FOR_DASHBOARD
     }),
+    clickAction() {
+      this.operation === "Edit Event"
+        ? this.saveData(editEvent, "Event Updated Successfully")
+        : this.saveData(createEvent, "Event Created Successfully");
+    },
+    setShowFlag(flag, imageId, openedFor, imageIndex) {
+      this.showFlag = flag;
+      this.imageId = imageId;
+      this.openedFor = openedFor;
+      this.imageIndex = imageIndex;
+    },
     setFile(e, key) {
       const files = e.target.files;
 
@@ -381,8 +465,9 @@ export default {
 
       this.event[key] = files[0];
     },
-    postEvent: async function() {
+    saveData: async function(saveFunction, successMessage) {
       let formData = new FormData();
+
       formData.append("initial_title", this.event.initial_title);
       formData.append("final_title", this.event.final_title);
       formData.append("initial_description", this.event.initial_description);
@@ -418,42 +503,18 @@ export default {
 
       try {
         store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
-        const response = await createEvent(formData);
+
+        if (this.operation === "Edit Event")
+          await saveFunction(this.editData.id, formData);
+        else await saveFunction(formData);
+
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-        this.resetFields();
-        this.notifyVue("Event Created Successfully", "success");
+        this.notifyVue(successMessage, "success");
         this.$router.push("/dashboard/events/list");
       } catch (error) {
         this.notifyVue("Error Happened", "danger");
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
       }
-    },
-    resetFields() {
-      this.event.initial_title = "";
-      this.event.final_title = "";
-      this.event.initial_description = "";
-      this.event.final_description = "";
-      this.event.summit_id = "";
-      this.event.cover_type = "";
-      this.event.event_type = "";
-      this.event.is_external = false;
-      this.event.external_link = "";
-      this.event.start_date = "";
-      this.event.end_date = "";
-      this.event.has_cover_over = false;
-      this.event.img_cover_over = "";
-      this.event.img_logo = "";
-      this.event.img_card = "";
-      this.event.vid_initial = "";
-      this.event.vid_final = "";
-      this.event.main_sponsors_ids = [];
-      this.event.sub_sponsors_ids = [];
-
-      this.$refs.img_logo.value = null;
-      this.$refs.img_cover_over.value = null;
-      this.$refs.img_media.value = null;
-      this.$refs.img_cover_main.value = null;
-      this.$refs.img_card.value = null;
     },
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -462,6 +523,39 @@ export default {
         verticalAlign: "top",
         type: color
       });
+    },
+    removeImage: async function() {
+      const payload = { eventId: this.editData.id, imageId: this.imageId };
+      const response = await this.deleteImage(payload);
+
+      switch (this.openedFor) {
+        case "img_logo":
+          this.editData.images.img_logo = null;
+          break;
+
+        case "img_card":
+          this.editData.images.img_card = null;
+          break;
+
+        case "img_cover_over":
+          this.editData.images.img_cover_over.splice(this.imageIndex, 1);
+          break;
+
+        case "img_media":
+          this.editData.images.img_media.splice(this.imageIndex, 1);
+          break;
+
+        case "img_cover_main":
+          this.editData.images.img_cover_main.splice(this.imageIndex, 1);
+          break;
+
+        default:
+          break;
+      }
+
+      this.notifyVue("Image Deleted Successfully", "success");
+      this.setShowFlag(false);
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
     }
   },
   computed: {
@@ -490,19 +584,55 @@ export default {
       return this.dashboardSponsorsData.map(sponsor => sponsor.name);
     }
   },
+  beforeMount() {
+    if (
+      !this.$router.history.current.params.data &&
+      this.$route.name === "Edit Event"
+    )
+      this.$router.push({
+        path: "/dashboard/events"
+      });
+  },
   mounted() {
-    store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
-    this.fetchSummitsList();
-    this.fetchEventType();
-    this.fetchCoverTypes();
-    this.fetchSponsorsData();
+    if (this.$route.name === "Edit Event") {
+      this.event.initial_title = this.editData.initial_title || "";
+      this.event.final_title = this.editData.final_title || "";
+      this.event.initial_description = this.editData.initial_description || "";
+      this.event.final_description = this.editData.final_description || "";
+      this.event.summit_id = this.editData.summit.id;
+      this.event.cover_type = this.editData.cover_type;
+      this.event.event_type = this.editData.type;
+      this.event.is_external = this.editData.is_external;
+      this.event.external_link = this.editData.external_link || "";
+      this.event.start_date = this.editData.start_date.split(" ")[0];
+      this.event.end_date = this.editData.end_date.split(" ")[0];
+      this.event.has_cover_over = this.editData.has_cover_over;
+      this.event.img_cover_over = this.editData.images.img_cover_over;
+      this.event.img_logo = this.editData.images.img_logo;
+      this.event.img_card = this.editData.images.img_card;
+      this.event.vid_initial = this.editData.videos.vid_initial.path || "";
+      this.event.vid_final = this.editData.videos.vid_final.path || "";
+      this.event.main_sponsors_ids = this.editData.main_sponsors.map(
+        sponsor => sponsor.id
+      );
+      this.event.sub_sponsors_ids = this.editData.sub_sponsors.map(
+        sponsor => sponsor.id
+      );
+    } else {
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+      this.fetchSummitsList();
+      this.fetchEventType();
+      this.fetchCoverTypes();
+      this.fetchSponsorsData();
+    }
   },
   updated() {
     if (this.isSummitsListFetched && this.isEventTypeFetched)
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   },
   components: {
-    Multiselect
+    ImagePreview,
+    DeleteDialog
   }
 };
 </script>

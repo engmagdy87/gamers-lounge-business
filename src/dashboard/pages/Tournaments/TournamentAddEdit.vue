@@ -13,11 +13,11 @@
           <a href="/dashboard/tournaments">Tournaments</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
-          Create Tournament
+          {{ operation }}
         </li>
       </ol>
     </nav>
-    <h4 slot="header" class="card-title">{{ operation }} Tournament</h4>
+    <h4 slot="header" class="card-title">{{ operation }}</h4>
     <form>
       <div class="row">
         <div class="col-md-6">
@@ -265,6 +265,17 @@
               @change="e => setFile(e, 'img_logo')"
               ref="img_logo"
             />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Tournament' &&
+                  editData.images !== null &&
+                  editData.images.img_logo !== null
+              "
+              :image="editData.images.img_logo"
+              :setShowDeleteDialogFlag="setShowFlag"
+              openedFor="img_logo"
+            />
           </div>
         </div>
         <div class="col-6">
@@ -276,6 +287,17 @@
               accept="image/png, image/jpeg"
               @change="e => setFile(e, 'img_card')"
               ref="img_card"
+            />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Tournament' &&
+                  editData.images !== null &&
+                  editData.images.img_card !== null
+              "
+              :image="editData.images.img_card"
+              :setShowDeleteDialogFlag="setShowFlag"
+              openedFor="img_card"
             />
           </div>
         </div>
@@ -293,6 +315,21 @@
               multiple
               ref="img_cover_main"
             />
+            <div
+              v-if="
+                editData !== undefined &&
+                  (operation === 'Edit Tournament' || editData.images !== null)
+              "
+            >
+              <ImagePreview
+                v-for="(img, index) in editData.images.img_cover_main"
+                :key="index"
+                :image="img"
+                :setShowDeleteDialogFlag="setShowFlag"
+                openedFor="img_cover_main"
+                :imageIndex="index"
+              />
+            </div>
           </div>
         </div>
         <div class="col-6">
@@ -306,6 +343,17 @@
               accept="image/png, image/jpeg"
               @change="e => setFile(e, 'img_cover_over')"
               ref="img_cover_over"
+            />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Tournament' &&
+                  editData.images !== null &&
+                  editData.images.img_cover_over !== null
+              "
+              :image="editData.images.img_cover_over"
+              :setShowDeleteDialogFlag="setShowFlag"
+              openedFor="img_cover_over"
             />
           </div>
         </div>
@@ -327,28 +375,46 @@
         <button
           type="button"
           class="btn btn-info btn-fill float-right"
-          @click="postTournament"
+          @click="clickAction"
         >
           Save
         </button>
       </div>
       <div class="clearfix"></div>
+      <DeleteDialog
+        :showFlag="showFlag"
+        :setShowDeleteDialogFlag="setShowFlag"
+        item="Image"
+        :deleteAction="removeImage"
+      />
     </form>
   </div>
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
+import ImagePreview from "../../../website/shared/ImagePreview.vue";
+import DeleteDialog from "../../../website/shared/DeleteDialog";
 import store from "../../../store/index";
 import types from "../../../store/types";
-// import Card from "src/dashboard/components/Cards/Card.vue";
-import { createTournament } from "../../../website/helpers/APIsHelper.js";
+import {
+  createTournament,
+  editTournament
+} from "../../../website/helpers/APIsHelper.js";
+import regions from "../../../store/modules/regions";
+import platforms from "../../../store/modules/platforms";
 
 export default {
   components: {
-    // Card
+    ImagePreview,
+    DeleteDialog
   },
   data() {
     return {
+      openedFor: "",
+      imageIndex: null,
+      showFlag: false,
+      imageId: null,
+      editData: this.$router.history.current.params.data || { images: null },
       operation: this.$route.name,
       tournament: {
         initial_title: "",
@@ -377,11 +443,23 @@ export default {
   },
   methods: {
     ...mapActions({
+      deleteImage: types.tournaments.actions.DELETE_TOURNAMENT_IMAGE,
       fetchRegionsList: types.regions.actions.FETCH_REGIONS_FOR_DASHBOARD,
       fetchPlatformsList: types.platforms.actions.FETCH_PLATFORMS_FOR_DASHBOARD,
       fetchGamesList: types.games.actions.FETCH_GAMES_FOR_DASHBOARD,
       fetchEventsList: types.events.actions.FETCH_EVENT_LIST
     }),
+    clickAction() {
+      this.operation === "Edit Tournament"
+        ? this.saveData(editTournament, "Tournament Updated Successfully")
+        : this.saveData(createTournament, "Tournament Created Successfully");
+    },
+    setShowFlag(flag, imageId, openedFor, imageIndex) {
+      this.showFlag = flag;
+      this.imageId = imageId;
+      this.openedFor = openedFor;
+      this.imageIndex = imageIndex;
+    },
     setFile(e, key) {
       const files = e.target.files;
 
@@ -389,7 +467,7 @@ export default {
 
       this.tournament[key] = files[0];
     },
-    postTournament: async function() {
+    saveData: async function(saveFunction, successMessage) {
       let formData = new FormData();
       formData.append("initial_title", this.tournament.initial_title);
       formData.append("final_title", this.tournament.final_title);
@@ -423,42 +501,18 @@ export default {
 
       try {
         store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
-        const response = await createTournament(formData);
+
+        if (this.operation === "Edit Tournament")
+          await saveFunction(this.editData.id, formData);
+        else await saveFunction(formData);
+
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-        this.resetFields();
-        this.notifyVue("Tournament Created Successfully", "success");
+        this.notifyVue(successMessage, "success");
         this.$router.push("/dashboard/tournaments/list");
       } catch (error) {
         this.notifyVue("Error Happened", "danger");
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
       }
-    },
-    resetFields() {
-      this.tournament.initial_title = "";
-      this.tournament.final_title = "";
-      this.tournament.initial_description = "";
-      this.tournament.final_description = "";
-      this.tournament.format = "";
-      this.tournament.register_link = "";
-      this.tournament.winner = "";
-      this.tournament.register_start_at = "";
-      this.tournament.register_end_at = "";
-      this.tournament.kick_off_date = "";
-      this.tournament.region_id = 0;
-      this.tournament.platform_id = 0;
-      this.tournament.game_id = 0;
-      this.tournament.event_id = 0;
-      this.tournament.has_rules = false;
-      this.tournament.rules = { title: "", content: "" };
-      this.tournament.contacts = { title: "", content: "" };
-      this.tournament.img_logo = "";
-      this.tournament.img_cover_over = "";
-      this.tournament.img_card = "";
-      this.tournament.vid_stream = "";
-      this.$refs.img_logo.value = null;
-      this.$refs.img_cover_over.value = null;
-      this.$refs.img_cover_main.value = null;
-      this.$refs.img_card.value = null;
     },
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -467,6 +521,35 @@ export default {
         verticalAlign: "top",
         type: color
       });
+    },
+    removeImage: async function() {
+      const payload = { tournamentId: this.editData.id, imageId: this.imageId };
+      const response = await this.deleteImage(payload);
+
+      switch (this.openedFor) {
+        case "img_logo":
+          this.editData.images.img_logo = null;
+          break;
+
+        case "img_card":
+          this.editData.images.img_card = null;
+          break;
+
+        case "img_cover_over":
+          this.editData.images.img_cover_over = null;
+          break;
+
+        case "img_cover_main":
+          this.editData.images.img_cover_main.splice(this.imageIndex, 1);
+          break;
+
+        default:
+          break;
+      }
+
+      this.notifyVue("Image Deleted Successfully", "success");
+      this.setShowFlag(false);
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
     }
   },
   computed: {
@@ -494,12 +577,51 @@ export default {
       return date;
     }
   },
+  beforeMount() {
+    if (
+      !this.$router.history.current.params.data &&
+      this.$route.name === "Edit Tournament"
+    )
+      this.$router.push({
+        path: "/dashboard/tournaments"
+      });
+  },
   mounted() {
-    store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
-    this.fetchRegionsList();
-    this.fetchPlatformsList();
-    this.fetchGamesList();
-    this.fetchEventsList();
+    if (this.$route.name === "Edit Tournament") {
+      this.tournament.initial_title = this.editData.initial_title || "";
+      this.tournament.final_title = this.editData.final_title || "";
+      this.tournament.initial_description =
+        this.editData.initial_description || "";
+      this.tournament.final_description = this.editData.final_description || "";
+      this.tournament.format = this.editData.format || "";
+      this.tournament.register_link = this.editData.register_link || "";
+      this.tournament.winner = this.editData.winner || "";
+      this.tournament.register_start_at = this.editData.register_start_at.split(
+        " "
+      )[0];
+      this.tournament.register_end_at = this.editData.register_end_at.split(
+        " "
+      )[0];
+      this.tournament.kick_off_date = this.editData.kick_off_date.split(" ")[0];
+      this.tournament.region_id = this.editData.region.id;
+      this.tournament.platform_id = this.editData.platform.id;
+      this.tournament.game_id = this.editData.game.id;
+      this.tournament.event_id = this.editData.event.id;
+      this.tournament.has_rules = this.editData.has_rules;
+      this.tournament.rules = this.editData.rule;
+      this.tournament.contacts = this.editData.contact;
+      this.tournament.img_logo = this.editData.images.img_logo;
+      this.tournament.img_cover_over = this.editData.images.img_cover_over;
+      this.tournament.img_card = this.editData.images.img_card;
+
+      this.tournament.vid_initial = this.editData.videos.vid_stream.path || "";
+    } else {
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+      this.fetchRegionsList();
+      this.fetchPlatformsList();
+      this.fetchGamesList();
+      this.fetchEventsList();
+    }
   },
   updated() {
     if (

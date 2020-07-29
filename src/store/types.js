@@ -119,6 +119,7 @@ const tournaments = {
         FETCH_TOURNAMENTS_DETAILS: 'games/actions/FETCH_TOURNAMENTS_DETAILS',
         FETCH_FILTERED_TOURNAMENTS: 'games/actions/FETCH_FILTERED_TOURNAMENTS',
         DELETE_TOURNAMENT: 'tournaments/actions/DELETE_TOURNAMENT',
+        DELETE_TOURNAMENT_IMAGE: 'tournaments/actions/DELETE_TOURNAMENT_IMAGE',
         EDIT_TOURNAMENT: 'tournaments/actions/EDIT_TOURNAMENT',
     }
 };
@@ -135,6 +136,7 @@ const summits = {
         FETCH_SUMMITS: 'summits/actions/FETCH_SUMMITS',
         FETCH_SUMMITS_LIST: 'summits/actions/FETCH_SUMMITS_LIST',
         DELETE_SUMMIT: 'summits/actions/DELETE_SUMMIT',
+        DELETE_SUMMIT_IMAGE: 'summits/actions/DELETE_SUMMIT_IMAGE',
         EDIT_SUMMIT: 'summits/actions/EDIT_SUMMIT',
     }
 };
@@ -166,6 +168,7 @@ const events = {
         FETCH_EVENT_DETAILS: 'events/actions/FETCH_EVENT_DETAILS',
         FETCH_EVENT_LIST: 'events/actions/FETCH_EVENT_LIST',
         DELETE_EVENT: 'events/actions/DELETE_EVENT',
+        DELETE_EVENT_IMAGE: 'events/actions/DELETE_EVENT_IMAGE',
         EDIT_EVENT: 'events/actions/EDIT_EVENT',
     }
 };
