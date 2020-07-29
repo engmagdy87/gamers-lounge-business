@@ -632,7 +632,8 @@ export default {
       this.event.vid_initial = this.editData.videos.vid_initial.path || "";
       this.event.vid_final = this.editData.videos.vid_final.path || "";
       this.event.vid_cover_main =
-        this.editData.videos.vid_cover_main.path || "";
+        this.editData.videos.vid_cover_main !== null ||
+        ("" && (this.editData.videos.vid_cover_main.path || ""));
       this.event.main_sponsors_ids = this.editData.main_sponsors.map(
         sponsor => sponsor.id
       );
