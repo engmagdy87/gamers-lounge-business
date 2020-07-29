@@ -47,7 +47,10 @@
     justify-content: center;
     align-items: center;
     img {
-      width: 30%;
+      width: 25%;
+      position: absolute;
+      display: table;
+      vertical-align: middle;
     }
   }
 
@@ -91,7 +94,6 @@
       @include create-hexagone-shape(10px);
     }
     &__custom-btn-inside {
-      display: flex;
       position: absolute;
       top: $border-thickness;
       left: $border-thickness;

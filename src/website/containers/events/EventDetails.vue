@@ -22,7 +22,7 @@
       >
         <img
           v-if="
-            !eventDetails.has_cover_over &&
+            eventDetails.has_cover_over &&
               eventDetails.images.img_cover_over !== null
           "
           :src="eventDetails.images.img_cover_over.path"

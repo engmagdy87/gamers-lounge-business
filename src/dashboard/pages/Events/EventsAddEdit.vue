@@ -473,8 +473,8 @@ export default {
       this.openedFor = openedFor;
       this.imageIndex = imageIndex;
     },
-    getVideo(e) {
-      this.vid_cover_main = e;
+    getVideo() {
+      this.event.vid_cover_main = this.$refs.vid_cover_main.files[0];
     },
     setFile(e, key) {
       const files = e.target.files;
@@ -629,11 +629,20 @@ export default {
       this.event.img_cover_over = this.editData.images.img_cover_over;
       this.event.img_logo = this.editData.images.img_logo;
       this.event.img_card = this.editData.images.img_card;
-      this.event.vid_initial = this.editData.videos.vid_initial.path || "";
-      this.event.vid_final = this.editData.videos.vid_final.path || "";
+      this.event.vid_initial =
+        (this.editData.videos.vid_initial !== null &&
+          this.editData.videos.vid_initial.path) ||
+        "";
+      this.event.vid_final =
+        (this.editData.videos.vid_final !== null &&
+          this.editData.videos.vid_final.path) ||
+        "";
+
       this.event.vid_cover_main =
-        this.editData.videos.vid_cover_main !== null ||
-        ("" && (this.editData.videos.vid_cover_main.path || ""));
+        (this.editData.videos.vid_cover_main !== null &&
+          this.editData.videos.vid_cover_main.path) ||
+        "";
+
       this.event.main_sponsors_ids = this.editData.main_sponsors.map(
         sponsor => sponsor.id
       );
