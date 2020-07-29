@@ -13,7 +13,7 @@ async function loadUserPersona(payload) {
 }
 
 async function setUserPersona(payload) {
-    const response = await post(
+    const response = await postMultipartWithoutAuth(
         payload,
         APIs.REGISTER_WEBSITE_USER
     );
@@ -176,6 +176,14 @@ async function removeEventImage(id, imageId) {
 async function getSponsorsForDashboard() {
     const response = await getDashboardData(
         APIs.GET_LIST_SPONSORS
+    );
+
+    return response.data;
+}
+
+async function getSponsorsForFooter() {
+    const response = await get(
+        APIs.GET_FOOTER_SPONSORS
     );
 
     return response.data;
@@ -502,6 +510,7 @@ export {
     editSummit,
     editRegion,
     editTournament,
+    getSponsorsForFooter
 };
 
 async function post(data, url) {
@@ -526,6 +535,20 @@ async function postMultipart(data, url) {
             'Authorization': `Bearer ${adminToken.access_token}`
         }
     });
+    if (
+        (response.status !== 200 && response.status !== 304) ||
+        response.data.errors !== undefined
+    )
+        throw new Error(
+            `response status code ${
+            response.status
+            }`
+        );
+
+    return response;
+}
+async function postMultipartWithoutAuth(data, url) {
+    const response = await axios.post(url, data);
     if (
         (response.status !== 200 && response.status !== 304) ||
         response.data.errors !== undefined

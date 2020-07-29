@@ -20,7 +20,7 @@
     </div>
     <div class="game-details-wrapper__content" v-if="showDetailsHero">
       <div class="game-details-wrapper__content__breadcrumb">
-        <a href="/games">game</a>
+        <a href="/">game</a>
         <span> > {{ gameDetails.title }}</span>
       </div>
       <div class="container">

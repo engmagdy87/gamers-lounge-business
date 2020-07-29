@@ -10,8 +10,9 @@
       <div
         class="event-details-wrapper__inside"
         v-if="
-          eventDetails.images.img_cover_main !== null &&
-            eventDetails.images.img_cover_main.length !== 0
+          (eventDetails.images.img_cover_main !== null &&
+            eventDetails.images.img_cover_main.length !== 0) ||
+            eventDetails.videos.vid_cover_main !== null
         "
         :style="
           eventDetails.cover_type === 'img'

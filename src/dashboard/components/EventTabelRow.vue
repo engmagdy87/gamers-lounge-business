@@ -54,16 +54,14 @@
     <td v-else></td>
     <td
       v-if="
-        rowData.images.vid_initial !== undefined &&
-          rowData.images.vid_initial !== null
+        rowData.videos.vid_initial !== undefined &&
+          rowData.videos.vid_initial !== null
       "
     >
       <a
-        v-for="(vid, index) in rowData.images.vid_initial"
-        :key="index"
-        :href="vid.path"
+        :href="rowData.videos.vid_initial.path"
         target="_blank"
-        >Vid{{ index + 1 }}</a
+        >Vid</a
       >
     </td>
     <td v-else></td>

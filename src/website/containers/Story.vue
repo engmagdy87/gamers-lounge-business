@@ -22,8 +22,20 @@
         <div class="col-12">
           <h1>{{ storyData.initial_title }}</h1>
         </div>
-        <div class="col-12">
+        <div class="col-6">
           <p>{{ storyData.initial_description }}</p>
+        </div>
+        <div class="col-6">
+          <iframe
+            v-if="storyData.videos.vid_initial !== null"
+            width="560"
+            height="315"
+            :src="storyData.videos.vid_initial.path"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          >
+          </iframe>
         </div>
       </div>
     </div>

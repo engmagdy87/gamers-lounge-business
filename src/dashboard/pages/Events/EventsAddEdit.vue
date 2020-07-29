@@ -369,6 +369,20 @@
           </base-input>
         </div>
       </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label class="mr-5" for="media-images1"
+            >Choose Cover Main Video</label
+          >
+          <input
+            type="file"
+            id="logo"
+            accept="video/*"
+            @change="getVideo"
+            ref="vid_cover_main"
+          />
+        </div>
+      </div>
 
       <div class="text-center">
         <button
@@ -434,6 +448,7 @@ export default {
         img_card: "",
         vid_initial: "",
         vid_final: "",
+        vid_cover_main: "",
         main_sponsors_ids: [],
         sub_sponsors_ids: []
       }
@@ -457,6 +472,9 @@ export default {
       this.imageId = imageId;
       this.openedFor = openedFor;
       this.imageIndex = imageIndex;
+    },
+    getVideo(e) {
+      this.vid_cover_main = e;
     },
     setFile(e, key) {
       const files = e.target.files;
@@ -485,6 +503,7 @@ export default {
       formData.append("img_card", this.event.img_card);
       formData.append("vid_initial", this.event.vid_initial);
       formData.append("vid_final", this.event.vid_final);
+      formData.append("vid_cover_main", this.event.vid_cover_main);
 
       for (var i = 0; i < this.event.main_sponsors_ids.length; i++) {
         formData.append("main_sponsors_ids[]", this.event.main_sponsors_ids[i]);
@@ -612,6 +631,8 @@ export default {
       this.event.img_card = this.editData.images.img_card;
       this.event.vid_initial = this.editData.videos.vid_initial.path || "";
       this.event.vid_final = this.editData.videos.vid_final.path || "";
+      this.event.vid_cover_main =
+        this.editData.videos.vid_cover_main.path || "";
       this.event.main_sponsors_ids = this.editData.main_sponsors.map(
         sponsor => sponsor.id
       );

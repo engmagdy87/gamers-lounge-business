@@ -2,7 +2,8 @@ import {
     getSponsorsForDashboard,
     getSponsors,
     removeSponsor,
-    removeSponsorImage
+    removeSponsorImage,
+    getSponsorsForFooter
 } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
@@ -11,6 +12,8 @@ const state = {
     isSponsorsDataFetched: false,
     dashboardSponsorsData: [],
     isDashboardSponsorsDataFetched: false,
+    footerSponsorsData: [],
+    isFooterSponsorsDataFetched: false,
 };
 
 const mutations = {
@@ -26,6 +29,12 @@ const mutations = {
     [types.sponsors.mutations.SET_IS_DASHBOARD_SPONSORS_DATA_FETCHED]: (currentState, payload) => {
         currentState.isDashboardSponsorsDataFetched = payload;
     },
+    [types.sponsors.mutations.SET_FOOTER_SPONSORS_DATA]: (currentState, payload) => {
+        currentState.footerSponsorsData = payload;
+    },
+    [types.sponsors.mutations.SET_IS_FOOTER_SPONSORS_DATA_FETCHED]: (currentState, payload) => {
+        currentState.isFooterSponsorsDataFetched = payload;
+    },
     [types.sponsors.mutations.REMOVE_DELETED_SPONSOR]: (currentState, index) => {
         currentState.sponsorsData.splice(index, 1);
     },
@@ -36,6 +45,17 @@ const getSponsorsData = async ({ commit },) => {
     const response = await getSponsors().then((response) => {
         commit(types.sponsors.mutations.SET_SPONSORS_DATA, response.data.sponsors);
         commit(types.sponsors.mutations.SET_IS_SPONSORS_DATA_FETCHED, true);
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
+const getFooterSponsorsData = async ({ commit },) => {
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await getSponsorsForFooter().then((response) => {
+        commit(types.sponsors.mutations.SET_FOOTER_SPONSORS_DATA, response.data.sponsors);
+        commit(types.sponsors.mutations.SET_IS_FOOTER_SPONSORS_DATA_FETCHED, true);
         commit(types.home.mutations.SET_SPINNER_FLAG, false);
         return true
     }).catch(() => false);
@@ -74,6 +94,7 @@ const deleteSponsorImage = async ({ commit }, payload) => {
 
 const actions = {
     [types.sponsors.actions.FETCH_SPONSORS]: getSponsorsData,
+    [types.sponsors.actions.FETCH_FOOTER_SPONSORS]: getFooterSponsorsData,
     [types.sponsors.actions.FETCH_SPONSORS_FOR_DASHBOARD]: getSponsorsDataForDashboard,
     [types.sponsors.actions.DELETE_SPONSOR]: deleteSponsor,
     [types.sponsors.actions.DELETE_SPONSOR_IMAGE]: deleteSponsorImage,

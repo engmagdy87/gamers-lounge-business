@@ -65,7 +65,7 @@
       :regionsData="regionsData"
     />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer :sponsors="footerSponsorsData" />
   </div>
 </template>
 
@@ -103,7 +103,10 @@ export default {
       isGamesDataFetched: state => state.games.isGamesCardsViewDataFetched,
       regionsData: state => state.regions.dashboardRegionsData,
       isDashboardRegionsDataFetched: state =>
-        state.regions.isDashboardRegionsDataFetched
+        state.regions.isDashboardRegionsDataFetched,
+      footerSponsorsData: state => state.sponsors.footerSponsorsData,
+      isFooterSponsorsDataFetched: state =>
+        state.sponsors.isFooterSponsorsDataFetched
     }),
     ...mapGetters({
       isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
@@ -124,7 +127,8 @@ export default {
     ...mapActions({
       fetchGames: types.games.actions.FETCH_GAMES_CARD_VIEW,
       fetchTournaments: types.tournaments.actions.FETCH_TOURNAMENTS,
-      fetchRegions: types.regions.actions.FETCH_REGIONS_FOR_DASHBOARD
+      fetchRegions: types.regions.actions.FETCH_REGIONS_FOR_DASHBOARD,
+      fetchFooterSponsors: types.sponsors.actions.FETCH_FOOTER_SPONSORS
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -160,12 +164,14 @@ export default {
     this.fetchGames();
     this.fetchTournaments();
     this.fetchRegions();
+    this.fetchFooterSponsors();
   },
   updated() {
     if (
       this.isGamesDataFetched &&
       this.isTournamentsDataFetched &&
-      this.isDashboardRegionsDataFetched
+      this.isDashboardRegionsDataFetched &&
+      this.isFooterSponsorsDataFetched
     )
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   }

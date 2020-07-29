@@ -14,10 +14,15 @@
     </div>
     <div
       class="events-wrapper__content"
-      v-if="isMainEventsFetched && isSubEventsFetched"
+      v-if="
+        isMainEventsFetched &&
+          isSubEventsFetched &&
+          (mainEventsData.length !== 0 || subEventsData.length !== 0)
+      "
     >
-      <h2>Main Events</h2>
+      <h2 v-if="mainEventsData.length !== 0">Main Events</h2>
       <VueSlickCarousel
+        v-if="mainEventsData.length !== 0"
         :arrows="true"
         :dots="true"
         autoplay
@@ -32,9 +37,16 @@
         />
       </VueSlickCarousel>
 
-      <h2>Sub Events</h2>
-      <EventsMenuView route="events" :data="subEventsData" />
+      <h2 v-if="subEventsData.length !== 0">Sub Events</h2>
+      <EventsMenuView
+        v-if="subEventsData.length !== 0"
+        route="events"
+        :data="subEventsData"
+      />
     </div>
+    <h2 style="color:white; text-align: center;margin-top: 10%;" v-else>
+      There are no events now
+    </h2>
     <LoginModal
       :showFlag="showLoginModal"
       :setShowLoginModal="setShowLoginModal"

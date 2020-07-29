@@ -45,6 +45,18 @@
               >
             </select>
           </div>
+          <div class="form-group">
+            <label for="region">Status</label>
+            <select class="form-control" v-model="status">
+              <option value="null">--Please select status</option>
+              <option :selected="status" :value="true"
+                >Registeration open</option
+              >
+              <option :selected="status" :value="false"
+                >Registeration close</option
+              >
+            </select>
+          </div>
 
           <button
             type="button"
@@ -67,7 +79,8 @@ export default {
   data() {
     return {
       gameId: null,
-      regionId: null
+      regionId: null,
+      status: null
     };
   },
   props: ["showFlag", "setShowFiltersModal", "gamesData", "regionsData"],
@@ -88,8 +101,16 @@ export default {
       });
     },
     async getFilteredData() {
-      const payload = { region_id: this.regionId, game_id: this.gameId };
-      if (this.regionId === null && this.gameId === null) {
+      const payload = {
+        region_id: this.regionId,
+        game_id: this.gameId,
+        status: this.status
+      };
+      if (
+        this.regionId === null &&
+        this.gameId === null &&
+        this.status === null
+      ) {
         this.notifyVue("Please select at least one filter", "danger");
       } else {
         const isValidRequest = await this.fetchFilteredTournaments(payload);
@@ -104,6 +125,7 @@ export default {
       this.setShowFiltersModal(false);
       this.gameId = null;
       this.regionId = null;
+      this.status = null;
     }
   }
 };

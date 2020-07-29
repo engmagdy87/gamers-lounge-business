@@ -28,6 +28,7 @@ const EDIT_EVENT = `${API_URL}/admin/events`
 
 // SPONSORS
 const GET_SPONSORS = `${API_URL}/admin/sponsors`
+const GET_FOOTER_SPONSORS = `${API_URL}/sponsors/footer`
 const CREATE_SPONSOR = `${API_URL}/admin/sponsors`
 const GET_LIST_SPONSORS = `${API_URL}/admin/sponsors/list`
 const DELETE_SPONSOR = `${API_URL}/admin/sponsors`
@@ -120,5 +121,6 @@ export {
     EDIT_SPONSOR,
     EDIT_TOURNAMENT,
     EDIT_SUMMIT,
-    EDIT_REGION
+    EDIT_REGION,
+    GET_FOOTER_SPONSORS
 };

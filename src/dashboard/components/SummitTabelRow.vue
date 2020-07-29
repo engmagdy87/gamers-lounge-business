@@ -73,15 +73,9 @@
     </td>
 
     <td
-      v-if="rowData.images !== undefined && rowData.images.vid_initial !== null"
+      v-if="rowData.videos !== undefined && rowData.videos.vid_initial !== null"
     >
-      <a
-        v-for="(vid, index) in rowData.images.vid_initial"
-        :key="index"
-        :href="vid.path"
-        target="_blank"
-        >Vid{{ index + 1 }}</a
-      >
+      <a :href="rowData.videos.vid_initial.path" target="_blank">Vid</a>
     </td>
     <td v-else></td>
     <td>{{ rowData.active }}</td>

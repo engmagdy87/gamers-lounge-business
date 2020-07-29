@@ -24,19 +24,25 @@ const getUserPersona = async ({ commit, dispatch }, payload) => {
         setUserCookie(response.data)
         commit(types.home.mutations.SET_SPINNER_FLAG, false)
         return true
-    }).catch(() => false);
+    }).catch((err) => {
+        commit(types.home.mutations.SET_SPINNER_FLAG, false)
+        return false
+    });
 
     return response
 };
 
-const postUserPersona = async ({ commit, dispatch }, payload) => {
+const postUserPersona = async ({ commit }, payload) => {
     commit(types.home.mutations.SET_SPINNER_FLAG, true)
     const response = await setUserPersona(payload).then((response) => {
         commit(types.user.mutations.SET_USER_PERSONA, response.data);
         setUserCookie(response.data)
         commit(types.home.mutations.SET_SPINNER_FLAG, false)
         return true
-    }).catch(() => false);
+    }).catch((err) => {
+        commit(types.home.mutations.SET_SPINNER_FLAG, false)
+        return false
+    });
     return response
 };
 
