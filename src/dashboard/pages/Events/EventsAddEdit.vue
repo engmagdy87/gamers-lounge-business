@@ -480,7 +480,7 @@ export default {
       this.event[key] = files[0];
     },
     saveData: async function(saveFunction, successMessage) {
-      if (compareDates(this.summit.start_date, this.summit.end_date)) {
+      if (compareDates(this.event.start_date, this.event.end_date)) {
         let formData = new FormData();
 
         formData.append("initial_title", this.event.initial_title);
