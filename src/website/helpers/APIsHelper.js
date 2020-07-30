@@ -21,6 +21,16 @@ async function setUserPersona(payload) {
     return response.data;
 }
 
+// Contact
+async function sendMessage(payload) {
+    const response = await postMultipartWithoutAuth(
+        payload,
+        APIs.POST_MESSAGE
+    );
+
+    return response.data;
+}
+
 // Summit
 async function createSummit(payload) {
     const response = await postMultipart(
@@ -510,7 +520,8 @@ export {
     editSummit,
     editRegion,
     editTournament,
-    getSponsorsForFooter
+    getSponsorsForFooter,
+    sendMessage
 };
 
 async function post(data, url) {

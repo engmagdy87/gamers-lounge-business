@@ -73,6 +73,7 @@ export default {
 .main-panel {
   &::-webkit-scrollbar {
     width: 5px !important;
+    height: 5px !important;
   }
   &::-webkit-scrollbar-thumb {
     background-color: $primary !important;

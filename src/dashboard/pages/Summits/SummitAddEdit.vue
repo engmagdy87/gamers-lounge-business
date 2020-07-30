@@ -37,13 +37,11 @@
         <div class="col">
           <div class="form-group">
             <label>Initial Description</label>
-            <textarea
-              rows="5"
-              class="form-control border-input"
-              placeholder="Enter Initial Description"
+            <froala
+              :tag="'textarea'"
+              :config="config"
               v-model="summit.initial_description"
-            >
-            </textarea>
+            ></froala>
           </div>
         </div>
       </div>
@@ -51,13 +49,11 @@
         <div class="col">
           <div class="form-group">
             <label>Final Description</label>
-            <textarea
-              rows="5"
-              class="form-control border-input"
-              placeholder="Enter Final Description"
+            <froala
+              :tag="'textarea'"
+              :config="config"
               v-model="summit.final_description"
-            >
-            </textarea>
+            ></froala>
           </div>
         </div>
       </div>
@@ -287,6 +283,7 @@ import {
   createSummit,
   editSummit
 } from "../../../website/helpers/APIsHelper.js";
+import compareDates from "../../../dashboard/helpers/DateHelper";
 
 export default {
   components: {
@@ -316,6 +313,12 @@ export default {
         img_cover_over: "",
         img_card: "",
         img_cover_main: ""
+      },
+      config: {
+        placeholderText: "Edit Your Content Here!",
+        charCounterCount: true,
+        charCounterMax: 1000,
+        quickInsertEnabled: false
       }
     };
   },
@@ -342,40 +345,44 @@ export default {
       this.summit[key] = files[0];
     },
     saveData: async function(saveFunction, successMessage) {
-      let formData = new FormData();
-      formData.append("initial_title", this.summit.initial_title);
-      formData.append("final_title", this.summit.final_title);
-      formData.append("initial_description", this.summit.initial_description);
-      formData.append("final_description", this.summit.final_description);
-      formData.append("attendess", this.summit.attendess);
-      formData.append("location", this.summit.location);
-      formData.append("start_date", this.summit.start_date);
-      formData.append("end_date", this.summit.end_date);
-      formData.append("active", this.summit.active ? 1 : 0);
-      formData.append("vid_initial", this.summit.vid_initial);
-      formData.append("img_logo", this.summit.img_logo);
-      formData.append("img_cover_over", this.summit.img_cover_over);
-      formData.append("img_card", this.summit.img_card);
-      formData.append("img_cover_main", this.summit.img_cover_main);
+      if (compareDates(this.summit.start_date, this.summit.end_date)) {
+        let formData = new FormData();
+        formData.append("initial_title", this.summit.initial_title);
+        formData.append("final_title", this.summit.final_title);
+        formData.append("initial_description", this.summit.initial_description);
+        formData.append("final_description", this.summit.final_description);
+        formData.append("attendess", this.summit.attendess);
+        formData.append("location", this.summit.location);
+        formData.append("start_date", this.summit.start_date);
+        formData.append("end_date", this.summit.end_date);
+        formData.append("active", this.summit.active ? 1 : 0);
+        formData.append("vid_initial", this.summit.vid_initial);
+        formData.append("img_logo", this.summit.img_logo);
+        formData.append("img_cover_over", this.summit.img_cover_over);
+        formData.append("img_card", this.summit.img_card);
+        formData.append("img_cover_main", this.summit.img_cover_main);
 
-      for (var i = 0; i < this.$refs.img_media.files.length; i++) {
-        let file = this.$refs.img_media.files[i];
-        formData.append("img_media[]", file);
-      }
+        for (var i = 0; i < this.$refs.img_media.files.length; i++) {
+          let file = this.$refs.img_media.files[i];
+          formData.append("img_media[]", file);
+        }
 
-      try {
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+        try {
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
 
-        if (this.operation === "Edit Summit")
-          await saveFunction(this.editData.id, formData);
-        else await saveFunction(formData);
+          if (this.operation === "Edit Summit")
+            await saveFunction(this.editData.id, formData);
+          else await saveFunction(formData);
 
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-        this.notifyVue(successMessage, "success");
-        this.$router.push("/dashboard/summits/list");
-      } catch (error) {
-        this.notifyVue("Error Happened", "danger");
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+          this.notifyVue(successMessage, "success");
+          this.$router.push("/dashboard/summits/list");
+        } catch (error) {
+          this.notifyVue("Error Happened", "danger");
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        }
+      } else {
+        this.notifyVue("Please insert dates in proper order", "danger");
       }
     },
     resetFields() {

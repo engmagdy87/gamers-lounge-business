@@ -21,9 +21,19 @@ const home = {
 const story = {
     mutations: {
         SET_STORY_DATA: 'story/mutations/SET_STORY_DATA',
+        SET_IS_STORY_FETCHED: 'story/mutations/SET_IS_STORY_FETCHED',
     },
     actions: {
         FETCH_STORY: 'story/actions/FETCH_STORY',
+    }
+};
+
+const contact = {
+    mutations: {
+        SET_IS_MESSAGE_SENT: 'contact/mutations/SET_IS_MESSAGE_SENT',
+    },
+    actions: {
+        SEND_MESSAGE: 'contact/actions/SEND_MESSAGE',
     }
 };
 
@@ -186,5 +196,6 @@ export default {
     games,
     platforms,
     regions,
-    tournaments
+    tournaments,
+    contact
 };

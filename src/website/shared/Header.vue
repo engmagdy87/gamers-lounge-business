@@ -5,9 +5,11 @@
       isSolidHeader ? 'header-wrapper--solid' : 'header-wrapper--gradient'
     ]"
   >
-    <div class="header-wrapper__logo">
-      <img src="/website/img/ess-logo.png" alt="ess logo" />
-    </div>
+    <a href="/" alt="esports summit">
+      <div class="header-wrapper__logo">
+        <img src="/website/img/ess-logo.png" alt="ess logo" />
+      </div>
+    </a>
     <!-- DESKTOP UI -->
     <nav class="header-wrapper--desktop">
       <ul class="header-wrapper__navLinks">
@@ -53,7 +55,7 @@
             activeItem === 'contact' ? 'header-wrapper__navLinks--active' : ''
           ]"
         >
-          <a href="#">Contact Us</a>
+          <a href="/contact">Contact Us</a>
         </li>
         <li
           class="float-right"
@@ -136,7 +138,7 @@
               activeItem === 'contact' ? 'header-wrapper__navLinks--active' : ''
             ]"
           >
-            <a href="#" @click="closeNav">Contact Us</a>
+            <a href="/contact" @click="closeNav">Contact Us</a>
           </li>
           <li
             class="float-lg-right"

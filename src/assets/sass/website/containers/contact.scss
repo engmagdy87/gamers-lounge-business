@@ -2,7 +2,7 @@
 @import "../variables.scss";
 @import "../mixins.scss";
 
-.story-wrapper {
+.contact-wrapper {
   background-image: url("~/website/img/hexagone-pattern.png");
   background-repeat: repeat;
   height: 100vh;
@@ -55,43 +55,46 @@
     @include is-mobile {
       min-height: 82vh;
     }
+    &__icon {
+      margin-right: 20px;
+    }
     h1,
-    p {
+    h2,
+    p,
+    span {
       color: white;
     }
-    h1 {
-      margin: 0;
-      color: white;
-      font-size: 2rem;
-      margin-bottom: 50px;
-    }
-    p {
-      font-size: 1.2rem;
-    }
-    .row {
-      .col {
-        padding: 5px;
+    &__custom-button-wrapper {
+      width: 190px;
+      height: 52px;
+      cursor: pointer;
+      &__outside {
+        position: relative;
+        width: 40%;
+        height: 100%;
+        background: $primary;
+        border-color: $primary;
+        color: black;
+        font-size: 1.05rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.2s ease;
+        @include create-hexagone-shape(10px);
       }
     }
   }
-  &__navLinks {
-    list-style: none;
-    color: white;
-    padding: 20px;
-    margin-bottom: 0;
-    li {
-      display: inline-block;
-      cursor: pointer;
-      padding-right: 20px;
-      transition: all 0.3s ease 0s;
-      color: $inactive-header-link;
-      font-size: 1.5rem;
-      font-weight: lighter;
-    }
-    &--active {
-      color: $primary !important;
-      text-decoration: underline;
-      font-family: "Roboto Bold";
-    }
-  }
+}
+
+.form-control {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  @include create-hexagone-shape(10px);
+  color: white;
+}
+.form-control::placeholder {
+  color: gray;
+}
+input[type="text"] {
+  height: 60px !important;
 }

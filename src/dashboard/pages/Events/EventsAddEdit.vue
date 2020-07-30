@@ -1,12 +1,5 @@
 <template>
-  <div
-    v-if="
-      isSummitsListFetched &&
-        isEventTypeFetched &&
-        isEventCoverTypesFetched &&
-        isDashboardSponsorsDataFetched
-    "
-  >
+  <div v-if="showFormWhenDataFetched">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -44,13 +37,11 @@
         <div class="col">
           <div class="form-group">
             <label>Initial Description</label>
-            <textarea
-              rows="5"
-              class="form-control border-input"
-              placeholder="Enter Initial Description"
+            <froala
+              :tag="'textarea'"
+              :config="config"
               v-model="event.initial_description"
-            >
-            </textarea>
+            ></froala>
           </div>
         </div>
       </div>
@@ -58,13 +49,11 @@
         <div class="col">
           <div class="form-group">
             <label>Final Description</label>
-            <textarea
-              rows="5"
-              class="form-control border-input"
-              placeholder="Enter Final Description"
+            <froala
+              :tag="'textarea'"
+              :config="config"
               v-model="event.final_description"
-            >
-            </textarea>
+            ></froala>
           </div>
         </div>
       </div>
@@ -411,6 +400,7 @@ import DeleteDialog from "../../../website/shared/DeleteDialog";
 import store from "../../../store/index";
 import types from "../../../store/types";
 import { createEvent, editEvent } from "../../../website/helpers/APIsHelper.js";
+import compareDates from "../../../dashboard/helpers/DateHelper";
 
 export default {
   data() {
@@ -451,6 +441,12 @@ export default {
         vid_cover_main: "",
         main_sponsors_ids: [],
         sub_sponsors_ids: []
+      },
+      config: {
+        placeholderText: "Edit Your Content Here!",
+        charCounterCount: true,
+        charCounterMax: 1000,
+        quickInsertEnabled: false
       }
     };
   },
@@ -484,55 +480,62 @@ export default {
       this.event[key] = files[0];
     },
     saveData: async function(saveFunction, successMessage) {
-      let formData = new FormData();
+      if (compareDates(this.summit.start_date, this.summit.end_date)) {
+        let formData = new FormData();
 
-      formData.append("initial_title", this.event.initial_title);
-      formData.append("final_title", this.event.final_title);
-      formData.append("initial_description", this.event.initial_description);
-      formData.append("final_description", this.event.final_description);
-      formData.append("summit_id", this.event.summit_id);
-      formData.append("cover_type", this.event.cover_type);
-      formData.append("type", this.event.event_type);
-      formData.append("is_external", this.event.is_external ? 1 : 0);
-      formData.append("external_link", this.event.external_link);
-      formData.append("start_date", this.event.start_date);
-      formData.append("end_date", this.event.end_date);
-      formData.append("has_cover_over", this.event.has_cover_over ? 1 : 0);
-      formData.append("img_cover_over", this.event.img_cover_over);
-      formData.append("img_logo", this.event.img_logo);
-      formData.append("img_card", this.event.img_card);
-      formData.append("vid_initial", this.event.vid_initial);
-      formData.append("vid_final", this.event.vid_final);
-      formData.append("vid_cover_main", this.event.vid_cover_main);
+        formData.append("initial_title", this.event.initial_title);
+        formData.append("final_title", this.event.final_title);
+        formData.append("initial_description", this.event.initial_description);
+        formData.append("final_description", this.event.final_description);
+        formData.append("summit_id", this.event.summit_id);
+        formData.append("cover_type", this.event.cover_type);
+        formData.append("type", this.event.event_type);
+        formData.append("is_external", this.event.is_external ? 1 : 0);
+        formData.append("external_link", this.event.external_link);
+        formData.append("start_date", this.event.start_date);
+        formData.append("end_date", this.event.end_date);
+        formData.append("has_cover_over", this.event.has_cover_over ? 1 : 0);
+        formData.append("img_cover_over", this.event.img_cover_over);
+        formData.append("img_logo", this.event.img_logo);
+        formData.append("img_card", this.event.img_card);
+        formData.append("vid_initial", this.event.vid_initial);
+        formData.append("vid_final", this.event.vid_final);
+        formData.append("vid_cover_main", this.event.vid_cover_main);
 
-      for (var i = 0; i < this.event.main_sponsors_ids.length; i++) {
-        formData.append("main_sponsors_ids[]", this.event.main_sponsors_ids[i]);
-      }
-      for (var i = 0; i < this.event.sub_sponsors_ids.length; i++) {
-        formData.append("sub_sponsors_ids[]", this.event.sub_sponsors_ids[i]);
-      }
-      for (var i = 0; i < this.$refs.img_media.files.length; i++) {
-        let file = this.$refs.img_media.files[i];
-        formData.append("img_media[]", file);
-      }
-      for (var i = 0; i < this.$refs.img_cover_main.files.length; i++) {
-        let file = this.$refs.img_cover_main.files[i];
-        formData.append("img_cover_main[]", file);
-      }
+        for (var i = 0; i < this.event.main_sponsors_ids.length; i++) {
+          formData.append(
+            "main_sponsors_ids[]",
+            this.event.main_sponsors_ids[i]
+          );
+        }
+        for (var i = 0; i < this.event.sub_sponsors_ids.length; i++) {
+          formData.append("sub_sponsors_ids[]", this.event.sub_sponsors_ids[i]);
+        }
+        for (var i = 0; i < this.$refs.img_media.files.length; i++) {
+          let file = this.$refs.img_media.files[i];
+          formData.append("img_media[]", file);
+        }
+        for (var i = 0; i < this.$refs.img_cover_main.files.length; i++) {
+          let file = this.$refs.img_cover_main.files[i];
+          formData.append("img_cover_main[]", file);
+        }
 
-      try {
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+        try {
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
 
-        if (this.operation === "Edit Event")
-          await saveFunction(this.editData.id, formData);
-        else await saveFunction(formData);
+          if (this.operation === "Edit Event")
+            await saveFunction(this.editData.id, formData);
+          else await saveFunction(formData);
 
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-        this.notifyVue(successMessage, "success");
-        this.$router.push("/dashboard/events/list");
-      } catch (error) {
-        this.notifyVue("Error Happened", "danger");
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+          this.notifyVue(successMessage, "success");
+          this.$router.push("/dashboard/events/list");
+        } catch (error) {
+          this.notifyVue("Error Happened", "danger");
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        }
+      } else {
+        this.notifyVue("Please insert dates in proper order", "danger");
       }
     },
     notifyVue(message, color) {
@@ -601,6 +604,16 @@ export default {
     },
     getSonsors() {
       return this.dashboardSponsorsData.map(sponsor => sponsor.name);
+    },
+    showFormWhenDataFetched() {
+      if (this.operation !== "Edit Event")
+        return (
+          this.isSummitsListFetched &&
+          this.isEventTypeFetched &&
+          this.isEventCoverTypesFetched &&
+          this.isDashboardSponsorsDataFetched
+        );
+      return true;
     }
   },
   beforeMount() {

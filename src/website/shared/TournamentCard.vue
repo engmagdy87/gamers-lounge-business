@@ -20,7 +20,7 @@
             <h1>{{ card.title || card.initial_title }}</h1>
             <span class="badge badge-pill"
               ><img src="/website/img/calendar.svg" alt="calendar icon" />{{
-                card.kick_off_date
+                card.kick_off_date.split(" ")[0]
               }}</span
             >
           </div>

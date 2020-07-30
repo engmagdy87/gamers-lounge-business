@@ -10,6 +10,7 @@
   overflow-x: hidden;
   &::-webkit-scrollbar {
     width: 5px !important;
+    height: 5px !important;
   }
   &::-webkit-scrollbar-thumb {
     background-color: $primary !important;
@@ -106,6 +107,9 @@
       align-items: center;
       transition: all 0.2s ease;
       @include create-hexagone-shape(10px);
+      a {
+        cursor: pointer;
+      }
     }
     &__main-sponsor {
       width: 80px;

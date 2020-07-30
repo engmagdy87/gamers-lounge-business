@@ -27,13 +27,11 @@
         <div class="col">
           <div class="form-group">
             <label>Description</label>
-            <textarea
-              rows="5"
-              class="form-control border-input"
-              placeholder="Enter Description"
+            <froala
+              :tag="'textarea'"
+              :config="config"
               v-model="game.description"
-            >
-            </textarea>
+            ></froala>
           </div>
         </div>
       </div>
@@ -137,6 +135,12 @@ export default {
         title: "",
         description: "",
         img_logo: ""
+      },
+      config: {
+        placeholderText: "Edit Your Content Here!",
+        charCounterCount: true,
+        charCounterMax: 1000,
+        quickInsertEnabled: false
       }
     };
   },

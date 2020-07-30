@@ -1,12 +1,5 @@
 <template>
-  <div
-    v-if="
-      isDashboardRegionsDataFetched &&
-        isDashboardPlatformsDataFetched &&
-        isDashboardGamesDataFetched &&
-        isEventsListFetched
-    "
-  >
+  <div v-if="showFormWhenDataFetched">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -44,13 +37,11 @@
         <div class="col">
           <div class="form-group">
             <label>Initial Description</label>
-            <textarea
-              rows="5"
-              class="form-control border-input"
-              placeholder="Enter Initial Description"
+            <froala
+              :tag="'textarea'"
+              :config="config"
               v-model="tournament.initial_description"
-            >
-            </textarea>
+            ></froala>
           </div>
         </div>
       </div>
@@ -58,13 +49,11 @@
         <div class="col">
           <div class="form-group">
             <label>Final Description</label>
-            <textarea
-              rows="5"
-              class="form-control border-input"
-              placeholder="Enter Final Description"
+            <froala
+              :tag="'textarea'"
+              :config="config"
               v-model="tournament.final_description"
-            >
-            </textarea>
+            ></froala>
           </div>
         </div>
       </div>
@@ -244,23 +233,21 @@
         <div class="col">
           <div class="form-group">
             <label>Contact Description</label>
-            <textarea
-              rows="5"
-              class="form-control border-input"
-              placeholder="Enter Contact Description"
+            <froala
+              :tag="'textarea'"
+              :config="config"
               v-model="tournament.contacts.content"
-            >
-            </textarea>
+            ></froala>
           </div>
         </div>
       </div>
       <div class="row mt-3 mb-3">
         <div class="col-6">
           <div>
-            <label for="logo" class="mr-5">Choose Logo Image</label>
+            <label for="img logo" class="mr-5">Choose Logo Image</label>
             <input
               type="file"
-              id="logo"
+              id="img logo"
               accept="image/png, image/jpeg"
               @change="e => setFile(e, 'img_logo')"
               ref="img_logo"
@@ -320,6 +307,7 @@
                 editData !== undefined &&
                   (operation === 'Edit Tournament' || editData.images !== null)
               "
+              class="image-preview-list"
             >
               <ImagePreview
                 v-for="(img, index) in editData.images.img_cover_main"
@@ -402,6 +390,7 @@ import {
 } from "../../../website/helpers/APIsHelper.js";
 import regions from "../../../store/modules/regions";
 import platforms from "../../../store/modules/platforms";
+import compareDates from "../../../dashboard/helpers/DateHelper";
 
 export default {
   components: {
@@ -438,6 +427,12 @@ export default {
         img_cover_over: "",
         img_card: "",
         vid_stream: ""
+      },
+      config: {
+        placeholderText: "Edit Your Content Here!",
+        charCounterCount: true,
+        charCounterMax: 1000,
+        quickInsertEnabled: false
       }
     };
   },
@@ -468,50 +463,63 @@ export default {
       this.tournament[key] = files[0];
     },
     saveData: async function(saveFunction, successMessage) {
-      let formData = new FormData();
-      formData.append("initial_title", this.tournament.initial_title);
-      formData.append("final_title", this.tournament.final_title);
-      formData.append(
-        "initial_description",
-        this.tournament.initial_description
-      );
-      formData.append("final_description", this.tournament.final_description);
-      formData.append("format", this.tournament.format);
-      formData.append("register_link", this.tournament.register_link);
-      formData.append("winner", this.tournament.winner);
-      formData.append("register_start_at", this.tournament.register_start_at);
-      formData.append("register_end_at", this.tournament.register_end_at);
-      formData.append("kick_off_date", this.tournament.kick_off_date);
-      formData.append("region_id", this.tournament.region_id);
-      formData.append("platform_id", this.tournament.platform_id);
-      formData.append("game_id", this.tournament.game_id);
-      formData.append("event_id", this.tournament.event_id);
-      formData.append("has_rules", this.tournament.has_rules ? 1 : 0);
-      formData.append("rules", JSON.stringify(this.tournament.rules));
-      formData.append("contacts", JSON.stringify(this.tournament.contacts));
-      formData.append("img_logo", this.tournament.img_logo);
-      formData.append("img_cover_over", this.tournament.img_cover_over);
-      formData.append("img_card", this.tournament.img_card);
-      formData.append("vid_stream", this.tournament.vid_stream);
+      if (
+        compareDates(
+          this.tournament.register_start_at,
+          this.tournament.register_end_at
+        ) &&
+        compareDates(
+          this.tournament.register_end_at,
+          this.tournament.kick_off_date
+        )
+      ) {
+        let formData = new FormData();
+        formData.append("initial_title", this.tournament.initial_title);
+        formData.append("final_title", this.tournament.final_title);
+        formData.append(
+          "initial_description",
+          this.tournament.initial_description
+        );
+        formData.append("final_description", this.tournament.final_description);
+        formData.append("format", this.tournament.format);
+        formData.append("register_link", this.tournament.register_link);
+        formData.append("winner", this.tournament.winner);
+        formData.append("register_start_at", this.tournament.register_start_at);
+        formData.append("register_end_at", this.tournament.register_end_at);
+        formData.append("kick_off_date", this.tournament.kick_off_date);
+        formData.append("region_id", this.tournament.region_id);
+        formData.append("platform_id", this.tournament.platform_id);
+        formData.append("game_id", this.tournament.game_id);
+        formData.append("event_id", this.tournament.event_id);
+        formData.append("has_rules", this.tournament.has_rules ? 1 : 0);
+        formData.append("rules", JSON.stringify(this.tournament.rules));
+        formData.append("contacts", JSON.stringify(this.tournament.contacts));
+        formData.append("img_logo", this.tournament.img_logo);
+        formData.append("img_cover_over", this.tournament.img_cover_over);
+        formData.append("img_card", this.tournament.img_card);
+        formData.append("vid_stream", this.tournament.vid_stream);
 
-      for (var i = 0; i < this.$refs.img_cover_main.files.length; i++) {
-        let file = this.$refs.img_cover_main.files[i];
-        formData.append("img_cover_main[]", file);
-      }
+        for (var i = 0; i < this.$refs.img_cover_main.files.length; i++) {
+          let file = this.$refs.img_cover_main.files[i];
+          formData.append("img_cover_main[]", file);
+        }
 
-      try {
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+        try {
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
 
-        if (this.operation === "Edit Tournament")
-          await saveFunction(this.editData.id, formData);
-        else await saveFunction(formData);
+          if (this.operation === "Edit Tournament")
+            await saveFunction(this.editData.id, formData);
+          else await saveFunction(formData);
 
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-        this.notifyVue(successMessage, "success");
-        this.$router.push("/dashboard/tournaments/list");
-      } catch (error) {
-        this.notifyVue("Error Happened", "danger");
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+          this.notifyVue(successMessage, "success");
+          this.$router.push("/dashboard/tournaments/list");
+        } catch (error) {
+          this.notifyVue("Error Happened", "danger");
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        }
+      } else {
+        this.notifyVue("Please insert dates in proper order", "danger");
       }
     },
     notifyVue(message, color) {
@@ -575,6 +583,16 @@ export default {
         "-" +
         today.getDate();
       return date;
+    },
+    showFormWhenDataFetched() {
+      if (this.operation !== "Edit Tournament")
+        return (
+          this.isDashboardRegionsDataFetched &&
+          this.isDashboardPlatformsDataFetched &&
+          this.isDashboardGamesDataFetched &&
+          this.isEventsListFetched
+        );
+      return true;
     }
   },
   beforeMount() {
@@ -640,5 +658,21 @@ export default {
 .custom-control-input:checked ~ .custom-control-label::before {
   border-color: $primary !important;
   background-color: $primary !important;
+}
+.image-preview-list {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    height: 5px !important;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary !important;
+    border-radius: 20px !important;
+  }
+  &::-webkit-scrollbar {
+    background-color: $accent !important;
+    border-radius: 20px !important;
+  }
 }
 </style>

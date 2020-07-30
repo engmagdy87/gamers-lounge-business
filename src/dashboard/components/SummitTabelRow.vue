@@ -4,11 +4,9 @@
     <td>{{ rowData.initial_title }}</td>
     <td>{{ rowData.final_title }}</td>
     <td>
-      <div class="description">
-        {{ rowData.initial_description }}
-      </div>
+      <div class="description" v-html="rowData.initial_description"></div>
     </td>
-    <td>{{ rowData.final_description }}</td>
+    <td v-html="rowData.final_description"></td>
     <td>{{ rowData.attendess }}</td>
     <td>{{ rowData.year }}</td>
     <td>{{ rowData.location }}</td>
@@ -121,8 +119,10 @@ tr td a {
   max-height: 200px !important;
   overflow-y: auto;
   padding: 8px;
+  width: 200px;
   &::-webkit-scrollbar {
     width: 5px !important;
+    height: 5px !important;
   }
   &::-webkit-scrollbar-thumb {
     background-color: $primary !important;

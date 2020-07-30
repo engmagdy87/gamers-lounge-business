@@ -1,6 +1,7 @@
 // Website containers
 import Home from '../website/containers/Home.vue'
 import Story from '../website/containers/Story.vue'
+import Contact from '../website/containers/Contact.vue'
 import EventsContainer from '../website/containers/Events.vue'
 
 // GeneralViews
@@ -60,6 +61,11 @@ const routes = [
     path: '/story',
     name: 'story',
     component: Story,
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: Contact,
   },
   {
     path: '/events',

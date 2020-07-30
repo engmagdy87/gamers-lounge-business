@@ -1,54 +1,83 @@
 <template>
-  <div class="home-wrapper">
+  <div class="home-wrapper" @scroll="detectScroll">
     <Header
       activeItem="home"
       :setShowRegisterModal="setShowRegisterModal"
       :setShowLoginModal="setShowLoginModal"
     />
-    <img src="website/img/hero.jpg" class="home-wrapper__hero-img" />
+    <VueSlickCarousel
+      v-if="mainEventsData.length !== 0 && isMainEventsFetched"
+      :arrows="false"
+      :pauseOnHover="false"
+      :slidesToShow="1"
+      :slidesToScroll="1"
+      autoplay
+      infinite
+    >
+      <img
+        v-for="(event, index) in mainEventsData"
+        :key="index"
+        :src="event.images.img_card.path"
+        alt=""
+        class="home-wrapper__slide"
+        @click="redirectTo(event.id)"
+      />
+    </VueSlickCarousel>
     <div class="home-wrapper__content">
-      <h2>Join The Battle</h2>
-      <div class="row">
-        <div class="col">
-          <ul class="home-wrapper__navLinks">
-            <li
-              :class="[isGamesActive ? 'home-wrapper__navLinks--active' : '']"
-              @click="setIsGamesActive(true)"
-            >
-              Games
-            </li>
-            <li
-              :class="[!isGamesActive ? 'home-wrapper__navLinks--active' : '']"
-              @click="setIsGamesActive(false)"
-            >
-              Tournament
-            </li>
-          </ul>
-        </div>
-        <div class="col d-flex justify-content-end align-items-center">
-          <CustomSwitch
-            :isMenuActive="isMenuActive"
-            :setIsMenuActive="setIsMenuActive"
-          />
-        </div>
-      </div>
-      <div class="row" v-if="!isGamesActive">
-        <div class="col">
-          <CustomButton :setShowFiltersModal="setShowFiltersModal" />
-        </div>
-      </div>
-      <MenuView
-        :data="getCorrespondingData"
-        :isGamesActive="isGamesActive"
-        v-if="isMenuActive && isGamesDataFetched && isTournamentsDataFetched"
-      />
-      <ListView
-        :data="getCorrespondingData"
-        :isGamesActive="
-          isGamesActive && isGamesDataFetched && isTournamentsDataFetched
+      <div
+        v-if="
+          isGamesDataFetched &&
+            isTournamentsDataFetched &&
+            isDashboardRegionsDataFetched &&
+            isFooterSponsorsDataFetched &&
+            isMainEventsFetched
         "
-        v-else
-      />
+      >
+        <h2>Join The Battle</h2>
+        <div class="row">
+          <div class="col">
+            <ul class="home-wrapper__navLinks">
+              <li
+                :class="[isGamesActive ? 'home-wrapper__navLinks--active' : '']"
+                @click="setIsGamesActive(true)"
+              >
+                Games
+              </li>
+              <li
+                :class="[
+                  !isGamesActive ? 'home-wrapper__navLinks--active' : ''
+                ]"
+                @click="setIsGamesActive(false)"
+              >
+                Tournament
+              </li>
+            </ul>
+          </div>
+          <div class="col d-flex justify-content-end align-items-center">
+            <CustomSwitch
+              :isMenuActive="isMenuActive"
+              :setIsMenuActive="setIsMenuActive"
+            />
+          </div>
+        </div>
+        <div class="row" v-if="!isGamesActive">
+          <div class="col">
+            <CustomButton :setShowFiltersModal="setShowFiltersModal" />
+          </div>
+        </div>
+        <MenuView
+          :data="getCorrespondingData"
+          :isGamesActive="isGamesActive"
+          v-if="isMenuActive && isGamesDataFetched && isTournamentsDataFetched"
+        />
+        <ListView
+          :data="getCorrespondingData"
+          :isGamesActive="
+            isGamesActive && isGamesDataFetched && isTournamentsDataFetched
+          "
+          v-else
+        />
+      </div>
     </div>
     <LoginModal
       :showFlag="showLoginModal"
@@ -65,12 +94,13 @@
       :regionsData="regionsData"
     />
     <Spinner :smallLoader="false" />
-    <Footer :sponsors="footerSponsorsData" />
+    <Footer :sponsors="footerSponsorsData" :showFooter="showFooter" />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapState, mapActions } from "vuex";
+import VueSlickCarousel from "vue-slick-carousel";
 import store from "../../store/index";
 import types from "../../store/types";
 import Header from "../shared/Header";
@@ -91,7 +121,8 @@ export default {
       isMenuActive: true,
       showLoginModal: false,
       showRegisterModal: false,
-      showFiltersModal: false
+      showFiltersModal: false,
+      showFooter: false
     };
   },
   computed: {
@@ -106,7 +137,9 @@ export default {
         state.regions.isDashboardRegionsDataFetched,
       footerSponsorsData: state => state.sponsors.footerSponsorsData,
       isFooterSponsorsDataFetched: state =>
-        state.sponsors.isFooterSponsorsDataFetched
+        state.sponsors.isFooterSponsorsDataFetched,
+      mainEventsData: state => state.events.mainEventsData,
+      isMainEventsFetched: state => state.events.isMainEventsFetched
     }),
     ...mapGetters({
       isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
@@ -128,7 +161,8 @@ export default {
       fetchGames: types.games.actions.FETCH_GAMES_CARD_VIEW,
       fetchTournaments: types.tournaments.actions.FETCH_TOURNAMENTS,
       fetchRegions: types.regions.actions.FETCH_REGIONS_FOR_DASHBOARD,
-      fetchFooterSponsors: types.sponsors.actions.FETCH_FOOTER_SPONSORS
+      fetchFooterSponsors: types.sponsors.actions.FETCH_FOOTER_SPONSORS,
+      fetchMainEvents: types.events.actions.FETCH_MAIN_EVENTS
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -145,6 +179,15 @@ export default {
     setIsGamesActive(flag) {
       this.isGamesActive = flag;
       this.isMenuActive = true;
+    },
+    redirectTo(id) {
+      this.$router.push({
+        path: `/events/event/${id}`
+      });
+    },
+    detectScroll(e) {
+      if (e.target.scrollTop > 120) this.showFooter = true;
+      else this.showFooter = false;
     }
   },
   components: {
@@ -157,7 +200,8 @@ export default {
     ListView,
     Footer,
     CustomButton,
-    Filters
+    Filters,
+    VueSlickCarousel
   },
   mounted() {
     store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
@@ -165,13 +209,15 @@ export default {
     this.fetchTournaments();
     this.fetchRegions();
     this.fetchFooterSponsors();
+    this.fetchMainEvents();
   },
   updated() {
     if (
       this.isGamesDataFetched &&
       this.isTournamentsDataFetched &&
       this.isDashboardRegionsDataFetched &&
-      this.isFooterSponsorsDataFetched
+      this.isFooterSponsorsDataFetched &&
+      this.isMainEventsFetched
     )
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   }

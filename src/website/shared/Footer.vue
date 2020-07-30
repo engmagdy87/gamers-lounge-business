@@ -1,5 +1,10 @@
 <template>
-  <footer class="footer-wrapper">
+  <footer
+    :class="[
+      'footer-wrapper',
+      showFooter ? 'footer-wrapper--show' : 'footer-wrapper--hide'
+    ]"
+  >
     <div
       v-for="(sponsor, index) in sponsors"
       :key="index"
@@ -18,7 +23,7 @@
 
 <script>
 export default {
-  props: ["sponsors"],
+  props: ["sponsors", "showFooter"],
   methods: {
     redirectTo(url) {
       if (url.includes("http")) window.open(url, "_blank");

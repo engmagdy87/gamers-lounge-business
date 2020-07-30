@@ -6,7 +6,7 @@
       :setShowRegisterModal="setShowRegisterModal"
       :setShowLoginModal="setShowLoginModal"
     />
-    <div class="story-wrapper__outside" v-if="!isDataEmpty">
+    <div class="story-wrapper__outside" v-if="!isDataEmpty && isStoryFetched">
       <div
         class="story-wrapper__inside"
         :style="
@@ -15,19 +15,23 @@
             ? `backgroundImage: url(${storyData.images.img_cover_main[0].path})`
             : ''
         "
-      ></div>
+      >
+        <img
+          v-if="storyData.images.img_cover_over !== null"
+          :src="storyData.images.img_cover_over.path"
+        />
+      </div>
     </div>
-    <div class="story-wrapper__content">
+    <div class="story-wrapper__content" v-if="isStoryFetched">
       <div class="row">
         <div class="col-12">
           <h1>{{ storyData.initial_title }}</h1>
         </div>
         <div class="col-6">
-          <p>{{ storyData.initial_description }}</p>
+          <p v-html="storyData.initial_description"></p>
         </div>
-        <div class="col-6">
+        <div class="col-6" v-if="storyData.videos.vid_initial !== null">
           <iframe
-            v-if="storyData.videos.vid_initial !== null"
             width="560"
             height="315"
             :src="storyData.videos.vid_initial.path"
@@ -71,7 +75,8 @@ export default {
       isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
     }),
     ...mapState({
-      storyData: state => state.story.storyData
+      storyData: state => state.story.storyData,
+      isStoryFetched: state => state.story.isStoryFetched
     }),
     isDataEmpty() {
       return (

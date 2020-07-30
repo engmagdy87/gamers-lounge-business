@@ -4,20 +4,18 @@
     <td>{{ rowData.initial_title }}</td>
     <td>{{ rowData.final_title }}</td>
     <td>
-      <div class="description">
-        {{ rowData.initial_description }}
-      </div>
+      <div v-html="rowData.initial_description" class="description"></div>
     </td>
-    <td>{{ rowData.final_description }}</td>
+    <td v-html="rowData.final_description"></td>
     <td>{{ rowData.format }}</td>
     <td>{{ rowData.register_link }}</td>
-    <td>{{ rowData.register_start_at }}</td>
-    <td>{{ rowData.register_end_at }}</td>
-    <td>{{ rowData.kick_off_date }}</td>
-    <td>{{ rowData.region.title }}</td>
-    <td>{{ rowData.platform.title }}</td>
-    <td>{{ rowData.game.title }}</td>
-    <td>{{ rowData.event.initial_title }}</td>
+    <td>{{ rowData.register_start_at.split(" ")[0] }}</td>
+    <td>{{ rowData.register_end_at.split(" ")[0] }}</td>
+    <td>{{ rowData.kick_off_date.split(" ")[0] }}</td>
+    <td>{{ rowData.region ? rowData.region.title : "" }}</td>
+    <td>{{ rowData.platform ? rowData.platform.title : "" }}</td>
+    <td>{{ rowData.game ? rowData.game.title : "" }}</td>
+    <td>{{ rowData.event ? rowData.event.initial_title : "" }}</td>
     <td>{{ rowData.has_rules }}</td>
     <td>
       {{
@@ -26,14 +24,14 @@
           : rowData.rule.title
       }}
     </td>
-    <td>
-      {{
-        rowData.rule === null || rowData.rule === undefined
-          ? ""
-          : rowData.rule.content
-      }}
+
+    <td v-if="rowData.rule === null || rowData.rule === undefined"></td>
+    <td v-else>
+      <div v-html="rowData.rule.content" class="description"></div>
     </td>
+
     <td>{{ rowData.winner }}</td>
+
     <td>
       {{
         rowData.contact === null || rowData.contact === undefined
@@ -41,13 +39,12 @@
           : rowData.contact.title
       }}
     </td>
-    <td>
-      {{
-        rowData.contact === null || rowData.contact === undefined
-          ? ""
-          : rowData.contact.content
-      }}
+
+    <td v-if="rowData.contact === null || rowData.contact === undefined"></td>
+    <td v-else>
+      <div v-html="rowData.contact.content" class="description"></div>
     </td>
+
     <td>
       <span
         v-if="
@@ -141,8 +138,10 @@ tr td a {
   max-height: 200px !important;
   overflow-y: auto;
   padding: 8px;
+  width: 200px;
   &::-webkit-scrollbar {
     width: 5px !important;
+    height: 5px !important;
   }
   &::-webkit-scrollbar-thumb {
     background-color: $primary !important;

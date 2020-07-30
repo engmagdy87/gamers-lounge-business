@@ -31,6 +31,8 @@ export default {
   display: inline-block;
   margin: 5px;
   background-color: gainsboro;
+  border: 1px solid #c5c5c5;
+  border-radius: 5px;
   img {
     object-fit: contain;
     height: 150px;

@@ -2,7 +2,7 @@
   <tr>
     <th scope="row">{{ id }}</th>
     <td>{{ rowData.title }}</td>
-    <td>{{ rowData.description }}</td>
+    <td v-html="rowData.description"></td>
     <td>
       <a
         v-if="

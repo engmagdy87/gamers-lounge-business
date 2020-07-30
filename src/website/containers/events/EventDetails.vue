@@ -65,7 +65,8 @@
                 <a
                   v-for="(sponsor, index) in eventDetails.sponsors.main"
                   :key="index"
-                  :href="sponsor.link"
+                  @click="redirectTo(sponsor.link)"
+                  style="cursor: pointer;"
                 >
                   <img
                     class="event-details-wrapper__content__main-sponsor"
@@ -77,7 +78,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col">{{ eventDetails.initial_description }}</div>
+              <div class="col" v-html="eventDetails.initial_description"></div>
             </div>
           </div>
         </div>
@@ -96,7 +97,7 @@
                 <a
                   v-for="(sponsor, index) in eventDetails.sponsors.sub"
                   :key="index"
-                  :href="sponsor.link"
+                  @click="redirectTo(sponsor.link)"
                 >
                   <img
                     class="event-details-wrapper__content__sub-sponsor"
@@ -171,6 +172,10 @@ export default {
     },
     setShowRegisterModal(value = false) {
       this.showRegisterModal = value;
+    },
+    redirectTo(url) {
+      if (url.includes("http")) window.open(url, "_blank");
+      else window.open(`http://${url}`, "_blank");
     }
   },
   components: {

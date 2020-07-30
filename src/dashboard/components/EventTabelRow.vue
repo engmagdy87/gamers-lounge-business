@@ -4,19 +4,18 @@
     <td>{{ rowData.initial_title }}</td>
     <td>{{ rowData.final_title }}</td>
    <td>
-      <div class="description">
-        {{ rowData.initial_description }}
+      <div class="description" v-html="rowData.initial_description">        
       </div>
     </td>
-    <td>{{ rowData.final_description }}</td>
+    <td v-html="rowData.final_description"></td>
     <td v-if="rowData.summit">
       {{ rowData.summit.initial_title }} ({{
         rowData.summit.active ? "Active" : ""
       }})
     </td>
     <td v-else></td>
-    <td>{{ rowData.start_date }}</td>
-    <td>{{ rowData.end_date }}</td>
+    <td>{{ rowData.start_date.split(" ")[0] }}</td>
+    <td>{{ rowData.end_date.split(" ")[0] }}</td>
     <td>{{ rowData.type }}</td>
     <td>
         <a v-if="
@@ -106,9 +105,11 @@ tr td a {
 .description {
   max-height: 200px !important;
   overflow-y: auto;
+  width: 200px;
   padding: 8px;
   &::-webkit-scrollbar {
     width: 5px !important;
+    height: 5px !important;
   }
   &::-webkit-scrollbar-thumb {
     background-color: $primary !important;

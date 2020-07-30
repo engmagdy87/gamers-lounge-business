@@ -34,7 +34,7 @@
           </div>
           <div class="col-9">
             <div class="row">
-              <div class="col">{{ gameDetails.description }}</div>
+              <div class="col" v-html="gameDetails.description"></div>
             </div>
           </div>
         </div>

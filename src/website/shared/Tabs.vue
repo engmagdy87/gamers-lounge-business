@@ -58,7 +58,7 @@
                 <span
                   class="badge badge-pill badge-secondary tab-wrapper__details__kick-off"
                   ><img src="/website/img/calendar.svg" alt="calendar icon" />{{
-                    data.kick_off_date
+                    data.kick_off_date.split(" ")[0]
                   }}</span
                 >
               </div>
@@ -86,7 +86,7 @@
         aria-labelledby="nav-profile-tab"
       >
         <h3>{{ data.rules.title }}</h3>
-        <p>{{ data.rules.content }}</p>
+        <p v-html="data.rules.content"></p>
       </div>
       <div
         :class="['tab-pane fade', activeTabIndex === 2 ? 'show active' : '']"
@@ -111,7 +111,7 @@
         aria-labelledby="nav-contact-tab"
       >
         <h3>{{ data.contacts.title }}</h3>
-        <p>{{ data.contacts.content }}</p>
+        <p v-html="data.contacts.content"></p>
       </div>
     </div>
   </div>

@@ -4,6 +4,9 @@ const API_URL = process.env.VUE_APP_API;
 const REGISTER_WEBSITE_USER = `${API_URL}/register`
 const LOGIN_WEBSITE_USER = `${API_URL}/login`
 
+// Contact
+const POST_MESSAGE = `${API_URL}/contact-us`
+
 // Summit
 const CREATE_SUMMIT = `${API_URL}/admin/summits`
 const GET_SUMMITS = `${API_URL}/admin/summits`
@@ -122,5 +125,6 @@ export {
     EDIT_TOURNAMENT,
     EDIT_SUMMIT,
     EDIT_REGION,
-    GET_FOOTER_SPONSORS
+    GET_FOOTER_SPONSORS,
+    POST_MESSAGE
 };
