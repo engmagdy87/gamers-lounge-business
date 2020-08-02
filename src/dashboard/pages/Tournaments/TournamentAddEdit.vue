@@ -19,8 +19,14 @@
             label="Initial Title"
             placeholder="Enter Initial Title"
             v-model="tournament.initial_title"
+            :autofocus="true"
+            :isInvalid="errors.initial_title !== undefined"
+            :isRequired="true"
           >
           </base-input>
+          <p class="error-message" v-if="errors.initial_title !== undefined">
+            {{ errors.initial_title }}
+          </p>
         </div>
         <div class="col-md-6">
           <base-input
@@ -36,12 +42,26 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label>Initial Description</label>
-            <froala
-              :tag="'textarea'"
-              :config="config"
+            <label
+              >Initial Description<span class="error-message"> *</span></label
+            >
+            <vue-pell-editor
+              :actions="editorOptions"
+              :style-with-css="false"
+              placeholder=""
               v-model="tournament.initial_description"
-            ></froala>
+              :class="
+                errors.initial_description !== undefined
+                  ? 'pell-content--is-invalid'
+                  : ''
+              "
+            />
+            <p
+              class="error-message"
+              v-if="errors.initial_description !== undefined"
+            >
+              {{ errors.initial_description }}
+            </p>
           </div>
         </div>
       </div>
@@ -49,11 +69,13 @@
         <div class="col">
           <div class="form-group">
             <label>Final Description</label>
-            <froala
-              :tag="'textarea'"
-              :config="config"
+            <vue-pell-editor
+              :actions="editorOptions"
+              :style-with-css="false"
+              default-paragraph-separator="p"
+              placeholder=""
               v-model="tournament.final_description"
-            ></froala>
+            />
           </div>
         </div>
       </div>
@@ -86,8 +108,17 @@
             placeholder="Enter Registeration Start Date"
             v-model="tournament.register_start_at"
             :min="minDate"
+            :isInvalid="errors.register_start_at !== undefined"
+            :isRequired="true"
+            @change="checkDatesSequence"
           >
           </base-input>
+          <p
+            class="error-message"
+            v-if="errors.register_start_at !== undefined"
+          >
+            {{ errors.register_start_at }}
+          </p>
         </div>
         <div class="col-md-4">
           <base-input
@@ -96,8 +127,14 @@
             placeholder="Enter Registeration End Date"
             v-model="tournament.register_end_at"
             :min="minDate"
+            :isInvalid="errors.register_end_at !== undefined"
+            :isRequired="true"
+            @change="checkDatesSequence"
           >
           </base-input>
+          <p class="error-message" v-if="errors.register_end_at !== undefined">
+            {{ errors.register_end_at }}
+          </p>
         </div>
         <div class="col-md-4">
           <base-input
@@ -106,8 +143,14 @@
             placeholder="Enter Kick-off Date"
             v-model="tournament.kick_off_date"
             :min="minDate"
+            :isInvalid="errors.kick_off_date !== undefined"
+            :isRequired="true"
+            @change="checkDatesSequence"
           >
           </base-input>
+          <p class="error-message" v-if="errors.kick_off_date !== undefined">
+            {{ errors.kick_off_date }}
+          </p>
         </div>
       </div>
       <div class="row">
@@ -175,7 +218,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2 mt-auto mb-auto">
+        <div class="col-md-4 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -188,7 +231,7 @@
             >
           </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-8">
           <base-input
             type="text"
             label="Rule Title"
@@ -197,14 +240,17 @@
           >
           </base-input>
         </div>
-        <div class="col-md-5">
-          <base-input
-            type="text"
-            label="Rule Description"
-            placeholder="Enter Rule Description"
+      </div>
+      <div class="row">
+        <div class="col">
+          <label>Rule Description</label>
+          <vue-pell-editor
+            :actions="editorOptions"
+            :style-with-css="false"
+            default-paragraph-separator="p"
+            placeholder=""
             v-model="tournament.rules.content"
-          >
-          </base-input>
+          />
         </div>
       </div>
       <div class="row">
@@ -233,120 +279,16 @@
         <div class="col">
           <div class="form-group">
             <label>Contact Description</label>
-            <froala
-              :tag="'textarea'"
-              :config="config"
+            <vue-pell-editor
+              :actions="editorOptions"
+              :style-with-css="false"
+              default-paragraph-separator="p"
+              placeholder=""
               v-model="tournament.contacts.content"
-            ></froala>
-          </div>
-        </div>
-      </div>
-      <div class="row mt-3 mb-3">
-        <div class="col-6">
-          <div>
-            <label for="img logo" class="mr-5">Choose Logo Image</label>
-            <input
-              type="file"
-              id="img logo"
-              accept="image/png, image/jpeg"
-              @change="e => setFile(e, 'img_logo')"
-              ref="img_logo"
-            />
-            <ImagePreview
-              v-if="
-                editData !== undefined &&
-                  operation === 'Edit Tournament' &&
-                  editData.images !== null &&
-                  editData.images.img_logo !== null
-              "
-              :image="editData.images.img_logo"
-              :setShowDeleteDialogFlag="setShowFlag"
-              openedFor="img_logo"
-            />
-          </div>
-        </div>
-        <div class="col-6">
-          <div>
-            <label class="mr-5" for="media-images1">Choose Card Image</label>
-            <input
-              type="file"
-              id="media-images1"
-              accept="image/png, image/jpeg"
-              @change="e => setFile(e, 'img_card')"
-              ref="img_card"
-            />
-            <ImagePreview
-              v-if="
-                editData !== undefined &&
-                  operation === 'Edit Tournament' &&
-                  editData.images !== null &&
-                  editData.images.img_card !== null
-              "
-              :image="editData.images.img_card"
-              :setShowDeleteDialogFlag="setShowFlag"
-              openedFor="img_card"
             />
           </div>
         </div>
       </div>
-      <div class="row mb-3">
-        <div class="col-6">
-          <div>
-            <label class="mr-5" for="media-images"
-              >Choose Cover Main Images</label
-            >
-            <input
-              type="file"
-              id="media-images"
-              accept="image/png, image/jpeg"
-              multiple
-              ref="img_cover_main"
-            />
-            <div
-              v-if="
-                editData !== undefined &&
-                  (operation === 'Edit Tournament' || editData.images !== null)
-              "
-              class="image-preview-list"
-            >
-              <ImagePreview
-                v-for="(img, index) in editData.images.img_cover_main"
-                :key="index"
-                :image="img"
-                :setShowDeleteDialogFlag="setShowFlag"
-                openedFor="img_cover_main"
-                :imageIndex="index"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div>
-            <label class="mr-5" for="media-images"
-              >Choose Cover Over Image</label
-            >
-            <input
-              type="file"
-              id="media-images"
-              accept="image/png, image/jpeg"
-              @change="e => setFile(e, 'img_cover_over')"
-              ref="img_cover_over"
-            />
-            <ImagePreview
-              v-if="
-                editData !== undefined &&
-                  operation === 'Edit Tournament' &&
-                  editData.images !== null &&
-                  editData.images.img_cover_over !== null
-              "
-              :image="editData.images.img_cover_over"
-              :setShowDeleteDialogFlag="setShowFlag"
-              openedFor="img_cover_over"
-            />
-          </div>
-        </div>
-      </div>
-
       <div class="row mb-3">
         <div class="col">
           <base-input
@@ -358,7 +300,120 @@
           </base-input>
         </div>
       </div>
+      <div class="row mt-3 mb-3">
+        <div class="col">
+          <div>
+            <label for="img logo" class="mr-5">Choose Logo Image</label>
+            <input
+              type="file"
+              id="img logo"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_logo')"
+              ref="img_logo"
+            />
+            <br />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Tournament' &&
+                  editData.images !== null &&
+                  editData.images.img_logo !== null
+              "
+              :image="editData.images.img_logo"
+              :setShowDeleteDialogFlag="setImageDataFlag"
+              openedFor="img_logo"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <div>
+            <label class="mr-5" for="media-images1">Choose Card Image</label>
+            <input
+              type="file"
+              id="media-images1"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_card')"
+              ref="img_card"
+            />
+            <br />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Tournament' &&
+                  editData.images !== null &&
+                  editData.images.img_card !== null
+              "
+              :image="editData.images.img_card"
+              :setShowDeleteDialogFlag="setImageDataFlag"
+              openedFor="img_card"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <div>
+            <label class="mr-5" for="media-images"
+              >Choose Cover Main Images</label
+            >
+            <input
+              type="file"
+              id="media-images"
+              accept="image/png, image/jpeg"
+              multiple
+              ref="img_cover_main"
+            />
+            <br />
+            <div
+              v-if="
+                editData !== undefined &&
+                  (operation === 'Edit Tournament' || editData.images !== null)
+              "
+              class="image-preview-list"
+            >
+              <ImagePreview
+                v-for="(img, index) in editData.images.img_cover_main"
+                :key="index"
+                :image="img"
+                :setShowDeleteDialogFlag="setImageDataFlag"
+                openedFor="img_cover_main"
+                :imageIndex="index"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="row mb-3">
+        <div class="col">
+          <div>
+            <label class="mr-5" for="media-images"
+              >Choose Cover Over Image</label
+            >
+            <input
+              type="file"
+              id="media-images"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_cover_over')"
+              ref="img_cover_over"
+            />
+            <br />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Tournament' &&
+                  editData.images !== null &&
+                  editData.images.img_cover_over !== null
+              "
+              :image="editData.images.img_cover_over"
+              :setShowDeleteDialogFlag="setImageDataFlag"
+              openedFor="img_cover_over"
+            />
+          </div>
+        </div>
+      </div>
       <div class="text-center">
         <button
           type="button"
@@ -371,7 +426,7 @@
       <div class="clearfix"></div>
       <DeleteDialog
         :showFlag="showFlag"
-        :setShowDeleteDialogFlag="setShowFlag"
+        :setShowDeleteDialogFlag="setImageDataFlag"
         item="Image"
         :deleteAction="removeImage"
       />
@@ -390,7 +445,9 @@ import {
 } from "../../../website/helpers/APIsHelper.js";
 import regions from "../../../store/modules/regions";
 import platforms from "../../../store/modules/platforms";
-import compareDates from "../../../dashboard/helpers/DateHelper";
+import isDatesInProperSequence from "../../../dashboard/helpers/DateHelper";
+import editorOptions from "../../../dashboard/wysiwyg-factory/options";
+import generateYoutubeUrl from "../../../dashboard/helpers/YoutubeUrlGeneration";
 
 export default {
   components: {
@@ -428,12 +485,8 @@ export default {
         img_card: "",
         vid_stream: ""
       },
-      config: {
-        placeholderText: "Edit Your Content Here!",
-        charCounterCount: true,
-        charCounterMax: 1000,
-        quickInsertEnabled: false
-      }
+      editorOptions,
+      errors: {}
     };
   },
   methods: {
@@ -449,7 +502,7 @@ export default {
         ? this.saveData(editTournament, "Tournament Updated Successfully")
         : this.saveData(createTournament, "Tournament Created Successfully");
     },
-    setShowFlag(flag, imageId, openedFor, imageIndex) {
+    setImageDataFlag(flag, imageId, openedFor, imageIndex) {
       this.showFlag = flag;
       this.imageId = imageId;
       this.openedFor = openedFor;
@@ -462,17 +515,102 @@ export default {
 
       this.tournament[key] = files[0];
     },
-    saveData: async function(saveFunction, successMessage) {
+    checkDatesSequence() {
       if (
-        compareDates(
+        isDatesInProperSequence(
           this.tournament.register_start_at,
           this.tournament.register_end_at
-        ) &&
-        compareDates(
+        ) === false ||
+        isDatesInProperSequence(
           this.tournament.register_end_at,
           this.tournament.kick_off_date
-        )
+        ) === false
       ) {
+        this.notifyVue("Please insert dates in proper sequence", "danger");
+      }
+      if (
+        isDatesInProperSequence(
+          this.summitsListData[0].start_date.split(" ")[0],
+          this.tournament.register_start_at
+        ) === false
+      ) {
+        this.notifyVue(
+          "Please insert registeration start date to be after summit start date " +
+            this.summitsListData[0].start_date.split(" ")[0],
+          "danger"
+        );
+      }
+      if (
+        isDatesInProperSequence(
+          this.tournament.register_end_at,
+          this.summitsListData[0].end_date.split(" ")[0]
+        ) === false
+      ) {
+        this.notifyVue(
+          "Please insert registeration end date to be before summit end date " +
+            this.summitsListData[0].end_date.split(" ")[0],
+          "danger"
+        );
+      }
+      if (
+        isDatesInProperSequence(
+          this.tournament.kick_off_date,
+          this.summitsListData[0].end_date.split(" ")[0]
+        ) === false
+      ) {
+        this.notifyVue(
+          "Please insert registeration kick-off date to be before summit end date " +
+            this.summitsListData[0].end_date.split(" ")[0],
+          "danger"
+        );
+      }
+    },
+    saveData: async function(saveFunction, successMessage) {
+      if (
+        isDatesInProperSequence(
+          this.tournament.register_start_at,
+          this.tournament.register_end_at
+        ) === false ||
+        isDatesInProperSequence(
+          this.tournament.register_end_at,
+          this.tournament.kick_off_date
+        ) === false
+      ) {
+        this.notifyVue("Please insert dates in proper sequence", "danger");
+      } else if (
+        isDatesInProperSequence(
+          this.summitsListData[0].start_date.split(" ")[0],
+          this.tournament.register_start_at
+        ) === false
+      ) {
+        this.notifyVue(
+          "Please insert registeration start date to be after summit start date " +
+            this.summitsListData[0].start_date.split(" ")[0],
+          "danger"
+        );
+      } else if (
+        isDatesInProperSequence(
+          this.tournament.register_end_at,
+          this.summitsListData[0].end_date.split(" ")[0]
+        ) === false
+      ) {
+        this.notifyVue(
+          "Please insert registeration end date to be before summit end date " +
+            this.summitsListData[0].end_date.split(" ")[0],
+          "danger"
+        );
+      } else if (
+        isDatesInProperSequence(
+          this.tournament.kick_off_date,
+          this.summitsListData[0].end_date.split(" ")[0]
+        ) === false
+      ) {
+        this.notifyVue(
+          "Please insert registeration kick-off date to be before summit end date " +
+            this.summitsListData[0].end_date.split(" ")[0],
+          "danger"
+        );
+      } else {
         let formData = new FormData();
         formData.append("initial_title", this.tournament.initial_title);
         formData.append("final_title", this.tournament.final_title);
@@ -497,7 +635,10 @@ export default {
         formData.append("img_logo", this.tournament.img_logo);
         formData.append("img_cover_over", this.tournament.img_cover_over);
         formData.append("img_card", this.tournament.img_card);
-        formData.append("vid_stream", this.tournament.vid_stream);
+        formData.append(
+          "vid_stream",
+          generateYoutubeUrl(this.tournament.vid_stream)
+        );
 
         for (var i = 0; i < this.$refs.img_cover_main.files.length; i++) {
           let file = this.$refs.img_cover_main.files[i];
@@ -515,11 +656,14 @@ export default {
           this.notifyVue(successMessage, "success");
           this.$router.push("/dashboard/tournaments/list");
         } catch (error) {
-          this.notifyVue("Error Happened", "danger");
+          this.errors = { ...error.data.errors };
+          Object.keys(error.data.errors).forEach(err => {
+            const errorMessage = error.data.errors[err][0];
+            this.notifyVue(errorMessage, "danger");
+            this.errors = { ...this.errors, [err]: errorMessage };
+          });
           store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
         }
-      } else {
-        this.notifyVue("Please insert dates in proper order", "danger");
       }
     },
     notifyVue(message, color) {
@@ -556,12 +700,14 @@ export default {
       }
 
       this.notifyVue("Image Deleted Successfully", "success");
-      this.setShowFlag(false);
+      this.setImageDataFlag(false);
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
     }
   },
   computed: {
     ...mapState({
+      summitsListData: state => state.summits.summitsListData,
+      isSummitsListFetched: state => state.summits.isSummitsListFetched,
       isDashboardRegionsDataFetched: state =>
         state.regions.isDashboardRegionsDataFetched,
       isDashboardPlatformsDataFetched: state =>
@@ -590,7 +736,8 @@ export default {
           this.isDashboardRegionsDataFetched &&
           this.isDashboardPlatformsDataFetched &&
           this.isDashboardGamesDataFetched &&
-          this.isEventsListFetched
+          this.isEventsListFetched &&
+          this.isSummitsListFetched
         );
       return true;
     }
@@ -605,6 +752,11 @@ export default {
       });
   },
   mounted() {
+    store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    this.fetchRegionsList();
+    this.fetchPlatformsList();
+    this.fetchGamesList();
+    this.fetchEventsList();
     if (this.$route.name === "Edit Tournament") {
       this.tournament.initial_title = this.editData.initial_title || "";
       this.tournament.final_title = this.editData.final_title || "";
@@ -632,13 +784,10 @@ export default {
       this.tournament.img_cover_over = this.editData.images.img_cover_over;
       this.tournament.img_card = this.editData.images.img_card;
 
-      this.tournament.vid_initial = this.editData.videos.vid_stream.path || "";
-    } else {
-      store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
-      this.fetchRegionsList();
-      this.fetchPlatformsList();
-      this.fetchGamesList();
-      this.fetchEventsList();
+      this.tournament.vid_stream =
+        (this.editData.videos.vid_stream !== null &&
+          this.editData.videos.vid_stream.path) ||
+        "";
     }
   },
   updated() {
@@ -646,7 +795,8 @@ export default {
       this.isDashboardRegionsDataFetched &&
       this.isDashboardPlatformsDataFetched &&
       this.isDashboardGamesDataFetched &&
-      this.isEventsListFetched
+      this.isEventsListFetched &&
+      this.isSummitsListFetched
     )
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   }
@@ -664,14 +814,11 @@ export default {
   width: 100%;
   overflow-x: auto;
   &::-webkit-scrollbar {
-    height: 5px !important;
+    background-color: $accent !important;
+    border-radius: 20px !important;
   }
   &::-webkit-scrollbar-thumb {
     background-color: $primary !important;
-    border-radius: 20px !important;
-  }
-  &::-webkit-scrollbar {
-    background-color: $accent !important;
     border-radius: 20px !important;
   }
 }

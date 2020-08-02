@@ -13,7 +13,7 @@ const GET_SUMMITS = `${API_URL}/admin/summits`
 const GET_SUMMITS_LIST = `${API_URL}/admin/summits/list`
 const GET_WEBSITE_STORY = `${API_URL}/summits/story`
 const DELETE_SUMMIT = `${API_URL}/admin/summits`
-const DELETE_IMAGE_IN_SUMMIT = `${API_URL}/admin/summits`
+const DELETE_MEDIA_IN_SUMMIT = `${API_URL}/admin/summits`
 const EDIT_SUMMIT = `${API_URL}/admin/summits`
 
 // Events
@@ -26,7 +26,7 @@ const GET_WEBSITE_MAIN_EVENTS = `${API_URL}/events/main`
 const GET_WEBSITE_SUB_EVENTS = `${API_URL}/events/sub`
 const GET_WEBSITE_EVENT_DETAILS = `${API_URL}/events`
 const DELETE_EVENT = `${API_URL}/admin/events`
-const DELETE_IMAGE_IN_EVENT = `${API_URL}/admin/events`
+const DELETE_MEDIA_IN_EVENT = `${API_URL}/admin/events`
 const EDIT_EVENT = `${API_URL}/admin/events`
 
 // SPONSORS
@@ -69,7 +69,6 @@ const GET_REGIONS = `${API_URL}/admin/regions`
 const CREATE_REGION = `${API_URL}/admin/regions`
 const GET_LIST_REGIONS = `${API_URL}/admin/regions/list`    // used for both dashboard and website
 const DELETE_REGION = `${API_URL}/admin/regions`
-// const GET_LIST_WEBSITE_GAMES = `${API_URL}/games/view`
 const EDIT_REGION = `${API_URL}/admin/regions`
 
 export {
@@ -113,11 +112,11 @@ export {
     DELETE_SPONSOR,
     DELETE_SUMMIT,
     DELETE_GAME,
-    DELETE_IMAGE_IN_EVENT,
+    DELETE_MEDIA_IN_EVENT,
     DELETE_IMAGE_IN_GAME,
     DELETE_IMAGE_IN_SPONSOR,
     DELETE_IMAGE_IN_TOURNAMENT,
-    DELETE_IMAGE_IN_SUMMIT,
+    DELETE_MEDIA_IN_SUMMIT,
     EDIT_GAME,
     EDIT_PLATFORM,
     EDIT_EVENT,

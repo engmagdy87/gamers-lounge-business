@@ -150,6 +150,7 @@ const summits = {
         FETCH_SUMMITS_LIST: 'summits/actions/FETCH_SUMMITS_LIST',
         DELETE_SUMMIT: 'summits/actions/DELETE_SUMMIT',
         DELETE_SUMMIT_IMAGE: 'summits/actions/DELETE_SUMMIT_IMAGE',
+        DELETE_SUMMIT_VIDEO: 'summits/actions/DELETE_SUMMIT_VIDEO',
         EDIT_SUMMIT: 'summits/actions/EDIT_SUMMIT',
     }
 };
@@ -182,6 +183,7 @@ const events = {
         FETCH_EVENT_LIST: 'events/actions/FETCH_EVENT_LIST',
         DELETE_EVENT: 'events/actions/DELETE_EVENT',
         DELETE_EVENT_IMAGE: 'events/actions/DELETE_EVENT_IMAGE',
+        DELETE_EVENT_VIDEO: 'events/actions/DELETE_EVENT_VIDEO',
         EDIT_EVENT: 'events/actions/EDIT_EVENT',
     }
 };

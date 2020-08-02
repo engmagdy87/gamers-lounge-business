@@ -24,12 +24,12 @@
       :columns="table.columns"
       :data="tournamentsData"
       tableType="tournaments"
-      :setShowDeleteDialogFlag="setShowFlag"
+      :setShowDeleteDialogFlag="setImageDataFlag"
     >
     </LTable>
     <DeleteDialog
       :showFlag="showFlag"
-      :setShowDeleteDialogFlag="setShowFlag"
+      :setShowDeleteDialogFlag="setImageDataFlag"
       item="Tournament"
       :deleteAction="removeTournament"
     />
@@ -101,7 +101,7 @@ export default {
         type: color
       });
     },
-    setShowFlag(flag, id, locationInDataArray) {
+    setImageDataFlag(flag, id, locationInDataArray) {
       this.showFlag = flag;
       this.targetId = id;
       this.locationInDataArray = locationInDataArray;

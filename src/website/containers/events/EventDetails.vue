@@ -6,9 +6,22 @@
       :setShowRegisterModal="setShowRegisterModal"
       :setShowLoginModal="setShowLoginModal"
     />
-    <div class="event-details-wrapper__outside" v-if="showDetailsHero">
+    <div
+      :class="[
+        'event-details-wrapper__outside',
+        eventDetails.cover_type === 'img'
+          ? 'event-details-wrapper__outside--hexa-shape'
+          : 'event-details-wrapper__outside--none'
+      ]"
+      v-if="showDetailsHero"
+    >
       <div
-        class="event-details-wrapper__inside"
+        :class="[
+          'event-details-wrapper__inside',
+          eventDetails.cover_type === 'img'
+            ? 'event-details-wrapper__inside--hexa-shape'
+            : 'event-details-wrapper__outside--none'
+        ]"
         v-if="
           (eventDetails.images.img_cover_main !== null &&
             eventDetails.images.img_cover_main.length !== 0) ||
@@ -43,10 +56,35 @@
       </div>
     </div>
     <div class="event-details-wrapper__content" v-if="showDetailsHero">
-      <div class="event-details-wrapper__content__breadcrumb">
-        <a href="/events">Event</a>
-        <span> > {{ eventDetails.initial_title }}</span>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="event-details-wrapper__content__breadcrumb">
+            <a href="/events">Event</a>
+            <span> > {{ eventDetails.initial_title }}</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div
+            class="col d-flex justify-content-end align-items-center mb-4"
+            v-if="eventDetails.sponsors !== undefined"
+          >
+            <a
+              v-for="(sponsor, index) in eventDetails.sponsors.main"
+              :key="index"
+              @click="redirectTo(sponsor.link)"
+              style="cursor: pointer;"
+            >
+              <img
+                class="event-details-wrapper__content__main-sponsor"
+                v-if="sponsor.images.img_logo !== null"
+                :src="sponsor.images.img_logo.path"
+                :alt="sponsor.name"
+              />
+            </a>
+          </div>
+        </div>
       </div>
+
       <div class="container">
         <div class="row">
           <div class="col-3 event-details-wrapper__content__logo">
@@ -57,29 +95,11 @@
             />
           </div>
           <div class="col-9">
-            <div class="row">
-              <div
-                class="col d-flex justify-content-end align-items-center mb-4"
-                v-if="eventDetails.sponsors !== undefined"
-              >
-                <a
-                  v-for="(sponsor, index) in eventDetails.sponsors.main"
-                  :key="index"
-                  @click="redirectTo(sponsor.link)"
-                  style="cursor: pointer;"
-                >
-                  <img
-                    class="event-details-wrapper__content__main-sponsor"
-                    v-if="sponsor.images.img_logo !== null"
-                    :src="sponsor.images.img_logo.path"
-                    :alt="sponsor.name"
-                  />
-                </a>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col" v-html="eventDetails.initial_description"></div>
-            </div>
+            <div
+              id="description-container"
+              class="col"
+              v-html="eventDetails.initial_description"
+            ></div>
           </div>
         </div>
       </div>
@@ -110,11 +130,8 @@
             </div>
           </div>
         </div>
-        <EventsMenuView
-          route="event-details"
-          :data="eventDetails.tournaments"
-        />
       </div>
+      <EventsMenuView route="event-details" :data="eventDetails.tournaments" />
     </div>
     <LoginModal
       :showFlag="showLoginModal"
@@ -136,6 +153,7 @@ import EventsMenuView from "../../components/events/EventsMenuView";
 import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
 import Spinner from "../../shared/Spinner";
+import redirectToNewTab from "../../helpers/RedirectToNewTab";
 
 export default {
   data() {
@@ -187,6 +205,9 @@ export default {
   },
   mounted() {
     this.fetchEventDetails(this.$router.history.current.params.eventId);
+  },
+  updated() {
+    redirectToNewTab("description-container");
   }
 };
 </script>

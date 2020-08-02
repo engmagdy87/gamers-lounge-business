@@ -64,17 +64,16 @@
               </div>
             </div>
             <div class="col-3 tab-wrapper__details__register">
-              <div
-                :class="[
-                  data.is_register_available
-                    ? 'tab-wrapper__details__register--open'
-                    : 'tab-wrapper__details__register--close'
-                ]"
-              ></div>
-              <span v-if="data.is_register_available"
+              <div :class="getCSSClass(data.register_status)"></div>
+              <span v-if="data.register_status === 'open'"
                 >Registeration is now open</span
               >
-              <span v-else>Register was closed</span>
+              <span v-else-if="data.register_status === 'closed'"
+                >Register was closed</span
+              >
+              <span v-else-if="data.register_status === 'soon'"
+                >Register coming soon</span
+              >
             </div>
           </div>
         </div>
@@ -131,9 +130,16 @@ export default {
       this.activeTabIndex = index;
     },
     selectClickAction(tab, index) {
-      tab === "Schedule" || tab === "Streaming"
+      tab === "Schedule" ||
+      tab === "Streaming" ||
+      (tab === "Rules Book" && !this.data.has_rules)
         ? () => {}
         : this.setActiveTabIndex(index);
+    },
+    getCSSClass(status) {
+      if (status === "open") return "tab-wrapper__details__register--open";
+      if (status === "closed") return "tab-wrapper__details__register--closed";
+      if (status === "soon") return "tab-wrapper__details__register--soon";
     }
   }
 };
@@ -235,8 +241,11 @@ export default {
       &--open {
         background-color: rgba(0, 211, 81, 1);
       }
-      &--close {
+      &--closed {
         background-color: red;
+      }
+      &--soon {
+        background-color: orange;
       }
     }
   }

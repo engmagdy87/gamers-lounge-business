@@ -6,9 +6,27 @@
       :setShowRegisterModal="setShowRegisterModal"
       :setShowLoginModal="setShowLoginModal"
     />
-    <div class="story-wrapper__outside" v-if="!isDataEmpty && isStoryFetched">
+    <div
+      :class="[
+        'story-wrapper__outside',
+        storyData.cover_type === 'img'
+          ? 'story-wrapper__outside--hexa-shape'
+          : 'story-wrapper__outside--none'
+      ]"
+      v-if="!isDataEmpty && isStoryFetched"
+    >
       <div
-        class="story-wrapper__inside"
+        :class="[
+          'story-wrapper__inside',
+          storyData.cover_type === 'img'
+            ? 'story-wrapper__inside--hexa-shape'
+            : 'story-wrapper__outside--none'
+        ]"
+        v-if="
+          (storyData.images.img_cover_main !== null &&
+            storyData.images.img_cover_main.length !== 0) ||
+            storyData.videos.vid_cover_main !== null
+        "
         :style="
           storyData.images.img_cover_main !== null &&
           storyData.images.img_cover_main.length !== 0
@@ -17,9 +35,24 @@
         "
       >
         <img
-          v-if="storyData.images.img_cover_over !== null"
+          v-if="
+            storyData.has_cover_over && storyData.images.img_cover_over !== null
+          "
           :src="storyData.images.img_cover_over.path"
         />
+        <video
+          autoplay
+          muted
+          loop
+          id="myVideo"
+          v-if="storyData.cover_type !== 'img'"
+          style="width: 100%;"
+        >
+          <source
+            :src="storyData.videos.vid_cover_main.path"
+            type="video/mp4"
+          />
+        </video>
       </div>
     </div>
     <div class="story-wrapper__content" v-if="isStoryFetched">
@@ -28,7 +61,11 @@
           <h1>{{ storyData.initial_title }}</h1>
         </div>
         <div class="col-6">
-          <p v-html="storyData.initial_description"></p>
+          <div
+            id="description-container"
+            class="story-paragraph"
+            v-html="storyData.initial_description"
+          ></div>
         </div>
         <div class="col-6" v-if="storyData.videos.vid_initial !== null">
           <iframe
@@ -62,6 +99,7 @@ import Header from "../shared/Header";
 import LoginModal from "../components/home/LoginModal";
 import RegisterModal from "../components/home/RegisterModal";
 import Spinner from "../shared/Spinner";
+import redirectToNewTab from "../helpers/RedirectToNewTab";
 
 export default {
   data() {
@@ -111,6 +149,9 @@ export default {
   },
   mounted() {
     this.fetchStory();
+  },
+  updated() {
+    redirectToNewTab("description-container");
   }
 };
 </script>

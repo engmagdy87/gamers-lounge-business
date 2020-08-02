@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="showFormWhenDataFetched">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -19,8 +19,14 @@
             label="Initial Title"
             placeholder="Enter Initial Title"
             v-model="summit.initial_title"
+            :autofocus="true"
+            :isInvalid="errors.initial_title !== undefined"
+            :isRequired="true"
           >
           </base-input>
+          <p class="error-message" v-if="errors.initial_title !== undefined">
+            {{ errors.initial_title }}
+          </p>
         </div>
         <div class="col-md-6">
           <base-input
@@ -36,12 +42,26 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label>Initial Description</label>
-            <froala
-              :tag="'textarea'"
-              :config="config"
+            <label
+              >Initial Description<span class="error-message"> *</span></label
+            >
+            <vue-pell-editor
+              :actions="editorOptions"
+              :style-with-css="false"
+              placeholder=""
               v-model="summit.initial_description"
-            ></froala>
+              :class="
+                errors.initial_description !== undefined
+                  ? 'pell-content--is-invalid'
+                  : ''
+              "
+            />
+            <p
+              class="error-message"
+              v-if="errors.initial_description !== undefined"
+            >
+              {{ errors.initial_description }}
+            </p>
           </div>
         </div>
       </div>
@@ -49,11 +69,13 @@
         <div class="col">
           <div class="form-group">
             <label>Final Description</label>
-            <froala
-              :tag="'textarea'"
-              :config="config"
+            <vue-pell-editor
+              :actions="editorOptions"
+              :style-with-css="false"
+              default-paragraph-separator="p"
+              placeholder=""
               v-model="summit.final_description"
-            ></froala>
+            />
           </div>
         </div>
       </div>
@@ -87,8 +109,14 @@
             placeholder="Enter Start Date"
             v-model="summit.start_date"
             :min="minDate"
+            :isInvalid="errors.start_date !== undefined"
+            :isRequired="true"
+            @change="checkDatesSequence"
           >
           </base-input>
+          <p class="error-message" v-if="errors.start_date !== undefined">
+            {{ errors.start_date }}
+          </p>
         </div>
         <div class="col-md-4">
           <base-input
@@ -97,8 +125,14 @@
             placeholder="Enter End Date"
             v-model="summit.end_date"
             :min="minDate"
+            :isInvalid="errors.end_date !== undefined"
+            :isRequired="true"
+            @change="checkDatesSequence"
           >
           </base-input>
+          <p class="error-message" v-if="errors.end_date !== undefined">
+            {{ errors.end_date }}
+          </p>
         </div>
         <div class="col-md-2 offset-1 m-auto">
           <div class="custom-control custom-switch">
@@ -115,7 +149,48 @@
         </div>
       </div>
       <div class="row mt-3 mb-3">
-        <div class="col-6">
+        <div class="col-md-6 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="has_cover_over"
+              v-model="summit.has_cover_over"
+            />
+            <label class="custom-control-label" for="has_cover_over"
+              >Cover Over Image</label
+            >
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="cover-type">Cover Type</label>
+            <select class="form-control" v-model="summit.cover_type">
+              <option value="-1">--Please select cover type</option>
+              <option
+                v-for="(type, index) in coverTypes"
+                :selected="summit.cover_type === type.value"
+                :key="index"
+                :value="type.value"
+                >{{ type.label }}</option
+              >
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <base-input
+            type="text"
+            label="Initial Video"
+            placeholder="Enter Initial Video"
+            v-model="summit.vid_initial"
+          >
+          </base-input>
+        </div>
+      </div>
+      <div class="row mt-3 mb-3">
+        <div class="col">
           <div>
             <label for="logo" class="mr-5">Choose Logo Image</label>
             <input
@@ -125,6 +200,7 @@
               @change="e => setFile(e, 'img_logo')"
               ref="img_logo"
             />
+            <br />
             <ImagePreview
               v-if="
                 editData !== undefined &&
@@ -133,12 +209,14 @@
                   editData.images.img_logo !== null
               "
               :image="editData.images.img_logo"
-              :setShowDeleteDialogFlag="setShowFlag"
+              :setShowDeleteDialogFlag="setImageDataFlag"
               openedFor="img_logo"
             />
           </div>
         </div>
-        <div class="col-6">
+      </div>
+      <div class="row mt-3 mb-3">
+        <div class="col">
           <div>
             <label class="mr-5" for="media-images">Choose Media Images</label>
             <input
@@ -148,6 +226,7 @@
               multiple
               ref="img_media"
             />
+            <br />
             <div
               v-if="
                 editData !== undefined &&
@@ -158,7 +237,7 @@
                 v-for="(img, index) in editData.images.img_media"
                 :key="index"
                 :image="img"
-                :setShowDeleteDialogFlag="setShowFlag"
+                :setShowDeleteDialogFlag="setImageDataFlag"
                 openedFor="img_media"
                 :imageIndex="index"
               />
@@ -167,10 +246,10 @@
         </div>
       </div>
       <div class="row mb-3">
-        <div class="col-6">
+        <div class="col">
           <div>
             <label class="mr-5" for="media-images"
-              >Choose Cover Main Images</label
+              >Choose Cover Main Image</label
             >
             <input
               type="file"
@@ -179,6 +258,7 @@
               @change="e => setFile(e, 'img_cover_main')"
               ref="img_cover_main"
             />
+            <br />
             <ImagePreview
               v-if="
                 editData !== undefined &&
@@ -186,13 +266,16 @@
                   editData.images !== null &&
                   editData.images.img_cover_main !== null
               "
-              :image="editData.images.img_cover_main"
-              :setShowDeleteDialogFlag="setShowFlag"
+              :image="editData.images.img_cover_main[0]"
+              :setShowDeleteDialogFlag="setImageDataFlag"
               openedFor="img_cover_main"
             />
           </div>
         </div>
-        <div class="col-6">
+      </div>
+
+      <div class="row mt-3 mb-3">
+        <div class="col">
           <div>
             <label class="mr-5" for="media-images"
               >Choose Cover Over Image</label
@@ -204,6 +287,7 @@
               @change="e => setFile(e, 'img_cover_over')"
               ref="img_cover_over"
             />
+            <br />
             <ImagePreview
               v-if="
                 editData !== undefined &&
@@ -212,7 +296,7 @@
                   editData.images.img_cover_over !== null
               "
               :image="editData.images.img_cover_over"
-              :setShowDeleteDialogFlag="setShowFlag"
+              :setShowDeleteDialogFlag="setImageDataFlag"
               openedFor="img_cover_over"
             />
           </div>
@@ -220,7 +304,7 @@
       </div>
 
       <div class="row mb-3">
-        <div class="col-6">
+        <div class="col">
           <div>
             <label class="mr-5" for="media-images1">Choose Card Image</label>
             <input
@@ -230,6 +314,7 @@
               @change="e => setFile(e, 'img_card')"
               ref="img_card"
             />
+            <br />
             <ImagePreview
               v-if="
                 editData !== undefined &&
@@ -238,19 +323,37 @@
                   editData.images.img_card !== null
               "
               :image="editData.images.img_card"
-              :setShowDeleteDialogFlag="setShowFlag"
+              :setShowDeleteDialogFlag="setImageDataFlag"
               openedFor="img_card"
             />
           </div>
         </div>
-        <div class="col-6">
-          <base-input
-            type="text"
-            label="Initial Video"
-            placeholder="Enter Initial Video"
-            v-model="summit.vid_initial"
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <label class="mr-5" for="media-images1"
+            >Choose Cover Main Video</label
           >
-          </base-input>
+          <input
+            type="file"
+            id="logo"
+            accept="video/*"
+            @change="getVideo"
+            ref="vid_cover_main"
+          />
+          <br />
+          <VideoPreview
+            v-if="
+              editData !== undefined &&
+                operation === 'Edit Summit' &&
+                editData.videos !== null &&
+                editData.videos.vid_cover_main !== null
+            "
+            :video="editData.videos.vid_cover_main"
+            :setShowDeleteDialogFlag="setVideoDataFlag"
+            openedFor="vid_cover_main"
+          />
         </div>
       </div>
 
@@ -266,9 +369,11 @@
       <div class="clearfix"></div>
       <DeleteDialog
         :showFlag="showFlag"
-        :setShowDeleteDialogFlag="setShowFlag"
-        item="Image"
-        :deleteAction="removeImage"
+        :setShowDeleteDialogFlag="
+          contentType === 'image' ? setImageDataFlag : setVideoDataFlag
+        "
+        :item="contentType === 'image' ? 'Image' : 'Video'"
+        :deleteAction="contentType === 'image' ? removeImage : removeVideo"
       />
     </form>
   </div>
@@ -276,6 +381,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import ImagePreview from "../../../website/shared/ImagePreview.vue";
+import VideoPreview from "../../../website/shared/VideoPreview.vue";
 import DeleteDialog from "../../../website/shared/DeleteDialog";
 import store from "../../../store/index";
 import types from "../../../store/types";
@@ -283,19 +389,24 @@ import {
   createSummit,
   editSummit
 } from "../../../website/helpers/APIsHelper.js";
-import compareDates from "../../../dashboard/helpers/DateHelper";
+import isDatesInProperSequence from "../../../dashboard/helpers/DateHelper";
+import editorOptions from "../../../dashboard/wysiwyg-factory/options";
+import generateYoutubeUrl from "../../../dashboard/helpers/YoutubeUrlGeneration";
 
 export default {
   components: {
     ImagePreview,
-    DeleteDialog
+    DeleteDialog,
+    VideoPreview
   },
   data() {
     return {
       openedFor: "",
+      contentType: "",
       imageIndex: null,
       showFlag: false,
       imageId: null,
+      videoId: null,
       editData: this.$router.history.current.params.data || { images: null },
       operation: this.$route.name,
       summit: {
@@ -308,34 +419,44 @@ export default {
         start_date: "",
         end_date: "",
         active: false,
+        has_cover_over: false,
+        cover_type: "-1",
         vid_initial: "",
         img_logo: "",
         img_cover_over: "",
         img_card: "",
-        img_cover_main: ""
+        img_cover_main: "",
+        vid_cover_main: ""
       },
-      config: {
-        placeholderText: "Edit Your Content Here!",
-        charCounterCount: true,
-        charCounterMax: 1000,
-        quickInsertEnabled: false
-      }
+      editorOptions,
+      errors: {}
     };
   },
   methods: {
     ...mapActions({
-      deleteImage: types.summits.actions.DELETE_SUMMIT_IMAGE
+      deleteImage: types.summits.actions.DELETE_SUMMIT_IMAGE,
+      deleteVideo: types.summits.actions.DELETE_SUMMIT_VIDEO,
+      fetchCoverTypes: types.events.actions.FETCH_EVENT_COVER_TYPES
     }),
     clickAction() {
       this.operation === "Edit Summit"
         ? this.saveData(editSummit, "Summit Updated Successfully")
         : this.saveData(createSummit, "Summit Created Successfully");
     },
-    setShowFlag(flag, imageId, openedFor, imageIndex) {
+    setImageDataFlag(flag, imageId, openedFor, imageIndex) {
       this.showFlag = flag;
       this.imageId = imageId;
       this.openedFor = openedFor;
       this.imageIndex = imageIndex;
+    },
+    setVideoDataFlag(flag, videoId, openedFor, contentType) {
+      this.showFlag = flag;
+      this.videoId = videoId;
+      this.openedFor = openedFor;
+      this.contentType = contentType;
+    },
+    getVideo() {
+      this.summit.vid_cover_main = this.$refs.vid_cover_main.files[0];
     },
     setFile(e, key) {
       const files = e.target.files;
@@ -344,8 +465,20 @@ export default {
 
       this.summit[key] = files[0];
     },
+    checkDatesSequence() {
+      if (
+        isDatesInProperSequence(this.event.start_date, this.event.end_date) ===
+        false
+      ) {
+        this.notifyVue("Please insert dates in proper sequence", "danger");
+      }
+    },
     saveData: async function(saveFunction, successMessage) {
-      if (compareDates(this.summit.start_date, this.summit.end_date)) {
+      if (
+        !isDatesInProperSequence(this.summit.start_date, this.summit.end_date)
+      ) {
+        this.notifyVue("Please insert dates in proper order", "danger");
+      } else {
         let formData = new FormData();
         formData.append("initial_title", this.summit.initial_title);
         formData.append("final_title", this.summit.final_title);
@@ -355,8 +488,14 @@ export default {
         formData.append("location", this.summit.location);
         formData.append("start_date", this.summit.start_date);
         formData.append("end_date", this.summit.end_date);
+        formData.append("has_cover_over", this.summit.has_cover_over ? 1 : 0);
+        formData.append("cover_type", this.summit.cover_type);
         formData.append("active", this.summit.active ? 1 : 0);
-        formData.append("vid_initial", this.summit.vid_initial);
+        formData.append(
+          "vid_initial",
+          generateYoutubeUrl(this.summit.vid_initial)
+        );
+        formData.append("vid_cover_main", this.summit.vid_cover_main);
         formData.append("img_logo", this.summit.img_logo);
         formData.append("img_cover_over", this.summit.img_cover_over);
         formData.append("img_card", this.summit.img_card);
@@ -378,36 +517,15 @@ export default {
           this.notifyVue(successMessage, "success");
           this.$router.push("/dashboard/summits/list");
         } catch (error) {
-          this.notifyVue("Error Happened", "danger");
+          this.errors = { ...error.data.errors };
+          Object.keys(error.data.errors).forEach(err => {
+            const errorMessage = error.data.errors[err][0];
+            this.notifyVue(errorMessage, "danger");
+            this.errors = { ...this.errors, [err]: errorMessage };
+          });
           store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
         }
-      } else {
-        this.notifyVue("Please insert dates in proper order", "danger");
       }
-    },
-    resetFields() {
-      this.summit.initial_title = "";
-      this.summit.final_title = "";
-      this.summit.initial_description = "";
-      this.summit.final_description = "";
-      this.summit.attendess = 0;
-      this.summit.location = "";
-      this.summit.start_date = "";
-      this.summit.end_date = "";
-      this.summit.active = false;
-
-      this.summit.img_logo = "";
-      this.summit.img_cover_over = "";
-      this.summit.img_card = "";
-      this.summit.img_cover_main = "";
-
-      this.summit.vid_initial = "";
-
-      this.$refs.img_logo.value = null;
-      this.$refs.img_cover_over.value = null;
-      this.$refs.img_media.value = null;
-      this.$refs.img_cover_main.value = null;
-      this.$refs.img_card.value = null;
     },
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -447,11 +565,33 @@ export default {
       }
 
       this.notifyVue("Image Deleted Successfully", "success");
-      this.setShowFlag(false);
+      this.setImageDataFlag(false);
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+    },
+    removeVideo: async function() {
+      const payload = { summitId: this.editData.id, videoId: this.videoId };
+
+      const response = await this.deleteVideo(payload);
+
+      switch (this.openedFor) {
+        case "vid_cover_main":
+          this.editData.videos.vid_cover_main = null;
+          break;
+
+        default:
+          break;
+      }
+
+      this.notifyVue("Video Deleted Successfully", "success");
+      this.setVideoDataFlag(false);
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
     }
   },
   computed: {
+    ...mapState({
+      coverTypes: state => state.events.eventCoverTypes,
+      isCoverTypesFetched: state => state.events.isEventCoverTypesFetched
+    }),
     minDate() {
       var today = new Date();
       var date =
@@ -461,6 +601,10 @@ export default {
         "-" +
         today.getDate();
       return date;
+    },
+    showFormWhenDataFetched() {
+      if (this.operation !== "Edit Summit") return this.isCoverTypesFetched;
+      return true;
     }
   },
   beforeMount() {
@@ -473,6 +617,8 @@ export default {
       });
   },
   mounted() {
+    store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    this.fetchCoverTypes();
     if (this.$route.name === "Edit Summit") {
       this.summit.initial_title = this.editData.initial_title || "";
       this.summit.final_title = this.editData.final_title || "";
@@ -482,6 +628,13 @@ export default {
       this.summit.location = this.editData.location || "";
       this.summit.start_date = this.editData.start_date.split(" ")[0];
       this.summit.end_date = this.editData.end_date.split(" ")[0];
+      this.summit.cover_type = this.editData.cover_type;
+      this.summit.has_cover_over = this.editData.has_cover_over;
+
+      this.summit.vid_cover_main =
+        (this.editData.videos.vid_cover_main !== null &&
+          this.editData.videos.vid_cover_main.path) ||
+        "";
 
       this.summit.active = this.editData.active || false;
       this.summit.img_logo = this.editData.images.img_logo;
@@ -493,6 +646,10 @@ export default {
         ? this.editData.videos.vid_initial.path || ""
         : "";
     }
+  },
+  updated() {
+    if (this.isCoverTypesFetched)
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   }
 };
 </script>

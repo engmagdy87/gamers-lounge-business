@@ -41,7 +41,7 @@ const postUserPersona = async ({ commit }, payload) => {
         return true
     }).catch((err) => {
         commit(types.home.mutations.SET_SPINNER_FLAG, false)
-        return false
+        throw err
     });
     return response
 };

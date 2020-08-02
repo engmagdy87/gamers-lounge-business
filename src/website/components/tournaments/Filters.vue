@@ -22,7 +22,7 @@
           <div class="form-group">
             <label for="region">Games</label>
             <select class="form-control" v-model="gameId">
-              <option value="null">--Please select game</option>
+              <option :value="null">--Please select game</option>
               <option
                 v-for="(game, index) in gamesData"
                 :selected="gameId === game.id"
@@ -35,7 +35,7 @@
           <div class="form-group">
             <label for="region">Regions</label>
             <select class="form-control" v-model="regionId">
-              <option value="null">--Please select region</option>
+              <option :value="null">--Please select region</option>
               <option
                 v-for="(region, index) in regionsData"
                 :selected="regionId === region.id"
@@ -48,7 +48,7 @@
           <div class="form-group">
             <label for="region">Status</label>
             <select class="form-control" v-model="status">
-              <option value="null">--Please select status</option>
+              <option :value="null">--Please select status</option>
               <option :selected="status" :value="true"
                 >Registeration open</option
               >
@@ -110,9 +110,9 @@ export default {
         this.regionId === null &&
         this.gameId === null &&
         this.status === null
-      ) {
+      )
         this.notifyVue("Please select at least one filter", "danger");
-      } else {
+      else {
         const isValidRequest = await this.fetchFilteredTournaments(payload);
         this.setSpinnerFlag(false);
         if (isValidRequest) {

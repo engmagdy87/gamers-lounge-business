@@ -34,7 +34,11 @@
           </div>
           <div class="col-9">
             <div class="row">
-              <div class="col" v-html="gameDetails.description"></div>
+              <div
+                id="description-container"
+                class="col"
+                v-html="gameDetails.description"
+              ></div>
             </div>
           </div>
         </div>
@@ -68,6 +72,7 @@ import MenuView from "../../components/home/MenuView";
 import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
 import Spinner from "../../shared/Spinner";
+import redirectToNewTab from "../../helpers/RedirectToNewTab";
 
 export default {
   data() {
@@ -115,6 +120,9 @@ export default {
   },
   mounted() {
     this.fetchGameDetails(this.$router.history.current.params.gameId);
+  },
+  updated() {
+    redirectToNewTab("description-container");
   }
 };
 </script>

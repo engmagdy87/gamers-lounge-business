@@ -3,9 +3,8 @@
     <th scope="row">{{ id }}</th>
     <td>{{ rowData.initial_title }}</td>
     <td>{{ rowData.final_title }}</td>
-   <td>
-      <div class="description" v-html="rowData.initial_description">        
-      </div>
+    <td>
+      <div class="description" v-html="rowData.initial_description"></div>
     </td>
     <td v-html="rowData.final_description"></td>
     <td v-if="rowData.summit">
@@ -18,37 +17,62 @@
     <td>{{ rowData.end_date.split(" ")[0] }}</td>
     <td>{{ rowData.type }}</td>
     <td>
-        <a v-if="
+      <a
+        v-if="
           rowData.images.img_card !== undefined &&
             rowData.images.img_card !== null
-        " :href="rowData.images.img_card.path" target="_blank">Img</a>
+        "
+        :href="rowData.images.img_card.path"
+        target="_blank"
+        >Img</a
+      >
     </td>
-    <td v-if="rowData.images !== undefined && rowData.images.img_cover_main !== null">
-        <a
-        v-for="(img, index) in rowData.images.img_cover_main" :key="index"          
-          :href="img.path"
-          target="_blank"
-          >Img{{ index + 1 }}</a
-        >
+    <td
+      v-if="
+        rowData.images !== undefined && rowData.images.img_cover_main !== null
+      "
+    >
+      <a
+        v-for="(img, index) in rowData.images.img_cover_main"
+        :key="index"
+        :href="img.path"
+        target="_blank"
+        >Img{{ index + 1 }}</a
+      >
     </td>
     <td v-else></td>
     <td>
-        <a v-if="
+      <a
+        v-if="
           rowData.images.img_cover_over !== undefined &&
             rowData.images.img_cover_over !== null
-        " :href="rowData.images.img_cover_over.path" target="_blank">Img</a>
-      </span>
+        "
+        :href="rowData.images.img_cover_over.path"
+        target="_blank"
+        >Img</a
+      >
     </td>
     <td>
-        <a v-if="rowData.images.img_logo !== undefined && rowData.images.img_logo !== null " :href="rowData.images.img_logo.path" target="_blank">Img</a>
+      <a
+        v-if="
+          rowData.images.img_logo !== undefined &&
+            rowData.images.img_logo !== null
+        "
+        :href="rowData.images.img_logo.path"
+        target="_blank"
+        >Img</a
+      >
     </td>
-    <td v-if="rowData.images !== undefined && rowData.images.img_media !== null">
-        <a
-        v-for="(img, index) in rowData.images.img_media" :key="index"          
-          :href="img.path"
-          target="_blank"
-          >Img{{ index + 1 }}</a
-        >
+    <td
+      v-if="rowData.images !== undefined && rowData.images.img_media !== null"
+    >
+      <a
+        v-for="(img, index) in rowData.images.img_media"
+        :key="index"
+        :href="img.path"
+        target="_blank"
+        >Img{{ index + 1 }}</a
+      >
     </td>
     <td v-else></td>
     <td
@@ -57,15 +81,11 @@
           rowData.videos.vid_initial !== null
       "
     >
-      <a
-        :href="rowData.videos.vid_initial.path"
-        target="_blank"
-        >Vid</a
-      >
+      <a :href="rowData.videos.vid_initial.path" target="_blank">Vid</a>
     </td>
     <td v-else></td>
     <td class="table-actions">
-      <img src="/website/img/edit.svg" alt="edit" @click="redirectTo"  />
+      <img src="/website/img/edit.svg" alt="edit" @click="redirectTo" />
       <img
         src="/website/img/delete.svg"
         alt="delete"
@@ -109,14 +129,11 @@ tr td a {
   padding: 8px;
   &::-webkit-scrollbar {
     width: 5px !important;
-    height: 5px !important;
+    background-color: $accent !important;
+    border-radius: 20px !important;
   }
   &::-webkit-scrollbar-thumb {
     background-color: $primary !important;
-    border-radius: 20px !important;
-  }
-  &::-webkit-scrollbar {
-    background-color: $accent !important;
     border-radius: 20px !important;
   }
 }

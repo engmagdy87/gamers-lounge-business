@@ -11,13 +11,11 @@
   &::-webkit-scrollbar {
     width: 5px !important;
     height: 5px !important;
+    background-color: $accent !important;
+    border-radius: 20px !important;
   }
   &::-webkit-scrollbar-thumb {
     background-color: $primary !important;
-    border-radius: 20px !important;
-  }
-  &::-webkit-scrollbar {
-    background-color: $accent !important;
     border-radius: 20px !important;
   }
   &__outside {
@@ -29,7 +27,12 @@
     justify-content: center;
     align-items: center;
     padding: 2px;
-    @include create-half-page-hero-shape();
+    &--hexa-shape {
+      @include create-half-page-hero-shape();
+    }
+    &--none {
+      clip-path: inset(0 0 0 0);
+    }
   }
 
   &__inside {
@@ -40,18 +43,23 @@
     background-repeat: no-repeat;
     background-size: cover;
     margin: auto;
-    @include create-half-page-hero-shape();
-    video {
-      object-fit: cover;
-    }
     display: flex;
     justify-content: center;
     align-items: center;
+    video {
+      object-fit: cover;
+    }
     img {
-      width: 25%;
+      width: 20%;
       position: absolute;
       display: table;
       vertical-align: middle;
+    }
+    &--hexa-shape {
+      @include create-half-page-hero-shape();
+    }
+    &--none {
+      clip-path: inset(0 0 0 0);
     }
   }
 

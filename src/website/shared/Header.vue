@@ -71,16 +71,18 @@
         >
           <a href="#">Login</a>
         </li>
-        <li class="float-right" v-if="isUserLoggedIn" @click="logoutUser">
-          <a href="#">
-            Logout
-          </a>
+        <li class="float-right" v-if="isUserLoggedIn">
+          <Avatar :logoutUser="logoutUser" />
         </li>
-        <li class="float-right" v-if="isUserLoggedIn && isUserAdmin">
-          <a href="/dashboard">
-            Dashboard
-          </a>
-        </li>
+        <a href="/dashboard">
+          <li v-if="isUserLoggedIn && isUserAdmin" class="float-right">
+            <img
+              class="header-wrapper__dashboard-img"
+              src="/website/img/dashboard.svg"
+              alt="dashboard"
+            />
+          </li>
+        </a>
       </ul>
     </nav>
 
@@ -178,6 +180,7 @@
 import { mapState, mapGetters } from "vuex";
 import store from "../../store/index";
 import types from "../../store/types";
+import Avatar from "./Avatar";
 import { removeCookie } from "../helpers/CookieHelper";
 
 export default {
@@ -205,6 +208,9 @@ export default {
       isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN,
       isUserAdmin: types.user.getters.IS_USER_ADMIN
     })
+  },
+  components: {
+    Avatar
   }
 };
 </script>

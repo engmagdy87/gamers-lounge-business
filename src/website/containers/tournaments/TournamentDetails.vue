@@ -23,7 +23,7 @@
         <div class="row">
           <div class="col-8">
             <div class="tournament-details-wrapper__content__breadcrumb">
-              <a href="/tournaments">Tournament</a>
+              <a href="/">Tournament</a>
               <span> > {{ tournamentDetails.initial_title }}</span>
             </div>
           </div>
@@ -67,6 +67,7 @@ import RegisterModal from "../../components/home/RegisterModal";
 import Spinner from "../../shared/Spinner";
 import Tabs from "../../shared/Tabs";
 import { getUserCookie } from "../../helpers/CookieHelper";
+import redirectToNewTab from "../../helpers/RedirectToNewTab";
 
 export default {
   data() {
@@ -133,6 +134,9 @@ export default {
     this.fetchTournamentDetails(
       this.$router.history.current.params.tournamentId
     );
+  },
+  updated() {
+    redirectToNewTab("description-container");
   }
 };
 </script>

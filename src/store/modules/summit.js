@@ -1,4 +1,4 @@
-import { getSummits, getSummitsList, removeSummit, removeSummitImage } from '../../website/helpers/APIsHelper';
+import { getSummits, getSummitsList, removeSummit, removeSummitImage, removeSummitVideo } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -67,11 +67,22 @@ const deleteSummitImage = async ({ commit }, payload) => {
     return response
 };
 
+const deleteSummitVideo = async ({ commit }, payload) => {
+    const { summitId, videoId } = payload
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removeSummitVideo(summitId, videoId).then(() => {
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.summits.actions.FETCH_SUMMITS]: getSummitsData,
     [types.summits.actions.FETCH_SUMMITS_LIST]: getSummitsListSummary,
     [types.summits.actions.DELETE_SUMMIT]: deleteSummit,
     [types.summits.actions.DELETE_SUMMIT_IMAGE]: deleteSummitImage,
+    [types.summits.actions.DELETE_SUMMIT_VIDEO]: deleteSummitVideo,
 };
 
 export default {

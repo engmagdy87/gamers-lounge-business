@@ -43,32 +43,41 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="firstName">First Name</label>
             <input
               type="text"
-              class="form-control"
-              id="firstName"
-              aria-describedby="firstNameHelp"
+              id="first_name"
+              aria-describedby="first_nameHelp"
               placeholder="Enter First Name"
-              v-model="firstName"
+              v-model="first_name"
+              :class="[
+                'form-control',
+                errors.first_name !== undefined ? 'is-invalid' : '',
+                errors.first_name === undefined ? 'registeration-style' : ''
+              ]"
             />
-            <!-- <small id="firstNameHelp" class="form-text text-muted"
-              >We'll never share your email with anyone else.</small
-            > -->
+            <p class="error-message" v-if="errors.first_name !== undefined">
+              {{ errors.first_name }}
+            </p>
           </div>
           <div class="form-group">
-            <label for="lastName">Last Name</label>
             <input
               type="text"
               class="form-control"
-              id="lastName"
-              aria-describedby="lastNameHelp"
+              id="last_name"
+              aria-describedby="last_nameHelp"
               placeholder="Enter Last Name"
-              v-model="lastName"
+              v-model="last_name"
+              :class="[
+                'form-control',
+                errors.last_name !== undefined ? 'is-invalid' : '',
+                errors.last_name === undefined ? 'registeration-style' : ''
+              ]"
             />
+            <p class="error-message" v-if="errors.last_name !== undefined">
+              {{ errors.last_name }}
+            </p>
           </div>
           <div class="form-group">
-            <label for="username">Username</label>
             <input
               type="text"
               class="form-control"
@@ -76,13 +85,37 @@
               aria-describedby="usernameHelp"
               placeholder="Enter Username"
               v-model="username"
+              :class="[
+                'form-control',
+                errors.username !== undefined ? 'is-invalid' : '',
+                errors.username === undefined ? 'registeration-style' : ''
+              ]"
             />
+            <p class="error-message" v-if="errors.username !== undefined">
+              {{ errors.username }}
+            </p>
           </div>
           <div class="form-group">
-            <label for="region">Phone</label>
+            <base-input
+              type="date"
+              placeholder="Enter Date of birth"
+              v-model="birthday_date"
+              :isRegisterationForm="true"
+            >
+            </base-input>
+          </div>
+          <div class="form-group">
             <div class="input-group-prepend">
               <div class="input-group-text">
-                <select class="form-control" v-model="phone.country_code">
+                <select
+                  class="form-control"
+                  v-model="phone.country_code"
+                  :class="
+                    errors['phone.number'] !== undefined
+                      ? 'pell-content--is-invalid'
+                      : ''
+                  "
+                >
                   <option
                     v-for="(countryCode, index) in countryCodesData"
                     :selected="phone.country_code === countryCode.dial_code"
@@ -101,9 +134,14 @@
                 v-model="phone.number"
               />
             </div>
+            <p
+              class="error-message"
+              v-if="errors['phone.number'] !== undefined"
+            >
+              {{ errors["phone.number"] }}
+            </p>
           </div>
           <div class="form-group">
-            <label for="email">Email</label>
             <input
               type="text"
               class="form-control"
@@ -111,26 +149,40 @@
               aria-describedby="emailHelp"
               placeholder="Enter Email"
               v-model="email"
+              :class="[
+                'form-control',
+                errors.email !== undefined ? 'is-invalid' : '',
+                errors.email === undefined ? 'registeration-style' : ''
+              ]"
             />
+            <p class="error-message" v-if="errors.email !== undefined">
+              {{ errors.email }}
+            </p>
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
             <input
               type="password"
               class="form-control"
               id="reigter-password"
               placeholder="Enter Password"
               v-model="password"
+              :class="[
+                'form-control',
+                errors.password !== undefined ? 'is-invalid' : '',
+                errors.password === undefined ? 'registeration-style' : ''
+              ]"
             />
+            <p class="error-message" v-if="errors.password !== undefined">
+              {{ errors.password }}
+            </p>
           </div>
           <div class="form-group">
-            <label for="password">Confirm Password</label>
             <input
               type="password"
               class="form-control"
               id="reigter-confirm-password"
               placeholder="Enter Password again"
-              v-model="confirmPassword"
+              v-model="password_confirmation"
             />
           </div>
           <button
@@ -148,25 +200,29 @@
 
 <script>
 import { mapActions } from "vuex";
+import store from "../../../store/index";
 import types from "../../../store/types";
 import countryCodes from "../../../assets/json/CountryCodes.json";
+import isEmailValid from "../../helpers/EmailValidation";
 
 export default {
   data() {
     return {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       username: "",
+      birthday_date: "",
       email: "",
       password: "",
-      confirmPassword: "",
+      password_confirmation: "",
       img_profile: "",
       phone: {
         country_code: countryCodes[0].dial_code,
         number: ""
       },
       imgProfileUrl: null,
-      countryCodesData: countryCodes
+      countryCodesData: countryCodes,
+      errors: {}
     };
   },
   props: ["showFlag", "setShowRegisterModal"],
@@ -175,43 +231,57 @@ export default {
       postUserPersona: types.user.actions.REGISTER_USER_PERSONA
     }),
     async registerUserPersona() {
-      let formData = new FormData();
-      formData.append("first_name", this.firstName);
-      formData.append("last_name", this.lastName);
-      formData.append("username", this.username);
-      formData.append("email", this.email);
-      formData.append("password", this.password);
-      formData.append("password_confirmation", this.confirmPassword);
-      formData.append("img_profile", this.img_profile);
-      formData.append("phone", JSON.stringify(this.phone));
-
-      const isValidRequest = await this.postUserPersona(formData);
-      if (isValidRequest) {
-        this.firstName = "";
-        this.lastName = "";
-        this.username = "";
-        this.email = "";
-        this.password = "";
-        this.confirmPassword = "";
-        this.img_profile = "";
-        this.imgProfileUrl = null;
-        this.phone = {
-          country_code: countryCodes[0].dial_code,
-          number: ""
-        };
-        this.$refs.img_profile.value = null;
+      if (!isEmailValid(this.email)) {
+        this.notifyVue("Email has invalid format", "danger");
+        this.errors = { ...this.errors, email: "Email has invalid format" };
       } else {
-        this.notifyVue("Error Happened", "danger");
+        let formData = new FormData();
+        formData.append("first_name", this.first_name);
+        formData.append("last_name", this.last_name);
+        formData.append("username", this.username);
+        formData.append("birthday_date", this.birthday_date);
+        formData.append("email", this.email);
+        formData.append("password", this.password);
+        formData.append("password_confirmation", this.password_confirmation);
+        formData.append("img_profile", this.img_profile);
+        formData.append("phone", JSON.stringify(this.phone));
+        try {
+          await this.postUserPersona(formData);
+
+          this.first_name = "";
+          this.last_name = "";
+          this.username = "";
+          this.birthday_date = "";
+          this.email = "";
+          this.password = "";
+          this.password_confirmation = "";
+          this.img_profile = "";
+          this.imgProfileUrl = null;
+          this.phone = {
+            country_code: countryCodes[0].dial_code,
+            number: ""
+          };
+        } catch (error) {
+          this.errors = { ...error.data.errors };
+          Object.keys(error.data.errors).forEach(err => {
+            const errorMessage = error.data.errors[err][0];
+            this.notifyVue(errorMessage, "danger");
+            this.errors = { ...this.errors, [err]: errorMessage };
+          });
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        }
       }
     },
     closeModal() {
       this.setShowRegisterModal(false);
-      this.firstName = "";
-      this.lastName = "";
+      this.errors = {};
+      this.first_name = "";
+      this.last_name = "";
       this.username = "";
+      this.birthday_date = "";
       this.email = "";
       this.password = "";
-      this.confirmPassword = "";
+      this.password_confirmation = "";
       this.img_profile = "";
       this.phone = {
         country_code: countryCodes[0].dial_code,
@@ -247,6 +317,8 @@ $preview-image: 200px;
   color: dimgray;
   padding: 10px 10px;
   height: $preview-image; /* minimum height */
+  width: 50%;
+  margin: auto;
   position: relative;
   cursor: pointer;
 }
@@ -279,11 +351,13 @@ $preview-image: 200px;
 .preview img {
   max-width: 100%;
   height: $preview-image;
+  border-radius: 10px !important;
+  border: 1px solid $primary;
 }
 
 .preview__close {
   position: absolute;
-  top: 0;
+  top: -20px;
   right: 0;
   color: white;
   float: right;

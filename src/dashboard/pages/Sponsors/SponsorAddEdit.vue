@@ -19,8 +19,14 @@
             label="Name"
             placeholder="Enter Name"
             v-model="sponsor.name"
+            :autofocus="true"
+            :isInvalid="errors.name !== undefined"
+            :isRequired="true"
           >
           </base-input>
+          <p class="error-message" v-if="errors.name !== undefined">
+            {{ errors.name }}
+          </p>
         </div>
         <div class="col-md-6">
           <base-input
@@ -28,8 +34,13 @@
             label="Link"
             placeholder="Enter Link"
             v-model="sponsor.link"
+            :isInvalid="errors.link !== undefined"
+            :isRequired="true"
           >
           </base-input>
+          <p class="error-message" v-if="errors.link !== undefined">
+            {{ errors.link }}
+          </p>
         </div>
       </div>
 
@@ -44,6 +55,7 @@
               @change="e => setFile(e, 'img_logo')"
               ref="img_logo"
             />
+            <br />
             <ImagePreview
               v-if="
                 editData !== undefined &&
@@ -52,7 +64,7 @@
                   editData.images.img_logo !== null
               "
               :image="editData.images.img_logo"
-              :setShowDeleteDialogFlag="setShowFlag"
+              :setShowDeleteDialogFlag="setImageDataFlag"
               openedFor="img_logo"
             />
           </div>
@@ -70,7 +82,7 @@
       <div class="clearfix"></div>
       <DeleteDialog
         :showFlag="showFlag"
-        :setShowDeleteDialogFlag="setShowFlag"
+        :setShowDeleteDialogFlag="setImageDataFlag"
         item="Image"
         :deleteAction="removeImage"
       />
@@ -105,7 +117,8 @@ export default {
         name: "",
         link: "",
         img_logo: ""
-      }
+      },
+      errors: {}
     };
   },
   methods: {
@@ -117,7 +130,7 @@ export default {
         ? this.saveData(editSponsor, "Sponsor Updated Successfully")
         : this.saveData(createSponsor, "Sponsor Created Successfully");
     },
-    setShowFlag(flag, imageId, openedFor, imageIndex) {
+    setImageDataFlag(flag, imageId, openedFor, imageIndex) {
       this.showFlag = flag;
       this.imageId = imageId;
       this.openedFor = openedFor;
@@ -147,7 +160,12 @@ export default {
         this.notifyVue(successMessage, "success");
         this.$router.push("/dashboard/sponsors/list");
       } catch (error) {
-        this.notifyVue("Error Happened", "danger");
+        this.errors = { ...error.data.errors };
+        Object.keys(error.data.errors).forEach(err => {
+          const errorMessage = error.data.errors[err][0];
+          this.notifyVue(errorMessage, "danger");
+          this.errors = { ...this.errors, [err]: errorMessage };
+        });
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
       }
     },
@@ -165,7 +183,7 @@ export default {
       }
 
       this.notifyVue("Image Deleted Successfully", "success");
-      this.setShowFlag(false);
+      this.setImageDataFlag(false);
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
     },
     notifyVue(message, color) {

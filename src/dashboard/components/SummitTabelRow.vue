@@ -122,14 +122,11 @@ tr td a {
   width: 200px;
   &::-webkit-scrollbar {
     width: 5px !important;
-    height: 5px !important;
+    background-color: $accent !important;
+    border-radius: 20px !important;
   }
   &::-webkit-scrollbar-thumb {
     background-color: $primary !important;
-    border-radius: 20px !important;
-  }
-  &::-webkit-scrollbar {
-    background-color: $accent !important;
     border-radius: 20px !important;
   }
 }

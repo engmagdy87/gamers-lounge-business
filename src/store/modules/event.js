@@ -1,4 +1,4 @@
-import { getEvents, getEventsTypes, getMainEvents, getSubEvents, getEventCoverTypes, getEvent, getEventsList, removeEvent, removeEventImage } from '../../website/helpers/APIsHelper';
+import { getEvents, getEventsTypes, getMainEvents, getSubEvents, getEventCoverTypes, getEvent, getEventsList, removeEvent, removeEventImage, removeEventVideo } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -154,6 +154,16 @@ const deleteEventImage = async ({ commit }, payload) => {
     return response
 };
 
+const deleteEventVideo = async ({ commit }, payload) => {
+    const { eventId, videoId } = payload
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removeEventVideo(eventId, videoId).then(() => {
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.events.actions.FETCH_EVENTS]: getEventsData,
     [types.events.actions.FETCH_EVENT_TYPE]: getEventTypes,
@@ -164,6 +174,7 @@ const actions = {
     [types.events.actions.FETCH_EVENT_LIST]: getEventsListForDashboard,
     [types.events.actions.DELETE_EVENT]: deleteEvent,
     [types.events.actions.DELETE_EVENT_IMAGE]: deleteEventImage,
+    [types.events.actions.DELETE_EVENT_VIDEO]: deleteEventVideo,
 };
 
 export default {

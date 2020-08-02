@@ -23,25 +23,36 @@
             <label for="username">Username</label>
             <input
               type="text"
-              class="form-control"
               id="login-username"
               aria-describedby="usernameHelp"
               placeholder="Enter Username"
               v-model="username"
+              :class="[
+                'form-control',
+                errors.username !== undefined ? 'is-invalid' : '',
+                errors.username === undefined ? 'registeration-style' : ''
+              ]"
             />
-            <!-- <small id="usernameHelp" class="form-text text-muted"
-              >We'll never share your email with anyone else.</small
-            > -->
+            <p class="error-message" v-if="errors.username !== undefined">
+              {{ errors.username }}
+            </p>
           </div>
           <div class="form-group">
             <label for="password">Password</label>
             <input
               type="password"
-              class="form-control"
               id="login-password"
               placeholder="Enter Password"
               v-model="password"
+              :class="[
+                'form-control',
+                errors.password !== undefined ? 'is-invalid' : '',
+                errors.last_name === undefined ? 'registeration-style' : ''
+              ]"
             />
+            <p class="error-message" v-if="errors.password !== undefined">
+              {{ errors.password }}
+            </p>
           </div>
           <button
             type="button"
@@ -58,22 +69,21 @@
 
 <script>
 import { mapActions, mapMutations } from "vuex";
+import store from "../../../store/index";
 import types from "../../../store/types";
 
 export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
+      errors: {}
     };
   },
   props: ["showFlag", "setShowLoginModal"],
   methods: {
     ...mapActions({
       fetchUserPersona: types.user.actions.FETCH_USER_PERSONA
-    }),
-    ...mapMutations({
-      setSpinnerFlag: types.home.mutations.SET_SPINNER_FLAG
     }),
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -85,18 +95,28 @@ export default {
     },
     async getUserPersona() {
       const payload = { username: this.username, password: this.password };
-      const isValidRequest = await this.fetchUserPersona(payload);
-      this.setSpinnerFlag(false);
-      if (isValidRequest) {
+      try {
+        await this.fetchUserPersona(payload);
+
+        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
         this.username = "";
         this.password = "";
         this.notifyVue("Successful Login", "success");
-      } else this.notifyVue("Something wrong happen!", "danger");
+      } catch (error) {
+        this.errors = { ...error.data.errors };
+        Object.keys(error.data.errors).forEach(err => {
+          const errorMessage = error.data.errors[err][0];
+          this.notifyVue(errorMessage, "danger");
+          this.errors = { ...this.errors, [err]: errorMessage };
+        });
+        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+      }
     },
     closeModal() {
       this.setShowLoginModal(false);
       this.username = "";
       this.password = "";
+      this.errors = {};
     }
   }
 };

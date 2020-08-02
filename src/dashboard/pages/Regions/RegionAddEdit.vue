@@ -19,8 +19,14 @@
             label="Title"
             placeholder="Enter Title"
             v-model="region.title"
+            :autofocus="true"
+            :isInvalid="errors.title !== undefined"
+            :isRequired="true"
           >
           </base-input>
+          <p class="error-message" v-if="errors.title !== undefined">
+            {{ errors.title }}
+          </p>
         </div>
       </div>
 
@@ -52,7 +58,8 @@ export default {
       operation: this.$route.name,
       region: {
         title: ""
-      }
+      },
+      errors: {}
     };
   },
   methods: {
@@ -76,7 +83,12 @@ export default {
         this.notifyVue(successMessage, "success");
         this.$router.push("/dashboard/regions/list");
       } catch (error) {
-        this.notifyVue("Error Happened", "danger");
+        this.errors = { ...error.data.errors };
+        Object.keys(error.data.errors).forEach(err => {
+          const errorMessage = error.data.errors[err][0];
+          this.notifyVue(errorMessage, "danger");
+          this.errors = { ...this.errors, [err]: errorMessage };
+        });
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
       }
     },

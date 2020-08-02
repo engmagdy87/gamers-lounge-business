@@ -17,7 +17,7 @@
       <img
         v-for="(event, index) in mainEventsData"
         :key="index"
-        :src="event.images.img_card.path"
+        :src="event.images.img_cover_home.path"
         alt=""
         class="home-wrapper__slide"
         @click="redirectTo(event.id)"

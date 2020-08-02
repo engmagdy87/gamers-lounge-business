@@ -22,12 +22,12 @@
       :columns="table.columns"
       :data="sponsorsData"
       tableType="sponsors"
-      :setShowDeleteDialogFlag="setShowFlag"
+      :setShowDeleteDialogFlag="setImageDataFlag"
     >
     </LTable>
     <DeleteDialog
       :showFlag="showFlag"
-      :setShowDeleteDialogFlag="setShowFlag"
+      :setShowDeleteDialogFlag="setImageDataFlag"
       item="Sponsor"
       :deleteAction="removeSponsor"
     />
@@ -70,7 +70,7 @@ export default {
         type: color
       });
     },
-    setShowFlag(flag, id, locationInDataArray) {
+    setImageDataFlag(flag, id, locationInDataArray) {
       this.showFlag = flag;
       this.targetId = id;
       this.locationInDataArray = locationInDataArray;

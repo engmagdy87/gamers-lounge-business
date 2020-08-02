@@ -19,19 +19,34 @@
             label="Title"
             placeholder="Enter Title"
             v-model="game.title"
+            :autofocus="true"
+            :isInvalid="errors.title !== undefined"
+            :isRequired="true"
           >
           </base-input>
+          <p class="error-message" v-if="errors.title !== undefined">
+            {{ errors.title }}
+          </p>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label>Description</label>
-            <froala
-              :tag="'textarea'"
-              :config="config"
+            <label>Description<span class="error-message"> *</span></label>
+            <vue-pell-editor
+              :actions="editorOptions"
+              :style-with-css="false"
+              placeholder=""
               v-model="game.description"
-            ></froala>
+              :class="
+                errors.description !== undefined
+                  ? 'pell-content--is-invalid'
+                  : ''
+              "
+            />
+            <p class="error-message" v-if="errors.description !== undefined">
+              {{ errors.description }}
+            </p>
           </div>
         </div>
       </div>
@@ -47,6 +62,7 @@
               @change="e => setFile(e, 'img_logo')"
               ref="img_logo"
             />
+            <br />
             <ImagePreview
               v-if="
                 editData !== undefined &&
@@ -55,11 +71,13 @@
                   editData.images.img_logo !== null
               "
               :image="editData.images.img_logo"
-              :setShowDeleteDialogFlag="setShowFlag"
+              :setShowDeleteDialogFlag="setImageDataFlag"
               openedFor="img_logo"
             />
           </div>
         </div>
+      </div>
+      <div class="row mt-3 mb-3">
         <div class="col">
           <div>
             <label class="mr-5" for="media-images"
@@ -72,6 +90,7 @@
               multiple
               ref="img_cover_main"
             />
+            <br />
             <div
               v-if="
                 editData !== undefined &&
@@ -82,7 +101,7 @@
                 v-for="(img, index) in editData.images.img_cover_main"
                 :key="index"
                 :image="img"
-                :setShowDeleteDialogFlag="setShowFlag"
+                :setShowDeleteDialogFlag="setImageDataFlag"
                 openedFor="img_cover_main"
                 :imageIndex="index"
               />
@@ -103,7 +122,7 @@
       <div class="clearfix"></div>
       <DeleteDialog
         :showFlag="showFlag"
-        :setShowDeleteDialogFlag="setShowFlag"
+        :setShowDeleteDialogFlag="setImageDataFlag"
         item="Image"
         :deleteAction="removeImage"
       />
@@ -117,6 +136,7 @@ import types from "../../../store/types";
 import ImagePreview from "../../../website/shared/ImagePreview.vue";
 import DeleteDialog from "../../../website/shared/DeleteDialog";
 import { createGame, editGame } from "../../../website/helpers/APIsHelper.js";
+import editorOptions from "../../../dashboard/wysiwyg-factory/options";
 
 export default {
   components: {
@@ -136,12 +156,8 @@ export default {
         description: "",
         img_logo: ""
       },
-      config: {
-        placeholderText: "Edit Your Content Here!",
-        charCounterCount: true,
-        charCounterMax: 1000,
-        quickInsertEnabled: false
-      }
+      editorOptions,
+      errors: {}
     };
   },
   methods: {
@@ -153,7 +169,7 @@ export default {
         ? this.saveData(editGame, "Game Updated Successfully")
         : this.saveData(createGame, "Game Created Successfully");
     },
-    setShowFlag(flag, imageId, openedFor, imageIndex) {
+    setImageDataFlag(flag, imageId, openedFor, imageIndex) {
       this.showFlag = flag;
       this.imageId = imageId;
       this.openedFor = openedFor;
@@ -187,7 +203,12 @@ export default {
         this.notifyVue(successMessage, "success");
         this.$router.push("/dashboard/games/list");
       } catch (error) {
-        this.notifyVue("Error Happened", "danger");
+        this.errors = { ...error.data.errors };
+        Object.keys(error.data.errors).forEach(err => {
+          const errorMessage = error.data.errors[err][0];
+          this.notifyVue(errorMessage, "danger");
+          this.errors = { ...this.errors, [err]: errorMessage };
+        });
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
       }
     },
@@ -217,7 +238,7 @@ export default {
       }
 
       this.notifyVue("Image Deleted Successfully", "success");
-      this.setShowFlag(false);
+      this.setImageDataFlag(false);
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
     }
   },

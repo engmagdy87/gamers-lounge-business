@@ -22,12 +22,12 @@
       :columns="table.columns"
       :data="gamesData"
       tableType="games"
-      :setShowDeleteDialogFlag="setShowFlag"
+      :setShowDeleteDialogFlag="setImageDataFlag"
     >
     </LTable>
     <DeleteDialog
       :showFlag="showFlag"
-      :setShowDeleteDialogFlag="setShowFlag"
+      :setShowDeleteDialogFlag="setImageDataFlag"
       item="Game"
       :deleteAction="removeGame"
     />
@@ -78,7 +78,7 @@ export default {
         type: color
       });
     },
-    setShowFlag(flag, id, locationInDataArray) {
+    setImageDataFlag(flag, id, locationInDataArray) {
       this.showFlag = flag;
       this.targetId = id;
       this.locationInDataArray = locationInDataArray;

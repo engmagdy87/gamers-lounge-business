@@ -1,23 +1,24 @@
 <template>
-  <div class="preview-image">
+  <div class="preview-video">
     <div class="close" role="button" @click="fireDeleteModal">
       &times;
     </div>
-    <img :src="image.path" alt="preview" />
+    <video autoplay muted loop style="width: 100%;">
+      <source :src="video.path" type="video/mp4" />
+    </video>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["image", "setShowDeleteDialogFlag", "openedFor", "imageIndex"],
+  props: ["video", "setShowDeleteDialogFlag", "openedFor"],
   methods: {
     fireDeleteModal() {
       this.setShowDeleteDialogFlag(
         true,
-        this.image.id,
+        this.video.id,
         this.openedFor,
-        this.imageIndex,
-        "image"
+        "video"
       );
     }
   }
@@ -25,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.preview-image {
+.preview-video {
   width: 150px;
   max-width: 150px;
   min-width: 150px;

@@ -13,7 +13,7 @@ async function loadUserPersona(payload) {
 }
 
 async function setUserPersona(payload) {
-    const response = await postMultipartWithoutAuth(
+    const response = await post(
         payload,
         APIs.REGISTER_WEBSITE_USER
     );
@@ -23,7 +23,7 @@ async function setUserPersona(payload) {
 
 // Contact
 async function sendMessage(payload) {
-    const response = await postMultipartWithoutAuth(
+    const response = await post(
         payload,
         APIs.POST_MESSAGE
     );
@@ -85,7 +85,15 @@ async function editSummit(id, data) {
 
 async function removeSummitImage(id, imageId) {
     const response = await deleteData(
-        `${APIs.DELETE_IMAGE_IN_SUMMIT}/${id}/images/${imageId}`
+        `${APIs.DELETE_MEDIA_IN_SUMMIT}/${id}/images/${imageId}`
+    );
+
+    return response;
+}
+
+async function removeSummitVideo(id, videoId) {
+    const response = await deleteData(
+        `${APIs.DELETE_MEDIA_IN_SUMMIT}/${id}/videos/${videoId}`
     );
 
     return response;
@@ -176,7 +184,15 @@ async function editEvent(id, data) {
 
 async function removeEventImage(id, imageId) {
     const response = await deleteData(
-        `${APIs.DELETE_IMAGE_IN_EVENT}/${id}/images/${imageId}`
+        `${APIs.DELETE_MEDIA_IN_EVENT}/${id}/images/${imageId}`
+    );
+
+    return response;
+}
+
+async function removeEventVideo(id, videoId) {
+    const response = await deleteData(
+        `${APIs.DELETE_MEDIA_IN_EVENT}/${id}/videos/${videoId}`
     );
 
     return response;
@@ -511,7 +527,9 @@ export {
     removeGameImage,
     removeSponsorImage,
     removeEventImage,
+    removeEventVideo,
     removeSummitImage,
+    removeSummitVideo,
     removeTournamentImage,
     editGame,
     editPlatform,
@@ -525,52 +543,26 @@ export {
 };
 
 async function post(data, url) {
-    const response = await axios.post(url, data);
-    if (
-        (response.status !== 200 && response.status !== 304) ||
-        response.data.errors !== undefined
-    )
-        throw new Error(
-            `response status code ${
-            response.status
-            }`
-        );
-
-    return response;
+    try {
+        const response = await axios.post(url, data);
+        return response
+    } catch (error) {
+        throw error.response
+    }
 }
 
 async function postMultipart(data, url) {
     const adminToken = getUserCookie()
-    const response = await axios.post(url, data, {
-        headers: {
-            'Authorization': `Bearer ${adminToken.access_token}`
-        }
-    });
-    if (
-        (response.status !== 200 && response.status !== 304) ||
-        response.data.errors !== undefined
-    )
-        throw new Error(
-            `response status code ${
-            response.status
-            }`
-        );
-
-    return response;
-}
-async function postMultipartWithoutAuth(data, url) {
-    const response = await axios.post(url, data);
-    if (
-        (response.status !== 200 && response.status !== 304) ||
-        response.data.errors !== undefined
-    )
-        throw new Error(
-            `response status code ${
-            response.status
-            }`
-        );
-
-    return response;
+    try {
+        const response = await axios.post(url, data, {
+            headers: {
+                'Authorization': `Bearer ${adminToken.access_token}`
+            }
+        })
+        return response
+    } catch (error) {
+        throw error.response
+    }
 }
 
 async function get(url, params) {
