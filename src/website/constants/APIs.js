@@ -3,6 +3,13 @@ const API_URL = process.env.VUE_APP_API;
 // Auth
 const REGISTER_WEBSITE_USER = `${API_URL}/register`
 const LOGIN_WEBSITE_USER = `${API_URL}/login`
+const RESEND_VERIFY_EMAIL = `${API_URL}/users/resend-verify-email`
+const FORGOT_PASSWORD = `${API_URL}/passwords/forgot`
+const RESET_PASSWORD = `${API_URL}/passwords/reset`
+
+// User
+const GET_USER_PROFILE = `${API_URL}/profile`
+const UPDATE_USER_PROFILE = `${API_URL}/profile`
 
 // Contact
 const POST_MESSAGE = `${API_URL}/contact-us`
@@ -125,5 +132,10 @@ export {
     EDIT_SUMMIT,
     EDIT_REGION,
     GET_FOOTER_SPONSORS,
-    POST_MESSAGE
+    POST_MESSAGE,
+    RESEND_VERIFY_EMAIL,
+    FORGOT_PASSWORD,
+    RESET_PASSWORD,
+    GET_USER_PROFILE,
+    UPDATE_USER_PROFILE
 };
