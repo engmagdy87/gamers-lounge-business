@@ -17,7 +17,7 @@
         <div class="col-12 col-md-5 profile-wrapper__content__profile-details">
           <div>
             <h4>First Name</h4>
-            <h4 v-if="!isEditMode">{{ profileData.first_name }}</h4>
+            <h4 v-if="!isEditMode">{{ profile.first_name }}</h4>
             <div class="form-group" v-else>
               <input
                 type="text"
@@ -38,7 +38,7 @@
           </div>
           <div>
             <h4>Username</h4>
-            <h4 v-if="!isEditMode">{{ profileData.username }}</h4>
+            <h4 v-if="!isEditMode">{{ profile.username }}</h4>
             <div class="form-group" v-else>
               <input
                 type="text"
@@ -59,7 +59,7 @@
           </div>
           <div>
             <h4>E-mail</h4>
-            <h4 v-if="!isEditMode">{{ profileData.email }}</h4>
+            <h4 v-if="!isEditMode">{{ profile.email }}</h4>
             <div class="form-group" v-else>
               <input
                 type="text"
@@ -86,7 +86,7 @@
         <div class="col-12 col-md-5 profile-wrapper__content__profile-details">
           <div>
             <h4>Last Name</h4>
-            <h4 v-if="!isEditMode">{{ profileData.last_name }}</h4>
+            <h4 v-if="!isEditMode">{{ profile.last_name }}</h4>
             <div class="form-group" v-else>
               <input
                 type="text"
@@ -108,14 +108,31 @@
           <div>
             <h4>Birth date</h4>
             <h4 v-if="!isEditMode">
-              {{ profileData.birthday_date.split(" ")[0] }}
+              {{ profile.birthday_date.split(" ")[0] }}
             </h4>
+            <div class="form-group" v-else>
+              <base-input
+                type="date"
+                placeholder="Enter Birth Date"
+                v-model="profile.birthday_date"
+                :isInvalid="errors.birthday_date !== undefined"
+                :isRequired="true"
+                :isRegisterationForm="true"
+              >
+              </base-input>
+              <p
+                class="error-message"
+                v-if="errors.birthday_date !== undefined"
+              >
+                {{ errors.birthday_date }}
+              </p>
+            </div>
           </div>
           <div>
             <h4>Phone number</h4>
             <h4 v-if="!isEditMode">
-              {{ profileData.phone.country_code }}
-              {{ profileData.phone.number }}
+              {{ profile.phone.country_code }}
+              {{ profile.phone.number }}
             </h4>
             <div class="form-group" v-else>
               <div class="input-group-prepend">
@@ -194,7 +211,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from "vuex";
+import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
 import { getUserCookie } from "../helpers/CookieHelper";
 import store from "../../store/index";
 import types from "../../store/types";
@@ -250,6 +267,9 @@ export default {
       fetchUserProfile: types.user.actions.FETCH_USER_PROFILE,
       updateUserProfile: types.user.actions.UPDATE_USER_PROFILE
     }),
+    ...mapMutations({
+      setIsProfileUpdated: types.user.mutations.SET_IS_USER_PROFILE_UPDATED
+    }),
     setShowChangePasswordModal(value = false) {
       this.showChangePasswordModal = value;
     },
@@ -258,9 +278,10 @@ export default {
       if (!value) {
         this.setRequestedPassword(password);
         await this.updateProfile();
+        this.setShowReloginModalModal(true);
       }
     },
-    setIsEditMode(value = false) {
+    setIsEditMode(value) {
       this.isEditMode = value;
     },
     setShowReloginModalModal(value = false) {
@@ -303,7 +324,6 @@ export default {
         await this.updateUserProfile(formData);
         this.setIsEditMode(false);
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-        this.setShowReloginModalModal(true);
       } catch (error) {
         if (
           error.data.errors !== undefined &&
@@ -328,6 +348,19 @@ export default {
         verticalAlign: "top",
         type: color
       });
+    },
+    fetchProfile: async function() {
+      await this.fetchUserProfile();
+      if (this.isProfileFetched && !this.isEditMode) {
+        this.profile.first_name = this.profileData.first_name;
+        this.profile.last_name = this.profileData.last_name;
+        this.profile.username = this.profileData.username;
+        this.profile.email = this.profileData.email;
+        this.profile.birthday_date = this.profileData.birthday_date.split(
+          " "
+        )[0];
+        this.profile.phone = this.profileData.phone;
+      }
     }
   },
   components: {
@@ -338,18 +371,7 @@ export default {
     ReloginModal
   },
   mounted() {
-    this.fetchUserProfile();
-  },
-  updated() {
-    if (this.isProfileFetched && !this.isEditMode) {
-      this.profile.first_name = this.profileData.first_name;
-      this.profile.last_name = this.profileData.last_name;
-      this.profile.username = this.profileData.username;
-      this.profile.email = this.profileData.email;
-      this.profile.birthday_date = this.profileData.birthday_date.split(" ")[0];
-      this.profile.phone = this.profileData.phone;
-    }
-    if (this.isProfileUpdated) this.setIsEditMode(false);
+    this.fetchProfile();
   }
 };
 </script>
