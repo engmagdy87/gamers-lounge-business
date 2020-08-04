@@ -21,6 +21,50 @@ async function setUserPersona(payload) {
     return response.data;
 }
 
+// User
+async function getProfile() {
+    const response = await getDashboardData(
+        APIs.GET_USER_PROFILE
+    );
+
+    return response.data;
+}
+
+async function updateProfile(payload) {
+    const response = await postMultipart(
+        payload,
+        APIs.UPDATE_USER_PROFILE
+    );
+
+    return response.data;
+}
+
+async function sendMail(payload) {
+    const response = await post(
+        payload,
+        APIs.SEND_MAIL
+    );
+
+    return response.data;
+}
+
+async function resetPassword(payload) {
+    const response = await post(
+        payload,
+        APIs.RESET_PASSWORD
+    );
+
+    return response.data;
+}
+
+async function resendVerificationEmail(payload) {
+    const response = await post(
+        payload,
+        APIs.RESEND_VERIFICATION_EMAIL
+    );
+    return response.data;
+}
+
 // Contact
 async function sendMessage(payload) {
     const response = await post(
@@ -457,6 +501,14 @@ async function getTournamentDetails(tournamentId) {
     return response.data;
 }
 
+async function getTournamentRegisterLink(tournamentId) {
+    const response = await getDashboardData(
+        `${APIs.GET_REGISTER_LINK}/${tournamentId}/register-link`
+    );
+
+    return response.data;
+}
+
 async function removeTournament(id) {
     const response = await deleteData(
         `${APIs.DELETE_TOURNAMENT}/${id}`
@@ -539,7 +591,13 @@ export {
     editRegion,
     editTournament,
     getSponsorsForFooter,
-    sendMessage
+    sendMessage,
+    getProfile,
+    updateProfile,
+    sendMail,
+    resetPassword,
+    resendVerificationEmail,
+    getTournamentRegisterLink
 };
 
 async function post(data, url) {

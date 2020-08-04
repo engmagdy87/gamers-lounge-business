@@ -3,6 +3,9 @@ import Home from '../website/containers/Home.vue'
 import Story from '../website/containers/Story.vue'
 import Contact from '../website/containers/Contact.vue'
 import EventsContainer from '../website/containers/Events.vue'
+import Profile from '../website/containers/Profile.vue'
+import ForgotPassword from '../website/containers/ForgotPassword.vue'
+import ResetPassword from '../website/containers/ResetPassword.vue'
 
 // GeneralViews
 import NotFound from '../dashboard/pages/NotFoundPage.vue'
@@ -86,6 +89,26 @@ const routes = [
     path: '/tournaments/tournament/:tournamentId',
     name: 'tournament',
     component: TournamentDetails,
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile,
+    beforeEnter(to, from, next) {
+      const token = getUserCookie()
+      if (!token) next('/');
+      else next();
+    }
+  },
+  {
+    path: '/forgot',
+    name: 'forgot',
+    component: ForgotPassword,
+  },
+  {
+    path: '/reset/:token/:email',
+    name: 'reset',
+    component: ResetPassword,
   },
   {
     path: '/dashboard',

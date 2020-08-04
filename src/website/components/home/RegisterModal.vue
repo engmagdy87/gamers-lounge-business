@@ -15,7 +15,7 @@
     >
       <div class="register-modal-header">
         <span class="close" @click="closeModal">&times;</span>
-        <h2>Register</h2>
+        <h2>Create Account</h2>
       </div>
       <div class="register-modal-body">
         <form>
@@ -190,7 +190,7 @@
             class="btn btn-primary float-right"
             @click="registerUserPersona"
           >
-            Register
+            Create
           </button>
         </form>
       </div>

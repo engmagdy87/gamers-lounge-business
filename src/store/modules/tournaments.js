@@ -1,4 +1,4 @@
-import { getTournaments, getTournamentsForDashboard, getTournamentDetails, getFilteredTournaments, removeTournament, removeTournamentImage } from '../../website/helpers/APIsHelper';
+import { getTournaments, getTournamentsForDashboard, getTournamentDetails, getFilteredTournaments, removeTournament, removeTournamentImage, getTournamentRegisterLink } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -84,6 +84,15 @@ const getFilteredTournamentsData = async ({ commit }, payload) => {
     return response
 };
 
+const fetchRegisterLink = async ({ commit }, payload) => {
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await getTournamentRegisterLink(payload).then((response) => {
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return response.data.register_link
+    }).catch(() => false);
+    return response
+};
+
 const deleteTournament = async ({ commit }, payload) => {
     const { tournamentId, locationInDataArray } = payload
     commit(types.home.mutations.SET_SPINNER_FLAG, true);
@@ -112,6 +121,7 @@ const actions = {
     [types.tournaments.actions.FETCH_FILTERED_TOURNAMENTS]: getFilteredTournamentsData,
     [types.tournaments.actions.DELETE_TOURNAMENT]: deleteTournament,
     [types.tournaments.actions.DELETE_TOURNAMENT_IMAGE]: deleteTournamentImage,
+    [types.tournaments.actions.FETCH_REGISTER_LINK]: fetchRegisterLink,
 };
 
 export default {

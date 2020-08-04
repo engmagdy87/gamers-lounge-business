@@ -5,11 +5,13 @@ const REGISTER_WEBSITE_USER = `${API_URL}/register`
 const LOGIN_WEBSITE_USER = `${API_URL}/login`
 const RESEND_VERIFY_EMAIL = `${API_URL}/users/resend-verify-email`
 const FORGOT_PASSWORD = `${API_URL}/passwords/forgot`
-const RESET_PASSWORD = `${API_URL}/passwords/reset`
 
 // User
 const GET_USER_PROFILE = `${API_URL}/profile`
 const UPDATE_USER_PROFILE = `${API_URL}/profile`
+const SEND_MAIL = `${API_URL}/passwords/forgot`
+const RESET_PASSWORD = `${API_URL}/passwords/reset`
+const RESEND_VERIFICATION_EMAIL = `${API_URL}/users/resend-verify-email`
 
 // Contact
 const POST_MESSAGE = `${API_URL}/contact-us`
@@ -63,6 +65,7 @@ const GET_WEBSITE_TOURNAMENT_DETAILS = `${API_URL}/tournaments`
 const DELETE_TOURNAMENT = `${API_URL}/admin/tournaments`
 const EDIT_TOURNAMENT = `${API_URL}/admin/tournaments`
 const DELETE_IMAGE_IN_TOURNAMENT = `${API_URL}/admin/tournaments`
+const GET_REGISTER_LINK = `${API_URL}/tournaments`
 
 // PLATFORM
 const GET_PLATFORMS = `${API_URL}/admin/platforms`
@@ -137,5 +140,8 @@ export {
     FORGOT_PASSWORD,
     RESET_PASSWORD,
     GET_USER_PROFILE,
-    UPDATE_USER_PROFILE
+    UPDATE_USER_PROFILE,
+    SEND_MAIL,
+    RESEND_VERIFICATION_EMAIL,
+    GET_REGISTER_LINK
 };

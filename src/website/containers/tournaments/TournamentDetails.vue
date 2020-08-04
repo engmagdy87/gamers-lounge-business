@@ -73,7 +73,8 @@ export default {
   data() {
     return {
       showLoginModal: false,
-      showRegisterModal: false
+      showRegisterModal: false,
+      registerLink: ""
     };
   },
   computed: {
@@ -98,7 +99,8 @@ export default {
   methods: {
     ...mapActions({
       fetchTournamentDetails:
-        types.tournaments.actions.FETCH_TOURNAMENTS_DETAILS
+        types.tournaments.actions.FETCH_TOURNAMENTS_DETAILS,
+      fetchTournamentRegisterLink: types.tournaments.actions.FETCH_REGISTER_LINK
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -106,12 +108,18 @@ export default {
     setShowRegisterModal(value = false) {
       this.showRegisterModal = value;
     },
+    getLink: async function() {
+      const result = await this.fetchTournamentRegisterLink(
+        this.$router.history.current.params.tournamentId
+      );
+      this.registerLink = result;
+    },
     redirectTo() {
       const token = getUserCookie();
       if (!token)
         this.notifyVue("Please login to register to tournament", "danger");
       else if (this.tournamentDetails.is_register_available)
-        window.open(this.tournamentDetails.register_link, "_blank");
+        window.open(this.registerLink, "_blank");
       else this.notifyVue("Register was closed", "danger");
     },
     notifyVue(message, color) {
@@ -134,6 +142,7 @@ export default {
     this.fetchTournamentDetails(
       this.$router.history.current.params.tournamentId
     );
+    this.getLink();
   },
   updated() {
     redirectToNewTab("description-container");

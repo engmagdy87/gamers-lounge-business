@@ -5,10 +5,22 @@ const user = {
     },
     mutations: {
         SET_USER_PERSONA: 'user/mutations/SET_USER_PERSONA',
+        SET_USER_PROFILE: 'user/mutations/SET_USER_PROFILE',
+        SET_IS_USER_PROFILE_FETCHED: 'user/mutations/SET_IS_USER_PROFILE_FETCHED',
+        SET_IS_USER_PROFILE_UPDATED: 'user/mutations/SET_IS_USER_PROFILE_UPDATED',
+        SET_IS_FORGOT_MAIL_SENT: 'user/mutations/SET_IS_FORGOT_MAIL_SENT',
+        SET_IS_RESET_PASSWORD_SENT: 'user/mutations/SET_IS_RESET_PASSWORD_SENT',
+        SET_IS_VERIFICATION_MAIL_SENT: 'user/mutations/SET_IS_VERIFICATION_MAIL_SENT',
+        SET_VERIFIED_USER_STATUS: 'user/mutations/SET_VERIFIED_USER_STATUS',
     },
     actions: {
         FETCH_USER_PERSONA: 'user/actions/FETCH_USER_PERSONA',
         REGISTER_USER_PERSONA: 'user/actions/REGISTER_USER_PERSONA',
+        FETCH_USER_PROFILE: 'user/actions/FETCH_USER_PROFILE',
+        UPDATE_USER_PROFILE: 'user/actions/GET_USER_PROFILE',
+        SEND_FORGOT_MAIL: 'user/actions/SEND_FORGOT_MAIL',
+        RESET_PASSWORD: 'user/actions/RESET_PASSWORD',
+        RESEND_VERIFICATION_EMAIL: 'user/actions/RESEND_VERIFICATION_EMAIL',
     }
 };
 
@@ -131,6 +143,7 @@ const tournaments = {
         FETCH_TOURNAMENTS_FOR_DASHBOARD: 'tournaments/actions/FETCH_TOURNAMENTS_FOR_DASHBOARD',
         FETCH_TOURNAMENTS_DETAILS: 'games/actions/FETCH_TOURNAMENTS_DETAILS',
         FETCH_FILTERED_TOURNAMENTS: 'games/actions/FETCH_FILTERED_TOURNAMENTS',
+        FETCH_REGISTER_LINK: 'games/actions/FETCH_REGISTER_LINK',
         DELETE_TOURNAMENT: 'tournaments/actions/DELETE_TOURNAMENT',
         DELETE_TOURNAMENT_IMAGE: 'tournaments/actions/DELETE_TOURNAMENT_IMAGE',
         EDIT_TOURNAMENT: 'tournaments/actions/EDIT_TOURNAMENT',

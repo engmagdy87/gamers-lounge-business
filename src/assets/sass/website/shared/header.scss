@@ -11,6 +11,12 @@
   align-items: center;
   height: $header-height;
   z-index: 100;
+  &__user-section {
+    color: $primary !important;
+  }
+  &__user-section-icon {
+    width: 20px;
+  }
   &--solid {
     background: $solid-header;
   }
@@ -53,7 +59,7 @@
     margin-left: 40px;
     width: 300px;
     @include is-mobile {
-      width: 150px;
+      width: 97%;
       margin-left: 10px;
     }
     img {
@@ -62,7 +68,7 @@
       margin-right: 20px;
       padding-bottom: 20px;
       @include is-mobile {
-        margin-right: 5px;
+        margin-right: auto;
         width: 90px;
         padding-bottom: 10px;
       }

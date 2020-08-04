@@ -5,11 +5,11 @@
       isSolidHeader ? 'header-wrapper--solid' : 'header-wrapper--gradient'
     ]"
   >
-    <a href="/" alt="esports summit">
-      <div class="header-wrapper__logo">
+    <div class="header-wrapper__logo">
+      <a href="/" alt="esports summit" style="width: 100%;">
         <img src="/website/img/ess-logo.png" alt="ess logo" />
-      </div>
-    </a>
+      </a>
+    </div>
     <!-- DESKTOP UI -->
     <nav class="header-wrapper--desktop">
       <ul class="header-wrapper__navLinks">
@@ -57,25 +57,33 @@
         >
           <a href="/contact">Contact Us</a>
         </li>
+
         <li
-          class="float-right"
+          class="float-right header-wrapper__user-section"
           @click="setShowRegisterModal(true)"
-          v-if="!isUserLoggedIn"
+          v-if="userCookie === null"
         >
-          <a href="#">Register</a>
+          <span class="header-wrapper__user-section">/</span
+          ><a class="header-wrapper__user-section" href="#">Create Account</a>
         </li>
         <li
           class="float-right"
           @click="setShowLoginModal(true)"
-          v-if="!isUserLoggedIn"
+          v-if="userCookie === null"
         >
-          <a href="#">Login</a>
+          <a class="header-wrapper__user-section" href="#">Login</a>
         </li>
-        <li class="float-right" v-if="isUserLoggedIn">
-          <Avatar :logoutUser="logoutUser" />
+        <img
+          v-if="userCookie === null"
+          class="float-right float-right header-wrapper__user-section-icon"
+          src="../../../public/website/img/user.svg"
+          alt="user"
+        />
+        <li class="float-right" v-if="userCookie !== null">
+          <Avatar :logoutUser="logoutUser" :userCookie="userCookie" />
         </li>
         <a href="/dashboard">
-          <li v-if="isUserLoggedIn && isUserAdmin" class="float-right">
+          <li v-if="userCookie !== null && isUserAdmin" class="float-right">
             <img
               class="header-wrapper__dashboard-img"
               src="/website/img/dashboard.svg"
@@ -145,25 +153,34 @@
           <li
             class="float-lg-right"
             @click="setShowRegisterModal(true)"
-            v-if="!isUserLoggedIn"
+            v-if="userCookie === null"
           >
             <a href="#" @click="closeNav">Register</a>
           </li>
           <li
             class="float-lg-right"
             @click="setShowLoginModal(true)"
-            v-if="!isUserLoggedIn"
+            v-if="userCookie === null"
           >
             <a href="#" @click="closeNav">Login</a>
           </li>
-          <li class="float-lg-right" v-if="isUserLoggedIn" @click="logoutUser">
-            <a href="#">
-              Logout
+          <li class="float-lg-right" v-if="userCookie !== null">
+            <a href="/profile">
+              Profile
             </a>
           </li>
-          <li class="float-lg-right" v-if="isUserLoggedIn && isUserAdmin">
+          <li class="float-lg-right" v-if="userCookie !== null && isUserAdmin">
             <a href="/dashboard">
               Dashboard
+            </a>
+          </li>
+          <li
+            class="float-lg-right"
+            v-if="userCookie !== null"
+            @click="logoutUser"
+          >
+            <a href="#">
+              Logout
             </a>
           </li>
         </div>
@@ -181,9 +198,14 @@ import { mapState, mapGetters } from "vuex";
 import store from "../../store/index";
 import types from "../../store/types";
 import Avatar from "./Avatar";
-import { removeCookie } from "../helpers/CookieHelper";
+import { removeCookie, getUserCookie } from "../helpers/CookieHelper";
 
 export default {
+  data() {
+    return {
+      userCookie: null
+    };
+  },
   props: [
     "activeItem",
     "setShowRegisterModal",
@@ -207,10 +229,25 @@ export default {
     ...mapGetters({
       isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN,
       isUserAdmin: types.user.getters.IS_USER_ADMIN
+    }),
+    ...mapState({
+      userVerification: state => state.user.userVerification,
+      userPersona: state => state.user.userPersona
     })
+  },
+  watch: {
+    userVerification() {
+      if (this.userVerification.status) this.userCookie = getUserCookie();
+    },
+    userPersona() {
+      if (Object.keys(this.userPersona).length === 0) this.userCookie = null;
+    }
   },
   components: {
     Avatar
+  },
+  mounted() {
+    if (getUserCookie() !== undefined) this.userCookie = getUserCookie();
   }
 };
 </script>

@@ -495,7 +495,8 @@ export default {
       fetchRegionsList: types.regions.actions.FETCH_REGIONS_FOR_DASHBOARD,
       fetchPlatformsList: types.platforms.actions.FETCH_PLATFORMS_FOR_DASHBOARD,
       fetchGamesList: types.games.actions.FETCH_GAMES_FOR_DASHBOARD,
-      fetchEventsList: types.events.actions.FETCH_EVENT_LIST
+      fetchEventsList: types.events.actions.FETCH_EVENT_LIST,
+      fetchSummitsList: types.summits.actions.FETCH_SUMMITS_LIST
     }),
     clickAction() {
       this.operation === "Edit Tournament"
@@ -757,6 +758,7 @@ export default {
     this.fetchPlatformsList();
     this.fetchGamesList();
     this.fetchEventsList();
+    this.fetchSummitsList();
     if (this.$route.name === "Edit Tournament") {
       this.tournament.initial_title = this.editData.initial_title || "";
       this.tournament.final_title = this.editData.final_title || "";

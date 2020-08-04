@@ -1,0 +1,99 @@
+@import "../color-palette.scss";
+@import "../variables.scss";
+@import "../mixins.scss";
+
+.profile-wrapper {
+  background-image: url("~/website/img/hexagone-pattern.png");
+  background-repeat: repeat;
+  height: 100vh;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 5px !important;
+    background-color: $accent !important;
+    border-radius: 20px !important;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary !important;
+    border-radius: 20px !important;
+  }
+  &__outside {
+    position: relative;
+    width: calc(100% - 2px);
+    height: $hero-image-height;
+    background: $placeholder-background;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    @include create-hero-header-shape();
+  }
+
+  &__inside {
+    position: relative;
+    background-image: url("~/website/img/profile-cover.jpg");
+    width: calc(100% - 2px);
+    height: calc(#{$hero-image-height} - 4px);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include create-hero-header-shape();
+  }
+
+  &__content {
+    width: 100%;
+    padding: 5vh 15%;
+    min-height: calc(100vh - 12vh);
+    color: white !important;
+    @include is-mobile {
+      min-height: 82vh;
+    }
+    &__profile-image {
+      div,
+      img {
+        border: 1px solid $primary;
+        border-radius: 10px;
+        background-color: $accent;
+        width: 150px;
+        height: 150px;
+      }
+    }
+    &__profile-details {
+      padding-left: 50px;
+      div {
+        height: 110px;
+        margin-top: 5px;
+        h4 {
+          margin-top: 0;
+          color: $primary;
+        }
+      }
+      h4:nth-child(2) {
+        font-weight: bold;
+      }
+    }
+    &__custom-button-wrapper {
+      width: 190px;
+      height: 52px;
+      cursor: pointer;
+      &__outside {
+        position: relative;
+        width: 200px;
+        height: 100%;
+        margin: 5px;
+        background: $placeholder-background;
+        border-color: $placeholder-background;
+        color: $primary;
+        font-size: 1.05rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.2s ease;
+        @include create-hexagone-shape(10px);
+      }
+    }
+  }
+}

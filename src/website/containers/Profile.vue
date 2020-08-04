@@ -1,0 +1,376 @@
+<template>
+  <div class="profile-wrapper">
+    <Header activeItem="profile" :isSolidHeader="true" />
+    <div class="profile-wrapper__outside" v-if="isProfileFetched">
+      <div class="profile-wrapper__inside"></div>
+    </div>
+    <div class="profile-wrapper__content" v-if="isProfileFetched">
+      <div class="row">
+        <div class="col-12 col-md-2 profile-wrapper__content__profile-image">
+          <img
+            v-if="profileData.images.img_profile !== null"
+            :src="profileData.images.img_profile.path"
+            alt="user profile"
+          />
+          <img v-else src="website/img/placeholder.png" alt="user profile" />
+        </div>
+        <div class="col-12 col-md-5 profile-wrapper__content__profile-details">
+          <div>
+            <h4>First Name</h4>
+            <h4 v-if="!isEditMode">{{ profileData.first_name }}</h4>
+            <div class="form-group" v-else>
+              <input
+                type="text"
+                id="first_name"
+                aria-describedby="first_nameHelp"
+                placeholder="Enter First Name"
+                v-model="profile.first_name"
+                :class="[
+                  'form-control',
+                  errors.first_name !== undefined ? 'is-invalid' : '',
+                  errors.first_name === undefined ? 'registeration-style' : ''
+                ]"
+              />
+              <p class="error-message" v-if="errors.first_name !== undefined">
+                {{ errors.first_name }}
+              </p>
+            </div>
+          </div>
+          <div>
+            <h4>Username</h4>
+            <h4 v-if="!isEditMode">{{ profileData.username }}</h4>
+            <div class="form-group" v-else>
+              <input
+                type="text"
+                id="username"
+                aria-describedby="username"
+                placeholder="Enter Username"
+                v-model="profile.username"
+                :class="[
+                  'form-control',
+                  errors.username !== undefined ? 'is-invalid' : '',
+                  errors.username === undefined ? 'registeration-style' : ''
+                ]"
+              />
+              <p class="error-message" v-if="errors.username !== undefined">
+                {{ errors.username }}
+              </p>
+            </div>
+          </div>
+          <div>
+            <h4>E-mail</h4>
+            <h4 v-if="!isEditMode">{{ profileData.email }}</h4>
+            <div class="form-group" v-else>
+              <input
+                type="text"
+                id="email"
+                aria-describedby="email"
+                placeholder="Enter Email"
+                v-model="profile.email"
+                :class="[
+                  'form-control',
+                  errors.email !== undefined ? 'is-invalid' : '',
+                  errors.email === undefined ? 'registeration-style' : ''
+                ]"
+              />
+              <p class="error-message" v-if="errors.email !== undefined">
+                {{ errors.email }}
+              </p>
+            </div>
+          </div>
+          <div>
+            <h4>Password</h4>
+            <h4>********</h4>
+          </div>
+        </div>
+        <div class="col-12 col-md-5 profile-wrapper__content__profile-details">
+          <div>
+            <h4>Last Name</h4>
+            <h4 v-if="!isEditMode">{{ profileData.last_name }}</h4>
+            <div class="form-group" v-else>
+              <input
+                type="text"
+                id="last-name"
+                aria-describedby="last name"
+                placeholder="Enter Last Name"
+                v-model="profile.last_name"
+                :class="[
+                  'form-control',
+                  errors.last_name !== undefined ? 'is-invalid' : '',
+                  errors.last_name === undefined ? 'registeration-style' : ''
+                ]"
+              />
+              <p class="error-message" v-if="errors.last_name !== undefined">
+                {{ errors.last_name }}
+              </p>
+            </div>
+          </div>
+          <div>
+            <h4>Birth date</h4>
+            <h4 v-if="!isEditMode">
+              {{ profileData.birthday_date.split(" ")[0] }}
+            </h4>
+          </div>
+          <div>
+            <h4>Phone number</h4>
+            <h4 v-if="!isEditMode">
+              {{ profileData.phone.country_code }}
+              {{ profileData.phone.number }}
+            </h4>
+            <div class="form-group" v-else>
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <select
+                    class="form-control"
+                    v-model="profile.phone.country_code"
+                    :class="
+                      errors['phone.number'] !== undefined
+                        ? 'pell-content--is-invalid'
+                        : ''
+                    "
+                  >
+                    <option
+                      v-for="(countryCode, index) in countryCodesData"
+                      :selected="
+                        profile.phone.country_code === countryCode.dial_code
+                      "
+                      :key="index"
+                      :value="countryCode.dial_code"
+                      >{{ countryCode.code }}
+                      {{ countryCode.dial_code }}</option
+                    >
+                  </select>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phone-number"
+                  aria-describedby="phoneNumber"
+                  placeholder="Enter Phone Number"
+                  v-model="profile.phone.number"
+                />
+              </div>
+              <p
+                class="error-message"
+                v-if="errors['phone.number'] !== undefined"
+              >
+                {{ errors["phone.number"] }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col float-right">
+          <div
+            class="btn float-right profile-wrapper__content__custom-button-wrapper__outside"
+            role="button"
+            @click="setAction"
+          >
+            {{ isEditMode ? "Done" : "Edit" }}
+          </div>
+          <div
+            class="btn float-right profile-wrapper__content__custom-button-wrapper__outside"
+            role="button"
+            @click="setShowChangePasswordModal(true)"
+          >
+            Change Password
+          </div>
+        </div>
+      </div>
+    </div>
+    <ChangePassword
+      :showFlag="showChangePasswordModal"
+      :setShowChangePasswordModal="setShowChangePasswordModal"
+      :setShowReloginModalModal="setShowReloginModalModal"
+    />
+    <RequestPassword
+      :showFlag="showRequestPasswordModal"
+      :setShowRequestedPasswordModal="setShowRequestedPasswordModal"
+    />
+    <ReloginModal :showFlag="showReloginModalModal" />
+    <Spinner :smallLoader="false" />
+  </div>
+</template>
+
+<script>
+import { mapGetters, mapActions, mapState } from "vuex";
+import { getUserCookie } from "../helpers/CookieHelper";
+import store from "../../store/index";
+import types from "../../store/types";
+import Header from "../shared/Header";
+import ChangePassword from "../../website/components/profile/ChangePassword";
+import ReloginModal from "../../website/components/profile/ReloginModal";
+import RequestPassword from "../../website/components/profile/RequestPassword";
+import Spinner from "../shared/Spinner";
+import countryCodes from "../../assets/json/CountryCodes.json";
+import isEmailValid from "../helpers/EmailValidation";
+
+export default {
+  data() {
+    return {
+      showChangePasswordModal: false,
+      showRequestPasswordModal: false,
+      showReloginModalModal: false,
+      isEditMode: false,
+      profile: {
+        first_name: "",
+        last_name: "",
+        username: "",
+        password: "",
+        birthday_date: "",
+        email: "",
+        phone: {
+          country_code: countryCodes[0].dial_code,
+          number: ""
+        },
+        img_profile: "",
+        imgProfileUrl: null
+      },
+      errors: {},
+      countryCodesData: countryCodes
+    };
+  },
+  computed: {
+    ...mapState({
+      profileData: state => state.user.userProfile,
+      isProfileFetched: state => state.user.isUserProfileFetched,
+      isProfileUpdated: state => state.user.isProfileUpdated,
+      userPersonaData: state => state.user.userPersona
+    })
+  },
+  watch: {
+    userPersonaData() {
+      if (Object.keys(this.userPersonaData).length === 0)
+        this.$router.push("/");
+    }
+  },
+  methods: {
+    ...mapActions({
+      fetchUserProfile: types.user.actions.FETCH_USER_PROFILE,
+      updateUserProfile: types.user.actions.UPDATE_USER_PROFILE
+    }),
+    setShowChangePasswordModal(value = false) {
+      this.showChangePasswordModal = value;
+    },
+    setShowRequestedPasswordModal: async function(value = false, password) {
+      this.showRequestPasswordModal = value;
+      if (!value) {
+        this.setRequestedPassword(password);
+        await this.updateProfile();
+      }
+    },
+    setIsEditMode(value = false) {
+      this.isEditMode = value;
+    },
+    setShowReloginModalModal(value = false) {
+      this.showReloginModalModal = value;
+    },
+    setRequestedPassword(value) {
+      this.profile.password = value;
+    },
+    setAction: async function() {
+      if (this.isEditMode) this.validatePostRequest();
+      else this.setIsEditMode(true);
+    },
+    validatePostRequest: async function() {
+      if (!isEmailValid(this.profile.email)) {
+        this.notifyVue("Email has invalid format", "danger");
+        this.errors = { ...this.errors, email: "Email has invalid format" };
+      } else if (
+        this.profile.username !== this.profileData.username ||
+        this.profile.email !== this.profileData.email
+      ) {
+        this.setShowRequestedPasswordModal(true);
+      } else {
+        await this.updateProfile();
+      }
+    },
+    updateProfile: async function() {
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+      let formData = new FormData();
+      formData.append("first_name", this.profile.first_name);
+      formData.append("last_name", this.profile.last_name);
+      formData.append("username", this.profile.username);
+      formData.append("birthday_date", this.profile.birthday_date);
+      formData.append("email", this.profile.email);
+      if (this.profile.password !== "")
+        formData.append("current_password", this.profile.password);
+      if (this.profile.img_profile !== "")
+        formData.append("img_profile", this.profile.img_profile);
+      formData.append("phone", JSON.stringify(this.profile.phone));
+      try {
+        await this.updateUserProfile(formData);
+        this.setIsEditMode(false);
+        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        this.setShowReloginModalModal(true);
+      } catch (error) {
+        if (
+          error.data.errors !== undefined &&
+          error.data.message === undefined
+        ) {
+          this.errors = { ...error.data.errors };
+          Object.keys(error.data.errors).forEach(err => {
+            const errorMessage = error.data.errors[err][0];
+            this.notifyVue(errorMessage, "danger");
+            this.errors = { ...this.errors, [err]: errorMessage };
+          });
+        } else {
+          this.notifyVue("Password is incorrect, Please try again!", "danger");
+        }
+        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+      }
+    },
+    notifyVue(message, color) {
+      this.$notifications.notify({
+        message: `<span>${message}</span>`,
+        horizontalAlign: "right",
+        verticalAlign: "top",
+        type: color
+      });
+    }
+  },
+  components: {
+    Header,
+    Spinner,
+    ChangePassword,
+    RequestPassword,
+    ReloginModal
+  },
+  mounted() {
+    this.fetchUserProfile();
+  },
+  updated() {
+    if (this.isProfileFetched && !this.isEditMode) {
+      this.profile.first_name = this.profileData.first_name;
+      this.profile.last_name = this.profileData.last_name;
+      this.profile.username = this.profileData.username;
+      this.profile.email = this.profileData.email;
+      this.profile.birthday_date = this.profileData.birthday_date.split(" ")[0];
+      this.profile.phone = this.profileData.phone;
+    }
+    if (this.isProfileUpdated) this.setIsEditMode(false);
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+@import "../../assets/sass/website/containers/profile.scss";
+.form-control {
+  background-color: black !important;
+  border: 1px solid #2af3f3 !important;
+  color: #2af3f3 !important;
+}
+
+.input-group-text {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  width: 150px !important;
+  height: fit-content !important;
+  margin: 0 !important;
+}
+.input-group-prepend {
+  display: flex !important;
+}
+</style>

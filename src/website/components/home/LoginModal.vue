@@ -47,13 +47,16 @@
               :class="[
                 'form-control',
                 errors.password !== undefined ? 'is-invalid' : '',
-                errors.last_name === undefined ? 'registeration-style' : ''
+                errors.password === undefined ? 'registeration-style' : ''
               ]"
             />
             <p class="error-message" v-if="errors.password !== undefined">
               {{ errors.password }}
             </p>
           </div>
+          <a href="/forgot">
+            Forgot Password?
+          </a>
           <button
             type="button"
             class="btn btn-primary float-right"
@@ -68,9 +71,10 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 import store from "../../../store/index";
 import types from "../../../store/types";
+import { setUserCookie } from "../../../website/helpers/CookieHelper";
 
 export default {
   data() {
@@ -85,6 +89,9 @@ export default {
     ...mapActions({
       fetchUserPersona: types.user.actions.FETCH_USER_PERSONA
     }),
+    ...mapMutations({
+      setUserVerificationStatus: types.user.mutations.SET_VERIFIED_USER_STATUS
+    }),
     notifyVue(message, color) {
       this.$notifications.notify({
         message: `<span>${message}</span>`,
@@ -93,22 +100,45 @@ export default {
         type: color
       });
     },
+
     async getUserPersona() {
       const payload = { username: this.username, password: this.password };
       try {
-        await this.fetchUserPersona(payload);
-
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-        this.username = "";
-        this.password = "";
-        this.notifyVue("Successful Login", "success");
+        const data = await this.fetchUserPersona(payload);
+        if (!data.user.email_verified_at) {
+          this.setUserVerificationStatus({
+            status: false,
+            email: data.user.email
+          });
+        } else {
+          this.setUserVerificationStatus({
+            status: true,
+            email: data.user.email
+          });
+          setUserCookie(data);
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+          this.username = "";
+          this.password = "";
+          this.notifyVue("Successful Login", "success");
+        }
+        this.setShowLoginModal(false);
       } catch (error) {
-        this.errors = { ...error.data.errors };
-        Object.keys(error.data.errors).forEach(err => {
-          const errorMessage = error.data.errors[err][0];
-          this.notifyVue(errorMessage, "danger");
-          this.errors = { ...this.errors, [err]: errorMessage };
-        });
+        if (
+          error.data.errors !== undefined &&
+          error.data.message === undefined
+        ) {
+          this.errors = { ...error.data.errors };
+          Object.keys(error.data.errors).forEach(err => {
+            const errorMessage = error.data.errors[err][0];
+            this.notifyVue(errorMessage, "danger");
+            this.errors = { ...this.errors, [err]: errorMessage };
+          });
+        } else {
+          this.notifyVue(
+            "Username or Password is incorrect, Please try again!",
+            "danger"
+          );
+        }
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
       }
     },

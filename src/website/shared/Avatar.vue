@@ -3,7 +3,6 @@
     <div
       role="button"
       tabIndex="0"
-      v-if="userCookie !== null"
       class="avatar-wrapper mr-3"
       @click="handleMenuVisibility"
     >
@@ -20,38 +19,40 @@
         'avatar-wrapper__menu',
         showMenu ? 'avatar-wrapper__menu--show' : 'avatar-wrapper__menu--hide'
       ]"
-      @click="logoutUser"
     >
-      Logout
+      <ul class="avatar-wrapper__navLinks">
+        <li>
+          <a href="/profile">Profile</a>
+        </li>
+        <li @click="logoutUser">
+          <a href="#">Logout</a>
+        </li>
+      </ul>
     </span>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import getFirstLettersOfString from "../../website/helpers/StringsHelper";
-import { getUserCookie } from "../../website/helpers/CookieHelper";
 
 export default {
-  props: ["logoutUser"],
+  props: ["logoutUser", "userCookie"],
   data() {
     return {
-      showMenu: false,
-      userCookie: null
+      showMenu: false
     };
-  },
-  methods: {
-    handleMenuVisibility() {
-      this.showMenu = !this.showMenu;
-    }
-  },
-  mounted() {
-    this.userCookie = getUserCookie();
   },
   computed: {
     getUserAbbreviationName() {
       return getFirstLettersOfString(
         `${this.userCookie.user.first_name} ${this.userCookie.user.last_name}`
       );
+    }
+  },
+  methods: {
+    handleMenuVisibility() {
+      this.showMenu = !this.showMenu;
     }
   }
 };
