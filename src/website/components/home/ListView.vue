@@ -54,13 +54,15 @@ export default {
   &__img {
     width: 10%;
     display: flex;
+    @include is-mobile {
+      width: 40%;
+    }
     img {
       max-width: 100%;
       max-height: 100px;
       margin-top: auto;
       margin-bottom: auto;
       @include is-mobile {
-        max-width: fit-content;
         max-height: 70px;
       }
     }
@@ -72,7 +74,7 @@ export default {
     margin-top: auto;
     margin-bottom: auto;
     @include is-mobile {
-      padding-left: 40%;
+      width: 60%;
     }
     h1 {
       font-size: 1.5rem;
