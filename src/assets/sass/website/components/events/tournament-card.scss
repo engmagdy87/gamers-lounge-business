@@ -73,6 +73,9 @@
     h1 {
       font-size: 1.5rem;
       margin-top: 20px;
+      @include is-mobile {
+        font-size: 1.2rem;
+      }
     }
     p {
       font-size: 0.9rem;

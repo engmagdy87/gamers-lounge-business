@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-view-wrapper">
+  <div>
     <div class="row" v-if="isGamesActive">
       <div
         class="col-12 col-lg-4 p-0"
@@ -33,5 +33,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped></style>

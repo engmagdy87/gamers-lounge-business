@@ -60,16 +60,19 @@
         <div class="col-12">
           <h1>{{ storyData.initial_title }}</h1>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6">
           <div
             id="description-container"
             class="story-paragraph"
             v-html="storyData.initial_description"
           ></div>
         </div>
-        <div class="col-6" v-if="storyData.videos.vid_initial !== null">
+        <div
+          class="col-12 col-md-6"
+          v-if="storyData.videos.vid_initial !== null"
+        >
           <iframe
-            width="560"
+            :width="isThisDeviceSmart ? '320' : '560'"
             height="315"
             :src="storyData.videos.vid_initial.path"
             frameborder="0"
@@ -100,6 +103,7 @@ import LoginModal from "../components/home/LoginModal";
 import RegisterModal from "../components/home/RegisterModal";
 import Spinner from "../shared/Spinner";
 import redirectToNewTab from "../helpers/RedirectToNewTab";
+import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 
 export default {
   data() {
@@ -120,6 +124,9 @@ export default {
       return (
         this.storyData !== undefined && Object.keys(this.storyData).length === 0
       );
+    },
+    isThisDeviceSmart() {
+      return isDeviceSmart();
     }
   },
   watch: {

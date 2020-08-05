@@ -25,14 +25,14 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col game-details-wrapper__content__logo">
+          <div class="col-12 col-lg-3 game-details-wrapper__content__logo">
             <img
               v-if="gameDetails.images.img_logo !== null"
               :src="gameDetails.images.img_logo.path"
               :alt="gameDetails.title"
             />
           </div>
-          <div class="col-9">
+          <div class="col-12 col-lg-9">
             <div class="row">
               <div
                 id="description-container"

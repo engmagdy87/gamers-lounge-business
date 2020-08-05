@@ -67,7 +67,15 @@
   }
   &__content {
     width: 60%;
-    padding-left: 15%;
+    padding-left: 7%;
+    @include is-mobile {
+      padding-left: 5%;
+    }
+    &__game {
+      @include is-mobile {
+        font-size: 0.6rem;
+      }
+    }
     span img {
       margin-right: 5px !important;
     }
@@ -77,6 +85,10 @@
     h1 {
       font-size: 1.5rem;
       margin-top: 10px;
+      @include is-mobile {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+      }
     }
     p {
       font-size: 0.9rem;

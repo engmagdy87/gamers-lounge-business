@@ -50,6 +50,7 @@
     color: white !important;
     @include is-mobile {
       min-height: 82vh;
+      padding: 5%;
     }
     &__profile-image {
       div,

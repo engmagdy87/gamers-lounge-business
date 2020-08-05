@@ -57,15 +57,15 @@
     </div>
     <div class="event-details-wrapper__content" v-if="showDetailsHero">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-12 col-md-6">
           <div class="event-details-wrapper__content__breadcrumb">
             <a href="/events">Event</a>
             <span> > {{ eventDetails.initial_title }}</span>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-12 col-md-6">
           <div
-            class="col d-flex justify-content-end align-items-center mb-4"
+            class="d-flex justify-content-end align-items-center mb-4"
             v-if="eventDetails.sponsors !== undefined"
           >
             <a
@@ -87,28 +87,40 @@
 
       <div class="container">
         <div class="row">
-          <div class="col-3 event-details-wrapper__content__logo">
+          <div class="col-12 col-md-3 event-details-wrapper__content__logo">
             <img
               v-if="eventDetails.images.img_logo !== null"
               :src="eventDetails.images.img_logo.path"
               :alt="eventDetails.initial_title"
             />
           </div>
-          <div class="col-9">
+          <div class="col-12 col-md-9">
             <div
               id="description-container"
-              class="col"
               v-html="eventDetails.initial_description"
+              style="height:200px;overflow: hidden;"
+              ref="descriptionText"
             ></div>
+            <span
+              @click="setHeightOfDescription"
+              style="display: block;padding:10px 15px;cursor:pointer;"
+              >{{ showMore ? "see less..." : "see more..." }}</span
+            >
           </div>
         </div>
       </div>
       <div class="container">
-        <div class="row event-details-wrapper__content__tournaments mb-5">
-          <div class="col">
+        <div
+          class="row event-details-wrapper__content__tournaments mb-5 mb-sm-3"
+        >
+          <div
+            class="col-12 order-2 order-md-1 col-md-6 event-details-wrapper__content__tournaments__title"
+          >
             Event Tournaments
           </div>
-          <div class="col d-flex justify-content-end align-items-center">
+          <div
+            class="col-12 order-1 order-md-2 col-md-6 d-flex justify-content-end align-items-center"
+          >
             <div class="event-details-wrapper__content__custom-btn-outside">
               <div
                 class="event-details-wrapper__content__custom-btn-inside"
@@ -159,7 +171,8 @@ export default {
   data() {
     return {
       showLoginModal: false,
-      showRegisterModal: false
+      showRegisterModal: false,
+      showMore: false
     };
   },
   computed: {
@@ -194,6 +207,17 @@ export default {
     redirectTo(url) {
       if (url.includes("http")) window.open(url, "_blank");
       else window.open(`http://${url}`, "_blank");
+    },
+    setHeightOfDescription() {
+      let height = "";
+      if (this.showMore) {
+        height = "200px";
+        this.showMore = false;
+      } else {
+        height = "100%";
+        this.showMore = true;
+      }
+      this.$refs.descriptionText.style.height = height;
     }
   },
   components: {

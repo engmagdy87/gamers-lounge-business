@@ -265,7 +265,10 @@
             >
           </div>
         </div>
-        <div class="col-md-6">
+      </div>
+
+      <div class="row mt-4 mb-3">
+        <div class="col">
           <div>
             <label class="mr-5" for="media-images"
               >Choose Cover Over Image</label
@@ -292,7 +295,6 @@
           </div>
         </div>
       </div>
-
       <div class="row mt-3 mb-3">
         <div class="col">
           <div>
@@ -474,10 +476,10 @@
       <DeleteDialog
         :showFlag="showFlag"
         :setShowDeleteDialogFlag="
-          contentType === 'image' ? setImageDataFlag : setVideoDataFlag
+          contentType === 'video' ? setVideoDataFlag : setImageDataFlag
         "
-        :item="contentType === 'image' ? 'Image' : 'Video'"
-        :deleteAction="contentType === 'image' ? removeImage : removeVideo"
+        :item="contentType === 'video' ? 'Video' : 'Image'"
+        :deleteAction="contentType === 'video' ? removeVideo : removeImage"
       />
     </form>
   </div>

@@ -28,7 +28,7 @@
       >
         <div class="container">
           <div class="row">
-            <div class="col-2">
+            <div class="col-12 col-md-2">
               <img
                 v-if="data.images.img_logo !== null"
                 :src="data.images.img_logo.path"
@@ -36,7 +36,7 @@
                 class="tab-wrapper__details__img"
               />
             </div>
-            <div class="col-7">
+            <div class="col-12 col-md-7">
               <div class="row  d-flex">
                 <h1 class="tab-wrapper__details__title">
                   {{ data.initial_title }}
@@ -57,13 +57,12 @@
               <div class="row">
                 <span
                   class="badge badge-pill badge-secondary tab-wrapper__details__kick-off"
-                  ><img src="/website/img/calendar.svg" alt="calendar icon" />{{
-                    data.kick_off_date.split(" ")[0]
-                  }}</span
+                  ><img src="/website/img/calendar.svg" alt="calendar icon" />
+                  <span>{{ data.kick_off_date.split(" ")[0] }}</span></span
                 >
               </div>
             </div>
-            <div class="col-3 tab-wrapper__details__register">
+            <div class="col-12 col-md-3 tab-wrapper__details__register">
               <div :class="getCSSClass(data.register_status)"></div>
               <span v-if="data.register_status === 'open'"
                 >Registeration is now open</span
@@ -85,7 +84,7 @@
         aria-labelledby="nav-profile-tab"
       >
         <h3>{{ data.rules.title }}</h3>
-        <p v-html="data.rules.content"></p>
+        <p id="description-container" v-html="data.rules.content"></p>
       </div>
       <div
         :class="['tab-pane fade', activeTabIndex === 2 ? 'show active' : '']"
@@ -110,7 +109,7 @@
         aria-labelledby="nav-contact-tab"
       >
         <h3>{{ data.contacts.title }}</h3>
-        <p v-html="data.contacts.content"></p>
+        <p id="description-container" v-html="data.contacts.content"></p>
       </div>
     </div>
   </div>
@@ -146,108 +145,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/sass/website/color-palette.scss";
-@import "../../assets/sass/website/variables.scss";
-@import "../../assets/sass/website/mixins.scss";
-
-.tab-pane {
-  padding: 30px;
-  position: relative;
-  @include create-hexa-shape-tabs-body();
-}
-
-.nav-tabs {
-  border: none;
-}
-
-.nav-tabs .nav-link:nth-child(1) {
-  margin: 0 20px 0 0;
-}
-.nav-tabs .nav-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #0c3656;
-  cursor: pointer !important;
-  color: rgba($color: #fff, $alpha: 0.4);
-  border: none;
-  margin: 0 20px;
-  width: 120px;
-  height: 50px;
-  @include create-hexagone-shape-tab(10px);
-  transform: translateY(5px);
-}
-
-.nav-item.nav-link.active {
-  background-color: $placeholder-background;
-  height: 55px;
-  filter: drop-shadow(0 0 4px #175e90) !important;
-  border: none;
-  color: white;
-  transform: translateY(0px);
-}
-
-.tab-pane.fade.show.active {
-  background-color: $placeholder-background;
-}
-
-.nav-tabs .nav-link .active,
-.nav-tabs .nav-item .show .nav-link {
-  background-color: $placeholder-background !important;
-  filter: drop-shadow(0 0 4px #175e90) !important;
-  color: white;
-  border: none;
-}
-
-.tab-wrapper {
-  &__details {
-    &__img {
-      width: 100%;
-      border: 1px solid $primary;
-      border-radius: 5px;
-    }
-    &__title {
-      font-size: 1.3rem;
-      margin: 0;
-    }
-    &__format {
-      font-size: 0.9rem;
-      font-weight: lighter;
-      margin: 0 10px;
-    }
-    &__platform {
-      margin-right: 5px;
-    }
-    &__region {
-      margin-left: 5px;
-    }
-    &__kick-off {
-      padding: 5px 10px;
-    }
-    &__register {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      a {
-        color: white !important;
-      }
-      div {
-        border-radius: 50%;
-        width: 10px;
-        height: 10px;
-        margin-top: 6px;
-        margin-right: 5px;
-      }
-      &--open {
-        background-color: rgba(0, 211, 81, 1);
-      }
-      &--closed {
-        background-color: red;
-      }
-      &--soon {
-        background-color: orange;
-      }
-    }
-  }
-}
+@import "../../assets/sass/website/shared/tabs.scss";
 </style>

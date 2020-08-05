@@ -150,35 +150,23 @@
           >
             <a href="/contact" @click="closeNav">Contact Us</a>
           </li>
-          <li
-            class="float-lg-right"
-            @click="setShowRegisterModal(true)"
-            v-if="userCookie === null"
-          >
+          <li @click="setShowRegisterModal(true)" v-if="userCookie === null">
             <a href="#" @click="closeNav">Register</a>
           </li>
-          <li
-            class="float-lg-right"
-            @click="setShowLoginModal(true)"
-            v-if="userCookie === null"
-          >
+          <li @click="setShowLoginModal(true)" v-if="userCookie === null">
             <a href="#" @click="closeNav">Login</a>
           </li>
-          <li class="float-lg-right" v-if="userCookie !== null">
+          <li v-if="userCookie !== null">
             <a href="/profile">
               Profile
             </a>
           </li>
-          <li class="float-lg-right" v-if="userCookie !== null && isUserAdmin">
+          <li v-if="userCookie !== null && isUserAdmin">
             <a href="/dashboard">
               Dashboard
             </a>
           </li>
-          <li
-            class="float-lg-right"
-            v-if="userCookie !== null"
-            @click="logoutUser"
-          >
+          <li v-if="userCookie !== null" @click="logoutUser">
             <a href="#">
               Logout
             </a>

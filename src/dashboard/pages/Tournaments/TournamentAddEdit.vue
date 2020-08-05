@@ -300,6 +300,49 @@
           </base-input>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-6 mt-auto mb-3">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="has_cover_over"
+              v-model="tournament.has_cover_over"
+            />
+            <label class="custom-control-label" for="has_cover_over"
+              >Cover Over Image</label
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <div>
+            <label class="mr-5" for="media-images"
+              >Choose Cover Over Image</label
+            >
+            <input
+              type="file"
+              id="media-images"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_cover_over')"
+              ref="img_cover_over"
+            />
+            <br />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Tournament' &&
+                  editData.images !== null &&
+                  editData.images.img_cover_over !== null
+              "
+              :image="editData.images.img_cover_over"
+              :setShowDeleteDialogFlag="setImageDataFlag"
+              openedFor="img_cover_over"
+            />
+          </div>
+        </div>
+      </div>
       <div class="row mt-3 mb-3">
         <div class="col">
           <div>
@@ -386,34 +429,6 @@
         </div>
       </div>
 
-      <div class="row mb-3">
-        <div class="col">
-          <div>
-            <label class="mr-5" for="media-images"
-              >Choose Cover Over Image</label
-            >
-            <input
-              type="file"
-              id="media-images"
-              accept="image/png, image/jpeg"
-              @change="e => setFile(e, 'img_cover_over')"
-              ref="img_cover_over"
-            />
-            <br />
-            <ImagePreview
-              v-if="
-                editData !== undefined &&
-                  operation === 'Edit Tournament' &&
-                  editData.images !== null &&
-                  editData.images.img_cover_over !== null
-              "
-              :image="editData.images.img_cover_over"
-              :setShowDeleteDialogFlag="setImageDataFlag"
-              openedFor="img_cover_over"
-            />
-          </div>
-        </div>
-      </div>
       <div class="text-center">
         <button
           type="button"
@@ -477,6 +492,7 @@ export default {
         platform_id: 0,
         game_id: 0,
         event_id: 0,
+        has_cover_over: false,
         has_rules: false,
         rules: { title: "", content: "" },
         contacts: { title: "", content: "" },
@@ -631,6 +647,10 @@ export default {
         formData.append("game_id", this.tournament.game_id);
         formData.append("event_id", this.tournament.event_id);
         formData.append("has_rules", this.tournament.has_rules ? 1 : 0);
+        formData.append(
+          "has_cover_over",
+          this.tournament.has_cover_over ? 1 : 0
+        );
         formData.append("rules", JSON.stringify(this.tournament.rules));
         formData.append("contacts", JSON.stringify(this.tournament.contacts));
         formData.append("img_logo", this.tournament.img_logo);
@@ -780,6 +800,7 @@ export default {
       this.tournament.game_id = this.editData.game.id;
       this.tournament.event_id = this.editData.event.id;
       this.tournament.has_rules = this.editData.has_rules;
+      this.tournament.has_cover_over = this.editData.has_cover_over;
       this.tournament.rules = this.editData.rule;
       this.tournament.contacts = this.editData.contact;
       this.tournament.img_logo = this.editData.images.img_logo;

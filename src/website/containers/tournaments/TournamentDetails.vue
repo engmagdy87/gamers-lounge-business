@@ -16,19 +16,27 @@
         :style="
           `backgroundImage: url(${tournamentDetails.images.img_cover_main[0].path})`
         "
-      ></div>
+      >
+        <img
+          v-if="
+            tournamentDetails.has_cover_over &&
+              tournamentDetails.images.img_cover_over !== null
+          "
+          :src="tournamentDetails.images.img_cover_over.path"
+        />
+      </div>
     </div>
     <div class="tournament-details-wrapper__content" v-if="showDetailsHero">
       <div class="container">
-        <div class="row">
-          <div class="col-8">
+        <div class="row mb-4 mb-md-0">
+          <div class="col-12 col-lg-8">
             <div class="tournament-details-wrapper__content__breadcrumb">
               <a href="/">Tournament</a>
               <span> > {{ tournamentDetails.initial_title }}</span>
             </div>
           </div>
           <div
-            class="col-4 d-flex align-items-center justify-content-end tournament-details-wrapper__custom-button-wrapper"
+            class="col-12 col-lg-4 d-flex align-items-center justify-content-end tournament-details-wrapper__custom-button-wrapper"
             role="button"
           >
             <div
@@ -118,9 +126,15 @@ export default {
       const token = getUserCookie();
       if (!token)
         this.notifyVue("Please login to register to tournament", "danger");
-      else if (this.tournamentDetails.is_register_available)
+      else if (
+        this.tournamentDetails.is_register_available &&
+        this.tournamentDetails.register_status === "open"
+      )
         window.open(this.registerLink, "_blank");
-      else this.notifyVue("Register was closed", "danger");
+      else if (this.tournamentDetails.register_status === "soon")
+        this.notifyVue("Register coming soon", "warning");
+      else if (this.tournamentDetails.register_status === "closed")
+        this.notifyVue("Register was closed", "danger");
     },
     notifyVue(message, color) {
       this.$notifications.notify({

@@ -14,7 +14,7 @@
         <div class="col-12">
           <h1>Contact Us</h1>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6">
           <p>
             We are taking to our community seriously, if you need our help or
             having any question about anything please don't hesitate to contact
@@ -26,14 +26,14 @@
             </span>
             <span>esportsummiut@gamerlounge.com</span>
           </div>
-          <div>
+          <div class="mb-3 mb-md-0">
             <span class="contact-wrapper__content__icon">
               <img src="website/img/phone.svg" alt="phone icon" />
             </span>
             <span>+20 123456789</span>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6">
           <form>
             <div class="form-group">
               <input

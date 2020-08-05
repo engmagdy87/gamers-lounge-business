@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-view-wrapper events-menu-view-wrapper">
+  <div class="events-menu-view-wrapper">
     <div class="row">
       <div
         class="col-12 col-lg-4 p-0"

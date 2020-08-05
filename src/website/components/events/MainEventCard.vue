@@ -30,12 +30,17 @@
                 >
                 <img
                   class="main-event-card-wrapper__content__game-logo"
-                  v-for="(img, index) in card.games"
+                  v-for="(img, index) in card.games.slice(0, 5)"
                   :key="index"
                   :src="img.images.img_logo.path"
                   :alt="`game${img.images.img_logo.id}`"
                   v-if="isImageAvailbale(img.images.img_logo)"
                 />
+                <span
+                  class="badge badge-pill badge-secondary mt-3 ml-auto mr-auto"
+                  v-if="card.games.length > 5"
+                  >+{{ card.games.length - 5 }} more</span
+                >
               </div>
             </div>
           </div>

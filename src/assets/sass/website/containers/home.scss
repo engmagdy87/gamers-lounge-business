@@ -19,16 +19,20 @@
     height: 100vh !important;
     object-fit: cover;
     cursor: pointer;
+    @include is-mobile {
+      height: 108vh !important;
+    }
   }
   &__content {
     width: 100%;
     min-height: 100vh;
     background-image: url("~/website/img/hexagone-pattern.png");
     background-repeat: repeat;
-    padding: 5% 15%;
+    padding: 12% 15%;
     margin-top: -$header-height !important;
     @include is-mobile {
-      margin-top: -$header-height-mobile;
+      // margin-top: -$header-height-mobile;
+      padding: 40% 10%;
     }
     h2 {
       margin: 0;

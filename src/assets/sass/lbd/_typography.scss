@@ -112,6 +112,13 @@ span {
   background-color: transparent !important;
 }
 
+#description-container {
+  word-break: break-word;
+  span {
+    color: white !important;
+  }
+}
+
 .pell-content > p > * {
   color: black !important;
 }

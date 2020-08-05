@@ -26,11 +26,16 @@
             >
             <br />
             <span
-              v-for="(game, index) in card.games"
+              v-for="(game, index) in card.games.slice(0, 4)"
               :key="index"
-              class="badge badge-pill badge-secondary"
+              class="badge badge-pill badge-secondary sub-event-card-wrapper__content__game"
               >{{ game.title }}
             </span>
+            <span
+              class="badge badge-pill badge-secondary sub-event-card-wrapper__content__game"
+              v-if="card.games.length > 4"
+              >+{{ card.games.length - 4 }} more</span
+            >
           </div>
         </div>
       </div>

@@ -30,15 +30,31 @@
   }
 
   &__inside {
+    position: relative;
     width: calc(100% - 2px);
     height: calc(#{$half-page-hero-image-height} - 4px);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     @include create-half-page-hero-shape();
     video {
       object-fit: cover;
+    }
+    img {
+      height: 30vh;
+      position: absolute;
+      display: table;
+      vertical-align: middle;
+    }
+    &--hexa-shape {
+      @include create-half-page-hero-shape();
+    }
+    &--none {
+      clip-path: inset(0 0 0 0);
     }
   }
 
@@ -49,11 +65,16 @@
     color: white;
     @include is-mobile {
       min-height: 82vh;
+      padding: 5%;
     }
     &__breadcrumb {
       font-size: 1.8rem;
       margin-bottom: 50px;
       padding-left: 15px;
+      @include is-mobile {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+      }
       a {
         text-decoration: none;
         color: white;

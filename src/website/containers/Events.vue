@@ -27,7 +27,7 @@
         :dots="true"
         autoplay
         infinite
-        :slidesToShow="4"
+        :slidesToShow="isThisDeviceSmart ? 1 : 4"
         :slidesToScroll="1"
       >
         <MainEventCard
@@ -70,6 +70,7 @@ import MainEventCard from "../components/events/MainEventCard";
 import LoginModal from "../components/home/LoginModal";
 import RegisterModal from "../components/home/RegisterModal";
 import EventsMenuView from "../components/events/EventsMenuView";
+import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
@@ -92,7 +93,10 @@ export default {
       subEventsData: state => state.events.subEventsData,
       isMainEventsFetched: state => state.events.isMainEventsFetched,
       isSubEventsFetched: state => state.events.isSubEventsFetched
-    })
+    }),
+    isThisDeviceSmart() {
+      return isDeviceSmart();
+    }
   },
   watch: {
     isUserLoggedIn() {

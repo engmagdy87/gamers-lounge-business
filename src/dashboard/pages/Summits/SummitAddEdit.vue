@@ -370,10 +370,10 @@
       <DeleteDialog
         :showFlag="showFlag"
         :setShowDeleteDialogFlag="
-          contentType === 'image' ? setImageDataFlag : setVideoDataFlag
+          contentType === 'video' ? setVideoDataFlag : setImageDataFlag
         "
-        :item="contentType === 'image' ? 'Image' : 'Video'"
-        :deleteAction="contentType === 'image' ? removeImage : removeVideo"
+        :item="contentType === 'video' ? 'Video' : 'Image'"
+        :deleteAction="contentType === 'video' ? removeVideo : removeImage"
       />
     </form>
   </div>

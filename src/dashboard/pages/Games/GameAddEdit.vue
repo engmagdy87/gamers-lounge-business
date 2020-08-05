@@ -109,7 +109,32 @@
           </div>
         </div>
       </div>
-
+      <div class="row mt-3 mb-3">
+        <div class="col">
+          <div>
+            <label for="logo" class="mr-5">Choose Card Image</label>
+            <input
+              type="file"
+              id="logo"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_card')"
+              ref="img_card"
+            />
+            <br />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Game' &&
+                  editData.images !== null &&
+                  editData.images.img_card !== null
+              "
+              :image="editData.images.img_card"
+              :setShowDeleteDialogFlag="setImageDataFlag"
+              openedFor="img_card"
+            />
+          </div>
+        </div>
+      </div>
       <div class="text-center">
         <button
           type="button"
@@ -154,7 +179,8 @@ export default {
       game: {
         title: "",
         description: "",
-        img_logo: ""
+        img_logo: "",
+        img_card: ""
       },
       editorOptions,
       errors: {}
@@ -187,6 +213,7 @@ export default {
       formData.append("title", this.game.title);
       formData.append("description", this.game.description);
       formData.append("img_logo", this.game.img_logo);
+      formData.append("img_card", this.game.img_card);
 
       for (let i = 0; i < this.$refs.img_cover_main.files.length; i++) {
         let file = this.$refs.img_cover_main.files[i];
@@ -227,6 +254,10 @@ export default {
       switch (this.openedFor) {
         case "img_logo":
           this.editData.images.img_logo = null;
+          break;
+
+        case "img_card":
+          this.editData.images.img_card = null;
           break;
 
         case "img_cover_main":

@@ -51,6 +51,7 @@
     min-height: calc(100vh - 12vh);
     @include is-mobile {
       min-height: 82vh;
+      padding: 5%;
     }
     &__icon {
       margin-right: 20px;
