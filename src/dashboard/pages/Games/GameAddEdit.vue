@@ -13,7 +13,7 @@
     <h4 slot="header" class="card-name">{{ operation }}</h4>
     <form>
       <div class="row">
-        <div class="col">
+        <div class="col-12 col-md-6">
           <base-input
             type="text"
             label="Title"
@@ -26,6 +26,21 @@
           </base-input>
           <p class="error-message" v-if="errors.title !== undefined">
             {{ errors.title }}
+          </p>
+        </div>
+        <div class="col-12 col-md-6">
+          <base-input
+            type="text"
+            label="Short Title"
+            placeholder="Enter Short Title"
+            v-model="game.short_title"
+            :autofocus="true"
+            :isInvalid="errors.short_title !== undefined"
+            :isRequired="true"
+          >
+          </base-input>
+          <p class="error-message" v-if="errors.short_title !== undefined">
+            {{ errors.short_title }}
           </p>
         </div>
       </div>
@@ -178,6 +193,7 @@ export default {
       operation: this.$route.name,
       game: {
         title: "",
+        short_title: "",
         description: "",
         img_logo: "",
         img_card: ""
@@ -211,6 +227,7 @@ export default {
     saveData: async function(saveFunction, successMessage) {
       let formData = new FormData();
       formData.append("title", this.game.title);
+      formData.append("short_title", this.game.short_title);
       formData.append("description", this.game.description);
       formData.append("img_logo", this.game.img_logo);
       formData.append("img_card", this.game.img_card);
@@ -285,6 +302,7 @@ export default {
   mounted() {
     if (this.$route.name === "Edit Game") {
       this.game.title = this.editData.title;
+      this.game.short_title = this.editData.short_title;
       this.game.description = this.editData.description;
     }
   }

@@ -229,15 +229,9 @@ export default {
     setHeightOfDescription() {
       let height = "";
       if (this.showMoreText) {
-        console.log("====================================");
-        console.log(1);
-        console.log("====================================");
         height = "200px";
         this.showMoreText = false;
       } else {
-        console.log("====================================");
-        console.log(2);
-        console.log("====================================");
         height = "100%";
         this.showMoreText = true;
       }

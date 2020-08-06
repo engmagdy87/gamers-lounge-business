@@ -23,7 +23,7 @@
                     class="main-event-card-wrapper__content__game-logo"
                     v-for="(img, index) in card.games.slice(
                       0,
-                      card.games.length > 9 ? 9 : card.games.length
+                      card.games.length > 9 ? 8 : card.games.length
                     )"
                     :key="index"
                     :src="img.images.img_logo.path"

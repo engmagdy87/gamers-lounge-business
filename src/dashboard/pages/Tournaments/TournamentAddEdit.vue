@@ -545,42 +545,6 @@ export default {
       ) {
         this.notifyVue("Please insert dates in proper sequence", "danger");
       }
-      if (
-        isDatesInProperSequence(
-          this.summitsListData[0].start_date.split(" ")[0],
-          this.tournament.register_start_at
-        ) === false
-      ) {
-        this.notifyVue(
-          "Please insert registeration start date to be after summit start date " +
-            this.summitsListData[0].start_date.split(" ")[0],
-          "danger"
-        );
-      }
-      if (
-        isDatesInProperSequence(
-          this.tournament.register_end_at,
-          this.summitsListData[0].end_date.split(" ")[0]
-        ) === false
-      ) {
-        this.notifyVue(
-          "Please insert registeration end date to be before summit end date " +
-            this.summitsListData[0].end_date.split(" ")[0],
-          "danger"
-        );
-      }
-      if (
-        isDatesInProperSequence(
-          this.tournament.kick_off_date,
-          this.summitsListData[0].end_date.split(" ")[0]
-        ) === false
-      ) {
-        this.notifyVue(
-          "Please insert registeration kick-off date to be before summit end date " +
-            this.summitsListData[0].end_date.split(" ")[0],
-          "danger"
-        );
-      }
     },
     saveData: async function(saveFunction, successMessage) {
       if (
@@ -594,39 +558,6 @@ export default {
         ) === false
       ) {
         this.notifyVue("Please insert dates in proper sequence", "danger");
-      } else if (
-        isDatesInProperSequence(
-          this.summitsListData[0].start_date.split(" ")[0],
-          this.tournament.register_start_at
-        ) === false
-      ) {
-        this.notifyVue(
-          "Please insert registeration start date to be after summit start date " +
-            this.summitsListData[0].start_date.split(" ")[0],
-          "danger"
-        );
-      } else if (
-        isDatesInProperSequence(
-          this.tournament.register_end_at,
-          this.summitsListData[0].end_date.split(" ")[0]
-        ) === false
-      ) {
-        this.notifyVue(
-          "Please insert registeration end date to be before summit end date " +
-            this.summitsListData[0].end_date.split(" ")[0],
-          "danger"
-        );
-      } else if (
-        isDatesInProperSequence(
-          this.tournament.kick_off_date,
-          this.summitsListData[0].end_date.split(" ")[0]
-        ) === false
-      ) {
-        this.notifyVue(
-          "Please insert registeration kick-off date to be before summit end date " +
-            this.summitsListData[0].end_date.split(" ")[0],
-          "danger"
-        );
       } else {
         let formData = new FormData();
         formData.append("initial_title", this.tournament.initial_title);
@@ -727,7 +658,6 @@ export default {
   },
   computed: {
     ...mapState({
-      summitsListData: state => state.summits.summitsListData,
       isSummitsListFetched: state => state.summits.isSummitsListFetched,
       isDashboardRegionsDataFetched: state =>
         state.regions.isDashboardRegionsDataFetched,
