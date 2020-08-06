@@ -112,10 +112,17 @@ span {
   background-color: transparent !important;
 }
 
-#description-container {
+.description-container {
   word-break: break-word;
+  overflow: hidden;
   span {
     color: white !important;
+  }
+  &--expand {
+    height: 100%;
+  }
+  &--limit {
+    height: 200px;
   }
 }
 

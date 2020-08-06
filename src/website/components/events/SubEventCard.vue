@@ -17,7 +17,7 @@
             />
           </div>
           <div class="sub-event-card-wrapper__content">
-            <h1>{{ card.initial_title }}</h1>
+            <h1>{{ trimText(card.initial_title) }}</h1>
             <span
               ><img src="website/img/group.svg" alt="group icon" />{{
                 card.tournaments.count
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import { TruncateText } from "../../helpers/StringsHelper";
 export default {
   props: ["card"],
   methods: {
@@ -53,6 +54,9 @@ export default {
         this.$router.push({
           path: `/events/event/${this.card.id}`
         });
+    },
+    trimText(text) {
+      return TruncateText(text);
     }
   }
 };

@@ -32,11 +32,10 @@
       <VueSlickCarousel
         v-if="mainEventsData.length !== 0"
         :arrows="true"
-        :dots="true"
-        autoplay
-        infinite
         :slidesToShow="isThisDeviceSmart ? 1 : 4"
         :slidesToScroll="1"
+        autoplay
+        infinite
       >
         <MainEventCard
           v-for="(card, index) in mainEventsData"

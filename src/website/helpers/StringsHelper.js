@@ -8,4 +8,10 @@ const getFirstLettersOfString = (text) => {
     return letters.toUpperCase()
 }
 
-export default getFirstLettersOfString
+const TruncateText = (text) => {
+    if (!text) return
+    if (text.length <= 20) return text
+    return `${text.slice(0, 20)}...`
+}
+
+export { getFirstLettersOfString, TruncateText }

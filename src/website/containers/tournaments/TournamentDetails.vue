@@ -75,7 +75,6 @@ import RegisterModal from "../../components/home/RegisterModal";
 import Spinner from "../../shared/Spinner";
 import Tabs from "../../shared/Tabs";
 import { getUserCookie } from "../../helpers/CookieHelper";
-import redirectToNewTab from "../../helpers/RedirectToNewTab";
 
 export default {
   data() {
@@ -157,9 +156,6 @@ export default {
       this.$router.history.current.params.tournamentId
     );
     this.getLink();
-  },
-  updated() {
-    redirectToNewTab("description-container");
   }
 };
 </script>

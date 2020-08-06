@@ -40,3 +40,25 @@
     filter: invert(1);
   }
 }
+.slick-dots {
+  bottom: 20px !important;
+  li {
+    width: 50px !important;
+    background-color: gray !important;
+    height: 3px !important;
+    button {
+      width: 50px !important;
+    }
+  }
+  li.slick-active {
+    background-color: $primary !important;
+  }
+}
+
+.slick-dots li button {
+  &:before {
+    width: 50px !important;
+    color: gray !important;
+    content: none !important;
+  }
+}

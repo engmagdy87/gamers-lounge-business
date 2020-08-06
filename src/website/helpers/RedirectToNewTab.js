@@ -1,12 +1,16 @@
 const redirectToNewTab = (tagId) => {
-    const element = document.getElementById(tagId)
-    if (!element) return
+    const elements = document.getElementsByClassName(tagId)
 
-    const tags = element.getElementsByTagName("a");
+    if (elements.length === 0) return
+    for (let index = 0; index < elements.length; index++) {
+        const element = elements[index];
+        const tags = element.getElementsByTagName("a");
 
-    for (var i = 0; i < tags.length; i++) {
-        tags[i].setAttribute("target", "_blank");
+        for (var i = 0; i < tags.length; i++) {
+            tags[i].setAttribute("target", "_blank");
+        }
     }
+
 }
 
 export default redirectToNewTab

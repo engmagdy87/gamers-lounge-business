@@ -8,6 +8,7 @@
     <VueSlickCarousel
       v-if="mainEventsData.length !== 0 && isMainEventsFetched"
       :arrows="false"
+      :dots="true"
       :pauseOnHover="false"
       :slidesToShow="1"
       :slidesToScroll="1"

@@ -84,7 +84,7 @@
         aria-labelledby="nav-profile-tab"
       >
         <h3>{{ data.rules.title }}</h3>
-        <p id="description-container" v-html="data.rules.content"></p>
+        <div class="description-container" v-html="data.rules.content"></div>
       </div>
       <div
         :class="['tab-pane fade', activeTabIndex === 2 ? 'show active' : '']"
@@ -109,13 +109,15 @@
         aria-labelledby="nav-contact-tab"
       >
         <h3>{{ data.contacts.title }}</h3>
-        <p id="description-container" v-html="data.contacts.content"></p>
+        <div class="description-container" v-html="data.contacts.content"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import redirectToNewTab from "../helpers/RedirectToNewTab";
+
 export default {
   props: ["data"],
   data() {
@@ -139,7 +141,25 @@ export default {
       if (status === "open") return "tab-wrapper__details__register--open";
       if (status === "closed") return "tab-wrapper__details__register--closed";
       if (status === "soon") return "tab-wrapper__details__register--soon";
+    },
+    changeHexaStyleForTab() {
+      const tabPanes = document.getElementsByClassName("tab-pane");
+      for (let index = 0; index < tabPanes.length; index++) {
+        const element = tabPanes[index];
+        if (element.clientHeight < 800) {
+          element.style.clipPath = `polygon(0 0,100% 0,100% 4%,100% 92%,99% 96%,66% 96%,65% 100%,2% 100%,0 95%)`;
+        } else {
+          element.style.clipPath = `polygon(0 0,100% 0,100% 4%,100% 50%,99% 99%,66% 99%,65% 100%,2% 100%,0 99%)`;
+        }
+      }
     }
+  },
+  mounted() {
+    this.changeHexaStyleForTab();
+  },
+  updated() {
+    this.changeHexaStyleForTab();
+    redirectToNewTab("description-container");
   }
 };
 </script>

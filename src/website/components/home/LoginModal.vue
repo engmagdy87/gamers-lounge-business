@@ -32,6 +32,7 @@
                 errors.username !== undefined ? 'is-invalid' : '',
                 errors.username === undefined ? 'registeration-style' : ''
               ]"
+              v-on:keyup.enter="onEnter"
             />
             <p class="error-message" v-if="errors.username !== undefined">
               {{ errors.username }}
@@ -49,6 +50,7 @@
                 errors.password !== undefined ? 'is-invalid' : '',
                 errors.password === undefined ? 'registeration-style' : ''
               ]"
+              v-on:keyup.enter="onEnter"
             />
             <p class="error-message" v-if="errors.password !== undefined">
               {{ errors.password }}
@@ -119,6 +121,7 @@ export default {
           store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
           this.username = "";
           this.password = "";
+          this.errors = {};
           this.notifyVue("Successful Login", "success");
         }
         this.setShowLoginModal(false);
@@ -147,6 +150,9 @@ export default {
       this.username = "";
       this.password = "";
       this.errors = {};
+    },
+    onEnter() {
+      this.getUserPersona();
     }
   }
 };

@@ -69,7 +69,7 @@
             v-if="eventDetails.sponsors !== undefined"
           >
             <a
-              v-for="(sponsor, index) in eventDetails.sponsors.main"
+              v-for="(sponsor, index) in eventDetails.sponsors.main.slice(0, 5)"
               :key="index"
               @click="redirectTo(sponsor.link)"
               style="cursor: pointer;"
@@ -96,15 +96,20 @@
           </div>
           <div class="col-12 col-md-9">
             <div
-              id="description-container"
+              :class="[
+                'description-container',
+                setShowMoreTextFlag
+                  ? 'description-container--limit'
+                  : 'description-container--expand'
+              ]"
               v-html="eventDetails.initial_description"
-              style="height:200px;overflow: hidden;"
               ref="descriptionText"
             ></div>
             <span
               @click="setHeightOfDescription"
-              style="display: block;padding:10px 15px;cursor:pointer;"
-              >{{ showMore ? "see less..." : "see more..." }}</span
+              style="padding:10px 15px;cursor:pointer;"
+              v-if="setShowMoreTextFlag"
+              >{{ showMoreText ? "see less..." : "see more..." }}</span
             >
           </div>
         </div>
@@ -127,7 +132,10 @@
                 v-if="eventDetails.sponsors !== undefined"
               >
                 <a
-                  v-for="(sponsor, index) in eventDetails.sponsors.sub"
+                  v-for="(sponsor, index) in eventDetails.sponsors.sub.slice(
+                    0,
+                    5
+                  )"
                   :key="index"
                   @click="redirectTo(sponsor.link)"
                 >
@@ -172,7 +180,8 @@ export default {
     return {
       showLoginModal: false,
       showRegisterModal: false,
-      showMore: false
+      showMoreText: false,
+      setShowMoreTextFlag: false
     };
   },
   computed: {
@@ -180,7 +189,8 @@ export default {
       isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
     }),
     ...mapState({
-      eventDetails: state => state.events.eventDetails
+      eventDetails: state => state.events.eventDetails,
+      isEventDetailsFetched: state => state.events.isEventDetailsFetched
     }),
     showDetailsHero() {
       return Object.keys(this.eventDetails).length !== 0;
@@ -191,6 +201,14 @@ export default {
       if (this.isUserLoggedIn) {
         this.setShowLoginModal(false);
         this.setShowRegisterModal(false);
+      }
+    },
+    isEventDetailsFetched() {
+      if (this.isEventDetailsFetched) {
+        setTimeout(() => {
+          this.setShowMoreTextFlag =
+            this.$refs.descriptionText.clientHeight > 200;
+        }, 100);
       }
     }
   },
@@ -210,12 +228,18 @@ export default {
     },
     setHeightOfDescription() {
       let height = "";
-      if (this.showMore) {
+      if (this.showMoreText) {
+        console.log("====================================");
+        console.log(1);
+        console.log("====================================");
         height = "200px";
-        this.showMore = false;
+        this.showMoreText = false;
       } else {
+        console.log("====================================");
+        console.log(2);
+        console.log("====================================");
         height = "100%";
-        this.showMore = true;
+        this.showMoreText = true;
       }
       this.$refs.descriptionText.style.height = height;
     }

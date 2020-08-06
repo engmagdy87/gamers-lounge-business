@@ -10,17 +10,7 @@
         />
         <div class="main-event-card-wrapper__overlay">
           <div class="row">
-            <div class="col-7 d-flex align-items-end">
-              <div class="main-event-card-wrapper__logo">
-                <img
-                  v-if="card.images.img_logo !== null"
-                  :src="card.images.img_logo.path"
-                  alt="logo"
-                />
-                <p>{{ card.initial_title }}</p>
-              </div>
-            </div>
-            <div class="col-5">
+            <div class="col-12 main-event-card-wrapper__first-section">
               <div class="main-event-card-wrapper__content">
                 <span class="badge badge-pill badge-secondary"
                   ><img src="website/img/group.svg" alt="group icon" />{{
@@ -28,19 +18,36 @@
                   }}
                   tournaments</span
                 >
+                <div class="main-event-card-wrapper__content__game-logos">
+                  <img
+                    class="main-event-card-wrapper__content__game-logo"
+                    v-for="(img, index) in card.games.slice(
+                      0,
+                      card.games.length > 9 ? 9 : card.games.length
+                    )"
+                    :key="index"
+                    :src="img.images.img_logo.path"
+                    :alt="`game${img.images.img_logo.id}`"
+                    v-if="isImageAvailbale(img.images.img_logo)"
+                  />
+                  <span
+                    class="badge badge-pill badge-secondary mt-3 ml-auto mr-auto"
+                    v-if="card.games.length > 9"
+                    >+{{ card.games.length - 8 }} more</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-12 d-flex align-items-end  main-event-card-wrapper__second-section"
+            >
+              <div class="main-event-card-wrapper__logo">
                 <img
-                  class="main-event-card-wrapper__content__game-logo"
-                  v-for="(img, index) in card.games.slice(0, 5)"
-                  :key="index"
-                  :src="img.images.img_logo.path"
-                  :alt="`game${img.images.img_logo.id}`"
-                  v-if="isImageAvailbale(img.images.img_logo)"
+                  v-if="card.images.img_logo !== null"
+                  :src="card.images.img_logo.path"
+                  alt="logo"
                 />
-                <span
-                  class="badge badge-pill badge-secondary mt-3 ml-auto mr-auto"
-                  v-if="card.games.length > 5"
-                  >+{{ card.games.length - 5 }} more</span
-                >
+                <p>{{ card.initial_title }}</p>
               </div>
             </div>
           </div>

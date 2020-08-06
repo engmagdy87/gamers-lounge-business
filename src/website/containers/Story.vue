@@ -62,8 +62,7 @@
         </div>
         <div class="col-12 col-md-6">
           <div
-            id="description-container"
-            class="story-paragraph"
+            class="story-paragraph description-container"
             v-html="storyData.initial_description"
           ></div>
         </div>

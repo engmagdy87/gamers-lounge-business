@@ -846,7 +846,6 @@ export default {
         (this.editData.videos.vid_cover_main !== null &&
           this.editData.videos.vid_cover_main.path) ||
         "";
-
       this.event.main_sponsors_ids = this.editData.main_sponsors;
       this.event.sub_sponsors_ids = this.editData.sub_sponsors;
     }

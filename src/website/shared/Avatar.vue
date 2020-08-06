@@ -34,7 +34,7 @@
 
 <script>
 import { mapState } from "vuex";
-import getFirstLettersOfString from "../../website/helpers/StringsHelper";
+import { getFirstLettersOfString } from "../../website/helpers/StringsHelper";
 
 export default {
   props: ["logoutUser", "userCookie"],
