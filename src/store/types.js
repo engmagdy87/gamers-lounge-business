@@ -157,6 +157,8 @@ const summits = {
         SET_IS_SUMMITS_FETCHED: 'summits/mutations/SET_IS_SUMMITS_FETCHED',
         SET_IS_SUMMITS_LIST_FETCHED: 'summits/mutations/SET_IS_SUMMITS_LIST_FETCHED',
         REMOVE_DELETED_SUMMIT: 'summits/mutations/REMOVE_DELETED_SUMMIT',
+        SET_COVER_HOME_EVENTS_IMAGE: 'summits/mutations/SET_COVER_HOME_EVENTS_IMAGE',
+        IS_COVER_HOME_EVENTS_IMAGE_FETCHED: 'summits/mutations/IS_COVER_HOME_EVENTS_IMAGE_FETCHED',
     },
     actions: {
         FETCH_SUMMITS: 'summits/actions/FETCH_SUMMITS',
@@ -165,6 +167,7 @@ const summits = {
         DELETE_SUMMIT_IMAGE: 'summits/actions/DELETE_SUMMIT_IMAGE',
         DELETE_SUMMIT_VIDEO: 'summits/actions/DELETE_SUMMIT_VIDEO',
         EDIT_SUMMIT: 'summits/actions/EDIT_SUMMIT',
+        FETCH_COVER_HOME_EVENTS_IMAGE: 'summits/actions/FETCH_COVER_HOME_EVENTS_IMAGE',
     }
 };
 

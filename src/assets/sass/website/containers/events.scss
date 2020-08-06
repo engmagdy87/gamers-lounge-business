@@ -32,7 +32,6 @@
   &__inside {
     width: calc(100% - 2px);
     height: calc(#{$hero-image-height} - 4px);
-    background-image: url("~/website/img/story-hero.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

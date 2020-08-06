@@ -1,11 +1,13 @@
-import { getSummits, getSummitsList, removeSummit, removeSummitImage, removeSummitVideo } from '../../website/helpers/APIsHelper';
+import { getSummits, getSummitsList, removeSummit, removeSummitImage, removeSummitVideo, getCoverHomeEventsImage } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
     summitsData: [],
     summitsListData: [],
+    coverHomeEventsImage: null,
     isSummitsFetched: false,
     isSummitsListFetched: false,
+    isCoverHomeEventsImageFetched: false,
 };
 
 const mutations = {
@@ -23,6 +25,12 @@ const mutations = {
     },
     [types.summits.mutations.REMOVE_DELETED_SUMMIT]: (currentState, index) => {
         currentState.summitsData.splice(index, 1);
+    },
+    [types.summits.mutations.SET_COVER_HOME_EVENTS_IMAGE]: (currentState, payload) => {
+        currentState.coverHomeEventsImage = payload;
+    },
+    [types.summits.mutations.IS_COVER_HOME_EVENTS_IMAGE_FETCHED]: (currentState, payload) => {
+        currentState.isCoverHomeEventsImageFetched = payload;
     },
 };
 
@@ -42,6 +50,14 @@ const getSummitsListSummary = async ({ commit }) => {
         commit(types.summits.mutations.SET_SUMMITS_LIST_DATA, response.data.summits);
         commit(types.summits.mutations.SET_IS_SUMMITS_LIST_FETCHED, true);
         return true
+    }).catch(() => false);
+    return response
+};
+
+const fetchCoverHomeEventsImage = async ({ commit }) => {
+    const response = await getCoverHomeEventsImage().then((response) => {
+        commit(types.summits.mutations.SET_COVER_HOME_EVENTS_IMAGE, response.data.cover);
+        commit(types.summits.mutations.IS_COVER_HOME_EVENTS_IMAGE_FETCHED, true);
     }).catch(() => false);
     return response
 };
@@ -83,6 +99,7 @@ const actions = {
     [types.summits.actions.DELETE_SUMMIT]: deleteSummit,
     [types.summits.actions.DELETE_SUMMIT_IMAGE]: deleteSummitImage,
     [types.summits.actions.DELETE_SUMMIT_VIDEO]: deleteSummitVideo,
+    [types.summits.actions.FETCH_COVER_HOME_EVENTS_IMAGE]: fetchCoverHomeEventsImage,
 };
 
 export default {

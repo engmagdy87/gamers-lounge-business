@@ -8,9 +8,17 @@
     />
     <div
       class="events-wrapper__outside"
-      v-if="isMainEventsFetched && isSubEventsFetched"
+      v-if="
+        isMainEventsFetched &&
+          isSubEventsFetched &&
+          isCoverHomeEventsImageFetched
+      "
     >
-      <div class="events-wrapper__inside"></div>
+      <div
+        class="events-wrapper__inside"
+        v-if="coverHomeEventsImage !== null"
+        :style="`backgroundImage: url(${coverHomeEventsImage.path})`"
+      ></div>
     </div>
     <div
       class="events-wrapper__content"
@@ -92,7 +100,10 @@ export default {
       mainEventsData: state => state.events.mainEventsData,
       subEventsData: state => state.events.subEventsData,
       isMainEventsFetched: state => state.events.isMainEventsFetched,
-      isSubEventsFetched: state => state.events.isSubEventsFetched
+      isSubEventsFetched: state => state.events.isSubEventsFetched,
+      isCoverHomeEventsImageFetched: state =>
+        state.summits.isCoverHomeEventsImageFetched,
+      coverHomeEventsImage: state => state.summits.coverHomeEventsImage
     }),
     isThisDeviceSmart() {
       return isDeviceSmart();
@@ -109,7 +120,9 @@ export default {
   methods: {
     ...mapActions({
       fetchMainEvents: types.events.actions.FETCH_MAIN_EVENTS,
-      fetchSubEvents: types.events.actions.FETCH_SUB_EVENTS
+      fetchSubEvents: types.events.actions.FETCH_SUB_EVENTS,
+      fetchCoverHomeEventsImage:
+        types.summits.actions.FETCH_COVER_HOME_EVENTS_IMAGE
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -131,9 +144,14 @@ export default {
     store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
     this.fetchMainEvents();
     this.fetchSubEvents();
+    this.fetchCoverHomeEventsImage();
   },
   updated() {
-    if (this.isMainEventsFetched && this.isSubEventsFetched)
+    if (
+      this.isMainEventsFetched &&
+      this.isSubEventsFetched &&
+      this.isCoverHomeEventsImageFetched
+    )
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   }
 };

@@ -332,6 +332,35 @@
 
       <div class="row mb-3">
         <div class="col">
+          <div>
+            <label class="mr-5" for="media-images1"
+              >Choose Cover Home Events Image</label
+            >
+            <input
+              type="file"
+              id="media-images1"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_cover_home_events')"
+              ref="img_cover_home_events"
+            />
+            <br />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Summit' &&
+                  editData.images !== null &&
+                  editData.images.img_cover_home_events !== null
+              "
+              :image="editData.images.img_cover_home_events"
+              :setShowDeleteDialogFlag="setImageDataFlag"
+              openedFor="img_cover_home_events"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
           <label class="mr-5" for="media-images1"
             >Choose Cover Main Video</label
           >
@@ -425,6 +454,7 @@ export default {
         img_logo: "",
         img_cover_over: "",
         img_card: "",
+        img_cover_home_events: "",
         img_cover_main: "",
         vid_cover_main: ""
       },
@@ -499,6 +529,10 @@ export default {
         formData.append("img_logo", this.summit.img_logo);
         formData.append("img_cover_over", this.summit.img_cover_over);
         formData.append("img_card", this.summit.img_card);
+        formData.append(
+          "img_cover_home_events",
+          this.summit.img_cover_home_events
+        );
         formData.append("img_cover_main", this.summit.img_cover_main);
 
         for (var i = 0; i < this.$refs.img_media.files.length; i++) {
@@ -554,6 +588,10 @@ export default {
 
         case "img_card":
           this.editData.images.img_card = null;
+          break;
+
+        case "img_cover_home_events":
+          this.editData.images.img_cover_home_events = null;
           break;
 
         case "img_media":
@@ -641,6 +679,7 @@ export default {
       this.summit.img_cover_main = this.editData.images.img_cover_main;
       this.summit.img_cover_over = this.editData.images.img_cover_over;
       this.summit.img_card = this.editData.images.img_card;
+      this.summit.img_cover_home_events = this.editData.images.img_cover_home_events;
 
       this.summit.vid_initial = this.editData.videos.vid_initial
         ? this.editData.videos.vid_initial.path || ""

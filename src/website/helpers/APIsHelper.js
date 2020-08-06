@@ -161,6 +161,14 @@ async function getEvents() {
     return response.data;
 }
 
+async function getCoverHomeEventsImage() {
+    const response = await get(
+        APIs.GET_COVER_HOME_EVENTS_IMAGE
+    );
+
+    return response.data;
+}
+
 async function getEventsList() {
     const response = await getDashboardData(
         APIs.GET_LIST_WEBSITE_EVENTS
@@ -597,7 +605,8 @@ export {
     sendMail,
     resetPassword,
     resendVerificationEmail,
-    getTournamentRegisterLink
+    getTournamentRegisterLink,
+    getCoverHomeEventsImage
 };
 
 async function post(data, url) {

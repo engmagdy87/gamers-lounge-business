@@ -37,6 +37,7 @@ const GET_WEBSITE_EVENT_DETAILS = `${API_URL}/events`
 const DELETE_EVENT = `${API_URL}/admin/events`
 const DELETE_MEDIA_IN_EVENT = `${API_URL}/admin/events`
 const EDIT_EVENT = `${API_URL}/admin/events`
+const GET_COVER_HOME_EVENTS_IMAGE = `${API_URL}/events/cover`
 
 // SPONSORS
 const GET_SPONSORS = `${API_URL}/admin/sponsors`
@@ -143,5 +144,6 @@ export {
     UPDATE_USER_PROFILE,
     SEND_MAIL,
     RESEND_VERIFICATION_EMAIL,
-    GET_REGISTER_LINK
+    GET_REGISTER_LINK,
+    GET_COVER_HOME_EVENTS_IMAGE
 };
