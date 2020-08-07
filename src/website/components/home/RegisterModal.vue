@@ -247,7 +247,11 @@ export default {
         formData.append("phone", JSON.stringify(this.phone));
         try {
           await this.postUserPersona(formData);
-
+          this.setShowRegisterModal(false);
+          this.notifyVue(
+            "Successful Register, Please Check Email to Verify Account",
+            "success"
+          );
           this.first_name = "";
           this.last_name = "";
           this.username = "";
