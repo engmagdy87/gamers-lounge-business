@@ -17,7 +17,7 @@
             />
           </div>
           <div class="tournament-card-wrapper__content">
-            <h1>{{ card.title || card.initial_title }}</h1>
+            <h1>{{ trimText(card.title || card.initial_title) }}</h1>
             <span class="badge badge-pill"
               ><img src="/website/img/calendar.svg" alt="calendar icon" />{{
                 card.kick_off_date.split(" ")[0]
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { TruncateText } from "../helpers/StringsHelper";
+
 export default {
   props: ["card"],
   methods: {
@@ -38,6 +40,9 @@ export default {
       this.$router.push({
         path: `/tournaments/tournament/${this.card.id}`
       });
+    },
+    trimText(text) {
+      return TruncateText(text);
     }
   }
 };

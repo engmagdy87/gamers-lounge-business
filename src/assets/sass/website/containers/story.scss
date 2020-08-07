@@ -55,9 +55,16 @@
       position: absolute;
       display: table;
       vertical-align: middle;
+      @include is-mobile {
+        width: 70%;
+        height: auto;
+      }
     }
     video {
       object-fit: cover;
+      @include is-mobile {
+        height: 100%;
+      }
     }
   }
 

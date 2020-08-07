@@ -15,7 +15,18 @@
   @include is-mobile {
     width: 100%;
     overflow-x: scroll;
+    overflow-y: hidden;
     flex-wrap: nowrap !important;
+    &::-webkit-scrollbar {
+      width: 5px !important;
+      background-color: $accent !important;
+      border-radius: 20px !important;
+      height: 2px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $primary !important;
+      border-radius: 20px !important;
+    }
   }
 }
 
@@ -76,7 +87,6 @@
   &__details {
     &__img {
       width: 100%;
-      border: 1px solid $primary;
       border-radius: 5px;
       @include is-mobile {
         width: 60%;
@@ -87,6 +97,10 @@
     &__title {
       font-size: 1.3rem;
       margin: 0;
+    }
+    &__description {
+      font-size: 1rem;
+      margin-top: 10px;
     }
     &__format {
       font-size: 0.9rem;

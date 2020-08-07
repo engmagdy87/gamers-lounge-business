@@ -1,13 +1,15 @@
-import { getSummits, getSummitsList, removeSummit, removeSummitImage, removeSummitVideo, getCoverHomeEventsImage } from '../../website/helpers/APIsHelper';
+import { getSummits, getSummitsList, removeSummit, removeSummitImage, removeSummitVideo, getCoverHomeEventsImage, getCoverContactUsImage } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
     summitsData: [],
     summitsListData: [],
     coverHomeEventsImage: null,
+    coverContactUsImage: null,
     isSummitsFetched: false,
     isSummitsListFetched: false,
     isCoverHomeEventsImageFetched: false,
+    isCoverContactUsImageFetched: false,
 };
 
 const mutations = {
@@ -29,8 +31,14 @@ const mutations = {
     [types.summits.mutations.SET_COVER_HOME_EVENTS_IMAGE]: (currentState, payload) => {
         currentState.coverHomeEventsImage = payload;
     },
+    [types.summits.mutations.SET_COVER_CONTACT_US_IMAGE]: (currentState, payload) => {
+        currentState.coverContactUsImage = payload;
+    },
     [types.summits.mutations.IS_COVER_HOME_EVENTS_IMAGE_FETCHED]: (currentState, payload) => {
         currentState.isCoverHomeEventsImageFetched = payload;
+    },
+    [types.summits.mutations.IS_COVER_CONTACT_US_IMAGE_FETCHED]: (currentState, payload) => {
+        currentState.isCoverContactUsImageFetched = payload;
     },
 };
 
@@ -58,6 +66,14 @@ const fetchCoverHomeEventsImage = async ({ commit }) => {
     const response = await getCoverHomeEventsImage().then((response) => {
         commit(types.summits.mutations.SET_COVER_HOME_EVENTS_IMAGE, response.data.cover);
         commit(types.summits.mutations.IS_COVER_HOME_EVENTS_IMAGE_FETCHED, true);
+    }).catch(() => false);
+    return response
+};
+
+const fetchCoverContactUsImage = async ({ commit }) => {
+    const response = await getCoverContactUsImage().then((response) => {
+        commit(types.summits.mutations.SET_COVER_CONTACT_US_IMAGE, response.data.cover);
+        commit(types.summits.mutations.IS_COVER_CONTACT_US_IMAGE_FETCHED, true);
     }).catch(() => false);
     return response
 };
@@ -100,6 +116,7 @@ const actions = {
     [types.summits.actions.DELETE_SUMMIT_IMAGE]: deleteSummitImage,
     [types.summits.actions.DELETE_SUMMIT_VIDEO]: deleteSummitVideo,
     [types.summits.actions.FETCH_COVER_HOME_EVENTS_IMAGE]: fetchCoverHomeEventsImage,
+    [types.summits.actions.FETCH_COVER_CONTACT_US_IMAGE]: fetchCoverContactUsImage,
 };
 
 export default {

@@ -27,13 +27,13 @@
         >
           <a href="/events">Events</a>
         </li>
-        <li
+        <!-- <li
           :class="[
             activeItem === 'giveaways' ? 'header-wrapper__navLinks--active' : ''
           ]"
         >
           <a href="#">Giveaways</a>
-        </li>
+        </li> -->
         <li
           :class="[
             activeItem === 'story' ? 'header-wrapper__navLinks--active' : ''
@@ -41,7 +41,7 @@
         >
           <a href="/story">Our Story</a>
         </li>
-        <li
+        <!-- <li
           :class="[
             activeItem === 'testimonial'
               ? 'header-wrapper__navLinks--active'
@@ -49,7 +49,7 @@
           ]"
         >
           <a href="#">Testimonial</a>
-        </li>
+        </li> -->
         <li
           :class="[
             activeItem === 'contact' ? 'header-wrapper__navLinks--active' : ''
@@ -118,7 +118,7 @@
           >
             <a href="/events" @click="closeNav">Events</a>
           </li>
-          <li
+          <!-- <li
             :class="[
               activeItem === 'giveaways'
                 ? 'header-wrapper__navLinks--active'
@@ -126,7 +126,7 @@
             ]"
           >
             <a href="#" @click="closeNav">Giveaways</a>
-          </li>
+          </li> -->
           <li
             :class="[
               activeItem === 'story' ? 'header-wrapper__navLinks--active' : ''
@@ -134,7 +134,7 @@
           >
             <a href="/story" @click="closeNav">Our Story</a>
           </li>
-          <li
+          <!-- <li
             :class="[
               activeItem === 'testimonial'
                 ? 'header-wrapper__navLinks--active'
@@ -142,7 +142,7 @@
             ]"
           >
             <a href="#" @click="closeNav">Testimonial</a>
-          </li>
+          </li> -->
           <li
             :class="[
               activeItem === 'contact' ? 'header-wrapper__navLinks--active' : ''

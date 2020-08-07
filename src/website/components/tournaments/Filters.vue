@@ -49,11 +49,14 @@
             <label for="region">Status</label>
             <select class="form-control" v-model="status">
               <option :value="null">--Please select status</option>
-              <option :selected="status" :value="true"
+              <option :selected="status" value="open"
                 >Registeration open</option
               >
-              <option :selected="status" :value="false"
+              <option :selected="status" value="closed"
                 >Registeration close</option
+              >
+              <option :selected="status" value="soon"
+                >Registeration soon</option
               >
             </select>
           </div>

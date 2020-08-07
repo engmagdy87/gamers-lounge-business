@@ -17,9 +17,11 @@
         <h1>{{ card.title || card.initial_title }}</h1>
         <p v-if="isGamesActive">{{ card.tournaments.count }} Tournaments</p>
         <span v-else class="badge badge-pill"
-          ><img src="/website/img/calendar.svg" alt="calendar icon" />{{
-            card.kick_off_date
-          }}</span
+          ><img
+            src="/website/img/calendar.svg"
+            alt="calendar icon"
+            style="margin-right:5px"
+          />{{ card.kick_off_date.split(" ")[0] }}</span
         >
       </div>
     </div>

@@ -67,14 +67,17 @@ h6,
   font-size: $font-size-h6;
   font-weight: $font-weight-bold;
   text-transform: uppercase;
+  font-family: "Roboto";
 }
 p {
   font-size: $font-paragraph;
   line-height: $line-height-general;
+  font-family: "Roboto";
 }
 p > * {
   color: white !important;
   background-color: transparent !important;
+  font-family: "Roboto";
 }
 .description > p > * {
   color: black !important;
@@ -110,6 +113,7 @@ p > * {
 }
 span {
   background-color: transparent !important;
+  font-family: "Roboto" !important;
 }
 
 .description-container {

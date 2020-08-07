@@ -55,8 +55,10 @@
   &__logo {
     width: 30%;
     margin-left: 5%;
-    margin-top: auto;
-    margin-bottom: auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img {
       width: 100%;
     }
@@ -71,8 +73,9 @@
       background-color: rgba($color: #6c757d, $alpha: 0.4) !important;
     }
     h1 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       margin-top: 20px;
+      word-break: break-all;
       @include is-mobile {
         font-size: 1.2rem;
       }

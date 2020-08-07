@@ -1,23 +1,23 @@
 <template>
-  <div class="hexa-card-wrapper" @click="redirectTo">
-    <div class="hexa-card-wrapper__outside">
-      <div class="hexa-card-wrapper__inside">
+  <div class="game-card-wrapper" @click="redirectTo">
+    <div class="game-card-wrapper__outside">
+      <div class="game-card-wrapper__inside">
         <img
           v-if="card.images.img_card !== null"
           :src="card.images.img_card.path"
           :alt="card.title + 'background'"
-          class="hexa-card-wrapper__bg-img"
+          class="game-card-wrapper__bg-img"
         />
-        <div class="hexa-card-wrapper__overlay">
-          <div class="hexa-card-wrapper__logo">
+        <div class="game-card-wrapper__overlay">
+          <div class="game-card-wrapper__logo">
             <img
               v-if="card.images.img_logo !== null"
               :src="card.images.img_logo.path"
               :alt="card.title + 'logo'"
             />
           </div>
-          <div class="hexa-card-wrapper__content">
-            <h1>{{ card.title || card.initial_title }}</h1>
+          <div class="game-card-wrapper__content">
+            <h1>{{ trimText(card.title || card.initial_title) }}</h1>
             <p>{{ card.tournaments.count }} Tournaments</p>
           </div>
         </div>
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import { TruncateText } from "../helpers/StringsHelper";
+
 export default {
   props: ["card", "isGamesActive"],
   methods: {
@@ -34,11 +36,14 @@ export default {
       this.$router.push({
         path: `/games/game/${this.card.id}`
       });
+    },
+    trimText(text) {
+      return TruncateText(text);
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/sass/website/shared/hexa-card.scss";
+@import "../../assets/sass/website/shared/game-card.scss";
 </style>

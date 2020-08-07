@@ -104,6 +104,7 @@
               ]"
               v-html="eventDetails.initial_description"
               ref="descriptionText"
+              v-if="eventDetails.initial_description !== undefined"
             ></div>
             <span
               @click="setHeightOfDescription"
@@ -208,7 +209,7 @@ export default {
         setTimeout(() => {
           this.setShowMoreTextFlag =
             this.$refs.descriptionText.clientHeight > 200;
-        }, 100);
+        }, 500);
       }
     }
   },

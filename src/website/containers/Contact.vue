@@ -6,8 +6,12 @@
       :setShowRegisterModal="setShowRegisterModal"
       :setShowLoginModal="setShowLoginModal"
     />
-    <div class="contact-wrapper__outside">
-      <div class="contact-wrapper__inside"></div>
+    <div class="contact-wrapper__outside" v-if="isCoverContactUsImageFetched">
+      <div
+        class="contact-wrapper__inside"
+        v-if="coverContactUsImage !== null"
+        :style="`backgroundImage: url(${coverContactUsImage.path})`"
+      ></div>
     </div>
     <div class="contact-wrapper__content">
       <div class="row">
@@ -87,6 +91,7 @@
 
 <script>
 import { mapGetters, mapActions, mapState } from "vuex";
+import store from "../../store/index";
 import types from "../../store/types";
 import Header from "../shared/Header";
 import LoginModal from "../components/home/LoginModal";
@@ -105,7 +110,10 @@ export default {
   },
   computed: {
     ...mapState({
-      isContactFetched: state => state.contact.isContactFetched
+      isContactFetched: state => state.contact.isContactFetched,
+      isCoverContactUsImageFetched: state =>
+        state.summits.isCoverContactUsImageFetched,
+      coverContactUsImage: state => state.summits.coverContactUsImage
     })
   },
   watch: {
@@ -118,7 +126,9 @@ export default {
   },
   methods: {
     ...mapActions({
-      postMessage: types.contact.actions.SEND_MESSAGE
+      postMessage: types.contact.actions.SEND_MESSAGE,
+      fetchCoverContactUsImage:
+        types.summits.actions.FETCH_COVER_CONTACT_US_IMAGE
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -156,6 +166,13 @@ export default {
     LoginModal,
     RegisterModal,
     Spinner
+  },
+  mounted() {
+    this.fetchCoverContactUsImage();
+  },
+  updated() {
+    if (this.isCoverContactUsImageFetched)
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   }
 };
 </script>

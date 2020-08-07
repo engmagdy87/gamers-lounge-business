@@ -15,6 +15,7 @@ const RESEND_VERIFICATION_EMAIL = `${API_URL}/users/resend-verify-email`
 
 // Contact
 const POST_MESSAGE = `${API_URL}/contact-us`
+const GET_COVER_CONTACT_US_IMAGE = `${API_URL}/contact-us/cover`
 
 // Summit
 const CREATE_SUMMIT = `${API_URL}/admin/summits`
@@ -145,5 +146,6 @@ export {
     SEND_MAIL,
     RESEND_VERIFICATION_EMAIL,
     GET_REGISTER_LINK,
-    GET_COVER_HOME_EVENTS_IMAGE
+    GET_COVER_HOME_EVENTS_IMAGE,
+    GET_COVER_CONTACT_US_IMAGE
 };

@@ -43,12 +43,19 @@
     @include create-half-page-hero-shape();
     video {
       object-fit: cover;
+      @include is-mobile {
+        height: 100%;
+      }
     }
     img {
       height: 30vh;
       position: absolute;
       display: table;
       vertical-align: middle;
+      @include is-mobile {
+        width: 70%;
+        height: auto;
+      }
     }
     &--hexa-shape {
       @include create-half-page-hero-shape();

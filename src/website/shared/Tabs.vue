@@ -36,43 +36,58 @@
                 class="tab-wrapper__details__img"
               />
             </div>
-            <div class="col-12 col-md-7">
-              <div class="row  d-flex">
-                <h1 class="tab-wrapper__details__title">
-                  {{ data.initial_title }}
-                </h1>
-                <span class="tab-wrapper__details__format">
-                  {{ data.format }}
-                </span>
-              </div>
-              <div class="row d-flex">
-                <span class="tab-wrapper__details__platform">
-                  {{ data.platform }}
-                </span>
-                -
-                <span class="tab-wrapper__details__region">
-                  {{ data.region }}
-                </span>
+            <div class="col-12 col-md-10">
+              <div class="row">
+                <div class="col-12 col-md-9">
+                  <div class="row d-flex">
+                    <h1 class="tab-wrapper__details__title">
+                      {{ data.initial_title }}
+                    </h1>
+                    <span class="tab-wrapper__details__format">
+                      {{ data.format }}
+                    </span>
+                  </div>
+                  <div class="row d-flex">
+                    <span class="tab-wrapper__details__platform">
+                      {{ data.platform }}
+                    </span>
+                    -
+                    <span class="tab-wrapper__details__region">
+                      {{ data.region }}
+                    </span>
+                  </div>
+                  <div class="row">
+                    <span
+                      class="badge badge-pill badge-secondary tab-wrapper__details__kick-off"
+                      ><img
+                        src="/website/img/calendar.svg"
+                        alt="calendar icon"
+                      />
+                      <span>{{ data.kick_off_date.split(" ")[0] }}</span></span
+                    >
+                  </div>
+                </div>
+                <div class="col-12 col-md-3 tab-wrapper__details__register">
+                  <div :class="getCSSClass(data.register_status)"></div>
+                  <span v-if="data.register_status === 'open'"
+                    >Registeration is now open</span
+                  >
+                  <span v-else-if="data.register_status === 'closed'"
+                    >Register was closed</span
+                  >
+                  <span v-else-if="data.register_status === 'soon'"
+                    >Register coming soon</span
+                  >
+                </div>
               </div>
               <div class="row">
-                <span
-                  class="badge badge-pill badge-secondary tab-wrapper__details__kick-off"
-                  ><img src="/website/img/calendar.svg" alt="calendar icon" />
-                  <span>{{ data.kick_off_date.split(" ")[0] }}</span></span
-                >
+                <div class="col-12" style="padding:0">
+                  <div
+                    class="tab-wrapper__details__description"
+                    v-html="data.initial_description"
+                  ></div>
+                </div>
               </div>
-            </div>
-            <div class="col-12 col-md-3 tab-wrapper__details__register">
-              <div :class="getCSSClass(data.register_status)"></div>
-              <span v-if="data.register_status === 'open'"
-                >Registeration is now open</span
-              >
-              <span v-else-if="data.register_status === 'closed'"
-                >Register was closed</span
-              >
-              <span v-else-if="data.register_status === 'soon'"
-                >Register coming soon</span
-              >
             </div>
           </div>
         </div>

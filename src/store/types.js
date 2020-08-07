@@ -159,6 +159,8 @@ const summits = {
         REMOVE_DELETED_SUMMIT: 'summits/mutations/REMOVE_DELETED_SUMMIT',
         SET_COVER_HOME_EVENTS_IMAGE: 'summits/mutations/SET_COVER_HOME_EVENTS_IMAGE',
         IS_COVER_HOME_EVENTS_IMAGE_FETCHED: 'summits/mutations/IS_COVER_HOME_EVENTS_IMAGE_FETCHED',
+        SET_COVER_CONTACT_US_IMAGE: 'summits/mutations/SET_COVER_CONTACT_US_IMAGE',
+        IS_COVER_CONTACT_US_IMAGE_FETCHED: 'summits/mutations/IS_COVER_CONTACT_US_IMAGE_FETCHED',
     },
     actions: {
         FETCH_SUMMITS: 'summits/actions/FETCH_SUMMITS',
@@ -168,6 +170,7 @@ const summits = {
         DELETE_SUMMIT_VIDEO: 'summits/actions/DELETE_SUMMIT_VIDEO',
         EDIT_SUMMIT: 'summits/actions/EDIT_SUMMIT',
         FETCH_COVER_HOME_EVENTS_IMAGE: 'summits/actions/FETCH_COVER_HOME_EVENTS_IMAGE',
+        FETCH_COVER_CONTACT_US_IMAGE: 'summits/actions/FETCH_COVER_CONTACT_US_IMAGE',
     }
 };
 
