@@ -203,14 +203,6 @@ export default {
         this.setShowLoginModal(false);
         this.setShowRegisterModal(false);
       }
-    },
-    isEventDetailsFetched() {
-      if (this.isEventDetailsFetched) {
-        setTimeout(() => {
-          this.setShowMoreTextFlag =
-            this.$refs.descriptionText.clientHeight > 200;
-        }, 500);
-      }
     }
   },
   methods: {
@@ -251,6 +243,12 @@ export default {
   },
   updated() {
     redirectToNewTab("description-container");
+    this.$nextTick(() => {
+      if (this.setShowMoreTextFlag === null) {
+        this.setShowMoreTextFlag =
+          this.$refs.descriptionText.clientHeight > 200;
+      }
+    });
   }
 };
 </script>
