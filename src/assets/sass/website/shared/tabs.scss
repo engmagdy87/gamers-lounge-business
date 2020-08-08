@@ -58,7 +58,7 @@
 }
 
 .nav-item.nav-link.active {
-  background-color: $placeholder-background;
+  background-color: rgba($color: $placeholder-background, $alpha: 0.5);
   height: 55px;
   filter: drop-shadow(0 0 4px #175e90) !important;
   border: none;
@@ -72,7 +72,7 @@
 }
 
 .tab-pane.fade.show.active {
-  background-color: $placeholder-background;
+  background-color: rgba($color: $placeholder-background, $alpha: 0.7);
 }
 
 .nav-tabs .nav-link .active,
@@ -86,7 +86,7 @@
 .tab-wrapper {
   &__details {
     &__img {
-      width: 100%;
+      width: 70%;
       border-radius: 5px;
       @include is-mobile {
         width: 60%;
@@ -117,7 +117,9 @@
       margin-left: 5px;
     }
     &__kick-off {
-      padding: 5px 10px 5px 0;
+      margin: 5px 0;
+      padding: 5px 10px;
+      background-color: rgba($color: #fff, $alpha: 0.2) !important;
       span {
         display: inline-block;
         margin-left: 5px;

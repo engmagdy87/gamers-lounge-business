@@ -47,7 +47,7 @@
                       {{ data.format }}
                     </span>
                   </div>
-                  <div class="row d-flex">
+                  <div class="row d-flex mt-1 mb-1">
                     <span class="tab-wrapper__details__platform">
                       {{ data.platform }}
                     </span>
@@ -161,11 +161,10 @@ export default {
       const tabPanes = document.getElementsByClassName("tab-pane");
       for (let index = 0; index < tabPanes.length; index++) {
         const element = tabPanes[index];
-        if (element.clientHeight < 800) {
-          element.style.clipPath = `polygon(0 0,100% 0,100% 4%,100% 92%,99% 96%,66% 96%,65% 100%,2% 100%,0 95%)`;
-        } else {
-          element.style.clipPath = `polygon(0 0,100% 0,100% 4%,100% 50%,99% 99.5%,66% 99.5%,65% 100%,2% 101%,0% 99%)`;
-        }
+        if (element.clientHeight < 800)
+          element.style.clipPath = `polygon(0 0,98% 0,100% 12%,100% 78%,98% 90%,66% 90%,50% 150%,6% 120%,0 90%)`;
+        else
+          element.style.clipPath = `polygon(0 0,98% 0,100% 3%,100% 94.5%,98% 97.5%,66% 97.5%,50% 120%,5% 105%,0 97%)`;
       }
     }
   },
