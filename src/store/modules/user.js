@@ -88,6 +88,7 @@ const getUserProfile = async ({ commit }) => {
 const updateUserProfile = async ({ commit }, payload) => {
     const response = await updateProfile(payload).then((response) => {
         commit(types.user.mutations.SET_IS_USER_PROFILE_UPDATED, true);
+        return response.data.user
     }).catch((err) => {
         commit(types.home.mutations.SET_SPINNER_FLAG, false)
         throw err

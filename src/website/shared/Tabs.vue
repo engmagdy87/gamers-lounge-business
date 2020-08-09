@@ -164,7 +164,7 @@ export default {
         if (element.clientHeight < 800)
           element.style.clipPath = `polygon(0 0,98% 0,100% 12%,100% 78%,98% 90%,66% 90%,50% 150%,6% 120%,0 90%)`;
         else
-          element.style.clipPath = `polygon(0 0,98% 0,100% 3%,100% 94.5%,98% 97.5%,66% 97.5%,50% 120%,5% 105%,0 97%)`;
+          element.style.clipPath = `polygon(0 0,98% 0,100% 0.5%,100% 99%,98% 99.5%,66% 99.5%,50% 110%,5% 102%,0 99.5%)`;
       }
     }
   },

@@ -31,6 +31,8 @@
                 errors.password !== undefined ? 'is-invalid' : '',
                 errors.password === undefined ? 'registeration-style' : ''
               ]"
+              autofocus
+              v-on:keyup.enter="() => {}"
             />
             <p class="error-message" v-if="errors.password !== undefined">
               {{ errors.password }}
@@ -62,10 +64,12 @@ export default {
     async updatePassword() {
       if (this.password === "")
         this.errors.password = "Please insert your password";
-      else this.closeModal();
+      else {
+        this.setShowRequestedPasswordModal(false, this.password);
+      }
     },
     closeModal() {
-      this.setShowRequestedPasswordModal(false, this.password);
+      this.setShowRequestedPasswordModal(false);
       this.password = "";
       this.errors = {};
     }
@@ -78,7 +82,7 @@ export default {
 .request-password-modal-body {
   padding: 16px;
   form {
-    height: 130px !important;
+    height: 150px !important;
   }
 }
 </style>

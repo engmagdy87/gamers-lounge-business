@@ -2,6 +2,8 @@
 @import "../variables.scss";
 @import "../mixins.scss";
 
+$preview-image: 150px;
+
 .profile-wrapper {
   background-image: url("~/website/img/hexagone-pattern.png");
   background-repeat: repeat;
@@ -52,16 +54,16 @@
       min-height: 82vh;
       padding: 5%;
     }
-    &__profile-image {
-      div,
-      img {
-        border: 1px solid $primary;
-        border-radius: 10px;
-        background-color: $accent;
-        width: 150px;
-        height: 150px;
-      }
-    }
+    // &__profile-image {
+    // div,
+    // img {
+    //   border: 1px solid $primary;
+    //   border-radius: 10px;
+    //   background-color: $accent;
+    //   width: 150px;
+    //   height: 150px;
+    // }
+    // }
     &__profile-details {
       padding-left: 50px;
       div {
@@ -96,5 +98,73 @@
         @include create-hexagone-shape(10px);
       }
     }
+  }
+}
+
+.dropbox {
+  outline: 2px dashed grey; /* the dash box */
+  outline-offset: -10px;
+  background: lightcyan;
+  color: dimgray;
+  padding: 10px 10px;
+  height: $preview-image; /* minimum height */
+  width: $preview-image;
+  margin: auto;
+  position: relative;
+  cursor: pointer;
+}
+
+.input-file {
+  opacity: 0; /* invisible but it's there! */
+  width: 100%;
+  height: $preview-image;
+  position: absolute;
+  cursor: pointer;
+}
+
+.dropbox:hover {
+  background: lightblue; /* when mouse over to the drop zone, change color */
+}
+
+.dropbox p {
+  font-size: 1.2em;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.preview {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview img {
+  max-width: 100%;
+  height: $preview-image;
+  border-radius: 10px !important;
+  border: 1px solid $primary;
+  object-fit: cover;
+}
+
+.preview__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: $accent;
+  background-color: $primary;
+  font-size: 20px;
+  float: right;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    cursor: pointer;
   }
 }

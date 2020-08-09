@@ -97,7 +97,7 @@
           <div class="col-12 col-md-9">
             <div
               :class="[
-                'description-container',
+                'description-container event-details-wrapper__content__description',
                 setShowMoreTextFlag
                   ? 'description-container--limit'
                   : 'description-container--expand'

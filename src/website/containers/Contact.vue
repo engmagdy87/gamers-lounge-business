@@ -28,14 +28,14 @@
             <span class="contact-wrapper__content__icon">
               <img src="website/img/email.svg" alt="email icon" />
             </span>
-            <span>esportsummiut@gamerlounge.com</span>
+            <span>contact-us@esportssummit-me.com</span>
           </div>
-          <div class="mb-3 mb-md-0">
+          <!-- <div class="mb-3 mb-md-0">
             <span class="contact-wrapper__content__icon">
               <img src="website/img/phone.svg" alt="phone icon" />
             </span>
             <span>+20 123456789</span>
-          </div>
+          </div> -->
         </div>
         <div class="col-12 col-md-6">
           <form>

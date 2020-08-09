@@ -71,11 +71,14 @@
     }
     &__logo {
       img {
-        width: 200px;
+        height: 200px;
       }
       @include is-mobile {
         margin-bottom: 15px;
       }
+    }
+    &__description {
+      padding-top: 60px;
     }
     &__tournaments {
       margin-top: 50px;

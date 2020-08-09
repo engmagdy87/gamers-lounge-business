@@ -7,12 +7,39 @@
     <div class="profile-wrapper__content" v-if="isProfileFetched">
       <div class="row">
         <div class="col-12 col-md-2 profile-wrapper__content__profile-image">
-          <img
-            v-if="profileData.images.img_profile !== null"
-            :src="profileData.images.img_profile.path"
-            alt="user profile"
-          />
-          <img v-else src="website/img/placeholder.png" alt="user profile" />
+          <div class="form-group">
+            <div class="preview" v-if="imgProfileUrl">
+              <div
+                v-if="isEditMode"
+                class="preview__close"
+                role="button"
+                @click="resetPreview"
+              >
+                &times;
+              </div>
+              <img v-if="imgProfileUrl" :src="imgProfileUrl" />
+              <img
+                v-else
+                src="website/img/placeholder.png"
+                alt="user profile"
+              />
+            </div>
+            <div class="dropbox" v-if="!imgProfileUrl">
+              <input
+                type="file"
+                multiple
+                name="img_profile"
+                @change="filesChange($event.target.name, $event.target.files)"
+                accept="image/png, image/jpeg"
+                class="input-file"
+                ref="img_profile"
+              />
+              <p v-if="!imgProfileUrl">
+                Drop you profile picture here<br />
+                or Browse
+              </p>
+            </div>
+          </div>
         </div>
         <div class="col-12 col-md-5 profile-wrapper__content__profile-details">
           <div>
@@ -212,7 +239,7 @@
 
 <script>
 import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
-import { getUserCookie } from "../helpers/CookieHelper";
+import { setUserCookie, getUserCookie } from "../helpers/CookieHelper";
 import store from "../../store/index";
 import types from "../../store/types";
 import Header from "../shared/Header";
@@ -241,9 +268,9 @@ export default {
           country_code: countryCodes[0].dial_code,
           number: ""
         },
-        img_profile: "",
-        imgProfileUrl: null
+        img_profile: ""
       },
+      imgProfileUrl: null,
       errors: {},
       countryCodesData: countryCodes
     };
@@ -275,7 +302,7 @@ export default {
     },
     setShowRequestedPasswordModal: async function(value = false, password) {
       this.showRequestPasswordModal = value;
-      if (!value) {
+      if (password) {
         this.setRequestedPassword(password);
         await this.updateProfile();
         this.setShowReloginModalModal(true);
@@ -300,7 +327,10 @@ export default {
         this.errors = { ...this.errors, email: "Email has invalid format" };
       } else if (
         this.profile.username !== this.profileData.username ||
-        this.profile.email !== this.profileData.email
+        this.profile.email !== this.profileData.email ||
+        this.profile.phone.country_code !==
+          this.profileData.phone.country_code ||
+        this.profile.phone.number !== this.profileData.phone.number
       ) {
         this.setShowRequestedPasswordModal(true);
       } else {
@@ -321,9 +351,12 @@ export default {
         formData.append("img_profile", this.profile.img_profile);
       formData.append("phone", JSON.stringify(this.profile.phone));
       try {
-        await this.updateUserProfile(formData);
+        const newUserData = await this.updateUserProfile(formData);
         this.setIsEditMode(false);
         store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        const oldCookie = getUserCookie();
+        oldCookie.user = newUserData;
+        setUserCookie(oldCookie);
       } catch (error) {
         if (
           error.data.errors !== undefined &&
@@ -349,6 +382,13 @@ export default {
         type: color
       });
     },
+    filesChange(name, files) {
+      this.profile.img_profile = files[0];
+      this.imgProfileUrl = URL.createObjectURL(files[0]);
+    },
+    resetPreview() {
+      this.imgProfileUrl = null;
+    },
     fetchProfile: async function() {
       await this.fetchUserProfile();
       if (this.isProfileFetched && !this.isEditMode) {
@@ -356,10 +396,11 @@ export default {
         this.profile.last_name = this.profileData.last_name;
         this.profile.username = this.profileData.username;
         this.profile.email = this.profileData.email;
+        this.imgProfileUrl = this.profileData.images.img_profile.path;
         this.profile.birthday_date = this.profileData.birthday_date.split(
           " "
         )[0];
-        this.profile.phone = this.profileData.phone;
+        this.profile.phone = { ...this.profileData.phone };
       }
     }
   },

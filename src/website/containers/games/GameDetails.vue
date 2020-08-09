@@ -35,7 +35,7 @@
           <div class="col-12 col-lg-9">
             <div class="row">
               <div
-                class="col description-container"
+                class="col description-container game-details-wrapper__content__description"
                 v-html="gameDetails.description"
               ></div>
             </div>
