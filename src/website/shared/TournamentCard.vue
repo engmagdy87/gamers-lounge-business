@@ -38,7 +38,11 @@ export default {
   methods: {
     redirectTo() {
       this.$router.push({
-        path: `/tournaments/tournament/${this.card.id}`
+        name: "tournament",
+        params: {
+          tournamentId: this.card.id,
+          previousPath: this.$router.history.current.path
+        }
       });
     },
     trimText(text) {

@@ -31,7 +31,9 @@
         <div class="row mb-4 mb-md-0">
           <div class="col-12 col-lg-8">
             <div class="tournament-details-wrapper__content__breadcrumb">
-              <a href="/">Tournament</a>
+              <a :href="this.$router.history.current.params.previousPath || '/'"
+                >Tournament</a
+              >
               <span> > {{ tournamentDetails.initial_title }}</span>
             </div>
           </div>

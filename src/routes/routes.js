@@ -43,7 +43,6 @@ import TournamentsList from 'src/dashboard/pages/Tournaments/TournamentsList.vue
 import TournamentAddEdit from 'src/dashboard/pages/Tournaments/TournamentAddEdit.vue'
 import TournamentDetails from '../website/containers/tournaments/TournamentDetails.vue'
 
-
 import Regions from 'src/dashboard/pages/Regions.vue'
 import RegionsList from 'src/dashboard/pages/Regions/RegionsList.vue'
 import RegionAddEdit from 'src/dashboard/pages/Regions/RegionAddEdit.vue'
