@@ -1,0 +1,205 @@
+.tab-pane {
+  padding: 30px;
+  position: relative;
+  -webkit-filter: drop-shadow(0 0 4px #175e90) !important;
+          filter: drop-shadow(0 0 4px #175e90) !important;
+}
+
+.tab-pane h3 {
+  word-break: break-all;
+}
+
+.nav-tabs {
+  border: none;
+}
+
+@media (max-width: 767px) {
+  .nav-tabs {
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -ms-flex-wrap: nowrap !important;
+        flex-wrap: nowrap !important;
+  }
+  .nav-tabs::-webkit-scrollbar {
+    width: 5px !important;
+    background-color: #172532 !important;
+    border-radius: 20px !important;
+    height: 2px;
+  }
+  .nav-tabs::-webkit-scrollbar-thumb {
+    background-color: #2af3f3 !important;
+    border-radius: 20px !important;
+  }
+}
+
+.nav-tabs .nav-link:nth-child(1) {
+  margin: 0 2px 0 0;
+}
+
+@media (max-width: 767px) {
+  .nav-tabs .nav-link:nth-child(1) {
+    margin: 0;
+  }
+}
+
+.nav-tabs .nav-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #0c3656;
+  cursor: pointer !important;
+  color: rgba(255, 255, 255, 0.4);
+  border: none;
+  margin: 0 2px;
+  width: 120px;
+  height: 50px;
+  -webkit-clip-path: polygon(0% 10px, 0% 0%, calc(100% - 10px) 0%, 100% 10px, 100% 100%, 100% 100%, 10px 100%, 0% 100%);
+          clip-path: polygon(0% 10px, 0% 0%, calc(100% - 10px) 0%, 100% 10px, 100% 100%, 100% 100%, 10px 100%, 0% 100%);
+  -webkit-transform: translateY(5px);
+          transform: translateY(5px);
+}
+
+@media (max-width: 767px) {
+  .nav-tabs .nav-link {
+    width: 80px;
+    height: 50px;
+    margin: 0;
+    font-size: 0.9rem;
+  }
+}
+
+.nav-item.nav-link.active {
+  background-color: rgba(10, 89, 144, 0.5);
+  height: 55px;
+  -webkit-filter: drop-shadow(0 0 4px #175e90) !important;
+          filter: drop-shadow(0 0 4px #175e90) !important;
+  border: none;
+  color: white;
+  -webkit-transform: translateY(0px);
+          transform: translateY(0px);
+}
+
+@media (max-width: 767px) {
+  .nav-item.nav-link.active {
+    width: 80px;
+    height: 50px;
+    margin: 0;
+  }
+}
+
+.tab-pane.fade.show.active {
+  background-color: rgba(10, 89, 144, 0.7);
+}
+
+.nav-tabs .nav-link .active,
+.nav-tabs .nav-item .show .nav-link {
+  background-color: #0a5990 !important;
+  -webkit-filter: drop-shadow(0 0 4px #175e90) !important;
+          filter: drop-shadow(0 0 4px #175e90) !important;
+  color: white;
+  border: none;
+}
+
+.tab-wrapper__details__img {
+  width: 70%;
+  border-radius: 5px;
+}
+
+@media (max-width: 767px) {
+  .tab-wrapper__details__img {
+    width: 60%;
+    display: block;
+    margin: 0 auto 15px;
+  }
+}
+
+.tab-wrapper__details__title {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.tab-wrapper__details__description {
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.tab-wrapper__details__format {
+  font-size: 0.9rem;
+  font-weight: lighter;
+  margin: 0 10px;
+}
+
+@media (max-width: 767px) {
+  .tab-wrapper__details__format {
+    margin-right: 10px;
+  }
+}
+
+.tab-wrapper__details__platform {
+  margin-right: 5px;
+}
+
+.tab-wrapper__details__region {
+  margin-left: 5px;
+}
+
+.tab-wrapper__details__kick-off {
+  margin: 5px 0;
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.tab-wrapper__details__kick-off span {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.tab-wrapper__details__register {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+@media (max-width: 767px) {
+  .tab-wrapper__details__register {
+    margin-top: 15px;
+  }
+}
+
+.tab-wrapper__details__register a {
+  color: white !important;
+}
+
+.tab-wrapper__details__register div {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: 6px;
+  margin-right: 5px;
+}
+
+.tab-wrapper__details__register--open {
+  background-color: #00d351;
+}
+
+.tab-wrapper__details__register--closed {
+  background-color: red;
+}
+
+.tab-wrapper__details__register--soon {
+  background-color: orange;
+}
+/*# sourceMappingURL=tabs.css.map */

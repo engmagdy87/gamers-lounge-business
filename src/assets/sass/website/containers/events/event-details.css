@@ -1,0 +1,226 @@
+.event-details-wrapper {
+  background-image: url("~/website/img/hexagone-pattern.png");
+  background-repeat: repeat;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.event-details-wrapper::-webkit-scrollbar {
+  width: 5px !important;
+  height: 5px !important;
+  background-color: #172532 !important;
+  border-radius: 20px !important;
+}
+
+.event-details-wrapper::-webkit-scrollbar-thumb {
+  background-color: #2af3f3 !important;
+  border-radius: 20px !important;
+}
+
+.event-details-wrapper__outside {
+  position: relative;
+  width: calc(100% - 2px);
+  height: 60vh;
+  background: #0a5990;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 2px;
+}
+
+.event-details-wrapper__outside--hexa-shape {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 4%, 100% 85%, 99% 92%, 66% 92%, 62% 100%, 2% 100%, 0 93%);
+          clip-path: polygon(0 0, 100% 0, 100% 4%, 100% 85%, 99% 92%, 66% 92%, 62% 100%, 2% 100%, 0 93%);
+}
+
+@media (max-width: 767px) {
+  .event-details-wrapper__outside--hexa-shape {
+    -webkit-clip-path: polygon(0 0, 98% 0, 100% 4%, 100% 92%, 98% 95%, 66% 95%, 62% 100%, 2% 100%, 0 96%);
+            clip-path: polygon(0 0, 98% 0, 100% 4%, 100% 92%, 98% 95%, 66% 95%, 62% 100%, 2% 100%, 0 96%);
+  }
+}
+
+.event-details-wrapper__outside--none {
+  -webkit-clip-path: inset(0 0 0 0);
+          clip-path: inset(0 0 0 0);
+}
+
+.event-details-wrapper__inside {
+  position: relative;
+  width: calc(100% - 2px);
+  height: calc(60vh - 4px);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.event-details-wrapper__inside video {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media (max-width: 767px) {
+  .event-details-wrapper__inside video {
+    height: 100%;
+  }
+}
+
+.event-details-wrapper__inside img {
+  height: 30vh;
+  position: absolute;
+  display: table;
+  vertical-align: middle;
+}
+
+@media (max-width: 767px) {
+  .event-details-wrapper__inside img {
+    width: 70%;
+    height: auto;
+  }
+}
+
+.event-details-wrapper__inside--hexa-shape {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 4%, 100% 85%, 99% 92%, 66% 92%, 62% 100%, 2% 100%, 0 93%);
+          clip-path: polygon(0 0, 100% 0, 100% 4%, 100% 85%, 99% 92%, 66% 92%, 62% 100%, 2% 100%, 0 93%);
+}
+
+@media (max-width: 767px) {
+  .event-details-wrapper__inside--hexa-shape {
+    -webkit-clip-path: polygon(0 0, 98% 0, 100% 4%, 100% 92%, 98% 95%, 66% 95%, 62% 100%, 2% 100%, 0 96%);
+            clip-path: polygon(0 0, 98% 0, 100% 4%, 100% 92%, 98% 95%, 66% 95%, 62% 100%, 2% 100%, 0 96%);
+  }
+}
+
+.event-details-wrapper__inside--none {
+  -webkit-clip-path: inset(0 0 0 0);
+          clip-path: inset(0 0 0 0);
+}
+
+.event-details-wrapper__content {
+  width: 100%;
+  padding: 5vh 15%;
+  min-height: calc(100vh - 12vh);
+  color: white;
+}
+
+@media (max-width: 767px) {
+  .event-details-wrapper__content {
+    min-height: 82vh;
+    padding: 5%;
+  }
+}
+
+.event-details-wrapper__content__breadcrumb {
+  font-size: 1.8rem;
+  margin-bottom: 50px;
+  padding-left: 15px;
+}
+
+.event-details-wrapper__content__breadcrumb a {
+  text-decoration: none;
+  color: white;
+}
+
+.event-details-wrapper__content__breadcrumb span {
+  color: #2af3f3;
+}
+
+.event-details-wrapper__content__logo img {
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.event-details-wrapper__content__description {
+  padding-top: 60px;
+}
+
+.event-details-wrapper__content__tournaments {
+  margin-top: 50px;
+}
+
+.event-details-wrapper__content__tournaments div:nth-child(1) {
+  font-size: 2rem;
+  color: #2af3f3;
+}
+
+@media (max-width: 767px) {
+  .event-details-wrapper__content__tournaments__title {
+    margin-top: 30px !important;
+  }
+}
+
+.event-details-wrapper__content__tournaments div:nth-child(2) {
+  height: 60px;
+}
+
+.event-details-wrapper__content__custom-btn-outside {
+  position: relative;
+  width: 80%;
+  height: 100%;
+  background: #2af3f3;
+  -webkit-clip-path: polygon(0% 10px, 10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px));
+          clip-path: polygon(0% 10px, 10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px));
+}
+
+@media (max-width: 767px) {
+  .event-details-wrapper__content__custom-btn-outside {
+    width: 100%;
+  }
+}
+
+.event-details-wrapper__content__custom-btn-inside {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  background: #100000;
+  font-size: 1.05rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  -webkit-clip-path: polygon(0% 10px, 10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px));
+          clip-path: polygon(0% 10px, 10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px));
+}
+
+.event-details-wrapper__content__custom-btn-inside a {
+  cursor: pointer;
+}
+
+.event-details-wrapper__content__main-sponsor {
+  width: 80px;
+  margin-left: 15px;
+}
+
+.event-details-wrapper__content__sub-sponsor {
+  width: 55px;
+  margin: 15px;
+}
+/*# sourceMappingURL=event-details.css.map */

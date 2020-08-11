@@ -15,4 +15,9 @@ const TruncateText = (text) => {
     return `${text.slice(0, numberOfCharacters)}...`
 }
 
-export { getFirstLettersOfString, TruncateText }
+const changeTextDirection = (text) => {
+    const arabicPattern = /[\u0600-\u06FF]/;
+    return arabicPattern.test(text)
+}
+
+export { getFirstLettersOfString, TruncateText, changeTextDirection }

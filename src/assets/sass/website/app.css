@@ -1,0 +1,81 @@
+.app-wrapper {
+  font-family: "Roboto";
+}
+
+.vue-notifyjs.notifications .list-move {
+  -webkit-transition: opacity 0.4s, -webkit-transform 0.3s;
+  transition: opacity 0.4s, -webkit-transform 0.3s;
+  transition: transform 0.3s, opacity 0.4s;
+  transition: transform 0.3s, opacity 0.4s, -webkit-transform 0.3s;
+}
+
+.vue-notifyjs.notifications .list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.vue-notifyjs.notifications .list-enter-active {
+  -webkit-transition: opacity 0.4s ease-in, -webkit-transform 0.2s ease-in;
+  transition: opacity 0.4s ease-in, -webkit-transform 0.2s ease-in;
+  transition: transform 0.2s ease-in, opacity 0.4s ease-in;
+  transition: transform 0.2s ease-in, opacity 0.4s ease-in, -webkit-transform 0.2s ease-in;
+}
+
+.vue-notifyjs.notifications .list-leave-active {
+  -webkit-transition: opacity 0.4s ease-out, -webkit-transform 1s ease-out;
+  transition: opacity 0.4s ease-out, -webkit-transform 1s ease-out;
+  transition: transform 1s ease-out, opacity 0.4s ease-out;
+  transition: transform 1s ease-out, opacity 0.4s ease-out, -webkit-transform 1s ease-out;
+}
+
+.vue-notifyjs.notifications .list-enter {
+  opacity: 0;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.vue-notifyjs.notifications .list-leave-to {
+  opacity: 0;
+  -webkit-transform: scale(1.2, 0.7);
+          transform: scale(1.2, 0.7);
+}
+
+.error-message {
+  color: red;
+}
+
+.registeration-style {
+  background-color: black !important;
+  border: 1px solid #2af3f3 !important;
+  color: #2af3f3 !important;
+}
+
+.registeration-style::-webkit-calendar-picker-indicator {
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+
+.slick-dots {
+  bottom: 20px !important;
+}
+
+.slick-dots li {
+  width: 50px !important;
+  background-color: gray !important;
+  height: 3px !important;
+}
+
+.slick-dots li button {
+  width: 50px !important;
+}
+
+.slick-dots li.slick-active {
+  background-color: #2af3f3 !important;
+}
+
+.slick-dots li button:before {
+  width: 50px !important;
+  color: gray !important;
+  content: none !important;
+}
+/*# sourceMappingURL=app.css.map */

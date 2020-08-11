@@ -98,7 +98,9 @@
         role="tabpanel"
         aria-labelledby="nav-profile-tab"
       >
-        <h3>{{ data.rules.title }}</h3>
+        <h3 :class="isThisArabicText ? 'tab-title--ar' : 'tab-title--en'">
+          {{ data.rules.title }}
+        </h3>
         <div class="description-container" v-html="data.rules.content"></div>
       </div>
       <div
@@ -123,7 +125,9 @@
         role="tabpanel"
         aria-labelledby="nav-contact-tab"
       >
-        <h3>{{ data.contacts.title }}</h3>
+        <h3 :class="isThisArabicText ? 'tab-title--ar' : 'tab-title--en'">
+          {{ data.contacts.title }}
+        </h3>
         <div class="description-container" v-html="data.contacts.content"></div>
       </div>
     </div>
@@ -132,12 +136,14 @@
 
 <script>
 import redirectToNewTab from "../helpers/RedirectToNewTab";
+import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
+import { changeTextDirection } from "../helpers/StringsHelper";
 
 export default {
   props: ["data"],
   data() {
     return {
-      activeTabIndex: 0,
+      activeTabIndex: 1,
       tabs: ["Details", "Rules Book", "Schedule", "Streaming", "Contacts"]
     };
   },
@@ -161,10 +167,12 @@ export default {
       const tabPanes = document.getElementsByClassName("tab-pane");
       for (let index = 0; index < tabPanes.length; index++) {
         const element = tabPanes[index];
-        if (element.clientHeight < 800)
+        if (isDeviceSmart())
+          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 99.5%,90% 99.8%,50% 99.8%,20% 101%,0% 99.7%,0 99.8%)`;
+        else if (element.clientHeight < 800)
           element.style.clipPath = `polygon(0 0,98% 0,100% 12%,100% 78%,98% 90%,66% 90%,50% 150%,6% 120%,0 90%)`;
         else
-          element.style.clipPath = `polygon(0 0,98% 0,100% 0.5%,100% 99%,98% 99.5%,66% 99.5%,50% 110%,5% 102%,0 99.5%)`;
+          element.style.clipPath = `polygon(0 0,98% 0,100% 0.5%,100% 99%,98% 99.5%,66% 99.5%,50% 103.5%,5% 102%,0 99.5%)`;
       }
     }
   },
@@ -174,10 +182,23 @@ export default {
   updated() {
     this.changeHexaStyleForTab();
     redirectToNewTab("description-container");
+  },
+  computed: {
+    isThisArabicText() {
+      return changeTextDirection(this.data.rules.title);
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../../assets/sass/website/shared/tabs.scss";
+.tab-title {
+  &--ar {
+    text-align: right;
+  }
+  &--en {
+    text-align: left;
+  }
+}
 </style>

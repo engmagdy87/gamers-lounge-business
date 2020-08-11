@@ -75,6 +75,22 @@ h6,
   text-transform: uppercase;
   font-family: "Roboto" !important;
 }
+
+.description > p > * {
+  color: black !important;
+  background-color: transparent !important;
+}
+
+.description > span > * > * {
+  color: black !important;
+  background-color: transparent !important;
+}
+.description > h1 > span > p > *,
+.description > h2 > span > p > *,
+.description > h3 > span > p > * {
+  color: black !important;
+  background-color: transparent !important;
+}
 p {
   font-size: $font-paragraph;
   line-height: $line-height-general;
@@ -85,11 +101,6 @@ p > * {
   background-color: transparent !important;
   font-family: "Roboto" !important;
 }
-.description > p > * {
-  color: black !important;
-  background-color: transparent !important;
-}
-
 .multiselect__option.multiselect__option--highlight {
   color: black;
   &:hover {

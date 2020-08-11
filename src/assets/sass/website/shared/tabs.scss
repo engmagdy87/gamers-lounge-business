@@ -5,6 +5,7 @@
 .tab-pane {
   padding: 30px;
   position: relative;
+  filter: drop-shadow(0 0 4px #175e90) !important;
   h3 {
     word-break: break-all;
   }
@@ -31,7 +32,7 @@
 }
 
 .nav-tabs .nav-link:nth-child(1) {
-  margin: 0 20px 0 0;
+  margin: 0 2px 0 0;
   @include is-mobile {
     margin: 0;
   }
@@ -44,7 +45,7 @@
   cursor: pointer !important;
   color: rgba($color: #fff, $alpha: 0.4);
   border: none;
-  margin: 0 20px;
+  margin: 0 2px;
   width: 120px;
   height: 50px;
   @include create-hexagone-shape-tab(10px);

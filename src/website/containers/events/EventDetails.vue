@@ -127,11 +127,14 @@
           <div
             class="col-12 order-1 order-md-2 col-md-6 d-flex justify-content-end align-items-center"
           >
-            <div class="event-details-wrapper__content__custom-btn-outside">
-              <div
-                class="event-details-wrapper__content__custom-btn-inside"
-                v-if="eventDetails.sponsors !== undefined"
-              >
+            <div
+              class="event-details-wrapper__content__custom-btn-outside"
+              v-if="
+                eventDetails.sponsors !== undefined &&
+                  eventDetails.sponsors.sub.length !== 0
+              "
+            >
+              <div class="event-details-wrapper__content__custom-btn-inside">
                 <a
                   v-for="(sponsor, index) in eventDetails.sponsors.sub.slice(
                     0,

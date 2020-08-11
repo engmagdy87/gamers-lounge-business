@@ -1,0 +1,255 @@
+.header-wrapper {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 120px;
+  z-index: 100;
+}
+
+.header-wrapper__user-section {
+  color: #2af3f3 !important;
+}
+
+.header-wrapper__user-section-icon {
+  width: 20px;
+}
+
+.header-wrapper--solid {
+  background: #121828;
+}
+
+.header-wrapper--gradient {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(80%, rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 80%, rgba(0, 0, 0, 0) 100%);
+}
+
+.header-wrapper--desktop {
+  display: none;
+  width: 100%;
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .header-wrapper--desktop {
+    display: block;
+    margin-right: 20px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .header-wrapper--desktop {
+    display: block;
+    margin-right: 20px;
+  }
+}
+
+.header-wrapper--mobile {
+  display: block;
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .header-wrapper--mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 1400px) {
+  .header-wrapper--mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .header-wrapper {
+    height: 75px;
+  }
+}
+
+.header-wrapper__logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  margin-right: auto;
+  margin-left: 40px;
+  width: 300px;
+}
+
+@media (max-width: 767px) {
+  .header-wrapper__logo {
+    width: 97%;
+    margin-left: 10px;
+  }
+}
+
+.header-wrapper__logo img {
+  display: block;
+  width: 150px;
+  margin-right: 20px;
+  padding-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+  .header-wrapper__logo img {
+    margin-right: auto;
+    width: 90px;
+    padding-bottom: 10px;
+  }
+}
+
+.header-wrapper__logo p {
+  display: inline-block;
+  font-size: 2rem;
+}
+
+@media (max-width: 767px) {
+  .header-wrapper__logo p {
+    font-size: 1rem;
+  }
+}
+
+.header-wrapper__navLinks {
+  list-style: none;
+  margin-bottom: 0;
+  margin-left: -10%;
+  text-align: center;
+}
+
+.header-wrapper__navLinks li {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.header-wrapper__navLinks li a {
+  padding: 20px 10px;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  color: #e7e7e7;
+  font-size: 1.2rem;
+  font-weight: lighter;
+}
+
+.header-wrapper__navLinks li:hover a {
+  color: #2af3f3;
+}
+
+.header-wrapper__navLinks--active a {
+  color: #2af3f3 !important;
+}
+
+.header-wrapper__dashboard-img {
+  width: 30px;
+  margin-right: 15px;
+}
+
+.hi-active {
+  color: #2af3f3 !important;
+}
+
+.hamburger-menu {
+  font-size: 30px;
+  cursor: pointer;
+  color: white !important;
+  position: absolute;
+  top: calc(120px / 2.5);
+  right: 24px;
+}
+
+@media (max-width: 767px) {
+  .hamburger-menu {
+    top: calc(75px / 7);
+  }
+}
+
+.overlay {
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 500;
+  top: 0;
+  left: 0;
+  background-color: #172532;
+  overflow-y: hidden;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: calc(100% - 50px);
+  text-align: left;
+  margin-top: 30px;
+  padding-left: 50px;
+  list-style: none;
+}
+
+@media (max-width: 767px) {
+  .overlay-content {
+    top: 15%;
+  }
+}
+
+.overlay-content__text--active {
+  color: #2af3f3 !important;
+}
+
+@media (max-width: 767px) {
+  .overlay-content__text {
+    font-size: 1.6rem !important;
+  }
+}
+
+.overlay li a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: white;
+  display: block;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.overlay li a:hover,
+.overlay li a:focus {
+  color: #2af3f3;
+}
+
+.overlay .closebtn {
+  color: #2af3f3;
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  cursor: pointer;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .overlay a {
+    font-size: 20px;
+  }
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+/*# sourceMappingURL=header.css.map */

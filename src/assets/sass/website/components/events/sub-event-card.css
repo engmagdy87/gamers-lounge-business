@@ -1,0 +1,136 @@
+.sub-event-card-wrapper {
+  position: relative;
+  height: 150px;
+  margin: 5px;
+  -webkit-filter: drop-shadow(0 0 4px #175e90);
+          filter: drop-shadow(0 0 4px #175e90);
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.sub-event-card-wrapper:hover {
+  -webkit-filter: drop-shadow(0 0 8px #175e90);
+          filter: drop-shadow(0 0 8px #175e90);
+}
+
+.sub-event-card-wrapper__outside {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #175e90;
+  -webkit-clip-path: polygon(0% 12px, 12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0% calc(100% - 12px));
+          clip-path: polygon(0% 12px, 12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0% calc(100% - 12px));
+}
+
+.sub-event-card-wrapper__inside {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  font-size: 1.05rem;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  -webkit-clip-path: polygon(0% 12px, 12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0% calc(100% - 12px));
+          clip-path: polygon(0% 12px, 12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0% calc(100% - 12px));
+}
+
+.sub-event-card-wrapper__bg-img, .sub-event-card-wrapper__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-clip-path: polygon(0% 12px, 12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0% calc(100% - 12px));
+          clip-path: polygon(0% 12px, 12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0% calc(100% - 12px));
+}
+
+.sub-event-card-wrapper__overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 2%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.sub-event-card-wrapper__overlay:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.sub-event-card-wrapper__logo {
+  width: 30%;
+  margin-left: 5%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.sub-event-card-wrapper__logo img {
+  width: 100%;
+  height: 130px;
+  max-height: 140px;
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+}
+
+.sub-event-card-wrapper__content {
+  width: 60%;
+  padding-left: 7%;
+}
+
+@media (max-width: 767px) {
+  .sub-event-card-wrapper__content {
+    padding-left: 5%;
+  }
+}
+
+@media (max-width: 767px) {
+  .sub-event-card-wrapper__content__game {
+    font-size: 0.6rem;
+  }
+}
+
+.sub-event-card-wrapper__content span img {
+  margin-right: 5px !important;
+}
+
+.sub-event-card-wrapper__content .badge.badge-pill.badge-secondary {
+  background-color: rgba(108, 117, 125, 0.4) !important;
+}
+
+.sub-event-card-wrapper__content h1 {
+  font-size: 1.3rem;
+  margin-top: 10px;
+  margin-bottom: 0;
+  word-break: break-all;
+}
+
+@media (max-width: 767px) {
+  .sub-event-card-wrapper__content h1 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+}
+
+.sub-event-card-wrapper__content p {
+  font-size: 0.9rem;
+  font-family: "Roboto Light";
+}
+/*# sourceMappingURL=sub-event-card.css.map */
