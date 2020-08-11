@@ -658,12 +658,17 @@ export default {
         formData.append("vid_final", generateYoutubeUrl(this.event.vid_final));
         formData.append("vid_cover_main", this.event.vid_cover_main);
 
+        if (this.event.main_sponsors_ids.length === 0)
+          formData.append("main_sponsors_ids[]", []);
         for (var i = 0; i < this.event.main_sponsors_ids.length; i++) {
           formData.append(
             "main_sponsors_ids[]",
             this.event.main_sponsors_ids[i].id
           );
         }
+
+        if (this.event.sub_sponsors_ids.length === 0)
+          formData.append("sub_sponsors_ids[]", []);
         for (var i = 0; i < this.event.sub_sponsors_ids.length; i++) {
           formData.append(
             "sub_sponsors_ids[]",
