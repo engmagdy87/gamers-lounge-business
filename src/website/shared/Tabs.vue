@@ -145,7 +145,7 @@ export default {
   props: ["data"],
   data() {
     return {
-      activeTabIndex: 1,
+      activeTabIndex: 0,
       tabs: ["Details", "Rules Book", "Schedule", "Streaming", "Contacts"]
     };
   },
