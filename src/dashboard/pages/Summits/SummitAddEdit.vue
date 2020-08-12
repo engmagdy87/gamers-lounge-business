@@ -526,8 +526,10 @@ export default {
     },
     checkDatesSequence() {
       if (
-        isDatesInProperSequence(this.event.start_date, this.event.end_date) ===
-        false
+        isDatesInProperSequence(
+          this.summit.start_date,
+          this.summit.end_date
+        ) === false
       ) {
         this.notifyVue("Please insert dates in proper sequence", "danger");
       }
