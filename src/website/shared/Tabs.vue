@@ -98,7 +98,7 @@
         role="tabpanel"
         aria-labelledby="nav-profile-tab"
       >
-        <h3 :class="isThisArabicText ? 'tab-title--ar' : 'tab-title--en'">
+        <h3 :class="isRuleTitleArabicText ? 'tab-title--ar' : 'tab-title--en'">
           {{ data.rules.title }}
         </h3>
         <div class="description-container" v-html="data.rules.content"></div>
@@ -125,7 +125,9 @@
         role="tabpanel"
         aria-labelledby="nav-contact-tab"
       >
-        <h3 :class="isThisArabicText ? 'tab-title--ar' : 'tab-title--en'">
+        <h3
+          :class="isContactTitleArabicText ? 'tab-title--ar' : 'tab-title--en'"
+        >
           {{ data.contacts.title }}
         </h3>
         <div class="description-container" v-html="data.contacts.content"></div>
@@ -184,8 +186,11 @@ export default {
     redirectToNewTab("description-container");
   },
   computed: {
-    isThisArabicText() {
+    isRuleTitleArabicText() {
       return changeTextDirection(this.data.rules.title);
+    },
+    isContactTitleArabicText() {
+      return changeTextDirection(this.data.contacts.title);
     }
   }
 };
