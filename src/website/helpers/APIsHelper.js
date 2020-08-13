@@ -65,6 +65,15 @@ async function resendVerificationEmail(payload) {
     return response.data;
 }
 
+async function removeUserImage(imageId) {
+    const response = await deleteData(
+        `${APIs.DELETE_IMAGE_IN_PROFILE}/${imageId}`
+    );
+
+    return response;
+}
+
+
 // Contact
 async function sendMessage(payload) {
     const response = await post(
@@ -608,6 +617,7 @@ export {
     removeSummitVideo,
     removeTournamentImage,
     removeTournamentVideo,
+    removeUserImage,
     editGame,
     editPlatform,
     editEvent,

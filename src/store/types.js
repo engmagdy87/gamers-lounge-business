@@ -21,6 +21,7 @@ const user = {
         SEND_FORGOT_MAIL: 'user/actions/SEND_FORGOT_MAIL',
         RESET_PASSWORD: 'user/actions/RESET_PASSWORD',
         RESEND_VERIFICATION_EMAIL: 'user/actions/RESEND_VERIFICATION_EMAIL',
+        DELETE_IMAGE_IN_PROFILE: 'user/actions/DELETE_IMAGE_IN_PROFILE',
     }
 };
 

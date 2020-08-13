@@ -1,5 +1,5 @@
 import types from '../types';
-import { loadUserPersona, setUserPersona, getProfile, updateProfile, sendMail, resetPassword, resendVerificationEmail } from '../../website/helpers/APIsHelper';
+import { loadUserPersona, setUserPersona, getProfile, updateProfile, sendMail, resetPassword, resendVerificationEmail, removeUserImage } from '../../website/helpers/APIsHelper';
 import { setUserCookie } from '../../website/helpers/CookieHelper';
 
 const state = {
@@ -132,6 +132,15 @@ const resetUserPassword = async ({ commit }, payload) => {
     return response
 };
 
+const deleteUserImage = async ({ commit }, imageId) => {
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removeUserImage(imageId).then(() => {
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.user.actions.FETCH_USER_PERSONA]: getUserPersona,
     [types.user.actions.REGISTER_USER_PERSONA]: postUserPersona,
@@ -140,6 +149,7 @@ const actions = {
     [types.user.actions.SEND_FORGOT_MAIL]: sendForgotPasswordMail,
     [types.user.actions.RESET_PASSWORD]: resetUserPassword,
     [types.user.actions.RESEND_VERIFICATION_EMAIL]: resendVerificationMail,
+    [types.user.actions.DELETE_IMAGE_IN_PROFILE]: deleteUserImage,
 };
 
 export default {

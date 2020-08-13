@@ -12,6 +12,7 @@ const UPDATE_USER_PROFILE = `${API_URL}/profile`
 const SEND_MAIL = `${API_URL}/passwords/forgot`
 const RESET_PASSWORD = `${API_URL}/passwords/reset`
 const RESEND_VERIFICATION_EMAIL = `${API_URL}/users/resend-verify-email`
+const DELETE_IMAGE_IN_PROFILE = `${API_URL}/users/images`
 
 // Contact
 const POST_MESSAGE = `${API_URL}/contact-us`
@@ -147,5 +148,6 @@ export {
     RESEND_VERIFICATION_EMAIL,
     GET_REGISTER_LINK,
     GET_COVER_HOME_EVENTS_IMAGE,
-    GET_COVER_CONTACT_US_IMAGE
+    GET_COVER_CONTACT_US_IMAGE,
+    DELETE_IMAGE_IN_PROFILE
 };

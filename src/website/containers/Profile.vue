@@ -292,7 +292,8 @@ export default {
   methods: {
     ...mapActions({
       fetchUserProfile: types.user.actions.FETCH_USER_PROFILE,
-      updateUserProfile: types.user.actions.UPDATE_USER_PROFILE
+      updateUserProfile: types.user.actions.UPDATE_USER_PROFILE,
+      deleteUserImage: types.user.actions.DELETE_IMAGE_IN_PROFILE
     }),
     ...mapMutations({
       setIsProfileUpdated: types.user.mutations.SET_IS_USER_PROFILE_UPDATED
@@ -387,8 +388,12 @@ export default {
       this.profile.img_profile = files[0];
       this.imgProfileUrl = URL.createObjectURL(files[0]);
     },
-    resetPreview() {
+    resetPreview: async function() {
+      const response = await this.deleteUserImage(
+        this.profileData.images.img_profile.id
+      );
       this.imgProfileUrl = null;
+      this.img_profile = "";
     },
     fetchProfile: async function() {
       await this.fetchUserProfile();

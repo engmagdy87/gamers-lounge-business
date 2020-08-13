@@ -6,7 +6,7 @@
       :setShowLoginModal="setShowLoginModal"
     />
     <VueSlickCarousel
-      v-if="mainEventsData.length !== 0 && isMainEventsFetched"
+      v-if="filteredMainEventsData.length !== 0 && isMainEventsFetched"
       :arrows="false"
       :dots="true"
       :pauseOnHover="false"
@@ -16,13 +16,12 @@
       infinite
     >
       <img
-        v-for="(event, index) in mainEventsData"
+        v-for="(event, index) in filteredMainEventsData"
         :key="index"
         :src="event.images.img_cover_home.path"
         alt=""
         class="home-wrapper__slide"
         @click="redirectTo(event.id)"
-        v-if="event.images.img_cover_home !== null"
       />
     </VueSlickCarousel>
     <div class="home-wrapper__content">
@@ -148,6 +147,11 @@ export default {
     }),
     getCorrespondingData() {
       return this.isGamesActive ? this.gamesData : this.tournamentsData;
+    },
+    filteredMainEventsData() {
+      return this.mainEventsData.filter(
+        event => event.images.img_cover_home !== null
+      );
     }
   },
   watch: {

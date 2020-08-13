@@ -799,9 +799,6 @@ export default {
     this.fetchEventsList();
     this.fetchSummitsList();
     this.fetchCoverTypes();
-    console.log("====================================");
-    console.log(this.editData);
-    console.log("====================================");
     if (this.$route.name === "Edit Tournament") {
       this.tournament.initial_title = this.editData.initial_title || "";
       this.tournament.final_title = this.editData.final_title || "";
