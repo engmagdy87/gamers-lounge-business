@@ -4,7 +4,7 @@
     <div class="profile-wrapper__outside" v-if="isProfileFetched">
       <div
         v-if="isEditMode && imgCoverUrl"
-        class="preview__close"
+        class="preview-cover__close"
         role="button"
         @click="resetCoverPreview"
       >
