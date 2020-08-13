@@ -314,6 +314,21 @@
             >
           </div>
         </div>
+        <div class="col-md-6 mt-auto mb-3">
+          <div class="form-group">
+            <label for="cover-type">Cover Type</label>
+            <select class="form-control" v-model="tournament.cover_type">
+              <option value="-1">--Please select cover type</option>
+              <option
+                v-for="(type, index) in eventCoverTypes"
+                :selected="tournament.cover_type === type.value"
+                :key="index"
+                :value="type.value"
+                >{{ type.label }}</option
+              >
+            </select>
+          </div>
+        </div>
       </div>
       <div class="row mb-3">
         <div class="col">
@@ -412,7 +427,9 @@
             <div
               v-if="
                 editData !== undefined &&
-                  (operation === 'Edit Tournament' || editData.images !== null)
+                  (operation === 'Edit Tournament' ||
+                    (editData.images !== null &&
+                      editData.images.img_cover_main !== null))
               "
               class="image-preview-list"
             >
@@ -428,6 +445,32 @@
           </div>
         </div>
       </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label class="mr-5" for="media-images1"
+            >Choose Cover Main Video</label
+          >
+          <input
+            type="file"
+            id="logo"
+            accept="video/*"
+            @change="getVideo"
+            ref="vid_cover_main"
+          />
+          <br />
+          <VideoPreview
+            v-if="
+              editData !== undefined &&
+                operation === 'Edit Tournament' &&
+                editData.videos !== null &&
+                editData.videos.vid_cover_main !== null
+            "
+            :video="editData.videos.vid_cover_main"
+            :setShowDeleteDialogFlag="setVideoDataFlag"
+            openedFor="vid_cover_main"
+          />
+        </div>
+      </div>
 
       <div class="text-center">
         <button
@@ -441,9 +484,11 @@
       <div class="clearfix"></div>
       <DeleteDialog
         :showFlag="showFlag"
-        :setShowDeleteDialogFlag="setImageDataFlag"
-        item="Image"
-        :deleteAction="removeImage"
+        :setShowDeleteDialogFlag="
+          contentType === 'video' ? setVideoDataFlag : setImageDataFlag
+        "
+        :item="contentType === 'video' ? 'Video' : 'Image'"
+        :deleteAction="contentType === 'video' ? removeVideo : removeImage"
       />
     </form>
   </div>
@@ -451,6 +496,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import ImagePreview from "../../../website/shared/ImagePreview.vue";
+import VideoPreview from "../../../website/shared/VideoPreview.vue";
 import DeleteDialog from "../../../website/shared/DeleteDialog";
 import store from "../../../store/index";
 import types from "../../../store/types";
@@ -467,11 +513,13 @@ import generateYoutubeUrl from "../../../dashboard/helpers/YoutubeUrlGeneration"
 export default {
   components: {
     ImagePreview,
-    DeleteDialog
+    DeleteDialog,
+    VideoPreview
   },
   data() {
     return {
       openedFor: "",
+      contentType: "",
       imageIndex: null,
       showFlag: false,
       imageId: null,
@@ -488,6 +536,7 @@ export default {
         register_start_at: "",
         register_end_at: "",
         kick_off_date: "",
+        cover_type: "-1",
         region_id: 0,
         platform_id: 0,
         game_id: 0,
@@ -499,7 +548,8 @@ export default {
         img_logo: "",
         img_cover_over: "",
         img_card: "",
-        vid_stream: ""
+        vid_stream: "",
+        vid_cover_main: ""
       },
       editorOptions,
       errors: {}
@@ -508,22 +558,31 @@ export default {
   methods: {
     ...mapActions({
       deleteImage: types.tournaments.actions.DELETE_TOURNAMENT_IMAGE,
+      deleteVideo: types.tournaments.actions.DELETE_EVENT_VIDEO,
       fetchRegionsList: types.regions.actions.FETCH_REGIONS_FOR_DASHBOARD,
       fetchPlatformsList: types.platforms.actions.FETCH_PLATFORMS_FOR_DASHBOARD,
       fetchGamesList: types.games.actions.FETCH_GAMES_FOR_DASHBOARD,
       fetchEventsList: types.events.actions.FETCH_EVENT_LIST,
-      fetchSummitsList: types.summits.actions.FETCH_SUMMITS_LIST
+      fetchSummitsList: types.summits.actions.FETCH_SUMMITS_LIST,
+      fetchCoverTypes: types.events.actions.FETCH_EVENT_COVER_TYPES
     }),
     clickAction() {
       this.operation === "Edit Tournament"
         ? this.saveData(editTournament, "Tournament Updated Successfully")
         : this.saveData(createTournament, "Tournament Created Successfully");
     },
-    setImageDataFlag(flag, imageId, openedFor, imageIndex) {
+    setImageDataFlag(flag, imageId, openedFor, imageIndex, contentType) {
       this.showFlag = flag;
       this.imageId = imageId;
       this.openedFor = openedFor;
       this.imageIndex = imageIndex;
+      this.contentType = contentType;
+    },
+    setVideoDataFlag(flag, videoId, openedFor, contentType) {
+      this.showFlag = flag;
+      this.videoId = videoId;
+      this.openedFor = openedFor;
+      this.contentType = contentType;
     },
     setFile(e, key) {
       const files = e.target.files;
@@ -531,6 +590,9 @@ export default {
       if (!files.length) return;
 
       this.tournament[key] = files[0];
+    },
+    getVideo() {
+      this.tournament.vid_cover_main = this.$refs.vid_cover_main.files[0];
     },
     checkDatesSequence() {
       if (
@@ -573,6 +635,7 @@ export default {
         formData.append("register_start_at", this.tournament.register_start_at);
         formData.append("register_end_at", this.tournament.register_end_at);
         formData.append("kick_off_date", this.tournament.kick_off_date);
+        formData.append("cover_type", this.tournament.cover_type);
         formData.append("region_id", this.tournament.region_id);
         formData.append("platform_id", this.tournament.platform_id);
         formData.append("game_id", this.tournament.game_id);
@@ -591,6 +654,7 @@ export default {
           "vid_stream",
           generateYoutubeUrl(this.tournament.vid_stream)
         );
+        formData.append("vid_cover_main", this.tournament.vid_cover_main);
 
         for (var i = 0; i < this.$refs.img_cover_main.files.length; i++) {
           let file = this.$refs.img_cover_main.files[i];
@@ -647,12 +711,34 @@ export default {
           this.editData.images.img_cover_main.splice(this.imageIndex, 1);
           break;
 
+        case "vid_cover_main":
+          this.editData.videos.vid_cover_main = null;
+          break;
+
         default:
           break;
       }
 
       this.notifyVue("Image Deleted Successfully", "success");
       this.setImageDataFlag(false);
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+    },
+    removeVideo: async function() {
+      const payload = { tournamentId: this.editData.id, videoId: this.videoId };
+
+      const response = await this.deleteVideo(payload);
+
+      switch (this.openedFor) {
+        case "vid_cover_main":
+          this.editData.videos.vid_cover_main = null;
+          break;
+
+        default:
+          break;
+      }
+
+      this.notifyVue("Video Deleted Successfully", "success");
+      this.setVideoDataFlag(false);
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
     }
   },
@@ -669,7 +755,9 @@ export default {
       regionsListData: state => state.regions.dashboardRegionsData,
       platformsListData: state => state.platforms.dashboardPlatformsData,
       gamesListData: state => state.games.dashboardGamesData,
-      eventsListData: state => state.events.eventsList
+      eventsListData: state => state.events.eventsList,
+      eventCoverTypes: state => state.events.eventCoverTypes,
+      isEventCoverTypesFetched: state => state.events.isEventCoverTypesFetched
     }),
     minDate() {
       var today = new Date();
@@ -688,7 +776,8 @@ export default {
           this.isDashboardPlatformsDataFetched &&
           this.isDashboardGamesDataFetched &&
           this.isEventsListFetched &&
-          this.isSummitsListFetched
+          this.isSummitsListFetched &&
+          this.isEventCoverTypesFetched
         );
       return true;
     }
@@ -709,6 +798,10 @@ export default {
     this.fetchGamesList();
     this.fetchEventsList();
     this.fetchSummitsList();
+    this.fetchCoverTypes();
+    console.log("====================================");
+    console.log(this.editData);
+    console.log("====================================");
     if (this.$route.name === "Edit Tournament") {
       this.tournament.initial_title = this.editData.initial_title || "";
       this.tournament.final_title = this.editData.final_title || "";
@@ -725,6 +818,7 @@ export default {
         " "
       )[0];
       this.tournament.kick_off_date = this.editData.kick_off_date.split(" ")[0];
+      this.tournament.cover_type = this.editData.cover_type;
       this.tournament.region_id = this.editData.region.id;
       this.tournament.platform_id = this.editData.platform.id;
       this.tournament.game_id = this.editData.game.id;
@@ -740,6 +834,10 @@ export default {
       this.tournament.vid_stream =
         (this.editData.videos.vid_stream !== null &&
           this.editData.videos.vid_stream.path) ||
+        "";
+      this.tournament.vid_cover_main =
+        (this.editData.videos.vid_cover_main !== null &&
+          this.editData.videos.vid_cover_main.path) ||
         "";
     }
   },

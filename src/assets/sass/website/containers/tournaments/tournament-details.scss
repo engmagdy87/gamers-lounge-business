@@ -26,7 +26,12 @@
     justify-content: center;
     align-items: center;
     padding: 2px;
-    @include create-half-page-hero-shape();
+    &--hexa-shape {
+      @include create-half-page-hero-shape();
+    }
+    &--none {
+      clip-path: inset(0 0 0 0);
+    }
   }
 
   &__inside {
@@ -40,7 +45,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    @include create-half-page-hero-shape();
     video {
       object-fit: cover;
       @include is-mobile {

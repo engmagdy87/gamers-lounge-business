@@ -22,6 +22,7 @@
         alt=""
         class="home-wrapper__slide"
         @click="redirectTo(event.id)"
+        v-if="event.images.img_cover_home !== null"
       />
     </VueSlickCarousel>
     <div class="home-wrapper__content">

@@ -109,7 +109,9 @@
             <div
               v-if="
                 editData !== undefined &&
-                  (operation === 'Edit Game' || editData.images !== null)
+                  (operation === 'Edit Game' ||
+                    (editData.images !== null &&
+                      editData.images.img_cover_main !== null))
               "
             >
               <ImagePreview

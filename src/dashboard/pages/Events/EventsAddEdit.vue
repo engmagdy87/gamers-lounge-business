@@ -362,7 +362,9 @@
             <div
               v-if="
                 editData !== undefined &&
-                  (operation === 'Edit Event' || editData.images !== null)
+                  (operation === 'Edit Event' ||
+                    (editData.images !== null &&
+                      editData.images.img_media !== null))
               "
             >
               <ImagePreview
@@ -394,7 +396,9 @@
             <div
               v-if="
                 editData !== undefined &&
-                  (operation === 'Edit Event' || editData.images !== null)
+                  (operation === 'Edit Event' ||
+                    (editData.images !== null &&
+                      editData.images.img_cover_main !== null))
               "
             >
               <ImagePreview

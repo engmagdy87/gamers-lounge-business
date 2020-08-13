@@ -89,7 +89,7 @@
       font-size: 1.3rem;
       margin-top: 10px;
       margin-bottom: 0;
-      word-break: break-all;
+      word-break: break-word;
       @include is-mobile {
         font-size: 1.2rem;
         margin-bottom: 5px;

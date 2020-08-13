@@ -545,7 +545,15 @@ async function editTournament(id, data) {
 
 async function removeTournamentImage(id, imageId) {
     const response = await deleteData(
-        `${APIs.DELETE_IMAGE_IN_TOURNAMENT}/${id}/images/${imageId}`
+        `${APIs.DELETE_MEDIA_IN_TOURNAMENT}/${id}/images/${imageId}`
+    );
+
+    return response;
+}
+
+async function removeTournamentVideo(id, videoId) {
+    const response = await deleteData(
+        `${APIs.DELETE_MEDIA_IN_TOURNAMENT}/${id}/videos/${videoId}`
     );
 
     return response;
@@ -599,6 +607,7 @@ export {
     removeSummitImage,
     removeSummitVideo,
     removeTournamentImage,
+    removeTournamentVideo,
     editGame,
     editPlatform,
     editEvent,

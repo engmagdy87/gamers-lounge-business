@@ -146,6 +146,7 @@ const tournaments = {
         FETCH_REGISTER_LINK: 'games/actions/FETCH_REGISTER_LINK',
         DELETE_TOURNAMENT: 'tournaments/actions/DELETE_TOURNAMENT',
         DELETE_TOURNAMENT_IMAGE: 'tournaments/actions/DELETE_TOURNAMENT_IMAGE',
+        DELETE_EVENT_VIDEO: 'tournaments/actions/DELETE_EVENT_VIDEO',
         EDIT_TOURNAMENT: 'tournaments/actions/EDIT_TOURNAMENT',
     }
 };

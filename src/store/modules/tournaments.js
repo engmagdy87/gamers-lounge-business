@@ -1,4 +1,4 @@
-import { getTournaments, getTournamentsForDashboard, getTournamentDetails, getFilteredTournaments, removeTournament, removeTournamentImage, getTournamentRegisterLink } from '../../website/helpers/APIsHelper';
+import { getTournaments, getTournamentsForDashboard, getTournamentDetails, getFilteredTournaments, removeTournament, removeTournamentImage, removeTournamentVideo, getTournamentRegisterLink } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -114,6 +114,16 @@ const deleteTournamentImage = async ({ commit }, payload) => {
     return response
 };
 
+const deleteTournamentVideo = async ({ commit }, payload) => {
+    const { tournamentId, videoId } = payload
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removeTournamentVideo(tournamentId, videoId).then(() => {
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     [types.tournaments.actions.FETCH_TOURNAMENTS]: getTournamentsData,
     [types.tournaments.actions.FETCH_TOURNAMENTS_FOR_DASHBOARD]: getTournamentsListSummary,
@@ -121,6 +131,7 @@ const actions = {
     [types.tournaments.actions.FETCH_FILTERED_TOURNAMENTS]: getFilteredTournamentsData,
     [types.tournaments.actions.DELETE_TOURNAMENT]: deleteTournament,
     [types.tournaments.actions.DELETE_TOURNAMENT_IMAGE]: deleteTournamentImage,
+    [types.tournaments.actions.DELETE_EVENT_VIDEO]: deleteTournamentVideo,
     [types.tournaments.actions.FETCH_REGISTER_LINK]: fetchRegisterLink,
 };
 

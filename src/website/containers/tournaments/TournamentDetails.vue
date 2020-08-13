@@ -6,15 +6,32 @@
       :setShowRegisterModal="setShowRegisterModal"
       :setShowLoginModal="setShowLoginModal"
     />
-    <div class="tournament-details-wrapper__outside" v-if="showDetailsHero">
+    <div
+      :class="[
+        'tournament-details-wrapper__outside',
+        tournamentDetails.cover_type === 'img'
+          ? 'tournament-details-wrapper__outside--hexa-shape'
+          : 'tournament-details-wrapper__outside--none'
+      ]"
+      v-if="showDetailsHero"
+    >
       <div
         class="tournament-details-wrapper__inside"
+        :class="[
+          'tournament-details-wrapper__inside',
+          tournamentDetails.cover_type === 'img'
+            ? 'tournament-details-wrapper__inside--hexa-shape'
+            : 'tournament-details-wrapper__inside--none'
+        ]"
         v-if="
-          tournamentDetails.images.img_cover_main !== null &&
-            tournamentDetails.images.img_cover_main.length !== 0
+          (tournamentDetails.images.img_cover_main !== null &&
+            tournamentDetails.images.img_cover_main.length !== 0) ||
+            tournamentDetails.videos.vid_cover_main !== null
         "
         :style="
-          `backgroundImage: url(${tournamentDetails.images.img_cover_main[0].path})`
+          tournamentDetails.cover_type === 'img'
+            ? `backgroundImage: url(${tournamentDetails.images.img_cover_main[0].path})`
+            : ''
         "
       >
         <img
@@ -24,6 +41,22 @@
           "
           :src="tournamentDetails.images.img_cover_over.path"
         />
+        <video
+          autoplay
+          muted
+          loop
+          id="myVideo"
+          v-if="
+            tournamentDetails.cover_type !== 'img' &&
+              tournamentDetails.videos.vid_cover_main !== null
+          "
+          style="width: 100%;"
+        >
+          <source
+            :src="tournamentDetails.videos.vid_cover_main.path"
+            type="video/mp4"
+          />
+        </video>
       </div>
     </div>
     <div class="tournament-details-wrapper__content" v-if="showDetailsHero">

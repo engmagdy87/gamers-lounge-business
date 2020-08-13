@@ -9,6 +9,7 @@
     >
       <div class="list-view-wrapper__img">
         <img
+          v-if="card.images.img_logo !== null"
           :src="card.images.img_logo.path"
           :alt="card.title || card.initial_title + 'logo'"
         />

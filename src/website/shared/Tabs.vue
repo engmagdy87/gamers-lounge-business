@@ -172,9 +172,19 @@ export default {
         if (isDeviceSmart())
           element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 99.5%,90% 99.8%,50% 99.8%,20% 101%,0% 99.7%,0 99.8%)`;
         else if (element.clientHeight < 800)
-          element.style.clipPath = `polygon(0 0,98% 0,100% 12%,100% 78%,98% 90%,66% 90%,50% 150%,6% 120%,0 90%)`;
-        else
-          element.style.clipPath = `polygon(0 0,98% 0,100% 0.5%,100% 99%,98% 99.5%,66% 99.5%,50% 103.5%,5% 102%,0 99.5%)`;
+          element.style.clipPath = `polygon(0 0,98.5% 0,100% 5%,100% 89%,98% 95%,66% 95%,50% 150%,6% 120%,0 93%)`;
+        else if (element.clientHeight >= 800 && element.clientHeight < 1300)
+          element.style.clipPath = `polygon(0 0,98% 0,100% 1.5%,100% 97%,98% 98.8%,60% 98.8%,55% 105%,10% 105%,0 99%)`;
+        else if (element.clientHeight >= 1300 && element.clientHeight < 1600)
+          element.style.clipPath = `polygon(0 0,98% 0,100% 1.5%,100% 98%,98% 98.8%,60% 98.8%,57% 100%,20% 105%,0 99.2%)`;
+        else if (element.clientHeight >= 1600 && element.clientHeight < 2000)
+          element.style.clipPath = `polygon(0 0,98% 0,100% 1%,100% 98%,98% 99%,60% 99%,57% 100%,20% 105%,0 99.5%)`;
+        else if (element.clientHeight >= 1600 && element.clientHeight < 3000)
+          element.style.clipPath = `polygon(0 0,98% 0,100% 1%,100% 98%,98% 99%,60% 99%,57% 100%,20% 105%,0 99.5%)`;
+        else if (element.clientHeight >= 3000 && element.clientHeight < 5000)
+          element.style.clipPath = `polygon(0 0,98% 0,100% 0.6%,100% 99%,98% 99.5%,66% 99.5%,60% 101%,15% 105%,0 99.5%)`;
+        else if (element.clientHeight >= 5000 && element.clientHeight < 8200)
+          element.style.clipPath = `polygon(0 0,98% 0,100% 0.3%,100% 99.5%,98% 99.7%,66% 99.7%,50% 101%,9% 101%,0 99.7%)`;
       }
     }
   },

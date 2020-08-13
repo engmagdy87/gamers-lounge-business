@@ -33,6 +33,7 @@
                   ? 'registeration-style'
                   : ''
               ]"
+              v-on:keyup.enter="onEnter"
             />
             <p
               class="error-message"
@@ -53,6 +54,7 @@
                 errors.new_password !== undefined ? 'is-invalid' : '',
                 errors.new_password === undefined ? 'registeration-style' : ''
               ]"
+              v-on:keyup.enter="onEnter"
             />
             <p class="error-message" v-if="errors.new_password !== undefined">
               {{ errors.new_password }}
@@ -74,6 +76,7 @@
                   ? 'registeration-style'
                   : ''
               ]"
+              v-on:keyup.enter="onEnter"
             />
             <p
               class="error-message"
@@ -121,6 +124,9 @@ export default {
         verticalAlign: "top",
         type: color
       });
+    },
+    onEnter() {
+      this.updatePassword();
     },
     async updatePassword() {
       const payload = {

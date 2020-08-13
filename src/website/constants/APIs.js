@@ -66,7 +66,7 @@ const GET_LIST_WEBSITE_TOURNAMENTS = `${API_URL}/tournaments/view`
 const GET_WEBSITE_TOURNAMENT_DETAILS = `${API_URL}/tournaments`
 const DELETE_TOURNAMENT = `${API_URL}/admin/tournaments`
 const EDIT_TOURNAMENT = `${API_URL}/admin/tournaments`
-const DELETE_IMAGE_IN_TOURNAMENT = `${API_URL}/admin/tournaments`
+const DELETE_MEDIA_IN_TOURNAMENT = `${API_URL}/admin/tournaments`
 const GET_REGISTER_LINK = `${API_URL}/tournaments`
 
 // PLATFORM
@@ -127,7 +127,7 @@ export {
     DELETE_MEDIA_IN_EVENT,
     DELETE_IMAGE_IN_GAME,
     DELETE_IMAGE_IN_SPONSOR,
-    DELETE_IMAGE_IN_TOURNAMENT,
+    DELETE_MEDIA_IN_TOURNAMENT,
     DELETE_MEDIA_IN_SUMMIT,
     EDIT_GAME,
     EDIT_PLATFORM,

@@ -32,7 +32,7 @@
                 errors.password === undefined ? 'registeration-style' : ''
               ]"
               autofocus
-              v-on:keyup.enter="() => {}"
+              v-on:keyup.enter="onEnter"
             />
             <p class="error-message" v-if="errors.password !== undefined">
               {{ errors.password }}
@@ -72,6 +72,9 @@ export default {
       this.setShowRequestedPasswordModal(false);
       this.password = "";
       this.errors = {};
+    },
+    onEnter() {
+      this.updatePassword();
     }
   }
 };

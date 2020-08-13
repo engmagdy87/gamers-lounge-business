@@ -8,9 +8,9 @@
       <div class="row">
         <div class="col-12 col-md-2 profile-wrapper__content__profile-image">
           <div class="form-group">
-            <div class="preview" v-if="imgProfileUrl">
+            <div class="preview">
               <div
-                v-if="isEditMode"
+                v-if="isEditMode && imgProfileUrl"
                 class="preview__close"
                 role="button"
                 @click="resetPreview"
@@ -19,12 +19,12 @@
               </div>
               <img v-if="imgProfileUrl" :src="imgProfileUrl" />
               <img
-                v-else
+                v-if="!isEditMode && !imgProfileUrl"
                 src="website/img/placeholder.png"
                 alt="user profile"
               />
             </div>
-            <div class="dropbox" v-if="!imgProfileUrl">
+            <div class="dropbox" v-if="!imgProfileUrl && isEditMode">
               <input
                 type="file"
                 multiple
@@ -349,6 +349,7 @@ export default {
         formData.append("current_password", this.profile.password);
       if (this.profile.img_profile !== "")
         formData.append("img_profile", this.profile.img_profile);
+      else formData.append("img_profile", null);
       formData.append("phone", JSON.stringify(this.profile.phone));
       try {
         const newUserData = await this.updateUserProfile(formData);
@@ -396,7 +397,9 @@ export default {
         this.profile.last_name = this.profileData.last_name;
         this.profile.username = this.profileData.username;
         this.profile.email = this.profileData.email;
-        this.imgProfileUrl = this.profileData.images.img_profile.path;
+        this.imgProfileUrl =
+          this.profileData.images.img_profile &&
+          this.profileData.images.img_profile.path;
         this.profile.birthday_date = this.profileData.birthday_date.split(
           " "
         )[0];

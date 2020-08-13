@@ -230,7 +230,9 @@
             <div
               v-if="
                 editData !== undefined &&
-                  (operation === 'Edit Summit' || editData.images !== null)
+                  (operation === 'Edit Summit' ||
+                    (editData.images !== null &&
+                      editData.images.img_media !== null))
               "
             >
               <ImagePreview
