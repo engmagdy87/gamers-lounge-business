@@ -145,6 +145,11 @@ span {
     color: white !important;
     word-break: break-word;
   }
+  span > a {
+    color: #2af3f3 !important;
+    word-break: break-word;
+    text-decoration: underline;
+  }
   &--expand {
     height: 100%;
   }
