@@ -32,7 +32,7 @@ $preview-image: 150px;
 
   &__inside {
     position: relative;
-    background-image: url("~/website/img/profile-cover.jpg");
+    // background-image: url("~/website/img/cover-placeholder.jpg");
     width: calc(100% - 2px);
     height: calc(#{$hero-image-height} - 4px);
     background-position: center center;
@@ -43,6 +43,10 @@ $preview-image: 150px;
     justify-content: center;
     align-items: center;
     @include create-hero-header-shape();
+    &__img {
+      @extend .profile-wrapper__inside;
+      background-image: url("~/website/img/cover-placeholder.jpg");
+    }
   }
 
   &__content {
@@ -54,16 +58,6 @@ $preview-image: 150px;
       min-height: 82vh;
       padding: 5%;
     }
-    // &__profile-image {
-    // div,
-    // img {
-    //   border: 1px solid $primary;
-    //   border-radius: 10px;
-    //   background-color: $accent;
-    //   width: 150px;
-    //   height: 150px;
-    // }
-    // }
     &__profile-details {
       padding-left: 50px;
       div {
@@ -113,6 +107,20 @@ $preview-image: 150px;
   position: relative;
   cursor: pointer;
 }
+.dropbox-cover {
+  outline-offset: -30px;
+  background: lightcyan;
+  color: dimgray;
+  height: 100%; /* minimum height */
+  width: 100%;
+  margin: auto;
+  position: relative;
+  cursor: pointer;
+  @include create-hero-header-shape();
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .input-file {
   opacity: 0; /* invisible but it's there! */
@@ -122,12 +130,18 @@ $preview-image: 150px;
   cursor: pointer;
 }
 
-.dropbox:hover {
+.dropbox:hover,
+.dropbox-cover:hover {
   background: lightblue; /* when mouse over to the drop zone, change color */
 }
 
 .dropbox p {
   font-size: 1.2em;
+  text-align: center;
+  padding: 10px 0;
+}
+.dropbox-cover p {
+  font-size: 1.5em;
   text-align: center;
   padding: 10px 0;
 }
@@ -140,7 +154,7 @@ $preview-image: 150px;
 }
 
 .preview img {
-  max-width: 100%;
+  width: 100%;
   height: $preview-image;
   border-radius: 10px !important;
   border: 1px solid $primary;
@@ -162,6 +176,7 @@ $preview-image: 150px;
   justify-content: center;
   align-items: center;
   margin: 0;
+  z-index: 100;
   &:hover,
   &:focus {
     text-decoration: none;

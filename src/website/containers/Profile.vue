@@ -2,7 +2,39 @@
   <div class="profile-wrapper">
     <Header activeItem="profile" :isSolidHeader="true" />
     <div class="profile-wrapper__outside" v-if="isProfileFetched">
-      <div class="profile-wrapper__inside"></div>
+      <div
+        v-if="isEditMode && imgCoverUrl"
+        class="preview__close"
+        role="button"
+        @click="resetCoverPreview"
+      >
+        &times;
+      </div>
+      <div
+        class="profile-wrapper__inside"
+        v-if="imgCoverUrl"
+        :style="`backgroundImage: url(${imgCoverUrl})`"
+      ></div>
+      <div
+        v-if="!isEditMode && !imgCoverUrl"
+        class="profile-wrapper__inside__img"
+        alt="user profile placeholder"
+      />
+      <div class="dropbox-cover" v-if="!imgCoverUrl && isEditMode">
+        <input
+          type="file"
+          multiple
+          name="img_cover_main"
+          @change="filesCoverChange($event.target.name, $event.target.files)"
+          accept="image/png, image/jpeg"
+          class="input-file"
+          ref="img_cover_main"
+        />
+        <p v-if="!imgCoverUrl">
+          Drop your profile cover picture here<br />
+          or Browse
+        </p>
+      </div>
     </div>
     <div class="profile-wrapper__content" v-if="isProfileFetched">
       <div class="row">
@@ -268,9 +300,11 @@ export default {
           country_code: countryCodes[0].dial_code,
           number: ""
         },
-        img_profile: ""
+        img_profile: "",
+        img_cover_main: ""
       },
       imgProfileUrl: null,
+      imgCoverUrl: null,
       errors: {},
       countryCodesData: countryCodes
     };
@@ -348,9 +382,13 @@ export default {
       formData.append("email", this.profile.email);
       if (this.profile.password !== "")
         formData.append("current_password", this.profile.password);
+
       if (this.profile.img_profile !== "")
         formData.append("img_profile", this.profile.img_profile);
-      else formData.append("img_profile", null);
+
+      if (this.profile.img_cover_main !== "")
+        formData.append("img_cover_main", this.profile.img_cover_main);
+
       formData.append("phone", JSON.stringify(this.profile.phone));
       try {
         const newUserData = await this.updateUserProfile(formData);
@@ -388,12 +426,23 @@ export default {
       this.profile.img_profile = files[0];
       this.imgProfileUrl = URL.createObjectURL(files[0]);
     },
+    filesCoverChange(name, files) {
+      this.profile.img_cover_main = files[0];
+      this.imgCoverUrl = URL.createObjectURL(files[0]);
+    },
     resetPreview: async function() {
       const response = await this.deleteUserImage(
         this.profileData.images.img_profile.id
       );
       this.imgProfileUrl = null;
-      this.img_profile = "";
+      this.profile.img_profile = "";
+    },
+    resetCoverPreview: async function() {
+      const response = await this.deleteUserImage(
+        this.profileData.images.img_cover_main.id
+      );
+      this.imgCoverUrl = null;
+      this.profile.img_cover_main = "";
     },
     fetchProfile: async function() {
       await this.fetchUserProfile();
@@ -405,6 +454,9 @@ export default {
         this.imgProfileUrl =
           this.profileData.images.img_profile &&
           this.profileData.images.img_profile.path;
+        this.imgCoverUrl =
+          this.profileData.images.img_cover_main &&
+          this.profileData.images.img_cover_main.path;
         this.profile.birthday_date = this.profileData.birthday_date.split(
           " "
         )[0];

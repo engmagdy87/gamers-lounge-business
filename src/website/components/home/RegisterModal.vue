@@ -31,13 +31,44 @@
                 type="file"
                 multiple
                 name="img_profile"
-                @change="filesChange($event.target.name, $event.target.files)"
+                @change="
+                  profileAvatarChange($event.target.name, $event.target.files)
+                "
                 accept="image/png, image/jpeg"
                 class="input-file"
                 ref="img_profile"
               />
               <p v-if="!imgProfileUrl">
-                Drop you profile picture here<br />
+                Drop your profile picture here<br />
+                or Browse
+              </p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="preview" v-if="imgCoverUrl">
+              <div
+                class="preview__close"
+                role="button"
+                @click="resetCoverPreview"
+              >
+                &times;
+              </div>
+              <img v-if="imgCoverUrl" :src="imgCoverUrl" />
+            </div>
+            <div class="dropbox" v-if="!imgCoverUrl">
+              <input
+                type="file"
+                multiple
+                name="img_profile"
+                @change="
+                  profileCoverChange($event.target.name, $event.target.files)
+                "
+                accept="image/png, image/jpeg"
+                class="input-file"
+                ref="img_profile"
+              />
+              <p v-if="!imgCoverUrl">
+                Drop your profile cover picture here<br />
                 or Browse
               </p>
             </div>
@@ -216,11 +247,13 @@ export default {
       password: "",
       password_confirmation: "",
       img_profile: "",
+      img_cover_main: "",
       phone: {
         country_code: countryCodes[0].dial_code,
         number: ""
       },
       imgProfileUrl: null,
+      imgCoverUrl: null,
       countryCodesData: countryCodes,
       errors: {}
     };
@@ -244,6 +277,7 @@ export default {
         formData.append("password", this.password);
         formData.append("password_confirmation", this.password_confirmation);
         formData.append("img_profile", this.img_profile);
+        formData.append("img_cover_main", this.img_cover_main);
         formData.append("phone", JSON.stringify(this.phone));
         try {
           await this.postUserPersona(formData);
@@ -261,6 +295,8 @@ export default {
           this.password_confirmation = "";
           this.img_profile = "";
           this.imgProfileUrl = null;
+          this.img_cover_main = "";
+          this.imgCoverUrl = null;
           this.phone = {
             country_code: countryCodes[0].dial_code,
             number: ""
@@ -287,17 +323,25 @@ export default {
       this.password = "";
       this.password_confirmation = "";
       this.img_profile = "";
+      this.img_cover_main = "";
       this.phone = {
         country_code: countryCodes[0].dial_code,
         number: ""
       };
     },
-    filesChange(name, files) {
+    profileAvatarChange(name, files) {
       this.img_profile = files[0];
       this.imgProfileUrl = URL.createObjectURL(files[0]);
     },
+    profileCoverChange(name, files) {
+      this.img_cover_main = files[0];
+      this.imgCoverUrl = URL.createObjectURL(files[0]);
+    },
     resetPreview() {
       this.imgProfileUrl = null;
+    },
+    resetCoverPreview() {
+      this.imgCoverUrl = null;
     },
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -313,82 +357,4 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../assets/sass/website/components/home/register-modal.scss";
-$preview-image: 200px;
-.dropbox {
-  outline: 2px dashed grey; /* the dash box */
-  outline-offset: -10px;
-  background: lightcyan;
-  color: dimgray;
-  padding: 10px 10px;
-  height: $preview-image; /* minimum height */
-  width: 50%;
-  margin: auto;
-  position: relative;
-  cursor: pointer;
-}
-
-.input-file {
-  opacity: 0; /* invisible but it's there! */
-  width: 100%;
-  height: $preview-image;
-  position: absolute;
-  cursor: pointer;
-}
-
-.dropbox:hover {
-  background: lightblue; /* when mouse over to the drop zone, change color */
-}
-
-.dropbox p {
-  font-size: 1.2em;
-  text-align: center;
-  padding: 50px 0;
-}
-
-.preview {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.preview img {
-  max-width: 100%;
-  height: $preview-image;
-  border-radius: 10px !important;
-  border: 1px solid $primary;
-}
-
-.preview__close {
-  position: absolute;
-  top: -20px;
-  right: 0;
-  color: white;
-  float: right;
-  font-size: 30px;
-  float: right;
-  cursor: pointer;
-  width: 20px;
-  margin-bottom: 0;
-  &:hover,
-  &:focus {
-    text-decoration: none;
-    cursor: pointer;
-  }
-}
-.form-control {
-  background-color: black !important;
-  border: 1px solid #2af3f3 !important;
-  color: #2af3f3 !important;
-}
-
-.input-group-text {
-  background-color: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-  width: 150px !important;
-}
-.input-group-prepend {
-  display: flex !important;
-}
 </style>

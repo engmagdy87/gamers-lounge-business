@@ -100,6 +100,7 @@ p > * {
   color: white !important;
   background-color: transparent !important;
   font-family: "Roboto" !important;
+  word-break: break-word;
 }
 .multiselect__option.multiselect__option--highlight {
   color: black;
@@ -138,9 +139,11 @@ span {
   overflow: hidden;
   span {
     color: white !important;
+    word-break: break-word;
   }
   span > * {
     color: white !important;
+    word-break: break-word;
   }
   &--expand {
     height: 100%;

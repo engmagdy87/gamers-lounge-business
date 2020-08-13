@@ -28,7 +28,8 @@
             <span class="contact-wrapper__content__icon">
               <img src="website/img/email.svg" alt="email icon" />
             </span>
-            <span>contact-us@esportssummit-me.com</span>
+            <span>business@esportssummit-me.com</span><br />
+            <span style="margin-left:40px">Info@esportssummit-me.com</span>
           </div>
           <!-- <div class="mb-3 mb-md-0">
             <span class="contact-wrapper__content__icon">
