@@ -6,7 +6,7 @@
     ]"
   >
     <div
-      v-for="(sponsor, index) in sponsors.slice(0, 5)"
+      v-for="(sponsor, index) in sponsors"
       :key="index"
       @click="redirectTo(sponsor.link)"
       role="button"
