@@ -157,10 +157,11 @@ export default {
       this.registerLink = result;
     },
     redirectTo() {
-      const token = getUserCookie();
-      if (!token)
-        this.notifyVue("Please login to register to tournament", "danger");
-      else if (
+      // Allow guests to register in tournaments for now
+      // const token = getUserCookie();
+      // if (!token)
+      //   this.notifyVue("Please login to register to tournament", "danger");
+      if (
         this.tournamentDetails.is_register_available &&
         this.tournamentDetails.register_status === "open"
       )
