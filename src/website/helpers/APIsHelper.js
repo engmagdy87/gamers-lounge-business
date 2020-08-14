@@ -527,11 +527,18 @@ async function getTournamentDetails(tournamentId) {
 }
 
 async function getTournamentRegisterLink(tournamentId) {
-    const response = await getDashboardData(
-        `${APIs.GET_REGISTER_LINK}/${tournamentId}/register-link`
-    );
+    // const response = await getDashboardData(
+    //     `${APIs.GET_REGISTER_LINK}/${tournamentId}/register-link`
+    // );
+    //
+    // return response.data;
 
-    return response.data;
+  // Temp: Allowing guests to register
+  const response = await get(
+      `${APIs.GET_REGISTER_LINK}/${tournamentId}/register-link`
+  );
+
+  return response.data;
 }
 
 async function removeTournament(id) {

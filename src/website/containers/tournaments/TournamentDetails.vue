@@ -157,7 +157,7 @@ export default {
       this.registerLink = result;
     },
     redirectTo() {
-      // Allow guests to register in tournaments for now
+      // Temp: Allow guests to register in tournaments for now
       // const token = getUserCookie();
       // if (!token)
       //   this.notifyVue("Please login to register to tournament", "danger");
