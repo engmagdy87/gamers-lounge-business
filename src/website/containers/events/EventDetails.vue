@@ -63,7 +63,7 @@
             <span> > {{ eventDetails.initial_title }}</span>
           </div>
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6" v-show="false">
           <div
             class="d-flex justify-content-end align-items-center mb-4"
             v-if="eventDetails.sponsors !== undefined"
@@ -128,7 +128,7 @@
             class="col-12 order-1 order-md-2 col-md-6 d-flex justify-content-end align-items-center"
           >
             <div
-              class="event-details-wrapper__content__custom-btn-outside"
+              class="event-details-wrapper__content__custom-btn-outside" v-show="false"
               v-if="
                 eventDetails.sponsors !== undefined &&
                   eventDetails.sponsors.sub.length !== 0
