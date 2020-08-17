@@ -54,7 +54,7 @@ const getSponsorsData = async ({ commit },) => {
 const getFooterSponsorsData = async ({ commit },) => {
     commit(types.home.mutations.SET_SPINNER_FLAG, true);
     const response = await getSponsorsForFooter().then((response) => {
-        commit(types.sponsors.mutations.SET_FOOTER_SPONSORS_DATA, response.data.sponsors);
+        commit(types.sponsors.mutations.SET_FOOTER_SPONSORS_DATA, response.data[0]);
         commit(types.sponsors.mutations.SET_IS_FOOTER_SPONSORS_DATA_FETCHED, true);
         commit(types.home.mutations.SET_SPINNER_FLAG, false);
         return true

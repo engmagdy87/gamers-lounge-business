@@ -117,13 +117,13 @@ const regions = {
         SET_IS_REGIONS_DATA_FETCHED: 'regions/mutations/SET_IS_REGIONS_DATA_FETCHED',
         SET_DASHBOARD_REGIONS_DATA: 'regions/mutations/SET_DASHBOARD_REGIONS_DATA',
         SET_IS_DASHBOARD_REGIONS_DATA_FETCHED: 'regions/mutations/SET_IS_DASHBOARD_REGIONS_DATA_FETCHED',
-        REMOVE_DELETED_REGION: 'region/mutations/REMOVE_DELETED_REGION',
+        REMOVE_DELETED_REGION: 'regions/mutations/REMOVE_DELETED_REGION',
     },
     actions: {
         FETCH_REGIONS: 'regions/actions/FETCH_REGIONS',
         FETCH_REGIONS_FOR_DASHBOARD: 'regions/actions/FETCH_REGIONS_FOR_DASHBOARD',
-        DELETE_REGION: 'region/actions/DELETE_REGION',
-        EDIT_REGION: 'region/actions/EDIT_REGION',
+        DELETE_REGION: 'regions/actions/DELETE_REGION',
+        EDIT_REGION: 'regions/actions/EDIT_REGION',
     }
 };
 
@@ -209,6 +209,22 @@ const events = {
     }
 };
 
+const sponsorsCategories = {
+    mutations: {
+        SET_SPONSORS_CATEGORIES_DATA: 'sponsorsCategories/mutations/SET_SPONSORS_CATEGORIES_DATA',
+        SET_IS_SPONSORS_CATEGORIES_DATA_FETCHED: 'sponsorsCategories/mutations/SET_IS_SPONSORS_CATEGORIES_DATA_FETCHED',
+        SET_DASHBOARD_SPONSORS_CATEGORIES_DATA: 'sponsorsCategories/mutations/SET_DASHBOARD_SPONSORS_CATEGORIES_DATA',
+        SET_IS_DASHBOARD_SPONSORS_CATEGORIES_DATA_FETCHED: 'sponsorsCategories/mutations/SET_IS_DASHBOARD_SPONSORS_CATEGORIES_DATA_FETCHED',
+        REMOVE_SPONSORS_CATEGORY: 'sponsorsCategories/mutations/REMOVE_SPONSORS_CATEGORY',
+    },
+    actions: {
+        FETCH_SPONSORS_CATEGORIES: 'sponsorsCategories/actions/FETCH_SPONSORS_CATEGORIES',
+        FETCH_SPONSORS_CATEGORIES_FOR_DASHBOARD: 'sponsorsCategories/actions/FETCH_SPONSORS_CATEGORIES_FOR_DASHBOARD',
+        DELETE_SPONSORS_CATEGORY: 'sponsorsCategories/actions/DELETE_SPONSORS_CATEGORY',
+        EDIT_SPONSORS_CATEGORY: 'sponsorsCategories/actions/EDIT_SPONSORS_CATEGORY',
+    }
+};
+
 export default {
     user,
     home,
@@ -220,5 +236,6 @@ export default {
     platforms,
     regions,
     tournaments,
-    contact
+    contact,
+    sponsorsCategories
 };

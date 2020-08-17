@@ -63,23 +63,28 @@
             <span> > {{ eventDetails.initial_title }}</span>
           </div>
         </div>
-        <div class="col-12 col-md-6" v-show="false">
+        <div
+          class="col-12 col-md-6  d-flex justify-content-end align-items-center"
+        >
           <div
-            class="d-flex justify-content-end align-items-center mb-4"
-            v-if="eventDetails.sponsors !== undefined"
+            class="event-details-wrapper__content__custom-btn-outside"
+            v-if="showSponsors"
           >
             <a
-              v-for="(sponsor, index) in eventDetails.sponsors.main.slice(0, 5)"
+              v-for="(sponsor, index) in formatSponsors"
               :key="index"
               @click="redirectTo(sponsor.link)"
-              style="cursor: pointer;"
             >
               <img
-                class="event-details-wrapper__content__main-sponsor"
-                v-if="sponsor.images.img_logo !== null"
+                class="event-details-wrapper__content__sponsor"
+                v-if="
+                  sponsor.images !== undefined &&
+                    sponsor.images.img_logo !== null
+                "
                 :src="sponsor.images.img_logo.path"
                 :alt="sponsor.name"
               />
+              <div v-else class="event-details-wrapper__content__divider"></div>
             </a>
           </div>
         </div>
@@ -123,35 +128,6 @@
             class="col-12 order-2 order-md-1 col-md-6 event-details-wrapper__content__tournaments__title"
           >
             Event Tournaments
-          </div>
-          <div
-            class="col-12 order-1 order-md-2 col-md-6 d-flex justify-content-end align-items-center"
-          >
-            <div
-              class="event-details-wrapper__content__custom-btn-outside" v-show="false"
-              v-if="
-                eventDetails.sponsors !== undefined &&
-                  eventDetails.sponsors.sub.length !== 0
-              "
-            >
-              <div class="event-details-wrapper__content__custom-btn-inside">
-                <a
-                  v-for="(sponsor, index) in eventDetails.sponsors.sub.slice(
-                    0,
-                    5
-                  )"
-                  :key="index"
-                  @click="redirectTo(sponsor.link)"
-                >
-                  <img
-                    class="event-details-wrapper__content__sub-sponsor"
-                    v-if="sponsor.images.img_logo !== null"
-                    :src="sponsor.images.img_logo.path"
-                    :alt="sponsor.name"
-                  />
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -198,6 +174,28 @@ export default {
     }),
     showDetailsHero() {
       return Object.keys(this.eventDetails).length !== 0;
+    },
+    showSponsors() {
+      return (
+        this.eventDetails.sponsors !== undefined &&
+        Object.keys(this.eventDetails.sponsors).length !== 0
+      );
+    },
+    formatSponsors() {
+      const sponsors = [];
+      let data = [];
+      let nextData = [];
+      const sponsorsData = this.eventDetails.sponsors;
+      const types = Object.keys(sponsorsData);
+      for (let i = 0; i < types.length; i++) {
+        data = sponsorsData[types[i]];
+        if (i < types.length) nextData = sponsorsData[types[i + 1]];
+
+        data.forEach(sponsor => sponsors.push(sponsor));
+
+        if (data.length > 0 && nextData.length > 0) sponsors.push({});
+      }
+      return sponsors;
     }
   },
   watch: {

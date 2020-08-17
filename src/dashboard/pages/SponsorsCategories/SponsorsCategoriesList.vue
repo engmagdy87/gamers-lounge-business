@@ -3,15 +3,17 @@
     <!-- <div class="container"> -->
     <div class="row">
       <div class="col-sm">
-        <h2 class="heading-margin">Regions ({{ regionsData.length }})</h2>
+        <h2 class="heading-margin">
+          Sponsors Categories ({{ sponsorsCategoriesData.length }})
+        </h2>
       </div>
       <div class="col-sm">
-        <router-link to="/dashboard/regions/create">
+        <router-link to="/dashboard/sponsors-categories/create">
           <button
             type="button"
             class="btn btn-secondary d-block ml-auto heading-margin"
           >
-            Add Region
+            Add Sponsors Category
           </button>
         </router-link>
       </div>
@@ -20,16 +22,16 @@
     <LTable
       class="table-hover table-striped"
       :columns="table.columns"
-      :data="regionsData"
-      tableType="regions"
+      :data="sponsorsCategoriesData"
+      tableType="sponsors-categories"
       :setShowDeleteDialogFlag="setShowDeleteDialog"
     >
     </LTable>
     <DeleteDialog
       :showFlag="showFlag"
       :setShowDeleteDialogFlag="setShowDeleteDialog"
-      item="Region"
-      :deleteAction="removeRegion"
+      item="Sponsors Category"
+      :deleteAction="removeSponsorsCategory"
     />
   </div>
 </template>
@@ -53,14 +55,16 @@ export default {
   },
   computed: {
     ...mapState({
-      regionsData: state => state.regions.regionsData,
-      isRegionsDataFetched: state => state.regions.isRegionsDataFetched
+      sponsorsCategoriesData: state =>
+        state.sponsorsCategory.sponsorsCategoriesData
     })
   },
   methods: {
     ...mapActions({
-      fetchRegions: types.regions.actions.FETCH_REGIONS,
-      deleteRegion: types.regions.actions.DELETE_REGION
+      fetchSponsorsCategory:
+        types.sponsorsCategories.actions.FETCH_SPONSORS_CATEGORIES,
+      deleteSponsorsCategory:
+        types.sponsorsCategories.actions.DELETE_SPONSORS_CATEGORY
     }),
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -75,15 +79,15 @@ export default {
       this.targetId = id;
       this.locationInDataArray = locationInDataArray;
     },
-    async removeRegion() {
+    async removeSponsorsCategory() {
       const payload = {
-        regionId: this.targetId,
+        sponsorsCategoryId: this.targetId,
         locationInDataArray: this.locationInDataArray
       };
       try {
-        await this.deleteRegion(payload);
+        await this.deleteSponsorsCategory(payload);
         this.resetFields();
-        this.notifyVue("Region Deleted Successfully", "success");
+        this.notifyVue("Sponsors Category Deleted Successfully", "success");
       } catch (error) {
         this.notifyVue("Error Happened", "danger");
       }
@@ -99,7 +103,7 @@ export default {
     DeleteDialog
   },
   mounted() {
-    this.fetchRegions();
+    this.fetchSponsorsCategory();
   }
 };
 </script>

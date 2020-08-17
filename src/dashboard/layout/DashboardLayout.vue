@@ -14,6 +14,10 @@
         <i class="nc-icon nc-notification-70"></i>
         <p>Events</p>
       </sidebar-link>
+      <sidebar-link to="/dashboard/sponsors-categories">
+        <i class="nc-icon nc-bullet-list-67"></i>
+        <p>Sponsors Categories</p>
+      </sidebar-link>
       <sidebar-link to="/dashboard/sponsors">
         <i class="nc-icon nc-money-coins"></i>
         <p>Sponsors</p>

@@ -62,7 +62,7 @@
     <div class="tournament-details-wrapper__content" v-if="showDetailsHero">
       <div class="container">
         <div class="row mb-4 mb-md-0">
-          <div class="col-12 col-lg-8">
+          <div class="col-12 col-lg-6 d-flex align-items-center">
             <div class="tournament-details-wrapper__content__breadcrumb">
               <a :href="this.$router.history.current.params.previousPath || '/'"
                 >Tournament</a
@@ -71,20 +71,45 @@
             </div>
           </div>
           <div
-            class="col-12 col-lg-4 d-flex align-items-center justify-content-end tournament-details-wrapper__custom-button-wrapper"
+            class="col-12 col-md-6 d-flex justify-content-end align-items-center"
+          >
+            <div
+              class="tournament-details-wrapper__custom-btn-outside"
+              v-if="showSponsors"
+            >
+              <a
+                v-for="(sponsor, index) in formatSponsors"
+                :key="index"
+                @click="redirectTo(sponsor.link)"
+              >
+                <img
+                  class="tournament-details-wrapper__sponsor"
+                  v-if="
+                    sponsor.images !== undefined &&
+                      sponsor.images.img_logo !== null
+                  "
+                  :src="sponsor.images.img_logo.path"
+                  :alt="sponsor.name"
+                />
+                <div v-else class="tournament-details-wrapper__divider"></div>
+              </a>
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-0 mt-4 tournament-details-wrapper__custom-button-wrapper"
             role="button"
           >
             <div
               class="tournament-details-wrapper__custom-button-wrapper__outside"
               @click="redirectTo"
             >
-              Register now
+              REGISTER
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col">
-            <Tabs :data="tournamentDetails" />
+          <div class="col mt-3 mt-md-5">
+            <Tabs :data="tournamentDetails" :redirectTo="redirectTo" />
           </div>
         </div>
       </div>
@@ -128,6 +153,28 @@ export default {
     }),
     showDetailsHero() {
       return Object.keys(this.tournamentDetails).length !== 0;
+    },
+    showSponsors() {
+      return (
+        this.tournamentDetails.sponsors !== undefined &&
+        Object.keys(this.tournamentDetails.sponsors).length !== 0
+      );
+    },
+    formatSponsors() {
+      const sponsors = [];
+      let data = [];
+      let nextData = [];
+      const sponsorsData = this.tournamentDetails.sponsors;
+      const types = Object.keys(sponsorsData);
+      for (let i = 0; i < types.length; i++) {
+        data = sponsorsData[types[i]];
+        if (i < types.length) nextData = sponsorsData[types[i + 1]];
+
+        data.forEach(sponsor => sponsors.push(sponsor));
+
+        if (data.length > 0 && nextData.length > 0) sponsors.push({});
+      }
+      return sponsors;
     }
   },
   watch: {

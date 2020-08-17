@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="showFormWhenDataFetched">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -44,6 +44,39 @@
         </div>
       </div>
 
+      <div class="row mt-3 mb-3">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="summit">Summit</label>
+            <select class="form-control" v-model="sponsor.summit_id">
+              <option value="-1">--Please select summit</option>
+              <option
+                v-for="(summit, index) in summitsListData"
+                :selected="sponsor.summit_id === summit.id"
+                :key="index"
+                :value="summit.id"
+                >{{ summit.initial_title
+                }}{{ summit.active ? "(Active)" : "" }}</option
+              >
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select class="form-control" v-model="sponsor.category_id">
+              <option value="-1">--Please select category</option>
+              <option
+                v-for="(category, index) in categoriesListData"
+                :selected="sponsor.category_id === category.id"
+                :key="index"
+                :value="category.id"
+                >{{ category.title }}</option
+              >
+            </select>
+          </div>
+        </div>
+      </div>
       <div class="row mt-3 mb-3">
         <div class="col">
           <div>
@@ -90,7 +123,7 @@
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 import store from "../../../store/index";
 import types from "../../../store/types";
 import ImagePreview from "../../../website/shared/ImagePreview.vue";
@@ -116,6 +149,8 @@ export default {
       sponsor: {
         name: "",
         link: "",
+        summit_id: "-1",
+        category_id: "-1",
         img_logo: ""
       },
       errors: {}
@@ -123,7 +158,10 @@ export default {
   },
   methods: {
     ...mapActions({
-      deleteImage: types.sponsors.actions.DELETE_SPONSOR_IMAGE
+      deleteImage: types.sponsors.actions.DELETE_SPONSOR_IMAGE,
+      fetchSummitsList: types.summits.actions.FETCH_SUMMITS_LIST,
+      fetchCategoriesList:
+        types.sponsorsCategories.actions.FETCH_SPONSORS_CATEGORIES_FOR_DASHBOARD
     }),
     clickAction() {
       this.operation === "Edit Sponsor"
@@ -147,6 +185,8 @@ export default {
       let formData = new FormData();
       formData.append("name", this.sponsor.name);
       formData.append("link", this.sponsor.link);
+      formData.append("summit_id", Number(this.sponsor.summit_id));
+      formData.append("category_id", Number(this.sponsor.category_id));
       formData.append("img_logo", this.sponsor.img_logo);
 
       try {
@@ -195,6 +235,24 @@ export default {
       });
     }
   },
+  computed: {
+    ...mapState({
+      summitsListData: state => state.summits.summitsListData,
+      isSummitsListFetched: state => state.summits.isSummitsListFetched,
+      categoriesListData: state =>
+        state.sponsorsCategory.dashboardSponsorCategoriesData,
+      isDashboardSponsorsCategoriesDataFetched: state =>
+        state.sponsorsCategory.isDashboardSponsorsCategoriesDataFetched
+    }),
+    showFormWhenDataFetched() {
+      if (this.operation !== "Edit Sponsor")
+        return (
+          this.isSummitsListFetched &&
+          this.isDashboardSponsorsCategoriesDataFetched
+        );
+      return true;
+    }
+  },
   beforeMount() {
     if (
       !this.$router.history.current.params.data &&
@@ -205,11 +263,25 @@ export default {
       });
   },
   mounted() {
+    store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    this.fetchSummitsList();
+    this.fetchCategoriesList();
     if (this.$route.name === "Edit Sponsor") {
       this.sponsor.name = this.editData.name;
       this.sponsor.link = this.editData.link;
+      this.sponsor.summit_id =
+        (this.editData.summit && this.editData.summit.id) || "-1";
+      this.sponsor.category_id =
+        (this.editData.category && this.editData.category.id) || "-1";
       this.sponsor.img_logo = this.editData.images.img_logo;
     }
+  },
+  updated() {
+    if (
+      this.isSummitsListFetched &&
+      this.isDashboardSponsorsCategoriesDataFetched
+    )
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   }
 };
 </script>

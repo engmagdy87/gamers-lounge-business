@@ -12,6 +12,7 @@ import platformsModule from './modules/platforms';
 import regionsModule from './modules/regions';
 import tournamentsModule from './modules/tournaments';
 import contactModule from './modules/contact';
+import sponsorsCategoryModule from './modules/sponsorsCategory';
 
 Vue.use(Vuex);
 
@@ -28,5 +29,6 @@ export default new Vuex.Store({
         regions: regionsModule,
         tournaments: tournamentsModule,
         contact: contactModule,
+        sponsorsCategory: sponsorsCategoryModule,
     }
 });

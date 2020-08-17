@@ -47,7 +47,15 @@ export default {
       targetId: null,
       locationInDataArray: null,
       table: {
-        columns: ["Id", "Name", "Link", "Logo Image", "Actions"]
+        columns: [
+          "Id",
+          "Name",
+          "Link",
+          "Summit",
+          "Category",
+          "Logo Image",
+          "Actions"
+        ]
       }
     };
   },

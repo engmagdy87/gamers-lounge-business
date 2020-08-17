@@ -30,7 +30,6 @@
           isGamesDataFetched &&
             isTournamentsDataFetched &&
             isDashboardRegionsDataFetched &&
-            isFooterSponsorsDataFetched &&
             isMainEventsFetched
         "
       >
@@ -95,7 +94,11 @@
       :regionsData="regionsData"
     />
     <Spinner :smallLoader="false" />
-    <Footer :sponsors="footerSponsorsData" :showFooter="showFooter" />
+    <Footer
+      :sponsors="footerSponsorsData"
+      :events="filteredMainEventsData"
+      :showFooter="footerCssClass"
+    />
   </div>
 </template>
 
@@ -123,7 +126,7 @@ export default {
       showLoginModal: false,
       showRegisterModal: false,
       showFiltersModal: false,
-      showFooter: false
+      footerCssClass: "hide"
     };
   },
   computed: {
@@ -192,8 +195,17 @@ export default {
       });
     },
     detectScroll(e) {
-      if (e.target.scrollTop > 120) this.showFooter = true;
-      else this.showFooter = false;
+      if (e.target.scrollTop <= 120) this.footerCssClass = "hide";
+      else if (
+        e.target.scrollTop > 120 &&
+        e.target.scrollTop + e.target.offsetHeight < e.target.scrollHeight
+      )
+        this.footerCssClass = "show-small";
+      else if (
+        e.target.scrollTop + e.target.offsetHeight ===
+        e.target.scrollHeight
+      )
+        this.footerCssClass = "show-large";
     }
   },
   components: {

@@ -80,6 +80,16 @@
         >
         </TournamentTabelRow>
       </tbody>
+      <tbody v-else-if="tableType === 'sponsors-categories'">
+        <SponsorsCategoryTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </SponsorsCategoryTabelRow>
+      </tbody>
     </table>
   </div>
 </template>
@@ -91,6 +101,7 @@ import GamesTabelRow from "./GamesTabelRow";
 import PlatformsTabelRow from "./PlatformsTabelRow";
 import RegionsTabelRow from "./RegionsTabelRow";
 import TournamentTabelRow from "./TournamentTabelRow";
+import SponsorsCategoryTabelRow from "./SponsorsCategoryTabelRow";
 
 export default {
   name: "l-table",
@@ -102,7 +113,8 @@ export default {
     GamesTabelRow,
     PlatformsTabelRow,
     RegionsTabelRow,
-    TournamentTabelRow
+    TournamentTabelRow,
+    SponsorsCategoryTabelRow
   }
 };
 </script>

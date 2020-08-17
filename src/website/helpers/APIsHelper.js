@@ -533,12 +533,12 @@ async function getTournamentRegisterLink(tournamentId) {
     //
     // return response.data;
 
-  // Temp: Allowing guests to register
-  const response = await get(
-      `${APIs.GET_REGISTER_LINK}/${tournamentId}/register-link`
-  );
+    // Temp: Allowing guests to register
+    const response = await get(
+        `${APIs.GET_REGISTER_LINK}/${tournamentId}/register-link`
+    );
 
-  return response.data;
+    return response.data;
 }
 
 async function removeTournament(id) {
@@ -574,6 +574,51 @@ async function removeTournamentVideo(id, videoId) {
 
     return response;
 }
+
+// Sponsor Category
+
+async function getSponsorCategories() {
+    const response = await getDashboardData(
+        APIs.GET_SPONSOR_CATEGORIES
+    );
+
+    return response.data;
+}
+
+async function getSponsorCategoriesList() {
+    const response = await getDashboardData(
+        APIs.GET_LIST_SPONSOR_CATEGORIES
+    );
+
+    return response.data;
+}
+
+async function editSponsorCategories(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_SPONSOR_CATEGORY}/${id}`
+    );
+
+    return response.data;
+}
+
+async function removeSponsorCategory(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_SPONSOR_CATEGORY}/${id}`
+    );
+
+    return response.data;
+}
+
+async function createSponsorCategory(payload) {
+    const response = await postMultipart(
+        payload,
+        APIs.CREATE_SPONSOR_CATEGORY
+    );
+
+    return response.data;
+}
+
 
 export {
     loadUserPersona,
@@ -641,7 +686,12 @@ export {
     resendVerificationEmail,
     getTournamentRegisterLink,
     getCoverHomeEventsImage,
-    getCoverContactUsImage
+    getCoverContactUsImage,
+    getSponsorCategories,
+    getSponsorCategoriesList,
+    editSponsorCategories,
+    removeSponsorCategory,
+    createSponsorCategory
 };
 
 async function post(data, url) {

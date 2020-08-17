@@ -1,23 +1,7 @@
 <template>
   <tr>
     <th scope="row">{{ id }}</th>
-    <td>{{ rowData.name }}</td>
-    <td>
-      <a :href="rowData.link" target="_blank">{{ rowData.link }}</a>
-    </td>
-    <td>{{ !rowData.summit ? "" : rowData.summit.initial_title }}</td>
-    <td>{{ !rowData.category ? "" : rowData.category.title }}</td>
-    <td>
-      <a
-        v-if="
-          rowData.images.img_logo !== undefined &&
-            rowData.images.img_logo !== null
-        "
-        :href="rowData.images.img_logo.path"
-        target="_blank"
-        >Img</a
-      >
-    </td>
+    <td>{{ rowData.title }}</td>
     <td class="table-actions">
       <img src="/website/img/edit.svg" alt="edit" @click="redirectTo" />
       <img
@@ -35,7 +19,7 @@ export default {
   methods: {
     redirectTo() {
       this.$router.push({
-        name: "Edit Sponsor",
+        name: "Edit Sponsors Category",
         params: { data: this.rowData }
       });
     }

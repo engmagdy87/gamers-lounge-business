@@ -1,33 +1,100 @@
 @import "../mixins.scss";
 
 .footer-wrapper {
-  height: 120px;
   width: 100%;
   background-color: #121828;
   color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: fixed;
   bottom: 0;
-  transition: 0.5s;
-  &--show {
-    transform: translateY(0);
-  }
-  &--hide {
-    transform: translateY(120px);
-  }
-  div {
-    width: fit-content;
+  transition: height 0.5s ease;
+  &--show-large {
+    // transform: translateY(0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: height 0.5s ease;
     height: fit-content;
   }
-  div img {
-    display: inline-block;
-    max-width: 90px;
-    margin: auto 40px;
+  &--show-small {
+    display: flex;
+    justify-content: center;
+    padding: 1.5vh 0;
+    transition: height 0.5s ease;
+    height: fit-content;
+  }
+  &--hide {
+    height: 0;
+    transition: height 0.5s ease;
+  }
+  &__small-footer {
+    width: 70%;
+    height: fit-content;
+    text-align: center;
     @include is-mobile {
-      max-width: 60px;
-      margin: 30px 15px;
+      width: 100%;
+    }
+    &__img-wrapper {
+      display: inline-block;
+      img {
+        max-width: 90px;
+        margin: auto 40px;
+        cursor: pointer;
+        @include is-mobile {
+          max-width: 40px;
+          margin: 15px;
+        }
+      }
     }
   }
+  &__large-footer {
+    width: 50%;
+    height: fit-content;
+    text-align: center;
+    padding-top: 20px;
+    @include is-mobile {
+      width: 100%;
+    }
+    &__img-wrapper {
+      display: inline-block;
+      img {
+        max-width: 90px;
+        margin: auto 40px;
+        cursor: pointer;
+        @include is-mobile {
+          max-width: 40px;
+          margin: 15px;
+        }
+      }
+    }
+  }
+}
+.styled-title {
+  line-height: 0.5;
+  text-align: center;
+  margin-top: 10px;
+}
+.styled-title span {
+  display: inline-block;
+  position: relative;
+  font-size: 1.3rem;
+}
+.styled-title span:before,
+.styled-title span:after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  border-top: 1.5px solid white;
+  border-bottom: 1.5px solid white;
+  border-radius: 2px;
+  top: 0;
+  width: 15vw;
+  margin-top: 4px;
+}
+.styled-title span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+.styled-title span:after {
+  left: 100%;
+  margin-left: 15px;
 }

@@ -17,6 +17,17 @@
           @click="selectClickAction(tab, index)"
           >{{ tab }}</a
         >
+        <div
+          class="col-lg-4 d-flex align-items-center justify-content-end tab-pane__custom-button-wrapper"
+          role="button"
+        >
+          <div
+            class="tab-pane__custom-button-wrapper__outside"
+            @click="redirectTo"
+          >
+            REGISTER
+          </div>
+        </div>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
@@ -142,7 +153,7 @@ import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 import { changeTextDirection } from "../helpers/StringsHelper";
 
 export default {
-  props: ["data"],
+  props: ["data", "redirectTo"],
   data() {
     return {
       activeTabIndex: 0,

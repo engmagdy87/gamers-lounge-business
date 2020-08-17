@@ -43,6 +43,10 @@ import TournamentsList from 'src/dashboard/pages/Tournaments/TournamentsList.vue
 import TournamentAddEdit from 'src/dashboard/pages/Tournaments/TournamentAddEdit.vue'
 import TournamentDetails from '../website/containers/tournaments/TournamentDetails.vue'
 
+import SponsorsCategories from 'src/dashboard/pages/SponsorsCategories.vue'
+import SponsorsCategoriesList from 'src/dashboard/pages/SponsorsCategories/SponsorsCategoriesList.vue'
+import SponsorsCategoriesAddEdit from 'src/dashboard/pages/SponsorsCategories/SponsorsCategoriesAddEdit.vue'
+
 import Regions from 'src/dashboard/pages/Regions.vue'
 import RegionsList from 'src/dashboard/pages/Regions/RegionsList.vue'
 import RegionAddEdit from 'src/dashboard/pages/Regions/RegionAddEdit.vue'
@@ -259,6 +263,29 @@ const routes = [
             path: 'edit',
             name: 'Edit Region',
             component: RegionAddEdit
+          }
+        ]
+      },
+      {
+        path: 'sponsors-categories',
+        name: 'Sponsors Categories',
+        redirect: '/dashboard/sponsors-categories/list',
+        component: SponsorsCategories,
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: SponsorsCategoriesList
+          },
+          {
+            path: 'create',
+            name: 'Create Sponsors Category',
+            component: SponsorsCategoriesAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit Sponsors Category',
+            component: SponsorsCategoriesAddEdit
           }
         ]
       },
