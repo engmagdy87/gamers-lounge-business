@@ -14,6 +14,7 @@
       :slidesToScroll="1"
       autoplay
       infinite
+      :autoplaySpeed="5000"
     >
       <img
         v-for="(event, index) in filteredMainEventsData"

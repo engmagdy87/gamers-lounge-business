@@ -14,14 +14,19 @@
     transition: all 0.5s ease;
     height: fit-content;
     max-height: 420px;
+    @include is-tablet {
+      max-height: 520px;
+    }
     @include is-mobile {
-      max-height: 350px;
+      max-height: 450px;
+      padding-top: 10px;
+      padding-bottom: 35px;
     }
   }
   &--show-small {
     display: flex;
     justify-content: center;
-    padding: 1.5vh 0;
+    padding: 0;
     transition: all 0.5s ease;
     height: fit-content;
     max-height: 120px;
@@ -65,8 +70,17 @@
     width: 50%;
     height: fit-content;
     text-align: center;
-    padding-top: 20px;
+    // padding-top: 20px;
     transition: all 0.5s ease;
+    div:nth-child(1) {
+      margin: 20px 0;
+      @include is-mobile {
+        margin: 5px 0;
+      }
+    }
+    @include is-tablet {
+      width: 80%;
+    }
     @include is-mobile {
       width: 100%;
     }

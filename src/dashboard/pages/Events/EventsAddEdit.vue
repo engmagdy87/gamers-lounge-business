@@ -140,7 +140,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="form-group">
             <label for="eventType">Main Sponsors</label>
             <multiselect
@@ -156,7 +156,7 @@
             </multiselect>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="form-group">
             <label for="eventType">Sub Sponsors</label>
             <multiselect
@@ -166,6 +166,22 @@
               :close-on-select="false"
               :clear-on-select="false"
               placeholder="Choose Sub Sponsors"
+              label="name"
+              track-by="name"
+            >
+            </multiselect>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="eventType">Extra Sub Sponsors</label>
+            <multiselect
+              v-model="event.extra_sub_sponsors_ids"
+              :options="dashboardSponsorsData"
+              :multiple="true"
+              :close-on-select="false"
+              :clear-on-select="false"
+              placeholder="Choose Extra Sub Sponsors"
               label="name"
               track-by="name"
             >
@@ -533,7 +549,8 @@ export default {
         vid_final: "",
         vid_cover_main: "",
         main_sponsors_ids: [],
-        sub_sponsors_ids: []
+        sub_sponsors_ids: [],
+        extra_sub_sponsors_ids: []
       },
       editorOptions,
       errors: {}
@@ -679,6 +696,16 @@ export default {
             this.event.sub_sponsors_ids[i].id
           );
         }
+
+        if (this.event.extra_sub_sponsors_ids.length === 0)
+          formData.append("extra_sub_sponsors_ids[]", []);
+        for (var i = 0; i < this.event.extra_sub_sponsors_ids.length; i++) {
+          formData.append(
+            "extra_sub_sponsors_ids[]",
+            this.event.extra_sub_sponsors_ids[i].id
+          );
+        }
+
         for (var i = 0; i < this.$refs.img_media.files.length; i++) {
           let file = this.$refs.img_media.files[i];
           formData.append("img_media[]", file);
@@ -857,6 +884,7 @@ export default {
         "";
       this.event.main_sponsors_ids = this.editData.main_sponsors;
       this.event.sub_sponsors_ids = this.editData.sub_sponsors;
+      this.event.extra_sub_sponsors_ids = this.editData.extra_sub_sponsors;
     }
   },
   updated() {

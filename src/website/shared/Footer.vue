@@ -1,6 +1,6 @@
 <template>
   <footer :class="['footer-wrapper', getHeighClass()]">
-    <div
+    <!-- <div
       v-if="showFooter === 'show-small'"
       class="footer-wrapper__small-footer"
     >
@@ -17,11 +17,8 @@
           :alt="sponsor.name"
         />
       </div>
-    </div>
-    <div
-      v-if="showFooter === 'show-large' && sponsors.length - 1 > 0"
-      class="footer-wrapper__large-footer"
-    >
+    </div> -->
+    <div v-if="sponsors.length - 1 > 0" class="footer-wrapper__large-footer">
       <div v-for="sponsorId in sponsors.length - 1" :key="sponsorId">
         <p class="styled-title">
           <span>{{ categoryTitle(sponsorId.toString()) }}</span>
