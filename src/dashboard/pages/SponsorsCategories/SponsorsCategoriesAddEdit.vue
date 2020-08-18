@@ -13,7 +13,7 @@
     <h4 slot="header" class="card-name">{{ operation }}</h4>
     <form>
       <div class="row">
-        <div class="col">
+        <div class="col-12 col-md-4">
           <base-input
             type="text"
             label="Title"
@@ -27,6 +27,32 @@
           <p class="error-message" v-if="errors.title !== undefined">
             {{ errors.title }}
           </p>
+        </div>
+        <div class="col-12 col-md-4">
+          <base-input
+            type="number"
+            label="Priority"
+            placeholder="Enter Priority"
+            v-model="sponsorCategory.priority"
+            min="0"
+          >
+          </base-input>
+          <p class="error-message" v-if="errors.priority !== undefined">
+            {{ errors.priority }}
+          </p>
+        </div>
+        <div class="col-12 col-md-4 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="enabled"
+              v-model="sponsorCategory.enabled"
+            />
+            <label class="custom-control-label" for="enabled"
+              >Publish Sponsor Category</label
+            >
+          </div>
         </div>
       </div>
 
@@ -57,7 +83,9 @@ export default {
       editData: this.$router.history.current.params.data || { images: null },
       operation: this.$route.name,
       sponsorCategory: {
-        title: ""
+        title: "",
+        priority: 0,
+        enabled: false
       },
       errors: {}
     };
@@ -77,6 +105,8 @@ export default {
     saveData: async function(saveFunction, successMessage) {
       let formData = new FormData();
       formData.append("title", this.sponsorCategory.title);
+      formData.append("priority", this.sponsorCategory.priority);
+      formData.append("enabled", this.sponsorCategory.enabled ? 1 : 0);
 
       try {
         store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
@@ -100,6 +130,8 @@ export default {
     },
     resetFields() {
       this.sponsorCategory.title = "";
+      this.sponsorCategory.priority = "";
+      this.sponsorCategory.enabled = "";
     },
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -122,6 +154,8 @@ export default {
   mounted() {
     if (this.$route.name === "Edit Sponsors Category") {
       this.sponsorCategory.title = this.editData.title;
+      this.sponsorCategory.priority = this.editData.priority || 0;
+      this.sponsorCategory.enabled = this.editData.enabled;
     }
   }
 };

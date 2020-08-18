@@ -59,7 +59,7 @@
       <div class="row">
         <div class="col-12 col-md-6">
           <div class="event-details-wrapper__content__breadcrumb">
-            <a href="/events">Event</a>
+            <a href="/events">Events</a>
             <span> > {{ eventDetails.initial_title }}</span>
           </div>
         </div>

@@ -20,7 +20,7 @@
     </div>
     <div class="game-details-wrapper__content" v-if="showDetailsHero">
       <div class="game-details-wrapper__content__breadcrumb">
-        <a href="/">Game</a>
+        <a style="cursor:pointer;" @click="backTo">Games</a>
         <span> > {{ gameDetails.title }}</span>
       </div>
       <div class="container">
@@ -108,6 +108,12 @@ export default {
     },
     setShowRegisterModal(value = false) {
       this.showRegisterModal = value;
+    },
+    backTo() {
+      const { previousPath } = this.$router.history.current.params;
+      if (previousPath === "/" || !previousPath)
+        this.$router.push({ name: "home", hash: "#games" });
+      else this.$router.push({ path: previousPath });
     }
   },
   components: {
