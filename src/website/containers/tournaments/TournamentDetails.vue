@@ -64,7 +64,9 @@
         <div class="row mb-4 mb-md-0">
           <div class="col-12 col-lg-6 d-flex align-items-center">
             <div class="tournament-details-wrapper__content__breadcrumb">
-              <a style="cursor:pointer;" @click="backTo">Tournaments</a>
+              <a style="cursor:pointer;" @click="backTo">{{
+                getBreadcrumbText
+              }}</a>
               <span> > {{ tournamentDetails.initial_title }}</span>
             </div>
           </div>
@@ -177,6 +179,11 @@ export default {
           sponsors.push({});
       }
       return sponsors;
+    },
+    getBreadcrumbText() {
+      const { previousPath } = this.$router.history.current.params;
+      if (previousPath.includes("event")) return "Events";
+      else return "Tournaments";
     }
   },
   watch: {
