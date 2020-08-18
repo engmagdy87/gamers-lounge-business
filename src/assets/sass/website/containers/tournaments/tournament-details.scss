@@ -141,8 +141,16 @@
     }
   }
   &__sponsor {
-    width: 80px;
     margin-left: 15px;
+    &--main {
+      width: 70px;
+    }
+    &--sub {
+      width: 60px;
+    }
+    &--extra_sub {
+      width: 50px;
+    }
   }
   &__divider {
     width: 2px;

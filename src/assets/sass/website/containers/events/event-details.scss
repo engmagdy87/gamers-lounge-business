@@ -142,14 +142,16 @@
         width: 70px;
       }
       &--sub {
-        width: 50px;
+        width: 60px;
       }
       &--extra_sub {
-        width: 30px;
+        width: 50px;
       }
     }
     &__divider {
       width: 2px;
+      max-width: 2px;
+      min-width: 2px;
       height: 35px;
       margin: auto 10px;
       background-color: white !important;

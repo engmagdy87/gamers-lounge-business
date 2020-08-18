@@ -81,7 +81,11 @@
                 @click="redirectTo(sponsor.link)"
               >
                 <img
-                  class="tournament-details-wrapper__sponsor"
+                  :class="[
+                    `tournament-details-wrapper__sponsor ${getCssClassForSponsor(
+                      sponsor
+                    )}`
+                  ]"
                   v-if="
                     sponsor.images !== undefined &&
                       sponsor.images.img_logo !== null
@@ -168,9 +172,9 @@ export default {
         data = sponsorsData[types[i]];
         if (i < types.length) nextData = sponsorsData[types[i + 1]];
 
-        data.forEach(sponsor => sponsors.push(sponsor));
-
-        if (data.length > 0 && nextData.length > 0) sponsors.push({});
+        data.forEach(sponsor => sponsors.push({ ...sponsor, type: types[i] }));
+        if (i < types.length - 1 && data.length > 0 && nextData.length > 0)
+          sponsors.push({});
       }
       return sponsors;
     }
@@ -229,6 +233,14 @@ export default {
         verticalAlign: "top",
         type: color
       });
+    },
+    getCssClassForSponsor(sponsor) {
+      if (sponsor.type === "main")
+        return "tournament-details-wrapper__sponsor--main";
+      if (sponsor.type === "sub")
+        return "tournament-details-wrapper__sponsor--sub";
+      if (sponsor.type === "extra_sub")
+        return "tournament-details-wrapper__sponsor--extra_sub";
     }
   },
   components: {
