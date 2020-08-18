@@ -182,7 +182,7 @@ export default {
     },
     getBreadcrumbText() {
       const { previousPath } = this.$router.history.current.params;
-      if (previousPath.includes("event")) return "Events";
+      if (previousPath.includes("event")) return "Event";
       else return "Tournaments";
     }
   },
