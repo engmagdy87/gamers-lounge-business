@@ -2,6 +2,8 @@
   <tr>
     <th scope="row">{{ id }}</th>
     <td>{{ rowData.title }}</td>
+    <td>{{ rowData.priority }}</td>
+    <td>{{ rowData.enabled ? "Yes" : "No" }}</td>
     <td class="table-actions">
       <img src="/website/img/edit.svg" alt="edit" @click="redirectTo" />
       <img

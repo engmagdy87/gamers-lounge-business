@@ -49,7 +49,7 @@ export default {
       targetId: null,
       locationInDataArray: null,
       table: {
-        columns: ["Id", "Title", "Actions"]
+        columns: ["Id", "Title", "Priority", "Published", "Actions"]
       }
     };
   },

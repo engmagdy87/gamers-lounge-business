@@ -24,7 +24,7 @@
         @click="redirectTo(event.id)"
       />
     </VueSlickCarousel>
-    <div class="home-wrapper__content">
+    <div class="home-wrapper__content" id="home">
       <div
         v-if="
           isGamesDataFetched &&
@@ -49,7 +49,7 @@
                 ]"
                 @click="setIsGamesActive(false)"
               >
-                Tournament
+                Tournaments
               </li>
             </ul>
           </div>
@@ -228,6 +228,11 @@ export default {
     this.fetchRegions();
     this.fetchFooterSponsors();
     this.fetchMainEvents();
+    const scrollId = this.$router.history.current.hash.split("#")[1];
+    if (scrollId && document.getElementById("home") !== null)
+      document.getElementById("home").scrollIntoView();
+    if (scrollId === "tournaments") this.isGamesActive = false;
+    if (scrollId === "games") this.isGamesActive = true;
   },
   updated() {
     if (

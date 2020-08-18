@@ -64,9 +64,7 @@
         <div class="row mb-4 mb-md-0">
           <div class="col-12 col-lg-6 d-flex align-items-center">
             <div class="tournament-details-wrapper__content__breadcrumb">
-              <a :href="this.$router.history.current.params.previousPath || '/'"
-                >Tournament</a
-              >
+              <a style="cursor:pointer;" @click="backTo">Tournaments</a>
               <span> > {{ tournamentDetails.initial_title }}</span>
             </div>
           </div>
@@ -202,6 +200,12 @@ export default {
         this.$router.history.current.params.tournamentId
       );
       this.registerLink = result;
+    },
+    backTo() {
+      const { previousPath } = this.$router.history.current.params;
+      if (previousPath === "/" || !previousPath)
+        this.$router.push({ name: "home", hash: "#tournaments" });
+      else this.$router.push({ path: previousPath });
     },
     redirectTo() {
       // Temp: Allow guests to register in tournaments for now

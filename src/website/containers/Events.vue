@@ -27,6 +27,7 @@
           isSubEventsFetched &&
           (mainEventsData.length !== 0 || subEventsData.length !== 0)
       "
+      id="main-events"
     >
       <h2 v-if="mainEventsData.length !== 0">Main Events</h2>
       <VueSlickCarousel
