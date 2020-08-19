@@ -5,7 +5,7 @@
       v-for="(card, index) in data"
       :key="index"
       role="button"
-      @click="redirectTo(card.id)"
+      @click="redirectTo(card)"
     >
       <div class="list-view-wrapper__img">
         <img
@@ -30,16 +30,36 @@
 </template>
 
 <script>
+import { reformatStringToBeInURL } from "../../helpers/StringsHelper";
+
 export default {
-  props: ["data", "isGamesActive"],
+  props: ["data", "isGamesActive", "tree"],
   methods: {
-    redirectTo(id) {
+    redirectTo(card) {
       let path = "";
-      if (this.isGamesActive) path = path = `/games/game/${id}`;
-      else path = `/tournaments/tournament/${id}`;
-      this.$router.push({
-        path
-      });
+      if (this.isGamesActive)
+        this.$router.push({
+          name: "game",
+          params: {
+            gameName: reformatStringToBeInURL(card.title || card.initial_title),
+            data: {
+              id: card.id,
+              title: card.title || card.initial_title
+            }
+          }
+        });
+      else
+        this.$router.push({
+          name: "tournament",
+          params: {
+            gameName: reformatStringToBeInURL(card.title || card.initial_title),
+            data: {
+              id: card.id,
+              title: card.title || card.initial_title,
+              tree: [{ name: "Home", path: "/#tournaments" }]
+            }
+          }
+        });
     }
   }
 };

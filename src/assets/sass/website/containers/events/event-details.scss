@@ -72,7 +72,7 @@
 
   &__content {
     width: 100%;
-    padding: 5vh 15%;
+    padding: 0 15% 5vh 15%;
     min-height: calc(100vh - 12vh);
     color: white;
     @include is-mobile {
@@ -119,8 +119,12 @@
     }
     &__custom-btn-outside {
       position: relative;
-      width: 100%;
-      height: 100%;
+      margin: 20px auto;
+      width: fit-content;
+      min-width: 20%;
+      max-width: 100%;
+      height: fit-content;
+      padding: 15px;
       background: $solid-header;
       border: 2px solid $primary;
       border-radius: 10px;
@@ -132,20 +136,20 @@
       @include is-mobile {
         width: 100%;
       }
-      a {
+      div a {
         cursor: pointer;
       }
     }
     &__sponsor {
-      margin-left: 5px;
+      margin: 5px 8px;
       &--main {
-        width: 100px;
+        width: 120px;
       }
       &--sub {
-        width: 90px;
+        width: 85px;
       }
       &--extra_sub {
-        width: 80px;
+        width: 65px;
       }
     }
     &__divider {

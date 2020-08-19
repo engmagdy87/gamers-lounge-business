@@ -14,23 +14,25 @@ import tournamentsModule from './modules/tournaments';
 import contactModule from './modules/contact';
 import sponsorsCategoryModule from './modules/sponsorsCategory';
 import giveawayModule from './modules/giveaway';
+import navigationTreeModule from './modules/navigationTree';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    modules: {
-        user: userModule,
-        home: homeModule,
-        story: storyModule,
-        summits: summitModule,
-        events: eventModule,
-        sponsors: sponsorModule,
-        games: gamesModule,
-        platforms: platformsModule,
-        regions: regionsModule,
-        tournaments: tournamentsModule,
-        contact: contactModule,
-        sponsorsCategory: sponsorsCategoryModule,
-        giveaways: giveawayModule,
-    }
+        modules: {
+                user: userModule,
+                home: homeModule,
+                story: storyModule,
+                summits: summitModule,
+                events: eventModule,
+                sponsors: sponsorModule,
+                games: gamesModule,
+                platforms: platformsModule,
+                regions: regionsModule,
+                tournaments: tournamentsModule,
+                contact: contactModule,
+                sponsorsCategory: sponsorsCategoryModule,
+                giveaways: giveawayModule,
+                navigationTree: navigationTreeModule,
+        }
 });

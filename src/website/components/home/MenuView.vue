@@ -15,7 +15,7 @@
         v-for="(card, index) in data"
         :key="index"
       >
-        <TournamentCard :card="card" />
+        <TournamentCard :card="card" :tree="tree" />
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@ import GameCard from "../../shared/GameCard";
 import TournamentCard from "../../shared/TournamentCard";
 
 export default {
-  props: ["data", "isGamesActive"],
+  props: ["data", "isGamesActive", "tree"],
   components: {
     GameCard,
     TournamentCard

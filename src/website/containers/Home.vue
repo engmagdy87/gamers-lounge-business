@@ -22,7 +22,7 @@
         :src="event.images.img_cover_home.path"
         alt=""
         class="home-wrapper__slide"
-        @click="redirectTo(event.id)"
+        @click="redirectTo(event.id, event.initial_title)"
       />
     </VueSlickCarousel>
     <div class="home-wrapper__content" id="home">
@@ -70,12 +70,14 @@
           :data="getCorrespondingData"
           :isGamesActive="isGamesActive"
           v-if="isMenuActive && isGamesDataFetched && isTournamentsDataFetched"
+          :tree="tree"
         />
         <ListView
           :data="getCorrespondingData"
           :isGamesActive="
             isGamesActive && isGamesDataFetched && isTournamentsDataFetched
           "
+          :tree="tree"
           v-else
         />
       </div>
@@ -118,6 +120,7 @@ import MenuView from "../components/home/MenuView";
 import ListView from "../components/home/ListView";
 import CustomSwitch from "../shared/CustomSwitch";
 import CustomButton from "../shared/CustomButton";
+import { reformatStringToBeInURL } from "../helpers/StringsHelper";
 
 export default {
   data() {
@@ -127,7 +130,8 @@ export default {
       showLoginModal: false,
       showRegisterModal: false,
       showFiltersModal: false,
-      footerCssClass: "hide"
+      footerCssClass: "hide",
+      tree: [{ name: "Home", path: "/" }]
     };
   },
   computed: {
@@ -190,9 +194,13 @@ export default {
       this.isGamesActive = flag;
       this.isMenuActive = true;
     },
-    redirectTo(id) {
+    redirectTo(id, title) {
       this.$router.push({
-        path: `/events/event/${id}`
+        name: "event",
+        params: {
+          eventName: reformatStringToBeInURL(title),
+          data: { id, title, tree: [{ name: "Home", path: "/" }] }
+        }
       });
     },
     detectScroll(e) {

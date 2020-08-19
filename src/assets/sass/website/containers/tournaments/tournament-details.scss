@@ -123,8 +123,12 @@
   }
   &__custom-btn-outside {
     position: relative;
-    width: 100%;
-    height: 100%;
+    margin: 20px auto;
+    width: fit-content;
+    min-width: 20%;
+    max-width: 100%;
+    height: fit-content;
+    padding: 15px;
     background: $solid-header;
     border: 2px solid $primary;
     border-radius: 10px;
@@ -136,26 +140,28 @@
     @include is-mobile {
       width: 100%;
     }
-    a {
+    div a {
       cursor: pointer;
     }
-  }
-  &__sponsor {
-    margin-left: 5px;
-    &--main {
-      width: 100px;
+    &__sponsor {
+      margin: 5px 8px;
+      &--main {
+        width: 120px;
+      }
+      &--sub {
+        width: 85px;
+      }
+      &--extra_sub {
+        width: 65px;
+      }
     }
-    &--sub {
-      width: 90px;
+    &__divider {
+      width: 2px;
+      max-width: 2px;
+      min-width: 2px;
+      height: 35px;
+      margin: auto 10px;
+      background-color: white !important;
     }
-    &--extra_sub {
-      width: 80px;
-    }
-  }
-  &__divider {
-    width: 2px;
-    height: 35px;
-    margin: auto 10px;
-    background-color: white !important;
   }
 }

@@ -44,7 +44,10 @@
 </template>
 
 <script>
-import { TruncateText } from "../../helpers/StringsHelper";
+import {
+  truncateText,
+  reformatStringToBeInURL
+} from "../../helpers/StringsHelper";
 export default {
   props: ["card"],
   methods: {
@@ -52,11 +55,19 @@ export default {
       if (this.card.is_external) window.open(this.card.external_link, "_blank");
       else
         this.$router.push({
-          path: `/events/event/${this.card.id}`
+          name: "event",
+          params: {
+            eventName: reformatStringToBeInURL(this.card.initial_title),
+            data: {
+              id: this.card.id,
+              title: this.card.initial_title,
+              tree: [{ name: "Events", path: "/events" }]
+            }
+          }
         });
     },
     trimText(text) {
-      return TruncateText(text);
+      return truncateText(text);
     }
   }
 };

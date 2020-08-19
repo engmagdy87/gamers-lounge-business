@@ -1,44 +1,32 @@
 <template>
   <footer :class="['footer-wrapper', getHeighClass()]">
-    <!-- <div
-      v-if="showFooter === 'show-small'"
-      class="footer-wrapper__small-footer"
-    >
-      <div
-        v-for="(sponsor, index) in getSponsorsCategoryWithPriority('1')"
-        :key="`${index}+small`"
-        @click="redirectTo(sponsor.link)"
-        role="button"
-        class="footer-wrapper__small-footer__img-wrapper"
-      >
-        <img
-          v-if="sponsor.images.img_logo !== null"
-          :src="sponsor.images.img_logo.path"
-          :alt="sponsor.name"
-        />
-      </div>
-    </div> -->
-    <div v-if="sponsors.length - 1 > 0" class="footer-wrapper__large-footer">
-      <div v-for="sponsorId in sponsors.length - 1" :key="sponsorId">
-        <p class="styled-title">
-          <span>{{ categoryTitle(sponsorId.toString()) }}</span>
-        </p>
+    <div class="footer-wrapper__large-footer">
+      <div v-if="sponsors.length > 0">
         <div
-          v-for="(sponsor, index) in getSponsorsCategoryWithPriority(
-            sponsorId.toString()
-          )"
-          :key="`${index}+large+Sponsored`"
-          @click="redirectTo(sponsor.link)"
-          role="button"
-          class="footer-wrapper__large-footer__img-wrapper"
+          v-for="sponsorId in sponsors.length === 1 ? 1 : sponsors.length - 1"
+          :key="sponsorId"
         >
-          <img
-            v-if="sponsor.images.img_logo !== null"
-            :src="sponsor.images.img_logo.path"
-            :alt="sponsor.name"
-          />
+          <p class="styled-title">
+            <span>{{ categoryTitle(sponsorId.toString()) }}</span>
+          </p>
+          <div
+            v-for="(sponsor, index) in getSponsorsCategoryWithPriority(
+              sponsorId.toString()
+            )"
+            :key="`${index}+large+Sponsored`"
+            @click="redirectTo(sponsor.link)"
+            role="button"
+            class="footer-wrapper__large-footer__img-wrapper"
+          >
+            <img
+              v-if="sponsor.images.img_logo !== null"
+              :src="sponsor.images.img_logo.path"
+              :alt="sponsor.name"
+            />
+          </div>
         </div>
       </div>
+
       <p class="styled-title"><span>Events</span></p>
       <div
         v-for="(event, index) in events"
@@ -53,7 +41,7 @@
           :alt="event.name"
         />
       </div>
-      <div>
+      <div v-if="sponsors.length > 1">
         <p class="styled-title">
           <span>{{ categoryTitle(sponsors.length.toString()) }}</span>
         </p>

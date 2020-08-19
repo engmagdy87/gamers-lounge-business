@@ -20,7 +20,7 @@
         </div>
         <div class="col-12 col-md-6">
           <p>
-            We are taking to our community seriously, if you need our help or
+            We are taking our community seriously, if you need our help or
             having any question about anything please don't hesitate to contact
             us or send us on our mail
           </p>

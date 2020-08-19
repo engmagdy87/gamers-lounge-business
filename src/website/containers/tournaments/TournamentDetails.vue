@@ -59,18 +59,51 @@
         </video>
       </div>
     </div>
+    <div
+      class="tournament-details-wrapper__custom-btn-outside"
+      v-if="showSponsors"
+    >
+      <div v-for="(sponsorType, index) in formatSponsorsTypes" :key="index">
+        <span v-if="sponsorType !== 'divider'">
+          <a
+            v-for="(sponsor, i) in tournamentDetails.sponsors[sponsorType]"
+            :key="i"
+            @click="redirectTo(sponsor.link)"
+          >
+            <img
+              :class="[
+                `tournament-details-wrapper__custom-btn-outside__sponsor ${getCssClassForSponsor(
+                  sponsorType
+                )}`
+              ]"
+              :src="sponsor.images.img_logo.path"
+              :alt="sponsor.name"
+            />
+          </a>
+        </span>
+        <div
+          v-else
+          class="tournament-details-wrapper__custom-btn-outside__divider"
+        ></div>
+      </div>
+    </div>
     <div class="tournament-details-wrapper__content" v-if="showDetailsHero">
       <div class="container">
         <div class="row mb-4 mb-md-0">
-          <div class="col-12 col-lg-6 d-flex align-items-center">
+          <div class="col-12 d-flex align-items-center">
             <div class="tournament-details-wrapper__content__breadcrumb">
-              <a style="cursor:pointer;" @click="backTo">{{
-                getBreadcrumbText
-              }}</a>
-              <span> > {{ tournamentDetails.initial_title }}</span>
+              <a
+                v-for="(route, i) in tournamentShortDetails.tree"
+                :href="
+                  route.path === '/' ? `${route.path}#tournaments` : route.path
+                "
+                :key="i"
+                >{{ route.name }} >
+              </a>
+              <span>{{ tournamentDetails.initial_title }}</span>
             </div>
           </div>
-          <div
+          <!-- <div
             class="col-12 col-md-6 d-flex justify-content-end align-items-center"
           >
             <div
@@ -98,7 +131,7 @@
                 <div v-else class="tournament-details-wrapper__divider"></div>
               </a>
             </div>
-          </div>
+          </div> -->
           <div
             class="col-12 col-md-0 mt-4 tournament-details-wrapper__custom-button-wrapper"
             role="button"
@@ -132,20 +165,26 @@
 
 <script>
 import { mapGetters, mapActions, mapState } from "vuex";
+import store from "../../../store/index";
 import types from "../../../store/types";
 import Header from "../../shared/Header";
 import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
 import Spinner from "../../shared/Spinner";
 import Tabs from "../../shared/Tabs";
-import { getUserCookie } from "../../helpers/CookieHelper";
+import {
+  getUserCookie,
+  setTournamentCookie,
+  getTournamentCookie
+} from "../../helpers/CookieHelper";
 
 export default {
   data() {
     return {
       showLoginModal: false,
       showRegisterModal: false,
-      registerLink: ""
+      registerLink: "",
+      tournamentShortDetails: {}
     };
   },
   computed: {
@@ -153,7 +192,8 @@ export default {
       isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
     }),
     ...mapState({
-      tournamentDetails: state => state.tournaments.tournamentDetailsData
+      tournamentDetails: state => state.tournaments.tournamentDetailsData,
+      tournamentTree: state => state.navigationTree.tournamentTree
     }),
     showDetailsHero() {
       return Object.keys(this.tournamentDetails).length !== 0;
@@ -164,26 +204,20 @@ export default {
         Object.keys(this.tournamentDetails.sponsors).length !== 0
       );
     },
-    formatSponsors() {
-      const sponsors = [];
+    formatSponsorsTypes() {
       let data = [];
       let nextData = [];
       const sponsorsData = this.tournamentDetails.sponsors;
       const types = Object.keys(sponsorsData);
-      for (let i = 0; i < types.length; i++) {
-        data = sponsorsData[types[i]];
-        if (i < types.length) nextData = sponsorsData[types[i + 1]];
+      let newTypes = [];
 
-        data.forEach(sponsor => sponsors.push({ ...sponsor, type: types[i] }));
-        if (i < types.length - 1 && data.length > 0 && nextData.length > 0)
-          sponsors.push({});
+      for (let i = 0; i < types.length; i++) {
+        if (i < types.length - 1) nextData = sponsorsData[types[i + 1]];
+        if (i < types.length - 1 && nextData.length > 0)
+          newTypes = [...newTypes, types[i], "divider"];
+        else newTypes = [...newTypes, types[i]];
       }
-      return sponsors;
-    },
-    getBreadcrumbText() {
-      const { previousPath } = this.$router.history.current.params;
-      if (previousPath.includes("event")) return "Event";
-      else return "Tournaments";
+      return newTypes;
     }
   },
   watch: {
@@ -208,7 +242,7 @@ export default {
     },
     getLink: async function() {
       const result = await this.fetchTournamentRegisterLink(
-        this.$router.history.current.params.tournamentId
+        this.tournamentShortDetails.id
       );
       this.registerLink = result;
     },
@@ -241,13 +275,13 @@ export default {
         type: color
       });
     },
-    getCssClassForSponsor(sponsor) {
-      if (sponsor.type === "main")
-        return "tournament-details-wrapper__sponsor--main";
-      if (sponsor.type === "sub")
-        return "tournament-details-wrapper__sponsor--sub";
-      if (sponsor.type === "extra_sub")
-        return "tournament-details-wrapper__sponsor--extra_sub";
+    getCssClassForSponsor(sponsorType) {
+      if (sponsorType === "main")
+        return "tournament-details-wrapper__custom-btn-outside__sponsor--main";
+      if (sponsorType === "sub")
+        return "tournament-details-wrapper__custom-btn-outside__sponsor--sub";
+      if (sponsorType === "extra_sub")
+        return "tournament-details-wrapper__custom-btn-outside__sponsor--extra_sub";
     }
   },
   components: {
@@ -258,9 +292,25 @@ export default {
     Tabs
   },
   mounted() {
-    this.fetchTournamentDetails(
-      this.$router.history.current.params.tournamentId
-    );
+    const tournamentCookieData = getTournamentCookie();
+    if (this.$router.history.current.params.data !== undefined) {
+      this.tournamentShortDetails = this.$router.history.current.params.data;
+      store.commit(
+        types.navigationTree.mutations.SET_TOURNAMENT_TREE,
+        this.tournamentShortDetails
+      );
+      setTournamentCookie(this.tournamentShortDetails);
+    } else if (Object.keys(this.tournamentTree).length > 0) {
+      this.tournamentShortDetails = this.tournamentTree;
+    } else if (tournamentCookieData !== undefined) {
+      this.tournamentShortDetails = tournamentCookieData;
+      store.commit(
+        types.navigationTree.mutations.SET_TOURNAMENT_TREE,
+        this.tournamentShortDetails
+      );
+    } else if (this.$router.history.current.params.data === undefined)
+      this.$router.push("/");
+    this.fetchTournamentDetails(this.tournamentShortDetails.id);
     this.getLink();
   }
 };

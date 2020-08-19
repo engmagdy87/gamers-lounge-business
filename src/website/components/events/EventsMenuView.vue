@@ -7,7 +7,11 @@
         :key="index"
       >
         <SubEventCard :card="card" v-if="route === 'events'" />
-        <TournamentCard :card="card" v-else-if="route === 'event-details'" />
+        <TournamentCard
+          :card="card"
+          v-else-if="route === 'event-details'"
+          :tree="tree"
+        />
       </div>
     </div>
   </div>
@@ -18,7 +22,7 @@ import SubEventCard from "../../components/events/SubEventCard";
 import TournamentCard from "../../shared/TournamentCard";
 
 export default {
-  props: ["data", "route"],
+  props: ["data", "route", "tree"],
   components: {
     SubEventCard,
     TournamentCard

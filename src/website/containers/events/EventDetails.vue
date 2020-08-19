@@ -55,41 +55,42 @@
         </video>
       </div>
     </div>
+    <div
+      class="event-details-wrapper__content__custom-btn-outside"
+      v-if="showSponsors"
+    >
+      <div v-for="(sponsorType, index) in formatSponsorsTypes" :key="index">
+        <span v-if="sponsorType !== 'divider'">
+          <a
+            v-for="(sponsor, i) in eventDetails.sponsors[sponsorType]"
+            :key="i"
+            @click="redirectTo(sponsor.link)"
+          >
+            <img
+              :class="[
+                `event-details-wrapper__content__sponsor ${getCssClassForSponsor(
+                  sponsorType
+                )}`
+              ]"
+              :src="sponsor.images.img_logo.path"
+              :alt="sponsor.name"
+            />
+          </a>
+        </span>
+        <div v-else class="event-details-wrapper__content__divider"></div>
+      </div>
+    </div>
     <div class="event-details-wrapper__content" v-if="showDetailsHero">
       <div class="row">
-        <div class="col-12 col-md-6">
+        <div class="col-12 d-flex align-items-center">
           <div class="event-details-wrapper__content__breadcrumb">
-            <a href="/events">Events</a>
-            <span> > {{ eventDetails.initial_title }}</span>
-          </div>
-        </div>
-        <div
-          class="col-12 col-md-6  d-flex justify-content-end align-items-center"
-        >
-          <div
-            class="event-details-wrapper__content__custom-btn-outside"
-            v-if="showSponsors"
-          >
             <a
-              v-for="(sponsor, index) in formatSponsors"
-              :key="index"
-              @click="redirectTo(sponsor.link)"
-            >
-              <img
-                :class="[
-                  `event-details-wrapper__content__sponsor ${getCssClassForSponsor(
-                    sponsor
-                  )}`
-                ]"
-                v-if="
-                  sponsor.images !== undefined &&
-                    sponsor.images.img_logo !== null
-                "
-                :src="sponsor.images.img_logo.path"
-                :alt="sponsor.name"
-              />
-              <div v-else class="event-details-wrapper__content__divider"></div>
+              v-for="(route, i) in eventShortDetails.tree"
+              :href="route.path"
+              :key="i"
+              >{{ route.name }} >
             </a>
+            <span>{{ eventDetails.initial_title }}</span>
           </div>
         </div>
       </div>
@@ -135,7 +136,11 @@
           </div>
         </div>
       </div>
-      <EventsMenuView route="event-details" :data="eventDetails.tournaments" />
+      <EventsMenuView
+        route="event-details"
+        :data="eventDetails.tournaments"
+        :tree="getTree"
+      />
     </div>
     <LoginModal
       :showFlag="showLoginModal"
@@ -151,6 +156,7 @@
 
 <script>
 import { mapGetters, mapActions, mapState } from "vuex";
+import store from "../../../store/index";
 import types from "../../../store/types";
 import Header from "../../shared/Header";
 import EventsMenuView from "../../components/events/EventsMenuView";
@@ -158,6 +164,7 @@ import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
 import Spinner from "../../shared/Spinner";
 import redirectToNewTab from "../../helpers/RedirectToNewTab";
+import { setEventCookie, getEventCookie } from "../../helpers/CookieHelper";
 
 export default {
   data() {
@@ -165,7 +172,8 @@ export default {
       showLoginModal: false,
       showRegisterModal: false,
       showMoreText: false,
-      setShowMoreTextFlag: false
+      setShowMoreTextFlag: false,
+      eventShortDetails: {}
     };
   },
   computed: {
@@ -174,7 +182,7 @@ export default {
     }),
     ...mapState({
       eventDetails: state => state.events.eventDetails,
-      isEventDetailsFetched: state => state.events.isEventDetailsFetched
+      eventTree: state => state.navigationTree.eventTree
     }),
     showDetailsHero() {
       return Object.keys(this.eventDetails).length !== 0;
@@ -185,21 +193,34 @@ export default {
         Object.keys(this.eventDetails.sponsors).length !== 0
       );
     },
-    formatSponsors() {
-      const sponsors = [];
+    formatSponsorsTypes() {
       let data = [];
       let nextData = [];
       const sponsorsData = this.eventDetails.sponsors;
       const types = Object.keys(sponsorsData);
-      for (let i = 0; i < types.length; i++) {
-        data = sponsorsData[types[i]];
-        if (i < types.length - 1) nextData = sponsorsData[types[i + 1]];
+      let newTypes = [];
 
-        data.forEach(sponsor => sponsors.push({ ...sponsor, type: types[i] }));
-        if (i < types.length - 1 && data.length > 0 && nextData.length > 0)
-          sponsors.push({});
+      for (let i = 0; i < types.length; i++) {
+        if (i < types.length - 1) nextData = sponsorsData[types[i + 1]];
+        if (i < types.length - 1 && nextData.length > 0)
+          newTypes = [...newTypes, types[i], "divider"];
+        else newTypes = [...newTypes, types[i]];
       }
-      return sponsors;
+      return newTypes;
+    },
+    getTree() {
+      let tree = [];
+      if (Object.keys(this.eventTree).length > 0)
+        tree = [...tree, ...this.eventTree.tree];
+      else tree = [...tree, ...this.$router.history.current.params.data.tree];
+      tree = [
+        ...tree,
+        {
+          name: this.eventDetails.initial_title,
+          path: this.$router.history.current.path
+        }
+      ];
+      return tree;
     }
   },
   watch: {
@@ -235,12 +256,12 @@ export default {
       }
       this.$refs.descriptionText.style.height = height;
     },
-    getCssClassForSponsor(sponsor) {
-      if (sponsor.type === "main")
+    getCssClassForSponsor(sponsorType) {
+      if (sponsorType === "main")
         return "event-details-wrapper__content__sponsor--main";
-      if (sponsor.type === "sub")
+      if (sponsorType === "sub")
         return "event-details-wrapper__content__sponsor--sub";
-      if (sponsor.type === "extra_sub")
+      if (sponsorType === "extra_sub")
         return "event-details-wrapper__content__sponsor--extra_sub";
     }
   },
@@ -252,7 +273,26 @@ export default {
     EventsMenuView
   },
   mounted() {
-    this.fetchEventDetails(this.$router.history.current.params.eventId);
+    const eventCookieData = getEventCookie();
+    if (this.$router.history.current.params.data !== undefined) {
+      this.eventShortDetails = this.$router.history.current.params.data;
+      store.commit(
+        types.navigationTree.mutations.SET_EVENT_TREE,
+        this.eventShortDetails
+      );
+      setEventCookie(this.eventShortDetails);
+    } else if (Object.keys(this.eventTree).length > 0) {
+      this.eventShortDetails = this.eventTree;
+    } else if (eventCookieData !== undefined) {
+      this.eventShortDetails = eventCookieData;
+      store.commit(
+        types.navigationTree.mutations.SET_EVENT_TREE,
+        this.eventShortDetails
+      );
+    } else if (this.$router.history.current.params.data === undefined)
+      this.$router.push("/");
+
+    this.fetchEventDetails(this.eventShortDetails.id);
   },
   updated() {
     redirectToNewTab("description-container");

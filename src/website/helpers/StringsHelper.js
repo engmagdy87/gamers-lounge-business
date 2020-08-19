@@ -8,7 +8,7 @@ const getFirstLettersOfString = (text) => {
     return letters.toUpperCase()
 }
 
-const TruncateText = (text) => {
+const truncateText = (text) => {
     const numberOfCharacters = 25
     if (!text) return
     if (text.length <= numberOfCharacters) return text
@@ -20,4 +20,8 @@ const changeTextDirection = (text) => {
     return arabicPattern.test(text)
 }
 
-export { getFirstLettersOfString, TruncateText, changeTextDirection }
+const reformatStringToBeInURL = (text) => {
+    return text.split(" ").filter(str => str !== "").join("-").toLowerCase()
+}
+
+export { getFirstLettersOfString, truncateText, changeTextDirection, reformatStringToBeInURL }
