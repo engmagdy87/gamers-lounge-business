@@ -90,6 +90,26 @@
         >
         </SponsorsCategoryTabelRow>
       </tbody>
+      <tbody v-else-if="tableType === 'giveaways'">
+        <GiveawayTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </GiveawayTabelRow>
+      </tbody>
+      <tbody v-else-if="tableType === 'giveaways-register-question'">
+        <GiveawayRegisterQuestionTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </GiveawayRegisterQuestionTabelRow>
+      </tbody>
     </table>
   </div>
 </template>
@@ -101,6 +121,8 @@ import GamesTabelRow from "./GamesTabelRow";
 import PlatformsTabelRow from "./PlatformsTabelRow";
 import RegionsTabelRow from "./RegionsTabelRow";
 import TournamentTabelRow from "./TournamentTabelRow";
+import GiveawayTabelRow from "./GiveawayTabelRow";
+import GiveawayRegisterQuestionTabelRow from "./GiveawayRegisterQuestionTabelRow";
 import SponsorsCategoryTabelRow from "./SponsorsCategoryTabelRow";
 
 export default {
@@ -114,7 +136,9 @@ export default {
     PlatformsTabelRow,
     RegionsTabelRow,
     TournamentTabelRow,
-    SponsorsCategoryTabelRow
+    SponsorsCategoryTabelRow,
+    GiveawayTabelRow,
+    GiveawayRegisterQuestionTabelRow
   }
 };
 </script>

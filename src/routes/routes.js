@@ -25,6 +25,11 @@ import EventsList from 'src/dashboard/pages/Events/EventsList.vue'
 import EventsAddEdit from 'src/dashboard/pages/Events/EventsAddEdit.vue'
 import EventDetails from '../website/containers/events/EventDetails.vue'
 
+import Giveaways from 'src/dashboard/pages/Giveaways.vue'
+import GiveawaysList from 'src/dashboard/pages/Giveaways/GiveawaysList.vue'
+import GiveawaysAddEdit from 'src/dashboard/pages/Giveaways/GiveawaysAddEdit.vue'
+// import GiveawayDetails from '../website/containers/giveaways/GiveawayDetails.vue'
+
 import Sponsors from 'src/dashboard/pages/Sponsors.vue'
 import SponsorsList from 'src/dashboard/pages/Sponsors/SponsorsList.vue'
 import SponsorAddEdit from 'src/dashboard/pages/Sponsors/SponsorAddEdit.vue'
@@ -171,6 +176,29 @@ const routes = [
             path: 'edit',
             name: 'Edit Event',
             component: EventsAddEdit
+          }
+        ]
+      },
+      {
+        path: 'giveaways',
+        name: 'Giveaways',
+        redirect: '/dashboard/giveaways/list',
+        component: Giveaways,
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: GiveawaysList
+          },
+          {
+            path: 'create',
+            name: 'Create Giveaway',
+            component: GiveawaysAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit Giveaway',
+            component: GiveawaysAddEdit
           }
         ]
       },

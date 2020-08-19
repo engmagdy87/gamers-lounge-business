@@ -38,6 +38,10 @@
         <i class="nc-icon nc-puzzle-10"></i>
         <p>Tournaments</p>
       </sidebar-link>
+      <sidebar-link to="/dashboard/giveaways">
+        <i class="nc-icon nc-app"></i>
+        <p>Giveaways & Offers</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>

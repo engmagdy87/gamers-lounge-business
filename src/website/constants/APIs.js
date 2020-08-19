@@ -25,6 +25,22 @@ const DELETE_GAME = `${API_URL}/admin/games`
 const EDIT_GAME = `${API_URL}/admin/games`
 const DELETE_IMAGE_IN_GAME = `${API_URL}/admin/games`
 
+// GIVEAWAY (14 APIs)
+const GET_GIVEAWAYS = `${API_URL}/admin/giveaways`
+const CREATE_GIVEAWAY = `${API_URL}/admin/giveaways`
+const GET_GIVEAWAY_TYPES = `${API_URL}/admin/giveaways/constants/types`
+const GET_GIVEAWAY_COVER_TYPES = `${API_URL}/admin/giveaways/constants/cover-types`
+const EDIT_GIVEAWAY = `${API_URL}/admin/giveaways`
+const DELETE_GIVEAWAY = `${API_URL}/admin/giveaways`
+const GET_GIVEAWAY_REGISTERS = `${API_URL}/admin/giveaways`
+const GET_GIVEAWAY_REGISTERS_QUESTIONS_TYPES = `${API_URL}/admin/giveaways/constants/questions-types`
+const DELETE_GIVEAWAY_REGISTER_QUESTION = `${API_URL}/admin/giveaways`
+const DELETE_MEDIA_IN_GIVEAWAY = `${API_URL}/admin/giveaways`
+const GET_WEBSITE_GIVEAWAYS = `${API_URL}/giveaways`
+const GET_WEBSITE_GIVEAWAY_DETAILS = `${API_URL}/giveaways`
+const GET_WEBSITE_GIVEAWAY_TOURNAMENTS = `${API_URL}/giveaways`
+const REGISTER_IN_GIVEAWAY = `${API_URL}/giveaways`
+
 // PLATFORM (5 APIs)
 const GET_PLATFORMS = `${API_URL}/admin/platforms`
 const CREATE_PLATFORM = `${API_URL}/admin/platforms`
@@ -161,5 +177,19 @@ export {
     CREATE_SPONSOR_CATEGORY,
     GET_LIST_SPONSOR_CATEGORIES,
     EDIT_SPONSOR_CATEGORY,
-    DELETE_SPONSOR_CATEGORY
+    DELETE_SPONSOR_CATEGORY,
+    GET_GIVEAWAYS,
+    CREATE_GIVEAWAY,
+    GET_GIVEAWAY_TYPES,
+    GET_GIVEAWAY_COVER_TYPES,
+    EDIT_GIVEAWAY,
+    DELETE_GIVEAWAY,
+    GET_GIVEAWAY_REGISTERS,
+    GET_GIVEAWAY_REGISTERS_QUESTIONS_TYPES,
+    DELETE_GIVEAWAY_REGISTER_QUESTION,
+    DELETE_MEDIA_IN_GIVEAWAY,
+    GET_WEBSITE_GIVEAWAYS,
+    GET_WEBSITE_GIVEAWAY_DETAILS,
+    GET_WEBSITE_GIVEAWAY_TOURNAMENTS,
+    REGISTER_IN_GIVEAWAY
 };

@@ -209,6 +209,33 @@ const events = {
     }
 };
 
+const giveaways = {
+    mutations: {
+        // SET_GIVEAWAYS_DATA: 'giveaways/mutations/SET_GIVEAWAYS_DATA',
+        SET_GIVEAWAY_TYPE_DATA: 'giveaways/mutations/SET_GIVEAWAY_TYPE_DATA',
+        SET_GIVEAWAY_COVER_TYPES: 'giveaways/mutations/SET_GIVEAWAY_COVER_TYPES',
+        // SET_GIVEAWAY_DETAILS: 'giveaways/mutations/SET_GIVEAWAY_DETAILS',
+        SET_GIVEAWAYS_LIST: 'giveaways/mutations/SET_GIVEAWAYS_LIST',
+        REMOVE_DELETED_GIVEAWAY: 'giveaways/mutations/REMOVE_DELETED_GIVEAWAY',
+        // SET_IS_GIVEAWAYS_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAYS_FETCHED',
+        SET_IS_GIVEAWAYS_LIST_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAYS_LIST_FETCHED',
+        SET_IS_GIVEAWAY_TYPE_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAY_TYPE_FETCHED',
+        SET_IS_GIVEAWAY_COVER_TYPES_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAY_COVER_TYPES_FETCHED',
+        // SET_IS_GIVEAWAY_DETAILS_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAY_DETAILS_FETCHED',
+    },
+    actions: {
+        // FETCH_GIVEAWAYS: 'giveaways/actions/FETCH_GIVEAWAYS',
+        FETCH_GIVEAWAY_TYPE: 'giveaways/actions/FETCH_GIVEAWAY_TYPE',
+        FETCH_GIVEAWAY_COVER_TYPES: 'giveaways/actions/FETCH_GIVEAWAY_COVER_TYPES',
+        // FETCH_GIVEAWAY_DETAILS: 'giveaways/actions/FETCH_GIVEAWAY_DETAILS',
+        FETCH_GIVEAWAY_LIST: 'giveaways/actions/FETCH_GIVEAWAY_LIST',
+        DELETE_GIVEAWAY: 'giveaways/actions/DELETE_GIVEAWAY',
+        DELETE_GIVEAWAY_IMAGE: 'giveaways/actions/DELETE_GIVEAWAY_IMAGE',
+        DELETE_GIVEAWAY_VIDEO: 'giveaways/actions/DELETE_GIVEAWAY_VIDEO',
+        // EDIT_GIVEAWAY: 'giveaways/actions/EDIT_GIVEAWAY',
+    }
+};
+
 const sponsorsCategories = {
     mutations: {
         SET_SPONSORS_CATEGORIES_DATA: 'sponsorsCategories/mutations/SET_SPONSORS_CATEGORIES_DATA',
@@ -231,6 +258,7 @@ export default {
     story,
     summits,
     events,
+    giveaways,
     sponsors,
     games,
     platforms,

@@ -267,6 +267,73 @@ async function removeEventVideo(id, videoId) {
     return response;
 }
 
+//Giveaways
+async function createGiveaway(payload) {
+    const response = await postMultipart(
+        payload,
+        APIs.CREATE_GIVEAWAY
+    );
+
+    return response.data;
+}
+
+async function getDashboardGiveaways() {
+    const response = await getDashboardData(
+        APIs.GET_GIVEAWAYS
+    );
+
+    return response.data;
+}
+
+async function removeGiveaway(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_GIVEAWAY}/${id}`
+    );
+
+    return response;
+}
+
+async function editGiveaway(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_GIVEAWAY}/${id}`
+    );
+
+    return response;
+}
+
+async function removeGiveawayImage(id, imageId) {
+    const response = await deleteData(
+        `${APIs.DELETE_MEDIA_IN_GIVEAWAY}/${id}/images/${imageId}`
+    );
+
+    return response;
+}
+
+async function removeGiveawayVideo(id, videoId) {
+    const response = await deleteData(
+        `${APIs.DELETE_MEDIA_IN_GIVEAWAY}/${id}/videos/${videoId}`
+    );
+
+    return response;
+}
+
+async function getGiveawaysTypes() {
+    const response = await getDashboardData(
+        APIs.GET_GIVEAWAY_TYPES
+    );
+
+    return response.data;
+}
+
+async function getGiveawaysCoverTypes() {
+    const response = await getDashboardData(
+        APIs.GET_GIVEAWAY_COVER_TYPES
+    );
+
+    return response.data;
+}
+
 //Sponsors
 async function getSponsorsForDashboard() {
     const response = await getDashboardData(
@@ -691,7 +758,15 @@ export {
     getSponsorCategoriesList,
     editSponsorCategories,
     removeSponsorCategory,
-    createSponsorCategory
+    createSponsorCategory,
+    createGiveaway,
+    editGiveaway,
+    getDashboardGiveaways,
+    removeGiveaway,
+    removeGiveawayImage,
+    removeGiveawayVideo,
+    getGiveawaysTypes,
+    getGiveawaysCoverTypes
 };
 
 async function post(data, url) {
