@@ -73,6 +73,7 @@ import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
 import Spinner from "../../shared/Spinner";
 import redirectToNewTab from "../../helpers/RedirectToNewTab";
+import { setGameCookie, getGameCookie } from "../../helpers/CookieHelper";
 
 export default {
   data() {
@@ -127,14 +128,22 @@ export default {
     MenuView
   },
   mounted() {
+    const gameCookieData = getGameCookie();
     if (this.$router.history.current.params.data !== undefined) {
       this.gameShortDetails = this.$router.history.current.params.data;
       store.commit(
         types.navigationTree.mutations.SET_GAME_TREE,
         this.gameShortDetails
       );
+      setGameCookie(this.gameShortDetails);
     } else if (Object.keys(this.gameTree).length > 0) {
       this.gameShortDetails = this.gameTree;
+    } else if (gameCookieData !== undefined) {
+      this.gameShortDetails = gameCookieData;
+      store.commit(
+        types.navigationTree.mutations.SET_GAME_TREE,
+        this.gameShortDetails
+      );
     } else if (this.$router.history.current.params.data === undefined)
       this.$router.push({ name: "home", hash: "#games" });
 

@@ -67,13 +67,12 @@
     }
   }
   &__large-footer {
-    width: 50%;
+    width: 70%;
     height: fit-content;
     text-align: center;
-    // padding-top: 20px;
     transition: all 0.5s ease;
     div:nth-child(1) {
-      margin: 20px 0;
+      margin: 22px 0;
       @include is-mobile {
         margin: 5px 0;
       }
