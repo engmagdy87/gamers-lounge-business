@@ -59,7 +59,12 @@
       <div class="row">
         <div class="col-12 col-md-6">
           <div class="event-details-wrapper__content__breadcrumb">
-            <a href="/events">Events</a>
+            <a
+              v-for="(route, i) in eventShortDetails.tree"
+              :href="route.path"
+              :key="i"
+              >{{ route.name }}</a
+            >
             <span> > {{ eventDetails.initial_title }}</span>
           </div>
         </div>
@@ -135,7 +140,11 @@
           </div>
         </div>
       </div>
-      <EventsMenuView route="event-details" :data="eventDetails.tournaments" />
+      <EventsMenuView
+        route="event-details"
+        :data="eventDetails.tournaments"
+        :tree="getTree"
+      />
     </div>
     <LoginModal
       :showFlag="showLoginModal"
@@ -151,6 +160,7 @@
 
 <script>
 import { mapGetters, mapActions, mapState } from "vuex";
+import store from "../../../store/index";
 import types from "../../../store/types";
 import Header from "../../shared/Header";
 import EventsMenuView from "../../components/events/EventsMenuView";
@@ -165,7 +175,8 @@ export default {
       showLoginModal: false,
       showRegisterModal: false,
       showMoreText: false,
-      setShowMoreTextFlag: false
+      setShowMoreTextFlag: false,
+      eventShortDetails: {}
     };
   },
   computed: {
@@ -174,7 +185,7 @@ export default {
     }),
     ...mapState({
       eventDetails: state => state.events.eventDetails,
-      isEventDetailsFetched: state => state.events.isEventDetailsFetched
+      eventTree: state => state.navigationTree.eventTree
     }),
     showDetailsHero() {
       return Object.keys(this.eventDetails).length !== 0;
@@ -200,6 +211,20 @@ export default {
           sponsors.push({});
       }
       return sponsors;
+    },
+    getTree() {
+      let tree = [];
+      if (Object.keys(this.eventTree).length > 0)
+        tree = [...tree, ...this.eventTree.tree];
+      else tree = [...tree, ...this.$router.history.current.params.data.tree];
+      tree = [
+        ...tree,
+        {
+          name: this.eventDetails.initial_title,
+          path: this.$router.history.current.path
+        }
+      ];
+      return tree;
     }
   },
   watch: {
@@ -252,7 +277,18 @@ export default {
     EventsMenuView
   },
   mounted() {
-    this.fetchEventDetails(this.$router.history.current.params.eventId);
+    if (this.$router.history.current.params.data !== undefined) {
+      this.eventShortDetails = this.$router.history.current.params.data;
+      store.commit(
+        types.navigationTree.mutations.SET_EVENT_TREE,
+        this.eventShortDetails
+      );
+    } else if (Object.keys(this.eventTree).length > 0) {
+      this.eventShortDetails = this.eventTree;
+    } else if (this.$router.history.current.params.data === undefined)
+      this.$router.push("/");
+
+    this.fetchEventDetails(this.eventShortDetails.id);
   },
   updated() {
     redirectToNewTab("description-container");

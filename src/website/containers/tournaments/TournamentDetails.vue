@@ -64,10 +64,15 @@
         <div class="row mb-4 mb-md-0">
           <div class="col-12 col-lg-6 d-flex align-items-center">
             <div class="tournament-details-wrapper__content__breadcrumb">
-              <a style="cursor:pointer;" @click="backTo">{{
-                getBreadcrumbText
-              }}</a>
-              <span> > {{ tournamentDetails.initial_title }}</span>
+              <a
+                v-for="(route, i) in tournamentShortDetails.tree"
+                :href="
+                  route.path === '/' ? `${route.path}#tournaments` : route.path
+                "
+                :key="i"
+                >{{ route.name }} >
+              </a>
+              <span> {{ tournamentDetails.initial_title }}</span>
             </div>
           </div>
           <div
@@ -132,6 +137,7 @@
 
 <script>
 import { mapGetters, mapActions, mapState } from "vuex";
+import store from "../../../store/index";
 import types from "../../../store/types";
 import Header from "../../shared/Header";
 import LoginModal from "../../components/home/LoginModal";
@@ -145,7 +151,8 @@ export default {
     return {
       showLoginModal: false,
       showRegisterModal: false,
-      registerLink: ""
+      registerLink: "",
+      tournamentShortDetails: {}
     };
   },
   computed: {
@@ -153,7 +160,8 @@ export default {
       isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
     }),
     ...mapState({
-      tournamentDetails: state => state.tournaments.tournamentDetailsData
+      tournamentDetails: state => state.tournaments.tournamentDetailsData,
+      tournamentTree: state => state.navigationTree.tournamentTree
     }),
     showDetailsHero() {
       return Object.keys(this.tournamentDetails).length !== 0;
@@ -179,11 +187,6 @@ export default {
           sponsors.push({});
       }
       return sponsors;
-    },
-    getBreadcrumbText() {
-      const { previousPath } = this.$router.history.current.params;
-      if (previousPath.includes("event")) return "Event";
-      else return "Tournaments";
     }
   },
   watch: {
@@ -208,7 +211,7 @@ export default {
     },
     getLink: async function() {
       const result = await this.fetchTournamentRegisterLink(
-        this.$router.history.current.params.tournamentId
+        this.tournamentShortDetails.id
       );
       this.registerLink = result;
     },
@@ -258,9 +261,17 @@ export default {
     Tabs
   },
   mounted() {
-    this.fetchTournamentDetails(
-      this.$router.history.current.params.tournamentId
-    );
+    if (this.$router.history.current.params.data !== undefined) {
+      this.tournamentShortDetails = this.$router.history.current.params.data;
+      store.commit(
+        types.navigationTree.mutations.SET_TOURNAMENT_TREE,
+        this.tournamentShortDetails
+      );
+    } else if (Object.keys(this.tournamentTree).length > 0) {
+      this.tournamentShortDetails = this.tournamentTree;
+    } else if (this.$router.history.current.params.data === undefined)
+      this.$router.push("/");
+    this.fetchTournamentDetails(this.tournamentShortDetails.id);
     this.getLink();
   }
 };

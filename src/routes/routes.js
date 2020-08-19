@@ -79,17 +79,17 @@ const routes = [
     component: EventsContainer,
   },
   {
-    path: '/events/event/:eventId',
+    path: '/events/event/:eventName',
     name: 'event',
     component: EventDetails,
   },
   {
-    path: '/games/game/:gameId',
+    path: '/games/game/:gameName',
     name: 'game',
     component: GameDetails,
   },
   {
-    path: '/tournaments/tournament/:tournamentId',
+    path: '/tournaments/tournament/:tournamentName',
     name: 'tournament',
     component: TournamentDetails,
   },

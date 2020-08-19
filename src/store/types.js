@@ -225,6 +225,15 @@ const sponsorsCategories = {
     }
 };
 
+
+const navigationTree = {
+    mutations: {
+        SET_GAME_TREE: 'navigationTree/mutations/SET_GAME_TREE',
+        SET_EVENT_TREE: 'navigationTree/mutations/SET_EVENT_TREE',
+        SET_TOURNAMENT_TREE: 'navigationTree/mutations/SET_TOURNAMENT_TREE',
+    },
+};
+
 export default {
     user,
     home,
@@ -237,5 +246,6 @@ export default {
     regions,
     tournaments,
     contact,
-    sponsorsCategories
+    sponsorsCategories,
+    navigationTree
 };

@@ -27,18 +27,28 @@
 </template>
 
 <script>
-import { TruncateText } from "../helpers/StringsHelper";
+import {
+  truncateText,
+  reformatStringToBeInURL
+} from "../helpers/StringsHelper";
 
 export default {
   props: ["card", "isGamesActive"],
   methods: {
     redirectTo() {
       this.$router.push({
-        path: `/games/game/${this.card.id}`
+        name: "game",
+        params: {
+          gameName: reformatStringToBeInURL(this.card.title),
+          data: {
+            id: this.card.id,
+            title: this.card.title
+          }
+        }
       });
     },
     trimText(text) {
-      return TruncateText(text);
+      return truncateText(text);
     }
   }
 };

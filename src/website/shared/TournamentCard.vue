@@ -31,22 +31,29 @@
 </template>
 
 <script>
-import { TruncateText } from "../helpers/StringsHelper";
+import {
+  truncateText,
+  reformatStringToBeInURL
+} from "../helpers/StringsHelper";
 
 export default {
-  props: ["card"],
+  props: ["card", "tree"],
   methods: {
     redirectTo() {
       this.$router.push({
         name: "tournament",
         params: {
-          tournamentId: this.card.id,
-          previousPath: this.$router.history.current.path
+          tournamentName: reformatStringToBeInURL(this.card.initial_title),
+          data: {
+            id: this.card.id,
+            title: this.card.initial_title,
+            tree: this.tree
+          }
         }
       });
     },
     trimText(text) {
-      return TruncateText(text);
+      return truncateText(text);
     }
   }
 };

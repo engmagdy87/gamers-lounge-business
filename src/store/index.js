@@ -13,6 +13,7 @@ import regionsModule from './modules/regions';
 import tournamentsModule from './modules/tournaments';
 import contactModule from './modules/contact';
 import sponsorsCategoryModule from './modules/sponsorsCategory';
+import navigationTreeModule from './modules/navigationTree';
 
 Vue.use(Vuex);
 
@@ -30,5 +31,6 @@ export default new Vuex.Store({
         tournaments: tournamentsModule,
         contact: contactModule,
         sponsorsCategory: sponsorsCategoryModule,
+        navigationTree: navigationTreeModule,
     }
 });

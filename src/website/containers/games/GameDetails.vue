@@ -65,6 +65,7 @@
 
 <script>
 import { mapGetters, mapActions, mapState } from "vuex";
+import store from "../../../store/index";
 import types from "../../../store/types";
 import Header from "../../shared/Header";
 import MenuView from "../../components/home/MenuView";
@@ -77,7 +78,8 @@ export default {
   data() {
     return {
       showLoginModal: false,
-      showRegisterModal: false
+      showRegisterModal: false,
+      gameShortDetails: {}
     };
   },
   computed: {
@@ -85,7 +87,8 @@ export default {
       isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
     }),
     ...mapState({
-      gameDetails: state => state.games.gameDetailsData
+      gameDetails: state => state.games.gameDetailsData,
+      gameTree: state => state.navigationTree.gameTree
     }),
     showDetailsHero() {
       return Object.keys(this.gameDetails).length !== 0;
@@ -124,7 +127,18 @@ export default {
     MenuView
   },
   mounted() {
-    this.fetchGameDetails(this.$router.history.current.params.gameId);
+    if (this.$router.history.current.params.data !== undefined) {
+      this.gameShortDetails = this.$router.history.current.params.data;
+      store.commit(
+        types.navigationTree.mutations.SET_GAME_TREE,
+        this.gameShortDetails
+      );
+    } else if (Object.keys(this.gameTree).length > 0) {
+      this.gameShortDetails = this.gameTree;
+    } else if (this.$router.history.current.params.data === undefined)
+      this.$router.push({ name: "home", hash: "#games" });
+
+    this.fetchGameDetails(this.gameShortDetails.id);
   },
   updated() {
     redirectToNewTab("description-container");
