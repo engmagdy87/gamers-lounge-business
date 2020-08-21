@@ -20,8 +20,8 @@
     </div>
     <div class="game-details-wrapper__content" v-if="showDetailsHero">
       <div class="game-details-wrapper__content__breadcrumb">
-        <a style="cursor:pointer;" @click="backTo">Games</a>
-        <span> > {{ gameDetails.title }}</span>
+        <a style="cursor:pointer;" @click="backTo">Games > </a>
+        <span>{{ gameDetails.title }}</span>
       </div>
       <div class="container">
         <div class="row">
@@ -48,7 +48,11 @@
             Tournaments
           </div>
         </div>
-        <MenuView :data="gameDetails.tournaments" :isGamesActive="false" />
+        <MenuView
+          :data="gameDetails.tournaments"
+          :isGamesActive="false"
+          :tree="newTree"
+        />
       </div>
     </div>
     <LoginModal
@@ -73,6 +77,7 @@ import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
 import Spinner from "../../shared/Spinner";
 import redirectToNewTab from "../../helpers/RedirectToNewTab";
+import reformatStringToBeInURL from "../../helpers/StringsHelper";
 import { setGameCookie, getGameCookie } from "../../helpers/CookieHelper";
 
 export default {
@@ -93,6 +98,14 @@ export default {
     }),
     showDetailsHero() {
       return Object.keys(this.gameDetails).length !== 0;
+    },
+    newTree() {
+      const tree = [].concat(this.gameShortDetails.tree);
+      tree.push({
+        name: this.gameShortDetails.title,
+        path: this.$router.history.current.path
+      });
+      return tree;
     }
   },
   watch: {

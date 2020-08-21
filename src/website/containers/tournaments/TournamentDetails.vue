@@ -94,9 +94,7 @@
             <div class="tournament-details-wrapper__content__breadcrumb">
               <a
                 v-for="(route, i) in tournamentShortDetails.tree"
-                :href="
-                  route.path === '/' ? `${route.path}#tournaments` : route.path
-                "
+                :href="route.path"
                 :key="i"
                 >{{ route.name }} >
               </a>

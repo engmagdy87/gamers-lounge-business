@@ -42,7 +42,8 @@ export default {
           gameName: reformatStringToBeInURL(this.card.title),
           data: {
             id: this.card.id,
-            title: this.card.title
+            title: this.card.title,
+            tree: [{ name: "Home", path: "/" }]
           }
         }
       });
