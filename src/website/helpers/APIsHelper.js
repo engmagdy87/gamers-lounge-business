@@ -318,6 +318,14 @@ async function removeGiveawayVideo(id, videoId) {
     return response;
 }
 
+async function removeGiveawayQuestion(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_GIVEAWAY_REGISTER_QUESTION}/${id}`
+    );
+
+    return response;
+}
+
 async function getGiveawaysTypes() {
     const response = await getDashboardData(
         APIs.GET_GIVEAWAY_TYPES
@@ -329,6 +337,14 @@ async function getGiveawaysTypes() {
 async function getGiveawaysCoverTypes() {
     const response = await getDashboardData(
         APIs.GET_GIVEAWAY_COVER_TYPES
+    );
+
+    return response.data;
+}
+
+async function getGiveawaysQuestionTypes() {
+    const response = await getDashboardData(
+        APIs.GET_GIVEAWAY_REGISTERS_QUESTIONS_TYPES
     );
 
     return response.data;
@@ -765,8 +781,10 @@ export {
     removeGiveaway,
     removeGiveawayImage,
     removeGiveawayVideo,
+    removeGiveawayQuestion,
     getGiveawaysTypes,
-    getGiveawaysCoverTypes
+    getGiveawaysCoverTypes,
+    getGiveawaysQuestionTypes
 };
 
 async function post(data, url) {

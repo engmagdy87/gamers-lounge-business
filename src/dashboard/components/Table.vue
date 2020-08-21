@@ -107,6 +107,9 @@
           :rowData="item"
           :id="index + 1"
           :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+          :setShowGiveawayRegisterQuestionModalFlag="
+            setShowGiveawayRegisterQuestionModalFlag
+          "
         >
         </GiveawayRegisterQuestionTabelRow>
       </tbody>
@@ -127,7 +130,13 @@ import SponsorsCategoryTabelRow from "./SponsorsCategoryTabelRow";
 
 export default {
   name: "l-table",
-  props: ["columns", "data", "tableType", "setShowDeleteDialogFlag"],
+  props: [
+    "columns",
+    "data",
+    "tableType",
+    "setShowDeleteDialogFlag",
+    "setShowGiveawayRegisterQuestionModalFlag"
+  ],
   components: {
     SummitTabelRow,
     EventTabelRow,

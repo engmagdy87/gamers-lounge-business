@@ -1,6 +1,6 @@
 import {
     getDashboardGiveaways, removeGiveaway, removeGiveawayImage, removeGiveawayVideo, getGiveawaysTypes,
-    getGiveawaysCoverTypes
+    getGiveawaysCoverTypes, getGiveawaysQuestionTypes, removeGiveawayQuestion
 } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
@@ -8,12 +8,14 @@ const state = {
     // giveawaysData: [],
     giveawaysTypes: [],
     giveawayCoverTypes: [],
+    giveawayQuestionTypes: [],
     // giveawayDetails: {},
     giveawaysList: [],
     // isGiveawaysFetched: false,
     isGiveawaysListFetched: false,
     isGiveawayTypeFetched: false,
     isGiveawayCoverTypesFetched: false,
+    isGiveawayQuestionTypesFetched: false,
     // isGiveawayDetailsFetched: false,
 };
 
@@ -30,6 +32,9 @@ const mutations = {
     [types.giveaways.mutations.SET_GIVEAWAY_COVER_TYPES]: (currentState, payload) => {
         currentState.giveawayCoverTypes = payload;
     },
+    [types.giveaways.mutations.SET_GIVEAWAY_QUESTION_TYPES]: (currentState, payload) => {
+        currentState.giveawayQuestionTypes = payload;
+    },
     // [types.giveaways.mutations.SET_GIVEAWAY_DETAILS]: (currentState, payload) => {
     //     currentState.giveawayDetails = payload;
     // },
@@ -45,11 +50,14 @@ const mutations = {
     [types.giveaways.mutations.SET_IS_GIVEAWAY_COVER_TYPES_FETCHED]: (currentState, payload) => {
         currentState.isGiveawayCoverTypesFetched = payload;
     },
+    [types.giveaways.mutations.SET_IS_GIVEAWAY_QUESTION_TYPES_FETCHED]: (currentState, payload) => {
+        currentState.isGiveawayQuestionTypesFetched = payload;
+    },
     // [types.giveaways.mutations.SET_IS_GIVEAWAY_DETAILS_FETCHED]: (currentState, payload) => {
     //     currentState.isGiveawayDetailsFetched = payload;
     // },
     [types.giveaways.mutations.REMOVE_DELETED_GIVEAWAY]: (currentState, index) => {
-        currentState.giveawaysData.splice(index, 1);
+        currentState.giveawaysList.splice(index, 1);
     },
 };
 
@@ -77,6 +85,15 @@ const getGiveawayCoverTypesData = async ({ commit }) => {
     const response = await getGiveawaysCoverTypes().then((response) => {
         commit(types.giveaways.mutations.SET_GIVEAWAY_COVER_TYPES, response.data.types);
         commit(types.giveaways.mutations.SET_IS_GIVEAWAY_COVER_TYPES_FETCHED, true);
+        return true
+    }).catch(() => false);
+    return response
+};
+
+const getGiveawayQuestionTypesData = async ({ commit }) => {
+    const response = await getGiveawaysQuestionTypes().then((response) => {
+        commit(types.giveaways.mutations.SET_GIVEAWAY_QUESTION_TYPES, response.data.types);
+        commit(types.giveaways.mutations.SET_IS_GIVEAWAY_QUESTION_TYPES_FETCHED, true);
         return true
     }).catch(() => false);
     return response
@@ -135,15 +152,26 @@ const deleteGiveawayVideo = async ({ commit }, payload) => {
     return response
 };
 
+const deleteGiveawayQuestion = async ({ commit }, questionId) => {
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await removeGiveawayQuestion(questionId).then(() => {
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const actions = {
     // [types.giveaways.actions.FETCH_GIVEAWAYS]: getGiveawaysData,
     [types.giveaways.actions.FETCH_GIVEAWAY_TYPE]: getGiveawayTypes,
     [types.giveaways.actions.FETCH_GIVEAWAY_COVER_TYPES]: getGiveawayCoverTypesData,
     // [types.giveaways.actions.FETCH_GIVEAWAY_DETAILS]: getGiveawayDetails,
     [types.giveaways.actions.FETCH_GIVEAWAY_LIST]: getGiveawaysListForDashboard,
+    [types.giveaways.actions.FETCH_GIVEAWAY_QUESTION_TYPES]: getGiveawayQuestionTypesData,
     [types.giveaways.actions.DELETE_GIVEAWAY]: deleteGiveaway,
     [types.giveaways.actions.DELETE_GIVEAWAY_IMAGE]: deleteGiveawayImage,
     [types.giveaways.actions.DELETE_GIVEAWAY_VIDEO]: deleteGiveawayVideo,
+    [types.giveaways.actions.DELETE_GIVEAWAY_QUESTION]: deleteGiveawayQuestion,
 };
 
 export default {

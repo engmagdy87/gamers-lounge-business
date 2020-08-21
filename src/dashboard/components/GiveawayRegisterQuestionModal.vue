@@ -1,6 +1,6 @@
 <template>
   <div
-    class="login-modal"
+    class="register-question-modal"
     :style="
       showGiveawayRegisterQuestionModalFlag ? 'display:block' : 'display:none'
     "
@@ -8,65 +8,79 @@
   >
     <!-- Modal content -->
     <div
-      class="login-modal-content"
+      class="register-question-modal-content"
       @click="
         e => {
           e.stopPropagation();
         }
       "
     >
-      <div class="login-modal-header">
+      <div class="register-question-modal-header">
         <span class="close" @click="closeModal">&times;</span>
-        <h2>Add Question</h2>
+        <h2>
+          {{ selectedQuestion === null ? "Add Question" : "Edit Question" }}
+        </h2>
       </div>
-      <div class="login-modal-body">
+      <div class="register-question-modal-body">
         <form>
           <div class="form-group">
-            <label for="username">Username</label>
-            <input
+            <label for="username">Title</label>
+            <base-input
               type="text"
-              id="login-username"
-              aria-describedby="usernameHelp"
-              placeholder="Enter Username"
-              v-model="username"
-              :class="[
-                'form-control',
-                errors.username !== undefined ? 'is-invalid' : '',
-                errors.username === undefined ? 'registeration-style' : ''
-              ]"
-              v-on:keyup.enter="onEnter"
+              id="title"
+              aria-describedby="title"
+              placeholder="Enter Title"
+              v-model="title"
             />
-            <p class="error-message" v-if="errors.username !== undefined">
-              {{ errors.username }}
+            <p class="error-message" v-if="errors.title !== undefined">
+              {{ errors.title }}
             </p>
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              id="login-password"
-              placeholder="Enter Password"
-              v-model="password"
-              :class="[
-                'form-control',
-                errors.password !== undefined ? 'is-invalid' : '',
-                errors.password === undefined ? 'registeration-style' : ''
-              ]"
-              v-on:keyup.enter="onEnter"
-            />
-            <p class="error-message" v-if="errors.password !== undefined">
-              {{ errors.password }}
+            <label for="cover-type">Type</label>
+            <select class="form-control" v-model="questionType">
+              <option value="-1">--Please select question type</option>
+              <option
+                v-for="(type, index) in giveawayQuestionTypes"
+                :selected="questionType === type"
+                :key="index"
+                :value="type"
+                >{{ type }}</option
+              >
+            </select>
+            <p class="error-message" v-if="errors.questionType !== undefined">
+              {{ errors.questionType }}
             </p>
           </div>
-          <a href="/forgot">
-            Forgot Password?
-          </a>
+          <div class="form-group">
+            <div>
+              <label class="typo__label">Options</label>
+              <multiselect
+                :disabled="questionType !== 'select'"
+                v-model="options"
+                tag-placeholder="Add this as new option"
+                placeholder="Add an option"
+                label="name"
+                track-by="code"
+                :options="options"
+                :multiple="true"
+                :taggable="true"
+                @tag="addOption"
+              >
+                <template slot="caret"></template>
+              </multiselect>
+              <p class="error-message" v-if="errors.options !== undefined">
+                {{ errors.options }}
+              </p>
+            </div>
+          </div>
+
           <button
             type="button"
             class="btn btn-primary float-right"
-            @click="getUserPersona"
+            @click="createPostedObject"
           >
-            Login
+            {{ selectedQuestion === null ? "Create" : "Save" }}
           </button>
         </form>
       </div>
@@ -78,26 +92,28 @@
 import { mapActions, mapMutations, mapState } from "vuex";
 import store from "../../store/index";
 import types from "../../store/types";
+import Multiselect from "vue-multiselect";
 
 export default {
+  components: {
+    Multiselect
+  },
   data() {
     return {
-      username: "",
-      password: "",
+      title: "",
+      questionType: "-1",
+      options: [],
       errors: {}
     };
   },
   props: [
     "showGiveawayRegisterQuestionModalFlag",
-    "setShowGiveawayRegisterQuestionModalFlag"
+    "setShowGiveawayRegisterQuestionModalFlag",
+    "giveawayQuestionTypes",
+    "setQuestionData",
+    "selectedQuestion"
   ],
   methods: {
-    // ...mapActions({
-    //   fetchUserPersona: types.user.actions.FETCH_USER_PERSONA
-    // }),
-    // ...mapMutations({
-    //   setUserVerificationStatus: types.user.mutations.SET_VERIFIED_USER_STATUS
-    // }),
     notifyVue(message, color) {
       this.$notifications.notify({
         message: `<span>${message}</span>`,
@@ -107,61 +123,78 @@ export default {
       });
     },
 
-    async getUserPersona() {
-      //   const payload = { username: this.username, password: this.password };
-      //   try {
-      //     const data = await this.fetchUserPersona(payload);
-      //     if (!data.user.email_verified_at) {
-      //       this.setUserVerificationStatus({
-      //         status: false,
-      //         email: data.user.email
-      //       });
-      //     } else {
-      //       this.setUserVerificationStatus({
-      //         status: true,
-      //         email: data.user.email
-      //       });
-      //       setUserCookie(data);
-      //       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-      //       this.username = "";
-      //       this.password = "";
-      //       this.errors = {};
-      //       this.notifyVue("Successful Login", "success");
-      //     }
-      //     this.setShowGiveawayRegisterQuestionModalFlag(false);
-      //   } catch (error) {
-      //     if (
-      //       error.data.errors !== undefined &&
-      //       error.data.message === undefined
-      //     ) {
-      //       this.errors = { ...error.data.errors };
-      //       Object.keys(error.data.errors).forEach(err => {
-      //         const errorMessage = error.data.errors[err][0];
-      //         this.notifyVue(errorMessage, "danger");
-      //         this.errors = { ...this.errors, [err]: errorMessage };
-      //       });
-      //     } else {
-      //       this.notifyVue(
-      //         "Username or Password is incorrect, Please try again!",
-      //         "danger"
-      //       );
-      //     }
-      //     store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-      //   }
+    createPostedObject() {
+      if (this.title === "") {
+        this.errors = { ...this.errors, title: "Title is required" };
+      } else delete this.errors.title;
+      if (this.questionType === "-1") {
+        this.errors = {
+          ...this.errors,
+          questionType: "Question Type is required"
+        };
+      } else delete this.errors.questionType;
+
+      if (this.questionType === "select" && this.options.length === 0) {
+        this.errors = {
+          ...this.errors,
+          options: "Options for Select are required"
+        };
+      } else delete this.errors.options;
+
+      if (Object.keys(this.errors).length === 0) {
+        let question = {
+          title: this.title,
+          type: this.questionType
+        };
+        if (this.questionType === "select") {
+          const options = this.options.map(option => option.name);
+          question = { ...question, data: JSON.stringify({ options }) };
+        }
+        this.setQuestionData(
+          question,
+          this.selectedQuestion === null ? "create" : "edit"
+        );
+        this.closeModal();
+      }
     },
     closeModal() {
       this.setShowGiveawayRegisterQuestionModalFlag(false);
-      this.username = "";
-      this.password = "";
+      this.title = "";
+      this.questionType = "-1";
+      this.options = [];
       this.errors = {};
     },
-    onEnter() {
-      this.getUserPersona();
+    addOption(newOption) {
+      const tag = {
+        name: newOption,
+        code: newOption
+      };
+      this.options.push(tag);
+    }
+  },
+  watch: {
+    selectedQuestion() {
+      if (this.selectedQuestion !== null) {
+        this.title = this.selectedQuestion.title;
+        this.questionType = this.selectedQuestion.type;
+        if (this.selectedQuestion.type === "select") {
+          JSON.parse(this.selectedQuestion.data).options.forEach(tag => {
+            this.options.push({
+              name: tag,
+              code: tag
+            });
+          });
+        }
+      } else {
+        this.title = "";
+        this.questionType = "-1";
+        this.options = [];
+      }
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/sass/website/components/home/login-modal.scss";
+@import "../../assets/sass/website/components/giveaways/register-question.scss";
 </style>

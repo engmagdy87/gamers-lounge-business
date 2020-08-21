@@ -823,9 +823,6 @@ export default {
         today.getDate();
       return date;
     },
-    getSonsors() {
-      return this.dashboardSponsorsData.map(sponsor => sponsor.name);
-    },
     showFormWhenDataFetched() {
       if (this.operation !== "Edit Event")
         return (

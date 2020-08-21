@@ -192,12 +192,12 @@ const routes = [
           },
           {
             path: 'create',
-            name: 'Create Giveaway',
+            name: 'Create Giveaway & Offers',
             component: GiveawaysAddEdit
           },
           {
             path: 'edit',
-            name: 'Edit Giveaway',
+            name: 'Edit Giveaway & Offers',
             component: GiveawaysAddEdit
           }
         ]

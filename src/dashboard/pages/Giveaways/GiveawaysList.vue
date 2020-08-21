@@ -3,7 +3,9 @@
     <!-- <div class="container"> -->
     <div class="row">
       <div class="col-sm">
-        <h2 class="heading-margin">Giveaways ({{ giveawaysData.length }})</h2>
+        <h2 class="heading-margin">
+          Giveaways & Offers ({{ giveawaysData.length }})
+        </h2>
       </div>
       <div class="col-sm">
         <router-link to="/dashboard/giveaways/create">
@@ -11,7 +13,7 @@
             type="button"
             class="btn btn-secondary d-block ml-auto heading-margin"
           >
-            Add Giveaway
+            Add Giveaways & Offers
           </button>
         </router-link>
       </div>
@@ -51,7 +53,7 @@ export default {
           "Id",
           "Title",
           "Description",
-          "email_template",
+          "Email Template",
           "Start Date",
           "End Date",
           "Type",

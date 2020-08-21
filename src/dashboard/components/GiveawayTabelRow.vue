@@ -1,21 +1,21 @@
 <template>
   <tr>
     <th scope="row">{{ id }}</th>
-    <td>{{ rowData.initial_title }}</td>
-    <td>{{ rowData.final_title }}</td>
+    <td>{{ rowData.title }}</td>
     <td>
-      <div class="description" v-html="rowData.initial_description"></div>
+      <div class="description" v-html="rowData.description"></div>
     </td>
-    <td v-html="rowData.final_description"></td>
-    <td v-if="rowData.summit">
-      {{ rowData.summit.initial_title }} ({{
-        rowData.summit.active ? "Active" : ""
-      }})
+    <td v-if="rowData.email_template !== null">
+      <div class="description" v-html="rowData.email_template.body"></div>
     </td>
     <td v-else></td>
     <td>{{ rowData.start_date.split(" ")[0] }}</td>
     <td>{{ rowData.end_date.split(" ")[0] }}</td>
     <td>{{ rowData.type }}</td>
+    <td>{{ rowData.cover_type === "-1" ? "" : rowData.cover_type }}</td>
+    <td>{{ rowData.register_limit }}</td>
+    <td>{{ rowData.is_external ? "Yes" : "No" }}</td>
+    <td>{{ rowData.enabled ? "Yes" : "No" }}</td>
     <td>
       <a
         v-if="
@@ -23,6 +23,17 @@
             rowData.images.img_card !== null
         "
         :href="rowData.images.img_card.path"
+        target="_blank"
+        >Img</a
+      >
+    </td>
+    <td>
+      <a
+        v-if="
+          rowData.images.img_cover_over !== undefined &&
+            rowData.images.img_cover_over !== null
+        "
+        :href="rowData.images.img_cover_over.path"
         target="_blank"
         >Img</a
       >
@@ -41,17 +52,7 @@
       >
     </td>
     <td v-else></td>
-    <td>
-      <a
-        v-if="
-          rowData.images.img_cover_over !== undefined &&
-            rowData.images.img_cover_over !== null
-        "
-        :href="rowData.images.img_cover_over.path"
-        target="_blank"
-        >Img</a
-      >
-    </td>
+
     <td>
       <a
         v-if="
@@ -64,24 +65,12 @@
       >
     </td>
     <td
-      v-if="rowData.images !== undefined && rowData.images.img_media !== null"
-    >
-      <a
-        v-for="(img, index) in rowData.images.img_media"
-        :key="index"
-        :href="img.path"
-        target="_blank"
-        >Img{{ index + 1 }}</a
-      >
-    </td>
-    <td v-else></td>
-    <td
       v-if="
-        rowData.videos.vid_initial !== undefined &&
-          rowData.videos.vid_initial !== null
+        rowData.videos.vid_cover_main !== undefined &&
+          rowData.videos.vid_cover_main !== null
       "
     >
-      <a :href="rowData.videos.vid_initial.path" target="_blank">Vid</a>
+      <a :href="rowData.videos.vid_cover_main.path" target="_blank">Vid</a>
     </td>
     <td v-else></td>
     <td class="table-actions">
@@ -101,7 +90,7 @@ export default {
   methods: {
     redirectTo() {
       this.$router.push({
-        name: "Edit Giveaway",
+        name: "Edit Giveaway & Offers",
         params: { data: this.rowData }
       });
     }

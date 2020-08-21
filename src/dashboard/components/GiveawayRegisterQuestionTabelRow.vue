@@ -3,13 +3,24 @@
     <th scope="row">{{ id }}</th>
     <td>{{ rowData.title }}</td>
     <td>{{ rowData.type }}</td>
-    <td>{{ rowData.data }}</td>
+    <td
+      v-if="
+        rowData.data !== 'null' &&
+          rowData.data !== null &&
+          rowData.data !== undefined
+      "
+    >
+      <li v-for="(option, i) in getOptions(rowData.data)" :key="i">
+        {{ option }}
+      </li>
+    </td>
+    <td v-else></td>
     <td class="table-actions">
-      <img src="/website/img/edit.svg" alt="edit" @click="redirectTo" />
+      <!-- <img src="/website/img/edit.svg" alt="edit" @click="showEditModal" /> -->
       <img
         src="/website/img/delete.svg"
         alt="delete"
-        @click="setShowDeleteDialogFlag(true, rowData.id, id - 1)"
+        @click="setShowDeleteDialogFlag(true, rowData.id, id - 1, 'question')"
       />
     </td>
   </tr>
@@ -17,13 +28,22 @@
 
 <script>
 export default {
-  props: ["id", "rowData", "setShowDeleteDialogFlag"],
+  props: [
+    "id",
+    "rowData",
+    "setShowDeleteDialogFlag",
+    "setShowGiveawayRegisterQuestionModalFlag"
+  ],
   methods: {
-    redirectTo() {
-      this.$router.push({
-        name: "Edit Giveaway",
-        params: { data: this.rowData }
-      });
+    showEditModal() {
+      this.setShowGiveawayRegisterQuestionModalFlag(
+        true,
+        this.rowData.id,
+        this.id - 1
+      );
+    },
+    getOptions(options) {
+      return JSON.parse(options).options.map(option => option);
     }
   }
 };

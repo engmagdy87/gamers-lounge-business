@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/dashboard/giveaways">Giveaways</a>
+          <a href="/dashboard/giveaways">Giveaways & Offers</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
           {{ operation }}
@@ -59,15 +59,18 @@
               :actions="editorOptions"
               :style-with-css="false"
               placeholder=""
-              v-model="giveaway.email_template"
+              v-model="giveaway.email_template.body"
               :class="
                 errors.email_template !== undefined
                   ? 'pell-content--is-invalid'
                   : ''
               "
             />
-            <p class="error-message" v-if="errors.email_template !== undefined">
-              {{ errors.email_template }}
+            <p
+              class="error-message"
+              v-if="errors['email_template.body'] !== undefined"
+            >
+              {{ errors["email_template.body"] }}
             </p>
           </div>
         </div>
@@ -127,6 +130,56 @@
             <p class="error-message" v-if="errors.type !== undefined">
               {{ errors.type }}
             </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="eventType">Main Sponsors</label>
+            <multiselect
+              v-model="giveaway.main_sponsors_ids"
+              :options="dashboardSponsorsData"
+              :multiple="true"
+              :close-on-select="false"
+              :clear-on-select="false"
+              placeholder="Choose Main Sponsors"
+              label="name"
+              track-by="name"
+            >
+            </multiselect>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="eventType">Sub Sponsors</label>
+            <multiselect
+              v-model="giveaway.sub_sponsors_ids"
+              :options="dashboardSponsorsData"
+              :multiple="true"
+              :close-on-select="false"
+              :clear-on-select="false"
+              placeholder="Choose Sub Sponsors"
+              label="name"
+              track-by="name"
+            >
+            </multiselect>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="eventType">Extra Sub Sponsors</label>
+            <multiselect
+              v-model="giveaway.extra_sub_sponsors_ids"
+              :options="dashboardSponsorsData"
+              :multiple="true"
+              :close-on-select="false"
+              :clear-on-select="false"
+              placeholder="Choose Extra Sub Sponsors"
+              label="name"
+              track-by="name"
+            >
+            </multiselect>
           </div>
         </div>
       </div>
@@ -231,7 +284,7 @@
         <div class="col-12">
           <div class="row mb-3">
             <div class="col-12 col-md-6">
-              <label class="mr-5 ml-2" for="media-images"
+              <label class="mr-5 ml-2" for="regiser-question"
                 >Register Questions</label
               >
             </div>
@@ -246,13 +299,16 @@
             </div>
           </div>
         </div>
-        <div class="col-12">
+        <div class="col-12" v-if="giveaway.register_questions.length > 0">
           <LTable
             class="table-hover table-striped"
             :columns="table.columns"
             :data="giveaway.register_questions"
             tableType="giveaways-register-question"
             :setShowDeleteDialogFlag="setRegisterQuestionFlag"
+            :setShowGiveawayRegisterQuestionModalFlag="
+              setShowGiveawayRegisterQuestionModalFlag
+            "
           >
           </LTable>
         </div>
@@ -274,7 +330,7 @@
             <ImagePreview
               v-if="
                 editData !== undefined &&
-                  operation === 'Edit Giveaway' &&
+                  operation === 'Edit Giveaway & Offers' &&
                   editData.images !== null &&
                   editData.images.img_cover_over !== null
               "
@@ -300,7 +356,7 @@
             <ImagePreview
               v-if="
                 editData !== undefined &&
-                  operation === 'Edit Giveaway' &&
+                  operation === 'Edit Giveaway & Offers' &&
                   editData.images !== null &&
                   editData.images.img_logo !== null
               "
@@ -328,7 +384,7 @@
             <div
               v-if="
                 editData !== undefined &&
-                  (operation === 'Edit Giveaway' ||
+                  (operation === 'Edit Giveaway & Offers' ||
                     (editData.images !== null &&
                       editData.images.img_cover_main !== null))
               "
@@ -361,7 +417,7 @@
             <ImagePreview
               v-if="
                 editData !== undefined &&
-                  operation === 'Edit Giveaway' &&
+                  operation === 'Edit Giveaway & Offers' &&
                   editData.images !== null &&
                   editData.images.img_card !== null
               "
@@ -379,7 +435,7 @@
           >
           <input
             type="file"
-            id="logo"
+            id="cover-video"
             accept="video/*"
             @change="getVideo"
             ref="vid_cover_main"
@@ -388,7 +444,7 @@
           <VideoPreview
             v-if="
               editData !== undefined &&
-                operation === 'Edit Giveaway' &&
+                operation === 'Edit Giveaway & Offers' &&
                 editData.videos !== null &&
                 editData.videos.vid_cover_main !== null
             "
@@ -411,11 +467,9 @@
       <div class="clearfix"></div>
       <DeleteDialog
         :showFlag="showFlag"
-        :setShowDeleteDialogFlag="
-          contentType === 'video' ? setVideoDataFlag : setImageDataFlag
-        "
-        :item="contentType === 'video' ? 'Video' : 'Image'"
-        :deleteAction="contentType === 'video' ? removeVideo : removeImage"
+        :setShowDeleteDialogFlag="getRemoveSetFlagFunction()"
+        :item="getRemoveModalTitleFunction()"
+        :deleteAction="getRemoveFunction()"
       />
       <GiveawayRegisterQuestionModal
         :showGiveawayRegisterQuestionModalFlag="
@@ -424,6 +478,9 @@
         :setShowGiveawayRegisterQuestionModalFlag="
           setShowGiveawayRegisterQuestionModalFlag
         "
+        :giveawayQuestionTypes="giveawayQuestionTypes"
+        :setQuestionData="setQuestionData"
+        :selectedQuestion="selectedQuestion"
       />
     </form>
   </div>
@@ -462,7 +519,9 @@ export default {
       giveaway: {
         title: "",
         description: "",
-        email_template: "",
+        email_template: {
+          body: ""
+        },
         start_date: "",
         end_date: "",
         type: "-1",
@@ -477,29 +536,40 @@ export default {
         img_cover_over: "",
         img_logo: "",
         img_card: "",
-        vid_cover_main: ""
+        vid_cover_main: "",
+        main_sponsors_ids: [],
+        sub_sponsors_ids: [],
+        extra_sub_sponsors_ids: []
       },
       editorOptions,
       errors: {},
       table: {
-        columns: ["Id", "Title", "Type", "Data", "Actions"]
-      }
+        columns: ["Id", "Title", "Type", "Options", "Actions"]
+      },
+      selectedQuestion: null
     };
   },
   methods: {
     ...mapActions({
       deleteImage: types.giveaways.actions.DELETE_GIVEAWAY_IMAGE,
       deleteVideo: types.giveaways.actions.DELETE_GIVEAWAY_VIDEO,
+      deleteQuestion: types.giveaways.actions.DELETE_GIVEAWAY_QUESTION,
       fetchEventsList: types.events.actions.FETCH_EVENT_LIST,
       fetchGiveawayType: types.giveaways.actions.FETCH_GIVEAWAY_TYPE,
-      fetchCoverTypes: types.giveaways.actions.FETCH_GIVEAWAY_COVER_TYPES
+      fetchCoverTypes: types.giveaways.actions.FETCH_GIVEAWAY_COVER_TYPES,
+      fetchQuestionTypes: types.giveaways.actions.FETCH_GIVEAWAY_QUESTION_TYPES,
+      fetchSponsorsData: types.sponsors.actions.FETCH_SPONSORS_FOR_DASHBOARD
     }),
     clickAction() {
-      this.operation === "Edit Giveaway"
+      this.operation === "Edit Giveaway & Offers"
         ? this.saveData(editGiveaway, "Giveaway Updated Successfully")
         : this.saveData(createGiveaway, "Giveaway Created Successfully");
     },
-    setShowGiveawayRegisterQuestionModalFlag(flag) {
+    setShowGiveawayRegisterQuestionModalFlag(flag, questionId, openedFor) {
+      this.questionId = questionId;
+      this.openedFor = openedFor;
+      if (openedFor === undefined) this.selectedQuestion = null;
+      else this.selectedQuestion = this.giveaway.register_questions[openedFor];
       this.showGiveawayRegisterQuestionModalFlag = flag;
     },
     setImageDataFlag(flag, imageId, openedFor, imageIndex, contentType) {
@@ -519,9 +589,40 @@ export default {
       this.showFlag = flag;
       this.questionId = questionId;
       this.openedFor = openedFor;
+      this.contentType = contentType;
+    },
+    setQuestionData: async function(question, operation) {
+      if (operation === "create")
+        this.giveaway.register_questions.push(question);
+      else {
+        store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+        await this.deleteQuestion(this.questionId);
+        this.giveaway.register_questions = [
+          ...this.giveaway.register_questions.slice(0, this.openedFor),
+          question,
+          ...this.giveaway.register_questions.slice(this.openedFor + 1)
+        ];
+        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+      }
     },
     getVideo() {
       this.giveaway.vid_cover_main = this.$refs.vid_cover_main.files[0];
+    },
+    getRemoveSetFlagFunction() {
+      if (this.contentType === "video") return this.setVideoDataFlag;
+      else if (this.contentType === "question")
+        return this.setRegisterQuestionFlag;
+      else return this.setImageDataFlag;
+    },
+    getRemoveFunction() {
+      if (this.contentType === "video") return this.removeVideo;
+      else if (this.contentType === "question") return this.removeQuestion;
+      else return this.removeImage;
+    },
+    getRemoveModalTitleFunction() {
+      if (this.contentType === "video") return "Video";
+      else if (this.contentType === "question") return "Question";
+      else return "Image";
     },
     setFile(e, key) {
       const files = e.target.files;
@@ -543,13 +644,17 @@ export default {
 
         formData.append("title", this.giveaway.title);
         formData.append("description", this.giveaway.description);
-        formData.append("email_template", this.giveaway.email_template);
+        formData.append(
+          "email_template",
+          JSON.stringify(this.giveaway.email_template)
+        );
         formData.append("start_date", this.giveaway.start_date);
         formData.append("end_date", this.giveaway.end_date);
         formData.append("type", this.giveaway.type);
         formData.append("cover_type", this.giveaway.cover_type);
         formData.append("register_limit", this.giveaway.register_limit);
         formData.append("has_cover_over", this.giveaway.has_cover_over ? 1 : 0);
+
         formData.append("is_external", this.giveaway.is_external ? 1 : 0);
         formData.append("external_link", this.giveaway.external_link);
         formData.append("enabled", this.giveaway.enabled ? 1 : 0);
@@ -557,6 +662,18 @@ export default {
         formData.append("img_logo", this.giveaway.img_logo);
         formData.append("img_card", this.giveaway.img_card);
         formData.append("vid_cover_main", this.giveaway.vid_cover_main);
+
+        if (this.giveaway.register_questions.length !== 0)
+          for (var i = 0; i < this.giveaway.register_questions.length; i++) {
+            const question = this.giveaway.register_questions[i];
+            const questionKeys = Object.keys(question);
+            for (let j = 0; j < questionKeys.length; j++) {
+              formData.append(
+                `register_questions[${i}][${questionKeys[j]}]`,
+                question[questionKeys[j]]
+              );
+            }
+          }
 
         if (this.giveaway.events_ids.length === 0)
           formData.append("events_ids[]", []);
@@ -569,10 +686,37 @@ export default {
           formData.append("img_cover_main[]", file);
         }
 
+        if (this.giveaway.main_sponsors_ids.length === 0)
+          formData.append("main_sponsors_ids[]", []);
+        for (var i = 0; i < this.giveaway.main_sponsors_ids.length; i++) {
+          formData.append(
+            "main_sponsors_ids[]",
+            this.giveaway.main_sponsors_ids[i].id
+          );
+        }
+
+        if (this.giveaway.sub_sponsors_ids.length === 0)
+          formData.append("sub_sponsors_ids[]", []);
+        for (var i = 0; i < this.giveaway.sub_sponsors_ids.length; i++) {
+          formData.append(
+            "sub_sponsors_ids[]",
+            this.giveaway.sub_sponsors_ids[i].id
+          );
+        }
+
+        if (this.giveaway.extra_sub_sponsors_ids.length === 0)
+          formData.append("extra_sub_sponsors_ids[]", []);
+        for (var i = 0; i < this.giveaway.extra_sub_sponsors_ids.length; i++) {
+          formData.append(
+            "extra_sub_sponsors_ids[]",
+            this.giveaway.extra_sub_sponsors_ids[i].id
+          );
+        }
+
         try {
           store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
 
-          if (this.operation === "Edit Giveaway")
+          if (this.operation === "Edit Giveaway & Offers")
             await saveFunction(this.editData.id, formData);
           else await saveFunction(formData);
 
@@ -645,6 +789,16 @@ export default {
       this.notifyVue("Video Deleted Successfully", "success");
       this.setVideoDataFlag(false);
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+    },
+    removeQuestion: async function() {
+      if (this.questionId !== undefined)
+        await this.deleteQuestion(this.questionId);
+
+      this.giveaway.register_questions.splice(this.openedFor, 1);
+
+      this.notifyVue("Question Deleted Successfully", "success");
+      this.setRegisterQuestionFlag(false);
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
     }
   },
   computed: {
@@ -655,7 +809,13 @@ export default {
       isGiveawayTypeFetched: state => state.giveaways.isGiveawayTypeFetched,
       giveawayCoverTypes: state => state.giveaways.giveawayCoverTypes,
       isGiveawayCoverTypesFetched: state =>
-        state.giveaways.isGiveawayCoverTypesFetched
+        state.giveaways.isGiveawayCoverTypesFetched,
+      giveawayQuestionTypes: state => state.giveaways.giveawayQuestionTypes,
+      isGiveawayQuestionTypesFetched: state =>
+        state.giveaways.isGiveawayQuestionTypesFetched,
+      dashboardSponsorsData: state => state.sponsors.dashboardSponsorsData,
+      isDashboardSponsorsDataFetched: state =>
+        state.sponsors.isDashboardSponsorsDataFetched
     }),
     minDate() {
       var today = new Date();
@@ -668,11 +828,13 @@ export default {
       return date;
     },
     showFormWhenDataFetched() {
-      if (this.operation !== "Edit Giveaway")
+      if (this.operation !== "Edit Giveaway & Offers")
         return (
           this.isEventsListFetched &&
           this.isGiveawayTypeFetched &&
-          this.isGiveawayCoverTypesFetched
+          this.isGiveawayCoverTypesFetched &&
+          this.isGiveawayQuestionTypesFetched &&
+          this.isDashboardSponsorsDataFetched
         );
       return true;
     }
@@ -680,7 +842,7 @@ export default {
   beforeMount() {
     if (
       !this.$router.history.current.params.data &&
-      this.$route.name === "Edit Giveaway"
+      this.$route.name === "Edit Giveaway & Offers"
     )
       this.$router.push({
         path: "/dashboard/giveaways"
@@ -691,10 +853,17 @@ export default {
     this.fetchEventsList();
     this.fetchGiveawayType();
     this.fetchCoverTypes();
-    if (this.$route.name === "Edit Giveaway") {
+    this.fetchQuestionTypes();
+    this.fetchSponsorsData();
+    if (this.$route.name === "Edit Giveaway & Offers") {
       this.giveaway.title = this.editData.title || "";
       this.giveaway.description = this.editData.description || "";
-      this.giveaway.email_template = this.editData.email_template || "";
+      this.giveaway.email_template =
+        this.editData.email_template === null
+          ? {
+              body: ""
+            }
+          : this.editData.email_template;
       this.giveaway.start_date = this.editData.start_date.split(" ")[0];
       this.giveaway.register_limit = this.editData.register_limit || 0;
       this.giveaway.end_date = this.editData.end_date.split(" ")[0];
@@ -704,6 +873,7 @@ export default {
       this.giveaway.is_external = this.editData.is_external;
       this.giveaway.external_link = this.editData.external_link || "";
       this.giveaway.enabled = this.editData.enabled;
+      this.giveaway.register_questions = this.editData.register_questions;
       this.giveaway.img_cover_over = this.editData.images.img_cover_over;
       this.giveaway.img_logo = this.editData.images.img_logo;
       this.giveaway.img_card = this.editData.images.img_card;
@@ -713,14 +883,18 @@ export default {
         (this.editData.videos.vid_cover_main !== null &&
           this.editData.videos.vid_cover_main.path) ||
         "";
-      this.giveaway.events_ids = this.editData.events_ids;
+      this.giveaway.events_ids = this.editData.events;
+      this.giveaway.main_sponsors_ids = this.editData.main_sponsors;
+      this.giveaway.sub_sponsors_ids = this.editData.sub_sponsors;
+      this.giveaway.extra_sub_sponsors_ids = this.editData.extra_sub_sponsors;
     }
   },
   updated() {
     if (
       this.isEventsListFetched &&
       this.isGiveawayTypeFetched &&
-      this.isGiveawayCoverTypesFetched
+      this.isGiveawayCoverTypesFetched &&
+      this.isGiveawayQuestionTypesFetched
     )
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   },
