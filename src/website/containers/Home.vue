@@ -12,15 +12,15 @@
       :pauseOnHover="false"
       :slidesToShow="1"
       :slidesToScroll="1"
+      :autoplaySpeed="5000"
       autoplay
       infinite
-      :autoplaySpeed="5000"
     >
       <img
         v-for="(event, index) in filteredMainEventsData"
         :key="index"
         :src="event.images.img_cover_home.path"
-        alt=""
+        :alt="event.initial_title"
         class="home-wrapper__slide"
         @click="redirectTo(event.id, event.initial_title)"
       />

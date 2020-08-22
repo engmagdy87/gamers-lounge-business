@@ -388,6 +388,34 @@
           </div>
         </div>
       </div>
+      <div class="row mb-3">
+        <div class="col">
+          <div>
+            <label class="mr-5" for="media-images1"
+              >Choose Cover Giveaways Image</label
+            >
+            <input
+              type="file"
+              id="media-images1"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_cover_home_giveaways')"
+              ref="img_cover_home_giveaways"
+            />
+            <br />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Summit' &&
+                  editData.images !== null &&
+                  editData.images.img_cover_home_giveaways !== null
+              "
+              :image="editData.images.img_cover_home_giveaways"
+              :setShowDeleteDialogFlag="setImageDataFlag"
+              openedFor="img_cover_home_giveaways"
+            />
+          </div>
+        </div>
+      </div>
 
       <div class="row mb-3">
         <div class="col">
@@ -486,6 +514,7 @@ export default {
         img_card: "",
         img_cover_home_events: "",
         img_cover_contact_us: "",
+        img_cover_home_giveaways: "",
         img_cover_main: "",
         vid_cover_main: ""
       },
@@ -570,6 +599,10 @@ export default {
           "img_cover_contact_us",
           this.summit.img_cover_contact_us
         );
+        formData.append(
+          "img_cover_home_giveaways",
+          this.summit.img_cover_home_giveaways
+        );
         formData.append("img_cover_main", this.summit.img_cover_main);
 
         for (var i = 0; i < this.$refs.img_media.files.length; i++) {
@@ -633,6 +666,10 @@ export default {
 
         case "img_cover_contact_us":
           this.editData.images.img_cover_contact_us = null;
+          break;
+
+        case "img_cover_home_giveaways":
+          this.editData.images.img_cover_home_giveaways = null;
           break;
 
         case "img_media":
@@ -722,6 +759,7 @@ export default {
       this.summit.img_card = this.editData.images.img_card;
       this.summit.img_cover_home_events = this.editData.images.img_cover_home_events;
       this.summit.img_cover_contact_us = this.editData.images.img_cover_contact_us;
+      this.summit.img_cover_home_giveaways = this.editData.images.img_cover_home_giveaways;
 
       this.summit.vid_initial = this.editData.videos.vid_initial
         ? this.editData.videos.vid_initial.path || ""

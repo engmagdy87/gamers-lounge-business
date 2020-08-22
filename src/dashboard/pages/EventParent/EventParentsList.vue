@@ -3,15 +3,17 @@
     <!-- <div class="container"> -->
     <div class="row">
       <div class="col-sm">
-        <h2 class="heading-margin">Platforms ({{ platformsData.length }})</h2>
+        <h2 class="heading-margin">
+          Event Parent ({{ dashboardEventParentsData.length }})
+        </h2>
       </div>
       <div class="col-sm">
-        <router-link to="/dashboard/platforms/create">
+        <router-link to="/dashboard/event-parent/create">
           <button
             type="button"
             class="btn btn-secondary d-block ml-auto heading-margin"
           >
-            Add Platform
+            Add Event Parent
           </button>
         </router-link>
       </div>
@@ -20,16 +22,16 @@
     <LTable
       class="table-hover table-striped"
       :columns="table.columns"
-      :data="platformsData"
-      tableType="platforms"
+      :data="dashboardEventParentsData"
+      tableType="event-parent"
       :setShowDeleteDialogFlag="setImageDataFlag"
     >
     </LTable>
     <DeleteDialog
       :showFlag="showFlag"
       :setShowDeleteDialogFlag="setImageDataFlag"
-      item="Platform"
-      :deleteAction="removePlatform"
+      item="Event Parent"
+      :deleteAction="removeEventParent"
     />
   </div>
 </template>
@@ -53,13 +55,15 @@ export default {
   },
   computed: {
     ...mapState({
-      platformsData: state => state.platforms.platformsData
+      dashboardEventParentsData: state =>
+        state.eventParent.dashboardEventParentsData
     })
   },
   methods: {
     ...mapActions({
-      fetchPlatforms: types.platforms.actions.FETCH_PLATFORMS,
-      deletePlatform: types.platforms.actions.DELETE_PLATFORM
+      fetchEventParent:
+        types.eventParent.actions.FETCH_EVENT_PARENTS_FOR_DASHBOARD,
+      deleteEventParent: types.eventParent.actions.DELETE_EVENT_PARENT
     }),
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -74,15 +78,15 @@ export default {
       this.targetId = id;
       this.locationInDataArray = locationInDataArray;
     },
-    async removePlatform() {
+    async removeEventParent() {
       const payload = {
-        platformId: this.targetId,
+        eventParentId: this.targetId,
         locationInDataArray: this.locationInDataArray
       };
       try {
-        await this.deletePlatform(payload);
+        await this.deleteEventParent(payload);
         this.resetFields();
-        this.notifyVue("Event Deleted Successfully", "success");
+        this.notifyVue("Event Parent Deleted Successfully", "success");
       } catch (error) {
         this.notifyVue("Error Happened", "danger");
       }
@@ -98,7 +102,7 @@ export default {
     DeleteDialog
   },
   mounted() {
-    this.fetchPlatforms();
+    this.fetchEventParent();
   }
 };
 </script>

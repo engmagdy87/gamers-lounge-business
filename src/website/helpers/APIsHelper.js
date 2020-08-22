@@ -225,6 +225,20 @@ async function getEvent(eventId) {
 
     return response.data;
 }
+async function getGiveawaysOfEvents(eventId) {
+    const response = await get(
+        `${APIs.GET_WEBSITE_GIVEAWAYS_IN_EVENT}/${eventId}/giveaways`
+    );
+
+    return response.data;
+}
+async function getOffersOfEvents(eventId) {
+    const response = await get(
+        `${APIs.GET_WEBSITE_OFFERS_IN_EVENT}/${eventId}/offers`
+    );
+
+    return response.data;
+}
 
 async function getEventCoverTypes() {
     const response = await getDashboardData(
@@ -277,9 +291,79 @@ async function createGiveaway(payload) {
     return response.data;
 }
 
+async function registerInGiveaway(id, payload) {
+    const response = await postMultipart(
+        payload,
+        `${APIs.REGISTER_IN_GIVEAWAY}/${id}/register`
+    );
+
+    return response.data;
+}
+
 async function getDashboardGiveaways() {
     const response = await getDashboardData(
         APIs.GET_GIVEAWAYS
+    );
+
+    return response.data;
+}
+
+async function getCoverGiveawaysImage() {
+    const response = await get(
+        APIs.GET_COVER_GIVEAWAY_IMAGE
+    );
+
+    return response.data;
+}
+
+async function getGiveawaysRegisters(id) {
+    const response = await getDashboardData(
+        `${APIs.GET_GIVEAWAY_REGISTERS}/${id}/registers`
+    );
+
+    return response.data;
+}
+
+async function getWebsiteGiveaways(data) {
+    const response = await get(
+        APIs.GET_WEBSITE_GIVEAWAYS,
+        {
+            params: {
+                ...data
+            }
+        }
+    );
+
+    return response.data;
+}
+
+async function getGiveaway(giveawayId) {
+    const response = await get(
+        `${APIs.GET_WEBSITE_GIVEAWAY_DETAILS}/${giveawayId}`
+    );
+
+    return response.data;
+}
+
+async function getGiveawayTournaments(giveawayId) {
+    const response = await get(
+        `${APIs.GET_WEBSITE_GIVEAWAY_TOURNAMENTS}/${giveawayId}/tournaments`
+    );
+
+    return response.data;
+}
+
+async function isRegisterAvailableInGiveaway(giveawayId) {
+    const response = await get(
+        `${APIs.IS_REGISTER_AVAILABLE_IN_GIVEAWAY}/${giveawayId}/is-register-available`
+    );
+
+    return response.data;
+}
+
+async function amIRegisteredInGiveawayInGiveaway(giveawayId) {
+    const response = await getDashboardData(
+        `${APIs.AM_I_REGISTERED_IN_GIVEAWAY}/${giveawayId}/am-i-registered`
     );
 
     return response.data;
@@ -702,6 +786,49 @@ async function createSponsorCategory(payload) {
     return response.data;
 }
 
+// Event Parent
+async function getEventParentForDashboard() {
+    const response = await getDashboardData(
+        APIs.GET_LIST_EVENTS_PARENTS
+    );
+
+    return response.data;
+}
+
+async function getEventParent() {
+    const response = await getDashboardData(
+        APIs.GET_EVENTS_PARENTS
+    );
+
+    return response.data;
+}
+
+async function createEventParent(payload) {
+    const response = await postMultipart(
+        payload,
+        APIs.CREATE_EVENTS_PARENT
+    );
+
+    return response.data;
+}
+
+async function removeEventParent(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_EVENTS_PARENT}/${id}`
+    );
+
+    return response;
+}
+
+async function editEventParent(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_EVENTS_PARENT}/${id}`
+    );
+
+    return response;
+}
+
 
 export {
     loadUserPersona,
@@ -784,7 +911,22 @@ export {
     removeGiveawayQuestion,
     getGiveawaysTypes,
     getGiveawaysCoverTypes,
-    getGiveawaysQuestionTypes
+    getGiveawaysQuestionTypes,
+    getWebsiteGiveaways,
+    getGiveaway,
+    getGiveawayTournaments,
+    isRegisterAvailableInGiveaway,
+    registerInGiveaway,
+    getEventParentForDashboard,
+    getEventParent,
+    createEventParent,
+    removeEventParent,
+    editEventParent,
+    getGiveawaysRegisters,
+    getCoverGiveawaysImage,
+    amIRegisteredInGiveawayInGiveaway,
+    getGiveawaysOfEvents,
+    getOffersOfEvents
 };
 
 async function post(data, url) {

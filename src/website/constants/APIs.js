@@ -12,6 +12,8 @@ const EDIT_EVENT = `${API_URL}/admin/events`
 const GET_WEBSITE_MAIN_EVENTS = `${API_URL}/events/main`
 const GET_WEBSITE_SUB_EVENTS = `${API_URL}/events/sub`
 const GET_WEBSITE_EVENT_DETAILS = `${API_URL}/events`
+const GET_WEBSITE_GIVEAWAYS_IN_EVENT = `${API_URL}/events`
+const GET_WEBSITE_OFFERS_IN_EVENT = `${API_URL}/events`
 const GET_COVER_HOME_EVENTS_IMAGE = `${API_URL}/events/cover`
 const GET_WEBSITE_EVENT_GIVEAWAYS_OFFERS = `${API_URL}/events`
 
@@ -40,6 +42,9 @@ const GET_WEBSITE_GIVEAWAYS = `${API_URL}/giveaways`
 const GET_WEBSITE_GIVEAWAY_DETAILS = `${API_URL}/giveaways`
 const GET_WEBSITE_GIVEAWAY_TOURNAMENTS = `${API_URL}/giveaways`
 const REGISTER_IN_GIVEAWAY = `${API_URL}/giveaways`
+const IS_REGISTER_AVAILABLE_IN_GIVEAWAY = `${API_URL}/giveaways`
+const AM_I_REGISTERED_IN_GIVEAWAY = `${API_URL}/giveaways`
+const GET_COVER_GIVEAWAY_IMAGE = `${API_URL}/giveaways/cover`
 
 // PLATFORM (5 APIs)
 const GET_PLATFORMS = `${API_URL}/admin/platforms`
@@ -107,6 +112,13 @@ const DELETE_IMAGE_IN_PROFILE = `${API_URL}/users/images`
 const POST_MESSAGE = `${API_URL}/contact-us`
 const GET_COVER_CONTACT_US_IMAGE = `${API_URL}/contact-us/cover`
 
+// EVENT PARENT (5 APIs)
+const GET_EVENTS_PARENTS = `${API_URL}/admin/events/parents`
+const CREATE_EVENTS_PARENT = `${API_URL}/admin/events/parents`
+const GET_LIST_EVENTS_PARENTS = `${API_URL}/admin/events/parents/list`
+const EDIT_EVENTS_PARENT = `${API_URL}/admin/events/parents`
+const DELETE_EVENTS_PARENT = `${API_URL}/admin/events/parents`
+
 export {
     API_URL,
     REGISTER_WEBSITE_USER,
@@ -143,6 +155,8 @@ export {
     GET_REGIONS,
     CREATE_REGION,
     GET_LIST_REGIONS,
+    GET_WEBSITE_GIVEAWAYS_IN_EVENT,
+    GET_WEBSITE_OFFERS_IN_EVENT,
     DELETE_REGION,
     DELETE_EVENT,
     DELETE_TOURNAMENT,
@@ -191,5 +205,13 @@ export {
     GET_WEBSITE_GIVEAWAYS,
     GET_WEBSITE_GIVEAWAY_DETAILS,
     GET_WEBSITE_GIVEAWAY_TOURNAMENTS,
-    REGISTER_IN_GIVEAWAY
+    REGISTER_IN_GIVEAWAY,
+    IS_REGISTER_AVAILABLE_IN_GIVEAWAY,
+    AM_I_REGISTERED_IN_GIVEAWAY,
+    GET_EVENTS_PARENTS,
+    CREATE_EVENTS_PARENT,
+    GET_LIST_EVENTS_PARENTS,
+    EDIT_EVENTS_PARENT,
+    DELETE_EVENTS_PARENT,
+    GET_COVER_GIVEAWAY_IMAGE
 };

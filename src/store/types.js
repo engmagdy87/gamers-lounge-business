@@ -111,6 +111,22 @@ const platforms = {
     }
 };
 
+const eventParent = {
+    mutations: {
+        SET_EVENT_PARENTS_DATA: 'eventParents/mutations/SET_EVENT_PARENTS_DATA',
+        SET_IS_EVENT_PARENTS_DATA_FETCHED: 'eventParents/mutations/SET_IS_EVENT_PARENTS_DATA_FETCHED',
+        SET_DASHBOARD_EVENT_PARENTS_DATA: 'eventParents/mutations/SET_DASHBOARD_EVENT_PARENTS_DATA',
+        SET_IS_DASHBOARD_EVENT_PARENTS_DATA_FETCHED: 'eventParents/mutations/SET_IS_DASHBOARD_EVENT_PARENTS_DATA_FETCHED',
+        REMOVE_DELETED_EVENT_PARENT: 'eventParents/mutations/REMOVE_DELETED_EVENT_PARENT',
+    },
+    actions: {
+        FETCH_EVENT_PARENTS: 'eventParents/actions/FETCH_EVENT_PARENTS',
+        FETCH_EVENT_PARENTS_FOR_DASHBOARD: 'eventParents/actions/FETCH_EVENT_PARENTS_FOR_DASHBOARD',
+        DELETE_EVENT_PARENT: 'eventParents/actions/DELETE_EVENT_PARENT',
+        EDIT_EVENT_PARENT: 'eventParents/actions/EDIT_EVENT_PARENT',
+    }
+};
+
 const regions = {
     mutations: {
         SET_REGIONS_DATA: 'regions/mutations/SET_REGIONS_DATA',
@@ -163,6 +179,8 @@ const summits = {
         IS_COVER_HOME_EVENTS_IMAGE_FETCHED: 'summits/mutations/IS_COVER_HOME_EVENTS_IMAGE_FETCHED',
         SET_COVER_CONTACT_US_IMAGE: 'summits/mutations/SET_COVER_CONTACT_US_IMAGE',
         IS_COVER_CONTACT_US_IMAGE_FETCHED: 'summits/mutations/IS_COVER_CONTACT_US_IMAGE_FETCHED',
+        SET_COVER_GIVEAWAYS_IMAGE: 'summits/mutations/SET_COVER_GIVEAWAYS_IMAGE',
+        IS_COVER_GIVEAWAYS_IMAGE_FETCHED: 'summits/mutations/IS_COVER_GIVEAWAYS_IMAGE_FETCHED',
     },
     actions: {
         FETCH_SUMMITS: 'summits/actions/FETCH_SUMMITS',
@@ -173,6 +191,7 @@ const summits = {
         EDIT_SUMMIT: 'summits/actions/EDIT_SUMMIT',
         FETCH_COVER_HOME_EVENTS_IMAGE: 'summits/actions/FETCH_COVER_HOME_EVENTS_IMAGE',
         FETCH_COVER_CONTACT_US_IMAGE: 'summits/actions/FETCH_COVER_CONTACT_US_IMAGE',
+        FETCH_COVER_GIVEAWAYS_IMAGE: 'summits/actions/FETCH_COVER_GIVEAWAYS_IMAGE',
     }
 };
 
@@ -184,6 +203,8 @@ const events = {
         SET_SUB_EVENTS_DATA: 'events/mutations/SET_SUB_EVENTS_DATA',
         SET_EVENT_COVER_TYPES: 'events/mutations/SET_EVENT_COVER_TYPES',
         SET_EVENT_DETAILS: 'events/mutations/SET_EVENT_DETAILS',
+        SET_EVENT_GIVEAWAYS: 'events/mutations/SET_EVENT_GIVEAWAYS',
+        SET_EVENT_OFFERS: 'events/mutations/SET_EVENT_OFFERS',
         SET_EVENTS_LIST: 'events/mutations/SET_EVENTS_LIST',
         REMOVE_DELETED_EVENT: 'events/mutations/REMOVE_DELETED_EVENT',
         SET_IS_EVENTS_FETCHED: 'events/mutations/SET_IS_EVENTS_FETCHED',
@@ -193,6 +214,8 @@ const events = {
         SET_IS_SUB_EVENTS_FETCHED: 'events/mutations/SET_IS_SUB_EVENTS_FETCHED',
         SET_IS_EVENT_COVER_TYPES_FETCHED: 'events/mutations/SET_IS_EVENT_COVER_TYPES_FETCHED',
         SET_IS_EVENT_DETAILS_FETCHED: 'events/mutations/SET_IS_EVENT_DETAILS_FETCHED',
+        SET_IS_EVENT_GIVEAWAYS_FETCHED: 'events/mutations/SET_IS_EVENT_GIVEAWAYS_FETCHED',
+        SET_IS_EVENT_OFFERS_FETCHED: 'events/mutations/SET_IS_EVENT_OFFERS_FETCHED',
     },
     actions: {
         FETCH_EVENTS: 'events/actions/FETCH_EVENTS',
@@ -202,6 +225,8 @@ const events = {
         FETCH_EVENT_COVER_TYPES: 'events/actions/FETCH_EVENT_COVER_TYPES',
         FETCH_EVENT_DETAILS: 'events/actions/FETCH_EVENT_DETAILS',
         FETCH_EVENT_LIST: 'events/actions/FETCH_EVENT_LIST',
+        FETCH_EVENT_GIVEAWAYS: 'events/actions/FETCH_EVENT_GIVEAWAYS',
+        FETCH_EVENT_OFFERS: 'events/actions/FETCH_EVENT_OFFERS',
         DELETE_EVENT: 'events/actions/DELETE_EVENT',
         DELETE_EVENT_IMAGE: 'events/actions/DELETE_EVENT_IMAGE',
         DELETE_EVENT_VIDEO: 'events/actions/DELETE_EVENT_VIDEO',
@@ -211,32 +236,46 @@ const events = {
 
 const giveaways = {
     mutations: {
-        // SET_GIVEAWAYS_DATA: 'giveaways/mutations/SET_GIVEAWAYS_DATA',
+        SET_GIVEAWAYS_DATA: 'giveaways/mutations/SET_GIVEAWAYS_DATA',
+        SET_OFFERS_DATA: 'giveaways/mutations/SET_OFFERS_DATA',
         SET_GIVEAWAY_TYPE_DATA: 'giveaways/mutations/SET_GIVEAWAY_TYPE_DATA',
         SET_GIVEAWAY_COVER_TYPES: 'giveaways/mutations/SET_GIVEAWAY_COVER_TYPES',
         SET_GIVEAWAY_QUESTION_TYPES: 'giveaways/mutations/SET_GIVEAWAY_QUESTION_TYPES',
-        // SET_GIVEAWAY_DETAILS: 'giveaways/mutations/SET_GIVEAWAY_DETAILS',
+        SET_GIVEAWAY_DETAILS: 'giveaways/mutations/SET_GIVEAWAY_DETAILS',
+        SET_GIVEAWAY_REGISTERS: 'giveaways/mutations/SET_GIVEAWAY_REGISTERS',
+        SET_GIVEAWAY_TOURNAMENTS: 'giveaways/mutations/SET_GIVEAWAY_TOURNAMENTS',
         SET_GIVEAWAYS_LIST: 'giveaways/mutations/SET_GIVEAWAYS_LIST',
+        SET_IS_REGISTER_AVAILABLE_IN_GIVEAWAY: 'giveaways/mutations/SET_IS_REGISTER_AVAILABLE_IN_GIVEAWAY',
+        SET_AM_I_REGISTERED_IN_GIVEAWAY: 'giveaways/mutations/SET_AM_I_REGISTERED_IN_GIVEAWAY',
         REMOVE_DELETED_GIVEAWAY: 'giveaways/mutations/REMOVE_DELETED_GIVEAWAY',
-        // SET_IS_GIVEAWAYS_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAYS_FETCHED',
+        SET_IS_GIVEAWAYS_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAYS_FETCHED',
+        SET_IS_OFFERS_FETCHED: 'giveaways/mutations/SET_IS_OFFERS_FETCHED',
         SET_IS_GIVEAWAYS_LIST_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAYS_LIST_FETCHED',
         SET_IS_GIVEAWAY_TYPE_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAY_TYPE_FETCHED',
+        SET_IS_GIVEAWAY_REGISTERS_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAY_REGISTERS_FETCHED',
         SET_IS_GIVEAWAY_COVER_TYPES_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAY_COVER_TYPES_FETCHED',
         SET_IS_GIVEAWAY_QUESTION_TYPES_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAY_QUESTION_TYPES_FETCHED',
-        // SET_IS_GIVEAWAY_DETAILS_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAY_DETAILS_FETCHED',
+        SET_IS_GIVEAWAY_DETAILS_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAY_DETAILS_FETCHED',
+        SET_IS_GIVEAWAY_TOURNAMENTS_FETCHED: 'giveaways/mutations/SET_IS_GIVEAWAY_TOURNAMENTS_FETCHED',
+        SET_IS_REGISTER_AVAILABLE_IN_GIVEAWAY_FETCHED: 'giveaways/mutations/SET_IS_REGISTER_AVAILABLE_IN_GIVEAWAY_FETCHED',
+        SET_AM_I_REGISTERED_IN_GIVEAWAY_FETCHED: 'giveaways/mutations/SET_AM_I_REGISTERED_IN_GIVEAWAY_GIVEAWAY_FETCHED',
     },
     actions: {
-        // FETCH_GIVEAWAYS: 'giveaways/actions/FETCH_GIVEAWAYS',
+        FETCH_GIVEAWAYS: 'giveaways/actions/FETCH_GIVEAWAYS',
+        FETCH_OFFERS: 'giveaways/actions/FETCH_OFFERS',
         FETCH_GIVEAWAY_TYPE: 'giveaways/actions/FETCH_GIVEAWAY_TYPE',
+        FETCH_GIVEAWAY_TOURNAMENTS: 'giveaways/actions/FETCH_GIVEAWAY_TOURNAMENTS',
         FETCH_GIVEAWAY_COVER_TYPES: 'giveaways/actions/FETCH_GIVEAWAY_COVER_TYPES',
         FETCH_GIVEAWAY_QUESTION_TYPES: 'giveaways/actions/FETCH_GIVEAWAY_QUESTION_TYPES',
-        // FETCH_GIVEAWAY_DETAILS: 'giveaways/actions/FETCH_GIVEAWAY_DETAILS',
+        FETCH_GIVEAWAY_DETAILS: 'giveaways/actions/FETCH_GIVEAWAY_DETAILS',
+        FETCH_GIVEAWAY_REGISTERS: 'giveaways/actions/FETCH_GIVEAWAY_REGISTERS',
+        FETCH_IS_REGISTER_AVAILABLE_IN_GIVEAWAY: 'giveaways/actions/FETCH_IS_REGISTER_AVAILABLE_IN_GIVEAWAY',
+        FETCH_AM_I_REGISTERED_IN_GIVEAWAY: 'giveaways/actions/FETCH_AM_I_REGISTERED_IN_GIVEAWAY',
         FETCH_GIVEAWAY_LIST: 'giveaways/actions/FETCH_GIVEAWAY_LIST',
         DELETE_GIVEAWAY: 'giveaways/actions/DELETE_GIVEAWAY',
         DELETE_GIVEAWAY_IMAGE: 'giveaways/actions/DELETE_GIVEAWAY_IMAGE',
         DELETE_GIVEAWAY_VIDEO: 'giveaways/actions/DELETE_GIVEAWAY_VIDEO',
         DELETE_GIVEAWAY_QUESTION: 'giveaways/actions/DELETE_GIVEAWAY_QUESTION',
-        // EDIT_GIVEAWAY: 'giveaways/actions/EDIT_GIVEAWAY',
     }
 };
 
@@ -262,6 +301,7 @@ const navigationTree = {
         SET_GAME_TREE: 'navigationTree/mutations/SET_GAME_TREE',
         SET_EVENT_TREE: 'navigationTree/mutations/SET_EVENT_TREE',
         SET_TOURNAMENT_TREE: 'navigationTree/mutations/SET_TOURNAMENT_TREE',
+        SET_GIVEAWAY_TREE: 'navigationTree/mutations/SET_GIVEAWAY_TREE',
     },
 };
 
@@ -275,6 +315,7 @@ export default {
     sponsors,
     games,
     platforms,
+    eventParent,
     regions,
     tournaments,
     contact,

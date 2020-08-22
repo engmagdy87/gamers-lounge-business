@@ -1,7 +1,7 @@
 <template>
   <div class="event-details-wrapper">
     <Header
-      activeItem="events"
+      activeItem="giveaways"
       :isSolidHeader="true"
       :setShowRegisterModal="setShowRegisterModal"
       :setShowLoginModal="setShowLoginModal"
@@ -9,7 +9,7 @@
     <div
       :class="[
         'event-details-wrapper__outside',
-        eventDetails.cover_type === 'img'
+        giveawayDetails.cover_type === 'img'
           ? 'event-details-wrapper__outside--hexa-shape'
           : 'event-details-wrapper__outside--none'
       ]"
@@ -18,38 +18,38 @@
       <div
         :class="[
           'event-details-wrapper__inside',
-          eventDetails.cover_type === 'img'
+          giveawayDetails.cover_type === 'img'
             ? 'event-details-wrapper__inside--hexa-shape'
             : 'event-details-wrapper__outside--none'
         ]"
         v-if="
-          (eventDetails.images.img_cover_main !== null &&
-            eventDetails.images.img_cover_main.length !== 0) ||
-            eventDetails.videos.vid_cover_main !== null
+          (giveawayDetails.images.img_cover_main !== null &&
+            giveawayDetails.images.img_cover_main.length !== 0) ||
+            giveawayDetails.videos.vid_cover_main !== null
         "
         :style="
-          eventDetails.cover_type === 'img'
-            ? `backgroundImage: url(${eventDetails.images.img_cover_main[0].path})`
+          giveawayDetails.cover_type === 'img'
+            ? `backgroundImage: url(${giveawayDetails.images.img_cover_main[0].path})`
             : ''
         "
       >
         <img
           v-if="
-            eventDetails.has_cover_over &&
-              eventDetails.images.img_cover_over !== null
+            giveawayDetails.has_cover_over &&
+              giveawayDetails.images.img_cover_over !== null
           "
-          :src="eventDetails.images.img_cover_over.path"
+          :src="giveawayDetails.images.img_cover_over.path"
         />
         <video
           autoplay
           muted
           loop
           id="myVideo"
-          v-if="eventDetails.cover_type !== 'img'"
+          v-if="giveawayDetails.cover_type !== 'img'"
           style="width: 100%;"
         >
           <source
-            :src="eventDetails.videos.vid_cover_main.path"
+            :src="giveawayDetails.videos.vid_cover_main.path"
             type="video/mp4"
           />
         </video>
@@ -62,7 +62,7 @@
       <div v-for="(sponsorType, index) in formatSponsorsTypes" :key="index">
         <span v-if="sponsorType !== 'divider'">
           <a
-            v-for="(sponsor, i) in eventDetails.sponsors[sponsorType]"
+            v-for="(sponsor, i) in giveawayDetails.sponsors[sponsorType]"
             :key="i"
             @click="redirectTo(sponsor.link)"
           >
@@ -82,15 +82,32 @@
     </div>
     <div class="event-details-wrapper__content" v-if="showDetailsHero">
       <div class="row">
-        <div class="col-12 d-flex align-items-center">
+        <div
+          class="col-12 order-2 order-md-1 col-md-8 d-flex align-items-center"
+        >
           <div class="event-details-wrapper__content__breadcrumb">
             <a
-              v-for="(route, i) in eventShortDetails.tree"
+              v-for="(route, i) in giveawayShortDetails.tree"
               :href="route.path"
               :key="i"
               >{{ route.name }} >
             </a>
-            <span>{{ eventDetails.initial_title }}</span>
+            <span>{{ giveawayDetails.title }}</span>
+          </div>
+        </div>
+        <div
+          class="col-12 order-1 order-md-2 col-md-4 d-flex align-items-center justify-content-end"
+        >
+          <div
+            class="event-details-wrapper__custom-button-wrapper"
+            role="button"
+          >
+            <div
+              class="event-details-wrapper__custom-button-wrapper__outside"
+              @click="registerAction"
+            >
+              REGISTER
+            </div>
           </div>
         </div>
       </div>
@@ -99,9 +116,9 @@
         <div class="row">
           <div class="col-12 col-md-3 event-details-wrapper__content__logo">
             <img
-              v-if="eventDetails.images.img_logo !== null"
-              :src="eventDetails.images.img_logo.path"
-              :alt="eventDetails.initial_title"
+              v-if="giveawayDetails.images.img_logo !== null"
+              :src="giveawayDetails.images.img_logo.path"
+              :alt="giveawayDetails.title"
             />
           </div>
           <div class="col-12 col-md-9">
@@ -112,9 +129,9 @@
                   ? 'description-container--limit'
                   : 'description-container--expand'
               ]"
-              v-html="eventDetails.initial_description"
+              v-html="giveawayDetails.description"
               ref="descriptionText"
-              v-if="eventDetails.initial_description !== undefined"
+              v-if="giveawayDetails.description !== undefined"
             ></div>
             <span
               @click="setHeightOfDescription"
@@ -132,13 +149,14 @@
           <div
             class="col-12 order-2 order-md-1 col-md-6 event-details-wrapper__content__tournaments__title"
           >
-            Event Tournaments
+            Giveaway Tournaments
           </div>
         </div>
       </div>
-      <EventsMenuView
-        route="event-details"
-        :data="eventDetails.tournaments"
+      <GiveawaysMenuView
+        v-if="isGiveawayTournamentsFetched"
+        route="giveaway-details"
+        :data="giveawaysTournaments"
         :tree="getTree"
       />
     </div>
@@ -150,16 +168,13 @@
       :showFlag="showRegisterModal"
       :setShowRegisterModal="setShowRegisterModal"
     />
-    <Spinner :smallLoader="false" />
-    <SidePopUp
-      v-if="
-        isEventGiveawaysFetched &&
-          isEventOffersFetched &&
-          giveawaysAndOffersData.length > 0
-      "
-      :giveawaysAndOffersData="giveawaysAndOffersData"
-      :tree="getTree"
+    <RegisterGiveawayModal
+      :showFlag="showRegisterGiveawayModal"
+      :setShowRegisterGiveawayModal="setShowRegisterGiveawayModal"
+      :questions="giveawayDetails.register_questions"
+      :giveawayId="giveawayDetails.id"
     />
+    <Spinner :smallLoader="false" />
   </div>
 </template>
 
@@ -168,22 +183,27 @@ import { mapGetters, mapActions, mapState } from "vuex";
 import store from "../../../store/index";
 import types from "../../../store/types";
 import Header from "../../shared/Header";
-import EventsMenuView from "../../components/events/EventsMenuView";
-import SidePopUp from "../../components/giveaways/SidePopUp";
+import GiveawaysMenuView from "../../components/giveaways/GiveawaysMenuView";
 import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
+import RegisterGiveawayModal from "../../components/giveaways/RegisterGiveawayModal";
 import Spinner from "../../shared/Spinner";
 import redirectToNewTab from "../../helpers/RedirectToNewTab";
-import { setEventCookie, getEventCookie } from "../../helpers/CookieHelper";
+import {
+  setGiveawayCookie,
+  getGiveawayCookie,
+  getUserCookie
+} from "../../helpers/CookieHelper";
 
 export default {
   data() {
     return {
       showLoginModal: false,
       showRegisterModal: false,
+      showRegisterGiveawayModal: false,
       showMoreText: false,
       setShowMoreTextFlag: false,
-      eventShortDetails: {}
+      giveawayShortDetails: {}
     };
   },
   computed: {
@@ -191,29 +211,31 @@ export default {
       isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
     }),
     ...mapState({
-      eventDetails: state => state.events.eventDetails,
-      giveawaysForEventList: state => state.events.giveawaysForEventList,
-      offersForEventList: state => state.events.offersForEventList,
-      isEventGiveawaysFetched: state => state.events.isEventGiveawaysFetched,
-      isEventOffersFetched: state => state.events.isEventOffersFetched,
-      eventTree: state => state.navigationTree.eventTree
+      giveawayDetails: state => state.giveaways.giveawayDetails,
+      giveawaysTournaments: state => state.giveaways.giveawaysTournaments,
+      isGiveawayTournamentsFetched: state =>
+        state.giveaways.isGiveawayTournamentsFetched,
+      isRegisterAvailableInGiveawayFlag: state =>
+        state.giveaways.isRegisterAvailableInGiveawayFlag,
+      isRegisterAvailableInGiveawayFetched: state =>
+        state.giveaways.isRegisterAvailableInGiveawayFetched,
+      giveawayTree: state => state.navigationTree.giveawayTree,
+      amIRegisteredInGiveawayFlag: state =>
+        state.giveaways.amIRegisteredInGiveawayFlag
     }),
     showDetailsHero() {
-      return Object.keys(this.eventDetails).length !== 0;
+      return Object.keys(this.giveawayDetails).length !== 0;
     },
     showSponsors() {
       return (
-        this.eventDetails.sponsors !== undefined &&
-        Object.keys(this.eventDetails.sponsors).length !== 0
+        this.giveawayDetails.sponsors !== undefined &&
+        Object.keys(this.giveawayDetails.sponsors).length !== 0
       );
-    },
-    giveawaysAndOffersData() {
-      return [...this.giveawaysForEventList, ...this.offersForEventList];
     },
     formatSponsorsTypes() {
       let data = [];
       let nextData = [];
-      const sponsorsData = this.eventDetails.sponsors;
+      const sponsorsData = this.giveawayDetails.sponsors;
       const types = Object.keys(sponsorsData);
       let newTypes = [];
 
@@ -227,13 +249,13 @@ export default {
     },
     getTree() {
       let tree = [];
-      if (Object.keys(this.eventTree).length > 0)
-        tree = [...tree, ...this.eventTree.tree];
+      if (Object.keys(this.giveawayTree).length > 0)
+        tree = [...tree, ...this.giveawayTree.tree];
       else tree = [...tree, ...this.$router.history.current.params.data.tree];
       tree = [
         ...tree,
         {
-          name: this.eventDetails.initial_title,
+          name: this.giveawayDetails.title,
           path: this.$router.history.current.path
         }
       ];
@@ -250,15 +272,22 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchEventDetails: types.events.actions.FETCH_EVENT_DETAILS,
-      fetchEventGiveaways: types.events.actions.FETCH_EVENT_GIVEAWAYS,
-      fetchEventOffers: types.events.actions.FETCH_EVENT_OFFERS
+      fetchGiveawayDetails: types.giveaways.actions.FETCH_GIVEAWAY_DETAILS,
+      fetchIsRegisterAvailableInGiveaway:
+        types.giveaways.actions.FETCH_IS_REGISTER_AVAILABLE_IN_GIVEAWAY,
+      fetchGiveawayTournaments:
+        types.giveaways.actions.FETCH_GIVEAWAY_TOURNAMENTS,
+      fetchAmIRegisteredGiveawaysImage:
+        types.giveaways.actions.FETCH_AM_I_REGISTERED_IN_GIVEAWAY
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
     },
     setShowRegisterModal(value = false) {
       this.showRegisterModal = value;
+    },
+    setShowRegisterGiveawayModal(value = false) {
+      this.showRegisterGiveawayModal = value;
     },
     redirectTo(url) {
       if (url.includes("http")) window.open(url, "_blank");
@@ -282,39 +311,65 @@ export default {
         return "event-details-wrapper__content__sponsor--sub";
       if (sponsorType === "extra_sub")
         return "event-details-wrapper__content__sponsor--extra_sub";
+    },
+    registerAction() {
+      const token = getUserCookie();
+      if (this.giveawayDetails.is_external)
+        window.open(this.giveawayDetails.external_link, "_blank");
+      else if (!token && !this.giveawayDetails.is_external)
+        this.notifyVue("Please login for registration", "warning");
+      else if (
+        !(
+          this.isRegisterAvailableInGiveawayFetched &&
+          this.isRegisterAvailableInGiveawayFlag
+        )
+      )
+        this.notifyVue("Register is closed", "warning");
+      else if (this.amIRegisteredInGiveawayFlag)
+        this.notifyVue("You are already registered", "danger");
+      else this.setShowRegisterGiveawayModal(true);
+    },
+    notifyVue(message, color) {
+      this.$notifications.notify({
+        message: `<span>${message}</span>`,
+        horizontalAlign: "right",
+        verticalAlign: "top",
+        type: color
+      });
     }
   },
   components: {
     Header,
     LoginModal,
     RegisterModal,
+    RegisterGiveawayModal,
     Spinner,
-    EventsMenuView,
-    SidePopUp
+    GiveawaysMenuView
   },
   mounted() {
-    const eventCookieData = getEventCookie();
+    const giveawayCookieData = getGiveawayCookie();
     if (this.$router.history.current.params.data !== undefined) {
-      this.eventShortDetails = this.$router.history.current.params.data;
+      this.giveawayShortDetails = this.$router.history.current.params.data;
       store.commit(
-        types.navigationTree.mutations.SET_EVENT_TREE,
-        this.eventShortDetails
+        types.navigationTree.mutations.SET_GIVEAWAY_TREE,
+        this.giveawayShortDetails
       );
-      setEventCookie(this.eventShortDetails);
-    } else if (Object.keys(this.eventTree).length > 0) {
-      this.eventShortDetails = this.eventTree;
-    } else if (eventCookieData !== undefined) {
-      this.eventShortDetails = eventCookieData;
+      setGiveawayCookie(this.giveawayShortDetails);
+    } else if (Object.keys(this.giveawayTree).length > 0) {
+      this.giveawayShortDetails = this.giveawayTree;
+    } else if (giveawayCookieData !== undefined) {
+      this.giveawayShortDetails = giveawayCookieData;
       store.commit(
-        types.navigationTree.mutations.SET_EVENT_TREE,
-        this.eventShortDetails
+        types.navigationTree.mutations.SET_GIVEAWAY_TREE,
+        this.giveawayShortDetails
       );
     } else if (this.$router.history.current.params.data === undefined)
       this.$router.push("/");
 
-    this.fetchEventDetails(this.eventShortDetails.id);
-    this.fetchEventGiveaways(this.eventShortDetails.id);
-    this.fetchEventOffers(this.eventShortDetails.id);
+    this.fetchGiveawayDetails(this.giveawayShortDetails.id);
+    this.fetchGiveawayTournaments(this.giveawayShortDetails.id);
+    this.fetchAmIRegisteredGiveawaysImage(this.giveawayShortDetails.id);
+    this.fetchIsRegisterAvailableInGiveaway(this.giveawayShortDetails.id);
   },
   updated() {
     redirectToNewTab("description-container");

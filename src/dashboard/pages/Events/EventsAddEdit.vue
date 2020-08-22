@@ -190,7 +190,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6 mt-auto mb-auto">
+        <div class="col-md-4 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -203,7 +203,7 @@
             >
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <base-input
             type="text"
             label="External Event Link"
@@ -211,6 +211,21 @@
             v-model="event.external_link"
           >
           </base-input>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="cover-type">Event Parent</label>
+            <select class="form-control" v-model="event.parent_id">
+              <option value="-1">--Please select event parent</option>
+              <option
+                v-for="(parent, index) in eventParentData"
+                :selected="event.parent_id === parent.id"
+                :key="index"
+                :value="parent.id"
+                >{{ parent.title }}</option
+              >
+            </select>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -535,6 +550,7 @@ export default {
         final_description: "",
         summit_id: "-1",
         cover_type: "-1",
+        parent_id: "-1",
         event_type: "-1",
         is_external: false,
         external_link: "",
@@ -563,6 +579,7 @@ export default {
       fetchSummitsList: types.summits.actions.FETCH_SUMMITS_LIST,
       fetchEventType: types.events.actions.FETCH_EVENT_TYPE,
       fetchCoverTypes: types.events.actions.FETCH_EVENT_COVER_TYPES,
+      fetchEventParent: types.eventParent.actions.FETCH_EVENT_PARENTS,
       fetchSponsorsData: types.sponsors.actions.FETCH_SPONSORS_FOR_DASHBOARD
     }),
     clickAction() {
@@ -662,6 +679,7 @@ export default {
         formData.append("final_description", this.event.final_description);
         formData.append("summit_id", this.event.summit_id);
         formData.append("cover_type", this.event.cover_type);
+        formData.append("parent_id", this.event.parent_id);
         formData.append("type", this.event.event_type);
         formData.append("is_external", this.event.is_external ? 1 : 0);
         formData.append("external_link", this.event.external_link);
@@ -809,6 +827,9 @@ export default {
       isEventTypeFetched: state => state.events.isEventTypeFetched,
       eventCoverTypes: state => state.events.eventCoverTypes,
       isEventCoverTypesFetched: state => state.events.isEventCoverTypesFetched,
+      eventParentData: state => state.eventParent.eventParentData,
+      isEventParentsDataFetched: state =>
+        state.eventParent.isEventParentsDataFetched,
       dashboardSponsorsData: state => state.sponsors.dashboardSponsorsData,
       isDashboardSponsorsDataFetched: state =>
         state.sponsors.isDashboardSponsorsDataFetched
@@ -829,7 +850,8 @@ export default {
           this.isSummitsListFetched &&
           this.isEventTypeFetched &&
           this.isEventCoverTypesFetched &&
-          this.isDashboardSponsorsDataFetched
+          this.isDashboardSponsorsDataFetched &&
+          this.isEventParentsDataFetched
         );
       return true;
     }
@@ -848,6 +870,7 @@ export default {
     this.fetchSummitsList();
     this.fetchEventType();
     this.fetchCoverTypes();
+    this.fetchEventParent();
     this.fetchSponsorsData();
     if (this.$route.name === "Edit Event") {
       this.event.initial_title = this.editData.initial_title || "";
@@ -856,6 +879,7 @@ export default {
       this.event.final_description = this.editData.final_description || "";
       this.event.summit_id = this.editData.summit.id;
       this.event.cover_type = this.editData.cover_type;
+      this.event.parent_id = this.editData.parent_id;
       this.event.event_type = this.editData.type;
       this.event.is_external = this.editData.is_external;
       this.event.external_link = this.editData.external_link || "";

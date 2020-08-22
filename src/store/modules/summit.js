@@ -1,4 +1,4 @@
-import { getSummits, getSummitsList, removeSummit, removeSummitImage, removeSummitVideo, getCoverHomeEventsImage, getCoverContactUsImage } from '../../website/helpers/APIsHelper';
+import { getSummits, getSummitsList, removeSummit, removeSummitImage, removeSummitVideo, getCoverHomeEventsImage, getCoverContactUsImage, getCoverGiveawaysImage } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -6,10 +6,12 @@ const state = {
     summitsListData: [],
     coverHomeEventsImage: null,
     coverContactUsImage: null,
+    coverGiveawaysImage: null,
     isSummitsFetched: false,
     isSummitsListFetched: false,
     isCoverHomeEventsImageFetched: false,
     isCoverContactUsImageFetched: false,
+    isCoverGiveawaysImageFetched: false,
 };
 
 const mutations = {
@@ -34,11 +36,17 @@ const mutations = {
     [types.summits.mutations.SET_COVER_CONTACT_US_IMAGE]: (currentState, payload) => {
         currentState.coverContactUsImage = payload;
     },
+    [types.summits.mutations.SET_COVER_GIVEAWAYS_IMAGE]: (currentState, payload) => {
+        currentState.coverGiveawaysImage = payload;
+    },
     [types.summits.mutations.IS_COVER_HOME_EVENTS_IMAGE_FETCHED]: (currentState, payload) => {
         currentState.isCoverHomeEventsImageFetched = payload;
     },
     [types.summits.mutations.IS_COVER_CONTACT_US_IMAGE_FETCHED]: (currentState, payload) => {
         currentState.isCoverContactUsImageFetched = payload;
+    },
+    [types.summits.mutations.IS_COVER_GIVEAWAYS_IMAGE_FETCHED]: (currentState, payload) => {
+        currentState.isCoverGiveawaysImageFetched = payload;
     },
 };
 
@@ -74,6 +82,14 @@ const fetchCoverContactUsImage = async ({ commit }) => {
     const response = await getCoverContactUsImage().then((response) => {
         commit(types.summits.mutations.SET_COVER_CONTACT_US_IMAGE, response.data.cover);
         commit(types.summits.mutations.IS_COVER_CONTACT_US_IMAGE_FETCHED, true);
+    }).catch(() => false);
+    return response
+};
+
+const fetchCoverGiveawaysImage = async ({ commit }) => {
+    const response = await getCoverGiveawaysImage().then((response) => {
+        commit(types.summits.mutations.SET_COVER_GIVEAWAYS_IMAGE, response.data.cover);
+        commit(types.summits.mutations.IS_COVER_GIVEAWAYS_IMAGE_FETCHED, true);
     }).catch(() => false);
     return response
 };
@@ -117,6 +133,7 @@ const actions = {
     [types.summits.actions.DELETE_SUMMIT_VIDEO]: deleteSummitVideo,
     [types.summits.actions.FETCH_COVER_HOME_EVENTS_IMAGE]: fetchCoverHomeEventsImage,
     [types.summits.actions.FETCH_COVER_CONTACT_US_IMAGE]: fetchCoverContactUsImage,
+    [types.summits.actions.FETCH_COVER_GIVEAWAYS_IMAGE]: fetchCoverGiveawaysImage,
 };
 
 export default {

@@ -2,7 +2,6 @@ import {
     getPlatformsForDashboard,
     getPlatforms,
     removePlatform,
-    editPlatform
 } from '../../website/helpers/APIsHelper';
 import types from '../types';
 

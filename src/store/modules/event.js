@@ -1,4 +1,4 @@
-import { getEvents, getEventsTypes, getMainEvents, getSubEvents, getEventCoverTypes, getEvent, getEventsList, removeEvent, removeEventImage, removeEventVideo } from '../../website/helpers/APIsHelper';
+import { getEvents, getEventsTypes, getMainEvents, getSubEvents, getEventCoverTypes, getEvent, getEventsList, removeEvent, removeEventImage, removeEventVideo, getGiveawaysOfEvents, getOffersOfEvents } from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -9,6 +9,8 @@ const state = {
     eventCoverTypes: [],
     eventDetails: {},
     eventsList: [],
+    giveawaysForEventList: [],
+    offersForEventList: [],
     isEventsFetched: false,
     isEventsListFetched: false,
     isEventTypeFetched: false,
@@ -16,6 +18,8 @@ const state = {
     isSubEventsFetched: false,
     isEventCoverTypesFetched: false,
     isEventDetailsFetched: false,
+    isEventGiveawaysFetched: false,
+    isEventOffersFetched: false,
 };
 
 const mutations = {
@@ -39,6 +43,18 @@ const mutations = {
     },
     [types.events.mutations.SET_EVENT_DETAILS]: (currentState, payload) => {
         currentState.eventDetails = payload;
+    },
+    [types.events.mutations.SET_EVENT_GIVEAWAYS]: (currentState, payload) => {
+        currentState.giveawaysForEventList = payload;
+    },
+    [types.events.mutations.SET_EVENT_OFFERS]: (currentState, payload) => {
+        currentState.offersForEventList = payload;
+    },
+    [types.events.mutations.SET_IS_EVENT_GIVEAWAYS_FETCHED]: (currentState, payload) => {
+        currentState.isEventGiveawaysFetched = payload;
+    },
+    [types.events.mutations.SET_IS_EVENT_OFFERS_FETCHED]: (currentState, payload) => {
+        currentState.isEventOffersFetched = payload;
     },
     [types.events.mutations.SET_IS_EVENTS_FETCHED]: (currentState, payload) => {
         currentState.isEventsFetched = payload;
@@ -124,6 +140,28 @@ const getEventDetails = async ({ commit }, eventId) => {
     return response
 };
 
+const getEventGiveaways = async ({ commit }, eventId) => {
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await getGiveawaysOfEvents(eventId).then((response) => {
+        commit(types.events.mutations.SET_EVENT_GIVEAWAYS, response.data.giveaways);
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        commit(types.events.mutations.SET_IS_EVENT_GIVEAWAYS_FETCHED, true);
+        return true
+    }).catch(() => false);
+    return response
+};
+
+const getEventOffers = async ({ commit }, eventId) => {
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
+    const response = await getOffersOfEvents(eventId).then((response) => {
+        commit(types.events.mutations.SET_EVENT_OFFERS, response.data.offers);
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        commit(types.events.mutations.SET_IS_EVENT_OFFERS_FETCHED, true);
+        return true
+    }).catch(() => false);
+    return response
+};
+
 const getEventsListForDashboard = async ({ commit }) => {
     const response = await getEventsList().then((response) => {
         commit(types.events.mutations.SET_EVENTS_LIST, response.data.events);
@@ -171,6 +209,8 @@ const actions = {
     [types.events.actions.FETCH_SUB_EVENTS]: getSubEventsData,
     [types.events.actions.FETCH_EVENT_COVER_TYPES]: getEventCoverTypesData,
     [types.events.actions.FETCH_EVENT_DETAILS]: getEventDetails,
+    [types.events.actions.FETCH_EVENT_GIVEAWAYS]: getEventGiveaways,
+    [types.events.actions.FETCH_EVENT_OFFERS]: getEventOffers,
     [types.events.actions.FETCH_EVENT_LIST]: getEventsListForDashboard,
     [types.events.actions.DELETE_EVENT]: deleteEvent,
     [types.events.actions.DELETE_EVENT_IMAGE]: deleteEventImage,

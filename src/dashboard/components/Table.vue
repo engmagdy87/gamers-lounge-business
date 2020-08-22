@@ -113,6 +113,29 @@
         >
         </GiveawayRegisterQuestionTabelRow>
       </tbody>
+      <tbody v-else-if="tableType === 'event-parent'">
+        <EventParentTableRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+          :setShowGiveawayRegisterQuestionModalFlag="
+            setShowGiveawayRegisterQuestionModalFlag
+          "
+        >
+        </EventParentTableRow>
+      </tbody>
+      <tbody v-else-if="tableType === 'giveaway-registers'">
+        <GiveawayRegistersTableRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :giveawayName="giveawayName"
+        >
+        </GiveawayRegistersTableRow>
+      </tbody>
     </table>
   </div>
 </template>
@@ -127,6 +150,8 @@ import TournamentTabelRow from "./TournamentTabelRow";
 import GiveawayTabelRow from "./GiveawayTabelRow";
 import GiveawayRegisterQuestionTabelRow from "./GiveawayRegisterQuestionTabelRow";
 import SponsorsCategoryTabelRow from "./SponsorsCategoryTabelRow";
+import EventParentTableRow from "./EventParentTableRow";
+import GiveawayRegistersTableRow from "./GiveawayRegistersTableRow";
 
 export default {
   name: "l-table",
@@ -135,7 +160,8 @@ export default {
     "data",
     "tableType",
     "setShowDeleteDialogFlag",
-    "setShowGiveawayRegisterQuestionModalFlag"
+    "setShowGiveawayRegisterQuestionModalFlag",
+    "giveawayName"
   ],
   components: {
     SummitTabelRow,
@@ -147,7 +173,9 @@ export default {
     TournamentTabelRow,
     SponsorsCategoryTabelRow,
     GiveawayTabelRow,
-    GiveawayRegisterQuestionTabelRow
+    GiveawayRegisterQuestionTabelRow,
+    EventParentTableRow,
+    GiveawayRegistersTableRow
   }
 };
 </script>

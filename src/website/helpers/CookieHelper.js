@@ -37,6 +37,7 @@ function setTournamentCookie(data) {
     expiryDate.setDate(expiryDate.getDate() + cookieLifeTimeInWeeks);
     cookies.set('esports-tournament', { ...data }, { path: '/', expires: expiryDate });
 }
+
 function getGameCookie() {
     const cookies = new Cookies();
     return cookies.get('esports-game');
@@ -47,6 +48,18 @@ function setGameCookie(data) {
     const expiryDate = new Date();
     expiryDate.setDate(expiryDate.getDate() + cookieLifeTimeInWeeks);
     cookies.set('esports-game', { ...data }, { path: '/', expires: expiryDate });
+}
+
+function getGiveawayCookie() {
+    const cookies = new Cookies();
+    return cookies.get('esports-giveaway');
+}
+
+function setGiveawayCookie(data) {
+    const cookies = new Cookies();
+    const expiryDate = new Date();
+    expiryDate.setDate(expiryDate.getDate() + cookieLifeTimeInWeeks);
+    cookies.set('esports-giveaway', { ...data }, { path: '/', expires: expiryDate });
 }
 
 function removeCookie() {
@@ -63,5 +76,7 @@ export {
     getTournamentCookie,
     setTournamentCookie,
     getGameCookie,
-    setGameCookie
+    setGameCookie,
+    getGiveawayCookie,
+    setGiveawayCookie
 };

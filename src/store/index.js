@@ -15,6 +15,7 @@ import contactModule from './modules/contact';
 import sponsorsCategoryModule from './modules/sponsorsCategory';
 import giveawayModule from './modules/giveaway';
 import navigationTreeModule from './modules/navigationTree';
+import parentEventModule from './modules/parentEvent';
 
 Vue.use(Vuex);
 
@@ -34,5 +35,6 @@ export default new Vuex.Store({
                 sponsorsCategory: sponsorsCategoryModule,
                 giveaways: giveawayModule,
                 navigationTree: navigationTreeModule,
+                eventParent: parentEventModule,
         }
 });

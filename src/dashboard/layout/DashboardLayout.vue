@@ -10,6 +10,10 @@
         <i class="nc-icon nc-planet"></i>
         <p>Summits</p>
       </sidebar-link>
+      <sidebar-link to="/dashboard/event-parent">
+        <i class="nc-icon nc-vector"></i>
+        <p>Events Parents</p>
+      </sidebar-link>
       <sidebar-link to="/dashboard/events">
         <i class="nc-icon nc-notification-70"></i>
         <p>Events</p>

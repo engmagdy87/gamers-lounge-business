@@ -1,5 +1,9 @@
 @import "./color-palette.scss";
 
+html {
+  overflow-x: hidden;
+}
+
 .app-wrapper {
   font-family: "Roboto";
 }

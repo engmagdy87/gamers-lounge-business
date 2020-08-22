@@ -3,7 +3,8 @@ import types from '../types';
 const state = {
     gameTree: {},
     eventTree: {},
-    tournamentTree: {}
+    tournamentTree: {},
+    giveawayTree: {},
 };
 
 const mutations = {
@@ -15,6 +16,9 @@ const mutations = {
     },
     [types.navigationTree.mutations.SET_TOURNAMENT_TREE]: (currentState, payload) => {
         currentState.tournamentTree = payload;
+    },
+    [types.navigationTree.mutations.SET_GIVEAWAY_TREE]: (currentState, payload) => {
+        currentState.giveawayTree = payload;
     },
 };
 

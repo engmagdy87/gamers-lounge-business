@@ -884,9 +884,9 @@ export default {
           this.editData.videos.vid_cover_main.path) ||
         "";
       this.giveaway.events_ids = this.editData.events;
-      this.giveaway.main_sponsors_ids = this.editData.main_sponsors;
-      this.giveaway.sub_sponsors_ids = this.editData.sub_sponsors;
-      this.giveaway.extra_sub_sponsors_ids = this.editData.extra_sub_sponsors;
+      this.giveaway.main_sponsors_ids = this.editData.sponsors.main;
+      this.giveaway.sub_sponsors_ids = this.editData.sponsors.sub;
+      this.giveaway.extra_sub_sponsors_ids = this.editData.sponsors.extra_sub;
     }
   },
   updated() {

@@ -3,6 +3,7 @@ import Home from '../website/containers/Home.vue'
 import Story from '../website/containers/Story.vue'
 import Contact from '../website/containers/Contact.vue'
 import EventsContainer from '../website/containers/Events.vue'
+import GiveawayContainer from '../website/containers/Giveaway.vue'
 import Profile from '../website/containers/Profile.vue'
 import ForgotPassword from '../website/containers/ForgotPassword.vue'
 import ResetPassword from '../website/containers/ResetPassword.vue'
@@ -27,8 +28,9 @@ import EventDetails from '../website/containers/events/EventDetails.vue'
 
 import Giveaways from 'src/dashboard/pages/Giveaways.vue'
 import GiveawaysList from 'src/dashboard/pages/Giveaways/GiveawaysList.vue'
+import GiveawaysRegistersList from 'src/dashboard/pages/Giveaways/GiveawaysRegistersList.vue'
 import GiveawaysAddEdit from 'src/dashboard/pages/Giveaways/GiveawaysAddEdit.vue'
-// import GiveawayDetails from '../website/containers/giveaways/GiveawayDetails.vue'
+import GiveawayDetails from '../website/containers/giveaways/GiveawayDetails.vue'
 
 import Sponsors from 'src/dashboard/pages/Sponsors.vue'
 import SponsorsList from 'src/dashboard/pages/Sponsors/SponsorsList.vue'
@@ -42,6 +44,10 @@ import GameDetails from '../website/containers/games/GameDetails.vue'
 import Platforms from 'src/dashboard/pages/Platforms.vue'
 import PlatformsList from 'src/dashboard/pages/Platforms/PlatformsList.vue'
 import PlatformAddEdit from 'src/dashboard/pages/Platforms/PlatformAddEdit.vue'
+
+import EventParents from 'src/dashboard/pages/EventParents.vue'
+import EventParentsList from 'src/dashboard/pages/EventParent/EventParentsList.vue'
+import EventParentAddEdit from 'src/dashboard/pages/EventParent/EventParentAddEdit.vue'
 
 import Tournaments from 'src/dashboard/pages/Tournaments.vue'
 import TournamentsList from 'src/dashboard/pages/Tournaments/TournamentsList.vue'
@@ -87,6 +93,16 @@ const routes = [
     path: '/events/event/:eventName',
     name: 'event',
     component: EventDetails,
+  },
+  {
+    path: '/giveaways',
+    name: 'giveaways',
+    component: GiveawayContainer,
+  },
+  {
+    path: '/giveaways/giveaway/:giveawayName',
+    name: 'giveaway',
+    component: GiveawayDetails,
   },
   {
     path: '/games/game/:gameName',
@@ -191,6 +207,11 @@ const routes = [
             component: GiveawaysList
           },
           {
+            path: 'list-registers/:giveawayId',
+            name: 'List Registers',
+            component: GiveawaysRegistersList
+          },
+          {
             path: 'create',
             name: 'Create Giveaway & Offers',
             component: GiveawaysAddEdit
@@ -268,6 +289,29 @@ const routes = [
             path: 'edit',
             name: 'Edit Platform',
             component: PlatformAddEdit
+          }
+        ]
+      },
+      {
+        path: 'event-parent',
+        name: 'Event Parent',
+        redirect: '/dashboard/event-parent/list',
+        component: EventParents,
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: EventParentsList
+          },
+          {
+            path: 'create',
+            name: 'Create Event Parent',
+            component: EventParentAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit Event Parent',
+            component: EventParentAddEdit
           }
         ]
       },

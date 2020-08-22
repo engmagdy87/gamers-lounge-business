@@ -80,6 +80,14 @@
         alt="delete"
         @click="setShowDeleteDialogFlag(true, rowData.id, id - 1)"
       />
+      <router-link
+        :to="{
+          path: `/dashboard/giveaways/list-registers/${rowData.id}`,
+          query: { giveawayName: rowData.title }
+        }"
+      >
+        <img src="/website/img/visibility.svg" alt="show" />
+      </router-link>
     </td>
   </tr>
 </template>
