@@ -39,7 +39,9 @@ export default {
       this.$router.push({
         name: "game",
         params: {
-          gameName: reformatStringToBeInURL(this.card.title),
+          gameName: `${this.card.id}-${reformatStringToBeInURL(
+            this.card.title
+          )}`,
           data: {
             id: this.card.id,
             title: this.card.title,

@@ -41,7 +41,9 @@ export default {
         this.$router.push({
           name: "game",
           params: {
-            gameName: reformatStringToBeInURL(card.title || card.initial_title),
+            gameName: `${card.id}-${reformatStringToBeInURL(
+              card.title || card.initial_title
+            )}`,
             data: {
               id: card.id,
               title: card.title || card.initial_title
@@ -52,7 +54,9 @@ export default {
         this.$router.push({
           name: "tournament",
           params: {
-            gameName: reformatStringToBeInURL(card.title || card.initial_title),
+            gameName: `${card.id}-${reformatStringToBeInURL(
+              card.title || card.initial_title
+            )}`,
             data: {
               id: card.id,
               title: card.title || card.initial_title,

@@ -306,9 +306,11 @@ export default {
         types.navigationTree.mutations.SET_TOURNAMENT_TREE,
         this.tournamentShortDetails
       );
-    } else if (this.$router.history.current.params.data === undefined)
-      this.$router.push("/");
-    this.fetchTournamentDetails(this.tournamentShortDetails.id);
+    }
+    const tournamentId = this.$router.history.current.params.tournamentName.split(
+      "-"
+    )[0];
+    this.fetchTournamentDetails(tournamentId);
     this.getLink();
   }
 };

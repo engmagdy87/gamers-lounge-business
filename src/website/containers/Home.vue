@@ -198,7 +198,7 @@ export default {
       this.$router.push({
         name: "event",
         params: {
-          eventName: reformatStringToBeInURL(title),
+          eventName: `${id}-${reformatStringToBeInURL(title)}`,
           data: { id, title, tree: [{ name: "Home", path: "/" }] }
         }
       });
