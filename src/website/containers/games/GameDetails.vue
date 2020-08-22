@@ -157,10 +157,10 @@ export default {
         types.navigationTree.mutations.SET_GAME_TREE,
         this.gameShortDetails
       );
-    } else if (this.$router.history.current.params.data === undefined)
-      this.$router.push({ name: "home", hash: "#games" });
+    }
 
-    this.fetchGameDetails(this.gameShortDetails.id);
+    const gameId = this.$router.history.current.params.gameName.split("-")[0];
+    this.fetchGameDetails(gameId);
   },
   updated() {
     redirectToNewTab("description-container");

@@ -309,12 +309,12 @@ export default {
         types.navigationTree.mutations.SET_EVENT_TREE,
         this.eventShortDetails
       );
-    } else if (this.$router.history.current.params.data === undefined)
-      this.$router.push("/");
+    }
+    const eventId = this.$router.history.current.params.eventName.split("-")[0];
 
-    this.fetchEventDetails(this.eventShortDetails.id);
-    this.fetchEventGiveaways(this.eventShortDetails.id);
-    this.fetchEventOffers(this.eventShortDetails.id);
+    this.fetchEventGiveaways(eventId);
+    this.fetchEventOffers(eventId);
+    this.fetchEventDetails(eventId);
   },
   updated() {
     redirectToNewTab("description-container");
