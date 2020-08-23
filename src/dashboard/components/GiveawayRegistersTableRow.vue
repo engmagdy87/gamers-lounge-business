@@ -5,7 +5,10 @@
     <td>{{ rowData.user.last_name }}</td>
     <td>{{ rowData.user.username }}</td>
     <td>{{ rowData.user.email }}</td>
-    <td>{{ rowData.user.phone }}</td>
+    <td v-if="rowData.user.phone">
+      {{ rowData.user.phone.country_code }} {{ rowData.user.phone.number }}
+    </td>
+    <td v-else></td>
     <td>{{ rowData.user.birthday_date }}</td>
     <td v-for="(item, i) in rowData.answers" :key="i">
       <a
@@ -34,10 +37,10 @@ export default {
       let csvContent = "data:text/csv;charset=utf-8,";
 
       //******* Heading *******/
-      let heading = "First Name;Last Name;Username;Email;Phone;Birthday Date;";
+      let heading = "First Name,Last Name,Username,Email,Phone,Birthday Date,";
 
       this.rowData.answers.forEach(
-        answer => (heading = heading + answer.title + ";")
+        answer => (heading = heading + answer.title + ",")
       );
 
       const {
@@ -49,12 +52,14 @@ export default {
         birthday_date
       } = this.rowData.user;
 
+      const formatedPhone = phone ? `${phone.country_code}${phone.number}` : "";
+
       //******* Row *******/
-      let row = `${first_name};${last_name};${username};${email};${phone ||
-        ""};${birthday_date || ""};`;
+      let row = `${first_name},${last_name},${username},${email},${formatedPhone},${birthday_date ||
+        ""},`;
 
       this.rowData.answers.forEach(
-        answer => (row = row + answer.content + ";")
+        answer => (row = row + answer.content + ",")
       );
 
       csvContent += [heading, row].join("\n").replace(/(^\[)|(\]$)/gm, "");

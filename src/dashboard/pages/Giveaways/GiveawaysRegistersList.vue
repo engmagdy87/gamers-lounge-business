@@ -74,10 +74,10 @@ export default {
       let csvContent = "data:text/csv;charset=utf-8,";
 
       //******* Heading *******/
-      let heading = "First Name;Last Name;Username;Email;Phone;Birthday Date;";
+      let heading = "First Name,Last Name,Username,Email,Phone,Birthday Date,";
 
       this.giveawaysRegisters[0].answers.forEach(
-        answer => (heading = heading + answer.title + ";")
+        answer => (heading = heading + answer.title + ",")
       );
 
       //******* Rows *******/
@@ -92,9 +92,14 @@ export default {
           phone,
           birthday_date
         } = userData.user;
-        row = `${first_name};${last_name};${username};${email};${phone ||
-          ""};${birthday_date || ""};`;
-        userData.answers.forEach(answer => (row = row + answer.content + ";"));
+
+        const formatedPhone = phone
+          ? `${phone.country_code}${phone.number}`
+          : "";
+
+        row = `${first_name},${last_name},${username},${email},${formatedPhone},${birthday_date ||
+          ""},`;
+        userData.answers.forEach(answer => (row = row + answer.content + ","));
         rows.push(row);
       });
 
