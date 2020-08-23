@@ -151,7 +151,7 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
-    <SidePopUp
+    <!-- <SidePopUp
       v-if="
         isEventGiveawaysFetched &&
           isEventOffersFetched &&
@@ -159,7 +159,7 @@
       "
       :giveawaysAndOffersData="giveawaysAndOffersData"
       :tree="getTree"
-    />
+    /> -->
   </div>
 </template>
 
