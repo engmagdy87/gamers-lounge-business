@@ -10,7 +10,7 @@
               class="footer-wrapper__social-media-icon"
               src="website/img/footer/discord.png"
               alt="discord"
-              @click="redirectTo('https://discord.gg/f4ybmuD')"
+              @click="redirectTo('https://discord.gg/PUwd4cZ')"
             />
             <img
               class="footer-wrapper__social-media-icon"
