@@ -28,13 +28,13 @@
     min-height: 100vh;
     background-image: url("~/website/img/hexagone-pattern.png");
     background-repeat: repeat;
-    padding: 12% 15% 25% 15%;
+    padding: 12% 15%;
     margin-top: -$header-height !important;
     @include is-tablet {
-      padding: 40% 10% 50% 10%;
+      padding: 40% 10% 20% 10%;
     }
     @include is-mobile {
-      padding: 40% 10% 100% 10%;
+      padding: 40% 10% 60% 10%;
     }
     h2 {
       margin: 0;

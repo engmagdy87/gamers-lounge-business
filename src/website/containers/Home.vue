@@ -204,17 +204,15 @@ export default {
       });
     },
     detectScroll(e) {
-      if (e.target.scrollTop <= 120) this.footerCssClass = "hide";
-      else if (
-        e.target.scrollTop > 120 &&
-        e.target.scrollTop + e.target.offsetHeight < e.target.scrollHeight
-      )
+      // if (e.target.scrollTop <= 120) this.footerCssClass = "hide";
+      // else if (
+      //   e.target.scrollTop > 120 &&
+      //   e.target.scrollTop + e.target.offsetHeight < e.target.scrollHeight
+      // )
+      //   this.footerCssClass = "show-small";
+      if (e.target.scrollTop + e.target.offsetHeight === e.target.scrollHeight)
         this.footerCssClass = "show-small";
-      else if (
-        e.target.scrollTop + e.target.offsetHeight ===
-        e.target.scrollHeight
-      )
-        this.footerCssClass = "show-large";
+      else this.footerCssClass = "hide";
     }
   },
   components: {

@@ -1,6 +1,67 @@
 <template>
   <footer :class="['footer-wrapper', getHeighClass()]">
-    <div class="footer-wrapper__large-footer">
+    <div class="row">
+      <div class="col12 col-md-8 order-2 order-md-1">
+        <div class="container ml-0">
+          <div
+            class="row mb-3 mt-3 mt-md-0 justify-content-center justify-content-md-start"
+          >
+            <img
+              class="footer-wrapper__social-media-icon"
+              src="website/img/footer/discord.png"
+              alt="discord"
+              @click="redirectTo('https://discord.gg/f4ybmuD')"
+            />
+            <img
+              class="footer-wrapper__social-media-icon"
+              src="website/img/footer/youtube.png"
+              alt="youtube"
+              @click="
+                redirectTo(
+                  'https://www.youtube.com/channel/UCeOGq-S3xKR8opZKNXYrd2w'
+                )
+              "
+            />
+            <img
+              class="footer-wrapper__social-media-icon"
+              src="website/img/footer/instagram.png"
+              alt="instagram"
+              @click="redirectTo('https://www.instagram.com/theesportssummit/')"
+            />
+            <img
+              class="footer-wrapper__social-media-icon"
+              src="website/img/footer/facebook.png"
+              alt="facebook"
+              @click="redirectTo('https://www.facebook.com/theesportssummit/')"
+            />
+          </div>
+          <div class="row d-block">
+            <div class="text-center text-md-left">
+              Copyright ©️ ESports Summit 2020
+            </div>
+            <div class="text-center text-md-left">
+              All Rights Reserved
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col12 col-md-4 d-flex justify-content-center justify-content-md-end align-items-center order-1 order-md-2"
+      >
+        <img
+          class="footer-wrapper__logo"
+          src="website/img/footer/gamers-lounge.png"
+          alt="instagram"
+        />
+        <div class="footer-wrapper__divider"></div>
+        <img
+          class="footer-wrapper__logo"
+          src="website/img/footer/worx.png"
+          alt="facebook"
+        />
+      </div>
+    </div>
+    <!-- <div class="footer-wrapper__large-footer">
       <div v-if="sponsors.length > 0">
         <div
           v-for="sponsorId in sponsors.length === 1 ? 1 : sponsors.length - 1"
@@ -61,7 +122,7 @@
           />
         </div>
       </div>
-    </div>
+    </div> -->
   </footer>
 </template>
 
@@ -84,8 +145,8 @@ export default {
       if (this.showFooter === "hide") return "footer-wrapper--hide";
       else if (this.showFooter === "show-small")
         return "footer-wrapper--show-small";
-      else if (this.showFooter === "show-large")
-        return "footer-wrapper--show-large";
+      // else if (this.showFooter === "show-large")
+      //   return "footer-wrapper--show-large";
     },
     getSponsorDataByPriority(priority) {
       const sponsors = this.sponsors.filter(category => {
