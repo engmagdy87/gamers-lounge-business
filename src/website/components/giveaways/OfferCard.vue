@@ -55,7 +55,9 @@ export default {
         this.$router.push({
           name: "giveaway",
           params: {
-            giveawayName: reformatStringToBeInURL(this.card.title),
+            giveawayName: `${this.card.id}-${reformatStringToBeInURL(
+              this.card.title
+            )}`,
             data: {
               id: this.card.id,
               title: this.card.title,
