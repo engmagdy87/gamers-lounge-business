@@ -210,9 +210,10 @@ export default {
       //   e.target.scrollTop + e.target.offsetHeight < e.target.scrollHeight
       // )
       //   this.footerCssClass = "show-small";
-      if (e.target.scrollTop + e.target.offsetHeight === e.target.scrollHeight)
-        this.footerCssClass = "show-small";
-      else this.footerCssClass = "hide";
+      //******************** */
+      // if (e.target.scrollTop + e.target.offsetHeight === e.target.scrollHeight)
+      //   this.footerCssClass = "show-small";
+      // else this.footerCssClass = "hide";
     }
   },
   components: {

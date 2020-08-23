@@ -1,5 +1,5 @@
 <template>
-  <footer :class="['footer-wrapper', getHeighClass()]">
+  <footer :class="['footer-wrapper', 'footer-wrapper--show-small']">
     <div class="row">
       <div class="col12 col-md-8 order-2 order-md-1">
         <div class="container ml-0">
