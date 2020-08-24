@@ -82,6 +82,7 @@
         </div>
       </div>
     </div>
+    <div v-if="isSummitsHistoryDataFetched">History</div>
     <LoginModal
       :showFlag="showLoginModal"
       :setShowLoginModal="setShowLoginModal"
@@ -117,7 +118,10 @@ export default {
     }),
     ...mapState({
       storyData: state => state.story.storyData,
-      isStoryFetched: state => state.story.isStoryFetched
+      summitsHistoryData: state => state.summits.summitsHistoryData,
+      isStoryFetched: state => state.story.isStoryFetched,
+      isSummitsHistoryDataFetched: state =>
+        state.summits.isSummitsHistoryDataFetched
     }),
     isDataEmpty() {
       return (
@@ -138,7 +142,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchStory: types.story.actions.FETCH_STORY
+      fetchStory: types.story.actions.FETCH_STORY,
+      fetchSummitsHistory: types.summits.actions.FETCH_SUMMITS_HISTORY
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -155,9 +160,14 @@ export default {
   },
   mounted() {
     this.fetchStory();
+    this.fetchSummitsHistory();
   },
   updated() {
     redirectToNewTab("description-container");
+    console.log("====================================");
+    console.log(this.isSummitsHistoryDataFetched);
+    console.log(this.summitsHistoryData);
+    console.log("====================================");
   }
 };
 </script>

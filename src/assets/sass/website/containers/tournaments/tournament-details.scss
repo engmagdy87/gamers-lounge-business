@@ -128,7 +128,7 @@
     min-width: 20%;
     max-width: 100%;
     height: fit-content;
-    padding: 15px;
+    padding: 20px 35px;
     background: $solid-header;
     border: 2px solid $primary;
     border-radius: 10px;
@@ -144,23 +144,26 @@
       cursor: pointer;
     }
     &__sponsor {
-      margin: 5px 8px;
+      margin: 5px 12px;
       &--main {
-        width: 120px;
+        max-width: 150px;
+        max-height: 100px;
       }
       &--sub {
-        width: 85px;
+        max-width: 120px;
+        max-height: 80px;
       }
       &--extra_sub {
-        width: 65px;
+        max-width: 75px;
+        max-height: 50px;
       }
     }
     &__divider {
       width: 2px;
       max-width: 2px;
       min-width: 2px;
-      height: 35px;
-      margin: auto 10px;
+      height: 80px;
+      margin: auto 12px;
       background-color: white !important;
     }
   }

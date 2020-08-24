@@ -172,6 +172,10 @@ const summits = {
     mutations: {
         SET_SUMMITS_DATA: 'summits/mutations/SET_SUMMITS_DATA',
         SET_SUMMITS_LIST_DATA: 'summits/mutations/SET_SUMMITS_LIST_DATA',
+        SET_SUMMITS_HISTORY: 'summits/mutations/SET_SUMMITS_HISTORY',
+        SET_SUMMIT_DETAILS: 'summits/mutations/SET_SUMMIT_DETAILS',
+        SET_IS_SUMMITS_HISTORY_FETCHED: 'summits/mutations/SET_IS_SUMMITS_HISTORY_FETCHED',
+        SET_IS_SUMMIT_DETAILS_FETCHED: 'summits/mutations/SET_IS_SUMMIT_DETAILS_FETCHED',
         SET_IS_SUMMITS_FETCHED: 'summits/mutations/SET_IS_SUMMITS_FETCHED',
         SET_IS_SUMMITS_LIST_FETCHED: 'summits/mutations/SET_IS_SUMMITS_LIST_FETCHED',
         REMOVE_DELETED_SUMMIT: 'summits/mutations/REMOVE_DELETED_SUMMIT',
@@ -185,6 +189,8 @@ const summits = {
     actions: {
         FETCH_SUMMITS: 'summits/actions/FETCH_SUMMITS',
         FETCH_SUMMITS_LIST: 'summits/actions/FETCH_SUMMITS_LIST',
+        FETCH_SUMMITS_HISTORY: 'summits/actions/FETCH_SUMMITS_HISTORY',
+        FETCH_SUMMIT_DETAILS: 'summits/actions/FETCH_SUMMIT_DETAILS',
         DELETE_SUMMIT: 'summits/actions/DELETE_SUMMIT',
         DELETE_SUMMIT_IMAGE: 'summits/actions/DELETE_SUMMIT_IMAGE',
         DELETE_SUMMIT_VIDEO: 'summits/actions/DELETE_SUMMIT_VIDEO',
@@ -206,6 +212,7 @@ const events = {
         SET_EVENT_GIVEAWAYS: 'events/mutations/SET_EVENT_GIVEAWAYS',
         SET_EVENT_OFFERS: 'events/mutations/SET_EVENT_OFFERS',
         SET_EVENTS_LIST: 'events/mutations/SET_EVENTS_LIST',
+        SET_EVENT_HISTORY: 'events/mutations/SET_EVENT_HISTORY',
         REMOVE_DELETED_EVENT: 'events/mutations/REMOVE_DELETED_EVENT',
         SET_IS_EVENTS_FETCHED: 'events/mutations/SET_IS_EVENTS_FETCHED',
         SET_IS_EVENTS_LIST_FETCHED: 'events/mutations/SET_IS_EVENTS_LIST_FETCHED',
@@ -216,6 +223,7 @@ const events = {
         SET_IS_EVENT_DETAILS_FETCHED: 'events/mutations/SET_IS_EVENT_DETAILS_FETCHED',
         SET_IS_EVENT_GIVEAWAYS_FETCHED: 'events/mutations/SET_IS_EVENT_GIVEAWAYS_FETCHED',
         SET_IS_EVENT_OFFERS_FETCHED: 'events/mutations/SET_IS_EVENT_OFFERS_FETCHED',
+        SET_IS_EVENT_HISTORY_FETCHED: 'events/mutations/SET_IS_EVENT_HISTORY_FETCHED',
     },
     actions: {
         FETCH_EVENTS: 'events/actions/FETCH_EVENTS',
@@ -225,6 +233,7 @@ const events = {
         FETCH_EVENT_COVER_TYPES: 'events/actions/FETCH_EVENT_COVER_TYPES',
         FETCH_EVENT_DETAILS: 'events/actions/FETCH_EVENT_DETAILS',
         FETCH_EVENT_LIST: 'events/actions/FETCH_EVENT_LIST',
+        FETCH_EVENT_HISTORY: 'events/actions/FETCH_EVENT_HISTORY',
         FETCH_EVENT_GIVEAWAYS: 'events/actions/FETCH_EVENT_GIVEAWAYS',
         FETCH_EVENT_OFFERS: 'events/actions/FETCH_EVENT_OFFERS',
         DELETE_EVENT: 'events/actions/DELETE_EVENT',

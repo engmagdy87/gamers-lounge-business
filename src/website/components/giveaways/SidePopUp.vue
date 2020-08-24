@@ -26,6 +26,7 @@
         :slidesToShow="1"
         :slidesToScroll="1"
         :autoplaySpeed="4000"
+        :dots="true"
         autoplay
         infinite
       >

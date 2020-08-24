@@ -1,6 +1,6 @@
 const API_URL = process.env.VUE_APP_API;
 
-// EVENTS (15 APIs): DELETE_MEDIA_... has 2 APIs
+// EVENTS (16 APIs): DELETE_MEDIA_... has 2 APIs
 const GET_EVENTS = `${API_URL}/admin/events`
 const CREATE_EVENT = `${API_URL}/admin/events`
 const GET_EVENT_TYPES = `${API_URL}/admin/events/constants/types`
@@ -15,7 +15,7 @@ const GET_WEBSITE_EVENT_DETAILS = `${API_URL}/events`
 const GET_WEBSITE_GIVEAWAYS_IN_EVENT = `${API_URL}/events`
 const GET_WEBSITE_OFFERS_IN_EVENT = `${API_URL}/events`
 const GET_COVER_HOME_EVENTS_IMAGE = `${API_URL}/events/cover`
-const GET_WEBSITE_EVENT_GIVEAWAYS_OFFERS = `${API_URL}/events`
+const GET_WEBSITE_EVENT_HISTORY = `${API_URL}/events`
 
 // GAMES (8 APIs)
 const GET_GAMES = `${API_URL}/admin/games`
@@ -27,7 +27,7 @@ const DELETE_GAME = `${API_URL}/admin/games`
 const EDIT_GAME = `${API_URL}/admin/games`
 const DELETE_IMAGE_IN_GAME = `${API_URL}/admin/games`
 
-// GIVEAWAY (14 APIs)
+// GIVEAWAY (17 APIs): DELETE_MEDIA_... has 2 APIs
 const GET_GIVEAWAYS = `${API_URL}/admin/giveaways`
 const CREATE_GIVEAWAY = `${API_URL}/admin/giveaways`
 const GET_GIVEAWAY_TYPES = `${API_URL}/admin/giveaways/constants/types`
@@ -84,6 +84,8 @@ const GET_WEBSITE_STORY = `${API_URL}/summits/story`
 const DELETE_SUMMIT = `${API_URL}/admin/summits`
 const DELETE_MEDIA_IN_SUMMIT = `${API_URL}/admin/summits`
 const EDIT_SUMMIT = `${API_URL}/admin/summits`
+const GET_WEBSITE_SUMMIT_HISTORY = `${API_URL}/summits/history`
+const GET_WEBSITE_SUMMIT_DETAILS = `${API_URL}/summits`
 
 // TOURNAMENTS (8 APIs)
 const GET_TOURNAMENTS = `${API_URL}/admin/tournaments`
@@ -138,7 +140,6 @@ export {
     GET_SPONSORS,
     CREATE_SPONSOR,
     GET_LIST_SPONSORS,
-    GET_WEBSITE_EVENT_GIVEAWAYS_OFFERS,
     GET_GAMES,
     GET_WEBSITE_GAME_DETAILS,
     CREATE_GAME,
@@ -213,5 +214,8 @@ export {
     GET_LIST_EVENTS_PARENTS,
     EDIT_EVENTS_PARENT,
     DELETE_EVENTS_PARENT,
-    GET_COVER_GIVEAWAY_IMAGE
+    GET_COVER_GIVEAWAY_IMAGE,
+    GET_WEBSITE_EVENT_HISTORY,
+    GET_WEBSITE_SUMMIT_HISTORY,
+    GET_WEBSITE_SUMMIT_DETAILS
 };

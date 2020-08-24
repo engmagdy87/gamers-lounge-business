@@ -194,6 +194,8 @@ export default {
       eventDetails: state => state.events.eventDetails,
       giveawaysForEventList: state => state.events.giveawaysForEventList,
       offersForEventList: state => state.events.offersForEventList,
+      eventHistory: state => state.events.eventHistory,
+      isEventHistoryFetched: state => state.events.isEventHistoryFetched,
       isEventGiveawaysFetched: state => state.events.isEventGiveawaysFetched,
       isEventOffersFetched: state => state.events.isEventOffersFetched,
       eventTree: state => state.navigationTree.eventTree
@@ -252,7 +254,8 @@ export default {
     ...mapActions({
       fetchEventDetails: types.events.actions.FETCH_EVENT_DETAILS,
       fetchEventGiveaways: types.events.actions.FETCH_EVENT_GIVEAWAYS,
-      fetchEventOffers: types.events.actions.FETCH_EVENT_OFFERS
+      fetchEventOffers: types.events.actions.FETCH_EVENT_OFFERS,
+      fetchEventHistory: types.events.actions.FETCH_EVENT_HISTORY
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -315,8 +318,13 @@ export default {
     this.fetchEventGiveaways(eventId);
     this.fetchEventOffers(eventId);
     this.fetchEventDetails(eventId);
+    this.fetchEventHistory(eventId);
   },
   updated() {
+    console.log("====================================");
+    console.log(this.eventHistory);
+    console.log(this.isEventHistoryFetched);
+    console.log("====================================");
     redirectToNewTab("description-container");
     this.$nextTick(() => {
       if (this.setShowMoreTextFlag === null) {

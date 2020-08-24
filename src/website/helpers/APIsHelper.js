@@ -136,6 +136,22 @@ async function editSummit(id, data) {
     return response;
 }
 
+async function getSummitsHistory() {
+    const response = await get(
+        APIs.GET_WEBSITE_SUMMIT_HISTORY
+    );
+
+    return response;
+}
+
+async function getSummitDetails(id) {
+    const response = await get(
+        `${APIs.GET_WEBSITE_SUMMIT_DETAILS}/${id}`
+    );
+
+    return response;
+}
+
 async function removeSummitImage(id, imageId) {
     const response = await deleteData(
         `${APIs.DELETE_MEDIA_IN_SUMMIT}/${id}/images/${imageId}`
@@ -225,6 +241,15 @@ async function getEvent(eventId) {
 
     return response.data;
 }
+
+async function getEventHistory(eventId) {
+    const response = await get(
+        `${APIs.GET_WEBSITE_EVENT_HISTORY}/${eventId}/history`
+    );
+
+    return response.data;
+}
+
 async function getGiveawaysOfEvents(eventId) {
     const response = await get(
         `${APIs.GET_WEBSITE_GIVEAWAYS_IN_EVENT}/${eventId}/giveaways`
@@ -232,6 +257,7 @@ async function getGiveawaysOfEvents(eventId) {
 
     return response.data;
 }
+
 async function getOffersOfEvents(eventId) {
     const response = await get(
         `${APIs.GET_WEBSITE_OFFERS_IN_EVENT}/${eventId}/offers`
@@ -926,7 +952,10 @@ export {
     getCoverGiveawaysImage,
     amIRegisteredInGiveawayInGiveaway,
     getGiveawaysOfEvents,
-    getOffersOfEvents
+    getOffersOfEvents,
+    getSummitsHistory,
+    getSummitDetails,
+    getEventHistory
 };
 
 async function post(data, url) {
