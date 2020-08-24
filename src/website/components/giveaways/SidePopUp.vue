@@ -26,6 +26,7 @@
         :slidesToShow="1"
         :slidesToScroll="1"
         :autoplaySpeed="4000"
+        :dots="true"
         autoplay
         infinite
       >
@@ -79,7 +80,7 @@ export default {
         this.$router.push({
           name: "giveaway",
           params: {
-            giveawayName: reformatStringToBeInURL(card.title),
+            giveawayName: `${card.id}-${reformatStringToBeInURL(card.title)}`,
             data: {
               id: card.id,
               title: card.title,

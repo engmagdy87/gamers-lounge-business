@@ -53,9 +53,11 @@ export default {
       if (this.card.is_external) window.open(this.card.external_link, "_blank");
       else
         this.$router.push({
-          name: "event",
+          name: "giveaway",
           params: {
-            eventName: reformatStringToBeInURL(this.card.title),
+            giveawayName: `${this.card.id}-${reformatStringToBeInURL(
+              this.card.title
+            )}`,
             data: {
               id: this.card.id,
               title: this.card.title,

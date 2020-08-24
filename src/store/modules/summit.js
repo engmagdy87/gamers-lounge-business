@@ -1,12 +1,19 @@
-import { getSummits, getSummitsList, removeSummit, removeSummitImage, removeSummitVideo, getCoverHomeEventsImage, getCoverContactUsImage, getCoverGiveawaysImage } from '../../website/helpers/APIsHelper';
+import {
+    getSummits, getSummitsList, removeSummit, removeSummitImage, removeSummitVideo, getCoverHomeEventsImage, getCoverContactUsImage, getCoverGiveawaysImage, getSummitsHistory,
+    getSummitDetails
+} from '../../website/helpers/APIsHelper';
 import types from '../types';
 
 const state = {
     summitsData: [],
     summitsListData: [],
+    summitsHistoryData: [],
+    summitsDetailsData: {},
     coverHomeEventsImage: null,
     coverContactUsImage: null,
     coverGiveawaysImage: null,
+    isSummitsHistoryDataFetched: false,
+    isSummitDetailsDataFetched: false,
     isSummitsFetched: false,
     isSummitsListFetched: false,
     isCoverHomeEventsImageFetched: false,
@@ -20,6 +27,18 @@ const mutations = {
     },
     [types.summits.mutations.SET_SUMMITS_LIST_DATA]: (currentState, payload) => {
         currentState.summitsListData = payload;
+    },
+    [types.summits.mutations.SET_SUMMITS_HISTORY]: (currentState, payload) => {
+        currentState.summitsHistoryData = payload;
+    },
+    [types.summits.mutations.SET_SUMMIT_DETAILS]: (currentState, payload) => {
+        currentState.summitsDetailsData = payload;
+    },
+    [types.summits.mutations.SET_IS_SUMMITS_HISTORY_FETCHED]: (currentState, payload) => {
+        currentState.isSummitsHistoryDataFetched = payload;
+    },
+    [types.summits.mutations.SET_IS_SUMMIT_DETAILS_FETCHED]: (currentState, payload) => {
+        currentState.isSummitDetailsDataFetched = payload;
     },
     [types.summits.mutations.SET_IS_SUMMITS_FETCHED]: (currentState, payload) => {
         currentState.isSummitsFetched = payload;
@@ -65,6 +84,27 @@ const getSummitsListSummary = async ({ commit }) => {
     const response = await getSummitsList().then((response) => {
         commit(types.summits.mutations.SET_SUMMITS_LIST_DATA, response.data.summits);
         commit(types.summits.mutations.SET_IS_SUMMITS_LIST_FETCHED, true);
+        return true
+    }).catch(() => false);
+    return response
+};
+
+const getSummitsHistoryData = async ({ commit }) => {
+    const response = await getSummitsHistory().then((response) => {
+        commit(types.summits.mutations.SET_SUMMITS_HISTORY, response.data.data.summit);
+        commit(types.summits.mutations.SET_IS_SUMMITS_HISTORY_FETCHED, true);
+        return true
+    }).catch(() => false);
+    return response
+};
+
+const getSummitDetailsData = async ({ commit }, summitId) => {
+    const response = await getSummitDetails(summitId).then((response) => {
+        console.log('====================================');
+        console.log(response.data);
+        console.log('====================================');
+        commit(types.summits.mutations.SET_SUMMIT_DETAILS, response.data.summits);
+        commit(types.summits.mutations.SET_IS_SUMMIT_DETAILS_FETCHED, true);
         return true
     }).catch(() => false);
     return response
@@ -128,6 +168,8 @@ const deleteSummitVideo = async ({ commit }, payload) => {
 const actions = {
     [types.summits.actions.FETCH_SUMMITS]: getSummitsData,
     [types.summits.actions.FETCH_SUMMITS_LIST]: getSummitsListSummary,
+    [types.summits.actions.FETCH_SUMMITS_HISTORY]: getSummitsHistoryData,
+    [types.summits.actions.FETCH_SUMMIT_DETAILS]: getSummitDetailsData,
     [types.summits.actions.DELETE_SUMMIT]: deleteSummit,
     [types.summits.actions.DELETE_SUMMIT_IMAGE]: deleteSummitImage,
     [types.summits.actions.DELETE_SUMMIT_VIDEO]: deleteSummitVideo,

@@ -27,13 +27,13 @@
         >
           <a href="/events">Events</a>
         </li>
-        <!-- <li
+        <li
           :class="[
             activeItem === 'giveaways' ? 'header-wrapper__navLinks--active' : ''
           ]"
         >
           <a href="/giveaways">Giveaways</a>
-        </li> -->
+        </li>
         <li
           :class="[
             activeItem === 'story' ? 'header-wrapper__navLinks--active' : ''
@@ -118,7 +118,7 @@
           >
             <a href="/events" @click="closeNav">Events</a>
           </li>
-          <!-- <li
+          <li
             :class="[
               activeItem === 'giveaways'
                 ? 'header-wrapper__navLinks--active'
@@ -126,7 +126,7 @@
             ]"
           >
             <a href="/giveaways" @click="closeNav">Giveaways</a>
-          </li> -->
+          </li>
           <li
             :class="[
               activeItem === 'story' ? 'header-wrapper__navLinks--active' : ''

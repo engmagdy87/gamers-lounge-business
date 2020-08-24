@@ -44,6 +44,7 @@ html {
     filter: invert(1);
   }
 }
+
 .slick-dots {
   bottom: 20px !important;
   li {
@@ -66,10 +67,27 @@ html {
     content: none !important;
   }
 }
+
 .register-question-modal-body {
   .multiselect__content-wrapper {
     display: none !important;
     height: 0 !important;
     max-height: 0 !important;
+  }
+}
+
+.side-popup-wrapper div.slick-slider.slick-initialized ul.slick-dots {
+  bottom: -8px !important;
+  li {
+    width: 4px !important;
+    height: 4px !important;
+    background-color: gray !important;
+    border-radius: 50%;
+    button {
+      width: 4px !important;
+    }
+  }
+  li.slick-active {
+    background-color: $primary !important;
   }
 }

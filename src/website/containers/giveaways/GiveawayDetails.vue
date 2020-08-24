@@ -363,13 +363,16 @@ export default {
         types.navigationTree.mutations.SET_GIVEAWAY_TREE,
         this.giveawayShortDetails
       );
-    } else if (this.$router.history.current.params.data === undefined)
-      this.$router.push("/");
+    }
 
-    this.fetchGiveawayDetails(this.giveawayShortDetails.id);
-    this.fetchGiveawayTournaments(this.giveawayShortDetails.id);
-    this.fetchAmIRegisteredGiveawaysImage(this.giveawayShortDetails.id);
-    this.fetchIsRegisterAvailableInGiveaway(this.giveawayShortDetails.id);
+    const giveawayId = this.$router.history.current.params.giveawayName.split(
+      "-"
+    )[0];
+
+    this.fetchGiveawayDetails(giveawayId);
+    this.fetchGiveawayTournaments(giveawayId);
+    this.fetchAmIRegisteredGiveawaysImage(giveawayId);
+    this.fetchIsRegisterAvailableInGiveaway(giveawayId);
   },
   updated() {
     redirectToNewTab("description-container");
