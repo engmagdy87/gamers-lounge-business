@@ -210,9 +210,10 @@ export default {
       this.showRegisterModal = value;
     },
     getLink: async function() {
-      const result = await this.fetchTournamentRegisterLink(
-        this.tournamentShortDetails.id
-      );
+      const tournamentId = this.$router.history.current.params.tournamentName.split(
+        "-"
+      )[0];
+      const result = await this.fetchTournamentRegisterLink(tournamentId);
       this.registerLink = result;
     },
     backTo() {
