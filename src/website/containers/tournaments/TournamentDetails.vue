@@ -144,7 +144,10 @@
         </div>
         <div class="row">
           <div class="col mt-3 mt-md-5">
-            <Tabs :data="tournamentDetails" :redirectTo="redirectTo" />
+            <TournamentTabs
+              :data="tournamentDetails"
+              :redirectTo="redirectTo"
+            />
           </div>
         </div>
       </div>
@@ -169,7 +172,7 @@ import Header from "../../shared/Header";
 import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
 import Spinner from "../../shared/Spinner";
-import Tabs from "../../shared/Tabs";
+import TournamentTabs from "../../shared/TournamentTabs";
 import {
   getUserCookie,
   setTournamentCookie,
@@ -287,7 +290,7 @@ export default {
     LoginModal,
     RegisterModal,
     Spinner,
-    Tabs
+    TournamentTabs
   },
   mounted() {
     const tournamentCookieData = getTournamentCookie();

@@ -173,6 +173,9 @@ const getEventOffers = async ({ commit }, eventId) => {
 const getEventHistoryData = async ({ commit }, eventId) => {
     commit(types.home.mutations.SET_SPINNER_FLAG, true);
     const response = await getEventHistory(eventId).then((response) => {
+        console.log('====================================');
+        console.log(response.data);
+        console.log('====================================');
         commit(types.events.mutations.SET_EVENT_HISTORY, response.data.history);
         commit(types.home.mutations.SET_SPINNER_FLAG, false);
         commit(types.events.mutations.SET_IS_EVENT_HISTORY_FETCHED, true);

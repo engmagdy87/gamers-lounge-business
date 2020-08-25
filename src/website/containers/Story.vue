@@ -81,8 +81,10 @@
           </iframe>
         </div>
       </div>
+      <div v-if="isSummitsHistoryDataFetched">
+        <StoryMenuView :data="summitsHistoryData" :tree="tree" />
+      </div>
     </div>
-    <div v-if="isSummitsHistoryDataFetched">History</div>
     <LoginModal
       :showFlag="showLoginModal"
       :setShowLoginModal="setShowLoginModal"
@@ -98,6 +100,7 @@
 <script>
 import { mapGetters, mapActions, mapState } from "vuex";
 import types from "../../store/types";
+import StoryMenuView from "../components/story/StoryMenuView";
 import Header from "../shared/Header";
 import LoginModal from "../components/home/LoginModal";
 import RegisterModal from "../components/home/RegisterModal";
@@ -109,7 +112,13 @@ export default {
   data() {
     return {
       showLoginModal: false,
-      showRegisterModal: false
+      showRegisterModal: false,
+      tree: [
+        {
+          name: "Our Story",
+          path: "/story"
+        }
+      ]
     };
   },
   computed: {
@@ -153,6 +162,7 @@ export default {
     }
   },
   components: {
+    StoryMenuView,
     Header,
     LoginModal,
     RegisterModal,
@@ -164,10 +174,6 @@ export default {
   },
   updated() {
     redirectToNewTab("description-container");
-    console.log("====================================");
-    console.log(this.isSummitsHistoryDataFetched);
-    console.log(this.summitsHistoryData);
-    console.log("====================================");
   }
 };
 </script>

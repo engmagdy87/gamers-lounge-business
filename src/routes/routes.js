@@ -20,6 +20,7 @@ import Overview from 'src/dashboard/pages/Overview.vue'
 import Summits from 'src/dashboard/pages/Summits.vue'
 import SummitsList from 'src/dashboard/pages/Summits/SummitsList.vue'
 import SummitAddEdit from 'src/dashboard/pages/Summits/SummitAddEdit.vue'
+import SummitHistoryDetails from 'src/website/containers/story/SummitHistoryDetails.vue'
 
 import Events from 'src/dashboard/pages/Events.vue'
 import EventsList from 'src/dashboard/pages/Events/EventsList.vue'
@@ -78,6 +79,11 @@ const routes = [
     path: '/story',
     name: 'story',
     component: Story,
+  },
+  {
+    path: '/summit/:summitName',
+    name: 'summit',
+    component: SummitHistoryDetails,
   },
   {
     path: '/contact',

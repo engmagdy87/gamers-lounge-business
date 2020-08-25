@@ -90,9 +90,8 @@
                 :selected="event.summit_id === summit.id"
                 :key="index"
                 :value="summit.id"
-                >{{ summit.initial_title }}({{
-                  summit.active ? "Active" : ""
-                }})</option
+                >{{ summit.initial_title
+                }}{{ summit.active ? "(Active)" : "" }}</option
               >
             </select>
           </div>

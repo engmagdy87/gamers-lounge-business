@@ -321,10 +321,6 @@ export default {
     this.fetchEventHistory(eventId);
   },
   updated() {
-    console.log("====================================");
-    console.log(this.eventHistory);
-    console.log(this.isEventHistoryFetched);
-    console.log("====================================");
     redirectToNewTab("description-container");
     this.$nextTick(() => {
       if (this.setShowMoreTextFlag === null) {

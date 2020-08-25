@@ -177,12 +177,21 @@
         </div>
       </div>
       <div class="row mb-3">
-        <div class="col">
+        <div class="col-12 col-md-6">
           <base-input
             type="text"
             label="Initial Video"
             placeholder="Enter Initial Video"
             v-model="summit.vid_initial"
+          >
+          </base-input>
+        </div>
+        <div class="col-12 col-md-6">
+          <base-input
+            type="text"
+            label="Final Video"
+            placeholder="Enter Final Video"
+            v-model="summit.vid_final"
           >
           </base-input>
         </div>
@@ -507,6 +516,7 @@ export default {
         has_cover_over: false,
         cover_type: "-1",
         vid_initial: "",
+        vid_final: "",
         img_logo: "",
         img_cover_over: "",
         img_card: "",
@@ -585,6 +595,7 @@ export default {
           "vid_initial",
           generateYoutubeUrl(this.summit.vid_initial)
         );
+        formData.append("vid_final", generateYoutubeUrl(this.summit.vid_final));
         formData.append("vid_cover_main", this.summit.vid_cover_main);
         formData.append("img_logo", this.summit.img_logo);
         formData.append("img_cover_over", this.summit.img_cover_over);
@@ -761,6 +772,9 @@ export default {
 
       this.summit.vid_initial = this.editData.videos.vid_initial
         ? this.editData.videos.vid_initial.path || ""
+        : "";
+      this.summit.vid_final = this.editData.videos.vid_final
+        ? this.editData.videos.vid_final.path || ""
         : "";
     }
   },

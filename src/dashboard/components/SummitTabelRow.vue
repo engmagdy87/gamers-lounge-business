@@ -6,7 +6,9 @@
     <td>
       <div class="description" v-html="rowData.initial_description"></div>
     </td>
-    <td v-html="rowData.final_description"></td>
+    <td>
+      <div class="description" v-html="rowData.final_description"></div>
+    </td>
     <td>{{ rowData.attendess }}</td>
     <td>{{ rowData.year }}</td>
     <td>{{ rowData.location }}</td>

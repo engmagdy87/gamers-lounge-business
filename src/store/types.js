@@ -311,6 +311,7 @@ const navigationTree = {
         SET_EVENT_TREE: 'navigationTree/mutations/SET_EVENT_TREE',
         SET_TOURNAMENT_TREE: 'navigationTree/mutations/SET_TOURNAMENT_TREE',
         SET_GIVEAWAY_TREE: 'navigationTree/mutations/SET_GIVEAWAY_TREE',
+        SET_SUMMIT_TREE: 'navigationTree/mutations/SET_SUMMIT_TREE',
     },
 };
 

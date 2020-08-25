@@ -62,6 +62,18 @@ function setGiveawayCookie(data) {
     cookies.set('esports-giveaway', { ...data }, { path: '/', expires: expiryDate });
 }
 
+function getSummitCookie() {
+    const cookies = new Cookies();
+    return cookies.get('esports-summit');
+}
+
+function setSummitCookie(data) {
+    const cookies = new Cookies();
+    const expiryDate = new Date();
+    expiryDate.setDate(expiryDate.getDate() + cookieLifeTimeInWeeks);
+    cookies.set('esports-summit', { ...data }, { path: '/', expires: expiryDate });
+}
+
 function removeCookie() {
     const cookies = new Cookies();
     cookies.remove("esports");
@@ -78,5 +90,7 @@ export {
     getGameCookie,
     setGameCookie,
     getGiveawayCookie,
-    setGiveawayCookie
+    setGiveawayCookie,
+    getSummitCookie,
+    setSummitCookie
 };

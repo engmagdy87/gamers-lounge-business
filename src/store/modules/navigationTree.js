@@ -5,6 +5,7 @@ const state = {
     eventTree: {},
     tournamentTree: {},
     giveawayTree: {},
+    summitTree: {},
 };
 
 const mutations = {
@@ -19,6 +20,9 @@ const mutations = {
     },
     [types.navigationTree.mutations.SET_GIVEAWAY_TREE]: (currentState, payload) => {
         currentState.giveawayTree = payload;
+    },
+    [types.navigationTree.mutations.SET_SUMMIT_TREE]: (currentState, payload) => {
+        currentState.summitTree = payload;
     },
 };
 

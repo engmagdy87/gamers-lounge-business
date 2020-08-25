@@ -8,7 +8,7 @@ const state = {
     summitsData: [],
     summitsListData: [],
     summitsHistoryData: [],
-    summitsDetailsData: {},
+    summitDetailsData: {},
     coverHomeEventsImage: null,
     coverContactUsImage: null,
     coverGiveawaysImage: null,
@@ -32,7 +32,7 @@ const mutations = {
         currentState.summitsHistoryData = payload;
     },
     [types.summits.mutations.SET_SUMMIT_DETAILS]: (currentState, payload) => {
-        currentState.summitsDetailsData = payload;
+        currentState.summitDetailsData = payload;
     },
     [types.summits.mutations.SET_IS_SUMMITS_HISTORY_FETCHED]: (currentState, payload) => {
         currentState.isSummitsHistoryDataFetched = payload;
@@ -100,10 +100,7 @@ const getSummitsHistoryData = async ({ commit }) => {
 
 const getSummitDetailsData = async ({ commit }, summitId) => {
     const response = await getSummitDetails(summitId).then((response) => {
-        console.log('====================================');
-        console.log(response.data);
-        console.log('====================================');
-        commit(types.summits.mutations.SET_SUMMIT_DETAILS, response.data.summits);
+        commit(types.summits.mutations.SET_SUMMIT_DETAILS, response.data.data.summit);
         commit(types.summits.mutations.SET_IS_SUMMIT_DETAILS_FETCHED, true);
         return true
     }).catch(() => false);
