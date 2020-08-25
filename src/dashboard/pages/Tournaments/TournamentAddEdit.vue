@@ -816,10 +816,14 @@ export default {
       )[0];
       this.tournament.kick_off_date = this.editData.kick_off_date.split(" ")[0];
       this.tournament.cover_type = this.editData.cover_type;
-      this.tournament.region_id = this.editData.region.id;
-      this.tournament.platform_id = this.editData.platform.id;
-      this.tournament.game_id = this.editData.game.id;
-      this.tournament.event_id = this.editData.event.id;
+      this.tournament.region_id =
+        this.editData.region !== null ? this.editData.region.id : "-1";
+      this.tournament.platform_id =
+        this.editData.platform !== null ? this.editData.platform.id : "-1";
+      this.tournament.game_id =
+        this.editData.game !== null ? this.editData.game.id : "-1";
+      this.tournament.event_id =
+        this.editData.event !== null ? this.editData.event.id : "-1";
       this.tournament.has_rules = this.editData.has_rules;
       this.tournament.has_cover_over = this.editData.has_cover_over;
       this.tournament.rules = this.editData.rule;

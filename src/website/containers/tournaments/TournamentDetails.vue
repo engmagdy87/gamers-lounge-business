@@ -68,7 +68,7 @@
           <a
             v-for="(sponsor, i) in tournamentDetails.sponsors[sponsorType]"
             :key="i"
-            @click="redirectTo(sponsor.link)"
+            @click="goToSponor(sponsor.link)"
           >
             <img
               :class="[
@@ -101,35 +101,6 @@
               <span>{{ tournamentDetails.initial_title }}</span>
             </div>
           </div>
-          <!-- <div
-            class="col-12 col-md-6 d-flex justify-content-end align-items-center"
-          >
-            <div
-              class="tournament-details-wrapper__custom-btn-outside"
-              v-if="showSponsors"
-            >
-              <a
-                v-for="(sponsor, index) in formatSponsors"
-                :key="index"
-                @click="redirectTo(sponsor.link)"
-              >
-                <img
-                  :class="[
-                    `tournament-details-wrapper__sponsor ${getCssClassForSponsor(
-                      sponsor
-                    )}`
-                  ]"
-                  v-if="
-                    sponsor.images !== undefined &&
-                      sponsor.images.img_logo !== null
-                  "
-                  :src="sponsor.images.img_logo.path"
-                  :alt="sponsor.name"
-                />
-                <div v-else class="tournament-details-wrapper__divider"></div>
-              </a>
-            </div>
-          </div> -->
           <div
             class="col-12 col-md-0 mt-4 tournament-details-wrapper__custom-button-wrapper"
             role="button"
@@ -242,9 +213,10 @@ export default {
       this.showRegisterModal = value;
     },
     getLink: async function() {
-      const result = await this.fetchTournamentRegisterLink(
-        this.tournamentShortDetails.id
-      );
+      const tournamentId = this.$router.history.current.params.tournamentName.split(
+        "-"
+      )[0];
+      const result = await this.fetchTournamentRegisterLink(tournamentId);
       this.registerLink = result;
     },
     backTo() {
@@ -267,6 +239,10 @@ export default {
         this.notifyVue("Register coming soon", "warning");
       else if (this.tournamentDetails.register_status === "closed")
         this.notifyVue("Register was closed", "danger");
+    },
+    goToSponor(url) {
+      if (url.includes("http")) window.open(url, "_blank");
+      else window.open(`http://${url}`, "_blank");
     },
     notifyVue(message, color) {
       this.$notifications.notify({
