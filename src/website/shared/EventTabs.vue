@@ -42,9 +42,6 @@
                 <p class="event-tab-wrapper__details__title">
                   Location: <span>{{ event.summit.location }}</span>
                 </p>
-                <!-- <p class="event-tab-wrapper__details__title">
-                    Attendess: <span>{{ data.attendess }}</span>
-                  </p> -->
               </div>
             </div>
             <div class="row mt-3">
@@ -64,6 +61,20 @@
               allowfullscreen
             >
             </iframe>
+            <EventHistoryGallery
+              :images="[
+                event.images.img_cover_over.path,
+                event.images.img_logo.path,
+                event.images.img_cover_over.path,
+                event.images.img_logo.path,
+                event.images.img_cover_over.path,
+                event.images.img_logo.path,
+                event.images.img_cover_over.path,
+                event.images.img_logo.path,
+                event.images.img_cover_over.path,
+                event.images.img_logo.path
+              ]"
+            />
           </div>
         </div>
       </div>
@@ -72,6 +83,7 @@
 </template>
 
 <script>
+import EventHistoryGallery from "../containers/events/EventHistoryGallery";
 import redirectToNewTab from "../helpers/RedirectToNewTab";
 import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 import { changeTextDirection } from "../helpers/StringsHelper";
@@ -96,7 +108,7 @@ export default {
       for (let index = 0; index < tabPanes.length; index++) {
         const element = tabPanes[index];
         if (isDeviceSmart())
-          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 99.5%,90% 99.8%,50% 99.8%,20% 101%,0% 99.7%,0 99.8%)`;
+          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 97%,95% 99%,70% 99%,50% 110%,0% 98%,0 99.8%)`;
         else if (element.clientHeight < 800)
           element.style.clipPath = `polygon(0 0,98.5% 0,100% 5%,100% 89%,98% 95%,66% 95%,50% 150%,6% 120%,0 93%)`;
         else if (element.clientHeight >= 800 && element.clientHeight < 1300)
@@ -123,6 +135,9 @@ export default {
   updated() {
     this.changeHexaStyleForTab();
     redirectToNewTab("description-container");
+  },
+  components: {
+    EventHistoryGallery
   }
 };
 </script>

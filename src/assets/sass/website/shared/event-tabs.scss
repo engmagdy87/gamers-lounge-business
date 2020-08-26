@@ -123,6 +123,9 @@
     }
     &__info {
       width: 70%;
+      @include is-mobile {
+        width: 100%;
+      }
       span {
         font-weight: bold;
       }
