@@ -141,7 +141,7 @@
         :data="eventDetails.tournaments"
         :tree="getTree"
       />
-      <EventTabs :data="eventHistory" v-if="isEventHistoryFetched" />
+      <!-- <EventTabs :data="eventHistory" v-if="isEventHistoryFetched" /> -->
     </div>
     <LoginModal
       :showFlag="showLoginModal"
@@ -153,7 +153,7 @@
     />
     <Spinner :smallLoader="false" />
     <Footer />
-    <SidePopUp
+    <!-- <SidePopUp
       v-if="
         isEventGiveawaysFetched &&
           isEventOffersFetched &&
@@ -161,7 +161,7 @@
       "
       :giveawaysAndOffersData="giveawaysAndOffersData"
       :tree="getTree"
-    />
+    /> -->
   </div>
 </template>
 

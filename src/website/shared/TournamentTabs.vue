@@ -204,7 +204,9 @@ export default {
       this.activeTabIndex = index;
     },
     selectClickAction(tab, index) {
-      tab === "Schedule" || (tab === "Rules Book" && !this.data.has_rules)
+      tab === "Schedule" ||
+      tab === "Streaming" ||
+      (tab === "Rules Book" && !this.data.has_rules)
         ? () => {}
         : this.setActiveTabIndex(index);
     },
