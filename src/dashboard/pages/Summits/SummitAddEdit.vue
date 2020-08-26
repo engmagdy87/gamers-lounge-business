@@ -485,7 +485,7 @@ import {
 } from "../../../website/helpers/APIsHelper.js";
 import isDatesInProperSequence from "../../../dashboard/helpers/DateHelper";
 import editorOptions from "../../../dashboard/wysiwyg-factory/options";
-import generateYoutubeUrl from "../../../dashboard/helpers/YoutubeUrlGeneration";
+import { liveVideoEmbedFormatter } from "../../../dashboard/helpers/LiveVideoEmbedFormater";
 
 export default {
   components: {
@@ -527,7 +527,8 @@ export default {
         vid_cover_main: ""
       },
       editorOptions,
-      errors: {}
+      errors: {},
+      CTAClicked: false
     };
   },
   methods: {
@@ -579,6 +580,7 @@ export default {
       ) {
         this.notifyVue("Please insert dates in proper order", "danger");
       } else {
+        this.CTAClicked = true;
         let formData = new FormData();
         formData.append("initial_title", this.summit.initial_title);
         formData.append("final_title", this.summit.final_title);
@@ -593,9 +595,12 @@ export default {
         formData.append("active", this.summit.active ? 1 : 0);
         formData.append(
           "vid_initial",
-          generateYoutubeUrl(this.summit.vid_initial)
+          liveVideoEmbedFormatter(this.summit.vid_initial)
         );
-        formData.append("vid_final", generateYoutubeUrl(this.summit.vid_final));
+        formData.append(
+          "vid_final",
+          liveVideoEmbedFormatter(this.summit.vid_final)
+        );
         formData.append("vid_cover_main", this.summit.vid_cover_main);
         formData.append("img_logo", this.summit.img_logo);
         formData.append("img_cover_over", this.summit.img_cover_over);
@@ -779,7 +784,7 @@ export default {
     }
   },
   updated() {
-    if (this.isCoverTypesFetched)
+    if (this.isCoverTypesFetched && !this.CTAClicked)
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   }
 };

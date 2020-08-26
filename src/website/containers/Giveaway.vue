@@ -62,7 +62,7 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
-    <Footer v-if="isGiveawaysFetched && isOffersFetched" />
+    <Footer />
   </div>
 </template>
 
@@ -71,6 +71,7 @@ import { mapGetters, mapState, mapActions } from "vuex";
 import store from "../../store/index";
 import types from "../../store/types";
 import Header from "../shared/Header";
+import Footer from "../shared/Footer";
 import Spinner from "../shared/Spinner";
 import GiveawayCard from "../components/giveaways/GiveawayCard";
 import GiveawaysMenuView from "../components/giveaways/GiveawaysMenuView";
@@ -138,6 +139,7 @@ export default {
   },
   components: {
     Header,
+    Footer,
     LoginModal,
     RegisterModal,
     Spinner,

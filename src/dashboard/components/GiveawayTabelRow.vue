@@ -5,6 +5,9 @@
     <td>
       <div class="description" v-html="rowData.description"></div>
     </td>
+    <td>
+      <div class="description">{{ rowData.short_description }}</div>
+    </td>
     <td v-if="rowData.email_template !== null">
       <div class="description" v-html="rowData.email_template.body"></div>
     </td>

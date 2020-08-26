@@ -53,6 +53,7 @@ export default {
           "Id",
           "Title",
           "Description",
+          "Short Description",
           "Email Template",
           "Start Date",
           "End Date",

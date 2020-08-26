@@ -527,7 +527,7 @@ import types from "../../../store/types";
 import { createEvent, editEvent } from "../../../website/helpers/APIsHelper.js";
 import editorOptions from "../../../dashboard/wysiwyg-factory/options";
 import isDatesInProperSequence from "../../../dashboard/helpers/DateHelper";
-import generateYoutubeUrl from "../../../dashboard/helpers/YoutubeUrlGeneration";
+import { liveVideoEmbedFormatter } from "../../../dashboard/helpers/LiveVideoEmbedFormater";
 
 export default {
   data() {
@@ -566,7 +566,8 @@ export default {
         extra_sub_sponsors_ids: []
       },
       editorOptions,
-      errors: {}
+      errors: {},
+      CTAClicked: false
     };
   },
   methods: {
@@ -668,6 +669,7 @@ export default {
           "danger"
         );
       } else {
+        this.CTAClicked = true;
         let formData = new FormData();
 
         formData.append("initial_title", this.event.initial_title);
@@ -689,9 +691,12 @@ export default {
         formData.append("img_card", this.event.img_card);
         formData.append(
           "vid_initial",
-          generateYoutubeUrl(this.event.vid_initial)
+          liveVideoEmbedFormatter(this.event.vid_initial)
         );
-        formData.append("vid_final", generateYoutubeUrl(this.event.vid_final));
+        formData.append(
+          "vid_final",
+          liveVideoEmbedFormatter(this.event.vid_final)
+        );
         formData.append("vid_cover_main", this.event.vid_cover_main);
 
         if (this.event.main_sponsors_ids.length === 0)
@@ -906,7 +911,11 @@ export default {
     }
   },
   updated() {
-    if (this.isSummitsListFetched && this.isEventTypeFetched)
+    if (
+      this.isSummitsListFetched &&
+      this.isEventTypeFetched &&
+      !this.CTAClicked
+    )
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   },
   components: {

@@ -1,5 +1,6 @@
 <template>
-  <div class="home-wrapper" @scroll="detectScroll">
+  <!-- <div class="home-wrapper" @scroll="detectScroll"> -->
+  <div class="home-wrapper">
     <Header
       activeItem="home"
       :setShowRegisterModal="setShowRegisterModal"
@@ -97,11 +98,7 @@
       :regionsData="regionsData"
     />
     <Spinner :smallLoader="false" />
-    <Footer
-      :sponsors="footerSponsorsData"
-      :events="filteredMainEventsData"
-      :showFooter="footerCssClass"
-    />
+    <Footer />
   </div>
 </template>
 
@@ -130,7 +127,7 @@ export default {
       showLoginModal: false,
       showRegisterModal: false,
       showFiltersModal: false,
-      footerCssClass: "hide",
+      // footerCssClass: "hide",
       tree: [{ name: "Home", path: "/" }]
     };
   },
@@ -202,19 +199,19 @@ export default {
           data: { id, title, tree: [{ name: "Home", path: "/" }] }
         }
       });
-    },
-    detectScroll(e) {
-      // if (e.target.scrollTop <= 120) this.footerCssClass = "hide";
-      // else if (
-      //   e.target.scrollTop > 120 &&
-      //   e.target.scrollTop + e.target.offsetHeight < e.target.scrollHeight
-      // )
-      //   this.footerCssClass = "show-small";
-      //******************** */
-      // if (e.target.scrollTop + e.target.offsetHeight === e.target.scrollHeight)
-      //   this.footerCssClass = "show-small";
-      // else this.footerCssClass = "hide";
     }
+    // detectScroll(e) {
+    // if (e.target.scrollTop <= 120) this.footerCssClass = "hide";
+    // else if (
+    //   e.target.scrollTop > 120 &&
+    //   e.target.scrollTop + e.target.offsetHeight < e.target.scrollHeight
+    // )
+    //   this.footerCssClass = "show-small";
+    //******************** */
+    // if (e.target.scrollTop + e.target.offsetHeight === e.target.scrollHeight)
+    //   this.footerCssClass = "show-small";
+    // else this.footerCssClass = "hide";
+    // }
   },
   components: {
     Header,

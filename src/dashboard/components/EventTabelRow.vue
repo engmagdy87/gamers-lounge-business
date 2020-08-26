@@ -6,11 +6,12 @@
     <td>
       <div class="description" v-html="rowData.initial_description"></div>
     </td>
-    <td v-html="rowData.final_description"></td>
+    <td>
+      <div class="description" v-html="rowData.final_description"></div>
+    </td>
     <td v-if="rowData.summit">
-      {{ rowData.summit.initial_title }} ({{
-        rowData.summit.active ? "Active" : ""
-      }})
+      {{ rowData.summit.initial_title }}
+      {{ rowData.summit.active ? "(Active)" : "" }}
     </td>
     <td v-else></td>
     <td>{{ rowData.start_date.split(" ")[0] }}</td>

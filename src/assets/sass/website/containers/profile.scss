@@ -52,10 +52,10 @@ $preview-image: 150px;
   &__content {
     width: 100%;
     padding: 5vh 15%;
-    min-height: calc(100vh - 12vh);
+    height: max-content;
     color: white !important;
     @include is-mobile {
-      min-height: 82vh;
+      // min-height: 82vh;
       padding: 5%;
     }
     &__profile-details {
@@ -90,6 +90,10 @@ $preview-image: 150px;
         align-items: center;
         transition: all 0.2s ease;
         @include create-hexagone-shape(10px);
+        @include is-mobile {
+          width: 40%;
+          height: 80%;
+        }
       }
     }
   }
@@ -159,6 +163,9 @@ $preview-image: 150px;
   border-radius: 10px !important;
   border: 1px solid $primary;
   object-fit: cover;
+  @include is-mobile {
+    width: 50%;
+  }
 }
 
 .preview__close,

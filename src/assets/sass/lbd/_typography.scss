@@ -81,6 +81,10 @@ h6,
   background-color: transparent !important;
 }
 
+.description > span {
+  font-size: 1rem !important;
+}
+
 .description > span > * > * {
   color: black !important;
   background-color: transparent !important;
@@ -100,6 +104,20 @@ h6,
   color: black !important;
   background-color: transparent !important;
 }
+
+.event-tab-wrapper__details__description {
+  span > * {
+    font-size: 1rem !important;
+  }
+  span {
+    font-size: 1rem !important;
+  }
+  span > a {
+    color: #2af3f3 !important;
+    text-decoration: underline;
+  }
+}
+
 p {
   font-size: $font-paragraph;
   line-height: $line-height-general;

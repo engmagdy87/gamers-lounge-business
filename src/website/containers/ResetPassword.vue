@@ -89,6 +89,7 @@ export default {
         this.errors = { ...this.errors, email: "Email has invalid format" };
       } else {
         try {
+          this.errors = {};
           let formData = new FormData();
           formData.append("token", this.token);
           formData.append("email", this.email);

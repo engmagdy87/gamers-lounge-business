@@ -97,10 +97,9 @@
   &__content {
     width: 100%;
     padding: 0 15% 5vh 15%;
-    min-height: calc(100vh - 12vh);
+    height: max-content;
     color: white;
     @include is-mobile {
-      min-height: 82vh;
       padding: 5%;
     }
     &__breadcrumb {

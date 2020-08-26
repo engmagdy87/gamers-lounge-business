@@ -72,7 +72,7 @@
   color: rgba($color: #fff, $alpha: 0.4);
   border: none;
   margin: 0 2px;
-  width: 120px;
+  width: max-content;
   height: 50px;
   @include create-hexagone-shape-tab(10px);
   transform: translateY(5px);
@@ -110,19 +110,19 @@
   border: none;
 }
 
-.summit-tab-wrapper {
+.event-tab-wrapper {
   &__details {
     &__img {
-      width: 40%;
+      width: 30%;
       border-radius: 5px;
       @include is-mobile {
-        width: 60%;
+        width: 50%;
         display: block;
         margin: 0 auto 15px;
       }
     }
     &__info {
-      width: 60%;
+      width: 70%;
       span {
         font-weight: bold;
       }
@@ -132,64 +132,7 @@
       margin: 0;
     }
     &__description {
-      font-size: 1rem;
       margin-top: 10px;
     }
-    &__format {
-      font-size: 0.9rem;
-      font-weight: lighter;
-      margin: 0 10px;
-      @include is-mobile {
-        margin-right: 10px;
-      }
-    }
-    &__platform {
-      margin-right: 5px;
-    }
-    &__region {
-      margin-left: 5px;
-    }
-    &__kick-off {
-      margin: 5px 0;
-      padding: 5px 10px;
-      background-color: rgba($color: #fff, $alpha: 0.2) !important;
-      span {
-        display: inline-block;
-        margin-left: 5px;
-      }
-    }
-    &__register {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      @include is-mobile {
-        margin-top: 15px;
-      }
-      a {
-        color: white !important;
-      }
-      div {
-        border-radius: 50%;
-        width: 10px;
-        height: 10px;
-        margin-top: 6px;
-        margin-right: 5px;
-      }
-      &--open {
-        background-color: rgba(0, 211, 81, 1);
-      }
-      &--closed {
-        background-color: red;
-      }
-      &--soon {
-        background-color: orange;
-      }
-    }
-  }
-  &__tournaments {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
   }
 }

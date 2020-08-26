@@ -237,7 +237,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col float-right">
+        <div class="col float-none float-md-right">
           <div
             class="btn float-right profile-wrapper__content__custom-button-wrapper__outside"
             role="button"
@@ -266,6 +266,7 @@
     />
     <ReloginModal :showFlag="showReloginModalModal" />
     <Spinner :smallLoader="false" />
+    <Footer />
   </div>
 </template>
 
@@ -275,6 +276,7 @@ import { setUserCookie, getUserCookie } from "../helpers/CookieHelper";
 import store from "../../store/index";
 import types from "../../store/types";
 import Header from "../shared/Header";
+import Footer from "../shared/Footer";
 import ChangePassword from "../../website/components/profile/ChangePassword";
 import ReloginModal from "../../website/components/profile/ReloginModal";
 import RequestPassword from "../../website/components/profile/RequestPassword";
@@ -374,6 +376,7 @@ export default {
     },
     updateProfile: async function() {
       store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+      thie.errors = {};
       let formData = new FormData();
       formData.append("first_name", this.profile.first_name);
       formData.append("last_name", this.profile.last_name);
@@ -469,7 +472,8 @@ export default {
     Spinner,
     ChangePassword,
     RequestPassword,
-    ReloginModal
+    ReloginModal,
+    Footer
   },
   mounted() {
     this.fetchProfile();

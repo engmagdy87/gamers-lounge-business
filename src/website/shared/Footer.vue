@@ -8,13 +8,13 @@
           >
             <img
               class="footer-wrapper__social-media-icon"
-              src="website/img/footer/discord.png"
+              src="/website/img/footer/discord.png"
               alt="discord"
               @click="redirectTo('https://discord.gg/PUwd4cZ')"
             />
             <img
               class="footer-wrapper__social-media-icon"
-              src="website/img/footer/youtube.png"
+              src="/website/img/footer/youtube.png"
               alt="youtube"
               @click="
                 redirectTo(
@@ -24,13 +24,13 @@
             />
             <img
               class="footer-wrapper__social-media-icon"
-              src="website/img/footer/instagram.png"
+              src="/website/img/footer/instagram.png"
               alt="instagram"
               @click="redirectTo('https://www.instagram.com/theesportssummit/')"
             />
             <img
               class="footer-wrapper__social-media-icon"
-              src="website/img/footer/facebook.png"
+              src="/website/img/footer/facebook.png"
               alt="facebook"
               @click="redirectTo('https://www.facebook.com/theesportssummit/')"
             />
@@ -50,14 +50,16 @@
       >
         <img
           class="footer-wrapper__logo"
-          src="website/img/footer/gamers-lounge.png"
-          alt="instagram"
+          src="/website/img/footer/gamers-lounge.png"
+          alt="gamers lounge"
+          @click="redirectTo('http://gamersloungeme.com/')"
         />
         <div class="footer-wrapper__divider"></div>
         <img
           class="footer-wrapper__logo"
-          src="website/img/footer/worx.png"
-          alt="facebook"
+          src="/website/img/footer/worx.png"
+          alt="worx"
+          @click="redirectTo('https://theworx-emc.com/')"
         />
       </div>
     </div>
@@ -128,45 +130,45 @@
 
 <script>
 export default {
-  props: ["sponsors", "events", "showFooter"],
+  // props: ["sponsors", "events", "showFooter"],
   methods: {
     redirectTo(url) {
       if (url.includes("http")) window.open(url, "_blank");
       else window.open(`http://${url}`, "_blank");
-    },
-    redirectEventTo(event) {
-      if (event.is_external) window.open(event.external_link, "_blank");
-      else
-        this.$router.push({
-          path: `/events/event/${event.id}`
-        });
-    },
-    getHeighClass() {
-      if (this.showFooter === "hide") return "footer-wrapper--hide";
-      else if (this.showFooter === "show-small")
-        return "footer-wrapper--show-small";
-      // else if (this.showFooter === "show-large")
-      //   return "footer-wrapper--show-large";
-    },
-    getSponsorDataByPriority(priority) {
-      const sponsors = this.sponsors.filter(category => {
-        const categoryObject = category[Object.keys(category)[0]][0];
-        if (
-          categoryObject.category.enabled &&
-          categoryObject.category.priority === priority
-        )
-          return category;
-      });
-      return sponsors;
-    },
-    getSponsorsCategoryWithPriority(priority) {
-      const sponsors = this.getSponsorDataByPriority(priority);
-      return Object.values(sponsors[0])[0];
-    },
-    categoryTitle(priority) {
-      const sponsors = this.getSponsorDataByPriority(priority);
-      return Object.keys(sponsors[0])[0];
     }
+    // redirectEventTo(event) {
+    //   if (event.is_external) window.open(event.external_link, "_blank");
+    //   else
+    //     this.$router.push({
+    //       path: `/events/event/${event.id}`
+    //     });
+    // },
+    // getHeighClass() {
+    //   if (this.showFooter === "hide") return "footer-wrapper--hide";
+    //   else if (this.showFooter === "show-small")
+    //     return "footer-wrapper--show-small";
+    // else if (this.showFooter === "show-large")
+    //   return "footer-wrapper--show-large";
+    // },
+    // getSponsorDataByPriority(priority) {
+    //   const sponsors = this.sponsors.filter(category => {
+    //     const categoryObject = category[Object.keys(category)[0]][0];
+    //     if (
+    //       categoryObject.category.enabled &&
+    //       categoryObject.category.priority === priority
+    //     )
+    //       return category;
+    //   });
+    //   return sponsors;
+    // },
+    // getSponsorsCategoryWithPriority(priority) {
+    //   const sponsors = this.getSponsorDataByPriority(priority);
+    //   return Object.values(sponsors[0])[0];
+    // },
+    // categoryTitle(priority) {
+    //   const sponsors = this.getSponsorDataByPriority(priority);
+    //   return Object.keys(sponsors[0])[0];
+    // }
   }
 };
 </script>

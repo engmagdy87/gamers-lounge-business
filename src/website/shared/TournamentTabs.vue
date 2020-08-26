@@ -32,6 +32,7 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
       <div
+        v-if="activeTabIndex === 0"
         :class="['tab-pane fade', activeTabIndex === 0 ? 'show active' : '']"
         id="nav-home"
         role="tabpanel"
@@ -104,6 +105,7 @@
         </div>
       </div>
       <div
+        v-if="activeTabIndex === 1"
         :class="['tab-pane fade', activeTabIndex === 1 ? 'show active' : '']"
         id="nav-profile"
         role="tabpanel"
@@ -115,6 +117,7 @@
         <div class="description-container" v-html="data.rules.content"></div>
       </div>
       <div
+        v-if="activeTabIndex === 2"
         :class="['tab-pane fade', activeTabIndex === 2 ? 'show active' : '']"
         id="nav-contact"
         role="tabpanel"
@@ -123,14 +126,49 @@
         schedule
       </div>
       <div
+        v-if="activeTabIndex === 3"
         :class="['tab-pane fade', activeTabIndex === 3 ? 'show active' : '']"
         id="nav-contact"
         role="tabpanel"
         aria-labelledby="nav-contact-tab"
       >
-        stream
+        <div
+          class="row"
+          v-if="
+            data.streaming !== null &&
+              data.streaming.path !== null &&
+              data.streaming.path !== ''
+          "
+        >
+          <div class="col-12 col-md-8">
+            <iframe
+              width="100%"
+              height="500"
+              :src="data.streaming.path"
+              frameborder="0"
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            >
+            </iframe>
+          </div>
+          <div class="col-12 col-md-4">
+            <iframe
+              scrolling="<scrolling>"
+              width="100%"
+              height="500"
+              :src="getLiveVideoChatEmbedUrl(data.streaming.path)"
+              frameborder="0"
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            >
+            </iframe>
+          </div>
+        </div>
+
+        <h3 v-else>There is no streaming now</h3>
       </div>
       <div
+        v-if="activeTabIndex === 4"
         :class="['tab-pane fade', activeTabIndex === 4 ? 'show active' : '']"
         id="nav-contact"
         role="tabpanel"
@@ -151,6 +189,7 @@
 import redirectToNewTab from "../helpers/RedirectToNewTab";
 import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 import { changeTextDirection } from "../helpers/StringsHelper";
+import { liveVideoChatEmbedFormatter } from "../../dashboard/helpers/LiveVideoEmbedFormater";
 
 export default {
   props: ["data", "redirectTo"],
@@ -165,9 +204,7 @@ export default {
       this.activeTabIndex = index;
     },
     selectClickAction(tab, index) {
-      tab === "Schedule" ||
-      tab === "Streaming" ||
-      (tab === "Rules Book" && !this.data.has_rules)
+      tab === "Schedule" || (tab === "Rules Book" && !this.data.has_rules)
         ? () => {}
         : this.setActiveTabIndex(index);
     },
@@ -197,6 +234,12 @@ export default {
         else if (element.clientHeight >= 5000 && element.clientHeight < 8200)
           element.style.clipPath = `polygon(0 0,98% 0,100% 0.3%,100% 99.5%,98% 99.7%,66% 99.7%,50% 101%,9% 101%,0 99.7%)`;
       }
+    },
+    getLiveVideoChatEmbedUrl(url) {
+      console.log("====================================");
+      console.log(liveVideoChatEmbedFormatter(url));
+      console.log("====================================");
+      return liveVideoChatEmbedFormatter(url);
     }
   },
   mounted() {

@@ -21,83 +21,57 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
       <div
-        :class="['tab-pane fade', activeTabIndex === 0 ? 'show active' : '']"
-        v-if="activeTabIndex === 0"
+        v-for="(event, i) in data"
+        :key="i"
+        :class="['tab-pane fade', activeTabIndex === i ? 'show active' : '']"
+        v-if="activeTabIndex === i"
         id="nav-home"
         role="tabpanel"
         aria-labelledby="nav-home-tab"
       >
-        <div class="container">
-          <div class="row">
-            <div class="col-12 col-md-6">
-              <div class="row d-flex align-items-center">
-                <img
-                  v-if="data.images.img_logo !== null"
-                  :src="data.images.img_logo.path"
-                  :alt="data.initial_title + 'background'"
-                  class="summit-tab-wrapper__details__img"
-                />
-                <div class="summit-tab-wrapper__details__info">
-                  <p class="summit-tab-wrapper__details__title">
-                    Location: <span>{{ data.location }}</span>
-                  </p>
-                  <p class="summit-tab-wrapper__details__title">
+        <div class="row p-3">
+          <div class="col-12 col-md-5">
+            <div class="row d-flex align-items-center">
+              <img
+                v-if="event.images.img_logo !== null"
+                :src="event.images.img_logo.path"
+                :alt="event.initial_title + 'background'"
+                class="event-tab-wrapper__details__img"
+              />
+              <div class="event-tab-wrapper__details__info">
+                <p class="event-tab-wrapper__details__title">
+                  Location: <span>{{ event.summit.location }}</span>
+                </p>
+                <!-- <p class="event-tab-wrapper__details__title">
                     Attendess: <span>{{ data.attendess }}</span>
-                  </p>
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div
-                  class="summit-tab-wrapper__details__description"
-                  v-html="data.final_description"
-                ></div>
+                  </p> -->
               </div>
             </div>
-            <div class="col-12 col-md-6" v-if="data.videos.vid_final !== null">
-              <iframe
-                width="100%"
-                height="315"
-                :src="data.videos.vid_final.path"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              >
-              </iframe>
+            <div class="row mt-3">
+              <div
+                class="event-tab-wrapper__details__description"
+                v-html="event.final_description"
+              ></div>
             </div>
           </div>
+          <div class="col-12 col-md-7" v-if="event.videos.vid_final !== null">
+            <iframe
+              width="100%"
+              height="315"
+              :src="event.videos.vid_final.path"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            >
+            </iframe>
+          </div>
         </div>
-      </div>
-      <div
-        v-if="activeTabIndex === 1"
-        :class="['tab-pane fade', activeTabIndex === 1 ? 'show active' : '']"
-        id="nav-profile"
-        role="tabpanel"
-        aria-labelledby="nav-profile-tab"
-      >
-        MEDIA
-      </div>
-      <div
-        :class="[
-          'tab-pane fade summit-tab-wrapper__tournaments',
-          activeTabIndex === 2 ? 'show active' : ''
-        ]"
-        id="nav-contact"
-        role="tabpanel"
-        aria-labelledby="nav-contact-tab"
-        v-if="activeTabIndex === 2"
-      >
-        <TournamentItem
-          v-for="(item, i) in data.tournaments"
-          :key="i"
-          :data="item"
-        ></TournamentItem>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import TournamentItem from "../components/story/TournamentItem";
 import redirectToNewTab from "../helpers/RedirectToNewTab";
 import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 import { changeTextDirection } from "../helpers/StringsHelper";
@@ -107,7 +81,7 @@ export default {
   data() {
     return {
       activeTabIndex: 0,
-      tabs: ["Details", "Media", "Tournaments"]
+      tabs: []
     };
   },
   methods: {
@@ -142,17 +116,17 @@ export default {
   },
   mounted() {
     this.changeHexaStyleForTab();
+    this.data.forEach(tab => {
+      this.tabs.push(tab.final_title);
+    });
   },
   updated() {
     this.changeHexaStyleForTab();
     redirectToNewTab("description-container");
-  },
-  components: {
-    TournamentItem
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/sass/website/shared/summit-tabs.scss";
+@import "../../assets/sass/website/shared/event-tabs.scss";
 </style>

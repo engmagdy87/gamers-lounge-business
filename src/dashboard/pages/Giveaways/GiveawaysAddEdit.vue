@@ -52,6 +52,23 @@
         </div>
       </div>
       <div class="row">
+        <div class="col-12">
+          <base-input
+            type="text"
+            label="Short Description"
+            placeholder="Enter Short Description"
+            v-model="giveaway.short_description"
+          >
+          </base-input>
+          <p
+            class="error-message"
+            v-if="errors.short_description !== undefined"
+          >
+            {{ errors.short_description }}
+          </p>
+        </div>
+      </div>
+      <div class="row">
         <div class="col">
           <div class="form-group">
             <label>Email Template<span class="error-message"> *</span></label>
@@ -501,7 +518,6 @@ import {
 } from "../../../website/helpers/APIsHelper.js";
 import editorOptions from "../../../dashboard/wysiwyg-factory/options";
 import isDatesInProperSequence from "../../../dashboard/helpers/DateHelper";
-import generateYoutubeUrl from "../../../dashboard/helpers/YoutubeUrlGeneration";
 
 export default {
   data() {
@@ -519,6 +535,7 @@ export default {
       giveaway: {
         title: "",
         description: "",
+        short_description: "",
         email_template: {
           body: ""
         },
@@ -546,7 +563,8 @@ export default {
       table: {
         columns: ["Id", "Title", "Type", "Options", "Actions"]
       },
-      selectedQuestion: null
+      selectedQuestion: null,
+      CTAClicked: false
     };
   },
   methods: {
@@ -639,11 +657,28 @@ export default {
         ) === false
       ) {
         this.notifyVue("Please insert dates in proper sequence", "danger");
+      }
+      if (
+        this.giveaway.short_description.length === 0 ||
+        this.giveaway.short_description.length > 170
+      ) {
+        this.errors = {
+          ...this.errors,
+          short_description:
+            "Short Description must be less than 170 characters and not empty"
+        };
+        this.notifyVue(
+          "Short Description must be less than 170 characters and not empty",
+          "danger"
+        );
       } else {
+        this.errors = {};
+        this.CTAClicked = true;
         let formData = new FormData();
 
         formData.append("title", this.giveaway.title);
         formData.append("description", this.giveaway.description);
+        formData.append("short_description", this.giveaway.short_description);
         formData.append(
           "email_template",
           JSON.stringify(this.giveaway.email_template)
@@ -858,6 +893,7 @@ export default {
     if (this.$route.name === "Edit Giveaway & Offers") {
       this.giveaway.title = this.editData.title || "";
       this.giveaway.description = this.editData.description || "";
+      this.giveaway.short_description = this.editData.short_description || "";
       this.giveaway.email_template =
         this.editData.email_template === null
           ? {
@@ -894,7 +930,8 @@ export default {
       this.isEventsListFetched &&
       this.isGiveawayTypeFetched &&
       this.isGiveawayCoverTypesFetched &&
-      this.isGiveawayQuestionTypesFetched
+      this.isGiveawayQuestionTypesFetched &&
+      !this.CTAClicked
     )
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   },

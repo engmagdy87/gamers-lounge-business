@@ -25,7 +25,7 @@
   }
   &__content {
     width: 100%;
-    min-height: 100vh;
+    height: max-content;
     background-image: url("~/website/img/hexagone-pattern.png");
     background-repeat: repeat;
     padding: 12% 15% 5% 15%;

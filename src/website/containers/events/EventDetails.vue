@@ -141,6 +141,7 @@
         :data="eventDetails.tournaments"
         :tree="getTree"
       />
+      <EventTabs :data="eventHistory" v-if="isEventHistoryFetched" />
     </div>
     <LoginModal
       :showFlag="showLoginModal"
@@ -151,7 +152,8 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
-    <!-- <SidePopUp
+    <Footer />
+    <SidePopUp
       v-if="
         isEventGiveawaysFetched &&
           isEventOffersFetched &&
@@ -159,7 +161,7 @@
       "
       :giveawaysAndOffersData="giveawaysAndOffersData"
       :tree="getTree"
-    /> -->
+    />
   </div>
 </template>
 
@@ -168,6 +170,8 @@ import { mapGetters, mapActions, mapState } from "vuex";
 import store from "../../../store/index";
 import types from "../../../store/types";
 import Header from "../../shared/Header";
+import Footer from "../../shared/Footer";
+import EventTabs from "../../shared/EventTabs";
 import EventsMenuView from "../../components/events/EventsMenuView";
 import SidePopUp from "../../components/giveaways/SidePopUp";
 import LoginModal from "../../components/home/LoginModal";
@@ -289,11 +293,13 @@ export default {
   },
   components: {
     Header,
+    Footer,
     LoginModal,
     RegisterModal,
     Spinner,
     EventsMenuView,
-    SidePopUp
+    SidePopUp,
+    EventTabs
   },
   mounted() {
     const eventCookieData = getEventCookie();

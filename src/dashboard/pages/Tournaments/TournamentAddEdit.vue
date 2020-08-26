@@ -167,6 +167,9 @@
                 >{{ region.title }}</option
               >
             </select>
+            <p class="error-message" v-if="errors.region_id !== undefined">
+              {{ errors.region_id }}
+            </p>
           </div>
         </div>
         <div class="col-md-6">
@@ -182,6 +185,9 @@
                 >{{ platform.title }}</option
               >
             </select>
+            <p class="error-message" v-if="errors.platform_id !== undefined">
+              {{ errors.platform_id }}
+            </p>
           </div>
         </div>
       </div>
@@ -199,6 +205,9 @@
                 >{{ game.title }}</option
               >
             </select>
+            <p class="error-message" v-if="errors.game_id !== undefined">
+              {{ errors.game_id }}
+            </p>
           </div>
         </div>
         <div class="col-md-6">
@@ -214,11 +223,27 @@
                 >{{ event.initial_title }}</option
               >
             </select>
+            <p class="error-message" v-if="errors.event_id !== undefined">
+              {{ errors.event_id }}
+            </p>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4 mt-auto mb-auto">
+        <div class="col-md-3 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="show_sponsors"
+              v-model="tournament.show_sponsors"
+            />
+            <label class="custom-control-label" for="show_sponsors"
+              >Show Sponsors</label
+            >
+          </div>
+        </div>
+        <div class="col-md-3 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -231,7 +256,7 @@
             >
           </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
           <base-input
             type="text"
             label="Rule Title"
@@ -254,12 +279,22 @@
         </div>
       </div>
       <div class="row">
-        <div class="col">
+        <div class="col-12 col-md-6">
           <base-input
             type="text"
             label="Winner"
             placeholder="Enter Winner"
             v-model="tournament.winner"
+          >
+          </base-input>
+        </div>
+        <div class="col-12 col-md-6">
+          <base-input
+            type="number"
+            label="Prize"
+            placeholder="Enter Prize"
+            v-model="tournament.price"
+            :min="0"
           >
           </base-input>
         </div>
@@ -300,8 +335,19 @@
           </base-input>
         </div>
       </div>
+      <div class="row mb-3">
+        <div class="col">
+          <base-input
+            type="text"
+            label="Schedule Title"
+            placeholder="Enter Schedule Title"
+            v-model="tournament.schedule_title"
+          >
+          </base-input>
+        </div>
+      </div>
       <div class="row">
-        <div class="col-md-6 mt-auto mb-3">
+        <div class="col-md-6  mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -314,7 +360,7 @@
             >
           </div>
         </div>
-        <div class="col-md-6 mt-auto mb-3">
+        <div class="col-md-6  mt-auto mb-auto">
           <div class="form-group">
             <label for="cover-type">Cover Type</label>
             <select class="form-control" v-model="tournament.cover_type">
@@ -327,6 +373,32 @@
                 >{{ type.label }}</option
               >
             </select>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <div>
+            <label class="mr-5" for="media-images">Choose Schedule Image</label>
+            <input
+              type="file"
+              id="media-images"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_schedule')"
+              ref="img_schedule"
+            />
+            <br />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Tournament' &&
+                  editData.images !== null &&
+                  editData.images.img_schedule !== null
+              "
+              :image="editData.images.img_schedule"
+              :setShowDeleteDialogFlag="setImageDataFlag"
+              openedFor="img_schedule"
+            />
           </div>
         </div>
       </div>
@@ -508,7 +580,7 @@ import regions from "../../../store/modules/regions";
 import platforms from "../../../store/modules/platforms";
 import isDatesInProperSequence from "../../../dashboard/helpers/DateHelper";
 import editorOptions from "../../../dashboard/wysiwyg-factory/options";
-import generateYoutubeUrl from "../../../dashboard/helpers/YoutubeUrlGeneration";
+import { liveVideoEmbedFormatter } from "../../../dashboard/helpers/LiveVideoEmbedFormater";
 
 export default {
   components: {
@@ -533,26 +605,31 @@ export default {
         format: "",
         register_link: "",
         winner: "",
+        price: 0,
         register_start_at: "",
         register_end_at: "",
         kick_off_date: "",
         cover_type: "-1",
-        region_id: 0,
-        platform_id: 0,
-        game_id: 0,
-        event_id: 0,
+        region_id: "-1",
+        platform_id: "-1",
+        game_id: "-1",
+        event_id: "-1",
         has_cover_over: false,
+        show_sponsors: false,
         has_rules: false,
         rules: { title: "", content: "" },
         contacts: { title: "", content: "" },
+        schedule_title: "",
         img_logo: "",
         img_cover_over: "",
+        img_schedule: "",
         img_card: "",
         vid_stream: "",
         vid_cover_main: ""
       },
       editorOptions,
-      errors: {}
+      errors: {},
+      CTAClicked: false
     };
   },
   methods: {
@@ -620,7 +697,30 @@ export default {
         ) === false
       ) {
         this.notifyVue("Please insert dates in proper sequence", "danger");
+      } else if (this.tournament.region_id === "-1") {
+        this.errors = {
+          ...this.errors,
+          region_id: "Please choose proper region"
+        };
+        this.notifyVue("Please insert proper region", "danger");
+      } else if (this.tournament.platform_id === "-1") {
+        this.errors = {
+          ...this.errors,
+          platform_id: "Please choose proper platform"
+        };
+        this.notifyVue("Please insert proper platform", "danger");
+      } else if (this.tournament.game_id === "-1") {
+        this.errors = { ...this.errors, game_id: "Please choose proper game" };
+        this.notifyVue("Please insert proper game", "danger");
+      } else if (this.tournament.event_id === "-1") {
+        this.errors = {
+          ...this.errors,
+          event_id: "Please choose proper event"
+        };
+        this.notifyVue("Please insert proper event", "danger");
       } else {
+        this.errors = {};
+        this.CTAClicked = true;
         let formData = new FormData();
         formData.append("initial_title", this.tournament.initial_title);
         formData.append("final_title", this.tournament.final_title);
@@ -632,6 +732,8 @@ export default {
         formData.append("format", this.tournament.format);
         formData.append("register_link", this.tournament.register_link);
         formData.append("winner", this.tournament.winner);
+        formData.append("schedule_title", this.tournament.schedule_title);
+        formData.append("price", this.tournament.price);
         formData.append("register_start_at", this.tournament.register_start_at);
         formData.append("register_end_at", this.tournament.register_end_at);
         formData.append("kick_off_date", this.tournament.kick_off_date);
@@ -640,6 +742,7 @@ export default {
         formData.append("platform_id", this.tournament.platform_id);
         formData.append("game_id", this.tournament.game_id);
         formData.append("event_id", this.tournament.event_id);
+        formData.append("show_sponsors", this.tournament.show_sponsors ? 1 : 0);
         formData.append("has_rules", this.tournament.has_rules ? 1 : 0);
         formData.append(
           "has_cover_over",
@@ -649,10 +752,11 @@ export default {
         formData.append("contacts", JSON.stringify(this.tournament.contacts));
         formData.append("img_logo", this.tournament.img_logo);
         formData.append("img_cover_over", this.tournament.img_cover_over);
+        formData.append("img_schedule", this.tournament.img_schedule);
         formData.append("img_card", this.tournament.img_card);
         formData.append(
           "vid_stream",
-          generateYoutubeUrl(this.tournament.vid_stream)
+          liveVideoEmbedFormatter(this.tournament.vid_stream)
         );
         formData.append("vid_cover_main", this.tournament.vid_cover_main);
 
@@ -705,6 +809,10 @@ export default {
 
         case "img_cover_over":
           this.editData.images.img_cover_over = null;
+          break;
+
+        case "img_schedule":
+          this.editData.images.img_schedule = null;
           break;
 
         case "img_cover_main":
@@ -808,6 +916,8 @@ export default {
       this.tournament.format = this.editData.format || "";
       this.tournament.register_link = this.editData.register_link || "";
       this.tournament.winner = this.editData.winner || "";
+      this.tournament.schedule_title = this.editData.schedule_title || "";
+      this.tournament.price = this.editData.price || 0;
       this.tournament.register_start_at = this.editData.register_start_at.split(
         " "
       )[0];
@@ -824,12 +934,14 @@ export default {
         this.editData.game !== null ? this.editData.game.id : "-1";
       this.tournament.event_id =
         this.editData.event !== null ? this.editData.event.id : "-1";
+      this.tournament.show_sponsors = this.editData.show_sponsors;
       this.tournament.has_rules = this.editData.has_rules;
       this.tournament.has_cover_over = this.editData.has_cover_over;
       this.tournament.rules = this.editData.rule;
       this.tournament.contacts = this.editData.contact;
       this.tournament.img_logo = this.editData.images.img_logo;
       this.tournament.img_cover_over = this.editData.images.img_cover_over;
+      this.tournament.img_schedule = this.editData.images.img_schedule;
       this.tournament.img_card = this.editData.images.img_card;
 
       this.tournament.vid_stream =
@@ -848,7 +960,8 @@ export default {
       this.isDashboardPlatformsDataFetched &&
       this.isDashboardGamesDataFetched &&
       this.isEventsListFetched &&
-      this.isSummitsListFetched
+      this.isSummitsListFetched &&
+      !this.CTAClicked
     )
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
   }

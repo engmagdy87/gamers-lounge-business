@@ -45,7 +45,7 @@
           <h3>{{ card.title }}</h3>
           <div
             class="col description-container"
-            v-html="card.description"
+            v-html="card.short_description"
           ></div>
         </div>
       </VueSlickCarousel>

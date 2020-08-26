@@ -64,7 +64,7 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
-    <Footer v-if="isMainEventsFetched && isSubEventsFetched" />
+    <Footer />
   </div>
 </template>
 
@@ -73,6 +73,7 @@ import { mapGetters, mapState, mapActions } from "vuex";
 import store from "../../store/index";
 import types from "../../store/types";
 import Header from "../shared/Header";
+import Footer from "../shared/Footer";
 import Spinner from "../shared/Spinner";
 import MainEventCard from "../components/events/MainEventCard";
 import LoginModal from "../components/home/LoginModal";
@@ -135,6 +136,7 @@ export default {
     Header,
     LoginModal,
     RegisterModal,
+    Footer,
     Spinner,
     MainEventCard,
     VueSlickCarousel,

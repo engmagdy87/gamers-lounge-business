@@ -91,6 +91,7 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
+    <Footer />
   </div>
 </template>
 
@@ -99,6 +100,7 @@ import { mapGetters, mapActions, mapState } from "vuex";
 import store from "../../../store/index";
 import types from "../../../store/types";
 import Header from "../../shared/Header";
+import Footer from "../../shared/Footer";
 import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
 import Spinner from "../../shared/Spinner";
@@ -160,6 +162,7 @@ export default {
   },
   components: {
     Header,
+    Footer,
     LoginModal,
     RegisterModal,
     Spinner,

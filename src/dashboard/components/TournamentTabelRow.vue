@@ -6,7 +6,9 @@
     <td>
       <div v-html="rowData.initial_description" class="description"></div>
     </td>
-    <td v-html="rowData.final_description"></td>
+    <td>
+      <div v-html="rowData.final_description" class="description"></div>
+    </td>
     <td>{{ rowData.format }}</td>
     <td>{{ rowData.register_link }}</td>
     <td>{{ rowData.register_start_at.split(" ")[0] }}</td>
