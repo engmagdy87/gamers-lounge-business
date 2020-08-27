@@ -94,6 +94,9 @@
                 }}{{ summit.active ? "(Active)" : "" }}</option
               >
             </select>
+            <p class="error-message" v-if="errors.summit_id !== undefined">
+              {{ errors.summit_id }}
+            </p>
           </div>
         </div>
         <div class="col-md-4">
@@ -109,6 +112,9 @@
                 >{{ type.label }}</option
               >
             </select>
+            <p class="error-message" v-if="errors.cover_type !== undefined">
+              {{ errors.cover_type }}
+            </p>
           </div>
         </div>
         <div class="col-md-4">
@@ -132,8 +138,8 @@
                 >{{ type.label }}</option
               >
             </select>
-            <p class="error-message" v-if="errors.type !== undefined">
-              {{ errors.type }}
+            <p class="error-message" v-if="errors.event_type !== undefined">
+              {{ errors.event_type }}
             </p>
           </div>
         </div>
@@ -224,6 +230,9 @@
                 >{{ parent.title }}</option
               >
             </select>
+            <p class="error-message" v-if="errors.parent_id !== undefined">
+              {{ errors.parent_id }}
+            </p>
           </div>
         </div>
       </div>
@@ -668,7 +677,32 @@ export default {
             this.summitsListData[0].end_date.split(" ")[0],
           "danger"
         );
+      } else if (this.event.cover_type === "-1") {
+        this.errors = {
+          ...this.errors,
+          cover_type: "Please choose proper cover type"
+        };
+        this.notifyVue("Please choose cover type", "danger");
+      } else if (this.event.summit_id === "-1") {
+        this.errors = {
+          ...this.errors,
+          summit_id: "Please choose proper summit"
+        };
+        this.notifyVue("Please choose summit", "danger");
+      } else if (this.event.event_type === "-1") {
+        this.errors = {
+          ...this.errors,
+          event_type: "Please choose proper event type"
+        };
+        this.notifyVue("Please choose event type", "danger");
+      } else if (this.event.parent_id === "-1") {
+        this.errors = {
+          ...this.errors,
+          parent_id: "Please choose proper event parent"
+        };
+        this.notifyVue("Please choose event parent", "danger");
       } else {
+        this.errors = {};
         this.CTAClicked = true;
         let formData = new FormData();
 

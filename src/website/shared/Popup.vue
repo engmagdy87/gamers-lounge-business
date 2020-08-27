@@ -11,18 +11,16 @@
       :style="`backgroundImage: url(${data.images.img_main.path})`"
       @click="redirectTo"
     >
-      <!-- <div class="popup-wrapper__arrow-container" @click="toggleEventPopup">
-        <img
-          src="/website/img/arrow.svg"
-          alt="arrow"
-          :class="[
-            'popup-wrapper__arrow',
-            showEventPopup
-              ? 'popup-wrapper__arrow--reverse'
-              : 'popup-wrapper__arrow--normal'
-          ]"
-        />
-      </div> -->
+      <span
+        class="close-popup"
+        @click="
+          e => {
+            e.stopPropagation();
+            closePopup();
+          }
+        "
+        >&times;</span
+      >
     </div>
   </div>
 </template>
@@ -34,7 +32,7 @@ export default {
   props: ["data"],
   data() {
     return {
-      showEventPopup: false
+      showEventPopup: true
     };
   },
   methods: {
@@ -43,8 +41,8 @@ export default {
       if (url.includes("http")) window.open(url, "_blank");
       else window.open(`http://${url}`, "_blank");
     },
-    trimText(text) {
-      return truncateText(text);
+    closePopup() {
+      this.showEventPopup = false;
     }
   }
 };

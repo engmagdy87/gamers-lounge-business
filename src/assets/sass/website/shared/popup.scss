@@ -14,7 +14,7 @@ $popup-title-height: 50px;
   right: 0;
   transition: all 0.3s ease;
   &--hide {
-    transform: translateX(0px);
+    transform: translateX(450px);
   }
   &--show {
     transform: translateX(0);
@@ -63,4 +63,27 @@ $popup-title-height: 50px;
       margin: auto;
     }
   }
+}
+
+/* The Close Button */
+.close-popup {
+  color: $primary;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 25px;
+  // margin-top: 10px;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-popup:hover,
+.close-popup:focus {
+  text-decoration: none;
+  cursor: pointer;
 }

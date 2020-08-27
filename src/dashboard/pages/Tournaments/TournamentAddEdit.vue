@@ -702,22 +702,22 @@ export default {
           ...this.errors,
           region_id: "Please choose proper region"
         };
-        this.notifyVue("Please insert proper region", "danger");
+        this.notifyVue("Please choose proper region", "danger");
       } else if (this.tournament.platform_id === "-1") {
         this.errors = {
           ...this.errors,
           platform_id: "Please choose proper platform"
         };
-        this.notifyVue("Please insert proper platform", "danger");
+        this.notifyVue("Please choose proper platform", "danger");
       } else if (this.tournament.game_id === "-1") {
         this.errors = { ...this.errors, game_id: "Please choose proper game" };
-        this.notifyVue("Please insert proper game", "danger");
+        this.notifyVue("Please choose proper game", "danger");
       } else if (this.tournament.event_id === "-1") {
         this.errors = {
           ...this.errors,
           event_id: "Please choose proper event"
         };
-        this.notifyVue("Please insert proper event", "danger");
+        this.notifyVue("Please choose proper event", "danger");
       } else {
         this.errors = {};
         this.CTAClicked = true;

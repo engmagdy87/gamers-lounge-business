@@ -227,6 +227,9 @@
                 >{{ type.label }}</option
               >
             </select>
+            <p class="error-message" v-if="errors.cover_type !== undefined">
+              {{ errors.cover_type }}
+            </p>
           </div>
         </div>
 
@@ -671,6 +674,12 @@ export default {
           "Short Description must be less than 170 characters and not empty",
           "danger"
         );
+      } else if (this.giveaway.cover_type === "-1") {
+        this.errors = {
+          ...this.errors,
+          cover_type: "Please choose proper cover type"
+        };
+        this.notifyVue("Please choose cover type", "danger");
       } else {
         this.errors = {};
         this.CTAClicked = true;

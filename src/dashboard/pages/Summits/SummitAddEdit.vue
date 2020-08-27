@@ -173,6 +173,9 @@
                 >{{ type.label }}</option
               >
             </select>
+            <p class="error-message" v-if="errors.cover_type !== undefined">
+              {{ errors.cover_type }}
+            </p>
           </div>
         </div>
       </div>
@@ -579,7 +582,14 @@ export default {
         !isDatesInProperSequence(this.summit.start_date, this.summit.end_date)
       ) {
         this.notifyVue("Please insert dates in proper order", "danger");
+      } else if (this.summit.cover_type === "-1") {
+        this.errors = {
+          ...this.errors,
+          cover_type: "Please choose proper cover type"
+        };
+        this.notifyVue("Please choose cover type", "danger");
       } else {
+        this.errors = {};
         this.CTAClicked = true;
         let formData = new FormData();
         formData.append("initial_title", this.summit.initial_title);
