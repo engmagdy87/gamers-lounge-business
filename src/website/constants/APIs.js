@@ -121,6 +121,14 @@ const GET_LIST_EVENTS_PARENTS = `${API_URL}/admin/events/parents/list`
 const EDIT_EVENTS_PARENT = `${API_URL}/admin/events/parents`
 const DELETE_EVENTS_PARENT = `${API_URL}/admin/events/parents`
 
+// POPUP (6 APIs)
+const GET_DASHBOARD_POPUPS = `${API_URL}/admin/popups`
+const CREATE_POPUP = `${API_URL}/admin/popups`
+const EDIT_POPUP = `${API_URL}/admin/popups`
+const DELETE_POPUP = `${API_URL}/admin/popups`
+const DELETE_POPUP_IMAGE = `${API_URL}/admin/popups`
+const GET_RANDOM_POPUP = `${API_URL}/popups/random`
+
 export {
     API_URL,
     REGISTER_WEBSITE_USER,
@@ -217,5 +225,11 @@ export {
     GET_COVER_GIVEAWAY_IMAGE,
     GET_WEBSITE_EVENT_HISTORY,
     GET_WEBSITE_SUMMIT_HISTORY,
-    GET_WEBSITE_SUMMIT_DETAILS
+    GET_WEBSITE_SUMMIT_DETAILS,
+    GET_DASHBOARD_POPUPS,
+    CREATE_POPUP,
+    EDIT_POPUP,
+    DELETE_POPUP,
+    DELETE_POPUP_IMAGE,
+    GET_RANDOM_POPUP
 };

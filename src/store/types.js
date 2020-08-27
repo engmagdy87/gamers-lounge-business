@@ -72,6 +72,26 @@ const sponsors = {
     }
 };
 
+const popups = {
+    getters: {
+        GET_POPUP: 'popups/getters/GET_POPUP',
+    },
+    mutations: {
+        SET_DASHBOARD_POPUPS_DATA: 'popups/mutations/SET_DASHBOARD_POPUPS_DATA',
+        SET_IS_DASHBOARD_POPUPS_DATA_FETCHED: 'popups/mutations/SET_IS_DASHBOARD_POPUPS_DATA_FETCHED',
+        SET_RANDOM_POPUP_DATA: 'popups/mutations/SET_RANDOM_POPUP_DATA',
+        SET_IS_RANDOM_POPUP_DATA_FETCHED: 'popups/mutations/SET_IS_RANDOM_POPUP_DATA_FETCHED',
+        REMOVE_DELETED_POPUP: 'popups/mutations/REMOVE_DELETED_POPUP',
+    },
+    actions: {
+        FETCH_DASHBOARD_POPUPS: 'popups/actions/FETCH_DASHBOARD_POPUPS',
+        FETCH_RANDOM_POPUPS: 'popups/actions/FETCH_RANDOM_POPUPS',
+        EDIT_POPUP: 'popups/actions/EDIT_POPUP',
+        DELETE_POPUP: 'popups/actions/DELETE_POPUP',
+        DELETE_IMAGE_IMAGE: 'popups/actions/DELETE_IMAGE_IMAGE',
+    }
+};
+
 const games = {
     mutations: {
         SET_GAMES_DATA: 'games/mutations/SET_GAMES_DATA',
@@ -330,5 +350,6 @@ export default {
     tournaments,
     contact,
     sponsorsCategories,
-    navigationTree
+    navigationTree,
+    popups
 };

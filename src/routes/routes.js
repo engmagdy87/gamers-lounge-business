@@ -37,6 +37,10 @@ import Sponsors from 'src/dashboard/pages/Sponsors.vue'
 import SponsorsList from 'src/dashboard/pages/Sponsors/SponsorsList.vue'
 import SponsorAddEdit from 'src/dashboard/pages/Sponsors/SponsorAddEdit.vue'
 
+import Popups from 'src/dashboard/pages/Popups.vue'
+import PopupList from 'src/dashboard/pages/Popups/PopupList.vue'
+import PopupAddEdit from 'src/dashboard/pages/Popups/PopupAddEdit.vue'
+
 import Games from 'src/dashboard/pages/Games.vue'
 import GamesList from 'src/dashboard/pages/Games/GamesList.vue'
 import GameAddEdit from 'src/dashboard/pages/Games/GameAddEdit.vue'
@@ -249,6 +253,29 @@ const routes = [
             path: 'edit',
             name: 'Edit Sponsor',
             component: SponsorAddEdit
+          }
+        ]
+      },
+      {
+        path: 'popups',
+        name: 'Popups',
+        redirect: '/dashboard/popups/list',
+        component: Popups,
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: PopupList
+          },
+          {
+            path: 'create',
+            name: 'Create Popup',
+            component: PopupAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit Popup',
+            component: PopupAddEdit
           }
         ]
       },

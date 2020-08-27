@@ -149,6 +149,19 @@
     0% calc(100% - #{$notchSize})
   );
 }
+
+@mixin create-half-hexagone-shape($notchSize) {
+  clip-path: polygon(
+    0% $notchSize,
+    $notchSize 0%,
+    100% 0%,
+    100% $notchSize,
+    100% calc(100% - #{$notchSize}),
+    100% 100%,
+    $notchSize 100%,
+    0% calc(100% - #{$notchSize})
+  );
+}
 @mixin create-hero-header-shape() {
   clip-path: polygon(
     0 0,

@@ -99,6 +99,7 @@
     />
     <Spinner :smallLoader="false" />
     <Footer />
+    <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>
 
@@ -118,6 +119,8 @@ import ListView from "../components/home/ListView";
 import CustomSwitch from "../shared/CustomSwitch";
 import CustomButton from "../shared/CustomButton";
 import { reformatStringToBeInURL } from "../helpers/StringsHelper";
+import Popup from "../shared/Popup";
+import * as POPUPS_PLACES from "../constants/PopupsPlaces";
 
 export default {
   data() {
@@ -128,7 +131,8 @@ export default {
       showRegisterModal: false,
       showFiltersModal: false,
       // footerCssClass: "hide",
-      tree: [{ name: "Home", path: "/" }]
+      tree: [{ name: "Home", path: "/" }],
+      randomPopupData: {}
     };
   },
   computed: {
@@ -145,10 +149,12 @@ export default {
       isFooterSponsorsDataFetched: state =>
         state.sponsors.isFooterSponsorsDataFetched,
       mainEventsData: state => state.events.mainEventsData,
-      isMainEventsFetched: state => state.events.isMainEventsFetched
+      isMainEventsFetched: state => state.events.isMainEventsFetched,
+      isRandomPopupDataFetched: state => state.popups.isRandomPopupDataFetched
     }),
     ...mapGetters({
-      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
+      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN,
+      randomPopup: types.popups.getters.GET_POPUP
     }),
     getCorrespondingData() {
       return this.isGamesActive ? this.gamesData : this.tournamentsData;
@@ -173,7 +179,8 @@ export default {
       fetchTournaments: types.tournaments.actions.FETCH_TOURNAMENTS,
       fetchRegions: types.regions.actions.FETCH_REGIONS_FOR_DASHBOARD,
       fetchFooterSponsors: types.sponsors.actions.FETCH_FOOTER_SPONSORS,
-      fetchMainEvents: types.events.actions.FETCH_MAIN_EVENTS
+      fetchMainEvents: types.events.actions.FETCH_MAIN_EVENTS,
+      fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -222,6 +229,7 @@ export default {
     MenuView,
     ListView,
     Footer,
+    Popup,
     CustomButton,
     Filters,
     VueSlickCarousel
@@ -233,6 +241,7 @@ export default {
     this.fetchRegions();
     this.fetchFooterSponsors();
     this.fetchMainEvents();
+    this.fetchRandomPopup();
     const scrollId = this.$router.history.current.hash.split("#")[1];
     if (scrollId && document.getElementById("home") !== null)
       document.getElementById("home").scrollIntoView();
@@ -240,6 +249,9 @@ export default {
     if (scrollId === "games") this.isGamesActive = true;
   },
   updated() {
+    if (this.isRandomPopupDataFetched)
+      this.randomPopupData = this.randomPopup(POPUPS_PLACES.HOME);
+
     if (
       this.isGamesDataFetched &&
       this.isTournamentsDataFetched &&

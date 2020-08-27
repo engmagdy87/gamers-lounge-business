@@ -1,0 +1,18 @@
+const CONTACT = 'Contact-Us'
+const EVENTS = 'Events'
+const GIVEAWAY = 'Giveaways'
+const HOME = 'Home'
+const PROFILE = 'Profile'
+const STORY = 'Our-Story'
+const EVENT_DETAILS = 'Event-Details'
+const GAME_DETAILS = 'Game-Details'
+const GIVEAWAY_DETAILS = 'Giveaway-Details'
+const SUMMIT_HISTORY_DETAILS = 'Summit-History-Details'
+const TOURNAMENT_DETAILS = 'Tournament-Details'
+
+export default
+    [CONTACT, EVENTS, GIVEAWAY, HOME, PROFILE, STORY, EVENT_DETAILS, GAME_DETAILS, GIVEAWAY_DETAILS, SUMMIT_HISTORY_DETAILS, TOURNAMENT_DETAILS]
+
+export {
+    CONTACT, EVENTS, GIVEAWAY, HOME, PROFILE, STORY, EVENT_DETAILS, GAME_DETAILS, GIVEAWAY_DETAILS, SUMMIT_HISTORY_DETAILS, TOURNAMENT_DETAILS
+}    

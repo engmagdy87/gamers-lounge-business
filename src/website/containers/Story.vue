@@ -95,6 +95,7 @@
     />
     <Spinner :smallLoader="false" />
     <Footer />
+    <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>
 
@@ -109,6 +110,8 @@ import RegisterModal from "../components/home/RegisterModal";
 import Spinner from "../shared/Spinner";
 import redirectToNewTab from "../helpers/RedirectToNewTab";
 import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
+import Popup from "../shared/Popup";
+import * as POPUPS_PLACES from "../constants/PopupsPlaces";
 
 export default {
   data() {
@@ -120,19 +123,22 @@ export default {
           name: "Our Story",
           path: "/story"
         }
-      ]
+      ],
+      randomPopupData: {}
     };
   },
   computed: {
     ...mapGetters({
-      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
+      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN,
+      randomPopup: types.popups.getters.GET_POPUP
     }),
     ...mapState({
       storyData: state => state.story.storyData,
       summitsHistoryData: state => state.summits.summitsHistoryData,
       isStoryFetched: state => state.story.isStoryFetched,
       isSummitsHistoryDataFetched: state =>
-        state.summits.isSummitsHistoryDataFetched
+        state.summits.isSummitsHistoryDataFetched,
+      isRandomPopupDataFetched: state => state.popups.isRandomPopupDataFetched
     }),
     isDataEmpty() {
       return (
@@ -154,7 +160,8 @@ export default {
   methods: {
     ...mapActions({
       fetchStory: types.story.actions.FETCH_STORY,
-      fetchSummitsHistory: types.summits.actions.FETCH_SUMMITS_HISTORY
+      fetchSummitsHistory: types.summits.actions.FETCH_SUMMITS_HISTORY,
+      fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -169,14 +176,18 @@ export default {
     Footer,
     LoginModal,
     RegisterModal,
-    Spinner
+    Spinner,
+    Popup
   },
   mounted() {
     this.fetchStory();
     this.fetchSummitsHistory();
+    this.fetchRandomPopup();
   },
   updated() {
     redirectToNewTab("description-container");
+    if (this.isRandomPopupDataFetched)
+      this.randomPopupData = this.randomPopup(POPUPS_PLACES.STORY);
   }
 };
 </script>

@@ -42,9 +42,11 @@ const getEventParentsData = async ({ commit },) => {
 };
 
 const getEventParentsDataForDashboard = async ({ commit },) => {
+    commit(types.home.mutations.SET_SPINNER_FLAG, true);
     const response = await getEventParentForDashboard().then((response) => {
         commit(types.eventParent.mutations.SET_DASHBOARD_EVENT_PARENTS_DATA, response.data.parents);
         commit(types.eventParent.mutations.SET_IS_DASHBOARD_EVENT_PARENTS_DATA_FETCHED, true);
+        commit(types.home.mutations.SET_SPINNER_FLAG, false);
         return true
     }).catch(() => false);
     return response

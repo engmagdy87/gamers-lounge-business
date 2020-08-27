@@ -236,9 +236,6 @@ export default {
       }
     },
     getLiveVideoChatEmbedUrl(url) {
-      console.log("====================================");
-      console.log(liveVideoChatEmbedFormatter(url));
-      console.log("====================================");
       return liveVideoChatEmbedFormatter(url);
     }
   },

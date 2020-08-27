@@ -1,19 +1,20 @@
 <template>
   <tr>
     <th scope="row">{{ id }}</th>
-    <td>{{ rowData.name }}</td>
+    <td>{{ rowData.title }}</td>
     <td>
       <a :href="rowData.link" target="_blank">URL</a>
     </td>
-    <td>{{ !rowData.summit ? "" : rowData.summit.initial_title }}</td>
-    <td>{{ !rowData.category ? "" : rowData.category.title }}</td>
+    <td>
+      <li v-for="(place, i) in rowData.places" :key="i">{{ place.name }}</li>
+    </td>
     <td>
       <a
         v-if="
-          rowData.images.img_logo !== undefined &&
-            rowData.images.img_logo !== null
+          rowData.images.img_main !== undefined &&
+            rowData.images.img_main !== null
         "
-        :href="rowData.images.img_logo.path"
+        :href="rowData.images.img_main.path"
         target="_blank"
         >Img</a
       >
@@ -35,7 +36,7 @@ export default {
   methods: {
     redirectTo() {
       this.$router.push({
-        name: "Edit Sponsor",
+        name: "Edit Popup",
         params: { data: this.rowData }
       });
     }

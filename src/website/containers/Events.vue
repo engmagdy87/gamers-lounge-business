@@ -155,6 +155,9 @@ export default {
       this.isCoverHomeEventsImageFetched
     )
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+
+    if (this.isRandomPopupDataFetched)
+      this.randomPopupData = this.randomPopup(POPUPS_PLACES.EVENTS);
   }
 };
 </script>

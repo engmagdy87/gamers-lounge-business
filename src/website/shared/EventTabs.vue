@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import EventHistoryGallery from "../containers/events/EventHistoryGallery";
+import EventHistoryGallery from "../components/events/EventHistoryGallery";
 import redirectToNewTab from "../helpers/RedirectToNewTab";
 import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 import { changeTextDirection } from "../helpers/StringsHelper";

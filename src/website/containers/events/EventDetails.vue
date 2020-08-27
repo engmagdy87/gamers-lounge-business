@@ -153,7 +153,8 @@
     />
     <Spinner :smallLoader="false" />
     <Footer />
-    <SidePopUp
+    <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
+    <EventPopUp
       v-if="
         isEventGiveawaysFetched &&
           isEventOffersFetched &&
@@ -171,14 +172,16 @@ import store from "../../../store/index";
 import types from "../../../store/types";
 import Header from "../../shared/Header";
 import Footer from "../../shared/Footer";
+import Popup from "../../shared/Popup";
 import EventTabs from "../../shared/EventTabs";
 import EventsMenuView from "../../components/events/EventsMenuView";
-import SidePopUp from "../../components/giveaways/SidePopUp";
+import EventPopUp from "../../components/giveaways/EventPopUp";
 import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
 import Spinner from "../../shared/Spinner";
 import redirectToNewTab from "../../helpers/RedirectToNewTab";
 import { setEventCookie, getEventCookie } from "../../helpers/CookieHelper";
+import * as POPUPS_PLACES from "../../constants/PopupsPlaces";
 
 export default {
   data() {
@@ -187,12 +190,14 @@ export default {
       showRegisterModal: false,
       showMoreText: false,
       setShowMoreTextFlag: false,
-      eventShortDetails: {}
+      eventShortDetails: {},
+      randomPopupData: {}
     };
   },
   computed: {
     ...mapGetters({
-      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
+      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN,
+      randomPopup: types.popups.getters.GET_POPUP
     }),
     ...mapState({
       eventDetails: state => state.events.eventDetails,
@@ -202,7 +207,8 @@ export default {
       isEventHistoryFetched: state => state.events.isEventHistoryFetched,
       isEventGiveawaysFetched: state => state.events.isEventGiveawaysFetched,
       isEventOffersFetched: state => state.events.isEventOffersFetched,
-      eventTree: state => state.navigationTree.eventTree
+      eventTree: state => state.navigationTree.eventTree,
+      isRandomPopupDataFetched: state => state.popups.isRandomPopupDataFetched
     }),
     showDetailsHero() {
       return Object.keys(this.eventDetails).length !== 0;
@@ -259,7 +265,8 @@ export default {
       fetchEventDetails: types.events.actions.FETCH_EVENT_DETAILS,
       fetchEventGiveaways: types.events.actions.FETCH_EVENT_GIVEAWAYS,
       fetchEventOffers: types.events.actions.FETCH_EVENT_OFFERS,
-      fetchEventHistory: types.events.actions.FETCH_EVENT_HISTORY
+      fetchEventHistory: types.events.actions.FETCH_EVENT_HISTORY,
+      fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -298,7 +305,8 @@ export default {
     RegisterModal,
     Spinner,
     EventsMenuView,
-    SidePopUp,
+    EventPopUp,
+    Popup,
     EventTabs
   },
   mounted() {
@@ -325,6 +333,7 @@ export default {
     this.fetchEventOffers(eventId);
     this.fetchEventDetails(eventId);
     this.fetchEventHistory(eventId);
+    this.fetchRandomPopup();
   },
   updated() {
     redirectToNewTab("description-container");
@@ -334,6 +343,8 @@ export default {
           this.$refs.descriptionText.clientHeight > 200;
       }
     });
+    if (this.isRandomPopupDataFetched)
+      this.randomPopupData = this.randomPopup(POPUPS_PLACES.EVENT_DETAILS);
   }
 };
 </script>

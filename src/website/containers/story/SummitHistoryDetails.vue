@@ -92,6 +92,7 @@
     />
     <Spinner :smallLoader="false" />
     <Footer />
+    <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>
 
@@ -110,24 +111,29 @@ import {
   setSummitCookie,
   getSummitCookie
 } from "../../helpers/CookieHelper";
+import Popup from "../../shared/Popup";
+import * as POPUPS_PLACES from "../../constants/PopupsPlaces";
 
 export default {
   data() {
     return {
       showLoginModal: false,
       showRegisterModal: false,
-      summitShortDetails: {}
+      summitShortDetails: {},
+      randomPopupData: {}
     };
   },
   computed: {
     ...mapGetters({
-      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
+      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN,
+      randomPopup: types.popups.getters.GET_POPUP
     }),
     ...mapState({
       summitDetails: state => state.summits.summitDetailsData,
       isSummitDetailsDataFetched: state =>
         state.summits.isSummitDetailsDataFetched,
-      summitTree: state => state.navigationTree.summitTree
+      summitTree: state => state.navigationTree.summitTree,
+      isRandomPopupDataFetched: state => state.popups.isRandomPopupDataFetched
     }),
     showDetailsHero() {
       return Object.keys(this.summitDetails).length !== 0;
@@ -143,7 +149,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchSummitDetails: types.summits.actions.FETCH_SUMMIT_DETAILS
+      fetchSummitDetails: types.summits.actions.FETCH_SUMMIT_DETAILS,
+      fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -166,6 +173,7 @@ export default {
     LoginModal,
     RegisterModal,
     Spinner,
+    Popup,
     SummitTabs
   },
   mounted() {
@@ -190,6 +198,13 @@ export default {
       "-"
     )[0];
     this.fetchSummitDetails(summitId);
+    this.fetchRandomPopup();
+  },
+  updated() {
+    if (this.isRandomPopupDataFetched)
+      this.randomPopupData = this.randomPopup(
+        POPUPS_PLACES.SUMMIT_HISTORY_DETAILS
+      );
   }
 };
 </script>

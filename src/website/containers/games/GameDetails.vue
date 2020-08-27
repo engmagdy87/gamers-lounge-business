@@ -65,6 +65,7 @@
     />
     <Spinner :smallLoader="false" />
     <Footer />
+    <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>
 
@@ -74,6 +75,7 @@ import store from "../../../store/index";
 import types from "../../../store/types";
 import Header from "../../shared/Header";
 import Footer from "../../shared/Footer";
+import Popup from "../../shared/Popup";
 import MenuView from "../../components/home/MenuView";
 import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
@@ -81,22 +83,26 @@ import Spinner from "../../shared/Spinner";
 import redirectToNewTab from "../../helpers/RedirectToNewTab";
 import reformatStringToBeInURL from "../../helpers/StringsHelper";
 import { setGameCookie, getGameCookie } from "../../helpers/CookieHelper";
+import * as POPUPS_PLACES from "../../constants/PopupsPlaces";
 
 export default {
   data() {
     return {
       showLoginModal: false,
       showRegisterModal: false,
-      gameShortDetails: {}
+      gameShortDetails: {},
+      randomPopupData: {}
     };
   },
   computed: {
     ...mapGetters({
-      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
+      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN,
+      randomPopup: types.popups.getters.GET_POPUP
     }),
     ...mapState({
       gameDetails: state => state.games.gameDetailsData,
-      gameTree: state => state.navigationTree.gameTree
+      gameTree: state => state.navigationTree.gameTree,
+      isRandomPopupDataFetched: state => state.popups.isRandomPopupDataFetched
     }),
     showDetailsHero() {
       return Object.keys(this.gameDetails).length !== 0;
@@ -120,7 +126,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchGameDetails: types.games.actions.FETCH_GAME_DETAILS
+      fetchGameDetails: types.games.actions.FETCH_GAME_DETAILS,
+      fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -140,6 +147,7 @@ export default {
     Footer,
     LoginModal,
     RegisterModal,
+    Popup,
     Spinner,
     MenuView
   },
@@ -164,9 +172,12 @@ export default {
 
     const gameId = this.$router.history.current.params.gameName.split("-")[0];
     this.fetchGameDetails(gameId);
+    this.fetchRandomPopup();
   },
   updated() {
     redirectToNewTab("description-container");
+    if (this.isRandomPopupDataFetched)
+      this.randomPopupData = this.randomPopup(POPUPS_PLACES.GAME_DETAILS);
   }
 };
 </script>

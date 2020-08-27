@@ -19,7 +19,7 @@ const liveVideoChatEmbedFormatter = (url) => {
     if (url.includes("youtube") && url.includes("embed")) {
         const items = url.split("/")
         const vidId = items[items.length - 1]
-        return `https://www.youtube.com/live_chat?v=${vidId}&embed_domain=localhost`
+        return `https://www.youtube.com/live_chat?v=${vidId}&embed_domain=${getParentUrl()}`
     }
 
     if (url.includes("twitch")) {
@@ -32,6 +32,10 @@ const liveVideoChatEmbedFormatter = (url) => {
 }
 
 const getParentUrl = () => {
+    console.log('====================================');
+    console.log(window.location.hostname);
+    console.log(process.env.NODE_ENV);
+    console.log('====================================');
     switch (process.env.NODE_ENV) {
         case "development":
             return "localhost"

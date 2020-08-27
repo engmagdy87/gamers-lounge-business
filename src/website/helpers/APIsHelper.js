@@ -855,6 +855,57 @@ async function editEventParent(id, data) {
     return response;
 }
 
+// Popups
+async function getPopupsForDashboard() {
+    const response = await getDashboardData(
+        APIs.GET_DASHBOARD_POPUPS
+    );
+
+    return response.data;
+}
+
+async function getRandomPopup() {
+    const response = await get(
+        APIs.GET_RANDOM_POPUP
+    );
+
+    return response.data;
+}
+
+async function createPopup(payload) {
+    const response = await postMultipart(
+        payload,
+        APIs.CREATE_POPUP
+    );
+
+    return response.data;
+}
+
+async function removePopup(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_POPUP}/${id}`
+    );
+
+    return response;
+}
+
+async function removePopupImage(id, imageId) {
+    const response = await deleteData(
+        `${APIs.DELETE_POPUP_IMAGE}/${id}/images/${imageId}`
+    );
+
+    return response;
+}
+
+async function editPopup(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_POPUP}/${id}`
+    );
+
+    return response;
+}
+
 
 export {
     loadUserPersona,
@@ -955,7 +1006,13 @@ export {
     getOffersOfEvents,
     getSummitsHistory,
     getSummitDetails,
-    getEventHistory
+    getEventHistory,
+    getPopupsForDashboard,
+    getRandomPopup,
+    createPopup,
+    removePopup,
+    removePopupImage,
+    editPopup
 };
 
 async function post(data, url) {

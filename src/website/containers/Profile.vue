@@ -267,6 +267,7 @@
     <ReloginModal :showFlag="showReloginModalModal" />
     <Spinner :smallLoader="false" />
     <Footer />
+    <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>
 
@@ -283,6 +284,8 @@ import RequestPassword from "../../website/components/profile/RequestPassword";
 import Spinner from "../shared/Spinner";
 import countryCodes from "../../assets/json/CountryCodes.json";
 import isEmailValid from "../helpers/EmailValidation";
+import Popup from "../shared/Popup";
+import * as POPUPS_PLACES from "../constants/PopupsPlaces";
 
 export default {
   data() {
@@ -308,15 +311,20 @@ export default {
       imgProfileUrl: null,
       imgCoverUrl: null,
       errors: {},
-      countryCodesData: countryCodes
+      countryCodesData: countryCodes,
+      randomPopupData: {}
     };
   },
   computed: {
+    ...mapGetters({
+      randomPopup: types.popups.getters.GET_POPUP
+    }),
     ...mapState({
       profileData: state => state.user.userProfile,
       isProfileFetched: state => state.user.isUserProfileFetched,
       isProfileUpdated: state => state.user.isProfileUpdated,
-      userPersonaData: state => state.user.userPersona
+      userPersonaData: state => state.user.userPersona,
+      isRandomPopupDataFetched: state => state.popups.isRandomPopupDataFetched
     })
   },
   watch: {
@@ -329,7 +337,8 @@ export default {
     ...mapActions({
       fetchUserProfile: types.user.actions.FETCH_USER_PROFILE,
       updateUserProfile: types.user.actions.UPDATE_USER_PROFILE,
-      deleteUserImage: types.user.actions.DELETE_IMAGE_IN_PROFILE
+      deleteUserImage: types.user.actions.DELETE_IMAGE_IN_PROFILE,
+      fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS
     }),
     ...mapMutations({
       setIsProfileUpdated: types.user.mutations.SET_IS_USER_PROFILE_UPDATED
@@ -473,10 +482,16 @@ export default {
     ChangePassword,
     RequestPassword,
     ReloginModal,
-    Footer
+    Footer,
+    Popup
   },
   mounted() {
     this.fetchProfile();
+    this.fetchRandomPopup();
+  },
+  updated() {
+    if (this.isRandomPopupDataFetched)
+      this.randomPopupData = this.randomPopup(POPUPS_PLACES.PROFILE);
   }
 };
 </script>

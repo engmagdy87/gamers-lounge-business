@@ -63,6 +63,7 @@
     />
     <Spinner :smallLoader="false" />
     <Footer />
+    <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>
 
@@ -78,6 +79,8 @@ import GiveawaysMenuView from "../components/giveaways/GiveawaysMenuView";
 import LoginModal from "../components/home/LoginModal";
 import RegisterModal from "../components/home/RegisterModal";
 import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
+import Popup from "../shared/Popup";
+import * as POPUPS_PLACES from "../constants/PopupsPlaces";
 
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
@@ -89,12 +92,14 @@ export default {
   data() {
     return {
       showLoginModal: false,
-      showRegisterModal: false
+      showRegisterModal: false,
+      randomPopupData: {}
     };
   },
   computed: {
     ...mapGetters({
-      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
+      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN,
+      randomPopup: types.popups.getters.GET_POPUP
     }),
     ...mapState({
       giveawaysData: state => state.giveaways.giveawaysData,
@@ -103,7 +108,8 @@ export default {
       isOffersFetched: state => state.giveaways.isOffersFetched,
       isCoverGiveawaysImageFetched: state =>
         state.summits.isCoverGiveawaysImageFetched,
-      coverGiveawaysImage: state => state.summits.coverGiveawaysImage
+      coverGiveawaysImage: state => state.summits.coverGiveawaysImage,
+      isRandomPopupDataFetched: state => state.popups.isRandomPopupDataFetched
     }),
     isThisDeviceSmart() {
       return isDeviceSmart();
@@ -128,7 +134,8 @@ export default {
       fetchGiveaways: types.giveaways.actions.FETCH_GIVEAWAYS,
       fetchOffers: types.giveaways.actions.FETCH_OFFERS,
       fetchCoverHomeGiveawaysImage:
-        types.summits.actions.FETCH_COVER_GIVEAWAYS_IMAGE
+        types.summits.actions.FETCH_COVER_GIVEAWAYS_IMAGE,
+      fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -145,13 +152,15 @@ export default {
     Spinner,
     GiveawayCard,
     GiveawaysMenuView,
-    VueSlickCarousel
+    VueSlickCarousel,
+    Popup
   },
   mounted() {
     store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
     this.fetchGiveaways();
     this.fetchOffers();
     this.fetchCoverHomeGiveawaysImage();
+    this.fetchRandomPopup();
   },
   updated() {
     if (
@@ -160,6 +169,9 @@ export default {
       this.isCoverGiveawaysImageFetched
     )
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+
+    if (this.isRandomPopupDataFetched)
+      this.randomPopupData = this.randomPopup(POPUPS_PLACES.GIVEAWAY);
   }
 };
 </script>
