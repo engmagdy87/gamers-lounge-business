@@ -754,10 +754,7 @@ export default {
         formData.append("img_cover_over", this.tournament.img_cover_over);
         formData.append("img_schedule", this.tournament.img_schedule);
         formData.append("img_card", this.tournament.img_card);
-        formData.append(
-          "vid_stream",
-          liveVideoEmbedFormatter(this.tournament.vid_stream)
-        );
+        formData.append("vid_stream", this.tournament.vid_stream);
         formData.append("vid_cover_main", this.tournament.vid_cover_main);
 
         for (var i = 0; i < this.$refs.img_cover_main.files.length; i++) {

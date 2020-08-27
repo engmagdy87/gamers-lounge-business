@@ -144,7 +144,7 @@
             <iframe
               width="100%"
               height="500"
-              :src="data.streaming.path"
+              :src="getLiveVideoEmbedUrl(data.streaming.path)"
               frameborder="0"
               allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
@@ -189,7 +189,10 @@
 import redirectToNewTab from "../helpers/RedirectToNewTab";
 import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 import { changeTextDirection } from "../helpers/StringsHelper";
-import { liveVideoChatEmbedFormatter } from "../../dashboard/helpers/LiveVideoEmbedFormater";
+import {
+  liveVideoEmbedFormatter,
+  liveVideoChatEmbedFormatter
+} from "../../dashboard/helpers/LiveVideoEmbedFormater";
 
 export default {
   props: ["data", "redirectTo"],
@@ -234,6 +237,9 @@ export default {
         else if (element.clientHeight >= 5000 && element.clientHeight < 8200)
           element.style.clipPath = `polygon(0 0,98% 0,100% 0.3%,100% 99.5%,98% 99.7%,66% 99.7%,50% 101%,9% 101%,0 99.7%)`;
       }
+    },
+    getLiveVideoEmbedUrl(url) {
+      return liveVideoEmbedFormatter(url);
     },
     getLiveVideoChatEmbedUrl(url) {
       return liveVideoChatEmbedFormatter(url);
