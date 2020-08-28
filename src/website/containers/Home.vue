@@ -98,7 +98,15 @@
       :regionsData="regionsData"
     />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer
+      v-if="
+        isGamesDataFetched &&
+          isTournamentsDataFetched &&
+          isDashboardRegionsDataFetched &&
+          isFooterSponsorsDataFetched &&
+          isMainEventsFetched
+      "
+    />
     <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>

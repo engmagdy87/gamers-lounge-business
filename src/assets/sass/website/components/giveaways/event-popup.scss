@@ -1,15 +1,15 @@
 @import "../../mixins.scss";
 @import "../../color-palette.scss";
+@import "../../variables.scss";
 
-$card-height: 400px;
 $card-title-height: 50px;
 
 .side-popup-container {
   filter: drop-shadow(0px 0px 6px #175e90);
   width: 320px;
-  height: $card-height;
+  height: $event-popup-top-height;
   position: absolute;
-  top: 15%;
+  top: $event-popup-top-offset;
   right: 0;
   transition: all 0.3s ease;
   &--hide {
@@ -70,7 +70,7 @@ $card-title-height: 50px;
     }
   }
   &__card {
-    height: calc(#{$card-height} - #{$card-title-height});
+    height: calc(#{$event-popup-top-height} - #{$card-title-height});
     h3 {
       margin: 10px 0 5px 0;
       font-size: 1.3rem;

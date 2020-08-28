@@ -4,15 +4,16 @@
       class="event-history-gallery__img-container"
       v-for="(image, i) in images"
       :key="i"
+      @click="() => setClickedImageInMedia(image.path)"
     >
-      <img :src="image" />
+      <img :src="image.path" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["images"]
+  props: ["images", "setClickedImageInMedia"]
 };
 </script>
 
@@ -37,6 +38,7 @@ export default {
   &__img-container {
     height: 100%;
     margin: 5px;
+    cursor: pointer;
     img {
       height: 100%;
     }

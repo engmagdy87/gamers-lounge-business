@@ -25,7 +25,6 @@
           isOffersFetched &&
           (getEnabledGiveaways.length !== 0 || getEnabledOffers.length !== 0)
       "
-      id="main-events"
     >
       <h2 v-if="getEnabledGiveaways.length !== 0">Giveaways</h2>
       <VueSlickCarousel
@@ -50,7 +49,14 @@
         :data="getEnabledOffers"
       />
     </div>
-    <h2 style="color:white; text-align: center;margin-top: 10%;" v-else>
+    <h2
+      style="color:white; text-align: center;margin-top: 10%;"
+      v-if="
+        isGiveawaysFetched &&
+          isOffersFetched &&
+          (getEnabledGiveaways.length === 0 || getEnabledOffers.length === 0)
+      "
+    >
       There are no giveaways or offers now
     </h2>
     <LoginModal
@@ -62,7 +68,11 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer
+      v-if="
+        isGiveawaysFetched && isOffersFetched && isCoverGiveawaysImageFetched
+      "
+    />
     <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>

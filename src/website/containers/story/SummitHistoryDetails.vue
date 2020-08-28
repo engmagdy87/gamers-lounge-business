@@ -77,7 +77,10 @@
         </div>
         <div class="row">
           <div class="col mt-3 mt-md-5">
-            <SummitTabs :data="summitDetails" />
+            <SummitTabs
+              :data="summitDetails"
+              :setClickedImageInMedia="setClickedImageInMedia"
+            />
           </div>
         </div>
       </div>
@@ -90,8 +93,13 @@
       :showFlag="showRegisterModal"
       :setShowRegisterModal="setShowRegisterModal"
     />
+    <ImageModal
+      :showImageModalModal="showImageModalModal"
+      :setShowImageModalModal="setShowImageModalModal"
+      :clickedImageInMedia="clickedImageInMedia"
+    />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer v-if="showDetailsHero" />
     <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>
@@ -104,6 +112,7 @@ import Header from "../../shared/Header";
 import Footer from "../../shared/Footer";
 import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
+import ImageModal from "../../shared/ImageModal";
 import Spinner from "../../shared/Spinner";
 import SummitTabs from "../../shared/SummitTabs";
 import {
@@ -119,8 +128,10 @@ export default {
     return {
       showLoginModal: false,
       showRegisterModal: false,
+      showImageModalModal: false,
       summitShortDetails: {},
-      randomPopupData: {}
+      randomPopupData: {},
+      clickedImageInMedia: ""
     };
   },
   computed: {
@@ -152,11 +163,18 @@ export default {
       fetchSummitDetails: types.summits.actions.FETCH_SUMMIT_DETAILS,
       fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS
     }),
+    setShowImageModalModal(value = false) {
+      this.showImageModalModal = value;
+    },
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
     },
     setShowRegisterModal(value = false) {
       this.showRegisterModal = value;
+    },
+    setClickedImageInMedia(imagePath) {
+      this.clickedImageInMedia = imagePath;
+      this.setShowImageModalModal(true);
     },
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -174,7 +192,8 @@ export default {
     RegisterModal,
     Spinner,
     Popup,
-    SummitTabs
+    SummitTabs,
+    ImageModal
   },
   mounted() {
     const summitCookieData = getSummitCookie();

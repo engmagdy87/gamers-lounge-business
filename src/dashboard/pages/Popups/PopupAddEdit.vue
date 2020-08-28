@@ -142,7 +142,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      deleteImage: types.popups.actions.DELETE_IMAGE_IMAGE
+      deleteImage: types.popups.actions.DELETE_POPUP_IMAGE
     }),
     clickAction() {
       this.operation === "Edit Popup"

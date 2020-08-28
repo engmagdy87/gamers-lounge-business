@@ -4,6 +4,9 @@
       'popup-container',
       showEventPopup ? 'popup-container--show' : 'popup-container--hide'
     ]"
+    data-toggle="tooltip"
+    data-placement="top"
+    :title="data.title"
   >
     <div
       class="popup-wrapper"

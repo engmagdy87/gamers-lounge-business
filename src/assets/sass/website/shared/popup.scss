@@ -1,5 +1,6 @@
 @import "../mixins.scss";
 @import "../color-palette.scss";
+@import "../variables.scss";
 
 $popup-width: 450px;
 $popup-height: 250px;
@@ -10,7 +11,7 @@ $popup-title-height: 50px;
   width: $popup-width;
   height: $popup-height;
   position: absolute;
-  top: 60%;
+  top: $popup-top-offset;
   right: 0;
   transition: all 0.3s ease;
   &--hide {

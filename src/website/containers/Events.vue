@@ -52,7 +52,14 @@
         :data="subEventsData"
       />
     </div>
-    <h2 style="color:white; text-align: center;margin-top: 10%;" v-else>
+    <h2
+      style="color:white; text-align: center;margin-top: 10%;"
+      v-if="
+        isMainEventsFetched &&
+          isSubEventsFetched &&
+          (mainEventsData.length === 0 || subEventsData.length === 0)
+      "
+    >
       There are no events now
     </h2>
     <LoginModal
@@ -64,7 +71,13 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer
+      v-if="
+        isMainEventsFetched &&
+          isSubEventsFetched &&
+          isCoverHomeEventsImageFetched
+      "
+    />
   </div>
 </template>
 

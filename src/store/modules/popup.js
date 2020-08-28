@@ -85,7 +85,7 @@ const actions = {
     [types.popups.actions.FETCH_RANDOM_POPUPS]: getRandomPopupData,
     [types.popups.actions.FETCH_DASHBOARD_POPUPS]: getPopupsDataForDashboard,
     [types.popups.actions.DELETE_POPUP]: deletePopup,
-    [types.popups.actions.DELETE_IMAGE_IMAGE]: deletePopupImage,
+    [types.popups.actions.DELETE_POPUP_IMAGE]: deletePopupImage,
 };
 
 export default {

@@ -266,7 +266,7 @@
     />
     <ReloginModal :showFlag="showReloginModalModal" />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer v-if="isProfileFetched" />
     <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>

@@ -94,7 +94,7 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer v-if="isStoryFetched" />
     <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>

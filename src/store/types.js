@@ -88,7 +88,24 @@ const popups = {
         FETCH_RANDOM_POPUPS: 'popups/actions/FETCH_RANDOM_POPUPS',
         EDIT_POPUP: 'popups/actions/EDIT_POPUP',
         DELETE_POPUP: 'popups/actions/DELETE_POPUP',
-        DELETE_IMAGE_IMAGE: 'popups/actions/DELETE_IMAGE_IMAGE',
+        DELETE_POPUP_IMAGE: 'popups/actions/DELETE_POPUP_IMAGE',
+    }
+};
+
+const testimonials = {
+    mutations: {
+        SET_DASHBOARD_TESTIMONIALS_DATA: 'testimonials/mutations/SET_DASHBOARD_TESTIMONIALS_DATA',
+        SET_IS_DASHBOARD_TESTIMONIALS_DATA_FETCHED: 'testimonials/mutations/SET_IS_DASHBOARD_TESTIMONIALS_DATA_FETCHED',
+        SET_TESTIMONIALS_DATA: 'testimonials/mutations/SET_TESTIMONIALS_DATA',
+        SET_IS_TESTIMONIALS_DATA_FETCHED: 'testimonials/mutations/SET_IS_TESTIMONIALS_DATA_FETCHED',
+        REMOVE_DELETED_TESTIMONIAL: 'testimonials/mutations/REMOVE_DELETED_TESTIMONIAL',
+    },
+    actions: {
+        FETCH_DASHBOARD_TESTIMONIALS: 'testimonials/actions/FETCH_DASHBOARD_TESTIMONIALS',
+        FETCH_TESTIMONIALS: 'testimonials/actions/FETCH_TESTIMONIALS',
+        EDIT_TESTIMONIAL: 'testimonials/actions/EDIT_TESTIMONIAL',
+        DELETE_TESTIMONIAL: 'testimonials/actions/DELETE_TESTIMONIAL',
+        DELETE_TESTIMONIAL_IMAGE: 'testimonials/actions/DELETE_TESTIMONIAL_IMAGE',
     }
 };
 
@@ -351,5 +368,6 @@ export default {
     contact,
     sponsorsCategories,
     navigationTree,
-    popups
+    popups,
+    testimonials
 };

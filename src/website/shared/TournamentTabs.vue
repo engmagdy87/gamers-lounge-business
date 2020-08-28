@@ -123,7 +123,19 @@
         role="tabpanel"
         aria-labelledby="nav-contact-tab"
       >
-        schedule
+        <div class="row">
+          <div class="col-12">
+            <h3 class="pl-3">{{ data.schedule_title }}</h3>
+          </div>
+          <div class="col-12">
+            <img
+              v-if="data.images.img_schedule !== null"
+              :src="data.images.img_schedule.path"
+              :alt="data.schedule_title + 'background'"
+              class="w-100 p-3"
+            />
+          </div>
+        </div>
       </div>
       <div
         v-if="activeTabIndex === 3"
@@ -207,7 +219,7 @@ export default {
       this.activeTabIndex = index;
     },
     selectClickAction(tab, index) {
-      tab === "Schedule" || (tab === "Rules Book" && !this.data.has_rules)
+      tab === "Rules Book" && !this.data.has_rules
         ? () => {}
         : this.setActiveTabIndex(index);
     },

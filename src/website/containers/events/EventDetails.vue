@@ -152,7 +152,14 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer
+      v-if="
+        isEventHistoryFetched &&
+          isEventGiveawaysFetched &&
+          isEventOffersFetched &&
+          isRandomPopupDataFetched
+      "
+    />
     <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
     <EventPopUp
       v-if="

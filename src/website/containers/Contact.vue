@@ -87,7 +87,7 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer v-if="isCoverContactUsImageFetched" />
     <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>
@@ -121,7 +121,6 @@ export default {
       randomPopup: types.popups.getters.GET_POPUP
     }),
     ...mapState({
-      isContactFetched: state => state.contact.isContactFetched,
       isCoverContactUsImageFetched: state =>
         state.summits.isCoverContactUsImageFetched,
       coverContactUsImage: state => state.summits.coverContactUsImage,

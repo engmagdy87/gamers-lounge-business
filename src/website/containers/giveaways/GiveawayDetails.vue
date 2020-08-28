@@ -175,7 +175,7 @@
       :giveawayId="giveawayDetails.id"
     />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer v-if="showDetailsHero" />
     <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>

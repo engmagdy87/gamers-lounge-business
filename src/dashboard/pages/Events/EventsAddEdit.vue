@@ -617,6 +617,11 @@ export default {
 
       this.event[key] = files[0];
     },
+    getSummitSelectedIndex() {
+      return this.summitsListData.findIndex(
+        summit => summit.id === this.event.summit_id
+      );
+    },
     checkDatesSequence() {
       if (
         isDatesInProperSequence(this.event.start_date, this.event.end_date) ===
@@ -626,25 +631,33 @@ export default {
       }
       if (
         isDatesInProperSequence(
-          this.summitsListData[0].start_date.split(" ")[0],
+          this.summitsListData[this.getSummitSelectedIndex()].start_date.split(
+            " "
+          )[0],
           this.event.start_date
         ) === false
       ) {
         this.notifyVue(
           "Please insert start date to be after summit start date " +
-            this.summitsListData[0].start_date.split(" ")[0],
+            this.summitsListData[
+              this.getSummitSelectedIndex()
+            ].start_date.split(" ")[0],
           "danger"
         );
       }
       if (
         isDatesInProperSequence(
           this.event.end_date,
-          this.summitsListData[0].end_date.split(" ")[0]
+          this.summitsListData[this.getSummitSelectedIndex()].end_date.split(
+            " "
+          )[0]
         ) === false
       ) {
         this.notifyVue(
           "Please insert end date to be before summit end date " +
-            this.summitsListData[0].end_date.split(" ")[0],
+            this.summitsListData[this.getSummitSelectedIndex()].end_date.split(
+              " "
+            )[0],
           "danger"
         );
       }
@@ -657,24 +670,32 @@ export default {
         this.notifyVue("Please insert dates in proper sequence", "danger");
       } else if (
         isDatesInProperSequence(
-          this.summitsListData[0].start_date.split(" ")[0],
+          this.summitsListData[this.getSummitSelectedIndex()].start_date.split(
+            " "
+          )[0],
           this.event.start_date
         ) === false
       ) {
         this.notifyVue(
           "Please insert start date to be after summit start date " +
-            this.summitsListData[0].start_date.split(" ")[0],
+            this.summitsListData[
+              this.getSummitSelectedIndex()
+            ].start_date.split(" ")[0],
           "danger"
         );
       } else if (
         isDatesInProperSequence(
           this.event.end_date,
-          this.summitsListData[0].end_date.split(" ")[0]
+          this.summitsListData[this.getSummitSelectedIndex()].end_date.split(
+            " "
+          )[0]
         ) === false
       ) {
         this.notifyVue(
           "Please insert end date to be before summit end date " +
-            this.summitsListData[0].end_date.split(" ")[0],
+            this.summitsListData[this.getSummitSelectedIndex()].end_date.split(
+              " "
+            )[0],
           "danger"
         );
       } else if (this.event.cover_type === "-1") {

@@ -63,27 +63,34 @@
             </iframe>
             <EventHistoryGallery
               :images="[
-                event.images.img_cover_over.path,
-                event.images.img_logo.path,
-                event.images.img_cover_over.path,
-                event.images.img_logo.path,
-                event.images.img_cover_over.path,
-                event.images.img_logo.path,
-                event.images.img_cover_over.path,
-                event.images.img_logo.path,
-                event.images.img_cover_over.path,
-                event.images.img_logo.path
+                event.images.img_cover_over,
+                event.images.img_logo,
+                event.images.img_cover_over,
+                event.images.img_logo,
+                event.images.img_cover_over,
+                event.images.img_logo,
+                event.images.img_cover_over,
+                event.images.img_logo,
+                event.images.img_cover_over,
+                event.images.img_logo
               ]"
+              :setClickedImageInMedia="setClickedImageInMedia"
             />
           </div>
         </div>
       </div>
     </div>
+    <ImageModal
+      :showImageModalModal="showImageModalModal"
+      :setShowImageModalModal="setShowImageModalModal"
+      :clickedImageInMedia="clickedImageInMedia"
+    />
   </div>
 </template>
 
 <script>
 import EventHistoryGallery from "../components/events/EventHistoryGallery";
+import ImageModal from "../shared/ImageModal";
 import redirectToNewTab from "../helpers/RedirectToNewTab";
 import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 import { changeTextDirection } from "../helpers/StringsHelper";
@@ -93,7 +100,9 @@ export default {
   data() {
     return {
       activeTabIndex: 0,
-      tabs: []
+      tabs: [],
+      showImageModalModal: false,
+      clickedImageInMedia: ""
     };
   },
   methods: {
@@ -102,6 +111,13 @@ export default {
     },
     selectClickAction(tab, index) {
       this.setActiveTabIndex(index);
+    },
+    setShowImageModalModal(value = false) {
+      this.showImageModalModal = value;
+    },
+    setClickedImageInMedia(imagePath) {
+      this.clickedImageInMedia = imagePath;
+      this.setShowImageModalModal(true);
     },
     changeHexaStyleForTab() {
       const tabPanes = document.getElementsByClassName("tab-pane");
@@ -137,7 +153,8 @@ export default {
     redirectToNewTab("description-container");
   },
   components: {
-    EventHistoryGallery
+    EventHistoryGallery,
+    ImageModal
   }
 };
 </script>

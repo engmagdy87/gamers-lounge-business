@@ -129,6 +129,14 @@ const DELETE_POPUP = `${API_URL}/admin/popups`
 const DELETE_POPUP_IMAGE = `${API_URL}/admin/popups`
 const GET_RANDOM_POPUP = `${API_URL}/popups/random`
 
+// TESTIMONIALS (6 APIs)
+const GET_DASHBOARD_TESTIMONIALS = `${API_URL}/admin/testimonials`
+const CREATE_TESTIMONIAL = `${API_URL}/admin/testimonials`
+const EDIT_TESTIMONIAL = `${API_URL}/admin/testimonials`
+const DELETE_TESTIMONIAL = `${API_URL}/admin/testimonials`
+const DELETE_TESTIMONIAL_IMAGE = `${API_URL}/admin/testimonials`
+const GET_TESTIMONIALS = `${API_URL}/testimonials`
+
 export {
     API_URL,
     REGISTER_WEBSITE_USER,
@@ -231,5 +239,11 @@ export {
     EDIT_POPUP,
     DELETE_POPUP,
     DELETE_POPUP_IMAGE,
-    GET_RANDOM_POPUP
+    GET_RANDOM_POPUP,
+    GET_DASHBOARD_TESTIMONIALS,
+    CREATE_TESTIMONIAL,
+    EDIT_TESTIMONIAL,
+    DELETE_TESTIMONIAL,
+    DELETE_TESTIMONIAL_IMAGE,
+    GET_TESTIMONIALS
 };

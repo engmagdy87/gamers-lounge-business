@@ -906,6 +906,57 @@ async function editPopup(id, data) {
     return response;
 }
 
+// Testimonials
+async function getTestimonialsForDashboard() {
+    const response = await getDashboardData(
+        APIs.GET_DASHBOARD_TESTIMONIALS
+    );
+
+    return response.data;
+}
+
+async function getTestimonial() {
+    const response = await get(
+        APIs.GET_TESTIMONIALS
+    );
+
+    return response.data;
+}
+
+async function createTestimonial(payload) {
+    const response = await postMultipart(
+        payload,
+        APIs.CREATE_TESTIMONIAL
+    );
+
+    return response.data;
+}
+
+async function removeTestimonial(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_TESTIMONIAL}/${id}`
+    );
+
+    return response;
+}
+
+async function removeTestimonialImage(id, imageId) {
+    const response = await deleteData(
+        `${APIs.DELETE_TESTIMONIAL_IMAGE}/${id}/images/${imageId}`
+    );
+
+    return response;
+}
+
+async function editTestimonial(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_TESTIMONIAL}/${id}`
+    );
+
+    return response;
+}
+
 
 export {
     loadUserPersona,
@@ -1012,7 +1063,13 @@ export {
     createPopup,
     removePopup,
     removePopupImage,
-    editPopup
+    editPopup,
+    getTestimonialsForDashboard,
+    getTestimonial,
+    createTestimonial,
+    removeTestimonial,
+    removeTestimonialImage,
+    editTestimonial
 };
 
 async function post(data, url) {
