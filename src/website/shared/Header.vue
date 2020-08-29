@@ -41,7 +41,7 @@
         >
           <a href="/story">Our Story</a>
         </li>
-        <li
+        <!-- <li
           :class="[
             activeItem === 'testimonials'
               ? 'header-wrapper__navLinks--active'
@@ -49,7 +49,7 @@
           ]"
         >
           <a href="/testimonials">Testimonials</a>
-        </li>
+        </li> -->
         <li
           :class="[
             activeItem === 'contact' ? 'header-wrapper__navLinks--active' : ''
@@ -134,7 +134,7 @@
           >
             <a href="/story" @click="closeNav">Our Story</a>
           </li>
-          <li
+          <!-- <li
             :class="[
               activeItem === 'testimonials'
                 ? 'header-wrapper__navLinks--active'
@@ -142,7 +142,7 @@
             ]"
           >
             <a href="/testimonials" @click="closeNav">Testimonials</a>
-          </li>
+          </li> -->
           <li
             :class="[
               activeItem === 'contact' ? 'header-wrapper__navLinks--active' : ''

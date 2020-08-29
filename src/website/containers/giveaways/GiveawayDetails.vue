@@ -237,7 +237,10 @@ export default {
     showSponsors() {
       return (
         this.giveawayDetails.sponsors !== undefined &&
-        Object.keys(this.giveawayDetails.sponsors).length !== 0
+        this.giveawayDetails.show_sponsors &&
+        Object.keys(this.giveawayDetails.sponsors.main).length !== 0 &&
+        Object.keys(this.giveawayDetails.sponsors.sub).length !== 0 &&
+        Object.keys(this.giveawayDetails.sponsors.extra_sub).length !== 0
       );
     },
     formatSponsorsTypes() {

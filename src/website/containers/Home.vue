@@ -24,6 +24,7 @@
         :alt="event.initial_title"
         class="home-wrapper__slide"
         @click="redirectTo(event.id, event.initial_title)"
+        v-if="event.enabled"
       />
     </VueSlickCarousel>
     <div class="home-wrapper__content" id="home">

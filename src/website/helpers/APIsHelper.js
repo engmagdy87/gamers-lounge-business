@@ -957,6 +957,13 @@ async function editTestimonial(id, data) {
     return response;
 }
 
+async function getCoverTestimonialsImage() {
+    const response = await get(
+        APIs.GET_COVER_TESTIMONIALS_IMAGE
+    );
+
+    return response.data;
+}
 
 export {
     loadUserPersona,
@@ -1069,7 +1076,8 @@ export {
     createTestimonial,
     removeTestimonial,
     removeTestimonialImage,
-    editTestimonial
+    editTestimonial,
+    getCoverTestimonialsImage
 };
 
 async function post(data, url) {

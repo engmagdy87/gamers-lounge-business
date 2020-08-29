@@ -17,6 +17,7 @@
     <td>{{ rowData.start_date.split(" ")[0] }}</td>
     <td>{{ rowData.end_date.split(" ")[0] }}</td>
     <td>{{ rowData.type }}</td>
+    <td>{{ rowData.enabled ? "Yes" : "No" }}</td>
     <td>
       <a
         v-if="

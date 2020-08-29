@@ -194,6 +194,34 @@
           </div>
         </div>
       </div>
+      <div class="row mt-3 mb-3">
+        <div class="col-md-6 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="enabled"
+              v-model="event.enabled"
+            />
+            <label class="custom-control-label" for="enabled"
+              >Publish Event</label
+            >
+          </div>
+        </div>
+        <div class="col-md-6 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="show_sponsors"
+              v-model="event.show_sponsors"
+            />
+            <label class="custom-control-label" for="show_sponsors"
+              >Show Sponsors</label
+            >
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-4 mt-auto mb-auto">
           <div class="custom-control custom-switch">
@@ -559,6 +587,8 @@ export default {
         parent_id: "-1",
         event_type: "-1",
         is_external: false,
+        enabled: false,
+        show_sponsors: false,
         external_link: "",
         start_date: "",
         end_date: "",
@@ -736,6 +766,8 @@ export default {
         formData.append("parent_id", this.event.parent_id);
         formData.append("type", this.event.event_type);
         formData.append("is_external", this.event.is_external ? 1 : 0);
+        formData.append("show_sponsors", this.event.show_sponsors ? 1 : 0);
+        formData.append("enabled", this.event.enabled ? 1 : 0);
         formData.append("external_link", this.event.external_link);
         formData.append("start_date", this.event.start_date);
         formData.append("end_date", this.event.end_date);
@@ -936,9 +968,11 @@ export default {
       this.event.final_description = this.editData.final_description || "";
       this.event.summit_id = this.editData.summit.id;
       this.event.cover_type = this.editData.cover_type;
-      this.event.parent_id = this.editData.parent_id;
+      this.event.parent_id = this.editData.parent.id;
       this.event.event_type = this.editData.type;
       this.event.is_external = this.editData.is_external;
+      this.event.show_sponsors = this.editData.show_sponsors;
+      this.event.enabled = this.editData.enabled;
       this.event.external_link = this.editData.external_link || "";
       this.event.start_date = this.editData.start_date.split(" ")[0];
       this.event.end_date = this.editData.end_date.split(" ")[0];

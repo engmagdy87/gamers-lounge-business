@@ -29,7 +29,7 @@
       "
       id="main-events"
     >
-      <h2 v-if="mainEventsData.length !== 0">Main Events</h2>
+      <h2 v-if="mainEventsData.length !== 0 && showMainTitle">Main Events</h2>
       <VueSlickCarousel
         v-if="mainEventsData.length !== 0"
         :arrows="true"
@@ -42,10 +42,11 @@
           v-for="(card, index) in mainEventsData"
           :key="index"
           :card="card"
+          v-if="card.enabled"
         />
       </VueSlickCarousel>
 
-      <h2 v-if="subEventsData.length !== 0">Sub Events</h2>
+      <h2 v-if="subEventsData.length !== 0 && showSubTitle">Sub Events</h2>
       <EventsMenuView
         v-if="subEventsData.length !== 0"
         route="events"
@@ -121,6 +122,12 @@ export default {
     }),
     isThisDeviceSmart() {
       return isDeviceSmart();
+    },
+    showMainTitle() {
+      return this.mainEventsData.filter(event => event.enabled).length > 0;
+    },
+    showSubTitle() {
+      return this.subEventsData.filter(event => event.enabled).length > 0;
     }
   },
   watch: {

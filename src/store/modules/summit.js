@@ -1,5 +1,5 @@
 import {
-    getSummits, getSummitsList, removeSummit, removeSummitImage, removeSummitVideo, getCoverHomeEventsImage, getCoverContactUsImage, getCoverGiveawaysImage, getSummitsHistory,
+    getSummits, getSummitsList, removeSummit, removeSummitImage, removeSummitVideo, getCoverHomeEventsImage, getCoverContactUsImage, getCoverGiveawaysImage, getCoverTestimonialsImage, getSummitsHistory,
     getSummitDetails
 } from '../../website/helpers/APIsHelper';
 import types from '../types';
@@ -12,6 +12,7 @@ const state = {
     coverHomeEventsImage: null,
     coverContactUsImage: null,
     coverGiveawaysImage: null,
+    coverTestimonialsImage: null,
     isSummitsHistoryDataFetched: false,
     isSummitDetailsDataFetched: false,
     isSummitsFetched: false,
@@ -19,6 +20,7 @@ const state = {
     isCoverHomeEventsImageFetched: false,
     isCoverContactUsImageFetched: false,
     isCoverGiveawaysImageFetched: false,
+    isCoverTestimonialsImageFetched: false,
 };
 
 const mutations = {
@@ -55,6 +57,9 @@ const mutations = {
     [types.summits.mutations.SET_COVER_CONTACT_US_IMAGE]: (currentState, payload) => {
         currentState.coverContactUsImage = payload;
     },
+    [types.summits.mutations.SET_COVER_TESTIMONIALS_IMAGE]: (currentState, payload) => {
+        currentState.coverTestimonialsImage = payload;
+    },
     [types.summits.mutations.SET_COVER_GIVEAWAYS_IMAGE]: (currentState, payload) => {
         currentState.coverGiveawaysImage = payload;
     },
@@ -63,6 +68,9 @@ const mutations = {
     },
     [types.summits.mutations.IS_COVER_CONTACT_US_IMAGE_FETCHED]: (currentState, payload) => {
         currentState.isCoverContactUsImageFetched = payload;
+    },
+    [types.summits.mutations.IS_COVER_TESTIMONIALS_IMAGE_FETCHED]: (currentState, payload) => {
+        currentState.isCoverTestimonialsImageFetched = payload;
     },
     [types.summits.mutations.IS_COVER_GIVEAWAYS_IMAGE_FETCHED]: (currentState, payload) => {
         currentState.isCoverGiveawaysImageFetched = payload;
@@ -123,6 +131,14 @@ const fetchCoverContactUsImage = async ({ commit }) => {
     return response
 };
 
+const fetchCoverTestimonialsImage = async ({ commit }) => {
+    const response = await getCoverTestimonialsImage().then((response) => {
+        commit(types.summits.mutations.SET_COVER_TESTIMONIALS_IMAGE, response.data.cover);
+        commit(types.summits.mutations.IS_COVER_TESTIMONIALS_IMAGE_FETCHED, true);
+    }).catch(() => false);
+    return response
+};
+
 const fetchCoverGiveawaysImage = async ({ commit }) => {
     const response = await getCoverGiveawaysImage().then((response) => {
         commit(types.summits.mutations.SET_COVER_GIVEAWAYS_IMAGE, response.data.cover);
@@ -172,6 +188,7 @@ const actions = {
     [types.summits.actions.DELETE_SUMMIT_VIDEO]: deleteSummitVideo,
     [types.summits.actions.FETCH_COVER_HOME_EVENTS_IMAGE]: fetchCoverHomeEventsImage,
     [types.summits.actions.FETCH_COVER_CONTACT_US_IMAGE]: fetchCoverContactUsImage,
+    [types.summits.actions.FETCH_COVER_TESTIMONIALS_IMAGE]: fetchCoverTestimonialsImage,
     [types.summits.actions.FETCH_COVER_GIVEAWAYS_IMAGE]: fetchCoverGiveawaysImage,
 };
 

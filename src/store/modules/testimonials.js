@@ -34,7 +34,7 @@ const mutations = {
 const getTestimonialsData = async ({ commit },) => {
     commit(types.home.mutations.SET_SPINNER_FLAG, true);
     const response = await getTestimonial().then((response) => {
-        commit(types.testimonials.mutations.SET_TESTIMONIALS_DATA, response.data.popup);
+        commit(types.testimonials.mutations.SET_TESTIMONIALS_DATA, response.data.testimonials);
         commit(types.testimonials.mutations.SET_IS_TESTIMONIALS_DATA_FETCHED, true);
         commit(types.home.mutations.SET_SPINNER_FLAG, false);
         return true

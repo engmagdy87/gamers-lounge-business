@@ -226,8 +226,21 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-3 mt-auto mb-auto">
+      <div class="row mt-3 mb-3">
+        <div class="col-md-6 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="enabled"
+              v-model="tournament.enabled"
+            />
+            <label class="custom-control-label" for="enabled"
+              >Publish Tournament</label
+            >
+          </div>
+        </div>
+        <div class="col-md-6 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -240,7 +253,9 @@
             >
           </div>
         </div>
-        <div class="col-md-3 mt-auto mb-auto">
+      </div>
+      <div class="row">
+        <div class="col-md-6 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -613,6 +628,7 @@ export default {
         event_id: "-1",
         has_cover_over: false,
         show_sponsors: false,
+        enabled: false,
         has_rules: false,
         rules: { title: "", content: "" },
         contacts: { title: "", content: "" },
@@ -740,6 +756,7 @@ export default {
         formData.append("game_id", this.tournament.game_id);
         formData.append("event_id", this.tournament.event_id);
         formData.append("show_sponsors", this.tournament.show_sponsors ? 1 : 0);
+        formData.append("enabled", this.tournament.enabled ? 1 : 0);
         formData.append("has_rules", this.tournament.has_rules ? 1 : 0);
         formData.append(
           "has_cover_over",
@@ -929,6 +946,7 @@ export default {
       this.tournament.event_id =
         this.editData.event !== null ? this.editData.event.id : "-1";
       this.tournament.show_sponsors = this.editData.show_sponsors;
+      this.tournament.enabled = this.editData.enabled;
       this.tournament.has_rules = this.editData.has_rules;
       this.tournament.has_cover_over = this.editData.has_cover_over;
       this.tournament.rules = this.editData.rule;

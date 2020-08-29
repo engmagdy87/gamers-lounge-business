@@ -2,10 +2,6 @@
 @import "../color-palette.scss";
 @import "../variables.scss";
 
-$popup-width: 450px;
-$popup-height: 250px;
-$popup-title-height: 50px;
-
 .popup-container {
   filter: drop-shadow(0px 0px 6px #175e90);
   width: $popup-width;
@@ -19,6 +15,11 @@ $popup-title-height: 50px;
   }
   &--show {
     transform: translateX(0);
+  }
+  @include is-mobile {
+    width: $popup-width-mobile;
+    height: $popup-height-mobile;
+    top: $popup-top-offset-mobile;
   }
 }
 .popup-wrapper {

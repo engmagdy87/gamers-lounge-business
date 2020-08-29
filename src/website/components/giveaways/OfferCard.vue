@@ -24,6 +24,7 @@
             >
             <br />
             <span
+              v-if="card.show_sponsors"
               v-for="(sponsor, index) in card.sponsors.main.slice(0, 4)"
               :key="index"
               class="badge badge-pill badge-secondary sub-event-card-wrapper__content__game"

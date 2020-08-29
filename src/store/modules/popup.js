@@ -52,7 +52,7 @@ const getRandomPopupData = async ({ commit },) => {
 const getPopupsDataForDashboard = async ({ commit },) => {
     commit(types.home.mutations.SET_SPINNER_FLAG, true);
     const response = await getPopupsForDashboard().then((response) => {
-        commit(types.popups.mutations.SET_DASHBOARD_POPUPS_DATA, response.data.sponsors);
+        commit(types.popups.mutations.SET_DASHBOARD_POPUPS_DATA, response.data.popups);
         commit(types.popups.mutations.SET_IS_DASHBOARD_POPUPS_DATA_FETCHED, true);
         commit(types.home.mutations.SET_SPINNER_FLAG, false);
         return true

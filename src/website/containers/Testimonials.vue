@@ -6,12 +6,14 @@
       :setShowRegisterModal="setShowRegisterModal"
       :setShowLoginModal="setShowLoginModal"
     />
-    <div class="testimonials-wrapper__outside">
+    <div
+      class="testimonials-wrapper__outside"
+      v-if="isCoverTestimonialsImageFetched"
+    >
       <div
         class="testimonials-wrapper__inside"
-        :style="
-          `backgroundImage: url('https://storage.googleapis.com/laravel-esportssummit-me/staging/images/events/cover_main-5f3dba7f59246.jpg')`
-        "
+        v-if="coverTestimonialsImage !== null"
+        :style="`backgroundImage: url(${coverTestimonialsImage.path})`"
       ></div>
     </div>
     <div class="testimonials-wrapper__content" v-if="isTestimonialsFetched">
@@ -29,7 +31,7 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
-    <Footer v-if="isTestimonialsFetched" />
+    <Footer v-if="isTestimonialsFetched && isCoverTestimonialsImageFetched" />
     <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>
@@ -62,6 +64,9 @@ export default {
     }),
     ...mapState({
       testimonialsData: state => state.testimonials.testimonialsData,
+      coverTestimonialsImage: state => state.summits.coverTestimonialsImage,
+      isCoverTestimonialsImageFetched: state =>
+        state.summits.isCoverTestimonialsImageFetched,
       isTestimonialsFetched: state =>
         state.testimonials.isTestimonialsDataFetched,
       isRandomPopupDataFetched: state => state.popups.isRandomPopupDataFetched
@@ -78,7 +83,9 @@ export default {
   methods: {
     ...mapActions({
       fetchTestimonials: types.testimonials.actions.FETCH_TESTIMONIALS,
-      fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS
+      fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS,
+      fetchCoverTestimonialsImage:
+        types.summits.actions.FETCH_COVER_TESTIMONIALS_IMAGE
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -100,9 +107,10 @@ export default {
     store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
     this.fetchTestimonials();
     this.fetchRandomPopup();
+    this.fetchCoverTestimonialsImage();
   },
   updated() {
-    if (this.isTestimonialsFetched)
+    if (this.isTestimonialsFetched && this.isCoverTestimonialsImageFetched)
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
     if (this.isRandomPopupDataFetched)
       this.randomPopupData = this.randomPopup(POPUPS_PLACES.TESTIMONIALS);

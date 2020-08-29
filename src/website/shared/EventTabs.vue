@@ -62,8 +62,10 @@
             >
             </iframe>
             <EventHistoryGallery
-              :images="eventImages(event.images)"
+              v-if="event.images.img_media.length > 0"
+              :images="event.images.img_media"
               :setClickedImageInMedia="setClickedImageInMedia"
+              :currentEventIndex="i"
             />
           </div>
         </div>
@@ -94,7 +96,8 @@ export default {
       tabs: [],
       showImageModalModal: false,
       clickedImageInMedia: "",
-      currentImageIndex: -1
+      currentImageIndex: -1,
+      currentEventIndex: -1
     };
   },
   methods: {
@@ -103,39 +106,29 @@ export default {
     },
     selectClickAction(tab, index) {
       this.setActiveTabIndex(index);
+      this.clickedImageInMedia = "";
+      this.currentImageIndex = -1;
     },
     setShowImageModalModal(value = false) {
       this.showImageModalModal = value;
     },
-    setClickedImageInMedia(imagePath, currentImageIndex) {
+    setClickedImageInMedia(imagePath, currentImageIndex, currentEventIndex) {
+      this.currentEventIndex = currentEventIndex;
       this.clickedImageInMedia = imagePath;
       this.currentImageIndex = currentImageIndex;
       this.setShowImageModalModal(true);
     },
-    eventImages(images) {
-      return [
-        images.img_cover_over,
-        images.img_logo,
-        images.img_cover_over,
-        images.img_logo,
-        images.img_cover_over,
-        images.img_logo,
-        images.img_cover_over,
-        images.img_logo,
-        images.img_cover_over,
-        images.img_logo
-      ];
-    },
     setCurrentImageIndex(index) {
-      if (index > this.summitDetails.images.img_media.length - 1)
+      if (index > this.data[this.currentEventIndex].images.img_media.length - 1)
         this.currentImageIndex = 0;
       else if (index < 0)
-        this.currentImageIndex = this.summitDetails.images.img_media.length - 1;
+        this.currentImageIndex =
+          this.data[this.currentEventIndex].images.img_media.length - 1;
       else this.currentImageIndex = index;
 
-      this.clickedImageInMedia = this.summitDetails.images.img_media[
-        this.currentImageIndex
-      ].path;
+      this.clickedImageInMedia = this.data[
+        this.currentEventIndex
+      ].images.img_media[this.currentImageIndex].path;
     },
     changeHexaStyleForTab() {
       const tabPanes = document.getElementsByClassName("tab-pane");

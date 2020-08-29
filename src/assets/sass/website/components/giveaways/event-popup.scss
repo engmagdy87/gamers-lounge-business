@@ -12,11 +12,16 @@ $card-title-height: 50px;
   top: $event-popup-top-offset;
   right: 0;
   transition: all 0.3s ease;
+  z-index: 200;
   &--hide {
     transform: translateX(280px);
   }
   &--show {
     transform: translateX(0);
+  }
+  @include is-mobile {
+    height: $event-popup-top-height-mobile;
+    top: $event-popup-top-offset-mobile;
   }
 }
 .side-popup-wrapper {
@@ -59,6 +64,9 @@ $card-title-height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    @include is-mobile {
+      top: 35%;
+    }
   }
   &__arrow {
     transition: all 0.3s ease;
@@ -71,14 +79,28 @@ $card-title-height: 50px;
   }
   &__card {
     height: calc(#{$event-popup-top-height} - #{$card-title-height});
+    @include is-mobile {
+      height: calc(#{$event-popup-top-height-mobile} - #{$card-title-height});
+    }
     h3 {
       margin: 10px 0 5px 0;
       font-size: 1.3rem;
+      @include is-mobile {
+        font-size: 1rem;
+      }
     }
     img {
       max-width: 80%;
       height: 40%;
       margin: auto;
+      @include is-mobile {
+        height: 30%;
+      }
+    }
+    &__text {
+      @include is-mobile {
+        font-size: 0.9rem;
+      }
     }
   }
 }

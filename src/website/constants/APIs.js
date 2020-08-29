@@ -136,6 +136,7 @@ const EDIT_TESTIMONIAL = `${API_URL}/admin/testimonials`
 const DELETE_TESTIMONIAL = `${API_URL}/admin/testimonials`
 const DELETE_TESTIMONIAL_IMAGE = `${API_URL}/admin/testimonials`
 const GET_TESTIMONIALS = `${API_URL}/testimonials`
+const GET_COVER_TESTIMONIALS_IMAGE = `${API_URL}/testimonials/cover`
 
 export {
     API_URL,
@@ -245,5 +246,6 @@ export {
     EDIT_TESTIMONIAL,
     DELETE_TESTIMONIAL,
     DELETE_TESTIMONIAL_IMAGE,
-    GET_TESTIMONIALS
+    GET_TESTIMONIALS,
+    GET_COVER_TESTIMONIALS_IMAGE
 };

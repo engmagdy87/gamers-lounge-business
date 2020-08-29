@@ -39,6 +39,7 @@
           @click="redirectTo(card)"
           role="button"
           class="side-popup-wrapper__card"
+          v-if="card.enabled"
         >
           <img
             v-if="card.images.img_logo !== null"
@@ -47,7 +48,7 @@
           />
           <h3>{{ card.title }}</h3>
           <div
-            class="col description-container"
+            class="col description-container side-popup-wrapper__card__text"
             v-html="card.short_description"
           ></div>
         </div>

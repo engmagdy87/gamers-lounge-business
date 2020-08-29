@@ -7,6 +7,18 @@ $hero-image-height: 248px;
 $half-page-hero-image-height: 60vh;
 $event-popup-top-height: 400px;
 $event-popup-top-offset: 15vh;
+
+$event-popup-top-height-mobile: 300px;
+$event-popup-top-offset-mobile: 5vh;
+
 $popup-top-offset: calc(
   #{$event-popup-top-height} + #{$event-popup-top-offset} + 5vh
 );
+$popup-top-offset-mobile: calc(
+  #{$event-popup-top-height-mobile} + #{$event-popup-top-offset-mobile} + 5vh
+);
+$popup-width: 450px;
+$popup-height: 250px;
+$popup-width-mobile: 300px;
+$popup-height-mobile: 167px;
+$popup-title-height: 50px;

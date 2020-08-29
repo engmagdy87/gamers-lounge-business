@@ -91,11 +91,10 @@
         </div>
         <div class="col-md-6">
           <base-input
-            type="number"
+            type="text"
             label="Attendess"
             placeholder="Enter Attendess"
             v-model="summit.attendess"
-            min="0"
           >
           </base-input>
         </div>
@@ -402,6 +401,34 @@
         <div class="col">
           <div>
             <label class="mr-5" for="media-images1"
+              >Choose Cover Testimonials Image</label
+            >
+            <input
+              type="file"
+              id="media-images1"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_cover_home_testimonials')"
+              ref="img_cover_home_testimonials"
+            />
+            <br />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Summit' &&
+                  editData.images !== null &&
+                  editData.images.img_cover_home_testimonials !== null
+              "
+              :image="editData.images.img_cover_home_testimonials"
+              :setShowDeleteDialogFlag="setImageDataFlag"
+              openedFor="img_cover_home_testimonials"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <div>
+            <label class="mr-5" for="media-images1"
               >Choose Cover Giveaways Image</label
             >
             <input
@@ -511,7 +538,7 @@ export default {
         final_title: "",
         initial_description: "",
         final_description: "",
-        attendess: 0,
+        attendess: "",
         location: "",
         start_date: "",
         end_date: "",
@@ -525,6 +552,7 @@ export default {
         img_card: "",
         img_cover_home_events: "",
         img_cover_contact_us: "",
+        img_cover_home_testimonials: "",
         img_cover_home_giveaways: "",
         img_cover_main: "",
         vid_cover_main: ""
@@ -624,6 +652,10 @@ export default {
           this.summit.img_cover_contact_us
         );
         formData.append(
+          "img_cover_home_testimonials",
+          this.summit.img_cover_home_testimonials
+        );
+        formData.append(
           "img_cover_home_giveaways",
           this.summit.img_cover_home_giveaways
         );
@@ -690,6 +722,10 @@ export default {
 
         case "img_cover_contact_us":
           this.editData.images.img_cover_contact_us = null;
+          break;
+
+        case "img_cover_home_testimonials":
+          this.editData.images.img_cover_home_testimonials = null;
           break;
 
         case "img_cover_home_giveaways":
@@ -764,7 +800,7 @@ export default {
       this.summit.final_title = this.editData.final_title || "";
       this.summit.initial_description = this.editData.initial_description || "";
       this.summit.final_description = this.editData.final_description || "";
-      this.summit.attendess = this.editData.attendess || 0;
+      this.summit.attendess = this.editData.attendess || "";
       this.summit.location = this.editData.location || "";
       this.summit.start_date = this.editData.start_date.split(" ")[0];
       this.summit.end_date = this.editData.end_date.split(" ")[0];
@@ -783,6 +819,7 @@ export default {
       this.summit.img_card = this.editData.images.img_card;
       this.summit.img_cover_home_events = this.editData.images.img_cover_home_events;
       this.summit.img_cover_contact_us = this.editData.images.img_cover_contact_us;
+      this.summit.img_cover_home_testimonials = this.editData.images.img_cover_home_testimonials;
       this.summit.img_cover_home_giveaways = this.editData.images.img_cover_home_giveaways;
 
       this.summit.vid_initial = this.editData.videos.vid_initial

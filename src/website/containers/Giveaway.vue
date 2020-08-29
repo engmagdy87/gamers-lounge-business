@@ -39,6 +39,7 @@
           v-for="(card, index) in getEnabledGiveaways"
           :key="index"
           :card="card"
+          v-if="card.enabled"
         />
       </VueSlickCarousel>
 

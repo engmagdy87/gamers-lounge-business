@@ -4,7 +4,7 @@
       class="event-history-gallery__img-container"
       v-for="(image, i) in images"
       :key="i"
-      @click="() => setClickedImageInMedia(image.path, i)"
+      @click="() => setClickedImageInMedia(image.path, i, currentEventIndex)"
     >
       <img :src="image.path" />
     </div>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  props: ["images", "setClickedImageInMedia"]
+  props: ["images", "setClickedImageInMedia", "currentEventIndex"]
 };
 </script>
 
