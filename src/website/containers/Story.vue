@@ -72,9 +72,7 @@
         >
           <iframe
             :width="isThisDeviceSmart ? '320' : '560'"
-            :height="
-              storyData.videos.vid_initial.path.includes('facebook') ? 700 : 315
-            "
+            height="350"
             :src="getLiveVideoEmbedFormatter(storyData.videos.vid_initial.path)"
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
