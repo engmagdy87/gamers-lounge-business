@@ -1,7 +1,19 @@
 <template>
   <div ref="imageModal" class="image-modal">
     <span class="close" @click="closeModal">&times;</span>
+    <img
+      class="image-modal__previous"
+      src="/website/img/next.svg"
+      alt="previous"
+      @click="setImageIndex(currentImageIndex - 1)"
+    />
     <img class="image-modal-content" id="img01" :src="clickedImageInMedia" />
+    <img
+      class="image-modal__next"
+      src="/website/img/next.svg"
+      alt="next"
+      @click="setImageIndex(currentImageIndex + 1)"
+    />
   </div>
 </template>
 
@@ -10,11 +22,16 @@ export default {
   props: [
     "showImageModalModal",
     "setShowImageModalModal",
-    "clickedImageInMedia"
+    "clickedImageInMedia",
+    "currentImageIndex",
+    "setCurrentImageIndex"
   ],
   methods: {
     closeModal() {
       this.setShowImageModalModal(false);
+    },
+    setImageIndex(index) {
+      this.setCurrentImageIndex(index);
     }
   },
   watch: {
@@ -42,6 +59,17 @@ export default {
   background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
   justify-content: center;
   align-items: center;
+  &__next {
+    width: 50px;
+    cursor: pointer;
+    margin: 20px;
+  }
+  &__previous {
+    width: 50px;
+    transform: rotate(180deg);
+    cursor: pointer;
+    margin: 20px;
+  }
 }
 
 /* Modal Content (image) */

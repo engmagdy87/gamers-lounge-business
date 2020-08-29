@@ -149,6 +149,16 @@
         >
         </PopupsTableRow>
       </tbody>
+      <tbody v-else-if="tableType === 'testimonials'">
+        <TestimonialTableRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </TestimonialTableRow>
+      </tbody>
     </table>
   </div>
 </template>
@@ -166,6 +176,7 @@ import SponsorsCategoryTabelRow from "./SponsorsCategoryTabelRow";
 import EventParentTableRow from "./EventParentTableRow";
 import GiveawayRegistersTableRow from "./GiveawayRegistersTableRow";
 import PopupsTableRow from "./PopupsTableRow";
+import TestimonialTableRow from "./TestimonialTableRow";
 
 export default {
   name: "l-table",
@@ -190,7 +201,8 @@ export default {
     GiveawayRegisterQuestionTabelRow,
     EventParentTableRow,
     GiveawayRegistersTableRow,
-    PopupsTableRow
+    PopupsTableRow,
+    TestimonialTableRow
   }
 };
 </script>

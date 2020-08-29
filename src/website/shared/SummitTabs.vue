@@ -79,7 +79,7 @@
           v-for="(image, i) in data.images.img_media"
           :key="i"
           role="button"
-          @click="() => setClickedImageInMedia(image.path)"
+          @click="() => setClickedImageInMedia(image.path, i)"
         >
           <img :src="image.path" :alt="image.path" />
         </div>

@@ -152,7 +152,12 @@
               data.streaming.path !== ''
           "
         >
-          <div class="col-12 col-md-8">
+          <div
+            :class="[
+              'col-12 ',
+              getLiveVideoChatEmbedUrl(data.streaming.path) ? 'col-md-8' : ''
+            ]"
+          >
             <iframe
               width="100%"
               height="500"
@@ -163,7 +168,10 @@
             >
             </iframe>
           </div>
-          <div class="col-12 col-md-4">
+          <div
+            class="col-12 col-md-4"
+            v-if="getLiveVideoChatEmbedUrl(data.streaming.path)"
+          >
             <iframe
               scrolling="<scrolling>"
               width="100%"

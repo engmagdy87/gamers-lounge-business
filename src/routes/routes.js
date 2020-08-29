@@ -5,6 +5,7 @@ import Contact from '../website/containers/Contact.vue'
 import EventsContainer from '../website/containers/Events.vue'
 import GiveawayContainer from '../website/containers/Giveaway.vue'
 import Profile from '../website/containers/Profile.vue'
+import TestimonialsContainer from '../website/containers/Testimonials.vue'
 import ForgotPassword from '../website/containers/ForgotPassword.vue'
 import ResetPassword from '../website/containers/ResetPassword.vue'
 
@@ -36,6 +37,10 @@ import GiveawayDetails from '../website/containers/giveaways/GiveawayDetails.vue
 import Sponsors from 'src/dashboard/pages/Sponsors.vue'
 import SponsorsList from 'src/dashboard/pages/Sponsors/SponsorsList.vue'
 import SponsorAddEdit from 'src/dashboard/pages/Sponsors/SponsorAddEdit.vue'
+
+import Testimonials from 'src/dashboard/pages/Testimonials.vue'
+import TestimonialsList from 'src/dashboard/pages/Testimonials/TestimonialsList.vue'
+import TestimonialAddEdit from 'src/dashboard/pages/Testimonials/TestimonialAddEdit.vue'
 
 import Popups from 'src/dashboard/pages/Popups.vue'
 import PopupList from 'src/dashboard/pages/Popups/PopupList.vue'
@@ -103,6 +108,11 @@ const routes = [
     path: '/events/event/:eventName',
     name: 'event',
     component: EventDetails,
+  },
+  {
+    path: '/testimonials',
+    name: 'testimonials',
+    component: TestimonialsContainer,
   },
   {
     path: '/giveaways',
@@ -253,6 +263,29 @@ const routes = [
             path: 'edit',
             name: 'Edit Sponsor',
             component: SponsorAddEdit
+          }
+        ]
+      },
+      {
+        path: 'testimonials',
+        name: 'Testimonials',
+        redirect: '/dashboard/testimonials/list',
+        component: Testimonials,
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: TestimonialsList
+          },
+          {
+            path: 'create',
+            name: 'Create Testimonial',
+            component: TestimonialAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit Testimonial',
+            component: TestimonialAddEdit
           }
         ]
       },

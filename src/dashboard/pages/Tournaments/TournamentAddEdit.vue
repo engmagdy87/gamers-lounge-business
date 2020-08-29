@@ -107,7 +107,6 @@
             label="Registeration Start Date"
             placeholder="Enter Registeration Start Date"
             v-model="tournament.register_start_at"
-            :min="minDate"
             :isInvalid="errors.register_start_at !== undefined"
             :isRequired="true"
             @change="checkDatesSequence"
@@ -126,7 +125,6 @@
             label="Registeration End Date"
             placeholder="Enter Registeration End Date"
             v-model="tournament.register_end_at"
-            :min="minDate"
             :isInvalid="errors.register_end_at !== undefined"
             :isRequired="true"
             @change="checkDatesSequence"
@@ -142,7 +140,6 @@
             label="Kick-off Date"
             placeholder="Enter Kick-off Date"
             v-model="tournament.kick_off_date"
-            :min="minDate"
             :isInvalid="errors.kick_off_date !== undefined"
             :isRequired="true"
             @change="checkDatesSequence"
@@ -864,16 +861,16 @@ export default {
       eventCoverTypes: state => state.events.eventCoverTypes,
       isEventCoverTypesFetched: state => state.events.isEventCoverTypesFetched
     }),
-    minDate() {
-      var today = new Date();
-      var date =
-        today.getFullYear() +
-        "-" +
-        ("0" + (today.getMonth() + 1)).slice(-2) +
-        "-" +
-        today.getDate();
-      return date;
-    },
+    // minDate() {
+    //   var today = new Date();
+    //   var date =
+    //     today.getFullYear() +
+    //     "-" +
+    //     ("0" + (today.getMonth() + 1)).slice(-2) +
+    //     "-" +
+    //     today.getDate();
+    //   return date;
+    // },
     showFormWhenDataFetched() {
       if (this.operation !== "Edit Tournament")
         return (

@@ -97,6 +97,8 @@
       :showImageModalModal="showImageModalModal"
       :setShowImageModalModal="setShowImageModalModal"
       :clickedImageInMedia="clickedImageInMedia"
+      :currentImageIndex="currentImageIndex"
+      :setCurrentImageIndex="setCurrentImageIndex"
     />
     <Spinner :smallLoader="false" />
     <Footer v-if="showDetailsHero" />
@@ -131,7 +133,8 @@ export default {
       showImageModalModal: false,
       summitShortDetails: {},
       randomPopupData: {},
-      clickedImageInMedia: ""
+      clickedImageInMedia: "",
+      currentImageIndex: -1
     };
   },
   computed: {
@@ -172,9 +175,21 @@ export default {
     setShowRegisterModal(value = false) {
       this.showRegisterModal = value;
     },
-    setClickedImageInMedia(imagePath) {
+    setClickedImageInMedia(imagePath, currentImageIndex) {
       this.clickedImageInMedia = imagePath;
+      this.currentImageIndex = currentImageIndex;
       this.setShowImageModalModal(true);
+    },
+    setCurrentImageIndex(index) {
+      if (index > this.summitDetails.images.img_media.length - 1)
+        this.currentImageIndex = 0;
+      else if (index < 0)
+        this.currentImageIndex = this.summitDetails.images.img_media.length - 1;
+      else this.currentImageIndex = index;
+
+      this.clickedImageInMedia = this.summitDetails.images.img_media[
+        this.currentImageIndex
+      ].path;
     },
     notifyVue(message, color) {
       this.$notifications.notify({

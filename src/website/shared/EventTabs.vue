@@ -62,18 +62,7 @@
             >
             </iframe>
             <EventHistoryGallery
-              :images="[
-                event.images.img_cover_over,
-                event.images.img_logo,
-                event.images.img_cover_over,
-                event.images.img_logo,
-                event.images.img_cover_over,
-                event.images.img_logo,
-                event.images.img_cover_over,
-                event.images.img_logo,
-                event.images.img_cover_over,
-                event.images.img_logo
-              ]"
+              :images="eventImages(event.images)"
               :setClickedImageInMedia="setClickedImageInMedia"
             />
           </div>
@@ -84,6 +73,8 @@
       :showImageModalModal="showImageModalModal"
       :setShowImageModalModal="setShowImageModalModal"
       :clickedImageInMedia="clickedImageInMedia"
+      :currentImageIndex="currentImageIndex"
+      :setCurrentImageIndex="setCurrentImageIndex"
     />
   </div>
 </template>
@@ -102,7 +93,8 @@ export default {
       activeTabIndex: 0,
       tabs: [],
       showImageModalModal: false,
-      clickedImageInMedia: ""
+      clickedImageInMedia: "",
+      currentImageIndex: -1
     };
   },
   methods: {
@@ -115,9 +107,35 @@ export default {
     setShowImageModalModal(value = false) {
       this.showImageModalModal = value;
     },
-    setClickedImageInMedia(imagePath) {
+    setClickedImageInMedia(imagePath, currentImageIndex) {
       this.clickedImageInMedia = imagePath;
+      this.currentImageIndex = currentImageIndex;
       this.setShowImageModalModal(true);
+    },
+    eventImages(images) {
+      return [
+        images.img_cover_over,
+        images.img_logo,
+        images.img_cover_over,
+        images.img_logo,
+        images.img_cover_over,
+        images.img_logo,
+        images.img_cover_over,
+        images.img_logo,
+        images.img_cover_over,
+        images.img_logo
+      ];
+    },
+    setCurrentImageIndex(index) {
+      if (index > this.summitDetails.images.img_media.length - 1)
+        this.currentImageIndex = 0;
+      else if (index < 0)
+        this.currentImageIndex = this.summitDetails.images.img_media.length - 1;
+      else this.currentImageIndex = index;
+
+      this.clickedImageInMedia = this.summitDetails.images.img_media[
+        this.currentImageIndex
+      ].path;
     },
     changeHexaStyleForTab() {
       const tabPanes = document.getElementsByClassName("tab-pane");

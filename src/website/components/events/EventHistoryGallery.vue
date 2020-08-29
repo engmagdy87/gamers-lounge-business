@@ -4,7 +4,7 @@
       class="event-history-gallery__img-container"
       v-for="(image, i) in images"
       :key="i"
-      @click="() => setClickedImageInMedia(image.path)"
+      @click="() => setClickedImageInMedia(image.path, i)"
     >
       <img :src="image.path" />
     </div>

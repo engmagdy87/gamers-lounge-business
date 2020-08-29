@@ -41,15 +41,15 @@
         >
           <a href="/story">Our Story</a>
         </li>
-        <!-- <li
+        <li
           :class="[
-            activeItem === 'testimonial'
+            activeItem === 'testimonials'
               ? 'header-wrapper__navLinks--active'
               : ''
           ]"
         >
-          <a href="#">Testimonial</a>
-        </li> -->
+          <a href="/testimonials">Testimonials</a>
+        </li>
         <li
           :class="[
             activeItem === 'contact' ? 'header-wrapper__navLinks--active' : ''
@@ -134,15 +134,15 @@
           >
             <a href="/story" @click="closeNav">Our Story</a>
           </li>
-          <!-- <li
+          <li
             :class="[
-              activeItem === 'testimonial'
+              activeItem === 'testimonials'
                 ? 'header-wrapper__navLinks--active'
                 : ''
             ]"
           >
-            <a href="#" @click="closeNav">Testimonial</a>
-          </li> -->
+            <a href="/testimonials" @click="closeNav">Testimonials</a>
+          </li>
           <li
             :class="[
               activeItem === 'contact' ? 'header-wrapper__navLinks--active' : ''
