@@ -43,12 +43,12 @@
         </li>
         <!-- <li
           :class="[
-            activeItem === 'testimonial'
+            activeItem === 'testimonials'
               ? 'header-wrapper__navLinks--active'
               : ''
           ]"
         >
-          <a href="#">Testimonial</a>
+          <a href="/testimonials">Testimonials</a>
         </li> -->
         <li
           :class="[
@@ -136,12 +136,12 @@
           </li>
           <!-- <li
             :class="[
-              activeItem === 'testimonial'
+              activeItem === 'testimonials'
                 ? 'header-wrapper__navLinks--active'
                 : ''
             ]"
           >
-            <a href="#" @click="closeNav">Testimonial</a>
+            <a href="/testimonials" @click="closeNav">Testimonials</a>
           </li> -->
           <li
             :class="[

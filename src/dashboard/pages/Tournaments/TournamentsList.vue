@@ -55,6 +55,7 @@ export default {
           "Final Title",
           "Initial Description",
           "Final Description",
+          "Published",
           "Format",
           "Register Link",
           "Registeration Start Date",

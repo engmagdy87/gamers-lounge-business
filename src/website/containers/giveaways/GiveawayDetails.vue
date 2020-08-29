@@ -175,7 +175,8 @@
       :giveawayId="giveawayDetails.id"
     />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer v-if="showDetailsHero" />
+    <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>
 
@@ -196,6 +197,8 @@ import {
   getGiveawayCookie,
   getUserCookie
 } from "../../helpers/CookieHelper";
+import Popup from "../../shared/Popup";
+import * as POPUPS_PLACES from "../../constants/PopupsPlaces";
 
 export default {
   data() {
@@ -205,12 +208,14 @@ export default {
       showRegisterGiveawayModal: false,
       showMoreText: false,
       setShowMoreTextFlag: false,
-      giveawayShortDetails: {}
+      giveawayShortDetails: {},
+      randomPopupData: {}
     };
   },
   computed: {
     ...mapGetters({
-      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
+      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN,
+      randomPopup: types.popups.getters.GET_POPUP
     }),
     ...mapState({
       giveawayDetails: state => state.giveaways.giveawayDetails,
@@ -223,7 +228,8 @@ export default {
         state.giveaways.isRegisterAvailableInGiveawayFetched,
       giveawayTree: state => state.navigationTree.giveawayTree,
       amIRegisteredInGiveawayFlag: state =>
-        state.giveaways.amIRegisteredInGiveawayFlag
+        state.giveaways.amIRegisteredInGiveawayFlag,
+      isRandomPopupDataFetched: state => state.popups.isRandomPopupDataFetched
     }),
     showDetailsHero() {
       return Object.keys(this.giveawayDetails).length !== 0;
@@ -231,7 +237,10 @@ export default {
     showSponsors() {
       return (
         this.giveawayDetails.sponsors !== undefined &&
-        Object.keys(this.giveawayDetails.sponsors).length !== 0
+        this.giveawayDetails.show_sponsors &&
+        Object.keys(this.giveawayDetails.sponsors.main).length !== 0 &&
+        Object.keys(this.giveawayDetails.sponsors.sub).length !== 0 &&
+        Object.keys(this.giveawayDetails.sponsors.extra_sub).length !== 0
       );
     },
     formatSponsorsTypes() {
@@ -280,7 +289,8 @@ export default {
       fetchGiveawayTournaments:
         types.giveaways.actions.FETCH_GIVEAWAY_TOURNAMENTS,
       fetchAmIRegisteredGiveawaysImage:
-        types.giveaways.actions.FETCH_AM_I_REGISTERED_IN_GIVEAWAY
+        types.giveaways.actions.FETCH_AM_I_REGISTERED_IN_GIVEAWAY,
+      fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -347,7 +357,8 @@ export default {
     RegisterModal,
     RegisterGiveawayModal,
     Spinner,
-    GiveawaysMenuView
+    GiveawaysMenuView,
+    Popup
   },
   mounted() {
     const giveawayCookieData = getGiveawayCookie();
@@ -376,6 +387,7 @@ export default {
     this.fetchGiveawayTournaments(giveawayId);
     this.fetchAmIRegisteredGiveawaysImage(giveawayId);
     this.fetchIsRegisterAvailableInGiveaway(giveawayId);
+    this.fetchRandomPopup();
   },
   updated() {
     redirectToNewTab("description-container");
@@ -385,6 +397,8 @@ export default {
           this.$refs.descriptionText.clientHeight > 200;
       }
     });
+    if (this.isRandomPopupDataFetched)
+      this.randomPopupData = this.randomPopup(POPUPS_PLACES.GIVEAWAY_DETAILS);
   }
 };
 </script>

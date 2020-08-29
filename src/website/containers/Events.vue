@@ -29,7 +29,7 @@
       "
       id="main-events"
     >
-      <h2 v-if="mainEventsData.length !== 0">Main Events</h2>
+      <h2 v-if="mainEventsData.length !== 0 && showMainTitle">Main Events</h2>
       <VueSlickCarousel
         v-if="mainEventsData.length !== 0"
         :arrows="true"
@@ -42,17 +42,25 @@
           v-for="(card, index) in mainEventsData"
           :key="index"
           :card="card"
+          v-if="card.enabled"
         />
       </VueSlickCarousel>
 
-      <h2 v-if="subEventsData.length !== 0">Sub Events</h2>
+      <h2 v-if="subEventsData.length !== 0 && showSubTitle">Sub Events</h2>
       <EventsMenuView
         v-if="subEventsData.length !== 0"
         route="events"
         :data="subEventsData"
       />
     </div>
-    <h2 style="color:white; text-align: center;margin-top: 10%;" v-else>
+    <h2
+      style="color:white; text-align: center;margin-top: 10%;"
+      v-if="
+        isMainEventsFetched &&
+          isSubEventsFetched &&
+          (mainEventsData.length === 0 || subEventsData.length === 0)
+      "
+    >
       There are no events now
     </h2>
     <LoginModal
@@ -64,7 +72,13 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer
+      v-if="
+        isMainEventsFetched &&
+          isSubEventsFetched &&
+          isCoverHomeEventsImageFetched
+      "
+    />
   </div>
 </template>
 
@@ -108,6 +122,12 @@ export default {
     }),
     isThisDeviceSmart() {
       return isDeviceSmart();
+    },
+    showMainTitle() {
+      return this.mainEventsData.filter(event => event.enabled).length > 0;
+    },
+    showSubTitle() {
+      return this.subEventsData.filter(event => event.enabled).length > 0;
     }
   },
   watch: {
@@ -155,6 +175,9 @@ export default {
       this.isCoverHomeEventsImageFetched
     )
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+
+    if (this.isRandomPopupDataFetched)
+      this.randomPopupData = this.randomPopup(POPUPS_PLACES.EVENTS);
   }
 };
 </script>

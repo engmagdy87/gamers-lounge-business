@@ -855,6 +855,115 @@ async function editEventParent(id, data) {
     return response;
 }
 
+// Popups
+async function getPopupsForDashboard() {
+    const response = await getDashboardData(
+        APIs.GET_DASHBOARD_POPUPS
+    );
+
+    return response.data;
+}
+
+async function getRandomPopup() {
+    const response = await get(
+        APIs.GET_RANDOM_POPUP
+    );
+
+    return response.data;
+}
+
+async function createPopup(payload) {
+    const response = await postMultipart(
+        payload,
+        APIs.CREATE_POPUP
+    );
+
+    return response.data;
+}
+
+async function removePopup(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_POPUP}/${id}`
+    );
+
+    return response;
+}
+
+async function removePopupImage(id, imageId) {
+    const response = await deleteData(
+        `${APIs.DELETE_POPUP_IMAGE}/${id}/images/${imageId}`
+    );
+
+    return response;
+}
+
+async function editPopup(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_POPUP}/${id}`
+    );
+
+    return response;
+}
+
+// Testimonials
+async function getTestimonialsForDashboard() {
+    const response = await getDashboardData(
+        APIs.GET_DASHBOARD_TESTIMONIALS
+    );
+
+    return response.data;
+}
+
+async function getTestimonial() {
+    const response = await get(
+        APIs.GET_TESTIMONIALS
+    );
+
+    return response.data;
+}
+
+async function createTestimonial(payload) {
+    const response = await postMultipart(
+        payload,
+        APIs.CREATE_TESTIMONIAL
+    );
+
+    return response.data;
+}
+
+async function removeTestimonial(id) {
+    const response = await deleteData(
+        `${APIs.DELETE_TESTIMONIAL}/${id}`
+    );
+
+    return response;
+}
+
+async function removeTestimonialImage(id, imageId) {
+    const response = await deleteData(
+        `${APIs.DELETE_TESTIMONIAL_IMAGE}/${id}/images/${imageId}`
+    );
+
+    return response;
+}
+
+async function editTestimonial(id, data) {
+    const response = await postMultipart(
+        data,
+        `${APIs.EDIT_TESTIMONIAL}/${id}`
+    );
+
+    return response;
+}
+
+async function getCoverTestimonialsImage() {
+    const response = await get(
+        APIs.GET_COVER_TESTIMONIALS_IMAGE
+    );
+
+    return response.data;
+}
 
 export {
     loadUserPersona,
@@ -955,7 +1064,20 @@ export {
     getOffersOfEvents,
     getSummitsHistory,
     getSummitDetails,
-    getEventHistory
+    getEventHistory,
+    getPopupsForDashboard,
+    getRandomPopup,
+    createPopup,
+    removePopup,
+    removePopupImage,
+    editPopup,
+    getTestimonialsForDashboard,
+    getTestimonial,
+    createTestimonial,
+    removeTestimonial,
+    removeTestimonialImage,
+    editTestimonial,
+    getCoverTestimonialsImage
 };
 
 async function post(data, url) {

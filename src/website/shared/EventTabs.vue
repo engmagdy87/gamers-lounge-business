@@ -42,9 +42,6 @@
                 <p class="event-tab-wrapper__details__title">
                   Location: <span>{{ event.summit.location }}</span>
                 </p>
-                <!-- <p class="event-tab-wrapper__details__title">
-                    Attendess: <span>{{ data.attendess }}</span>
-                  </p> -->
               </div>
             </div>
             <div class="row mt-3">
@@ -64,14 +61,29 @@
               allowfullscreen
             >
             </iframe>
+            <EventHistoryGallery
+              v-if="event.images.img_media.length > 0"
+              :images="event.images.img_media"
+              :setClickedImageInMedia="setClickedImageInMedia"
+              :currentEventIndex="i"
+            />
           </div>
         </div>
       </div>
     </div>
+    <ImageModal
+      :showImageModalModal="showImageModalModal"
+      :setShowImageModalModal="setShowImageModalModal"
+      :clickedImageInMedia="clickedImageInMedia"
+      :currentImageIndex="currentImageIndex"
+      :setCurrentImageIndex="setCurrentImageIndex"
+    />
   </div>
 </template>
 
 <script>
+import EventHistoryGallery from "../components/events/EventHistoryGallery";
+import ImageModal from "../shared/ImageModal";
 import redirectToNewTab from "../helpers/RedirectToNewTab";
 import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 import { changeTextDirection } from "../helpers/StringsHelper";
@@ -81,7 +93,11 @@ export default {
   data() {
     return {
       activeTabIndex: 0,
-      tabs: []
+      tabs: [],
+      showImageModalModal: false,
+      clickedImageInMedia: "",
+      currentImageIndex: -1,
+      currentEventIndex: -1
     };
   },
   methods: {
@@ -90,13 +106,36 @@ export default {
     },
     selectClickAction(tab, index) {
       this.setActiveTabIndex(index);
+      this.clickedImageInMedia = "";
+      this.currentImageIndex = -1;
+    },
+    setShowImageModalModal(value = false) {
+      this.showImageModalModal = value;
+    },
+    setClickedImageInMedia(imagePath, currentImageIndex, currentEventIndex) {
+      this.currentEventIndex = currentEventIndex;
+      this.clickedImageInMedia = imagePath;
+      this.currentImageIndex = currentImageIndex;
+      this.setShowImageModalModal(true);
+    },
+    setCurrentImageIndex(index) {
+      if (index > this.data[this.currentEventIndex].images.img_media.length - 1)
+        this.currentImageIndex = 0;
+      else if (index < 0)
+        this.currentImageIndex =
+          this.data[this.currentEventIndex].images.img_media.length - 1;
+      else this.currentImageIndex = index;
+
+      this.clickedImageInMedia = this.data[
+        this.currentEventIndex
+      ].images.img_media[this.currentImageIndex].path;
     },
     changeHexaStyleForTab() {
       const tabPanes = document.getElementsByClassName("tab-pane");
       for (let index = 0; index < tabPanes.length; index++) {
         const element = tabPanes[index];
         if (isDeviceSmart())
-          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 99.5%,90% 99.8%,50% 99.8%,20% 101%,0% 99.7%,0 99.8%)`;
+          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 97%,95% 99%,70% 99%,50% 110%,0% 98%,0 99.8%)`;
         else if (element.clientHeight < 800)
           element.style.clipPath = `polygon(0 0,98.5% 0,100% 5%,100% 89%,98% 95%,66% 95%,50% 150%,6% 120%,0 93%)`;
         else if (element.clientHeight >= 800 && element.clientHeight < 1300)
@@ -123,6 +162,10 @@ export default {
   updated() {
     this.changeHexaStyleForTab();
     redirectToNewTab("description-container");
+  },
+  components: {
+    EventHistoryGallery,
+    ImageModal
   }
 };
 </script>

@@ -59,6 +59,9 @@
                 }}{{ summit.active ? "(Active)" : "" }}</option
               >
             </select>
+            <p class="error-message" v-if="errors.summit_id !== undefined">
+              {{ errors.summit_id }}
+            </p>
           </div>
         </div>
         <div class="col-md-6">
@@ -74,6 +77,9 @@
                 >{{ category.title }}</option
               >
             </select>
+            <p class="error-message" v-if="errors.category_id !== undefined">
+              {{ errors.category_id }}
+            </p>
           </div>
         </div>
       </div>
@@ -182,31 +188,46 @@ export default {
       this.sponsor[key] = files[0];
     },
     saveData: async function(saveFunction, successMessage) {
-      let formData = new FormData();
-      formData.append("name", this.sponsor.name);
-      formData.append("link", this.sponsor.link);
-      formData.append("summit_id", Number(this.sponsor.summit_id));
-      formData.append("category_id", Number(this.sponsor.category_id));
-      formData.append("img_logo", this.sponsor.img_logo);
+      if (this.sponsor.summit_id === "-1") {
+        this.errors = {
+          ...this.errors,
+          summit_id: "Please choose proper summit"
+        };
+        this.notifyVue("Please choose summit", "danger");
+      } else if (this.summit.category_id === "-1") {
+        this.errors = {
+          ...this.errors,
+          category_id: "Please choose proper category"
+        };
+        this.notifyVue("Please choose category", "danger");
+      } else {
+        this.errors = {};
+        let formData = new FormData();
+        formData.append("name", this.sponsor.name);
+        formData.append("link", this.sponsor.link);
+        formData.append("summit_id", Number(this.sponsor.summit_id));
+        formData.append("category_id", Number(this.sponsor.category_id));
+        formData.append("img_logo", this.sponsor.img_logo);
 
-      try {
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+        try {
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
 
-        if (this.operation === "Edit Sponsor")
-          await saveFunction(this.editData.id, formData);
-        else await saveFunction(formData);
+          if (this.operation === "Edit Sponsor")
+            await saveFunction(this.editData.id, formData);
+          else await saveFunction(formData);
 
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-        this.notifyVue(successMessage, "success");
-        this.$router.push("/dashboard/sponsors/list");
-      } catch (error) {
-        this.errors = { ...error.data.errors };
-        Object.keys(error.data.errors).forEach(err => {
-          const errorMessage = error.data.errors[err][0];
-          this.notifyVue(errorMessage, "danger");
-          this.errors = { ...this.errors, [err]: errorMessage };
-        });
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+          this.notifyVue(successMessage, "success");
+          this.$router.push("/dashboard/sponsors/list");
+        } catch (error) {
+          this.errors = { ...error.data.errors };
+          Object.keys(error.data.errors).forEach(err => {
+            const errorMessage = error.data.errors[err][0];
+            this.notifyVue(errorMessage, "danger");
+            this.errors = { ...this.errors, [err]: errorMessage };
+          });
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        }
       }
     },
     removeImage: async function() {

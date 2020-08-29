@@ -107,7 +107,6 @@
             label="Registeration Start Date"
             placeholder="Enter Registeration Start Date"
             v-model="tournament.register_start_at"
-            :min="minDate"
             :isInvalid="errors.register_start_at !== undefined"
             :isRequired="true"
             @change="checkDatesSequence"
@@ -126,7 +125,6 @@
             label="Registeration End Date"
             placeholder="Enter Registeration End Date"
             v-model="tournament.register_end_at"
-            :min="minDate"
             :isInvalid="errors.register_end_at !== undefined"
             :isRequired="true"
             @change="checkDatesSequence"
@@ -142,7 +140,6 @@
             label="Kick-off Date"
             placeholder="Enter Kick-off Date"
             v-model="tournament.kick_off_date"
-            :min="minDate"
             :isInvalid="errors.kick_off_date !== undefined"
             :isRequired="true"
             @change="checkDatesSequence"
@@ -229,8 +226,21 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-3 mt-auto mb-auto">
+      <div class="row mt-3 mb-3">
+        <div class="col-md-6 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="enabled"
+              v-model="tournament.enabled"
+            />
+            <label class="custom-control-label" for="enabled"
+              >Publish Tournament</label
+            >
+          </div>
+        </div>
+        <div class="col-md-6 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -243,7 +253,9 @@
             >
           </div>
         </div>
-        <div class="col-md-3 mt-auto mb-auto">
+      </div>
+      <div class="row">
+        <div class="col-md-6 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -616,6 +628,7 @@ export default {
         event_id: "-1",
         has_cover_over: false,
         show_sponsors: false,
+        enabled: false,
         has_rules: false,
         rules: { title: "", content: "" },
         contacts: { title: "", content: "" },
@@ -702,22 +715,22 @@ export default {
           ...this.errors,
           region_id: "Please choose proper region"
         };
-        this.notifyVue("Please insert proper region", "danger");
+        this.notifyVue("Please choose proper region", "danger");
       } else if (this.tournament.platform_id === "-1") {
         this.errors = {
           ...this.errors,
           platform_id: "Please choose proper platform"
         };
-        this.notifyVue("Please insert proper platform", "danger");
+        this.notifyVue("Please choose proper platform", "danger");
       } else if (this.tournament.game_id === "-1") {
         this.errors = { ...this.errors, game_id: "Please choose proper game" };
-        this.notifyVue("Please insert proper game", "danger");
+        this.notifyVue("Please choose proper game", "danger");
       } else if (this.tournament.event_id === "-1") {
         this.errors = {
           ...this.errors,
           event_id: "Please choose proper event"
         };
-        this.notifyVue("Please insert proper event", "danger");
+        this.notifyVue("Please choose proper event", "danger");
       } else {
         this.errors = {};
         this.CTAClicked = true;
@@ -743,6 +756,7 @@ export default {
         formData.append("game_id", this.tournament.game_id);
         formData.append("event_id", this.tournament.event_id);
         formData.append("show_sponsors", this.tournament.show_sponsors ? 1 : 0);
+        formData.append("enabled", this.tournament.enabled ? 1 : 0);
         formData.append("has_rules", this.tournament.has_rules ? 1 : 0);
         formData.append(
           "has_cover_over",
@@ -754,10 +768,7 @@ export default {
         formData.append("img_cover_over", this.tournament.img_cover_over);
         formData.append("img_schedule", this.tournament.img_schedule);
         formData.append("img_card", this.tournament.img_card);
-        formData.append(
-          "vid_stream",
-          liveVideoEmbedFormatter(this.tournament.vid_stream)
-        );
+        formData.append("vid_stream", this.tournament.vid_stream);
         formData.append("vid_cover_main", this.tournament.vid_cover_main);
 
         for (var i = 0; i < this.$refs.img_cover_main.files.length; i++) {
@@ -867,16 +878,16 @@ export default {
       eventCoverTypes: state => state.events.eventCoverTypes,
       isEventCoverTypesFetched: state => state.events.isEventCoverTypesFetched
     }),
-    minDate() {
-      var today = new Date();
-      var date =
-        today.getFullYear() +
-        "-" +
-        ("0" + (today.getMonth() + 1)).slice(-2) +
-        "-" +
-        today.getDate();
-      return date;
-    },
+    // minDate() {
+    //   var today = new Date();
+    //   var date =
+    //     today.getFullYear() +
+    //     "-" +
+    //     ("0" + (today.getMonth() + 1)).slice(-2) +
+    //     "-" +
+    //     today.getDate();
+    //   return date;
+    // },
     showFormWhenDataFetched() {
       if (this.operation !== "Edit Tournament")
         return (
@@ -935,6 +946,7 @@ export default {
       this.tournament.event_id =
         this.editData.event !== null ? this.editData.event.id : "-1";
       this.tournament.show_sponsors = this.editData.show_sponsors;
+      this.tournament.enabled = this.editData.enabled;
       this.tournament.has_rules = this.editData.has_rules;
       this.tournament.has_cover_over = this.editData.has_cover_over;
       this.tournament.rules = this.editData.rule;

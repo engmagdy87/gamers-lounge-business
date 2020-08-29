@@ -72,6 +72,43 @@ const sponsors = {
     }
 };
 
+const popups = {
+    getters: {
+        GET_POPUP: 'popups/getters/GET_POPUP',
+    },
+    mutations: {
+        SET_DASHBOARD_POPUPS_DATA: 'popups/mutations/SET_DASHBOARD_POPUPS_DATA',
+        SET_IS_DASHBOARD_POPUPS_DATA_FETCHED: 'popups/mutations/SET_IS_DASHBOARD_POPUPS_DATA_FETCHED',
+        SET_RANDOM_POPUP_DATA: 'popups/mutations/SET_RANDOM_POPUP_DATA',
+        SET_IS_RANDOM_POPUP_DATA_FETCHED: 'popups/mutations/SET_IS_RANDOM_POPUP_DATA_FETCHED',
+        REMOVE_DELETED_POPUP: 'popups/mutations/REMOVE_DELETED_POPUP',
+    },
+    actions: {
+        FETCH_DASHBOARD_POPUPS: 'popups/actions/FETCH_DASHBOARD_POPUPS',
+        FETCH_RANDOM_POPUPS: 'popups/actions/FETCH_RANDOM_POPUPS',
+        EDIT_POPUP: 'popups/actions/EDIT_POPUP',
+        DELETE_POPUP: 'popups/actions/DELETE_POPUP',
+        DELETE_POPUP_IMAGE: 'popups/actions/DELETE_POPUP_IMAGE',
+    }
+};
+
+const testimonials = {
+    mutations: {
+        SET_DASHBOARD_TESTIMONIALS_DATA: 'testimonials/mutations/SET_DASHBOARD_TESTIMONIALS_DATA',
+        SET_IS_DASHBOARD_TESTIMONIALS_DATA_FETCHED: 'testimonials/mutations/SET_IS_DASHBOARD_TESTIMONIALS_DATA_FETCHED',
+        SET_TESTIMONIALS_DATA: 'testimonials/mutations/SET_TESTIMONIALS_DATA',
+        SET_IS_TESTIMONIALS_DATA_FETCHED: 'testimonials/mutations/SET_IS_TESTIMONIALS_DATA_FETCHED',
+        REMOVE_DELETED_TESTIMONIAL: 'testimonials/mutations/REMOVE_DELETED_TESTIMONIAL',
+    },
+    actions: {
+        FETCH_DASHBOARD_TESTIMONIALS: 'testimonials/actions/FETCH_DASHBOARD_TESTIMONIALS',
+        FETCH_TESTIMONIALS: 'testimonials/actions/FETCH_TESTIMONIALS',
+        EDIT_TESTIMONIAL: 'testimonials/actions/EDIT_TESTIMONIAL',
+        DELETE_TESTIMONIAL: 'testimonials/actions/DELETE_TESTIMONIAL',
+        DELETE_TESTIMONIAL_IMAGE: 'testimonials/actions/DELETE_TESTIMONIAL_IMAGE',
+    }
+};
+
 const games = {
     mutations: {
         SET_GAMES_DATA: 'games/mutations/SET_GAMES_DATA',
@@ -182,7 +219,9 @@ const summits = {
         SET_COVER_HOME_EVENTS_IMAGE: 'summits/mutations/SET_COVER_HOME_EVENTS_IMAGE',
         IS_COVER_HOME_EVENTS_IMAGE_FETCHED: 'summits/mutations/IS_COVER_HOME_EVENTS_IMAGE_FETCHED',
         SET_COVER_CONTACT_US_IMAGE: 'summits/mutations/SET_COVER_CONTACT_US_IMAGE',
+        SET_COVER_TESTIMONIALS_IMAGE: 'summits/mutations/SET_COVER_TESTIMONIALS_IMAGE',
         IS_COVER_CONTACT_US_IMAGE_FETCHED: 'summits/mutations/IS_COVER_CONTACT_US_IMAGE_FETCHED',
+        IS_COVER_TESTIMONIALS_IMAGE_FETCHED: 'summits/mutations/IS_COVER_TESTIMONIALS_IMAGE_FETCHED',
         SET_COVER_GIVEAWAYS_IMAGE: 'summits/mutations/SET_COVER_GIVEAWAYS_IMAGE',
         IS_COVER_GIVEAWAYS_IMAGE_FETCHED: 'summits/mutations/IS_COVER_GIVEAWAYS_IMAGE_FETCHED',
     },
@@ -197,6 +236,7 @@ const summits = {
         EDIT_SUMMIT: 'summits/actions/EDIT_SUMMIT',
         FETCH_COVER_HOME_EVENTS_IMAGE: 'summits/actions/FETCH_COVER_HOME_EVENTS_IMAGE',
         FETCH_COVER_CONTACT_US_IMAGE: 'summits/actions/FETCH_COVER_CONTACT_US_IMAGE',
+        FETCH_COVER_TESTIMONIALS_IMAGE: 'summits/actions/FETCH_COVER_TESTIMONIALS_IMAGE',
         FETCH_COVER_GIVEAWAYS_IMAGE: 'summits/actions/FETCH_COVER_GIVEAWAYS_IMAGE',
     }
 };
@@ -330,5 +370,7 @@ export default {
     tournaments,
     contact,
     sponsorsCategories,
-    navigationTree
+    navigationTree,
+    popups,
+    testimonials
 };

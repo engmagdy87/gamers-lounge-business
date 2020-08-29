@@ -57,6 +57,7 @@ export default {
           "Start Date",
           "End Date",
           "Type",
+          "Published",
           "Card Image",
           "Cover Main Image",
           "Cover Over Image",

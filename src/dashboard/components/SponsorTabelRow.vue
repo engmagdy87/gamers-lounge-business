@@ -3,7 +3,7 @@
     <th scope="row">{{ id }}</th>
     <td>{{ rowData.name }}</td>
     <td>
-      <a :href="rowData.link" target="_blank">{{ rowData.link }}</a>
+      <a :href="rowData.link" target="_blank">URL</a>
     </td>
     <td>{{ !rowData.summit ? "" : rowData.summit.initial_title }}</td>
     <td>{{ !rowData.category ? "" : rowData.category.title }}</td>

@@ -164,6 +164,10 @@ span {
 .description-container {
   word-break: break-word;
   overflow: hidden;
+  div {
+    color: white !important;
+    word-break: break-word;
+  }
   span {
     color: white !important;
     word-break: break-word;
@@ -172,6 +176,13 @@ span {
     color: white !important;
     word-break: break-word;
   }
+  h1 > a,
+  h2 > a,
+  h3 > a,
+  h4 > a,
+  h5 > a,
+  h6 > a,
+  p > a,
   span > a {
     color: #2af3f3 !important;
     word-break: break-word;

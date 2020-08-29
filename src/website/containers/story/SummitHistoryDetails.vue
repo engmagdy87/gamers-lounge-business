@@ -77,7 +77,10 @@
         </div>
         <div class="row">
           <div class="col mt-3 mt-md-5">
-            <SummitTabs :data="summitDetails" />
+            <SummitTabs
+              :data="summitDetails"
+              :setClickedImageInMedia="setClickedImageInMedia"
+            />
           </div>
         </div>
       </div>
@@ -90,8 +93,16 @@
       :showFlag="showRegisterModal"
       :setShowRegisterModal="setShowRegisterModal"
     />
+    <ImageModal
+      :showImageModalModal="showImageModalModal"
+      :setShowImageModalModal="setShowImageModalModal"
+      :clickedImageInMedia="clickedImageInMedia"
+      :currentImageIndex="currentImageIndex"
+      :setCurrentImageIndex="setCurrentImageIndex"
+    />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer v-if="showDetailsHero" />
+    <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>
 
@@ -103,6 +114,7 @@ import Header from "../../shared/Header";
 import Footer from "../../shared/Footer";
 import LoginModal from "../../components/home/LoginModal";
 import RegisterModal from "../../components/home/RegisterModal";
+import ImageModal from "../../shared/ImageModal";
 import Spinner from "../../shared/Spinner";
 import SummitTabs from "../../shared/SummitTabs";
 import {
@@ -110,24 +122,32 @@ import {
   setSummitCookie,
   getSummitCookie
 } from "../../helpers/CookieHelper";
+import Popup from "../../shared/Popup";
+import * as POPUPS_PLACES from "../../constants/PopupsPlaces";
 
 export default {
   data() {
     return {
       showLoginModal: false,
       showRegisterModal: false,
-      summitShortDetails: {}
+      showImageModalModal: false,
+      summitShortDetails: {},
+      randomPopupData: {},
+      clickedImageInMedia: "",
+      currentImageIndex: -1
     };
   },
   computed: {
     ...mapGetters({
-      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
+      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN,
+      randomPopup: types.popups.getters.GET_POPUP
     }),
     ...mapState({
       summitDetails: state => state.summits.summitDetailsData,
       isSummitDetailsDataFetched: state =>
         state.summits.isSummitDetailsDataFetched,
-      summitTree: state => state.navigationTree.summitTree
+      summitTree: state => state.navigationTree.summitTree,
+      isRandomPopupDataFetched: state => state.popups.isRandomPopupDataFetched
     }),
     showDetailsHero() {
       return Object.keys(this.summitDetails).length !== 0;
@@ -143,13 +163,33 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchSummitDetails: types.summits.actions.FETCH_SUMMIT_DETAILS
+      fetchSummitDetails: types.summits.actions.FETCH_SUMMIT_DETAILS,
+      fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS
     }),
+    setShowImageModalModal(value = false) {
+      this.showImageModalModal = value;
+    },
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
     },
     setShowRegisterModal(value = false) {
       this.showRegisterModal = value;
+    },
+    setClickedImageInMedia(imagePath, currentImageIndex) {
+      this.clickedImageInMedia = imagePath;
+      this.currentImageIndex = currentImageIndex;
+      this.setShowImageModalModal(true);
+    },
+    setCurrentImageIndex(index) {
+      if (index > this.summitDetails.images.img_media.length - 1)
+        this.currentImageIndex = 0;
+      else if (index < 0)
+        this.currentImageIndex = this.summitDetails.images.img_media.length - 1;
+      else this.currentImageIndex = index;
+
+      this.clickedImageInMedia = this.summitDetails.images.img_media[
+        this.currentImageIndex
+      ].path;
     },
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -166,7 +206,9 @@ export default {
     LoginModal,
     RegisterModal,
     Spinner,
-    SummitTabs
+    Popup,
+    SummitTabs,
+    ImageModal
   },
   mounted() {
     const summitCookieData = getSummitCookie();
@@ -190,6 +232,13 @@ export default {
       "-"
     )[0];
     this.fetchSummitDetails(summitId);
+    this.fetchRandomPopup();
+  },
+  updated() {
+    if (this.isRandomPopupDataFetched)
+      this.randomPopupData = this.randomPopup(
+        POPUPS_PLACES.SUMMIT_HISTORY_DETAILS
+      );
   }
 };
 </script>

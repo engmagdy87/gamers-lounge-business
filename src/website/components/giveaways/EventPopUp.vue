@@ -2,20 +2,23 @@
   <div
     :class="[
       'side-popup-container',
-      showSidePopup
+      showEventPopup
         ? 'side-popup-container--show'
         : 'side-popup-container--hide'
     ]"
   >
     <div class="side-popup-wrapper">
       <h2>Giveaways & Offers</h2>
-      <div class="side-popup-wrapper__arrow-container" @click="toggleSidePopup">
+      <div
+        class="side-popup-wrapper__arrow-container"
+        @click="toggleEventPopup"
+      >
         <img
           src="/website/img/arrow.svg"
           alt="arrow"
           :class="[
             'side-popup-wrapper__arrow',
-            showSidePopup
+            showEventPopup
               ? 'side-popup-wrapper__arrow--reverse'
               : 'side-popup-wrapper__arrow--normal'
           ]"
@@ -36,6 +39,7 @@
           @click="redirectTo(card)"
           role="button"
           class="side-popup-wrapper__card"
+          v-if="card.enabled"
         >
           <img
             v-if="card.images.img_logo !== null"
@@ -44,7 +48,7 @@
           />
           <h3>{{ card.title }}</h3>
           <div
-            class="col description-container"
+            class="col description-container side-popup-wrapper__card__text"
             v-html="card.short_description"
           ></div>
         </div>
@@ -64,15 +68,15 @@ export default {
   props: ["giveawaysAndOffersData", "tree"],
   data() {
     return {
-      showSidePopup: true
+      showEventPopup: true
     };
   },
   components: {
     VueSlickCarousel
   },
   methods: {
-    toggleSidePopup() {
-      this.showSidePopup = !this.showSidePopup;
+    toggleEventPopup() {
+      this.showEventPopup = !this.showEventPopup;
     },
     redirectTo(card) {
       if (card.is_external) window.open(card.external_link, "_blank");
@@ -94,5 +98,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/sass/website/components/giveaways/side-popup.scss";
+@import "../../../assets/sass/website/components/giveaways/event-popup.scss";
 </style>

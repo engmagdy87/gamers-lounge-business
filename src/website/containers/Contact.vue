@@ -87,7 +87,8 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer v-if="isCoverContactUsImageFetched" />
+    <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>
 
@@ -100,6 +101,8 @@ import Footer from "../shared/Footer";
 import LoginModal from "../components/home/LoginModal";
 import RegisterModal from "../components/home/RegisterModal";
 import Spinner from "../shared/Spinner";
+import Popup from "../shared/Popup";
+import * as POPUPS_PLACES from "../constants/PopupsPlaces";
 
 export default {
   data() {
@@ -108,15 +111,20 @@ export default {
       showRegisterModal: false,
       email: "",
       subject: "",
-      message: ""
+      message: "",
+      randomPopupData: {}
     };
   },
   computed: {
+    ...mapGetters({
+      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN,
+      randomPopup: types.popups.getters.GET_POPUP
+    }),
     ...mapState({
-      isContactFetched: state => state.contact.isContactFetched,
       isCoverContactUsImageFetched: state =>
         state.summits.isCoverContactUsImageFetched,
-      coverContactUsImage: state => state.summits.coverContactUsImage
+      coverContactUsImage: state => state.summits.coverContactUsImage,
+      isRandomPopupDataFetched: state => state.popups.isRandomPopupDataFetched
     })
   },
   watch: {
@@ -131,7 +139,8 @@ export default {
     ...mapActions({
       postMessage: types.contact.actions.SEND_MESSAGE,
       fetchCoverContactUsImage:
-        types.summits.actions.FETCH_COVER_CONTACT_US_IMAGE
+        types.summits.actions.FETCH_COVER_CONTACT_US_IMAGE,
+      fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -169,14 +178,19 @@ export default {
     Footer,
     LoginModal,
     RegisterModal,
-    Spinner
+    Spinner,
+    Popup
   },
   mounted() {
     this.fetchCoverContactUsImage();
+    this.fetchRandomPopup();
   },
   updated() {
     if (this.isCoverContactUsImageFetched)
       store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+
+    if (this.isRandomPopupDataFetched)
+      this.randomPopupData = this.randomPopup(POPUPS_PLACES.CONTACT);
   }
 };
 </script>

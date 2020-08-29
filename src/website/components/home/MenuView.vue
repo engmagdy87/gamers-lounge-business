@@ -14,6 +14,7 @@
         class="col-12 col-lg-4 p-0"
         v-for="(card, index) in data"
         :key="index"
+        v-if="card.enabled"
       >
         <TournamentCard :card="card" :tree="tree" />
       </div>

@@ -200,8 +200,36 @@
           </div>
         </div>
       </div>
+      <div class="row mt-3 mb-3">
+        <div class="col-md-6 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="enabled"
+              v-model="giveaway.enabled"
+            />
+            <label class="custom-control-label" for="enabled"
+              >Publish Giveaway/Offer</label
+            >
+          </div>
+        </div>
+        <div class="col-md-6 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="show_sponsors"
+              v-model="giveaway.show_sponsors"
+            />
+            <label class="custom-control-label" for="show_sponsors"
+              >Show Sponsors</label
+            >
+          </div>
+        </div>
+      </div>
       <div class="row">
-        <div class="col-12 col-md-4 mt-auto mb-auto">
+        <div class="col-12 col-md-6 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -214,7 +242,7 @@
             >
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="form-group">
             <label for="cover-type">Cover Type</label>
             <select class="form-control" v-model="giveaway.cover_type">
@@ -227,20 +255,9 @@
                 >{{ type.label }}</option
               >
             </select>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4 mt-auto mb-auto">
-          <div class="custom-control custom-switch">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="enabled"
-              v-model="giveaway.enabled"
-            />
-            <label class="custom-control-label" for="enabled"
-              >Publish Giveaway/Offer</label
-            >
+            <p class="error-message" v-if="errors.cover_type !== undefined">
+              {{ errors.cover_type }}
+            </p>
           </div>
         </div>
       </div>
@@ -545,11 +562,12 @@ export default {
         cover_type: "-1",
         register_limit: 0,
         has_cover_over: false,
+        enabled: false,
+        show_sponsors: false,
         events_ids: [],
         register_questions: [],
         is_external: false,
         external_link: "",
-        enabled: false,
         img_cover_over: "",
         img_logo: "",
         img_card: "",
@@ -671,6 +689,12 @@ export default {
           "Short Description must be less than 170 characters and not empty",
           "danger"
         );
+      } else if (this.giveaway.cover_type === "-1") {
+        this.errors = {
+          ...this.errors,
+          cover_type: "Please choose proper cover type"
+        };
+        this.notifyVue("Please choose cover type", "danger");
       } else {
         this.errors = {};
         this.CTAClicked = true;
@@ -689,10 +713,11 @@ export default {
         formData.append("cover_type", this.giveaway.cover_type);
         formData.append("register_limit", this.giveaway.register_limit);
         formData.append("has_cover_over", this.giveaway.has_cover_over ? 1 : 0);
+        formData.append("enabled", this.giveaway.enabled ? 1 : 0);
+        formData.append("show_sponsors", this.giveaway.show_sponsors ? 1 : 0);
 
         formData.append("is_external", this.giveaway.is_external ? 1 : 0);
         formData.append("external_link", this.giveaway.external_link);
-        formData.append("enabled", this.giveaway.enabled ? 1 : 0);
         formData.append("img_cover_over", this.giveaway.img_cover_over);
         formData.append("img_logo", this.giveaway.img_logo);
         formData.append("img_card", this.giveaway.img_card);
@@ -906,9 +931,10 @@ export default {
       this.giveaway.type = this.editData.type;
       this.giveaway.cover_type = this.editData.cover_type;
       this.giveaway.has_cover_over = this.editData.has_cover_over;
+      this.giveaway.enabled = this.editData.enabled;
+      this.giveaway.show_sponsors = this.editData.show_sponsors;
       this.giveaway.is_external = this.editData.is_external;
       this.giveaway.external_link = this.editData.external_link || "";
-      this.giveaway.enabled = this.editData.enabled;
       this.giveaway.register_questions = this.editData.register_questions;
       this.giveaway.img_cover_over = this.editData.images.img_cover_over;
       this.giveaway.img_logo = this.editData.images.img_logo;

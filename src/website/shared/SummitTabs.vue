@@ -74,7 +74,15 @@
         role="tabpanel"
         aria-labelledby="nav-profile-tab"
       >
-        MEDIA
+        <div
+          class="summit-tab-wrapper__media-image"
+          v-for="(image, i) in data.images.img_media"
+          :key="i"
+          role="button"
+          @click="() => setClickedImageInMedia(image.path, i)"
+        >
+          <img :src="image.path" :alt="image.path" />
+        </div>
       </div>
       <div
         :class="[
@@ -103,7 +111,7 @@ import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 import { changeTextDirection } from "../helpers/StringsHelper";
 
 export default {
-  props: ["data", "redirectTo"],
+  props: ["data", "setClickedImageInMedia"],
   data() {
     return {
       activeTabIndex: 0,

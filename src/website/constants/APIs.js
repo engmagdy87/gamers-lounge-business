@@ -121,6 +121,23 @@ const GET_LIST_EVENTS_PARENTS = `${API_URL}/admin/events/parents/list`
 const EDIT_EVENTS_PARENT = `${API_URL}/admin/events/parents`
 const DELETE_EVENTS_PARENT = `${API_URL}/admin/events/parents`
 
+// POPUP (6 APIs)
+const GET_DASHBOARD_POPUPS = `${API_URL}/admin/popups`
+const CREATE_POPUP = `${API_URL}/admin/popups`
+const EDIT_POPUP = `${API_URL}/admin/popups`
+const DELETE_POPUP = `${API_URL}/admin/popups`
+const DELETE_POPUP_IMAGE = `${API_URL}/admin/popups`
+const GET_RANDOM_POPUP = `${API_URL}/popups/random`
+
+// TESTIMONIALS (6 APIs)
+const GET_DASHBOARD_TESTIMONIALS = `${API_URL}/admin/testimonials`
+const CREATE_TESTIMONIAL = `${API_URL}/admin/testimonials`
+const EDIT_TESTIMONIAL = `${API_URL}/admin/testimonials`
+const DELETE_TESTIMONIAL = `${API_URL}/admin/testimonials`
+const DELETE_TESTIMONIAL_IMAGE = `${API_URL}/admin/testimonials`
+const GET_TESTIMONIALS = `${API_URL}/testimonials`
+const GET_COVER_TESTIMONIALS_IMAGE = `${API_URL}/testimonials/cover`
+
 export {
     API_URL,
     REGISTER_WEBSITE_USER,
@@ -217,5 +234,18 @@ export {
     GET_COVER_GIVEAWAY_IMAGE,
     GET_WEBSITE_EVENT_HISTORY,
     GET_WEBSITE_SUMMIT_HISTORY,
-    GET_WEBSITE_SUMMIT_DETAILS
+    GET_WEBSITE_SUMMIT_DETAILS,
+    GET_DASHBOARD_POPUPS,
+    CREATE_POPUP,
+    EDIT_POPUP,
+    DELETE_POPUP,
+    DELETE_POPUP_IMAGE,
+    GET_RANDOM_POPUP,
+    GET_DASHBOARD_TESTIMONIALS,
+    CREATE_TESTIMONIAL,
+    EDIT_TESTIMONIAL,
+    DELETE_TESTIMONIAL,
+    DELETE_TESTIMONIAL_IMAGE,
+    GET_TESTIMONIALS,
+    GET_COVER_TESTIMONIALS_IMAGE
 };

@@ -136,6 +136,29 @@
         >
         </GiveawayRegistersTableRow>
       </tbody>
+      <tbody v-else-if="tableType === 'popups'">
+        <PopupsTableRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+          :setShowGiveawayRegisterQuestionModalFlag="
+            setShowGiveawayRegisterQuestionModalFlag
+          "
+        >
+        </PopupsTableRow>
+      </tbody>
+      <tbody v-else-if="tableType === 'testimonials'">
+        <TestimonialTableRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </TestimonialTableRow>
+      </tbody>
     </table>
   </div>
 </template>
@@ -152,6 +175,8 @@ import GiveawayRegisterQuestionTabelRow from "./GiveawayRegisterQuestionTabelRow
 import SponsorsCategoryTabelRow from "./SponsorsCategoryTabelRow";
 import EventParentTableRow from "./EventParentTableRow";
 import GiveawayRegistersTableRow from "./GiveawayRegistersTableRow";
+import PopupsTableRow from "./PopupsTableRow";
+import TestimonialTableRow from "./TestimonialTableRow";
 
 export default {
   name: "l-table",
@@ -175,7 +200,9 @@ export default {
     GiveawayTabelRow,
     GiveawayRegisterQuestionTabelRow,
     EventParentTableRow,
-    GiveawayRegistersTableRow
+    GiveawayRegistersTableRow,
+    PopupsTableRow,
+    TestimonialTableRow
   }
 };
 </script>

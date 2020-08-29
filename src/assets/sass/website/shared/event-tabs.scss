@@ -115,6 +115,7 @@
     &__img {
       width: 30%;
       border-radius: 5px;
+      padding-right: 10px;
       @include is-mobile {
         width: 50%;
         display: block;
@@ -123,6 +124,9 @@
     }
     &__info {
       width: 70%;
+      @include is-mobile {
+        width: 100%;
+      }
       span {
         font-weight: bold;
       }

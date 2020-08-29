@@ -123,7 +123,19 @@
         role="tabpanel"
         aria-labelledby="nav-contact-tab"
       >
-        schedule
+        <div class="row">
+          <div class="col-12">
+            <h3 class="pl-3">{{ data.schedule_title }}</h3>
+          </div>
+          <div class="col-12">
+            <img
+              v-if="data.images.img_schedule !== null"
+              :src="data.images.img_schedule.path"
+              :alt="data.schedule_title + 'background'"
+              class="w-100 p-3"
+            />
+          </div>
+        </div>
       </div>
       <div
         v-if="activeTabIndex === 3"
@@ -140,18 +152,26 @@
               data.streaming.path !== ''
           "
         >
-          <div class="col-12 col-md-8">
+          <div
+            :class="[
+              'col-12 ',
+              getLiveVideoChatEmbedUrl(data.streaming.path) ? 'col-md-8' : ''
+            ]"
+          >
             <iframe
               width="100%"
               height="500"
-              :src="data.streaming.path"
+              :src="getLiveVideoEmbedUrl(data.streaming.path)"
               frameborder="0"
               allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             >
             </iframe>
           </div>
-          <div class="col-12 col-md-4">
+          <div
+            class="col-12 col-md-4"
+            v-if="getLiveVideoChatEmbedUrl(data.streaming.path)"
+          >
             <iframe
               scrolling="<scrolling>"
               width="100%"
@@ -189,7 +209,10 @@
 import redirectToNewTab from "../helpers/RedirectToNewTab";
 import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 import { changeTextDirection } from "../helpers/StringsHelper";
-import { liveVideoChatEmbedFormatter } from "../../dashboard/helpers/LiveVideoEmbedFormater";
+import {
+  liveVideoEmbedFormatter,
+  liveVideoChatEmbedFormatter
+} from "../../dashboard/helpers/LiveVideoEmbedFormater";
 
 export default {
   props: ["data", "redirectTo"],
@@ -204,9 +227,7 @@ export default {
       this.activeTabIndex = index;
     },
     selectClickAction(tab, index) {
-      tab === "Schedule" ||
-      tab === "Streaming" ||
-      (tab === "Rules Book" && !this.data.has_rules)
+      tab === "Rules Book" && !this.data.has_rules
         ? () => {}
         : this.setActiveTabIndex(index);
     },
@@ -237,10 +258,10 @@ export default {
           element.style.clipPath = `polygon(0 0,98% 0,100% 0.3%,100% 99.5%,98% 99.7%,66% 99.7%,50% 101%,9% 101%,0 99.7%)`;
       }
     },
+    getLiveVideoEmbedUrl(url) {
+      return liveVideoEmbedFormatter(url);
+    },
     getLiveVideoChatEmbedUrl(url) {
-      console.log("====================================");
-      console.log(liveVideoChatEmbedFormatter(url));
-      console.log("====================================");
       return liveVideoChatEmbedFormatter(url);
     }
   },

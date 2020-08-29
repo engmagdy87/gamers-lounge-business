@@ -9,6 +9,7 @@
     <td>
       <div v-html="rowData.final_description" class="description"></div>
     </td>
+    <td>{{ rowData.enabled ? "Yes" : "No" }}</td>
     <td>{{ rowData.format }}</td>
     <td>{{ rowData.register_link }}</td>
     <td>{{ rowData.register_start_at.split(" ")[0] }}</td>

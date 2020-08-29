@@ -46,6 +46,14 @@
         <i class="nc-icon nc-app"></i>
         <p>Giveaways & Offers</p>
       </sidebar-link>
+      <sidebar-link to="/dashboard/popups">
+        <i class="nc-icon nc-air-baloon"></i>
+        <p>Popups</p>
+      </sidebar-link>
+      <sidebar-link to="/dashboard/testimonials">
+        <i class="nc-icon nc-chat-round"></i>
+        <p>Testimonials</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>

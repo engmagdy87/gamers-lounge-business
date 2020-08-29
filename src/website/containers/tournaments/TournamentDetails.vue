@@ -132,7 +132,8 @@
       :setShowRegisterModal="setShowRegisterModal"
     />
     <Spinner :smallLoader="false" />
-    <Footer />
+    <Footer v-if="showDetailsHero" />
+    <Popup :data="randomPopupData" v-if="randomPopupData !== null" />
   </div>
 </template>
 
@@ -151,6 +152,8 @@ import {
   setTournamentCookie,
   getTournamentCookie
 } from "../../helpers/CookieHelper";
+import Popup from "../../shared/Popup";
+import * as POPUPS_PLACES from "../../constants/PopupsPlaces";
 
 export default {
   data() {
@@ -158,16 +161,19 @@ export default {
       showLoginModal: false,
       showRegisterModal: false,
       registerLink: "",
-      tournamentShortDetails: {}
+      tournamentShortDetails: {},
+      randomPopupData: {}
     };
   },
   computed: {
     ...mapGetters({
-      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN
+      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN,
+      randomPopup: types.popups.getters.GET_POPUP
     }),
     ...mapState({
       tournamentDetails: state => state.tournaments.tournamentDetailsData,
-      tournamentTree: state => state.navigationTree.tournamentTree
+      tournamentTree: state => state.navigationTree.tournamentTree,
+      isRandomPopupDataFetched: state => state.popups.isRandomPopupDataFetched
     }),
     showDetailsHero() {
       return Object.keys(this.tournamentDetails).length !== 0;
@@ -207,7 +213,9 @@ export default {
     ...mapActions({
       fetchTournamentDetails:
         types.tournaments.actions.FETCH_TOURNAMENTS_DETAILS,
-      fetchTournamentRegisterLink: types.tournaments.actions.FETCH_REGISTER_LINK
+      fetchTournamentRegisterLink:
+        types.tournaments.actions.FETCH_REGISTER_LINK,
+      fetchRandomPopup: types.popups.actions.FETCH_RANDOM_POPUPS
     }),
     setShowLoginModal(value = false) {
       this.showLoginModal = value;
@@ -215,10 +223,7 @@ export default {
     setShowRegisterModal(value = false) {
       this.showRegisterModal = value;
     },
-    getLink: async function() {
-      const tournamentId = this.$router.history.current.params.tournamentName.split(
-        "-"
-      )[0];
+    getLink: async function(tournamentId) {
       const result = await this.fetchTournamentRegisterLink(tournamentId);
       this.registerLink = result;
     },
@@ -270,7 +275,8 @@ export default {
     LoginModal,
     RegisterModal,
     Spinner,
-    TournamentTabs
+    TournamentTabs,
+    Popup
   },
   mounted() {
     const tournamentCookieData = getTournamentCookie();
@@ -294,7 +300,12 @@ export default {
       "-"
     )[0];
     this.fetchTournamentDetails(tournamentId);
-    this.getLink();
+    this.getLink(tournamentId);
+    this.fetchRandomPopup();
+  },
+  updated() {
+    if (this.isRandomPopupDataFetched)
+      this.randomPopupData = this.randomPopup(POPUPS_PLACES.TOURNAMENT_DETAILS);
   }
 };
 </script>

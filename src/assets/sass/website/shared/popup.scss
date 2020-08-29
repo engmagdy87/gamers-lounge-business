@@ -1,26 +1,29 @@
-@import "../../mixins.scss";
-@import "../../color-palette.scss";
+@import "../mixins.scss";
+@import "../color-palette.scss";
+@import "../variables.scss";
 
-$card-height: 400px;
-$card-title-height: 50px;
-
-.side-popup-container {
+.popup-container {
   filter: drop-shadow(0px 0px 6px #175e90);
-  width: 320px;
-  height: $card-height;
+  width: $popup-width;
+  height: $popup-height;
   position: absolute;
-  top: 20%;
+  top: $popup-top-offset;
   right: 0;
   transition: all 0.3s ease;
   &--hide {
-    transform: translateX(280px);
+    transform: translateX(450px);
   }
   &--show {
     transform: translateX(0);
   }
+  @include is-mobile {
+    width: $popup-width-mobile;
+    height: $popup-height-mobile;
+    top: $popup-top-offset-mobile;
+  }
 }
-.side-popup-wrapper {
-  background-color: #100100;
+.popup-wrapper {
+  height: 100%;
   color: white;
   padding-left: 50px;
   padding-right: 25px;
@@ -29,26 +32,7 @@ $card-title-height: 50px;
   text-align: center;
   cursor: pointer;
   position: relative;
-  clip-path: polygon(
-    100% 100%,
-    0% 100%,
-    18% 100%,
-    8% 92%,
-    8% 65%,
-    0% 60%,
-    0% 40%,
-    8% 35%,
-    8% 30%,
-    8% 7%,
-    18% 0%,
-    100% 0%
-  );
-  h2 {
-    font-size: 1.4rem;
-    padding: 10px;
-    margin: 0 0 5px 0;
-    height: $card-title-height;
-  }
+  @include create-half-hexagone-shape(12px);
   &__arrow-container {
     cursor: pointer;
     width: 20px;
@@ -70,7 +54,7 @@ $card-title-height: 50px;
     }
   }
   &__card {
-    height: calc(#{$card-height} - #{$card-title-height});
+    height: calc(#{$popup-height} - #{$popup-title-height});
     h3 {
       margin: 10px 0 5px 0;
       font-size: 1.3rem;
@@ -81,4 +65,27 @@ $card-title-height: 50px;
       margin: auto;
     }
   }
+}
+
+/* The Close Button */
+.close-popup {
+  color: $primary;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 25px;
+  // margin-top: 10px;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-popup:hover,
+.close-popup:focus {
+  text-decoration: none;
+  cursor: pointer;
 }
