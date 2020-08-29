@@ -54,7 +54,9 @@
           <div class="col-12 col-md-7" v-if="event.videos.vid_final !== null">
             <iframe
               width="100%"
-              height="315"
+              :height="
+                event.videos.vid_final.path.includes('facebook') ? 700 : 315
+              "
               :src="getLiveVideoEmbedFormatter(event.videos.vid_final.path)"
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"

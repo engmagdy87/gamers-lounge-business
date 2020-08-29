@@ -160,7 +160,7 @@
           >
             <iframe
               width="100%"
-              :height="data.streaming.path.includes('facebook') ? 650 : 500"
+              :height="data.streaming.path.includes('facebook') ? 700 : 500"
               :src="getLiveVideoEmbedUrl(data.streaming.path)"
               frameborder="0"
               allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
@@ -175,7 +175,7 @@
             <iframe
               scrolling="<scrolling>"
               width="100%"
-              :height="data.streaming.path.includes('facebook') ? 650 : 500"
+              :height="data.streaming.path.includes('facebook') ? 700 : 500"
               :src="getLiveVideoChatEmbedUrl(data.streaming.path)"
               frameborder="0"
               allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
