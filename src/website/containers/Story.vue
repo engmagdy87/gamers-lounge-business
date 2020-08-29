@@ -73,7 +73,7 @@
           <iframe
             :width="isThisDeviceSmart ? '320' : '560'"
             height="315"
-            :src="liveVideoEmbedFormatter(storyData.videos.vid_initial.path)"
+            :src="getLiveVideoEmbedFormatter(storyData.videos.vid_initial.path)"
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
@@ -169,6 +169,9 @@ export default {
     },
     setShowRegisterModal(value = false) {
       this.showRegisterModal = value;
+    },
+    getLiveVideoEmbedFormatter(url) {
+      return liveVideoEmbedFormatter(url);
     }
   },
   components: {

@@ -55,7 +55,7 @@
             <iframe
               width="100%"
               height="315"
-              :src="liveVideoEmbedFormatter(event.videos.vid_final.path)"
+              :src="getLiveVideoEmbedFormatter(event.videos.vid_final.path)"
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
@@ -118,6 +118,9 @@ export default {
       this.clickedImageInMedia = imagePath;
       this.currentImageIndex = currentImageIndex;
       this.setShowImageModalModal(true);
+    },
+    getLiveVideoEmbedFormatter(url) {
+      return liveVideoEmbedFormatter(url);
     },
     setCurrentImageIndex(index) {
       if (index > this.data[this.currentEventIndex].images.img_media.length - 1)

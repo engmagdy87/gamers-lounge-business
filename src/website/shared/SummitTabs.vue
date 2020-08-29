@@ -57,7 +57,7 @@
               <iframe
                 width="100%"
                 height="315"
-                :src="liveVideoEmbedFormatter(data.videos.vid_final.path)"
+                :src="getLiveVideoEmbedFormatter(data.videos.vid_final.path)"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -125,6 +125,9 @@ export default {
     },
     selectClickAction(tab, index) {
       this.setActiveTabIndex(index);
+    },
+    getLiveVideoEmbedFormatter(url) {
+      return liveVideoEmbedFormatter(url);
     },
     changeHexaStyleForTab() {
       const tabPanes = document.getElementsByClassName("tab-pane");

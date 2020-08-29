@@ -564,7 +564,6 @@ import types from "../../../store/types";
 import { createEvent, editEvent } from "../../../website/helpers/APIsHelper.js";
 import editorOptions from "../../../dashboard/wysiwyg-factory/options";
 import isDatesInProperSequence from "../../../dashboard/helpers/DateHelper";
-import { liveVideoEmbedFormatter } from "../../../dashboard/helpers/LiveVideoEmbedFormater";
 
 export default {
   data() {

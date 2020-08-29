@@ -515,7 +515,6 @@ import {
 } from "../../../website/helpers/APIsHelper.js";
 import isDatesInProperSequence from "../../../dashboard/helpers/DateHelper";
 import editorOptions from "../../../dashboard/wysiwyg-factory/options";
-import { liveVideoEmbedFormatter } from "../../../dashboard/helpers/LiveVideoEmbedFormater";
 
 export default {
   components: {
