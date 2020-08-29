@@ -113,7 +113,8 @@
 .summit-tab-wrapper {
   &__details {
     &__img {
-      width: 40%;
+      width: 30%;
+      padding-right: 15px;
       border-radius: 5px;
       @include is-mobile {
         width: 60%;

@@ -148,14 +148,26 @@
       &--main {
         max-width: 150px;
         max-height: 100px;
+        @include is-mobile {
+          max-width: 120px;
+          max-height: 70px;
+        }
       }
       &--sub {
         max-width: 120px;
         max-height: 80px;
+        @include is-mobile {
+          max-width: 90px;
+          max-height: 40px;
+        }
       }
       &--extra_sub {
         max-width: 75px;
         max-height: 50px;
+        @include is-mobile {
+          max-width: 40px;
+          max-height: 30px;
+        }
       }
     }
     &__divider {

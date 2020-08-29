@@ -968,7 +968,8 @@ export default {
       this.event.final_description = this.editData.final_description || "";
       this.event.summit_id = this.editData.summit.id;
       this.event.cover_type = this.editData.cover_type;
-      this.event.parent_id = this.editData.parent.id;
+      this.event.parent_id =
+        this.editData.parent === null ? "-1" : this.editData.parent.id;
       this.event.event_type = this.editData.type;
       this.event.is_external = this.editData.is_external;
       this.event.show_sponsors = this.editData.show_sponsors;

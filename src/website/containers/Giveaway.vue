@@ -71,7 +71,10 @@
     <Spinner :smallLoader="false" />
     <Footer
       v-if="
-        isGiveawaysFetched && isOffersFetched && isCoverGiveawaysImageFetched
+        isGiveawaysFetched &&
+          isOffersFetched &&
+          isCoverGiveawaysImageFetched &&
+          getEnabledGiveaways.length !== 0
       "
     />
     <Popup :data="randomPopupData" v-if="randomPopupData !== null" />

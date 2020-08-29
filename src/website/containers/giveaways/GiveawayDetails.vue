@@ -59,26 +59,65 @@
       class="event-details-wrapper__content__custom-btn-outside"
       v-if="showSponsors"
     >
-      <div v-for="(sponsorType, index) in formatSponsorsTypes" :key="index">
-        <span v-if="sponsorType !== 'divider'">
-          <a
-            v-for="(sponsor, i) in giveawayDetails.sponsors[sponsorType]"
-            :key="i"
-            @click="redirectTo(sponsor.link)"
-          >
-            <img
-              :class="[
-                `event-details-wrapper__content__sponsor ${getCssClassForSponsor(
-                  sponsorType
-                )}`
-              ]"
-              :src="sponsor.images.img_logo.path"
-              :alt="sponsor.name"
-            />
-          </a>
-        </span>
-        <div v-else class="event-details-wrapper__content__divider"></div>
-      </div>
+      <a
+        v-for="(sponsor, i) in giveawayDetails.sponsors.main"
+        :key="`main${i}`"
+        @click="goToSponor(sponsor.link)"
+      >
+        <img
+          :class="[
+            `event-details-wrapper__content__sponsor ${getCssClassForSponsor(
+              'main'
+            )}`
+          ]"
+          :src="sponsor.images.img_logo.path"
+          :alt="sponsor.name"
+        />
+      </a>
+      <span
+        class="event-details-wrapper__content__divider"
+        v-if="
+          giveawayDetails.sponsors.main.length !== 0 &&
+            giveawayDetails.sponsors.sub.length !== 0
+        "
+      ></span>
+      <a
+        v-for="(sponsor, i) in giveawayDetails.sponsors.sub"
+        :key="`sub${i}`"
+        @click="goToSponor(sponsor.link)"
+      >
+        <img
+          :class="[
+            `event-details-wrapper__content__sponsor ${getCssClassForSponsor(
+              'sub'
+            )}`
+          ]"
+          :src="sponsor.images.img_logo.path"
+          :alt="sponsor.name"
+        />
+      </a>
+      <span
+        class="event-details-wrapper__content__divider"
+        v-if="
+          giveawayDetails.sponsors.sub.length !== 0 &&
+            giveawayDetails.sponsors.extra_sub.length !== 0
+        "
+      ></span>
+      <a
+        v-for="(sponsor, i) in giveawayDetails.sponsors.extra_sub"
+        :key="`extra_sub${i}`"
+        @click="goToSponor(sponsor.link)"
+      >
+        <img
+          :class="[
+            `event-details-wrapper__content__sponsor ${getCssClassForSponsor(
+              'extra_sub'
+            )}`
+          ]"
+          :src="sponsor.images.img_logo.path"
+          :alt="sponsor.name"
+        />
+      </a>
     </div>
     <div class="event-details-wrapper__content" v-if="showDetailsHero">
       <div class="row">
@@ -238,9 +277,9 @@ export default {
       return (
         this.giveawayDetails.sponsors !== undefined &&
         this.giveawayDetails.show_sponsors &&
-        Object.keys(this.giveawayDetails.sponsors.main).length !== 0 &&
-        Object.keys(this.giveawayDetails.sponsors.sub).length !== 0 &&
-        Object.keys(this.giveawayDetails.sponsors.extra_sub).length !== 0
+        (Object.keys(this.giveawayDetails.sponsors.main).length !== 0 ||
+          Object.keys(this.giveawayDetails.sponsors.sub).length !== 0 ||
+          Object.keys(this.giveawayDetails.sponsors.extra_sub).length !== 0)
       );
     },
     formatSponsorsTypes() {

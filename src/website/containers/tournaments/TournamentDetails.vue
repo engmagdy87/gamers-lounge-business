@@ -63,29 +63,65 @@
       class="tournament-details-wrapper__custom-btn-outside"
       v-if="showSponsors"
     >
-      <div v-for="(sponsorType, index) in formatSponsorsTypes" :key="index">
-        <span v-if="sponsorType !== 'divider'">
-          <a
-            v-for="(sponsor, i) in tournamentDetails.sponsors[sponsorType]"
-            :key="i"
-            @click="goToSponor(sponsor.link)"
-          >
-            <img
-              :class="[
-                `tournament-details-wrapper__custom-btn-outside__sponsor ${getCssClassForSponsor(
-                  sponsorType
-                )}`
-              ]"
-              :src="sponsor.images.img_logo.path"
-              :alt="sponsor.name"
-            />
-          </a>
-        </span>
-        <div
-          v-else
-          class="tournament-details-wrapper__custom-btn-outside__divider"
-        ></div>
-      </div>
+      <a
+        v-for="(sponsor, i) in tournamentDetails.sponsors.main"
+        :key="`main${i}`"
+        @click="goToSponor(sponsor.link)"
+      >
+        <img
+          :class="[
+            `tournament-details-wrapper__custom-btn-outside__sponsor ${getCssClassForSponsor(
+              'main'
+            )}`
+          ]"
+          :src="sponsor.images.img_logo.path"
+          :alt="sponsor.name"
+        />
+      </a>
+      <span
+        class="tournament-details-wrapper__custom-btn-outside__divider"
+        v-if="
+          tournamentDetails.sponsors.main.length !== 0 &&
+            tournamentDetails.sponsors.sub.length !== 0
+        "
+      ></span>
+      <a
+        v-for="(sponsor, i) in tournamentDetails.sponsors.sub"
+        :key="`sub${i}`"
+        @click="goToSponor(sponsor.link)"
+      >
+        <img
+          :class="[
+            `tournament-details-wrapper__custom-btn-outside__sponsor ${getCssClassForSponsor(
+              'sub'
+            )}`
+          ]"
+          :src="sponsor.images.img_logo.path"
+          :alt="sponsor.name"
+        />
+      </a>
+      <span
+        class="tournament-details-wrapper__custom-btn-outside__divider"
+        v-if="
+          tournamentDetails.sponsors.sub.length !== 0 &&
+            tournamentDetails.sponsors.extra_sub.length !== 0
+        "
+      ></span>
+      <a
+        v-for="(sponsor, i) in tournamentDetails.sponsors.extra_sub"
+        :key="`extra_sub${i}`"
+        @click="goToSponor(sponsor.link)"
+      >
+        <img
+          :class="[
+            `tournament-details-wrapper__custom-btn-outside__sponsor ${getCssClassForSponsor(
+              'extra_sub'
+            )}`
+          ]"
+          :src="sponsor.images.img_logo.path"
+          :alt="sponsor.name"
+        />
+      </a>
     </div>
     <div class="tournament-details-wrapper__content" v-if="showDetailsHero">
       <div class="container">
@@ -182,7 +218,9 @@ export default {
       return (
         this.tournamentDetails.sponsors !== undefined &&
         this.tournamentDetails.show_sponsors &&
-        Object.keys(this.tournamentDetails.sponsors).length !== 0
+        (Object.keys(this.tournamentDetails.sponsors.main).length !== 0 ||
+          Object.keys(this.tournamentDetails.sponsors.sub).length !== 0 ||
+          Object.keys(this.tournamentDetails.sponsors.extra_sub).length !== 0)
       );
     },
     formatSponsorsTypes() {

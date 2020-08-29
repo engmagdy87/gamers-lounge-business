@@ -11,7 +11,7 @@
   right: 0;
   transition: all 0.3s ease;
   &--hide {
-    transform: translateX(450px);
+    transform: translateX($popup-width);
   }
   &--show {
     transform: translateX(0);

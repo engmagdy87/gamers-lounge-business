@@ -15,6 +15,7 @@ const state = {
 
 const getters = {
     [types.popups.getters.GET_POPUP]: (currentState) => (placeName) => {
+        if (currentState.randomPopupData.places === undefined) return null
         const isPlaceExists = currentState.randomPopupData.places.filter(place => place.name === placeName).length > 0
         return isPlaceExists ? currentState.randomPopupData : null;
     }
@@ -41,7 +42,7 @@ const mutations = {
 const getRandomPopupData = async ({ commit },) => {
     commit(types.home.mutations.SET_SPINNER_FLAG, true);
     const response = await getRandomPopup().then((response) => {
-        commit(types.popups.mutations.SET_RANDOM_POPUP_DATA, response.data.popup[0]);
+        commit(types.popups.mutations.SET_RANDOM_POPUP_DATA, response.data.popup.length === 0 ? {} : response.data.popup[0]);
         commit(types.popups.mutations.SET_IS_RANDOM_POPUP_DATA_FETCHED, true);
         commit(types.home.mutations.SET_SPINNER_FLAG, false);
         return true

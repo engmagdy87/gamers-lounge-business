@@ -27,7 +27,7 @@ export default {
   overflow-y: hidden;
   display: flex;
   &::-webkit-scrollbar {
-    height: 5px !important;
+    height: 8px !important;
     background-color: $accent !important;
     border-radius: 10px !important;
   }

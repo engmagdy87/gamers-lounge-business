@@ -58,7 +58,8 @@
       v-if="
         isMainEventsFetched &&
           isSubEventsFetched &&
-          (mainEventsData.length === 0 || subEventsData.length === 0)
+          mainEventsData.length === 0 &&
+          subEventsData.length === 0
       "
     >
       There are no events now
@@ -76,7 +77,8 @@
       v-if="
         isMainEventsFetched &&
           isSubEventsFetched &&
-          isCoverHomeEventsImageFetched
+          isCoverHomeEventsImageFetched &&
+          (mainEventsData.length !== 0 || subEventsData.length !== 0)
       "
     />
   </div>

@@ -160,7 +160,7 @@
           >
             <iframe
               width="100%"
-              height="500"
+              :height="data.streaming.path.includes('facebook') ? 650 : 500"
               :src="getLiveVideoEmbedUrl(data.streaming.path)"
               frameborder="0"
               allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
@@ -175,7 +175,7 @@
             <iframe
               scrolling="<scrolling>"
               width="100%"
-              height="500"
+              :height="data.streaming.path.includes('facebook') ? 650 : 500"
               :src="getLiveVideoChatEmbedUrl(data.streaming.path)"
               frameborder="0"
               allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
@@ -243,7 +243,7 @@ export default {
         if (isDeviceSmart())
           element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 99.5%,90% 99.8%,50% 99.8%,20% 101%,0% 99.7%,0 99.8%)`;
         else if (element.clientHeight < 800)
-          element.style.clipPath = `polygon(0 0,98.5% 0,100% 5%,100% 89%,98% 95%,66% 95%,50% 150%,6% 120%,0 93%)`;
+          element.style.clipPath = `polygon(0 0,98.5% 0,100% 2%,100% 96%,98% 98%,66% 98%,50% 120%,1% 100%,0 98%)`;
         else if (element.clientHeight >= 800 && element.clientHeight < 1300)
           element.style.clipPath = `polygon(0 0,98% 0,100% 1.5%,100% 97%,98% 98.8%,60% 98.8%,55% 105%,10% 105%,0 99%)`;
         else if (element.clientHeight >= 1300 && element.clientHeight < 1600)

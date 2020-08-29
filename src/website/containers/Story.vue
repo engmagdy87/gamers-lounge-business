@@ -81,9 +81,9 @@
           </iframe>
         </div>
       </div>
-      <!-- <div v-if="isSummitsHistoryDataFetched">
+      <div v-if="isSummitsHistoryDataFetched">
         <StoryMenuView :data="summitsHistoryData" :tree="tree" />
-      </div> -->
+      </div>
     </div>
     <LoginModal
       :showFlag="showLoginModal"
