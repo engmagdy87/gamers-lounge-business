@@ -12,10 +12,7 @@
           <div class="row">
             <div class="col-12 main-event-card-wrapper__first-section">
               <div class="main-event-card-wrapper__content">
-                <div
-                  class="main-event-card-wrapper__content__game-logos"
-                  v-if="card.show_sponsors"
-                >
+                <div class="main-event-card-wrapper__content__game-logos">
                   <img
                     class="main-event-card-wrapper__content__game-logo"
                     v-for="(img, index) in card.sponsors.main.slice(
