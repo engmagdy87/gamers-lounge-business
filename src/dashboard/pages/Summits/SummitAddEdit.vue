@@ -631,14 +631,8 @@ export default {
         formData.append("has_cover_over", this.summit.has_cover_over ? 1 : 0);
         formData.append("cover_type", this.summit.cover_type);
         formData.append("active", this.summit.active ? 1 : 0);
-        formData.append(
-          "vid_initial",
-          liveVideoEmbedFormatter(this.summit.vid_initial)
-        );
-        formData.append(
-          "vid_final",
-          liveVideoEmbedFormatter(this.summit.vid_final)
-        );
+        formData.append("vid_initial", this.summit.vid_initial);
+        formData.append("vid_final", this.summit.vid_final);
         formData.append("vid_cover_main", this.summit.vid_cover_main);
         formData.append("img_logo", this.summit.img_logo);
         formData.append("img_cover_over", this.summit.img_cover_over);

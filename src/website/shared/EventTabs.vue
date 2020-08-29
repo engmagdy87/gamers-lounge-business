@@ -55,7 +55,7 @@
             <iframe
               width="100%"
               height="315"
-              :src="event.videos.vid_final.path"
+              :src="liveVideoEmbedFormatter(event.videos.vid_final.path)"
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
@@ -87,6 +87,7 @@ import ImageModal from "../shared/ImageModal";
 import redirectToNewTab from "../helpers/RedirectToNewTab";
 import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 import { changeTextDirection } from "../helpers/StringsHelper";
+import { liveVideoEmbedFormatter } from "../../dashboard/helpers/LiveVideoEmbedFormater";
 
 export default {
   props: ["data", "redirectTo"],

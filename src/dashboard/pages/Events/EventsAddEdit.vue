@@ -776,14 +776,8 @@ export default {
         formData.append("img_logo", this.event.img_logo);
         formData.append("img_cover_home", this.event.img_cover_home);
         formData.append("img_card", this.event.img_card);
-        formData.append(
-          "vid_initial",
-          liveVideoEmbedFormatter(this.event.vid_initial)
-        );
-        formData.append(
-          "vid_final",
-          liveVideoEmbedFormatter(this.event.vid_final)
-        );
+        formData.append("vid_initial", this.event.vid_initial);
+        formData.append("vid_final", this.event.vid_final);
         formData.append("vid_cover_main", this.event.vid_cover_main);
 
         if (this.event.main_sponsors_ids.length === 0)

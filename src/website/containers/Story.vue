@@ -73,7 +73,7 @@
           <iframe
             :width="isThisDeviceSmart ? '320' : '560'"
             height="315"
-            :src="storyData.videos.vid_initial.path"
+            :src="liveVideoEmbedFormatter(storyData.videos.vid_initial.path)"
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
@@ -112,6 +112,7 @@ import redirectToNewTab from "../helpers/RedirectToNewTab";
 import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
 import Popup from "../shared/Popup";
 import * as POPUPS_PLACES from "../constants/PopupsPlaces";
+import { liveVideoEmbedFormatter } from "../../dashboard/helpers/LiveVideoEmbedFormater";
 
 export default {
   data() {
