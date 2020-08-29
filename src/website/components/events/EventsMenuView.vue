@@ -5,7 +5,6 @@
         class="col-12 col-lg-4 p-0"
         v-for="(card, index) in data"
         :key="index"
-        v-if="card.enabled"
       >
         <SubEventCard :card="card" v-if="route === 'events'" />
         <TournamentCard
