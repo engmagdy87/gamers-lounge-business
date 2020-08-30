@@ -59,7 +59,10 @@
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
-              v-if="event.videos.vid_final !== null"
+              v-if="
+                event.videos.vid_final !== null &&
+                  event.videos.vid_final.path !== ''
+              "
             >
             </iframe>
             <img
