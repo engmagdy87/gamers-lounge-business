@@ -192,7 +192,7 @@
         isEventHistoryFetched &&
           isEventGiveawaysFetched &&
           isEventOffersFetched &&
-          isRandomPopupDataFetched
+          showDetailsHero
       "
     />
     <Popup :data="randomPopupData" v-if="randomPopupData !== null" />

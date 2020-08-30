@@ -22,15 +22,22 @@
           <p>
             We are taking our community seriously, if you need our help or
             having any question about anything please don't hesitate to contact
-            us or send us on our mail
-          </p>
-          <div style="margin:40px 0">
+            us or send us on our mail<br />
             <span class="contact-wrapper__content__icon">
               <img src="website/img/email.svg" alt="email icon" />
             </span>
-            <span>business@esportssummit-me.com</span><br />
-            <span style="margin-left:40px">Info@esportssummit-me.com</span>
-          </div>
+            <span>Info@esportssummit-me.com</span><br />
+          </p>
+
+          <p>
+            For buisness inquiries in contact us on
+            <br />
+            <span class="contact-wrapper__content__icon">
+              <img src="website/img/email.svg" alt="email icon" />
+            </span>
+            <span>business@esportssummit-me.com</span>
+          </p>
+
           <!-- <div class="mb-3 mb-md-0">
             <span class="contact-wrapper__content__icon">
               <img src="website/img/phone.svg" alt="phone icon" />

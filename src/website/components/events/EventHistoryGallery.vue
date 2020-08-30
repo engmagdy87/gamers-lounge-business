@@ -19,6 +19,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../assets/sass/website/color-palette.scss";
+@import "../../../assets/sass/website/mixins.scss";
 .event-history-gallery {
   width: 100%;
   max-width: 100%;

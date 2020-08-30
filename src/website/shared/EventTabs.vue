@@ -61,8 +61,14 @@
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
+              v-if="event.videos.vid_final !== null"
             >
             </iframe>
+            <img
+              class="event-tab-wrapper__details__placeholder-img"
+              v-else-if="event.images.img_media.length > 0"
+              :src="event.images.img_media[0].path"
+            />
             <EventHistoryGallery
               v-if="event.images.img_media.length > 0"
               :images="event.images.img_media"
@@ -143,7 +149,7 @@ export default {
         if (isDeviceSmart())
           element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 97%,95% 99%,70% 99%,50% 110%,0% 98%,0 99.8%)`;
         else if (element.clientHeight < 800)
-          element.style.clipPath = `polygon(0 0,98.5% 0,100% 5%,100% 89%,98% 95%,66% 95%,50% 150%,6% 120%,0 93%)`;
+          element.style.clipPath = `polygon(0 0,98.5% 0,100% 5%,100% 92.5%,98.5% 97%,66% 97%,50% 150%,6% 110%,0 96%)`;
         else if (element.clientHeight >= 800 && element.clientHeight < 1300)
           element.style.clipPath = `polygon(0 0,98% 0,100% 1.5%,100% 97%,98% 98.8%,60% 98.8%,55% 105%,10% 105%,0 99%)`;
         else if (element.clientHeight >= 1300 && element.clientHeight < 1600)

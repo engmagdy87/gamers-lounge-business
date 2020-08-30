@@ -101,7 +101,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <base-input
             type="date"
             label="Start Date"
@@ -116,7 +116,7 @@
             {{ errors.start_date }}
           </p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
           <base-input
             type="date"
             label="End Date"
@@ -131,7 +131,9 @@
             {{ errors.end_date }}
           </p>
         </div>
-        <div class="col-md-2 offset-1 m-auto">
+      </div>
+      <div class="row mt-3 mb-3">
+        <div class="col-md-6 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -141,6 +143,19 @@
             />
             <label class="custom-control-label" for="customSwitch1"
               >Active</label
+            >
+          </div>
+        </div>
+        <div class="col-md-6 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customSwitch2"
+              v-model="summit.enabled"
+            />
+            <label class="custom-control-label" for="customSwitch2"
+              >Publish Summit</label
             >
           </div>
         </div>
@@ -542,6 +557,7 @@ export default {
         start_date: "",
         end_date: "",
         active: false,
+        enabled: false,
         has_cover_over: false,
         cover_type: "-1",
         vid_initial: "",
@@ -630,6 +646,7 @@ export default {
         formData.append("has_cover_over", this.summit.has_cover_over ? 1 : 0);
         formData.append("cover_type", this.summit.cover_type);
         formData.append("active", this.summit.active ? 1 : 0);
+        formData.append("enabled", this.summit.enabled ? 1 : 0);
         formData.append("vid_initial", this.summit.vid_initial);
         formData.append("vid_final", this.summit.vid_final);
         formData.append("vid_cover_main", this.summit.vid_cover_main);
@@ -806,6 +823,7 @@ export default {
         "";
 
       this.summit.active = this.editData.active || false;
+      this.summit.enabled = this.editData.enabled || false;
       this.summit.img_logo = this.editData.images.img_logo;
       this.summit.img_cover_main = this.editData.images.img_cover_main;
       this.summit.img_cover_over = this.editData.images.img_cover_over;
