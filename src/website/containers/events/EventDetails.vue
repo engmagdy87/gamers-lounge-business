@@ -341,6 +341,10 @@ export default {
         return "event-details-wrapper__content__sponsor--sub";
       if (sponsorType === "extra_sub")
         return "event-details-wrapper__content__sponsor--extra_sub";
+    },
+    goToSponor(url) {
+      if (url.includes("http")) window.open(url, "_blank");
+      else window.open(`http://${url}`, "_blank");
     }
   },
   components: {

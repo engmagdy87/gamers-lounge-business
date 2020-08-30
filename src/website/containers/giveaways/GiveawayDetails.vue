@@ -380,6 +380,10 @@ export default {
         this.notifyVue("You are already registered", "danger");
       else this.setShowRegisterGiveawayModal(true);
     },
+    goToSponor(url) {
+      if (url.includes("http")) window.open(url, "_blank");
+      else window.open(`http://${url}`, "_blank");
+    },
     notifyVue(message, color) {
       this.$notifications.notify({
         message: `<span>${message}</span>`,
