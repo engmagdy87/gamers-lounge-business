@@ -72,9 +72,7 @@
         >
           <iframe
             :width="isThisDeviceSmart ? '320' : '560'"
-            :height="
-              storyData.videos.vid_initial.path.includes('facebook') ? 450 : 350
-            "
+            :height="getVideoHeight(storyData.videos.vid_initial.path)"
             :src="getLiveVideoEmbedFormatter(storyData.videos.vid_initial.path)"
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -174,6 +172,12 @@ export default {
     },
     getLiveVideoEmbedFormatter(url) {
       return liveVideoEmbedFormatter(url);
+    },
+    getVideoHeight(path) {
+      if (isDeviceSmart() && path.includes("facebook")) return 180;
+      if (!isDeviceSmart() && path.includes("facebook")) return 400;
+      if (isDeviceSmart() && !path.includes("facebook")) return 200;
+      if (!isDeviceSmart() && !path.includes("facebook")) return 350;
     }
   },
   components: {

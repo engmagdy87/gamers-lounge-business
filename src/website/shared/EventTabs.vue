@@ -54,9 +54,7 @@
           <div class="col-12 col-md-7" v-if="event.videos.vid_final !== null">
             <iframe
               width="100%"
-              :height="
-                event.videos.vid_final.path.includes('facebook') ? 450 : 350
-              "
+              :height="getVideoHeight(event.videos.vid_final.path)"
               :src="getLiveVideoEmbedFormatter(event.videos.vid_final.path)"
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -142,12 +140,18 @@ export default {
         this.currentEventIndex
       ].images.img_media[this.currentImageIndex].path;
     },
+    getVideoHeight(path) {
+      if (isDeviceSmart() && path.includes("facebook")) return 150;
+      if (!isDeviceSmart() && path.includes("facebook")) return 450;
+      if (isDeviceSmart() && !path.includes("facebook")) return 200;
+      if (!isDeviceSmart() && !path.includes("facebook")) return 350;
+    },
     changeHexaStyleForTab() {
       const tabPanes = document.getElementsByClassName("tab-pane");
       for (let index = 0; index < tabPanes.length; index++) {
         const element = tabPanes[index];
         if (isDeviceSmart())
-          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 97%,95% 99%,70% 99%,50% 110%,0% 98%,0 99.8%)`;
+          element.style.clipPath = `polygon(0 0,98% 0,100% 3%,100% 95%,95% 98%,70% 98%,50% 110%,5% 99.5%,0% 98%)`;
         else if (element.clientHeight < 800)
           element.style.clipPath = `polygon(0 0,98.5% 0,100% 5%,100% 92.5%,98.5% 97%,66% 97%,50% 150%,6% 110%,0 96%)`;
         else if (element.clientHeight >= 800 && element.clientHeight < 1300)

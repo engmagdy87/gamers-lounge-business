@@ -92,7 +92,7 @@
   color: white;
   transform: translateY(0px);
   @include is-mobile {
-    width: 80px;
+    width: max-content;
     height: 50px;
     margin: 0;
   }
