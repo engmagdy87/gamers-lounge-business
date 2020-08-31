@@ -59,7 +59,7 @@
     margin-left: 40px;
     width: 300px;
     @include is-mobile {
-      width: 97%;
+      width: fit-content;
       margin-left: 10px;
     }
     img {

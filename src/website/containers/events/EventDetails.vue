@@ -200,7 +200,8 @@
       v-if="
         isEventGiveawaysFetched &&
           isEventOffersFetched &&
-          giveawaysAndOffersData.length > 0
+          giveawaysAndOffersData.length > 0 &&
+          isGiveawaysEnabled
       "
       :giveawaysAndOffersData="giveawaysAndOffersData"
       :tree="getTree"
@@ -224,6 +225,7 @@ import Spinner from "../../shared/Spinner";
 import redirectToNewTab from "../../helpers/RedirectToNewTab";
 import { setEventCookie, getEventCookie } from "../../helpers/CookieHelper";
 import * as POPUPS_PLACES from "../../constants/PopupsPlaces";
+import giveaway from "../../../store/modules/giveaway";
 
 export default {
   data() {
@@ -254,6 +256,12 @@ export default {
     }),
     showDetailsHero() {
       return Object.keys(this.eventDetails).length !== 0;
+    },
+    isGiveawaysEnabled() {
+      return (
+        this.giveawaysAndOffersData.filter(giveaway => giveaway.enabled)
+          .length > 0
+      );
     },
     showSponsors() {
       return (

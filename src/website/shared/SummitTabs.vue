@@ -56,7 +56,7 @@
             <div class="col-12 col-md-6" v-if="data.videos.vid_final !== null">
               <iframe
                 width="100%"
-                height="380"
+                :height="getVideoHeight()"
                 :src="getLiveVideoEmbedFormatter(data.videos.vid_final.path)"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -129,12 +129,16 @@ export default {
     getLiveVideoEmbedFormatter(url) {
       return liveVideoEmbedFormatter(url);
     },
+    getVideoHeight() {
+      if (isDeviceSmart()) return 150;
+      return 380;
+    },
     changeHexaStyleForTab() {
       const tabPanes = document.getElementsByClassName("tab-pane");
       for (let index = 0; index < tabPanes.length; index++) {
         const element = tabPanes[index];
         if (isDeviceSmart())
-          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 99.5%,90% 99.8%,50% 99.8%,20% 101%,0% 99.7%,0 99.8%)`;
+          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 96%,90% 98%,60% 98%,5% 110%,5% 100%,0% 98%)`;
         else if (element.clientHeight < 800)
           element.style.clipPath = `polygon(0 0,98.5% 0,100% 5%,100% 89%,98% 95%,66% 95%,50% 150%,6% 120%,0 93%)`;
         else if (element.clientHeight >= 800 && element.clientHeight < 1300)
