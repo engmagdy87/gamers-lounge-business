@@ -160,7 +160,7 @@
           >
             <iframe
               width="100%"
-              :height="data.streaming.path.includes('facebook') ? 700 : 500"
+              :height="getVideoHeight(data.streaming.path)"
               :src="getLiveVideoEmbedUrl(data.streaming.path)"
               frameborder="0"
               allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
@@ -239,12 +239,23 @@ export default {
       if (status === "closed") return "tab-wrapper__details__register--closed";
       if (status === "soon") return "tab-wrapper__details__register--soon";
     },
+    getVideoHeight(path) {
+      if (isDeviceSmart() && path.includes("facebook")) return 180;
+      if (!isDeviceSmart() && path.includes("facebook")) return 650;
+      if (isDeviceSmart() && !path.includes("facebook")) return 200;
+      if (!isDeviceSmart() && !path.includes("facebook")) return 500;
+    },
     changeHexaStyleForTab() {
       const tabPanes = document.getElementsByClassName("tab-pane");
       for (let index = 0; index < tabPanes.length; index++) {
         const element = tabPanes[index];
-        if (isDeviceSmart())
-          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 99.2%,95% 99.6%,60% 99.6%,5% 105%,5% 100%,0% 99.5%)`;
+
+        if (isDeviceSmart() && element.clientHeight < 500)
+          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 92%,95% 96%,60% 96%,10% 110%,5% 100%,0% 95%)`;
+        else if (isDeviceSmart() && element.clientHeight < 1000)
+          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 97.5%,95% 99%,60% 99%,5% 110%,5% 100%,0% 99%)`;
+        else if (isDeviceSmart())
+          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 99.6%,95% 99.8%,60% 99.8%,5% 102%,5% 100%,0% 99.8%)`;
         else if (element.clientHeight < 800)
           element.style.clipPath = `polygon(0 0,98.5% 0,100% 2%,100% 96%,98% 98%,66% 98%,50% 120%,1% 100%,0 98%)`;
         else if (element.clientHeight >= 800 && element.clientHeight < 1300)
