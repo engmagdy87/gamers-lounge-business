@@ -170,7 +170,10 @@
           </div>
           <div
             class="col-12 col-md-4"
-            v-if="getLiveVideoChatEmbedUrl(data.streaming.path)"
+            v-if="
+              getLiveVideoChatEmbedUrl(data.streaming.path) &&
+                isChatVisible(data.streaming.path)
+            "
           >
             <iframe
               scrolling="<scrolling>"
@@ -241,7 +244,7 @@ export default {
       for (let index = 0; index < tabPanes.length; index++) {
         const element = tabPanes[index];
         if (isDeviceSmart())
-          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 96%,90% 98%,60% 98%,5% 110%,5% 100%,0% 98%)`;
+          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 99.2%,95% 99.6%,60% 99.6%,5% 105%,5% 100%,0% 99.5%)`;
         else if (element.clientHeight < 800)
           element.style.clipPath = `polygon(0 0,98.5% 0,100% 2%,100% 96%,98% 98%,66% 98%,50% 120%,1% 100%,0 98%)`;
         else if (element.clientHeight >= 800 && element.clientHeight < 1300)
@@ -263,6 +266,9 @@ export default {
     },
     getLiveVideoChatEmbedUrl(url) {
       return liveVideoChatEmbedFormatter(url);
+    },
+    isChatVisible(url) {
+      return !(isDeviceSmart() && !url.includes("twitch"));
     }
   },
   mounted() {

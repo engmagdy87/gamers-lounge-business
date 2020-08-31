@@ -96,7 +96,7 @@ import LoginModal from "../components/home/LoginModal";
 import RegisterModal from "../components/home/RegisterModal";
 import EventsMenuView from "../components/events/EventsMenuView";
 import isDeviceSmart from "../helpers/DetectIsDeviceSmart";
-
+import * as POPUPS_PLACES from "../constants/PopupsPlaces";
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 // optional style for arrows & dots

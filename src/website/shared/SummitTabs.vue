@@ -137,7 +137,11 @@ export default {
       const tabPanes = document.getElementsByClassName("tab-pane");
       for (let index = 0; index < tabPanes.length; index++) {
         const element = tabPanes[index];
-        if (isDeviceSmart())
+        if (isDeviceSmart() && element.clientHeight > 3000)
+          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 99.2%,95% 99.6%,60% 99.6%,5% 105%,5% 100%,0% 99.5%)`;
+        else if (isDeviceSmart() && element.clientHeight > 2000)
+          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 99.2%,95% 99.6%,60% 99.6%,5% 105%,5% 100%,0% 99.8%)`;
+        else if (isDeviceSmart())
           element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 96%,90% 98%,60% 98%,5% 110%,5% 100%,0% 98%)`;
         else if (element.clientHeight < 800)
           element.style.clipPath = `polygon(0 0,98.5% 0,100% 5%,100% 89%,98% 95%,66% 95%,50% 150%,6% 120%,0 93%)`;
