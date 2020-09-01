@@ -15,6 +15,10 @@
           aria-controls="nav-home"
           aria-selected="true"
           @click="selectClickAction(tab, index)"
+          v-if="
+            tab !== 'Tournaments' ||
+              (tab === 'Tournaments' && data.tournaments.length > 0)
+          "
           >{{ tab }}</a
         >
       </div>
@@ -92,7 +96,7 @@
         id="nav-contact"
         role="tabpanel"
         aria-labelledby="nav-contact-tab"
-        v-if="activeTabIndex === 2"
+        v-if="activeTabIndex === 2 && data.tournaments.length > 0"
       >
         <TournamentItem
           v-for="(item, i) in data.tournaments"

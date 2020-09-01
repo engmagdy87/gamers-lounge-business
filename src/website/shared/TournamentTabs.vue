@@ -251,7 +251,7 @@ export default {
         const element = tabPanes[index];
 
         if (isDeviceSmart() && element.clientHeight < 500)
-          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 92%,95% 96%,60% 96%,10% 110%,5% 100%,0% 95%)`;
+          element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 92%,95% 96%,60% 96%,30% 110%,5% 100%,0% 95%)`;
         else if (isDeviceSmart() && element.clientHeight < 1000)
           element.style.clipPath = `polygon(0 0,100% 0,100% 0.5%,100% 97.5%,95% 99%,60% 99%,5% 110%,5% 100%,0% 99%)`;
         else if (isDeviceSmart())
