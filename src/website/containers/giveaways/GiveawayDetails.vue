@@ -181,7 +181,7 @@
           </div>
         </div>
       </div>
-      <div class="container">
+      <!-- <div class="container">
         <div
           class="row event-details-wrapper__content__tournaments mb-5 mb-sm-3"
         >
@@ -197,7 +197,7 @@
         route="giveaway-details"
         :data="giveawaysTournaments"
         :tree="getTree"
-      />
+      /> -->
     </div>
     <LoginModal
       :showFlag="showLoginModal"

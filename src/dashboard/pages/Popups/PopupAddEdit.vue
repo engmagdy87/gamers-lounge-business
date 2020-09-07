@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="showFormWhenDataFetched">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -50,7 +50,7 @@
             <label for="popupTplaces">Places</label>
             <multiselect
               v-model="popup.places"
-              :options="PopupsPlaces"
+              :options="getPlaces()"
               :multiple="true"
               :close-on-select="false"
               :clear-on-select="false"
@@ -115,6 +115,7 @@ import POPUPS_PLACES from "../../../website/constants/PopupsPlaces";
 import ImagePreview from "../../../website/shared/ImagePreview.vue";
 import DeleteDialog from "../../../website/shared/DeleteDialog";
 import { createPopup, editPopup } from "../../../website/helpers/APIsHelper.js";
+import { reformatStringToBeInURL } from "../../../website/helpers/StringsHelper";
 
 export default {
   components: {
@@ -124,7 +125,7 @@ export default {
   },
   data() {
     return {
-      PopupsPlaces: POPUPS_PLACES,
+      PopupsPlaces: [],
       openedFor: "",
       imageIndex: null,
       showFlag: false,
@@ -142,8 +143,19 @@ export default {
   },
   methods: {
     ...mapActions({
-      deleteImage: types.popups.actions.DELETE_POPUP_IMAGE
+      deleteImage: types.popups.actions.DELETE_POPUP_IMAGE,
+      fetchEventsList: types.events.actions.FETCH_EVENT_LIST
     }),
+    getPlaces() {
+      const places = [
+        ...POPUPS_PLACES,
+        ...this.eventsListData.map(
+          event => `${event.id}-${reformatStringToBeInURL(event.initial_title)}`
+        )
+      ];
+      this.PopupsPlaces = places;
+      return places;
+    },
     clickAction() {
       this.operation === "Edit Popup"
         ? this.saveData(editPopup, "Popup Updated Successfully")
@@ -219,6 +231,18 @@ export default {
       });
     }
   },
+  computed: {
+    ...mapState({
+      isEventsListFetched: state => state.events.isEventsListFetched,
+      eventsListData: state => state.events.eventsList
+    }),
+    showFormWhenDataFetched() {
+      if (this.isEventsListFetched)
+        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+      if (this.operation !== "Edit Popup") return this.isEventsListFetched;
+      return true;
+    }
+  },
   beforeMount() {
     if (
       !this.$router.history.current.params.data &&
@@ -228,7 +252,15 @@ export default {
         path: "/dashboard/popups"
       });
   },
+  updated() {
+    if (this.isEventsListFetched)
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+  },
   mounted() {
+    if (!this.isEventsListFetched) {
+      store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+      this.fetchEventsList();
+    }
     if (this.$route.name === "Edit Popup") {
       this.popup.title = this.editData.title;
       this.popup.link = this.editData.link;

@@ -55,7 +55,7 @@
       v-if="
         isGiveawaysFetched &&
           isOffersFetched &&
-          (getEnabledGiveaways.length === 0 || getEnabledOffers.length === 0)
+          getEnabledGiveaways.length === 0 && getEnabledOffers.length === 0
       "
     >
       There are no giveaways or offers now

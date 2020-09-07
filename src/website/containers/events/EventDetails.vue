@@ -401,7 +401,9 @@ export default {
       }
     });
     if (this.isRandomPopupDataFetched)
-      this.randomPopupData = this.randomPopup(POPUPS_PLACES.EVENT_DETAILS);
+      this.randomPopupData = this.randomPopup(
+        this.$router.history.current.params.eventName
+      );
   }
 };
 </script>
