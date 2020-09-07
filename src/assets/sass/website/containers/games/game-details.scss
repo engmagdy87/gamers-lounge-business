@@ -39,9 +39,7 @@
     @include create-half-page-hero-shape();
     video {
       object-fit: cover;
-      @include is-mobile {
-        height: 100%;
-      }
+      height: 100%;
     }
   }
 
