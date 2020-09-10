@@ -18,9 +18,10 @@
           </div>
           <div class="sub-event-card-wrapper__content">
             <h1>{{ trimText(card.title) }}</h1>
-            <span
-              ><img src="website/img/group.svg" alt="group icon" />
-              {{ card.tournaments.count }} tournaments</span
+            <span class="badge badge-pill"
+              ><img src="/website/img/calendar.svg" alt="calendar icon" />{{
+                card.end_date.split(" ")[0]
+              }}</span
             >
             <br />
             <span

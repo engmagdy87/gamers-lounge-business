@@ -231,6 +231,7 @@ import RegisterModal from "../../components/home/RegisterModal";
 import RegisterGiveawayModal from "../../components/giveaways/RegisterGiveawayModal";
 import Spinner from "../../shared/Spinner";
 import redirectToNewTab from "../../helpers/RedirectToNewTab";
+import { registerInGiveaway } from "../../helpers/APIsHelper";
 import {
   setGiveawayCookie,
   getGiveawayCookie,
@@ -363,7 +364,7 @@ export default {
       if (sponsorType === "extra_sub")
         return "event-details-wrapper__content__sponsor--extra_sub";
     },
-    registerAction() {
+    registerAction: async function() {
       const token = getUserCookie();
       if (this.giveawayDetails.is_external)
         window.open(this.giveawayDetails.external_link, "_blank");
@@ -378,7 +379,17 @@ export default {
         this.notifyVue("Register is closed", "warning");
       else if (this.amIRegisteredInGiveawayFlag)
         this.notifyVue("You are already registered", "danger");
-      else this.setShowRegisterGiveawayModal(true);
+      else if (this.giveawayDetails.register_questions.length === 0) {
+        try {
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
+          await registerInGiveaway(this.giveawayDetails.id, null);
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+          this.notifyVue("Successful Register in Giveaway", "success");
+        } catch (error) {
+          this.notifyVue(error.data.errors.answers[0], "danger");
+          store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+        }
+      } else this.setShowRegisterGiveawayModal(true);
     },
     goToSponor(url) {
       if (url.includes("http")) window.open(url, "_blank");

@@ -188,6 +188,12 @@ span {
     word-break: break-word;
     text-decoration: underline;
   }
+  p {
+    @media (max-width: 767px) {
+      flex-flow: wrap-reverse !important;
+      display: flex !important;
+    }
+  }
   &--expand {
     height: 100%;
   }
