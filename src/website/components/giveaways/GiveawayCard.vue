@@ -38,11 +38,11 @@
               class="col-12 d-flex align-items-end  main-event-card-wrapper__second-section"
             >
               <div class="main-event-card-wrapper__logo">
-                <img
-                  v-if="card.images.img_logo !== null"
-                  :src="card.images.img_logo.path"
-                  alt="logo"
-                />
+<!--                <img-->
+<!--                  v-if="card.images.img_logo !== null"-->
+<!--                  :src="card.images.img_logo.path"-->
+<!--                  alt="logo"-->
+<!--                />-->
                 <p>{{ card.title }}</p>
               </div>
             </div>

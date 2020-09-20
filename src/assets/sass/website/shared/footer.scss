@@ -1,6 +1,7 @@
 @import "../mixins.scss";
 
 .footer-wrapper {
+  padding: 20px;
   width: 100%;
   background-color: #121828;
   color: white;
@@ -110,7 +111,7 @@
     cursor: pointer;
   }
   &__divider {
-    height: 90%;
+    // height: 90%;
     width: 2px;
     margin: 0 30px;
     cursor: pointer;
@@ -146,4 +147,9 @@
 .styled-title span:after {
   left: 100%;
   margin-left: 15px;
+}
+
+.logo_img_custom{
+  display: -webkit-box;
+  height: fit-content;
 }
