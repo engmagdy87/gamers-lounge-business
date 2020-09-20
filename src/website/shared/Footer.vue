@@ -1,7 +1,7 @@
 <template>
-  <footer :class="['footer-wrapper', 'footer-wrapper']">
+  <footer :class="['footer-wrapper', 'footer-wrapper--show-small']">
     <div class="row">
-      <div class="col12 col-md-2 order-2 order-md-1">
+      <div class="col12 col-md-8 order-2 order-md-1">
         <div class="container ml-0">
           <div
             class="row mb-3 mt-3 mt-md-0 justify-content-center justify-content-md-start"
@@ -46,32 +46,32 @@
         </div>
       </div>
 
-      <div
-        class="col12 col-md-8 d-flex justify-content-center order-1 order-md-2"
-      >
-        <img
-          class="footer-wrapper"
-          src="/website/img/footer/sponsors-main.png"
-        />
-      </div>
-
 <!--      <div-->
-<!--        class="col12 col-md-2 justify-content-center justify-content-md-end  order-1 order-md-2 logo_img_custom"-->
+<!--        class="col12 col-md-8 d-flex justify-content-center order-1 order-md-2"-->
 <!--      >-->
 <!--        <img-->
 <!--          class="footer-wrapper"-->
-<!--          src="/website/img/footer/gamers-lounge.png"-->
-<!--          alt="gamers lounge"-->
-<!--          @click="redirectTo('http://gamersloungeme.com/')"-->
-<!--        />-->
-<!--        <div class="footer-wrapper__divider"></div>-->
-<!--        <img-->
-<!--          class="footer-wrapper"-->
-<!--          src="/website/img/footer/worx.png"-->
-<!--          alt="worx"-->
-<!--          @click="redirectTo('https://theworx-emc.com/')"-->
+<!--          src="/website/img/footer/sponsors-main.png"-->
 <!--        />-->
 <!--      </div>-->
+
+      <div
+        class="col12 col-md-4 d-flex justify-content-center justify-content-md-end align-items-center order-1 order-md-2"
+      >
+        <img
+          class="footer-wrapper__logo"
+          src="/website/img/footer/gamers-lounge.png"
+          alt="gamers lounge"
+          @click="redirectTo('http://gamersloungeme.com/')"
+        />
+        <div class="footer-wrapper__divider"></div>
+        <img
+          class="footer-wrapper__logo"
+          src="/website/img/footer/worx.png"
+          alt="worx"
+          @click="redirectTo('https://theworx-emc.com/')"
+        />
+      </div>
     </div>
 
     <!-- <div class="footer-wrapper__large-footer">
