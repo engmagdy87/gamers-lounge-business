@@ -9,7 +9,7 @@
       <div class="logo">
         <a href="/" class="simple-text logo__container">
           <div class="logo-img">
-            <img src="../../../../public/website/img/ess-logo.png" alt="logo" />
+            <!-- <img src="../../../../public/website/img/ess-logo.png" alt="logo" /> -->
           </div>
           {{ title }}
         </a>
@@ -47,7 +47,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "ESports Summits"
+      default: "Gamers Lounge"
     },
     backgroundColor: {
       type: String,

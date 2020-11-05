@@ -69,7 +69,6 @@
 <script>
 import store from "../../store/index";
 import types from "../../store/types";
-import { removeCookie } from "../../website/helpers/CookieHelper";
 
 export default {
   computed: {
@@ -101,7 +100,7 @@ export default {
     },
     logoutAdmin() {
       removeCookie();
-      store.commit(types.user.mutations.SET_USER_PERSONA, {});
+      // store.commit(types.user.mutations.SET_USER_PERSONA, {});
       window.open("/", "_self");
     }
   }

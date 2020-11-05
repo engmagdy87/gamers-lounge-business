@@ -6,8 +6,8 @@
     ]"
   >
     <div class="header-wrapper__logo">
-      <a href="/" alt="esports summit" style="width: 100%;">
-        <img src="/website/img/ess-logo.png" alt="ess logo" />
+      <a href="/" alt="gamers lounge" style="width: 100%;">
+        <!-- <img src="/website/img/ess-logo.png" alt="ess logo" /> -->
       </a>
     </div>
     <!-- DESKTOP UI -->
@@ -60,7 +60,6 @@
 
         <li
           class="float-right header-wrapper__user-section"
-          @click="setShowRegisterModal(true)"
           v-if="userCookie === null"
         >
           <span class="header-wrapper__user-section">/</span
@@ -73,17 +72,17 @@
         >
           <a class="header-wrapper__user-section" href="#">Login</a>
         </li>
-        <img
+        <!-- <img
           v-if="userCookie === null"
           class="float-right float-right header-wrapper__user-section-icon"
           src="../../../public/website/img/user.svg"
           alt="user"
-        />
+        /> -->
         <li class="float-right" v-if="userCookie !== null">
           <Avatar :logoutUser="logoutUser" :userCookie="userCookie" />
         </li>
         <a href="/dashboard">
-          <li v-if="userCookie !== null && isUserAdmin" class="float-right">
+          <li v-if="userCookie !== null" class="float-right">
             <img
               class="header-wrapper__dashboard-img"
               src="/website/img/dashboard.svg"
@@ -150,7 +149,7 @@
           >
             <a href="/contact" @click="closeNav">Contact Us</a>
           </li>
-          <li @click="setShowRegisterModal(true)" v-if="userCookie === null">
+          <li v-if="userCookie === null">
             <a href="#" @click="closeNav">Register</a>
           </li>
           <li @click="setShowLoginModal(true)" v-if="userCookie === null">
@@ -161,7 +160,7 @@
               Profile
             </a>
           </li>
-          <li v-if="userCookie !== null && isUserAdmin">
+          <li v-if="userCookie !== null">
             <a href="/dashboard">
               Dashboard
             </a>
@@ -194,12 +193,7 @@ export default {
       userCookie: null
     };
   },
-  props: [
-    "activeItem",
-    "setShowRegisterModal",
-    "setShowLoginModal",
-    "isSolidHeader"
-  ],
+  props: ["activeItem", "setShowLoginModal", "isSolidHeader"],
   methods: {
     openNav() {
       this.$refs.myNav.style.height = "100%";
@@ -211,24 +205,6 @@ export default {
       removeCookie();
       store.commit(types.user.mutations.SET_USER_PERSONA, {});
       this.closeNav();
-    }
-  },
-  computed: {
-    ...mapGetters({
-      isUserLoggedIn: types.user.getters.IS_USER_LOGGED_IN,
-      isUserAdmin: types.user.getters.IS_USER_ADMIN
-    }),
-    ...mapState({
-      userVerification: state => state.user.userVerification,
-      userPersona: state => state.user.userPersona
-    })
-  },
-  watch: {
-    userVerification() {
-      if (this.userVerification.status) this.userCookie = getUserCookie();
-    },
-    userPersona() {
-      if (Object.keys(this.userPersona).length === 0) this.userCookie = null;
     }
   },
   components: {

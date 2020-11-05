@@ -1,8 +1,8 @@
 {
-  "name": "esports-summit",
+  "name": "gamers-lounge",
   "version": "2.0.0",
   "private": true,
-  "description": "ESports Summit",
+  "description": "Gamers Lounge",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",

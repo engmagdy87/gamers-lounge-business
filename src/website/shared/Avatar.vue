@@ -11,7 +11,7 @@
           v-if="userCookie.user.images.img_profile !== null"
           :src="userCookie.user.images.img_profile.path"
         />
-        <span v-else>{{ getUserAbbreviationName }}</span>
+        <!-- <span v-else>{{ getUserAbbreviationName }}</span> -->
       </div>
     </div>
     <span
@@ -34,7 +34,6 @@
 
 <script>
 import { mapState } from "vuex";
-import { getFirstLettersOfString } from "../../website/helpers/StringsHelper";
 
 export default {
   props: ["logoutUser", "userCookie"],
@@ -42,13 +41,6 @@ export default {
     return {
       showMenu: false
     };
-  },
-  computed: {
-    getUserAbbreviationName() {
-      return getFirstLettersOfString(
-        `${this.userCookie.user.first_name} ${this.userCookie.user.last_name}`
-      );
-    }
   },
   methods: {
     handleMenuVisibility() {

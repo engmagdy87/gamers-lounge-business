@@ -37,7 +37,7 @@
           </div>
           <div class="row d-block">
             <div class="text-center text-md-left">
-              Copyright ©️ ESports Summit 2020
+              Copyright ©️ Gamers Lounge 2020
             </div>
             <div class="text-center text-md-left">
               All Rights Reserved
@@ -46,14 +46,14 @@
         </div>
       </div>
 
-<!--      <div-->
-<!--        class="col12 col-md-8 d-flex justify-content-center order-1 order-md-2"-->
-<!--      >-->
-<!--        <img-->
-<!--          class="footer-wrapper"-->
-<!--          src="/website/img/footer/sponsors-main.png"-->
-<!--        />-->
-<!--      </div>-->
+      <!--      <div-->
+      <!--        class="col12 col-md-8 d-flex justify-content-center order-1 order-md-2"-->
+      <!--      >-->
+      <!--        <img-->
+      <!--          class="footer-wrapper"-->
+      <!--          src="/website/img/footer/sponsors-main.png"-->
+      <!--        />-->
+      <!--      </div>-->
 
       <div
         class="col12 col-md-4 d-flex justify-content-center justify-content-md-end align-items-center order-1 order-md-2"
@@ -140,50 +140,50 @@
 </template>
 
 <script>
-  export default {
-    // props: ["sponsors", "events", "showFooter"],
-    methods: {
-      redirectTo(url) {
-        if (url.includes("http")) window.open(url, "_blank");
-        else window.open(`http://${url}`, "_blank");
-      }
-      // redirectEventTo(event) {
-      //   if (event.is_external) window.open(event.external_link, "_blank");
-      //   else
-      //     this.$router.push({
-      //       path: `/events/event/${event.id}`
-      //     });
-      // },
-      // getHeighClass() {
-      //   if (this.showFooter === "hide") return "footer-wrapper--hide";
-      //   else if (this.showFooter === "show-small")
-      //     return "footer-wrapper--show-small";
-      // else if (this.showFooter === "show-large")
-      //   return "footer-wrapper--show-large";
-      // },
-      // getSponsorDataByPriority(priority) {
-      //   const sponsors = this.sponsors.filter(category => {
-      //     const categoryObject = category[Object.keys(category)[0]][0];
-      //     if (
-      //       categoryObject.category.enabled &&
-      //       categoryObject.category.priority === priority
-      //     )
-      //       return category;
-      //   });
-      //   return sponsors;
-      // },
-      // getSponsorsCategoryWithPriority(priority) {
-      //   const sponsors = this.getSponsorDataByPriority(priority);
-      //   return Object.values(sponsors[0])[0];
-      // },
-      // categoryTitle(priority) {
-      //   const sponsors = this.getSponsorDataByPriority(priority);
-      //   return Object.keys(sponsors[0])[0];
-      // }
+export default {
+  // props: ["sponsors", "events", "showFooter"],
+  methods: {
+    redirectTo(url) {
+      if (url.includes("http")) window.open(url, "_blank");
+      else window.open(`http://${url}`, "_blank");
     }
-  };
+    // redirectEventTo(event) {
+    //   if (event.is_external) window.open(event.external_link, "_blank");
+    //   else
+    //     this.$router.push({
+    //       path: `/events/event/${event.id}`
+    //     });
+    // },
+    // getHeighClass() {
+    //   if (this.showFooter === "hide") return "footer-wrapper--hide";
+    //   else if (this.showFooter === "show-small")
+    //     return "footer-wrapper--show-small";
+    // else if (this.showFooter === "show-large")
+    //   return "footer-wrapper--show-large";
+    // },
+    // getSponsorDataByPriority(priority) {
+    //   const sponsors = this.sponsors.filter(category => {
+    //     const categoryObject = category[Object.keys(category)[0]][0];
+    //     if (
+    //       categoryObject.category.enabled &&
+    //       categoryObject.category.priority === priority
+    //     )
+    //       return category;
+    //   });
+    //   return sponsors;
+    // },
+    // getSponsorsCategoryWithPriority(priority) {
+    //   const sponsors = this.getSponsorDataByPriority(priority);
+    //   return Object.values(sponsors[0])[0];
+    // },
+    // categoryTitle(priority) {
+    //   const sponsors = this.getSponsorDataByPriority(priority);
+    //   return Object.keys(sponsors[0])[0];
+    // }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/sass/website/shared/footer.scss";
+@import "../../assets/sass/website/shared/footer.scss";
 </style>

@@ -6,54 +6,6 @@
         <i class="nc-icon nc-chart-pie-35"></i>
         <p>Dashboard</p>
       </sidebar-link>
-      <sidebar-link to="/dashboard/summits">
-        <i class="nc-icon nc-planet"></i>
-        <p>Summits</p>
-      </sidebar-link>
-      <sidebar-link to="/dashboard/event-parent">
-        <i class="nc-icon nc-vector"></i>
-        <p>Events Parents</p>
-      </sidebar-link>
-      <sidebar-link to="/dashboard/events">
-        <i class="nc-icon nc-notification-70"></i>
-        <p>Events</p>
-      </sidebar-link>
-      <sidebar-link to="/dashboard/sponsors-categories">
-        <i class="nc-icon nc-bullet-list-67"></i>
-        <p>Sponsors Categories</p>
-      </sidebar-link>
-      <sidebar-link to="/dashboard/sponsors">
-        <i class="nc-icon nc-money-coins"></i>
-        <p>Sponsors</p>
-      </sidebar-link>
-      <sidebar-link to="/dashboard/games">
-        <i class="nc-icon nc-controller-modern"></i>
-        <p>Games</p>
-      </sidebar-link>
-      <sidebar-link to="/dashboard/platforms">
-        <i class="nc-icon nc-tv-2"></i>
-        <p>Platforms</p>
-      </sidebar-link>
-      <sidebar-link to="/dashboard/regions">
-        <i class="nc-icon nc-square-pin"></i>
-        <p>Regions</p>
-      </sidebar-link>
-      <sidebar-link to="/dashboard/tournaments">
-        <i class="nc-icon nc-puzzle-10"></i>
-        <p>Tournaments</p>
-      </sidebar-link>
-      <sidebar-link to="/dashboard/giveaways">
-        <i class="nc-icon nc-app"></i>
-        <p>Giveaways & Offers</p>
-      </sidebar-link>
-      <sidebar-link to="/dashboard/popups">
-        <i class="nc-icon nc-air-baloon"></i>
-        <p>Popups</p>
-      </sidebar-link>
-      <sidebar-link to="/dashboard/testimonials">
-        <i class="nc-icon nc-chat-round"></i>
-        <p>Testimonials</p>
-      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
