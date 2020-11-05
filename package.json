@@ -1,8 +1,8 @@
 {
-  "name": "gamers-lounge",
+  "name": "gamers-lounge-business",
   "version": "2.0.0",
   "private": true,
-  "description": "Gamers Lounge",
+  "description": "Gamers Lounge business",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",

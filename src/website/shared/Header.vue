@@ -6,7 +6,7 @@
     ]"
   >
     <div class="header-wrapper__logo">
-      <a href="/" alt="gamers lounge" style="width: 100%;">
+      <a href="/" alt="gamers lounge business" style="width: 100%;">
         <!-- <img src="/website/img/ess-logo.png" alt="ess logo" /> -->
       </a>
     </div>

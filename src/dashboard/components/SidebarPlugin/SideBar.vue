@@ -47,7 +47,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Gamers Lounge"
+      default: "Gamers Lounge Business"
     },
     backgroundColor: {
       type: String,
