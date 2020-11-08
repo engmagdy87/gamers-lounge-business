@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 // Mixins
 
 @mixin calc-difference-width($percentage, $number) {
@@ -125,96 +127,57 @@
   }
 }
 
-@mixin create-hexagone-shape-tab($notchSize) {
-  clip-path: polygon(
-    0% $notchSize,
-    0% 0%,
-    calc(100% - #{$notchSize}) 0%,
-    100% $notchSize,
-    100% 100%,
-    100% 100%,
-    $notchSize 100%,
-    0% 100%
+@mixin fully-clipped-shape($width, $height, $clipped-length) {
+  $ratio: $width / $height;
+
+  $horizontal-clipping: (($clipped-length / $width) * 100%);
+  $vertical-clipping: calc((100% - #{($clipped-length / $height) * 100%}));
+
+  $vertical-clipping-with-ratio: calc(
+    (100% - #{(($clipped-length / $height) / #{$ratio}) * 100%})
   );
-}
-@mixin create-hexagone-shape($notchSize) {
+  $horizontal-clipping-with-ratio: ($clipped-length / $width) * 100% * $ratio;
   clip-path: polygon(
-    0% $notchSize,
-    $notchSize 0%,
-    calc(100% - #{$notchSize}) 0%,
-    100% $notchSize,
-    100% calc(100% - #{$notchSize}),
-    calc(100% - #{$notchSize}) 100%,
-    $notchSize 100%,
-    0% calc(100% - #{$notchSize})
+    $horizontal-clipping 0%,
+    $vertical-clipping-with-ratio 0%,
+    100% $horizontal-clipping-with-ratio,
+    100% $vertical-clipping,
+    $vertical-clipping-with-ratio 100%,
+    $horizontal-clipping 100%,
+    0% $vertical-clipping,
+    0% $horizontal-clipping-with-ratio
   );
 }
 
-@mixin create-half-hexagone-shape($notchSize) {
+@mixin half-clipped-shape($width, $height, $clipped-length) {
+  $ratio: $width / $height;
+
+  $horizontal-clipping: (($clipped-length / $width) * 100%);
+  $vertical-clipping: calc((100% - #{($clipped-length / $height) * 100%}));
+
+  $vertical-clipping-with-ratio: calc(
+    (100% - #{(($clipped-length / $height) / #{$ratio}) * 100%})
+  );
+  $horizontal-clipping-with-ratio: ($clipped-length / $width) * 100% * $ratio;
   clip-path: polygon(
-    0% $notchSize,
-    $notchSize 0%,
+    $horizontal-clipping 0%,
     100% 0%,
-    100% $notchSize,
-    100% calc(100% - #{$notchSize}),
-    100% 100%,
-    $notchSize 100%,
-    0% calc(100% - #{$notchSize})
+    100% 0%,
+    100% $vertical-clipping,
+    $vertical-clipping-with-ratio 100%,
+    0% 100%,
+    0% 100%,
+    0% $horizontal-clipping-with-ratio
   );
-}
-@mixin create-hero-header-shape() {
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% 4%,
-    100% 85%,
-    99% 92%,
-    66% 92%,
-    60% 130%,
-    2% 105%,
-    0 93%
-  );
-  @include is-mobile {
-    clip-path: polygon(
-      0 0,
-      98% 0,
-      100% 4%,
-      100% 92%,
-      98% 95%,
-      66% 95%,
-      62% 100%,
-      2% 100%,
-      0 96%
-    );
-  }
-}
-@mixin create-half-page-hero-shape() {
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% 4%,
-    100% 85%,
-    99% 92%,
-    66% 92%,
-    62% 100%,
-    2% 100%,
-    0 93%
-  );
-  @include is-mobile {
-    clip-path: polygon(
-      0 0,
-      98% 0,
-      100% 4%,
-      100% 92%,
-      98% 95%,
-      66% 95%,
-      62% 100%,
-      2% 100%,
-      0 96%
-    );
-  }
 }
 
-@mixin create-hexa-shape() {
-  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+@mixin header-item-hover-effect($width, $height) {
+  content: "";
+  width: $width;
+  height: $height;
+  background-color: $accent;
+  position: absolute;
+  bottom: 0;
+  transition: width $transition-time ease;
+  transform: translateX(0%) translateY(5px);
 }

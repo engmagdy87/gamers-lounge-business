@@ -1,18 +1,18 @@
 // Website containers
-import Home from '../website/containers/Home.vue'
+const Home = () => import(/* webpackChunkName: "Home" */ '../website/containers/Home.vue')
 
 // GeneralViews
-import NotFound from '../dashboard/pages/NotFoundPage.vue'
+const NotFound = () => import(/* webpackChunkName: "NotFound" */ '../dashboard/pages/NotFoundPage.vue')
 
 // Admin container
-import DashboardLayout from '../dashboard/layout/DashboardLayout.vue'
+const DashboardLayout = () => import(/* webpackChunkName: "DashboardLayout" */ '../dashboard/layout/DashboardLayout.vue')
 
 // Admin pages
-import Overview from 'src/dashboard/pages/Overview.vue'
+const Overview = () => import(/* webpackChunkName: "Overview" */ 'src/dashboard/pages/Overview.vue')
 
-import TableList from 'src/dashboard/pages/TableList.vue'
-import Icons from 'src/dashboard/pages/Icons.vue'
-import Notifications from 'src/dashboard/pages/Notifications.vue'
+const TableList = () => import(/* webpackChunkName: "TableList" */ 'src/dashboard/pages/TableList.vue')
+const Icons = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/Icons.vue')
+const Notifications = () => import(/* webpackChunkName: "Notifications" */ 'src/dashboard/pages/Notifications.vue')
 
 import { getUserCookie } from '../website/helpers/CookieHelper'
 

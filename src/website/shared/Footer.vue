@@ -3,38 +3,6 @@
     <div class="row">
       <div class="col12 col-md-8 order-2 order-md-1">
         <div class="container ml-0">
-          <div
-            class="row mb-3 mt-3 mt-md-0 justify-content-center justify-content-md-start"
-          >
-            <img
-              class="footer-wrapper__social-media-icon"
-              src="/website/img/footer/discord.png"
-              alt="discord"
-              @click="redirectTo('https://discord.gg/PUwd4cZ')"
-            />
-            <img
-              class="footer-wrapper__social-media-icon"
-              src="/website/img/footer/youtube.png"
-              alt="youtube"
-              @click="
-                redirectTo(
-                  'https://www.youtube.com/channel/UCeOGq-S3xKR8opZKNXYrd2w'
-                )
-              "
-            />
-            <img
-              class="footer-wrapper__social-media-icon"
-              src="/website/img/footer/instagram.png"
-              alt="instagram"
-              @click="redirectTo('https://www.instagram.com/theesportssummit/')"
-            />
-            <img
-              class="footer-wrapper__social-media-icon"
-              src="/website/img/footer/facebook.png"
-              alt="facebook"
-              @click="redirectTo('https://www.facebook.com/theesportssummit/')"
-            />
-          </div>
           <div class="row d-block">
             <div class="text-center text-md-left">
               Copyright ©️ Gamers Lounge 2020

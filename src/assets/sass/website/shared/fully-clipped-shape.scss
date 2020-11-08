@@ -1,0 +1,34 @@
+@import "../mixins.scss";
+@import "../color-palette.scss";
+@import "../variables.scss";
+
+@mixin filled-fully-clipped-shape(
+  $clipped-shape-width,
+  $clipped-shape-height,
+  $clipped-length,
+  $clipped-shape-width-mobile,
+  $clipped-shape-height-mobile,
+  $clipped-length-mobile,
+  $bg-color
+) {
+  div {
+    width: $clipped-shape-width;
+    height: $clipped-shape-height;
+    background-color: $bg-color;
+    @include fully-clipped-shape(
+      $clipped-shape-width,
+      $clipped-shape-height,
+      $clipped-length
+    );
+
+    @include is-mobile {
+      width: $clipped-shape-width-mobile;
+      height: $clipped-shape-height-mobile;
+      @include fully-clipped-shape(
+        $clipped-shape-width-mobile,
+        $clipped-shape-height-mobile,
+        $clipped-length-mobile
+      );
+    }
+  }
+}

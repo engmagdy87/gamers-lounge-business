@@ -1,11 +1,28 @@
 @import "./color-palette.scss";
 
-html {
+html,
+body {
   overflow-x: hidden;
 }
 
+body {
+  height: 100vh;
+}
+
 .app-wrapper {
+  height: 100%;
   font-family: "Roboto";
+  overflow-y: auto;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 5px !important;
+    background-color: $accent !important;
+    border-radius: 20px !important;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary !important;
+    border-radius: 20px !important;
+  }
 }
 .vue-notifyjs.notifications {
   .list-move {
@@ -34,60 +51,4 @@ html {
 
 .error-message {
   color: red;
-}
-
-.registeration-style {
-  background-color: black !important;
-  border: 1px solid #2af3f3 !important;
-  color: #2af3f3 !important;
-  &::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-  }
-}
-
-.slick-dots {
-  bottom: 20px !important;
-  li {
-    width: 50px !important;
-    background-color: gray !important;
-    height: 3px !important;
-    button {
-      width: 50px !important;
-    }
-  }
-  li.slick-active {
-    background-color: $primary !important;
-  }
-}
-
-.slick-dots li button {
-  &:before {
-    width: 50px !important;
-    color: gray !important;
-    content: none !important;
-  }
-}
-
-.register-question-modal-body {
-  .multiselect__content-wrapper {
-    display: none !important;
-    height: 0 !important;
-    max-height: 0 !important;
-  }
-}
-
-.side-popup-wrapper div.slick-slider.slick-initialized ul.slick-dots {
-  bottom: -8px !important;
-  li {
-    width: 4px !important;
-    height: 4px !important;
-    background-color: gray !important;
-    border-radius: 50%;
-    button {
-      width: 4px !important;
-    }
-  }
-  li.slick-active {
-    background-color: $primary !important;
-  }
 }

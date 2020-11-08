@@ -1,30 +1,18 @@
 <template>
   <div class="home-wrapper">
-    <Header activeItem="home" />
-
-    <div class="home-wrapper__content" id="home">
-      hello
-    </div>
-
-    <Spinner :smallLoader="false" />
-    <Footer />
+    <Hero />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapState, mapActions } from "vuex";
-import VueSlickCarousel from "vue-slick-carousel";
 import store from "../../store/index";
 import types from "../../store/types";
-import Header from "../shared/Header";
-import Footer from "../shared/Footer";
-import Spinner from "../shared/Spinner";
+import Hero from "../components/home/Hero";
 
 export default {
   components: {
-    Header,
-    Spinner,
-    Footer
+    Hero
   }
 };
 </script>

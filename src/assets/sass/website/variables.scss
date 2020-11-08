@@ -1,24 +1,14 @@
 $header-height: 120px;
 $header-height-mobile: 75px;
+$header-item-underline-height: 5px;
+$header-item-underline-width: 60%;
+$header-active-item-font: 1.5rem;
+$header-inactive-item-font: 1rem;
+
 $footer-height: 80px;
-$footer-height-mobile: 80px;
+$footer-height-mobile: 100px;
+
 $border-thickness: 1px;
-$hero-image-height: 248px;
-$half-page-hero-image-height: 60vh;
-$event-popup-top-height: 400px;
-$event-popup-top-offset: 15vh;
+$total-border-thickness: 2px;
 
-$event-popup-top-height-mobile: 300px;
-$event-popup-top-offset-mobile: 5vh;
-
-$popup-top-offset: calc(
-  #{$event-popup-top-height} + #{$event-popup-top-offset} + 5vh
-);
-$popup-top-offset-mobile: calc(
-  #{$event-popup-top-height-mobile} + #{$event-popup-top-offset-mobile} + 5vh
-);
-$popup-width: 450px;
-$popup-height: 250px;
-$popup-width-mobile: 300px;
-$popup-height-mobile: 167px;
-$popup-title-height: 50px;
+$transition-time: 0.3s;

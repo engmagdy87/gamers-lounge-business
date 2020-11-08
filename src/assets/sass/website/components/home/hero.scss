@@ -1,0 +1,12 @@
+@import "../../mixins.scss";
+
+.hero-wrapper {
+  width: 100%;
+  height: 100vh;
+  padding-top: $header-height;
+  background-attachment: fixed;
+  @include cover-image("~/images/hero.jpg");
+  @include is-mobile {
+    padding-top: $header-height-mobile;
+  }
+}
