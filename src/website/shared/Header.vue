@@ -15,7 +15,7 @@
           <li>
             <a
               :class="[
-                activeItem === 'home'
+                activeItem === '/'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -26,7 +26,7 @@
           <li>
             <a
               :class="[
-                activeItem === 'services'
+                activeItem === '/services'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -37,7 +37,7 @@
           <li>
             <a
               :class="[
-                activeItem === 'about'
+                activeItem === '/about'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -48,7 +48,7 @@
           <li>
             <a
               :class="[
-                activeItem === 'contact'
+                activeItem === '/contact'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -59,7 +59,7 @@
           <li>
             <a
               :class="[
-                activeItem === 'work'
+                activeItem === '/work'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -70,7 +70,7 @@
           <li>
             <a
               :class="[
-                activeItem === 'jobs'
+                activeItem === '/jobs'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -124,7 +124,7 @@
           <div class="overlay-content">
             <li
               :class="[
-                activeItem === 'home'
+                activeItem === '/'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -135,7 +135,7 @@
             </li>
             <li
               :class="[
-                activeItem === 'services'
+                activeItem === '/services'
                   ? 'header-wrapper__navLinks--active'
                   : ''
               ]"
@@ -144,7 +144,7 @@
             </li>
             <li
               :class="[
-                activeItem === 'about'
+                activeItem === '/about'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -153,7 +153,7 @@
             </li>
             <li
               :class="[
-                activeItem === 'contact'
+                activeItem === '/contact'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -162,7 +162,7 @@
             </li>
             <li
               :class="[
-                activeItem === 'work'
+                activeItem === '/work'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -171,7 +171,7 @@
             </li>
             <li
               :class="[
-                activeItem === 'jobs'
+                activeItem === '/jobs'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -221,7 +221,7 @@ export default {
   data() {
     return {
       userCookie: null,
-      activeItem: this.$route.name
+      activeItem: this.$route.path
     };
   },
   props: ["setShowLoginModal", "isSolidHeader"],
