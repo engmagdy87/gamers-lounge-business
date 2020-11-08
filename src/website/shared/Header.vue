@@ -78,39 +78,6 @@
               >Jobs</a
             >
           </li>
-
-          <!-- <li
-          class="float-right header-wrapper__user-section"
-          v-if="userCookie === null"
-        >
-          <span class="header-wrapper__user-section">/</span
-          ><a class="header-wrapper__user-section" href="#">Create Account</a>
-        </li>
-        <li
-          class="float-right"
-          @click="setShowLoginModal(true)"
-          v-if="userCookie === null"
-        >
-          <a class="header-wrapper__user-section" href="#">Login</a>
-        </li> -->
-          <!-- <img
-          v-if="userCookie === null"
-          class="float-right float-right header-wrapper__user-section-icon"
-          src="../../../public/website/img/user.svg"
-          alt="user"
-        /> -->
-          <!-- <li class="float-right" v-if="userCookie !== null">
-          <Avatar :logoutUser="logoutUser" :userCookie="userCookie" />
-        </li> -->
-          <a href="/dashboard">
-            <li v-if="userCookie !== null" class="float-right">
-              <img
-                class="header-wrapper__dashboard-img"
-                src="/website/img/dashboard.svg"
-                alt="dashboard"
-              />
-            </li>
-          </a>
         </ul>
       </nav>
 
@@ -178,27 +145,6 @@
             >
               <a href="/jobs" @click="closeNav">Jobs</a>
             </li>
-            <!-- <li v-if="userCookie === null">
-            <a href="#" @click="closeNav">Register</a>
-          </li>
-          <li @click="setShowLoginModal(true)" v-if="userCookie === null">
-            <a href="#" @click="closeNav">Login</a>
-          </li>
-          <li v-if="userCookie !== null">
-            <a href="/profile">
-              Profile
-            </a>
-          </li> -->
-            <li v-if="userCookie !== null">
-              <a href="/dashboard">
-                Dashboard
-              </a>
-            </li>
-            <!-- <li v-if="userCookie !== null" @click="logoutUser">
-            <a href="#">
-              Logout
-            </a>
-          </li> -->
           </div>
         </div>
 
