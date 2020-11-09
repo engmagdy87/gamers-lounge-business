@@ -1,5 +1,7 @@
 <template>
-  <div class="hero-wrapper"></div>
+  <div class="hero-wrapper">
+    <slot name="hero-content"> </slot>
+  </div>
 </template>
 
 <style lang="scss" scoped>
