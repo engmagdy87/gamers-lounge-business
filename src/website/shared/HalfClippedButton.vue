@@ -1,15 +1,15 @@
 <template>
   <div>
-    <HalfClippedShape isButton :onClickAction="goToUrl">
+    <HalfClippedOutlinedShape isButton :onClickAction="goToUrl">
       <template #content>
         {{ text }}
       </template>
-    </HalfClippedShape>
+    </HalfClippedOutlinedShape>
   </div>
 </template>
 
 <script>
-import HalfClippedShape from "./HalfClippedShape";
+import HalfClippedOutlinedShape from "./HalfClippedOutlinedShape";
 
 export default {
   props: ["text"],
@@ -21,14 +21,14 @@ export default {
     }
   },
   components: {
-    HalfClippedShape
+    HalfClippedOutlinedShape
   }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../../assets/sass/website/color-palette.scss";
-@import "../../assets/sass/website/shared/half-clipped-shape.scss";
+@import "../../assets/sass/website/shared/half-clipped-outline-shape.scss";
 
 $clipped-shape-width: 150px;
 $clipped-shape-height: 40px;

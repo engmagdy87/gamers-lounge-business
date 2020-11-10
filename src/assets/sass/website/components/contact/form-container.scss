@@ -1,0 +1,14 @@
+@import "../../color-palette.scss";
+
+.form-container-wrapper {
+  background-color: $primary;
+  width: 100%;
+  height: max-content;
+  padding: 50px;
+  text-align: center;
+  h2,
+  p {
+    color: $header-item;
+    margin: 10px 0;
+  }
+}

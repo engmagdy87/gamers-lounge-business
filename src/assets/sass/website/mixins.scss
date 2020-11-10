@@ -92,9 +92,15 @@
   -o-transition: #{$property} #{$duration} #{$type};
 }
 
+@mixin is-extra-small-mobile {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
 @mixin is-mobile {
   // Extra small devices (portrait phones, less than 767px)
-  @media (max-width: 767px) {
+  @media (min-width: 601px) and (max-width: 767px) {
     @content;
   }
 }
@@ -180,4 +186,14 @@
   bottom: 0;
   transition: width $transition-time ease;
   transform: translateX(0%) translateY(5px);
+}
+
+@mixin initializePageStyle {
+  height: max-content;
+  margin-top: -$header-height;
+  min-height: calc(100vh - #{$footer-height});
+  @include is-extra-small-mobile {
+    margin-top: -$header-height-mobile;
+    min-height: calc(100vh - #{$footer-height-mobile});
+  }
 }

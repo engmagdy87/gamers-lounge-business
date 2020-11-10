@@ -2,74 +2,82 @@
 @import "../color-palette.scss";
 @import "../variables.scss";
 
-@mixin outline-half-clipped-shape(
+@mixin filled-half-clipped-shape(
+  $clipped-length,
   $clipped-shape-width,
   $clipped-shape-height,
-  $clipped-length,
-  $clipped-shape-width-mobile,
-  $clipped-shape-height-mobile,
-  $clipped-length-mobile,
-  $bg-color,
-  $outline-color
+  $clipped-shape-width-xs,
+  $clipped-shape-height-xs,
+  $clipped-shape-width-sm,
+  $clipped-shape-height-sm,
+  $clipped-shape-width-md,
+  $clipped-shape-height-md,
+  $clipped-shape-width-lg,
+  $clipped-shape-height-lg,
+  $clipped-shape-width-xlg,
+  $clipped-shape-height-xlg,
+  $clipped-shape-width-xxlg,
+  $clipped-shape-height-xxlg,
+  $bg-color
 ) {
-  .outline-box {
+  .half-filled-box {
     width: $clipped-shape-width;
     height: $clipped-shape-height;
-    position: relative;
-    @include is-mobile {
-      width: $clipped-shape-width-mobile;
-      height: $clipped-shape-height-mobile;
-    }
-    &__outside {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background-color: $outline-color;
-      @include half-clipped-shape(
-        $clipped-shape-width,
-        $clipped-shape-height,
-        $clipped-length
-      );
-      @include is-mobile {
-        @include half-clipped-shape(
-          $clipped-shape-width-mobile,
-          $clipped-shape-height-mobile,
-          $clipped-length-mobile
-        );
-      }
+    background-color: $bg-color;
+    color: $header-item;
+    padding: 20px;
+    text-align: center;
+    margin: auto;
+    @include half-clipped-shape(
+      $clipped-shape-width,
+      $clipped-shape-height,
+      $clipped-length
+    );
+
+    @include is-extra-small-mobile {
+      $width: $clipped-shape-width-xs;
+      $height: $clipped-shape-height-xs;
+      width: $width;
+      height: $height;
+      @include half-clipped-shape($width, $height, $clipped-length);
     }
 
-    &__inside {
-      position: absolute;
-      top: $border-thickness;
-      left: $border-thickness;
-      width: calc(100% - #{$total-border-thickness});
-      height: calc(100% - #{$total-border-thickness});
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: $bg-color;
-      color: $outline-color;
-      transition: all $transition-time ease-in-out;
-      @include half-clipped-shape(
-        $clipped-shape-width,
-        $clipped-shape-height,
-        $clipped-length
-      );
-      @include is-mobile {
-        @include half-clipped-shape(
-          $clipped-shape-width-mobile,
-          $clipped-shape-height-mobile,
-          $clipped-length-mobile
-        );
-      }
-      &--is-button {
-        cursor: pointer;
-        &:hover {
-          background-color: $outline-color;
-          color: $header-item;
-        }
-      }
+    @include is-mobile {
+      $width: $clipped-shape-width-sm;
+      $height: $clipped-shape-height-sm;
+      width: $width;
+      height: $height;
+      @include half-clipped-shape($width, $height, $clipped-length);
+    }
+
+    @include is-tablet {
+      $width: $clipped-shape-width-md;
+      $height: $clipped-shape-height-md;
+      width: $width;
+      height: $height;
+      @include half-clipped-shape($width, $height, $clipped-length);
+    }
+
+    @include is-desktop {
+      $width: $clipped-shape-width-lg;
+      $height: $clipped-shape-height-lg;
+      width: $width;
+      height: $height;
+      @include half-clipped-shape($width, $height, $clipped-length);
+    }
+    @include is-large-desktop {
+      $width: $clipped-shape-width-xlg;
+      $height: $clipped-shape-height-xlg;
+      width: $width;
+      height: $height;
+      @include half-clipped-shape($width, $height, $clipped-length);
+    }
+    @include is-extra-large-desktop {
+      $width: $clipped-shape-width-xxlg;
+      $height: $clipped-shape-height-xxlg;
+      width: $width;
+      height: $height;
+      @include half-clipped-shape($width, $height, $clipped-length);
     }
   }
 }

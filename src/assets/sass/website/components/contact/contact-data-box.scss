@@ -1,0 +1,47 @@
+@import "../../mixins.scss";
+
+.contact-data-box-wrapper {
+  &__img {
+    margin-bottom: 5%;
+    height: 30px;
+    @include is-extra-small-mobile {
+      margin-top: 6%;
+    }
+    @include is-mobile {
+      margin-top: 5%;
+    }
+
+    @include is-tablet {
+      margin-top: 10%;
+    }
+
+    @include is-desktop {
+      margin-top: 15%;
+    }
+    @include is-large-desktop {
+      margin-top: 3%;
+    }
+    @include is-extra-large-desktop {
+      margin-top: 5%;
+    }
+    img {
+      max-width: 40px;
+      height: 100%;
+    }
+  }
+  &__title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 8% 0;
+    @include is-extra-small-mobile {
+      margin: 5% 0;
+    }
+  }
+  &__details {
+    font-size: 0.9rem;
+    @include is-extra-small-mobile {
+      font-size: 0.8rem;
+    }
+  }
+}

@@ -20,7 +20,7 @@
     height: $header-height;
     z-index: 100;
     background: rgba($color: $primary, $alpha: 0.7);
-    @include is-mobile {
+    @include is-extra-small-mobile {
       height: $header-height-mobile;
     }
   }
@@ -129,7 +129,7 @@
   position: absolute;
   top: calc(#{$header-height} / 2.5);
   right: 24px;
-  @include is-mobile {
+  @include is-extra-small-mobile {
     top: calc(#{$header-height-mobile} / 7);
   }
 }
