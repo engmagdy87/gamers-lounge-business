@@ -1,7 +1,7 @@
 <template>
   <header class="header-wrapper">
     <div class="header-wrapper__social-media">
-      <HalfClippedButton text="GL Games" />
+      <HalfClippedOutlineButton text="GL Games" />
     </div>
     <div class="header-wrapper__main">
       <div class="header-wrapper__logo">
@@ -15,7 +15,7 @@
           <li>
             <a
               :class="[
-                activeItem === '/'
+                activeItem === 'home'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -26,7 +26,7 @@
           <li>
             <a
               :class="[
-                activeItem === '/services'
+                activeItem === 'services'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -37,7 +37,7 @@
           <li>
             <a
               :class="[
-                activeItem === '/about'
+                activeItem === 'about'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -48,7 +48,7 @@
           <li>
             <a
               :class="[
-                activeItem === '/contact'
+                activeItem === 'contact'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -59,7 +59,7 @@
           <li>
             <a
               :class="[
-                activeItem === '/work'
+                activeItem === 'work'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -70,7 +70,7 @@
           <li>
             <a
               :class="[
-                activeItem === '/jobs'
+                activeItem === 'jobs'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -91,7 +91,7 @@
           <div class="overlay-content">
             <li
               :class="[
-                activeItem === '/'
+                activeItem === 'home'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -102,7 +102,7 @@
             </li>
             <li
               :class="[
-                activeItem === '/services'
+                activeItem === 'services'
                   ? 'header-wrapper__navLinks--active'
                   : ''
               ]"
@@ -111,7 +111,7 @@
             </li>
             <li
               :class="[
-                activeItem === '/about'
+                activeItem === 'about'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -120,7 +120,7 @@
             </li>
             <li
               :class="[
-                activeItem === '/contact'
+                activeItem === 'contact'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -129,7 +129,7 @@
             </li>
             <li
               :class="[
-                activeItem === '/work'
+                activeItem === 'work'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -138,7 +138,7 @@
             </li>
             <li
               :class="[
-                activeItem === '/jobs'
+                activeItem === 'jobs'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -160,17 +160,16 @@
 import { mapState, mapGetters } from "vuex";
 import store from "../../store/index";
 import types from "../../store/types";
-import HalfClippedButton from "./HalfClippedButton";
+import HalfClippedOutlineButton from "./HalfClippedOutlineButton";
 import { removeCookie, getUserCookie } from "../helpers/CookieHelper";
 
 export default {
   data() {
     return {
-      userCookie: null,
-      activeItem: this.$route.path
+      userCookie: null
     };
   },
-  props: ["setShowLoginModal", "isSolidHeader"],
+  props: ["activeItem", "setShowLoginModal", "isSolidHeader"],
   methods: {
     openNav() {
       this.$refs.myNav.style.height = "100%";
@@ -185,7 +184,7 @@ export default {
     }
   },
   components: {
-    HalfClippedButton
+    HalfClippedOutlineButton
   },
   mounted() {
     if (getUserCookie() !== undefined) this.userCookie = getUserCookie();

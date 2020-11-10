@@ -1,0 +1,45 @@
+@import "../color-palette.scss";
+@import "../shared/half-clipped-shape.scss";
+
+// All have vw as divide operation units must be the same for all
+$width: 42vw;
+$height: 4vw;
+$clipped-length: $height / 2;
+
+$widths-and-heights: (
+  clipped-shape-width: $width,
+  clipped-shape-height: $height,
+  clipped-length: $clipped-length,
+  clipped-shape-width-xs: 55vw,
+  clipped-shape-height-xs: (
+    $height
+  ) * 2,
+  clipped-length-xs: $height,
+  clipped-shape-width-sm: (
+    $width + 5vw
+  ) * 1.5,
+  clipped-shape-height-sm: $height * 2,
+  clipped-length-sm: $height,
+  clipped-shape-width-md: $width + 5vw,
+  clipped-shape-height-md: $height * 1.5,
+  clipped-length-md: $height * 1.5/2,
+  clipped-shape-width-lg: $width + 5vw,
+  clipped-shape-height-lg: $height,
+  clipped-length-lg: $height/2,
+  clipped-shape-width-xlg: $width + 5vw,
+  clipped-shape-height-xlg: $height,
+  clipped-length-xlg: $height/2,
+  clipped-shape-width-xxlg: $width - 10vw,
+  clipped-shape-height-xxlg: $height - 1vw,
+  clipped-length-xxlg: (
+    $height - 1vw
+  )/2
+);
+
+// use /deep/ to apply scss classes to the child components
+form div /deep/ {
+  @include filled-half-clipped-shape($widths-and-heights, $accent);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -197,3 +197,55 @@
     min-height: calc(100vh - #{$footer-height-mobile});
   }
 }
+
+@mixin set-half-clipped-shape-for-input(
+  $extra-small-mobile,
+  $mobile,
+  $tablet,
+  $desktop,
+  $large-desktop,
+  $extra-large-desktop
+) {
+  @include is-extra-small-mobile {
+    @include half-clipped-shape(
+      map-get($extra-small-mobile, clipped-shape-width),
+      map-get($extra-small-mobile, clipped-shape-height),
+      map-get($extra-small-mobile, clipped-length)
+    );
+  }
+  @include is-mobile {
+    @include half-clipped-shape(
+      map-get($mobile, clipped-shape-width),
+      map-get($mobile, clipped-shape-height),
+      map-get($mobile, clipped-length)
+    );
+  }
+  @include is-tablet {
+    @include half-clipped-shape(
+      map-get($tablet, clipped-shape-width),
+      map-get($tablet, clipped-shape-height),
+      map-get($tablet, clipped-length)
+    );
+  }
+  @include is-desktop {
+    @include half-clipped-shape(
+      map-get($desktop, clipped-shape-width),
+      map-get($desktop, clipped-shape-height),
+      map-get($desktop, clipped-length)
+    );
+  }
+  @include is-large-desktop {
+    @include half-clipped-shape(
+      map-get($large-desktop, clipped-shape-width),
+      map-get($large-desktop, clipped-shape-height),
+      map-get($large-desktop, clipped-length)
+    );
+  }
+  @include is-extra-large-desktop {
+    @include half-clipped-shape(
+      map-get($extra-large-desktop, clipped-shape-width),
+      map-get($extra-large-desktop, clipped-shape-height),
+      map-get($extra-large-desktop, clipped-length)
+    );
+  }
+}

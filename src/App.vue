@@ -1,6 +1,6 @@
 <template>
   <div :class="['app-wrapper', { 'nav-open': $sidebar.showSidebar }]">
-    <Header />
+    <Header :activeItem="headerActiveItem" />
     <notifications></notifications>
     <router-view></router-view>
     <Spinner :smallLoader="false" />
@@ -18,10 +18,18 @@ import Spinner from "./website/shared/Spinner";
 import { getUserCookie } from "./website/helpers/CookieHelper";
 
 export default {
+  data() {
+    return {
+      headerActiveItem: null
+    };
+  },
   components: {
     Header,
     Spinner,
     Footer
+  },
+  updated() {
+    this.headerActiveItem = this.$route.name;
   }
 };
 </script>

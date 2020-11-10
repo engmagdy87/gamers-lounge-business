@@ -1,0 +1,23 @@
+@import "../color-palette.scss";
+@import "../shared/half-clipped-outline-shape.scss";
+
+$clipped-shape-width: 150px;
+$clipped-shape-height: 40px;
+$clipped-length: $clipped-shape-height / 2;
+$clipped-shape-width-mobile: 144px;
+$clipped-shape-height-mobile: 42px;
+$clipped-length-mobile: $clipped-shape-height / 2;
+
+// use /deep/ to apply scss classes to the child components
+div /deep/ {
+  @include outline-half-clipped-shape(
+    $clipped-shape-width,
+    $clipped-shape-height,
+    $clipped-length,
+    $clipped-shape-width-mobile,
+    $clipped-shape-height-mobile,
+    $clipped-length-mobile,
+    $primary,
+    $accent
+  );
+}

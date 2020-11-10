@@ -2,82 +2,98 @@
 @import "../color-palette.scss";
 @import "../variables.scss";
 
-@mixin filled-half-clipped-shape(
-  $clipped-length,
-  $clipped-shape-width,
-  $clipped-shape-height,
-  $clipped-shape-width-xs,
-  $clipped-shape-height-xs,
-  $clipped-shape-width-sm,
-  $clipped-shape-height-sm,
-  $clipped-shape-width-md,
-  $clipped-shape-height-md,
-  $clipped-shape-width-lg,
-  $clipped-shape-height-lg,
-  $clipped-shape-width-xlg,
-  $clipped-shape-height-xlg,
-  $clipped-shape-width-xxlg,
-  $clipped-shape-height-xxlg,
-  $bg-color
-) {
+@mixin filled-half-clipped-shape($widths-and-heights, $bg-color) {
   .half-filled-box {
-    width: $clipped-shape-width;
-    height: $clipped-shape-height;
+    width: map-get($widths-and-heights, clipped-shape-width);
+    height: map-get($widths-and-heights, clipped-shape-height);
     background-color: $bg-color;
     color: $header-item;
     padding: 20px;
     text-align: center;
     margin: auto;
     @include half-clipped-shape(
-      $clipped-shape-width,
-      $clipped-shape-height,
-      $clipped-length
+      $width,
+      $height,
+      map-get($widths-and-heights, clipped-length)
     );
 
     @include is-extra-small-mobile {
-      $width: $clipped-shape-width-xs;
-      $height: $clipped-shape-height-xs;
+      $width: map-get($widths-and-heights, clipped-shape-width-xs);
+      $height: map-get($widths-and-heights, clipped-shape-height-xs);
       width: $width;
       height: $height;
-      @include half-clipped-shape($width, $height, $clipped-length);
+      @include half-clipped-shape(
+        $width,
+        $height,
+        map-get($widths-and-heights, clipped-length-xs)
+      );
     }
 
     @include is-mobile {
-      $width: $clipped-shape-width-sm;
-      $height: $clipped-shape-height-sm;
+      $width: map-get($widths-and-heights, clipped-shape-width-sm);
+      $height: map-get($widths-and-heights, clipped-shape-height-sm);
       width: $width;
       height: $height;
-      @include half-clipped-shape($width, $height, $clipped-length);
+      @include half-clipped-shape(
+        $width,
+        $height,
+        map-get($widths-and-heights, clipped-length-sm)
+      );
     }
 
     @include is-tablet {
-      $width: $clipped-shape-width-md;
-      $height: $clipped-shape-height-md;
+      $width: map-get($widths-and-heights, clipped-shape-width-md);
+      $height: map-get($widths-and-heights, clipped-shape-height-md);
       width: $width;
       height: $height;
-      @include half-clipped-shape($width, $height, $clipped-length);
+      @include half-clipped-shape(
+        $width,
+        $height,
+        map-get($widths-and-heights, clipped-length-md)
+      );
     }
 
     @include is-desktop {
-      $width: $clipped-shape-width-lg;
-      $height: $clipped-shape-height-lg;
+      $width: map-get($widths-and-heights, clipped-shape-width-lg);
+      $height: map-get($widths-and-heights, clipped-shape-height-lg);
       width: $width;
       height: $height;
-      @include half-clipped-shape($width, $height, $clipped-length);
+      @include half-clipped-shape(
+        $width,
+        $height,
+        map-get($widths-and-heights, clipped-length-lg)
+      );
     }
     @include is-large-desktop {
-      $width: $clipped-shape-width-xlg;
-      $height: $clipped-shape-height-xlg;
+      $width: map-get($widths-and-heights, clipped-shape-width-xlg);
+      $height: map-get($widths-and-heights, clipped-shape-height-xlg);
       width: $width;
       height: $height;
-      @include half-clipped-shape($width, $height, $clipped-length);
+      @include half-clipped-shape(
+        $width,
+        $height,
+        map-get($widths-and-heights, clipped-length-xlg)
+      );
     }
     @include is-extra-large-desktop {
-      $width: $clipped-shape-width-xxlg;
-      $height: $clipped-shape-height-xxlg;
+      $width: map-get($widths-and-heights, clipped-shape-width-xxlg);
+      $height: map-get($widths-and-heights, clipped-shape-height-xxlg);
       width: $width;
       height: $height;
-      @include half-clipped-shape($width, $height, $clipped-length);
+      @include half-clipped-shape(
+        $width,
+        $height,
+        map-get($widths-and-heights, clipped-length-xxlg)
+      );
+    }
+    &--is-button {
+      cursor: pointer;
+      background-color: $bg-color;
+      transition: background-color $transition-time ease-in-out;
+      &:hover {
+        background-color: darken($color: $bg-color, $amount: 5);
+        color: $header-item;
+      }
     }
   }
 }
