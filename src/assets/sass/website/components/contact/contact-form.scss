@@ -1,0 +1,207 @@
+@import "../../mixins.scss";
+@import "../../color-palette.scss";
+@import "../../variables.scss";
+@import "../../shared/half-clipped-shape.scss";
+
+.contact-form-wrapper {
+  form {
+    @include is-extra-small-mobile {
+      padding: 10px;
+    }
+    @include is-mobile {
+      padding: 20px;
+    }
+    @include is-tablet {
+      padding: 20px;
+    }
+    @include is-desktop {
+      padding: 30px;
+    }
+    @include is-large-desktop {
+      padding: 30px;
+    }
+    @include is-extra-large-desktop {
+      padding: 50px;
+    }
+    .form-group {
+      position: relative;
+      label {
+        background-color: $form-background;
+        position: absolute;
+        top: -10px;
+        left: 50px;
+        z-index: 1;
+        color: white;
+      }
+      &__name-label {
+        width: 60px;
+      }
+      &__email-label {
+        width: 60px;
+      }
+      &__message-label {
+        width: 80px;
+      }
+    }
+  }
+  &__input-outline-mask,
+  &__input-outline-mask input {
+    $extra-small-mobile: (
+      clipped-shape-width: 50%,
+      clipped-shape-height: 7%,
+      clipped-length: 3%
+    );
+    $mobile: (
+      clipped-shape-width: 90%,
+      clipped-shape-height: 7%,
+      clipped-length: 3%
+    );
+    $tablet: (
+      clipped-shape-width: 60%,
+      clipped-shape-height: 7%,
+      clipped-length: 3%
+    );
+    $desktop: (
+      clipped-shape-width: 80%,
+      clipped-shape-height: 7%,
+      clipped-length: 3%
+    );
+    $large-desktop: (
+      clipped-shape-width: 90%,
+      clipped-shape-height: 8%,
+      clipped-length: 3%
+    );
+    $extra-large-desktop: (
+      clipped-shape-width: 100%,
+      clipped-shape-height: 7%,
+      clipped-length: 2%
+    );
+    @include set-half-clipped-shape-for-input(
+      $extra-small-mobile,
+      $mobile,
+      $tablet,
+      $desktop,
+      $large-desktop,
+      $extra-large-desktop
+    );
+  }
+  &__input-outline-mask {
+    position: relative;
+    background-color: $light-white;
+    width: 100%;
+    height: $input-form-height;
+
+    input {
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      border-radius: 0;
+      width: calc(100% - 2px);
+      height: $input-form-height - 2px;
+      background-color: $form-background;
+      border: transparent;
+      color: white;
+      padding: 8px 20px;
+    }
+  }
+  &__textarea-outline-mask {
+    position: relative;
+    background-color: $light-white;
+    width: 100%;
+    height: 150px;
+
+    textarea {
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      border-radius: 0;
+      width: calc(100% - 2px);
+      height: 148px;
+      background-color: $form-background;
+      border: transparent;
+      color: white;
+      padding: 8px 20px;
+    }
+  }
+  &__textarea-outline-mask,
+  &__textarea-outline-mask textarea {
+    $extra-small-mobile: (
+      clipped-shape-width: 50%,
+      clipped-shape-height: 25%,
+      clipped-length: 3%
+    );
+    $mobile: (
+      clipped-shape-width: 70%,
+      clipped-shape-height: 20%,
+      clipped-length: 2.5%
+    );
+    $tablet: (
+      clipped-shape-width: 70%,
+      clipped-shape-height: 30%,
+      clipped-length: 4%
+    );
+    $desktop: (
+      clipped-shape-width: 80%,
+      clipped-shape-height: 25%,
+      clipped-length: 3%
+    );
+    $large-desktop: (
+      clipped-shape-width: 90%,
+      clipped-shape-height: 25%,
+      clipped-length: 3%
+    );
+    $extra-large-desktop: (
+      clipped-shape-width: 100%,
+      clipped-shape-height: 20%,
+      clipped-length: 2%
+    );
+    @include set-half-clipped-shape-for-input(
+      $extra-small-mobile,
+      $mobile,
+      $tablet,
+      $desktop,
+      $large-desktop,
+      $extra-large-desktop
+    );
+  }
+}
+
+// All have vw as divide operation units must be the same for all
+$width: 50vw;
+$height: 25vw;
+$clipped-length: 4vw;
+
+$widths-and-heights: (
+  clipped-shape-width: $width,
+  clipped-shape-height: $height,
+  clipped-length: $clipped-length,
+  clipped-shape-width-xs: 70vw,
+  clipped-shape-height-xs: (
+    $height + 10vw
+  ) * 3,
+  clipped-length-xs: $clipped-length,
+  clipped-shape-width-sm: (
+    $width + 5vw
+  ) * 1.5,
+  clipped-shape-height-sm: (
+    $height + 5vw
+  ) * 2,
+  clipped-length-sm: $clipped-length,
+  clipped-shape-width-md: $width + 5vw,
+  clipped-shape-height-md: $height * 2,
+  clipped-length-md: $clipped-length,
+  clipped-shape-width-lg: $width + 5vw,
+  clipped-shape-height-lg: $height + 12vw,
+  clipped-length-lg: $clipped-length,
+  clipped-shape-width-xlg: $width + 5vw,
+  clipped-shape-height-xlg: $height + 10vw,
+  clipped-length-xlg: $clipped-length,
+  clipped-shape-width-xxlg: $width - 10vw,
+  clipped-shape-height-xxlg: $height + 1vw,
+  clipped-length-xxlg: $clipped-length
+);
+
+// use /deep/ to apply scss classes to the child components
+div /deep/ {
+  @include filled-half-clipped-shape($widths-and-heights, $form-background);
+}

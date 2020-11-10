@@ -1,15 +1,9 @@
 <template>
-  <div class="outline-box" @click="onClickAction">
-    <div class="outline-box__outside">
-      <div
-        :class="[
-          'outline-box__inside',
-          isButton && 'outline-box__inside--is-button'
-        ]"
-      >
-        <slot name="content"></slot>
-      </div>
-    </div>
+  <div
+    :class="['half-filled-box', isButton && 'half-filled-box--is-button']"
+    @click="onClickAction"
+  >
+    <slot name="content"></slot>
   </div>
 </template>
 

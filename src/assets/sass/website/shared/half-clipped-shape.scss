@@ -2,73 +2,97 @@
 @import "../color-palette.scss";
 @import "../variables.scss";
 
-@mixin outline-half-clipped-shape(
-  $clipped-shape-width,
-  $clipped-shape-height,
-  $clipped-length,
-  $clipped-shape-width-mobile,
-  $clipped-shape-height-mobile,
-  $clipped-length-mobile,
-  $bg-color,
-  $outline-color
-) {
-  .outline-box {
-    width: $clipped-shape-width;
-    height: $clipped-shape-height;
-    position: relative;
-    @include is-mobile {
-      width: $clipped-shape-width-mobile;
-      height: $clipped-shape-height-mobile;
-    }
-    &__outside {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background-color: $outline-color;
+@mixin filled-half-clipped-shape($widths-and-heights, $bg-color) {
+  .half-filled-box {
+    width: map-get($widths-and-heights, clipped-shape-width);
+    height: map-get($widths-and-heights, clipped-shape-height);
+    background-color: $bg-color;
+    color: $header-item;
+    padding: 20px;
+    text-align: center;
+    margin: auto;
+    @include half-clipped-shape(
+      $width,
+      $height,
+      map-get($widths-and-heights, clipped-length)
+    );
+
+    @include is-extra-small-mobile {
+      $width: map-get($widths-and-heights, clipped-shape-width-xs);
+      $height: map-get($widths-and-heights, clipped-shape-height-xs);
+      width: $width;
+      height: $height;
       @include half-clipped-shape(
-        $clipped-shape-width,
-        $clipped-shape-height,
-        $clipped-length
+        $width,
+        $height,
+        map-get($widths-and-heights, clipped-length-xs)
       );
-      @include is-mobile {
-        @include half-clipped-shape(
-          $clipped-shape-width-mobile,
-          $clipped-shape-height-mobile,
-          $clipped-length-mobile
-        );
-      }
     }
 
-    &__inside {
-      position: absolute;
-      top: $border-thickness;
-      left: $border-thickness;
-      width: calc(100% - #{$total-border-thickness});
-      height: calc(100% - #{$total-border-thickness});
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: $bg-color;
-      color: $outline-color;
-      transition: all $transition-time ease-in-out;
+    @include is-mobile {
+      $width: map-get($widths-and-heights, clipped-shape-width-sm);
+      $height: map-get($widths-and-heights, clipped-shape-height-sm);
+      width: $width;
+      height: $height;
       @include half-clipped-shape(
-        $clipped-shape-width,
-        $clipped-shape-height,
-        $clipped-length
+        $width,
+        $height,
+        map-get($widths-and-heights, clipped-length-sm)
       );
-      @include is-mobile {
-        @include half-clipped-shape(
-          $clipped-shape-width-mobile,
-          $clipped-shape-height-mobile,
-          $clipped-length-mobile
-        );
-      }
-      &--is-button {
-        cursor: pointer;
-        &:hover {
-          background-color: $outline-color;
-          color: $header-item;
-        }
+    }
+
+    @include is-tablet {
+      $width: map-get($widths-and-heights, clipped-shape-width-md);
+      $height: map-get($widths-and-heights, clipped-shape-height-md);
+      width: $width;
+      height: $height;
+      @include half-clipped-shape(
+        $width,
+        $height,
+        map-get($widths-and-heights, clipped-length-md)
+      );
+    }
+
+    @include is-desktop {
+      $width: map-get($widths-and-heights, clipped-shape-width-lg);
+      $height: map-get($widths-and-heights, clipped-shape-height-lg);
+      width: $width;
+      height: $height;
+      @include half-clipped-shape(
+        $width,
+        $height,
+        map-get($widths-and-heights, clipped-length-lg)
+      );
+    }
+    @include is-large-desktop {
+      $width: map-get($widths-and-heights, clipped-shape-width-xlg);
+      $height: map-get($widths-and-heights, clipped-shape-height-xlg);
+      width: $width;
+      height: $height;
+      @include half-clipped-shape(
+        $width,
+        $height,
+        map-get($widths-and-heights, clipped-length-xlg)
+      );
+    }
+    @include is-extra-large-desktop {
+      $width: map-get($widths-and-heights, clipped-shape-width-xxlg);
+      $height: map-get($widths-and-heights, clipped-shape-height-xxlg);
+      width: $width;
+      height: $height;
+      @include half-clipped-shape(
+        $width,
+        $height,
+        map-get($widths-and-heights, clipped-length-xxlg)
+      );
+    }
+    &--is-button {
+      cursor: pointer;
+      background-color: $bg-color;
+      transition: background-color $transition-time ease-in-out;
+      &:hover {
+        background-color: darken($color: $bg-color, $amount: 5);
+        color: $header-item;
       }
     }
   }

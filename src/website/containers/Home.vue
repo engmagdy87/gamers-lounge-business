@@ -8,7 +8,7 @@
 import { mapGetters, mapState, mapActions } from "vuex";
 import store from "../../store/index";
 import types from "../../store/types";
-import Hero from "../components/home/Hero";
+import Hero from "../shared/Hero";
 
 export default {
   components: {
