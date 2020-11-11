@@ -2,6 +2,13 @@
   <header class="header-wrapper">
     <div class="header-wrapper__social-media">
       <HalfClippedOutlineButton text="GL Games" />
+
+      <div class="header-wrapper__social-media__logos">
+        <img class="fb-logo" src="../../../public/images/facebook.svg" alt="" srcset="">
+        <img src="../../../public/images/instagram.svg" alt="" srcset="">
+        <img src="../../../public/images/twitter.svg" alt="" srcset="">
+        <img src="../../../public/images/youtube.svg" alt="" srcset="">
+      </div>
     </div>
     <div class="header-wrapper__main">
       <div class="header-wrapper__logo">
