@@ -2,134 +2,126 @@
 @import "../variables.scss";
 @import "../color-palette.scss";
 
-/*         Home Footer                */
+
 $scale-hover:scale(1.2);
 
-$breakpoint-md:1200px;
-$breakpoint-sm:700px;
 $fontsize-paragraph:1.2rem;
 $clippath-botRight-leftTop:polygon(14% 0, 100% 0, 100% 85%, 86% 100%, 0 100%, 0 15%);
 $transition-5:all .5s ease-in-out;
 $transition-3:all .3s ease-in-out;
 
-
 .footer-section{
     background-color: $dark-background;
-    padding-top: 175px!important;
-    .footer-container{
+    padding-top: 175px;
+    &__container{
         width: 80%;
         margin: auto;
-    }
-}
 
-.footer-leftside{
-    padding-bottom: 20px;
-        p{
-            color: $light-gray;
-            font-size: $fontsize-paragraph;
-            font-family: Segoe UI !important;
-            @include is-desktop {
-                font-size: 1rem;
+        .footer-leftside{
+            padding-bottom: 20px;
+                p{
+                    color: $light-gray;
+                    font-size: $fontsize-paragraph;
+                    font-family: Segoe UI;
+                    @include is-desktop {
+                        font-size: 1rem;
+                    }
+                    @include is-mobile{
+                        font-size: .8rem;
+                    }
+                }
+                i{
+                    color: $header-item;
+                    padding-right: 5px;
+                }
+                @include is-mobile {
+                    max-width: 100%;
+                    flex: 100%;
+                    text-align: center;
+                }
+                @include is-tablet {
+                    max-width: 100%;
+                    flex: 100%;
+                    text-align: center;
+                }
+        }
+
+        .footer-socialmedia{
+            padding-bottom: 100px;
+            .footer-followus{
+                width: 108px;
+                position: relative;
+                color: $header-item;
+                padding-bottom: 25px;
+                font-family: "Segoe UI";
+                font-weight: bolder;
+                font-size: 20px;
+                    &::after{
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    top: 28px;
+                    left: 0px;
+                    height: 4px;
+                    width: 56%;
+                    background: $underline-cyan;
+                    transition: $transition-5;
+                    }
+                @include is-mobile {
+                    margin: auto;
+                }
+                @include is-tablet {
+                    margin: auto;
+                }
+                @include is-desktop {
+                    margin: auto;
+                }
             }
-            @include is-mobile{
-                font-size: .8rem;
+            
+            .socialMedia{
+                @include is-mobile {
+                    justify-content: center;
+                }
+                @include is-tablet {
+                    justify-content: center;
+                }
+                @include is-desktop {
+                    justify-content: center;
+                }
+            }
+            .social-logos-container{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                color: $header-item;
+                width: 110px;
+                height: 85px;
+                margin: 10px;
+                background-color: $accent;
+                clip-path: $clippath-botRight-leftTop;
+                transition: $transition-5;
+                &:hover{
+                //transform: $scale-hover;
+                background-color:  darken($accent, 30px);
+                }
+                @include is-mobile {
+                    width: 96px;
+                    height: 74px;
+                    font-size: 2rem;
+                }
+                @include is-tablet {
+                    width: 96px;
+                    height: 74px;
+                    font-size: 2rem;
+                }
+                @include is-desktop {
+                    width: 96px;
+                    height: 74px;
+                    font-size: 2rem;
+                }
             }
         }
-        i{
-            color: $header-item;
-            padding-right: 5px;
-        }
-        @include is-mobile {
-            max-width: 100%!important;
-            flex: 100%;
-            text-align: center;
-        }
-        @include is-tablet {
-            max-width: 100%!important;
-            flex: 100%;
-            text-align: center;
-        }
-}
-
-
-.footer-socialmedia{
-    padding-bottom: 100px;
-
-
-    .footer-followus{
-        width: 108px!important;
-        position: relative;
-        color: $header-item;
-        padding-bottom: 25px;
-        font-family: Segoe UI !important;
-        font-weight: bolder;
-        font-size: 20px;
-            &::after{
-              content: "";
-              position: absolute;
-              bottom: 0;
-              top: 28px;
-              left: 0px!important;
-              height: 4px;
-              width: 56%!important;
-              background: $underline-cyan;
-              transition: $transition-5;
-            }
-        @include is-mobile {
-            margin: auto!important;
-        }
-        @include is-tablet {
-            margin: auto!important;
-        }
-        @include is-desktop {
-            margin: auto!important;
-        }
-    }
-    
-    .socialMedia{
-        @include is-mobile {
-            justify-content: center;
-        }
-        @include is-tablet {
-            justify-content: center;
-        }
-        @include is-desktop {
-            justify-content: center;
-        }
-    }
-    .social-logos-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        color: $header-item;
-        width: 110px;
-        height: 85px;
-        margin: 10px;
-        background-color: $accent;
-        clip-path: $clippath-botRight-leftTop;
-        transition: $transition-5;
-        &:hover{
-           //transform: $scale-hover;
-           background-color:  darken($accent, 30px);
-        }
-        @include is-mobile {
-            width: 96px;
-            height: 74px;
-            font-size: 2rem;
-        }
-        @include is-tablet {
-            width: 96px;
-            height: 74px;
-            font-size: 2rem;
-        }
-        @include is-desktop {
-            width: 96px;
-            height: 74px;
-            font-size: 2rem;
-        }
-    }
-}
 
 .footer-nav{
     .nav-link{
@@ -149,16 +141,16 @@ $transition-3:all .3s ease-in-out;
         margin: 40px;
         position: relative;
         @include is-mobile {
-            margin: 20px!important;
+            margin: 20px;
         }
         @include is-tablet {
-            margin: 20px!important;
+            margin: 20px;
         }
      }
         a{
         color: $header-item;
         font-size: $fontsize-paragraph;
-        font-family: Segoe UI !important;
+        font-family: "Segoe UI";
             &:hover{
                 color: $header-item;
             }
@@ -177,15 +169,16 @@ $transition-3:all .3s ease-in-out;
                 transition: $transition-3;
             }
         }
+    }
+  }
 }
-
  .CopyrightDiv{
     color: $light-gray;
     background-color: $primary;
       a{
         text-decoration: none;
         color: $accent;
-        font-family: Segoe UI !important;
+        font-family: "Segoe UI";
         transition: $transition-3;
           &:hover{
             color: $header-item;
@@ -196,12 +189,9 @@ $transition-3:all .3s ease-in-out;
         margin-bottom: 0;
         width: 80%;
         margin: auto;
-        font-family: Segoe UI !important;
+        font-family: "Segoe UI";
         @include is-mobile{
             font-size: .9rem;
         }
       }
  }
-
-
-/*          End of Home Footer              */
