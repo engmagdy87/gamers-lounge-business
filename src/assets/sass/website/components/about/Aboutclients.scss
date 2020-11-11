@@ -1,0 +1,127 @@
+@import "../../color-palette.scss";
+@import "../../variables.scss";
+@import "../../mixins.scss";
+
+.aboutclients-wrapper{
+    &__inside{
+      padding-bottom: 150px;
+      .clients-header{
+        width: 100%;
+        text-align: center;
+        color: $header-item;
+        margin: 100px 0 150px 0;
+        h1{
+          font-family: Segoe UI !important;
+          font-weight: bolder;
+        }
+      }
+      &__topline, &__bottomline{
+        display: flex;
+        justify-content: center;
+        div{
+          width: 65%;
+          height: .01rem;
+          background-color: rgba(151, 143, 143, 0.2);
+          @include is-extra-large-desktop{
+            width: 70%;
+          }
+          @include is-large-desktop {
+            width: 90%;
+          }
+          @include is-desktop {
+            width: 90%;
+          }
+          @include is-tablet {
+            width: 90%;
+          }
+          @include is-mobile {
+            width: 90%;
+          }
+        }
+      }
+      &__linebetween{
+        display: flex;
+        justify-content: center;
+        div{
+          height: .01rem;
+          width: 65%;
+          background-color: rgba(151, 143, 143, 0.2);
+          @include is-extra-large-desktop{
+            width: 70%;
+          }
+          @include is-large-desktop {
+            width: 90%;
+          }
+          @include is-desktop {
+            width: 90%;
+          }
+          @include is-tablet {
+            width: 90%;
+          }
+          @include is-mobile {
+            width: 90%;
+          }
+        }
+      }
+
+      .container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        justify-items: stretch;
+        align-items: stretch;
+          :last-child{
+            .container__imageHolder__image{
+              margin-right: 0;
+            }
+            :last-child{
+              display: block;
+            }
+          }
+          &__imageHolder{
+            display: flex;
+            justify-content:center;
+            :last-child{
+              display: none;
+            }
+
+            &__image{
+              object-fit: contain;
+              padding: 30px;
+              width: 65%;
+              margin-right: auto;
+              @include is-large-desktop {
+                width: 70%;
+              }
+              @include is-desktop {
+                width: 80%;
+              }
+              @include is-tablet {
+                width: 90%;
+              }
+              @include is-mobile {
+                width: 100%;
+              }
+            }
+            .bottomgrid{
+              margin-top: 0;
+              margin-bottom: -50px;
+            }
+            &__rightline, &__leftline{
+              width: .01rem;
+              background-color: rgba(151, 143, 143, 0.2);
+              margin-top: -50px;
+            }
+            &__rightline{
+              margin-left: auto;
+            }
+            &__leftline{
+              margin-right: auto;
+            }
+          }
+      }
+  }
+}
+
