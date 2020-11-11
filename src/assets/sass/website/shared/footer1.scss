@@ -1,0 +1,16 @@
+@import "../mixins.scss";
+@import "../variables.scss";
+@import "../color-palette.scss";
+
+.footer-wrapper {
+  padding: 20px;
+  width: 100%;
+  background-color: $primary;
+  color: white;
+
+  height: $footer-height;
+  padding: 20px;
+  @include is-mobile {
+    height: $footer-height-mobile;
+  }
+}
