@@ -9,15 +9,32 @@
   margin-top: -$header-height;
   min-height: calc(100vh - #{$footer-height});
   @include is-mobile {
-    margin-top: -$header-height-mobile;
+    margin-top: -$header-height-mobile - 45;
     min-height: calc(100vh - #{$footer-height-mobile});
   }
-  .heroContent{
-    width: 80%;
-    height: 100%;
-    margin: auto;
-    text-align: left;
-    align-items: center;
+  .about-container{
+    .half-filled-box{
+      margin: 0!important;
+      margin-bottom: 100px!important;
+      @include is-large-desktop {
+        margin-bottom: 90px!important;
+      }
+      @include is-desktop {
+        margin-bottom: 80px!important;
+      }
+      @include is-tablet {
+        margin-bottom: 70px!important;
+      }
+      @include is-mobile {
+        margin-bottom: 50px!important;
+      }
+    }
+    &__heroContent{
+      width: 80%;
+      height: 100%;
+      margin: auto;
+      text-align: left;
+
         h1{
             color: $header-item;
             user-select: none;
@@ -40,6 +57,7 @@
         }
     }
   }
+}
 
 
 // All have vw as divide operation units must be the same for all
@@ -51,34 +69,34 @@ $widths-and-heights: (
   clipped-shape-width: $width,
   clipped-shape-height: $height,
   clipped-length: $clipped-length,
-  clipped-shape-width-xs: 70vw,
+  clipped-shape-width-xs: 90vw,
   clipped-shape-height-xs: (
     $height + 10vw
   ) * 3,
   clipped-length-xs: $clipped-length,
   clipped-shape-width-sm: (
-    $width + 5vw
+    $width + 10vw
   ) * 1.5,
   clipped-shape-height-sm: (
-    $height + 5vw
+    $height + 15vw
   ) * 2,
   clipped-length-sm: $clipped-length,
-  clipped-shape-width-md: $width + 5vw,
-  clipped-shape-height-md: $height * 2,
+  clipped-shape-width-md: $width + 17vw,
+  clipped-shape-height-md: $height * 2 + 10,
   clipped-length-md: $clipped-length,
-  clipped-shape-width-lg: $width + 5vw,
-  clipped-shape-height-lg: $height + 12vw,
+  clipped-shape-width-lg: $width + 15vw,
+  clipped-shape-height-lg: $height + 22vw,
   clipped-length-lg: $clipped-length,
-  clipped-shape-width-xlg: $width + 5vw,
-  clipped-shape-height-xlg: $height + 10vw,
+  clipped-shape-width-xlg: $width + 10vw,
+  clipped-shape-height-xlg: $height + 14vw,
   clipped-length-xlg: $clipped-length,
   clipped-shape-width-xxlg: $width - 10vw,
-  clipped-shape-height-xxlg: $height + 1vw,
+  clipped-shape-height-xxlg: $height + 2vw,
   clipped-length-xxlg: $clipped-length
 );
 
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
-  @include filled-half-clipped-shape($widths-and-heights, $form-background);
+  @include filled-half-clipped-shape($widths-and-heights, rgba($primary, 0.7));
 }  
 
