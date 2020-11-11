@@ -12,6 +12,14 @@
     margin-top: -$header-height-mobile - 45;
     min-height: calc(100vh - #{$footer-height-mobile});
   }
+  @media (max-width:600px) {
+    margin-top: -75px;
+  }
+  .hero-wrapper{
+    @media (max-width:600px) {
+      padding-top: 150px;
+    }
+  }
   .about-container{
     .half-filled-box{
       margin: 0!important;
@@ -27,6 +35,7 @@
       }
       @include is-mobile {
         margin-bottom: 50px!important;
+        margin-top: 100px!important;
       }
     }
     &__heroContent{
@@ -91,7 +100,7 @@ $widths-and-heights: (
   clipped-shape-height-xlg: $height + 14vw,
   clipped-length-xlg: $clipped-length,
   clipped-shape-width-xxlg: $width - 10vw,
-  clipped-shape-height-xxlg: $height + 2vw,
+  clipped-shape-height-xxlg: $height + 3vw,
   clipped-length-xxlg: $clipped-length
 );
 
