@@ -1,0 +1,48 @@
+@import "../../color-palette.scss";
+@import "../../variables.scss";
+@import "../../mixins.scss";
+
+.image-holder{
+    display: flex;
+    justify-content:center;
+    :last-child{
+      display: none;
+    }
+
+    &__image{
+    object-fit: contain;
+    padding: 30px;
+    width: 65%;
+    margin-right: auto;
+        @include is-large-desktop {
+            width: 70%;
+        }
+        @include is-desktop {
+            width: 80%;
+        }
+        @include is-tablet {
+            width: 90%;
+        }
+        @include is-mobile {
+            width: 100%;
+        }
+        @include is-extra-small-mobile{
+            width: 90%;
+        }
+    }
+    .bottomgrid{
+    margin-top: 0;
+    margin-bottom: -50px;
+    }
+    &__rightline, &__leftline{
+    width: .01rem;
+    background-color: rgba($light-gray, .2);
+    margin-top: -50px;
+    }
+    &__rightline{
+    margin-left: auto;
+    }
+    &__leftline{
+    margin-right: auto;
+    }
+}

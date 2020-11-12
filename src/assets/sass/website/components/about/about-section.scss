@@ -1,0 +1,67 @@
+@import "../../color-palette.scss";
+@import "../../variables.scss";
+@import "../../mixins.scss";
+
+.about-section-wrapper{
+  &__inside{
+      
+      &--is-text{
+          padding: 35px;
+          background-color: $form-background;
+          min-height: 706px;
+          @include is-mobile {
+             min-height: 500px;
+           }
+            h1{
+                color: $header-item;
+                font-size: 2.3rem;
+                font-family: "Segoe UI Bold";
+                @include is-large-desktop {
+                  font-size: 2rem;
+                }
+                @include is-desktop {
+                  font-size: 2rem;
+                }
+                @include is-tablet {
+                  font-size: 1.7rem;
+                }
+                @include is-mobile {
+                    font-size: 1.5rem;
+                  }
+                @include is-extra-small-mobile{
+                  font-size: 1.5rem;
+                }
+            }
+            p{
+                color: $sub-text;
+                font-size: 1.2rem;
+                @include is-large-desktop {
+                  font-size: 1rem;
+                }
+                @include is-desktop {
+                  font-size: 1rem;
+                }
+                @include is-tablet {
+                  font-size: .9rem;
+                }
+                @include is-mobile {
+                  font-size: .9rem;
+                }
+                @include is-extra-small-mobile{
+                  font-size: .9rem;
+                }
+            }
+            
+        }
+        &--is-image{
+            height: 809px;
+            @include cover-image("~/images/about.png");
+            filter: brightness(80%);
+        }
+  }
+}
+
+
+
+
+
