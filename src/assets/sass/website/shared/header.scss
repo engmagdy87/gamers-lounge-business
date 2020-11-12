@@ -22,6 +22,7 @@
     &__logos{
       margin-left: auto;
       padding-right: 50px;
+      cursor: pointer;
       @include is-desktop{
         padding-right: 20px;
       }

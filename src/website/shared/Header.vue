@@ -4,10 +4,10 @@
       <HalfClippedOutlineButton text="GL Games" />
 
       <div class="header-wrapper__social-media__logos">
-        <img class="fb-logo" src="../../../public/images/facebook.svg" alt="" srcset="">
-        <img src="../../../public/images/instagram.svg" alt="" srcset="">
-        <img src="../../../public/images/twitter.svg" alt="" srcset="">
-        <img src="../../../public/images/youtube.svg" alt="" srcset="">
+        <img class="fb-logo" src="../../../public/images/facebook.svg" @click="goToLink('facebook')" alt="" srcset="">
+        <img src="../../../public/images/instagram.svg" @click="goToLink('instagram')" alt="" srcset="">
+        <img src="../../../public/images/twitter.svg" @click="goToLink('twitter')" alt="" srcset="">
+        <img src="../../../public/images/youtube.svg" @click="goToLink('youtube')" alt="" srcset="">
       </div>
     </div>
     <div class="header-wrapper__main">
@@ -188,7 +188,10 @@ export default {
       removeCookie();
       store.commit(types.user.mutations.SET_USER_PERSONA, {});
       this.closeNav();
-    }
+    },
+    goToLink(value) {
+      window.open("https://"+value+".com", "_blank");
+    },
   },
   components: {
     HalfClippedOutlineButton

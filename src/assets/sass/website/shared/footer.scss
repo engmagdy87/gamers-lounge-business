@@ -22,26 +22,27 @@ $transition-3:all .3s ease-in-out;
                 p{
                     color: $light-gray;
                     font-size: $fontsize-paragraph;
-                    font-family: Segoe UI;
                     @include is-desktop {
                         font-size: 1rem;
                     }
                     @include is-mobile{
                         font-size: .8rem;
                     }
+                    @include is-extra-small-mobile{
+                        font-size: .8rem;
+                    }
                 }
-                i{
-                    color: $header-item;
+                img{
                     padding-right: 5px;
+                    margin-top: -3px;
+                }
+                @include is-extra-small-mobile{
+                    text-align: center;
                 }
                 @include is-mobile {
-                    max-width: 100%;
-                    flex: 100%;
                     text-align: center;
                 }
                 @include is-tablet {
-                    max-width: 100%;
-                    flex: 100%;
                     text-align: center;
                 }
         }
@@ -53,10 +54,9 @@ $transition-3:all .3s ease-in-out;
                 position: relative;
                 color: $header-item;
                 padding-bottom: 25px;
-                font-family: "Segoe UI";
-                font-weight: bolder;
+                font-family: "Segoe-UI Bold";
                 font-size: 20px;
-                    &::after{
+                  &::after{
                     content: "";
                     position: absolute;
                     bottom: 0;
@@ -66,27 +66,33 @@ $transition-3:all .3s ease-in-out;
                     width: 56%;
                     background: $underline-cyan;
                     transition: $transition-5;
-                    }
+                  }
+                @include is-extra-small-mobile{
+                  margin: auto;
+                }
                 @include is-mobile {
-                    margin: auto;
+                  margin: auto;
                 }
                 @include is-tablet {
-                    margin: auto;
+                  margin: auto;
                 }
                 @include is-desktop {
-                    margin: auto;
+                  margin: auto;
                 }
             }
             
             .socialMedia{
+                @include is-extra-small-mobile{
+                  justify-content: center;
+                }
                 @include is-mobile {
-                    justify-content: center;
+                  justify-content: center;
                 }
                 @include is-tablet {
-                    justify-content: center;
+                  justify-content: center;
                 }
                 @include is-desktop {
-                    justify-content: center;
+                  justify-content: center;
                 }
             }
             .social-logos-container{
@@ -102,23 +108,29 @@ $transition-3:all .3s ease-in-out;
                 clip-path: $clippath-botRight-leftTop;
                 transition: $transition-5;
                 &:hover{
-                //transform: $scale-hover;
-                background-color:  darken($accent, 30px);
+                  background-color:  darken($accent, 30px);
+                }
+                @include is-extra-small-mobile{
+                    width: 85px;
+                    height: 65px;
+                    .fb-logo{
+                        width: 20px;
+                    }
+                    img{
+                        width: 30px;
+                    }
                 }
                 @include is-mobile {
                     width: 96px;
                     height: 74px;
-                    font-size: 2rem;
                 }
                 @include is-tablet {
                     width: 96px;
                     height: 74px;
-                    font-size: 2rem;
                 }
                 @include is-desktop {
                     width: 96px;
                     height: 74px;
-                    font-size: 2rem;
                 }
             }
         }
@@ -134,12 +146,15 @@ $transition-3:all .3s ease-in-out;
             width: 50%;
         }
         .nav-link{
-            font-weight: 600;
+            font-family: 'Segoe-UI Bold';
         }
     }
      li {
         margin: 40px;
         position: relative;
+        @include is-extra-small-mobile{
+            margin: 15px;
+        }
         @include is-mobile {
             margin: 20px;
         }
@@ -150,7 +165,6 @@ $transition-3:all .3s ease-in-out;
         a{
         color: $header-item;
         font-size: $fontsize-paragraph;
-        font-family: "Segoe UI";
             &:hover{
                 color: $header-item;
             }
@@ -171,14 +185,13 @@ $transition-3:all .3s ease-in-out;
         }
     }
   }
-}
+
  .CopyrightDiv{
     color: $light-gray;
     background-color: $primary;
       a{
         text-decoration: none;
         color: $accent;
-        font-family: "Segoe UI";
         transition: $transition-3;
           &:hover{
             color: $header-item;
@@ -189,9 +202,38 @@ $transition-3:all .3s ease-in-out;
         margin-bottom: 0;
         width: 80%;
         margin: auto;
-        font-family: "Segoe UI";
+        @include is-extra-small-mobile{
+            font-size: .7rem;
+        }
         @include is-mobile{
             font-size: .9rem;
         }
       }
  }
+
+ .scroll-top-wrapper{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 5%;
+    right: 5%;
+    background-color: $accent;
+    width: 90px;
+    height: 65px;
+    cursor: pointer;
+    transition: $transition-3;
+    clip-path: $clippath-botRight-leftTop;
+    &:hover{
+        background-color: darken($accent, 30px);
+    }
+    div{
+        :last-child{
+            margin-top: -7px;
+        }
+        img{
+            display: flex;
+        }
+    }
+ }
+}
