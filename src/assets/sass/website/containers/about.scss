@@ -54,8 +54,7 @@
             color: $header-item;
             user-select: none;
             font-size: 2.5rem;
-            font-family: "Segoe UI";
-            font-weight: bolder;
+            font-family: "Segoe UI Bold";
             @include max-width-1650{
               font-size: 2rem;
             }
@@ -65,7 +64,6 @@
         }
         p{
             color: $sub-text;
-            font-family: "Segoe UI";
             user-select: none;
             font-size: 1.1rem;
             line-height: 40px;
