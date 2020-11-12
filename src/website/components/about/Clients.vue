@@ -1,11 +1,11 @@
 <template>
-  <div class="aboutclients-wrapper">
-    <div class="aboutclients-wrapper__inside">
+  <div class="about-clients-wrapper">
+    <div class="about-clients-wrapper__inside">
         <div class="clients-header">
           <h1>OUR CLIENTS</h1>
         </div>
 
-        <div class="aboutclients-wrapper__inside__topline"> <div></div> </div>
+        <div class="about-clients-wrapper__inside__topline"> <div></div> </div>
 
         <div class="container">
             <div class="container__imageHolder">
@@ -34,7 +34,7 @@
 
         </div> 
 
-        <div class="aboutclients-wrapper__inside__linebetween"> <div></div> </div>
+        <div class="about-clients-wrapper__inside__linebetween"> <div></div> </div>
 
         <div class="container">
             
@@ -63,7 +63,7 @@
             </div>
         </div>
 
-        <div class="aboutclients-wrapper__inside__bottomline"> <div></div> </div>
+        <div class="about-clients-wrapper__inside__bottomline"> <div></div> </div>
     </div>
   </div>
 </template>
@@ -75,6 +75,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/sass/website/components/about/Aboutclients.scss";
+@import "../../../assets/sass/website/components/about/about-clients.scss";
 
 </style>

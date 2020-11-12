@@ -1,12 +1,8 @@
 <template>
-  <div class="aboutsection-wrapper">
-    <div class="aboutsection-wrapper__container">  
-        <div class="aboutsection-wrapper__inside">
-            <div class="row align-items-center">
-                <div class="aboutsection-wrapper__inside--is-image col-md-6">
-
-                </div>
-                <div class="aboutsection-wrapper__inside--is-text col-md-6">
+<div>
+    <AboutSectionData>
+        <template #content>
+                <div class="about-section-wrapper__inside--is-text col-md-6">
                     <h1>Esports Tounaments</h1>
                     <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
                         nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
@@ -21,14 +17,18 @@
                         et, consetetur sadipscing elitr, sed diam nonumy eirmod Lorem ipsum dolor sit amet, 
                         ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod</p>
                 </div>
-            </div>
-        </div>
-    </div>
+                <div class="about-section-wrapper__inside--is-image col-md-6">
 
-    <div class="aboutsection-wrapper__container">  
-        <div class="aboutsection-wrapper__inside">
-            <div class="row align-items-center">
-                <div class="aboutsection-wrapper__inside--is-text col-md-6">
+                </div>
+        </template>
+    </AboutSectionData>
+
+    <AboutSectionData>
+        <template #content>
+                <div class="about-section-wrapper__inside--is-image col-md-6">
+                </div>
+
+                <div class="about-section-wrapper__inside--is-text col-md-6">
                     <h1>Esports Tounaments</h1>
                     <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
                         nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
@@ -43,23 +43,19 @@
                         et, consetetur sadipscing elitr, sed diam nonumy eirmod Lorem ipsum dolor sit amet, 
                         ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod</p>
                 </div>
-                <div class="aboutsection-wrapper__inside--is-image col-md-6">
+        </template>
+    </AboutSectionData>
 
-                </div>
-            </div>
-        </div>
-    </div>
-
-  </div>
+</div>
 </template>
 
 <script>
+import AboutSectionData from "./AboutSectionData";
 export default {
-
+    components:{ AboutSectionData }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/sass/website/components/about/Aboutsection.scss";
-
+@import "../../../assets/sass/website/components/about/about-section.scss";
 </style>

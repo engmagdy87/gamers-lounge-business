@@ -23,7 +23,7 @@
           </template>
       </Hero>
 
-    <Aboutsection/>
+    <AboutSection/>
 
     <Clients />
   </div>
@@ -35,14 +35,14 @@ import store from "../../store/index";
 import types from "../../store/types";
 import Hero from "../shared/Hero";
 import HalfClippedShape from "../shared/HalfClippedShape";
-import Aboutsection from "../components/about/Aboutsection";
+import AboutSection from "../components/about/AboutSection";
 import Clients from "../components/about/Clients";
 
 export default {
   components: {
     Hero,
     HalfClippedShape,
-    Aboutsection,
+    AboutSection,
     Clients
   }
 };
@@ -52,24 +52,4 @@ export default {
 @import "../../assets/sass/website/containers/about.scss";
 @import "../../assets/sass/website/color-palette.scss";
 
-// $clipped-shape-width: 1260px;
-// $clipped-shape-height: 400px;
-// $clipped-length: $clipped-shape-height / 5;
-// $clipped-shape-width-mobile: 700px;
-// $clipped-shape-height-mobile: 400px;
-// $clipped-length-mobile: $clipped-shape-height / 5;
-
-// // use /deep/ to apply scss classes to the child components
-// div /deep/ {
-//   @include outline-half-clipped-shape(
-//     $clipped-shape-width,
-//     $clipped-shape-height,
-//     $clipped-length,
-//     $clipped-shape-width-mobile,
-//     $clipped-shape-height-mobile,
-//     $clipped-length-mobile,
-//     $primary,
-//     $accent
-//   );
-// }
 </style>
