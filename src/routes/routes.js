@@ -2,6 +2,7 @@
 const Home = () => import(/* webpackChunkName: "Home" */ '../website/containers/Home.vue')
 const Contact = () => import(/* webpackChunkName: "Contact" */ '../website/containers/Contact.vue')
 
+
 // GeneralViews
 const NotFound = () => import(/* webpackChunkName: "NotFound" */ '../dashboard/pages/NotFoundPage.vue')
 
