@@ -2,6 +2,7 @@
 
 html,
 body {
+  font-family: "Segoe UI";
   overflow-x: hidden;
 }
 
@@ -11,9 +12,9 @@ body {
 
 .app-wrapper {
   height: 100%;
-  font-family: "Segoe UI";
   overflow-y: auto;
   overflow-x: hidden;
+  scroll-behavior: smooth;
   &::-webkit-scrollbar {
     width: 5px !important;
     background-color: $accent !important;

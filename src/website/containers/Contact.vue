@@ -2,19 +2,19 @@
   <div class="contact-wrapper">
     <Hero>
       <template #hero-content>
-        <div class="row align-items-end h-100 contact-wrapper__contact_box">
+        <div class="row align-items-end contact-wrapper__contact_box">
           <div
-            class="col-12 col-md-4 d-flex justify-content-center justify-content-md-end mt-3 mb-sm-3 mb-2"
+            class="col-12 col-md-4 d-flex justify-content-center justify-content-md-end mt-2 mb-sm-3 mb-1"
           >
             <ContactDataBox :data="contactData[0]" />
           </div>
           <div
-            class="col-12 col-md-4 d-flex justify-content-center mb-sm-3 mb-2"
+            class="col-12 col-md-4 d-flex justify-content-center mb-sm-3 mb-1"
           >
             <ContactDataBox :data="contactData[1]" />
           </div>
           <div
-            class="col-12 col-md-4 d-flex justify-content-center justify-content-md-start mb-sm-3 mb-2"
+            class="col-12 col-md-4 d-flex justify-content-center justify-content-md-start mb-sm-3"
           >
             <ContactDataBox :data="contactData[2]" />
           </div>

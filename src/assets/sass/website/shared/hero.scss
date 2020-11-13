@@ -8,6 +8,5 @@
   @include cover-image("~/images/hero.jpg");
   @include is-extra-small-mobile {
     padding-top: $header-height-mobile;
-    height: max-content;
   }
 }
