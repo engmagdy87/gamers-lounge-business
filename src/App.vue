@@ -1,6 +1,6 @@
 <template>
   <div :class="['app-wrapper', { 'nav-open': $sidebar.showSidebar }]">
-    <Header :activeItem="headerActiveItem" />
+    <Header id="top" :activeItem="headerActiveItem" />
     <notifications></notifications>
     <router-view></router-view>
     <Spinner :smallLoader="false" />

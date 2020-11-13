@@ -1,13 +1,38 @@
 <template>
   <header class="header-wrapper">
-    <div class="header-wrapper__social-media">
-      <HalfClippedOutlineButton text="GL Games" />
+    <div class="row header-wrapper__social-media">
+      <div class="col-12 col-sm-6 d-flex justify-content-center d-sm-block">
+        <HalfClippedOutlineButton text="GL Games" />
+      </div>
 
-      <div class="header-wrapper__social-media__logos">
-        <img class="fb-logo" src="../../../public/images/facebook.svg" alt="" srcset="">
-        <img src="../../../public/images/instagram.svg" alt="" srcset="">
-        <img src="../../../public/images/twitter.svg" alt="" srcset="">
-        <img src="../../../public/images/youtube.svg" alt="" srcset="">
+      <div class="col-12 col-sm-6 d-none d-sm-flex justify-content-end">
+        <div class="header-wrapper__social-media__logos">
+          <img
+            class="fb-logo"
+            src="../../../public/images/facebook.svg"
+            @click="goToLink('facebook')"
+            alt=""
+            srcset=""
+          />
+          <img
+            src="../../../public/images/instagram.svg"
+            @click="goToLink('instagram')"
+            alt=""
+            srcset=""
+          />
+          <img
+            src="../../../public/images/twitter.svg"
+            @click="goToLink('twitter')"
+            alt=""
+            srcset=""
+          />
+          <img
+            src="../../../public/images/youtube.svg"
+            @click="goToLink('youtube')"
+            alt=""
+            srcset=""
+          />
+        </div>
       </div>
     </div>
     <div class="header-wrapper__main">
@@ -188,6 +213,9 @@ export default {
       removeCookie();
       store.commit(types.user.mutations.SET_USER_PERSONA, {});
       this.closeNav();
+    },
+    goToLink(value) {
+      window.open("https://" + value + ".com", "_blank");
     }
   },
   components: {
