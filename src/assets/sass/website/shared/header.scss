@@ -70,22 +70,14 @@
     justify-content: center;
     align-items: baseline;
     margin-right: auto;
-    margin-left: 40px;
     width: 300px;
-    @include is-mobile {
+    @include is-extra-small-mobile {
+      justify-content: start;
       width: fit-content;
-      margin-left: 10px;
+      margin-left: 20px;
     }
     img {
-      display: block;
       width: 150px;
-      margin-right: 20px;
-      padding-bottom: 20px;
-      @include is-mobile {
-        margin-right: auto;
-        width: 90px;
-        padding-bottom: 10px;
-      }
     }
     p {
       display: inline-block;
@@ -128,6 +120,18 @@
           $header-item-underline-width,
           $header-item-underline-height
         );
+        @include is-extra-small-mobile {
+          @include header-item-hover-effect(0, $header-item-underline-height);
+        }
+        @include is-mobile {
+          @include header-item-hover-effect(0, $header-item-underline-height);
+        }
+        @include is-tablet {
+          @include header-item-hover-effect(0, $header-item-underline-height);
+        }
+        @include is-desktop {
+          @include header-item-hover-effect(0, $header-item-underline-height);
+        }
       }
     }
   }
@@ -140,7 +144,16 @@
   top: calc(#{$header-height} / 2.5);
   right: 24px;
   @include is-extra-small-mobile {
-    top: calc(#{$header-height-mobile} / 7);
+    top: calc(#{$header-height-mobile} / 5);
+  }
+  @include is-mobile {
+    top: calc(#{$header-height-mobile} / 2);
+  }
+  @include is-tablet {
+    top: calc(#{$header-height-mobile} / 2);
+  }
+  @include is-desktop {
+    top: calc(#{$header-height-mobile} / 2);
   }
 }
 
@@ -151,7 +164,7 @@
   z-index: 500;
   top: 0;
   left: 0;
-  background-color: $accent;
+  background-color: $primary;
   overflow-y: hidden;
   transition: 0.5s;
 }
@@ -186,17 +199,23 @@
   transition: 0.3s;
 }
 
+.overlay li.header-wrapper__navLinks--active {
+  a {
+    color: $accent;
+  }
+}
+
 .overlay li a:hover,
 .overlay li a:focus {
   color: $primary;
 }
 
 .overlay .closebtn {
-  color: $primary;
+  color: white;
   position: absolute;
   top: 20px;
   right: 45px;
-  font-size: 60px;
+  font-size: 50px;
   cursor: pointer;
 }
 

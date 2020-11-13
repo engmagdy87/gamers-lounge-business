@@ -4,8 +4,7 @@
       <div class="col-12 col-sm-6 d-flex justify-content-center d-sm-block">
         <HalfClippedOutlineButton text="GL Games" />
       </div>
-
-      <div class="col-12 col-sm-6 d-none d-sm-flex justify-content-end">
+      <div class="col-6 d-none d-sm-flex justify-content-end">
         <div class="header-wrapper__social-media__logos">
           <img
             class="fb-logo"
@@ -37,8 +36,11 @@
     </div>
     <div class="header-wrapper__main">
       <div class="header-wrapper__logo">
-        <a href="/" alt="gamers lounge business" style="width: 100%;">
-          <!-- <img src="/website/img/ess-logo.png" alt="ess logo" /> -->
+        <a href="/">
+          <img
+            src="../../../public/images/GL-logo.png"
+            alt="gamers lounge logo"
+          />
         </a>
       </div>
       <!-- DESKTOP UI -->
