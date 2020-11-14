@@ -1,5 +1,5 @@
 <template>
-  <div class="Jobs-wrapper">
+  <div class="jobs-wrapper">
       <JobsMainPage/>
   </div>
 </template>

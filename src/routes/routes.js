@@ -2,7 +2,7 @@
 const Home = () => import(/* webpackChunkName: "Home" */ '../website/containers/Home.vue')
 const Contact = () => import(/* webpackChunkName: "Contact" */ '../website/containers/Contact.vue')
 const About = () => import(/* webpackChunkName: "About" */ '../website/containers/About.vue')
-const Jobs = () => import(/* webpackChunkName: "About" */ '../website/containers/Jobs.vue')
+const Jobs = () => import(/* webpackChunkName: "Jobs" */ '../website/containers/Jobs.vue')
 
 // GeneralViews
 const NotFound = () => import(/* webpackChunkName: "NotFound" */ '../dashboard/pages/NotFoundPage.vue')

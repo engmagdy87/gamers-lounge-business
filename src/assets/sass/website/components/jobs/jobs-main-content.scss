@@ -2,7 +2,7 @@
 @import "../../color-palette.scss";
 @import "../../shared/half-clipped-shape.scss";
 
-.Job-main-content-wrapper{
+.job-main-content-wrapper{
     background-color: $primary;
     margin-top: -120px;
     padding-top: 120px;
@@ -75,7 +75,7 @@
         margin: 0px 0 50px;
        }
    } 
-   &__detailsBtn{
+   &__details-btn{
     display: flex;
     justify-content: flex-end;
    }
