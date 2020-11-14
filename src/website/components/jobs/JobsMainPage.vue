@@ -1,7 +1,7 @@
 <template>
   <div class="Job-main-content-wrapper">
     <div class="Job-main-content-wrapper__container row">
-      <div class="col-12 Job-main-content-wrapper__title">
+      <div class="col-12 p-0 Job-main-content-wrapper__title">
         <h1> let's work together</h1>
         <p> We're always looking for freah talents in eSports(Casters - Analysis - Designers - Video Editors ) if
           you're an eSports fan and think you have what it takes </p>
