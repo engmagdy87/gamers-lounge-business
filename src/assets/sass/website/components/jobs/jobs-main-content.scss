@@ -58,7 +58,7 @@
             width: 100%;
             padding-top: 40px;
             padding-bottom: 40px;
-            margin: 10px;
+            margin: 6px;
         }
     
 
@@ -80,3 +80,11 @@
     justify-content: flex-end;
    }
 }
+
+/deep/ div.outline-box__inside.outline-box__inside--is-button{
+    background-color: $form-background;
+    &:hover{
+      background-color: $accent;
+      color: $header-item;
+    }
+  }

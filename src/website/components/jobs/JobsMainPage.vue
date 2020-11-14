@@ -7,7 +7,7 @@
           you're an eSports fan and think you have what it takes </p>
       </div>
 
-      <div class="Job-main-content-wrapper__jobs row">
+      <div class="Job-main-content-wrapper__jobs row m-0">
         <div v-for="job in jobsData" :key="job.id" class="Job-main-content-wrapper__jobs__content col-xs-12 col-sm-12 col-md-6 col-lg-4">
 
           <div class="Job-main-content-wrapper__job-title col-12">
@@ -16,7 +16,9 @@
           </div>
 
           <div class="Job-main-content-wrapper__detailsBtn col-12">
-            <HalfClippedOutlineButton text="View" />
+            <router-link :to="job.id">
+              <HalfClippedOutlineButton text="View" />
+            </router-link>
           </div>
 
         </div>
