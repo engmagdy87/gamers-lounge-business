@@ -1,6 +1,6 @@
 <template>
   <div class="Jobs-wrapper">
-      <JobsMainPage/>
+      <JobsPage/>
   </div>
 </template>
 
@@ -8,10 +8,10 @@
 import { mapGetters, mapState, mapActions } from "vuex";
 import store from "../../store/index";
 import types from "../../store/types";
-import JobsMainPage from "../components/jobs/JobsMainPage";
+import JobsPage from "../components/jobs/JobsPage";
 export default {
   components: {
-    JobsMainPage,
+    JobsPage,
   }
 };
 </script>
