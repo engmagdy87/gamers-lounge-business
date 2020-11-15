@@ -103,9 +103,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/sass/website/color-palette.scss";
-@import "../../assets/sass/website/variables.scss";
-@import "../../assets/sass/website/mixins.scss";
+@import "../../../assets/sass/website/color-palette.scss";
+@import "../../../assets/sass/website/variables.scss";
+@import "../../../assets/sass/website/mixins.scss";
 
 .carousel-wrapper {
   @include initializePageStyle;
