@@ -5,13 +5,14 @@
         <Carousel>
           <template #carouselSlide="{slide}">
             <!-- Slide Component uses "slide" prop 👆-->
-            <div :slide="1" style="background-color:black; color:red;"> <h1>HELLO</h1> </div>
-            <div :slide="2" style="background-color:orange; color:black;"> <h1>BYE</h1> </div>
+            <div :slide="slide" style="background-color:black; color:red;"> <h1>HELLO HELLO</h1> </div>
+            <div :slide="slide" style="background-color:orange; color:black;"> <h1>BYE BYE</h1> </div>
           </template>
+          
           <template #carouselNavigationButtons="{goToPrev,goToNext}">
             <!-- Navigation Components uses "goToPrev" and "goToNext" props 👆-->
-            <button goToPrev> NEXT </button>
-            <button goToNext> NEXT </button>
+            <button :goToPrev="goToPrev"> Prev </button>
+            <button :goToNext="goToNext"> Next </button>
           </template>
         </Carousel>
       </template>
