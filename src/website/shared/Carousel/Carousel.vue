@@ -143,7 +143,7 @@ export default {
 }
 
 button.carousel-wrapper__bullets--active {
-  background-color: cyan;
+  background-color: $accent;
   width: 56px;
   height: 13px;
   border-radius: 11px;

@@ -3,22 +3,15 @@
   <HalfClippedShape> 
     <template #content>
         <Carousel
-        :timeInMillisecond=2000
+        :timeInMillisecond=5000
         :slides="slides"
         :autoPlay="false"
         customBulletsStyleClass="hero-bullets"
         >
             <template #carouselSlide="{slide}">
-                <div>
-                    <h1> {{slide.title}}</h1>
-                    <h4>{{slide.content}}</h4>
-                </div>
-            </template>
-
-            <template #carouselNavigationButtons="{goToPrev,goToNext}">
-                <div class="carousel-navigation">
-                <button @click="goToPrev"> Prev </button>
-                <button @click="goToNext"> Next </button>
+                <div class="hero-carousel__container">
+                    <h1 class="hero-carousel__container--title"> {{slide.title}}</h1>
+                    <h4 class="hero-carousel__container--content">{{slide.content}}</h4>
                 </div>
             </template>
         </Carousel>
@@ -39,8 +32,7 @@ export default {
     return{
       slides:[
         {
-          title:"Begining",
-          content: "HELLO",
+          title:"SCULPTING A NEW ERA OF ESPORTS IN THE MENA",
         },
         {
           title:"Begining456",

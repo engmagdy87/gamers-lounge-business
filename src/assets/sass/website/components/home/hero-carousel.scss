@@ -2,24 +2,57 @@
 @import "../../color-palette.scss";
 @import "../../shared/half-clipped-shape.scss";
 
-
-
 .hero-carousel{
-    // background-color: rgba($primary, 0.7);
-    // width: 980px;
-    height: 400px;
-    margin: auto;
-    margin-top: 300px;
+    margin-top: 400px;
+    &__container{
+      &--title{
+        font-family: 'Segoe UI Bold';
+        width: 80%;
+        margin: auto;
+        padding-top: 50px;
+        font-size: 3rem;
+        text-align: left;
+        @include is-extra-small-mobile {
+          padding-top: 0px;
+          font-size: 1.5rem;
+        }
+        @include is-mobile {
+          padding-top: 50px;
+          font-size: 2.2rem;
+        }
+    
+        @include is-tablet {
+          padding-top: 50px;
+          font-size: 2.2rem;
+        }
+    
+        @include is-desktop {
+          padding-top: 50px;
+          font-size: 2.2rem;
+        }
+      }
+      &--content{
+        text-align: left;
+        width: 80%;
+        margin: auto;
+      }
+    }
   }
   /deep/ .hero-bullets{
     position: absolute;
     bottom: 0%;
-    left: 50%;
+    width: 100%;
+    margin: auto;
   }
-
+@media (max-width: 600px){
+  .carousel-wrapper {
+    margin-top: 0;
+    min-height: auto;
+  }
+}
   // All have vw as divide operation units must be the same for all
-$width: 70vw;
-$height: 15vw;
+$width: 47vw;
+$height: 16vw;
 $clipped-length: 3vw;
 
 $widths-and-heights: (
@@ -27,24 +60,24 @@ $widths-and-heights: (
   clipped-shape-height: $height,
   clipped-length: $clipped-length,
   clipped-shape-width-xs: (
-    $width + 5vw
-  ) * 3,
+    $width + 50vw
+  ),
   clipped-shape-height-xs: (
-    $height + 10vw
-  ) * 2,
+    $height + 30vw
+  ),
   clipped-length-xs: $clipped-length,
   clipped-shape-width-sm: (
-    $width + 5vw
-  ) * 2,
+    $width + 50vw
+  ),
   clipped-shape-height-sm: (
-    $height + 5vw
-  ) * 2,
+    $height + 20vw
+  ),
   clipped-length-sm: $clipped-length,
-  clipped-shape-width-md: $width + 5vw,
+  clipped-shape-width-md: $width + 30vw,
   clipped-shape-height-md: $height * 2,
   clipped-length-md: $clipped-length,
-  clipped-shape-width-lg: $width + 5vw,
-  clipped-shape-height-lg: $height + 10vw,
+  clipped-shape-width-lg: $width + 10vw,
+  clipped-shape-height-lg: $height + 15vw,
   clipped-length-lg: $clipped-length,
   clipped-shape-width-xlg: $width + 5vw,
   clipped-shape-height-xlg: $height + 10vw,

@@ -1,0 +1,192 @@
+@import "../../mixins.scss";
+@import "../../color-palette.scss";
+@import "../../shared/half-clipped-shape.scss";
+
+@include is-extra-small-mobile {
+}
+@include is-mobile {
+}
+
+@include is-tablet {
+}
+
+@include is-desktop {
+}
+@include is-large-desktop {
+}
+@include is-extra-large-desktop {
+}
+
+
+.services-carousel{
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-color: $primary;
+  .services-header{
+    text-align: center;
+    padding-bottom: 100px;
+    &__sub-text{
+      color: $header-item;
+    }
+    &__title{
+      color: $header-item;
+      font-family: 'Segoe UI Bold';
+      font-size: 2.6rem;
+      letter-spacing: 4px;
+    }
+    &__view-link{
+      color: $accent;
+    }
+  }
+    &__title{
+      font-family: 'Segoe UI Bold';
+      width: 80%;
+      padding-top: 80px;
+      font-size: 2rem;
+      text-align: left;
+      color: $accent;
+      margin-bottom: 0;
+      text-transform: uppercase;
+      @include is-extra-small-mobile {
+        font-size: 1.7rem;
+      }
+      @include is-mobile {
+        font-size: 1.7rem;
+      }
+      @include is-tablet {
+        font-size: 1.7rem;
+      }
+      @include is-desktop {
+        font-size: 1.7rem;
+      }
+    }
+    &__text{
+      text-align: left;
+      font-size: 1.2rem;
+      line-height: 35px;
+      margin-top: 10px;
+      @include is-extra-small-mobile {
+        padding-top: 10px;
+        font-size: 1.1rem;
+      }
+      @include is-mobile {
+        padding-top: 10px;
+        font-size: 1rem;
+      }
+  
+      @include is-tablet {
+        padding-top: 10px;
+        font-size: 1rem;
+      }
+  
+      @include is-desktop {
+        padding-top: 10px;
+        font-size: 1rem;
+      }
+    }
+    &__img{
+      object-fit: cover;
+      width: 100%;
+      height: 530px;
+    }
+  }
+
+/deep/ div.outline-box__inside.outline-box__inside--is-button{
+  background-color: $accent;
+  color: $header-item;
+  &:hover{
+    background-color: $accent;
+    color: $header-item;
+  }
+}
+/deep/ .outline-box{
+  width: 170px;
+  height: 50px;
+  margin-left: auto;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+/deep/ .hero-bullets{
+  display: none;
+}
+/deep/ .half-filled-box{
+  min-height: 555px;
+}
+@media (max-width: 767px){
+  /deep/ .half-filled-box{
+    min-height: 893px;
+  }
+}
+@media (max-width: 600px){
+  /deep/ .half-filled-box{
+    min-height: 1047px;
+  }
+}
+/deep/ .carousel-wrapper__slide{
+  padding-left: 40px;
+ // padding-right: 40px;
+}
+/deep/ .carousel-navigation{
+  position: absolute;
+  left: 2%;
+  margin-top: 25px;
+  button{
+    margin:20px 20px 20px 10px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    img{
+      width: 85%;
+    }
+  }
+}
+@media (max-width: 600px){
+  /deep/  .carousel-wrapper {
+    margin-top: 0;
+    min-height: auto;
+    &__slide{
+      padding-left: 0px;
+    }
+  }
+}
+  // All have vw as divide operation units must be the same for all
+$width: 85vw;
+$height: 20vw;
+$clipped-length: 3vw;
+
+$widths-and-heights: (
+  clipped-shape-width: $width,
+  clipped-shape-height: $height,
+  clipped-length: $clipped-length,
+  clipped-shape-width-xs: (
+    $width + 10vw
+  ),
+  clipped-shape-height-xs: (
+    $height + 10vw
+  ) * 2,
+  clipped-length-xs: $clipped-length,
+  clipped-shape-width-sm: (
+    $width + 10vw
+  ) ,
+  clipped-shape-height-sm: (
+    $height + 5vw
+  ) ,
+  clipped-length-sm: $clipped-length,
+  clipped-shape-width-md: $width + 10vw,
+  clipped-shape-height-md: $height * 2,
+  clipped-length-md: $clipped-length,
+  clipped-shape-width-lg: $width + 10vw,
+  clipped-shape-height-lg: $height + 10vw,
+  clipped-length-lg: $clipped-length,
+  clipped-shape-width-xlg: $width + 5vw,
+  clipped-shape-height-xlg: $height + 10vw,
+  clipped-length-xlg: $clipped-length,
+  clipped-shape-width-xxlg: $width,
+  clipped-shape-height-xxlg: $height,
+  clipped-length-xxlg: $clipped-length
+);
+
+// use /deep/ to apply scss classes to the child components
+div /deep/ {
+  @include filled-half-clipped-shape($widths-and-heights, $form-background);
+}
