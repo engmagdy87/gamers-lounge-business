@@ -7,6 +7,7 @@
     </Hero>
 
     <ServicesCarousel />
+    <WorkCarousel />
   </div>
 </template>
 
@@ -17,11 +18,13 @@ import types from "../../store/types";
 import Hero from "../shared/Hero";
 import HeroCarousel from "../components/home/HeroCarousel"
 import ServicesCarousel from "../components/home/ServicesCarousel"
+import WorkCarousel from "../components/home/WorkCarousel"
 export default {
   components: {
     Hero,
     HeroCarousel,
-    ServicesCarousel
+    ServicesCarousel,
+    WorkCarousel
   }
 };
 </script>

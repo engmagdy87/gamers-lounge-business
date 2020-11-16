@@ -1,0 +1,148 @@
+@import "../../mixins.scss";
+@import "../../color-palette.scss";
+@import "../../shared/half-clipped-shape.scss";
+
+.work-carousel{
+    .work-header{
+      text-align: center;
+      padding-bottom: 100px;
+      &__sub-text{
+        color: $header-item;
+      }
+      &__title{
+        color: $header-item;
+        font-family: 'Segoe UI Bold';
+        font-size: 2.6rem;
+        letter-spacing: 4px;
+      }
+      &__view-link{
+        color: $accent;
+      }
+    }
+    &__carousel-container{
+      width: 63%;
+      margin-left: auto;
+      height: 920px;
+    }
+    &__inside{
+      background-color: $accent;
+      &--img{
+        display: flex;
+
+        left: -30%;
+        img{
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          object-position: center center;
+        }
+      }
+      &--text{
+        color: $header-item;
+      }
+      &--title{
+        font-family: 'Segoe UI Bold';
+        font-size: 2.5rem;
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          top: 55px;
+          left: 0px;
+          height: 4px;
+          width: 35%;
+          background: $header-item;
+        }
+      }
+      &--text-container{
+        min-height: 650px;
+        border-right: solid 1px white;
+        margin-top: 110px;
+        margin-left: -250px;
+        margin-right: 150px;
+        padding-right: 100px;
+      }
+    }
+    &__btn{
+      margin-left: -85px;
+    }
+}
+
+
+/deep/ div.outline-box__inside.outline-box__inside--is-button{
+  background-color: $header-item;
+  color: $accent;
+  width: 155px;
+  &:hover{
+    background-color: $header-item;
+    color: $accent;
+  }
+}
+/deep/ .hero-bullets{
+  display: none;
+}
+/deep/ .carousel-navigation{
+  position: absolute;
+  right: 125px;
+  bottom: 11%;
+  button{
+    margin:5px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    img{
+      width: 85%;
+    }
+  }
+}
+/deep/ .half-filled-box{
+  padding: 0!important;
+  margin-top: 110px!important;
+}
+@include is-extra-large-desktop {
+  /deep/ .half-filled-box{
+    min-height: 600px;
+  }
+}
+  // All have vw as divide operation units must be the same for all
+$width: 47vw;
+$height: 16vw;
+$clipped-length: 1vw;
+
+$widths-and-heights: (
+  clipped-shape-width: $width,
+  clipped-shape-height: $height,
+  clipped-length: $clipped-length,
+  clipped-shape-width-xs: (
+    $width + 50vw
+  ),
+  clipped-shape-height-xs: (
+    $height + 30vw
+  ),
+  clipped-length-xs: $clipped-length,
+  clipped-shape-width-sm: (
+    $width + 50vw
+  ),
+  clipped-shape-height-sm: (
+    $height + 20vw
+  ),
+  clipped-length-sm: $clipped-length,
+  clipped-shape-width-md: $width + 30vw,
+  clipped-shape-height-md: $height * 2,
+  clipped-length-md: $clipped-length,
+  clipped-shape-width-lg: $width + 10vw,
+  clipped-shape-height-lg: $height + 15vw,
+  clipped-length-lg: $clipped-length,
+  clipped-shape-width-xlg: $width + 5vw,
+  clipped-shape-height-xlg: $height + 10vw,
+  clipped-length-xlg: $clipped-length,
+  clipped-shape-width-xxlg: $width,
+  clipped-shape-height-xxlg: $height,
+  clipped-length-xxlg: $clipped-length
+);
+
+// use /deep/ to apply scss classes to the child components
+div /deep/ {
+  @include filled-half-clipped-shape($widths-and-heights, transparent);
+}
