@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HalfClippedOutlinedShape isButton :onClickAction="goToUrl">
+    <HalfClippedOutlinedShape isButton>
       <template #content>
         {{ text }}
       </template>
@@ -13,13 +13,6 @@ import HalfClippedOutlinedShape from "./HalfClippedOutlinedShape";
 
 export default {
   props: ["text"],
-  methods: {
-    goToUrl() {
-      console.log("====================================");
-      console.log("Go To GL GAMES");
-      console.log("====================================");
-    }
-  },
   components: {
     HalfClippedOutlinedShape
   }

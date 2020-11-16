@@ -2,7 +2,9 @@
   <header class="header-wrapper">
     <div class="row header-wrapper__social-media">
       <div class="col-12 col-sm-6 d-flex justify-content-center d-sm-block">
-        <HalfClippedOutlineButton text="GL Games" />
+        <a href="https://www.google.com" target="__blank">
+          <HalfClippedOutlineButton text="GL Games" />
+        </a>
       </div>
       <div class="col-6 d-none d-sm-flex justify-content-end">
         <div class="header-wrapper__social-media__logos">
@@ -104,7 +106,7 @@
           <li>
             <a
               :class="[
-                activeItem === 'jobs'
+                activeItem === 'jobs' || activeItem === 'job'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -172,7 +174,7 @@
             </li>
             <li
               :class="[
-                activeItem === 'jobs'
+                activeItem === 'jobs' || activeItem === 'job'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"

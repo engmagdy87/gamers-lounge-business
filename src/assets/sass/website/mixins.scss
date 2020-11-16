@@ -196,6 +196,9 @@
     margin-top: -$header-height-mobile;
     min-height: calc(100vh - #{$footer-height-mobile});
   }
+  .container {
+    max-width: 80%;
+  }
 }
 
 @mixin set-half-clipped-shape-for-input(

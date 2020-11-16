@@ -1,5 +1,5 @@
 <template>
-  <div class="outline-box" @click="onClickAction">
+  <div class="outline-box">
     <div class="outline-box__outside">
       <div
         :class="[
@@ -19,10 +19,6 @@ export default {
     isButton: {
       type: Boolean,
       default: false
-    },
-    onClickAction: {
-      type: Function,
-      default: () => {}
     }
   }
 };

@@ -16,7 +16,7 @@
                 type="text"
                 class="form-control"
                 id="email"
-                aria-describedby="emailHelp"
+                aria-describedby="email"
                 v-model="contact.email"
               />
             </div>
@@ -32,7 +32,7 @@
               </textarea>
             </div>
           </div>
-          <HalfClippedButton text="Submit" />
+          <HalfClippedButton text="Submit" :onClickAction="sendMessage" />
         </form>
       </template>
     </HalfClippedShape>
@@ -56,6 +56,13 @@ export default {
   components: {
     HalfClippedShape,
     HalfClippedButton
+  },
+  methods: {
+    sendMessage() {
+      console.log("====================================");
+      console.log("send Message");
+      console.log("====================================");
+    }
   }
 };
 </script>
