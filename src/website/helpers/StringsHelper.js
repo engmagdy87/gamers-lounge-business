@@ -24,4 +24,8 @@ const reformatStringToBeInURL = (text) => {
     return text.split(" ").filter(str => str !== "").join("-").toLowerCase()
 }
 
-export { getFirstLettersOfString, truncateText, changeTextDirection, reformatStringToBeInURL }
+const getEntityId = (text) => {
+    return text.split("-")[0]
+}
+
+export { getFirstLettersOfString, truncateText, changeTextDirection, reformatStringToBeInURL, getEntityId }

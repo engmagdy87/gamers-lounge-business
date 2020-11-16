@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HalfClippedShape isButton :onClickAction="sendMessage">
+    <HalfClippedShape isButton :onClickAction="onClickAction">
       <template #content> {{ text }}</template>
     </HalfClippedShape>
   </div>
@@ -10,14 +10,7 @@
 import HalfClippedShape from "./HalfClippedShape";
 
 export default {
-  props: ["text"],
-  methods: {
-    sendMessage() {
-      console.log("====================================");
-      console.log("send Message");
-      console.log("====================================");
-    }
-  },
+  props: ["text", "onClickAction"],
   components: {
     HalfClippedShape
   }

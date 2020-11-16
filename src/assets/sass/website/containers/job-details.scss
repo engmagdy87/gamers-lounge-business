@@ -1,0 +1,28 @@
+@import "../color-palette.scss";
+@import "../variables.scss";
+@import "../mixins.scss";
+
+.job-details-wrapper {
+  @include initializePageStyle;
+  background-color: $primary;
+  padding-top: $header-height;
+  &__details {
+    color: $header-item;
+    hr {
+      border: 1px solid $header-item;
+      margin-bottom: 30px;
+    }
+    h1 {
+      font-size: 30px;
+    }
+    h2 {
+      font-size: 20px;
+    }
+    h3 {
+      font-size: 30px;
+    }
+    p {
+      line-height: 30px;
+    }
+  }
+}
