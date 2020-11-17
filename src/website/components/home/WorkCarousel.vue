@@ -10,12 +10,13 @@
     
     <div class="work-carousel__carousel-container">
         <Carousel
+        :autoPlay="false"
         :slides="slides"
         customBulletsStyleClass="hero-bullets"
         >
             <template #carouselSlide="{slide}">
-                <div class="row m-0 work-carousel__inside">
-                    <div class="col-md-12 col-lg-12 col-xl-6 work-carousel__inside--img">
+                <div class="work-carousel__inside">
+                    <div class="work-carousel__inside--img">
                         <HalfClippedShape>
                             <template #content>
                                 <img draggable="false" :src="slide.img">
@@ -23,10 +24,10 @@
                         </HalfClippedShape>
                     </div>
                     
-                    <div class="col-md-12 col-lg-12 col-xl-6 work-carousel__inside--text">
+                    <div class="work-carousel__inside--text">
                         <div class="work-carousel__inside--text-container">
                             <h1 class="work-carousel__inside--title"> {{slide.title}}</h1>
-                            <h4 class="work-carousel__inside--text">{{slide.text}}</h4>
+                            <h4 class="work-carousel__inside--content">{{slide.text}}</h4>
                         </div>
                         
                         <div class="work-carousel__btn">

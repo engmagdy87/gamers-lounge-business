@@ -2,6 +2,18 @@
 @import "../../color-palette.scss";
 @import "../../shared/half-clipped-shape.scss";
 
+@mixin is-1600-or-less {
+  // Extra large devices (large desktops, 1200px and up)
+  @media (max-width: 1600px) {
+    @content;
+  }
+}
+@mixin is-large-desktop-or-less {
+  // Extra large devices (large desktops, 1200px and up)
+  @media (max-width: 1400px) {
+    @content;
+  }
+}
 @mixin is-desktop-or-less {
   // Extra large devices (large desktops, 1200px and up)
   @media (max-width: 1200px) {
@@ -38,30 +50,40 @@
       right: 0;
       height: 1120px;
       background-color: $accent;
-      @include is-desktop-or-less {
+      @include is-large-desktop-or-less {
         width: 100%;
-        margin: 0;
-        height: 1650px;
+        height: 1210px;
+     }
+      @include is-desktop-or-less {
+        height: 1280px;
+      }
+      @include is-767px-or-less {
+        height: 1440px;
       }
     }
     &__carousel-container{
-      width: 63%;
-      margin-left: auto;
+      width: 100%;
       height: 1120px;
       @include is-desktop-or-less {
         width: 100%;
         margin: 0;
-        height: 1650px;
+        height: 1280px;
+      }
+      @include is-767px-or-less {
+        height: 1440px;
       }
     }
     &__inside{
-      //background-color: $accent;
       &--img{
-        display: flex;
-        left: -30%;
-        @include is-desktop-or-less {
-          left: 0%;
+        position: absolute;
+        left: 8%;
+        @include is-1600-or-less {
+          left: 2%;
         }
+        @include is-large-desktop-or-less {
+          position: relative;
+          left: 0%;
+       }
         img{
           height: 100%;
           width: 100%;
@@ -102,6 +124,8 @@
       }
       &--text{
         color: $header-item;
+        width: 63%;
+        margin-left: auto;
         @include is-extra-small-mobile {
           font-size: 1.1rem;
         }
@@ -115,16 +139,31 @@
           font-size: 1.2rem;
         }
         @include is-large-desktop {
-          font-size: 1.4rem;
+          font-size: 1.2rem;
         }
+        @include is-large-desktop-or-less {
+          width: 90%;
+       }
       }
       &--text-container{
         min-height: 650px;
-        border-right: solid 1px white;
+        border-right: solid 1px $header-item;
         margin-top: 110px;
-        margin-left: -250px;
-        margin-right: 150px;
-        padding-right: 100px;
+        margin-left: 320px;
+        margin-right: 120px;
+        padding-right: 128px;
+        @include is-large-desktop-or-less {
+          margin-right: 0;
+          padding-right: 0;
+          margin-top: 50px;
+          margin-left: 0;
+          border-right: none;
+          min-height: 455px;
+       }
+        @include is-1600-or-less {
+          margin-right: 50px;
+          padding-right: 50px;
+        }
         @include is-desktop-or-less{
           margin-left: 0px;
           margin-top: 0px;
@@ -138,12 +177,8 @@
       }
     }
     &__btn{
-      margin-left: -85px;
-      @include is-desktop-or-less{
-        margin-left: 0px;
-        display: flex;
-        justify-content: center;
-      }
+      display: flex;
+      justify-content: center;
     }
 }
 
@@ -166,17 +201,23 @@
 }
 /deep/ .carousel-navigation{
   position: absolute;
-  right: 125px;
-  bottom: 11%;
+  right: 81px;
+  bottom: 27%;
+  @include is-1600-or-less {
+    right: 81px;
+  }
+  @include is-large-desktop-or-less {
+    bottom: 0%;
+ }
   @include is-desktop-or-less{
     bottom: 9%;
   }
+  @include is-tablet {
+    bottom: 3%;
+  }
   @include is-767px-or-less {
-    bottom: 5%;
-    right: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
+    bottom: 1%;
+    right: 2%;
   }
   button{
     margin:5px;
@@ -190,13 +231,10 @@
 }
 /deep/ .half-filled-box{
   padding: 0!important;
-  margin-top: 110px!important;
-  min-height: 650px!important;
 }
-@include is-extra-large-desktop {
-  /deep/ .half-filled-box{
-    min-height: 600px;
-  }
+/deep/  .carousel-wrapper {
+  margin-top: 0;
+  min-height: auto;
 }
   // All have vw as divide operation units must be the same for all
 $width: 750px;
@@ -208,27 +246,27 @@ $widths-and-heights: (
   clipped-shape-height: $height,
   clipped-length: $clipped-length,
   clipped-shape-width-xs: (
-    $width
+    $width - 250px
   ),
   clipped-shape-height-xs: (
-    $height
+    $height - 250px
   ),
   clipped-length-xs: $clipped-length,
   clipped-shape-width-sm: (
-    $width
+    $width - 250px
   ),
   clipped-shape-height-sm: (
-    $height
+    $height - 250px
   ),
   clipped-length-sm: $clipped-length,
-  clipped-shape-width-md: $width,
-  clipped-shape-height-md: $height ,
+  clipped-shape-width-md: $width - 200px,
+  clipped-shape-height-md: $height - 200px,
   clipped-length-md: $clipped-length,
-  clipped-shape-width-lg: $width ,
-  clipped-shape-height-lg: $height ,
+  clipped-shape-width-lg: $width - 150px,
+  clipped-shape-height-lg: $height - 150px,
   clipped-length-lg: $clipped-length,
-  clipped-shape-width-xlg: $width ,
-  clipped-shape-height-xlg: $height ,
+  clipped-shape-width-xlg: $width - 150px,
+  clipped-shape-height-xlg: $height - 150px,
   clipped-length-xlg: $clipped-length,
   clipped-shape-width-xxlg: $width,
   clipped-shape-height-xxlg: $height,
