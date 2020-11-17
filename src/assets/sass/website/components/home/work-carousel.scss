@@ -15,6 +15,7 @@
   }
 }
 .work-carousel{
+  position: relative;
     .work-header{
       text-align: center;
       padding-bottom: 100px;
@@ -31,18 +32,30 @@
         color: $accent;
       }
     }
-    &__carousel-container{
+    &__bg{
+      position: absolute;
       width: 63%;
-      margin-left: auto;
-      height: 920px;
+      right: 0;
+      height: 1120px;
+      background-color: $accent;
       @include is-desktop-or-less {
         width: 100%;
         margin: 0;
-        height: 1350px;
+        height: 1650px;
+      }
+    }
+    &__carousel-container{
+      width: 63%;
+      margin-left: auto;
+      height: 1120px;
+      @include is-desktop-or-less {
+        width: 100%;
+        margin: 0;
+        height: 1650px;
       }
     }
     &__inside{
-      background-color: $accent;
+      //background-color: $accent;
       &--img{
         display: flex;
         left: -30%;
@@ -58,7 +71,7 @@
       }
       &--title{
         font-family: 'Segoe UI Bold';
-        font-size: 2.5rem;
+        font-size: 2.4rem;
         position: relative;
         height: 48px;
         @include is-extra-small-mobile {
@@ -156,10 +169,10 @@
   right: 125px;
   bottom: 11%;
   @include is-desktop-or-less{
-    bottom: 4%;
+    bottom: 9%;
   }
   @include is-767px-or-less {
-    bottom: 0%;
+    bottom: 5%;
     right: 0;
     width: 100%;
     display: flex;
@@ -188,34 +201,34 @@
   // All have vw as divide operation units must be the same for all
 $width: 750px;
 $height: 750px;
-$clipped-length: 50px;
+$clipped-length: 90px;
 
 $widths-and-heights: (
   clipped-shape-width: $width,
   clipped-shape-height: $height,
   clipped-length: $clipped-length,
   clipped-shape-width-xs: (
-    $width + 50px
+    $width
   ),
   clipped-shape-height-xs: (
-    $height + 30px
+    $height
   ),
   clipped-length-xs: $clipped-length,
   clipped-shape-width-sm: (
-    $width + 50px
+    $width
   ),
   clipped-shape-height-sm: (
-    $height + 30px
+    $height
   ),
   clipped-length-sm: $clipped-length,
-  clipped-shape-width-md: $width + 30px,
-  clipped-shape-height-md: $height * 2,
+  clipped-shape-width-md: $width,
+  clipped-shape-height-md: $height ,
   clipped-length-md: $clipped-length,
-  clipped-shape-width-lg: $width + 10px,
-  clipped-shape-height-lg: $height + 15px,
+  clipped-shape-width-lg: $width ,
+  clipped-shape-height-lg: $height ,
   clipped-length-lg: $clipped-length,
-  clipped-shape-width-xlg: $width + 5px,
-  clipped-shape-height-xlg: $height + 30px,
+  clipped-shape-width-xlg: $width ,
+  clipped-shape-height-xlg: $height ,
   clipped-length-xlg: $clipped-length,
   clipped-shape-width-xxlg: $width,
   clipped-shape-height-xxlg: $height,

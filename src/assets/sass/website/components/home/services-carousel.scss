@@ -32,7 +32,7 @@
       margin-bottom: 0;
       text-transform: uppercase;
       @include is-extra-small-mobile {
-        font-size: 1.7rem;
+        font-size: 1.5rem;
       }
       @include is-mobile {
         font-size: 1.7rem;
@@ -51,7 +51,7 @@
       margin-top: 10px;
       @include is-extra-small-mobile {
         padding-top: 10px;
-        font-size: 1.1rem;
+        font-size: .9rem;
       }
       @include is-mobile {
         padding-top: 10px;
@@ -70,7 +70,7 @@
     }
     &__img{
       object-fit: cover;
-      max-width: 695px;
+      max-width: 680px;
       height: 100%;
     }
   }
@@ -96,9 +96,20 @@
 /deep/ .half-filled-box{
   min-height: 555px;
 }
+
+@media (max-width: 1600px){
+  /deep/ .half-filled-box{
+    min-height: 675px;
+  }
+}
+@media (max-width: 1100px){
+  /deep/ .half-filled-box{
+    min-height: 820px;
+  }
+}
 @media (max-width: 767px){
   /deep/ .half-filled-box{
-    min-height: 893px;
+    min-height: 993px;
   }
 }
 @media (max-width: 600px){
@@ -108,7 +119,12 @@
 }
 /deep/ .carousel-wrapper__slide{
   padding-left: 40px;
- // padding-right: 40px;
+  @include is-extra-small-mobile {
+    padding-left: 0px;
+  }
+  @include is-mobile {
+    padding-left: 0px;
+  }
 }
 /deep/ .carousel-navigation{
   position: absolute;
@@ -136,37 +152,37 @@
   // All have vw as divide operation units must be the same for all
 $width: 85vw;
 $height: 20vw;
-$clipped-length: 3vw;
+$clipped-length: 4vw;
 
 $widths-and-heights: (
   clipped-shape-width: $width,
   clipped-shape-height: $height,
-  clipped-length: $clipped-length,
+  clipped-length: $clipped-length * 0,
   clipped-shape-width-xs: (
     $width + 10vw
   ),
   clipped-shape-height-xs: (
     $height + 10vw
   ) * 2,
-  clipped-length-xs: $clipped-length,
+  clipped-length-xs: $clipped-length * 0,
   clipped-shape-width-sm: (
     $width + 10vw
   ) ,
   clipped-shape-height-sm: (
     $height + 5vw
   ) ,
-  clipped-length-sm: $clipped-length,
+  clipped-length-sm: $clipped-length * 0,
   clipped-shape-width-md: $width + 10vw,
   clipped-shape-height-md: $height * 2,
   clipped-length-md: $clipped-length,
   clipped-shape-width-lg: $width + 10vw,
-  clipped-shape-height-lg: $height + 10vw,
+  clipped-shape-height-lg: $height + 30vw,
   clipped-length-lg: $clipped-length,
   clipped-shape-width-xlg: $width + 5vw,
-  clipped-shape-height-xlg: $height + 10vw,
+  clipped-shape-height-xlg: $height + 30vw,
   clipped-length-xlg: $clipped-length,
   clipped-shape-width-xxlg: $width,
-  clipped-shape-height-xxlg: $height,
+  clipped-shape-height-xxlg: $height + 10vw,
   clipped-length-xxlg: $clipped-length
 );
 

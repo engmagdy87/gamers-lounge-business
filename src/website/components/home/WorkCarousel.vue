@@ -6,6 +6,8 @@
     <router-link to="/" class="work-header__view-link"> View all </router-link>
   </div>
 
+    <div class="work-carousel__bg"></div>
+    
     <div class="work-carousel__carousel-container">
         <Carousel
         :autoPlay="false"
