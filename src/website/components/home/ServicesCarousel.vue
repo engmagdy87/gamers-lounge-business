@@ -8,7 +8,6 @@
   <HalfClippedShape> 
     <template #content>
         <Carousel
-        :autoPlay="false"
         :slides="slides"
         customBulletsStyleClass="hero-bullets"
         >
