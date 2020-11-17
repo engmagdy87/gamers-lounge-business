@@ -3,9 +3,7 @@
   <HalfClippedShape> 
     <template #content>
         <Carousel
-        :timeInMillisecond=5000
         :slides="slides"
-        :autoPlay="false"
         customBulletsStyleClass="hero-bullets"
         >
             <template #carouselSlide="{slide}">

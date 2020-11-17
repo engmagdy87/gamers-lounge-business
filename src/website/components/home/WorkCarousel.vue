@@ -8,9 +8,8 @@
 
     <div class="work-carousel__carousel-container">
         <Carousel
-        :timeInMillisecond=5000
-        :slides="slides"
         :autoPlay="false"
+        :slides="slides"
         customBulletsStyleClass="hero-bullets"
         >
             <template #carouselSlide="{slide}">

@@ -8,9 +8,8 @@
   <HalfClippedShape> 
     <template #content>
         <Carousel
-        :timeInMillisecond=5000
-        :slides="slides"
         :autoPlay="false"
+        :slides="slides"
         customBulletsStyleClass="hero-bullets"
         >
             <template #carouselSlide="{slide}">
@@ -63,12 +62,12 @@ export default {
         {
           title:"Esports Tournaments2",
           text:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e",
-          img:"./images/hero.jpg"
+          img:"./images/pubgpic.png"
         },
         {
           title:"Esports Tournaments3",
           text:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr,sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e",
-          img:"./images/hero.jpg"
+          img:"./images/pubgpic.png"
         }
       ]
     }

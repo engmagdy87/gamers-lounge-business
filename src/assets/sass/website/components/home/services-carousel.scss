@@ -70,8 +70,8 @@
     }
     &__img{
       object-fit: cover;
-      width: 100%;
-      height: 530px;
+      max-width: 695px;
+      height: 100%;
     }
   }
 
@@ -84,8 +84,8 @@
   }
 }
 /deep/ .outline-box{
-  width: 170px;
-  height: 50px;
+  height: 50px!important;
+  width: 158px!important;
   margin-left: auto;
   margin-top: 50px;
   margin-bottom: 30px;
