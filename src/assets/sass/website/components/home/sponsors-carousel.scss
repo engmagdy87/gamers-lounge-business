@@ -1,0 +1,106 @@
+@import "../../mixins.scss";
+@import "../../color-palette.scss";
+@import "../../shared/half-clipped-shape.scss";
+
+// All have vw as divide operation units must be the same for all
+$height: 10vw;
+$height-xs: $height + 30vw;
+$height-sm: $height + 15vw;
+$height-md: $height + 8vw;
+$height-lg: $height + 5vw;
+$height-xlg: $height + 5vw;
+$height-xxlg: $height;
+
+$width: 85vw;
+$width-xs: $width + 5vw;
+$width-sm: $width + 5vw;
+$width-md: $width + 10vw;
+$width-lg: $width + 7vw;
+$width-xlg: $width;
+$width-xxlg: $width;
+
+$clipped-length: 3vw;
+
+$total-padding: $half-clipped-shape-padding * 2;
+
+.sponsors-carousel-wrapper {
+  position: absolute;
+  bottom: -$height/2;
+  color: white;
+  left: 0;
+  right: 0;
+  @include is-extra-small-mobile {
+    bottom: -$height-xs/2;
+  }
+  @include is-mobile {
+    bottom: -$height-sm/2;
+  }
+  @include is-tablet {
+    bottom: -$height-md/2;
+  }
+  @include is-desktop {
+    bottom: -$height-lg/2;
+  }
+  @include is-large-desktop {
+    bottom: -$height-xlg/2;
+  }
+  @include is-extra-large-desktop {
+    bottom: -$height-xxlg/2;
+  }
+  &__slide {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    height: calc(#{$height} - #{$total-padding});
+    @include is-extra-small-mobile {
+      height: calc(#{$height-xs} - #{$total-padding});
+    }
+    @include is-mobile {
+      height: calc(#{$height-sm} - #{$total-padding});
+    }
+    @include is-tablet {
+      height: calc(#{$height-md} - #{$total-padding});
+    }
+    @include is-desktop {
+      height: calc(#{$height-lg} - #{$total-padding});
+    }
+    @include is-large-desktop {
+      height: calc(#{$height-xlg} - #{$total-padding});
+    }
+    @include is-extra-large-desktop {
+      height: calc(#{$height-xxlg} - #{$total-padding});
+    }
+    img {
+      max-width: 100%;
+    }
+  }
+}
+
+$widths-and-heights: (
+  clipped-shape-width: $width,
+  clipped-shape-height: $height,
+  clipped-length: $clipped-length,
+  clipped-shape-width-xs: $width-xs,
+  clipped-shape-height-xs: $height-xs,
+  clipped-length-xs: $clipped-length,
+  clipped-shape-width-sm: $width-sm,
+  clipped-shape-height-sm: $height-sm,
+  clipped-length-sm: $clipped-length,
+  clipped-shape-width-md: $width-md,
+  clipped-shape-height-md: $height-md,
+  clipped-length-md: $clipped-length,
+  clipped-shape-width-lg: $width-lg,
+  clipped-shape-height-lg: $height-lg,
+  clipped-length-lg: $clipped-length,
+  clipped-shape-width-xlg: $width-xlg,
+  clipped-shape-height-xlg: $height-xlg,
+  clipped-length-xlg: $clipped-length,
+  clipped-shape-width-xxlg: $width-xxlg,
+  clipped-shape-height-xxlg: $height-xxlg,
+  clipped-length-xxlg: $clipped-length
+);
+
+// use /deep/ to apply scss classes to the child components
+div /deep/ {
+  @include filled-half-clipped-shape($widths-and-heights, $form-background);
+}

@@ -5,4 +5,5 @@
 .home-wrapper {
   @include initializePageStyle;
   background-color: $primary;
+  position: relative;
 }
