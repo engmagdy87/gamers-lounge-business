@@ -1,0 +1,192 @@
+@import "../../mixins.scss";
+@import "../../color-palette.scss";
+@import "../../shared/half-clipped-shape.scss";
+
+.services-carousel{
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-color: $primary;
+  .services-header{
+    text-align: center;
+    padding-bottom: 100px;
+    &__sub-text{
+      color: $header-item;
+    }
+    &__title{
+      color: $header-item;
+      font-family: 'Segoe UI Bold';
+      font-size: 2.6rem;
+      letter-spacing: 4px;
+    }
+    &__view-link{
+      color: $accent;
+    }
+  }
+    &__title{
+      font-family: 'Segoe UI Bold';
+      width: 80%;
+      padding-top: 80px;
+      font-size: 2rem;
+      text-align: left;
+      color: $accent;
+      margin-bottom: 0;
+      text-transform: uppercase;
+      @include is-extra-small-mobile {
+        font-size: 1.5rem;
+      }
+      @include is-mobile {
+        font-size: 1.7rem;
+      }
+      @include is-tablet {
+        font-size: 1.7rem;
+      }
+      @include is-desktop {
+        font-size: 1.7rem;
+      }
+    }
+    &__text{
+      text-align: left;
+      font-size: 1.2rem;
+      line-height: 35px;
+      margin-top: 10px;
+      @include is-extra-small-mobile {
+        padding-top: 10px;
+        font-size: .9rem;
+      }
+      @include is-mobile {
+        padding-top: 10px;
+        font-size: 1rem;
+      }
+  
+      @include is-tablet {
+        padding-top: 10px;
+        font-size: 1rem;
+      }
+  
+      @include is-desktop {
+        padding-top: 10px;
+        font-size: 1rem;
+      }
+    }
+    &__img{
+      object-fit: cover;
+      max-width: 680px;
+      height: 100%;
+    }
+  }
+
+/deep/ div.outline-box__inside.outline-box__inside--is-button{
+  background-color: $accent;
+  color: $header-item;
+  &:hover{
+    background-color: $accent;
+    color: $header-item;
+  }
+}
+/deep/ .outline-box{
+  height: 50px!important;
+  width: 158px!important;
+  margin-left: auto;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+/deep/ .hero-bullets{
+  display: none;
+}
+/deep/ .half-filled-box{
+  min-height: 555px;
+}
+
+@media (max-width: 1600px){
+  /deep/ .half-filled-box{
+    min-height: 675px;
+  }
+}
+@media (max-width: 1100px){
+  /deep/ .half-filled-box{
+    min-height: 820px;
+  }
+}
+@media (max-width: 767px){
+  /deep/ .half-filled-box{
+    min-height: 993px;
+  }
+}
+@media (max-width: 600px){
+  /deep/ .half-filled-box{
+    min-height: 1047px;
+  }
+}
+/deep/ .carousel-wrapper__slide{
+  padding-left: 40px;
+  @include is-extra-small-mobile {
+    padding-left: 0px;
+  }
+  @include is-mobile {
+    padding-left: 0px;
+  }
+}
+/deep/ .carousel-navigation{
+  position: absolute;
+  left: 2%;
+  margin-top: 25px;
+  button{
+    margin:20px 20px 20px 10px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    img{
+      width: 85%;
+    }
+  }
+}
+@media (max-width: 600px){
+  /deep/  .carousel-wrapper {
+    margin-top: 0;
+    min-height: auto;
+    &__slide{
+      padding-left: 0px;
+    }
+  }
+}
+  // All have vw as divide operation units must be the same for all
+$width: 85vw;
+$height: 20vw;
+$clipped-length: 4vw;
+
+$widths-and-heights: (
+  clipped-shape-width: $width,
+  clipped-shape-height: $height,
+  clipped-length: $clipped-length * 0,
+  clipped-shape-width-xs: (
+    $width + 10vw
+  ),
+  clipped-shape-height-xs: (
+    $height + 10vw
+  ) * 2,
+  clipped-length-xs: $clipped-length * 0,
+  clipped-shape-width-sm: (
+    $width + 10vw
+  ) ,
+  clipped-shape-height-sm: (
+    $height + 5vw
+  ) ,
+  clipped-length-sm: $clipped-length * 0,
+  clipped-shape-width-md: $width + 10vw,
+  clipped-shape-height-md: $height * 2,
+  clipped-length-md: $clipped-length,
+  clipped-shape-width-lg: $width + 10vw,
+  clipped-shape-height-lg: $height + 30vw,
+  clipped-length-lg: $clipped-length,
+  clipped-shape-width-xlg: $width + 5vw,
+  clipped-shape-height-xlg: $height + 30vw,
+  clipped-length-xlg: $clipped-length,
+  clipped-shape-width-xxlg: $width,
+  clipped-shape-height-xxlg: $height + 10vw,
+  clipped-length-xxlg: $clipped-length
+);
+
+// use /deep/ to apply scss classes to the child components
+div /deep/ {
+  @include filled-half-clipped-shape($widths-and-heights, $form-background);
+}

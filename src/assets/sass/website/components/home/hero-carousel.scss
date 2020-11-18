@@ -1,0 +1,115 @@
+@import "../../mixins.scss";
+@import "../../color-palette.scss";
+@import "../../shared/half-clipped-shape.scss";
+
+.hero-carousel{
+    margin-top: 400px;
+    @include is-extra-small-mobile {
+      margin-top: 200px;
+    }
+    @include is-mobile {
+      margin-top: 250px;
+    }
+    @include is-tablet {
+      margin-top: 250px;
+    }
+
+    @include is-desktop {
+      margin-top: 300px;
+    }
+
+      &__title{
+        font-family: 'Segoe UI Bold';
+        width: 80%;
+        margin: auto;
+        padding-top: 50px;
+        font-size: 3rem;
+        text-align: left;
+        @include is-extra-small-mobile {
+          font-size: 1.3rem;
+        }
+        @include is-mobile {
+          font-size: 1.8rem;
+        }
+        @include is-tablet {
+          font-size: 2rem;
+        }
+  
+        @include is-desktop {
+          font-size: 2rem;
+        }
+        @include is-large-desktop {
+          font-size: 2.2rem;
+        }
+
+      }
+      &__content{
+        text-align: left;
+        width: 80%;
+        margin: auto;
+      }
+  }
+
+/deep/ .hero-bullets{
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  margin: auto;
+}
+@media (max-width: 600px){
+  .carousel-wrapper {
+    margin-top: 0;
+    min-height: auto;
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1600px){
+  /deep/ .half-filled-box{
+    min-height: 300px;
+  }
+  /deep/ .hero-bullets{
+    bottom: 7%;
+  }
+}
+
+  // All have vw as divide operation units must be the same for all
+$width: 50vw;
+$height: 17vw;
+$clipped-length: 3vw;
+
+$widths-and-heights: (
+  clipped-shape-width: $width,
+  clipped-shape-height: $height,
+  clipped-length: $clipped-length,
+  clipped-shape-width-xs: (
+    $width + 45vw
+  ),
+  clipped-shape-height-xs: (
+    $height + 30vw
+  ),
+  clipped-length-xs: $clipped-length,
+  clipped-shape-width-sm: (
+    $width + 45vw
+  ),
+  clipped-shape-height-sm: (
+    $height + 20vw
+  ),
+  clipped-length-sm: $clipped-length,
+  clipped-shape-width-md: $width + 30vw,
+  clipped-shape-height-md: $height * 2,
+  clipped-length-md: $clipped-length,
+  clipped-shape-width-lg: $width + 10vw,
+  clipped-shape-height-lg: $height + 15vw,
+  clipped-length-lg: $clipped-length,
+  clipped-shape-width-xlg: $width + 7vw,
+  clipped-shape-height-xlg: $height + 5vw,
+  clipped-length-xlg: $clipped-length,
+  clipped-shape-width-xxlg: $width,
+  clipped-shape-height-xxlg: $height,
+  clipped-length-xxlg: $clipped-length
+);
+
+// use /deep/ to apply scss classes to the child components
+div /deep/ {
+  @include filled-half-clipped-shape($widths-and-heights, rgba($primary, 0.7));
+}

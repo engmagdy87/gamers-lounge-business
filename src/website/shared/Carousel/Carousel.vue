@@ -12,7 +12,7 @@
         <slot name="carouselSlide" :slide="slide"></slot>
       </div>
     </transition-group>
-    <div class="carousel-wrapper__bullets" v-if="showBullets">
+    <div :class="`carousel-wrapper__bullets ${customBulletsStyleClass}`" v-if="showBullets">
       <button
         v-for="(slide, i) in slides"
         :key="i"
@@ -46,6 +46,10 @@ export default {
     showBullets: {
       type: Boolean,
       default: true
+    },
+    customBulletsStyleClass: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -103,17 +107,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/sass/website/color-palette.scss";
-@import "../../assets/sass/website/variables.scss";
-@import "../../assets/sass/website/mixins.scss";
+@import "../../../assets/sass/website/color-palette.scss";
+@import "../../../assets/sass/website/variables.scss";
+@import "../../../assets/sass/website/mixins.scss";
 
 .carousel-wrapper {
   @include initializePageStyle;
   position: relative;
-  margin: 50px;
-  background-color: #eee;
-  height: 50vh;
-  min-height: 50vh;
+  height: 100%;
+  width: 100%;
+  min-height: inherit;
+  margin: 0;
   &__slide {
     position: absolute;
     top: 0;
@@ -126,9 +130,6 @@ export default {
     }
   }
   &__bullets {
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
     & > button {
       background-color: gray;
       border: none;
@@ -142,7 +143,7 @@ export default {
 }
 
 button.carousel-wrapper__bullets--active {
-  background-color: cyan;
+  background-color: $accent;
   width: 56px;
   height: 13px;
   border-radius: 11px;

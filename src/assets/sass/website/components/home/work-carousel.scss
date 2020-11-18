@@ -1,0 +1,279 @@
+@import "../../mixins.scss";
+@import "../../color-palette.scss";
+@import "../../shared/half-clipped-shape.scss";
+
+@mixin is-1600-or-less {
+  // Extra large devices (large desktops, 1200px and up)
+  @media (max-width: 1600px) {
+    @content;
+  }
+}
+@mixin is-large-desktop-or-less {
+  // Extra large devices (large desktops, 1200px and up)
+  @media (max-width: 1400px) {
+    @content;
+  }
+}
+@mixin is-desktop-or-less {
+  // Extra large devices (large desktops, 1200px and up)
+  @media (max-width: 1200px) {
+    @content;
+  }
+}
+@mixin is-767px-or-less {
+  // Extra large devices (large desktops, 1200px and up)
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+.work-carousel{
+  position: relative;
+    .work-header{
+      text-align: center;
+      padding-bottom: 100px;
+      &__sub-text{
+        color: $header-item;
+      }
+      &__title{
+        color: $header-item;
+        font-family: 'Segoe UI Bold';
+        font-size: 2.6rem;
+        letter-spacing: 4px;
+      }
+      &__view-link{
+        color: $accent;
+      }
+    }
+    &__bg{
+      position: absolute;
+      width: 63%;
+      right: 0;
+      height: 1120px;
+      background-color: $accent;
+      @include is-large-desktop-or-less {
+        width: 100%;
+        height: 1210px;
+     }
+      @include is-desktop-or-less {
+        height: 1280px;
+      }
+      @include is-767px-or-less {
+        height: 1440px;
+      }
+    }
+    &__carousel-container{
+      width: 100%;
+      height: 1120px;
+      @include is-desktop-or-less {
+        width: 100%;
+        margin: 0;
+        height: 1280px;
+      }
+      @include is-767px-or-less {
+        height: 1440px;
+      }
+    }
+    &__inside{
+      &--img{
+        position: absolute;
+        left: 8%;
+        @include is-1600-or-less {
+          left: 2%;
+        }
+        @include is-large-desktop-or-less {
+          position: relative;
+          left: 0%;
+       }
+        img{
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          object-position: center center;
+        }
+      }
+      &--title{
+        font-family: 'Segoe UI Bold';
+        font-size: 2.4rem;
+        position: relative;
+        height: 48px;
+        @include is-extra-small-mobile {
+          font-size: 1.6rem;
+        }
+        @include is-mobile {
+          font-size: 1.6rem;
+        }
+        @include is-tablet {
+          font-size: 1.6rem;
+        }
+        @include is-desktop {
+          font-size: 1.6rem;
+        }
+        @include is-large-desktop {
+          font-size: 1.8rem;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          top: 55px;
+          left: 0px;
+          height: 4px;
+          width: 35%;
+          background: $header-item;
+        }
+      }
+      &--text{
+        color: $header-item;
+        width: 63%;
+        margin-left: auto;
+        @include is-extra-small-mobile {
+          font-size: 1.1rem;
+        }
+        @include is-mobile {
+          font-size: 1.1rem;
+        }
+        @include is-tablet {
+          font-size: 1.2rem;
+        }
+        @include is-desktop {
+          font-size: 1.2rem;
+        }
+        @include is-large-desktop {
+          font-size: 1.2rem;
+        }
+        @include is-large-desktop-or-less {
+          width: 90%;
+       }
+      }
+      &--text-container{
+        min-height: 650px;
+        border-right: solid 1px $header-item;
+        margin-top: 110px;
+        margin-left: 320px;
+        margin-right: 120px;
+        padding-right: 128px;
+        @include is-large-desktop-or-less {
+          margin-right: 0;
+          padding-right: 0;
+          margin-top: 50px;
+          margin-left: 0;
+          border-right: none;
+          min-height: 455px;
+       }
+        @include is-1600-or-less {
+          margin-right: 50px;
+          padding-right: 50px;
+        }
+        @include is-desktop-or-less{
+          margin-left: 0px;
+          margin-top: 0px;
+          min-height: 400px;
+        }
+        @include is-767px-or-less {
+          border-right: 0;
+          margin-right: 0px;
+          padding-right: 30px;
+        }
+      }
+    }
+    &__btn{
+      display: flex;
+      justify-content: center;
+    }
+}
+
+/deep/ div.outline-box__inside.outline-box__inside--is-button{
+  background-color: $header-item;
+  color: $accent;
+  width: 155px;
+  font-size: 1.1rem;
+  &:hover{
+    background-color: $header-item;
+    color: $accent;
+  }
+}
+/deep/ .outline-box{
+  height: 50px!important;
+  width: 158px!important;
+}
+/deep/ .hero-bullets{
+  display: none;
+}
+/deep/ .carousel-navigation{
+  position: absolute;
+  right: 81px;
+  bottom: 27%;
+  @include is-1600-or-less {
+    right: 81px;
+  }
+  @include is-large-desktop-or-less {
+    bottom: 0%;
+ }
+  @include is-desktop-or-less{
+    bottom: 9%;
+  }
+  @include is-tablet {
+    bottom: 3%;
+  }
+  @include is-767px-or-less {
+    bottom: 1%;
+    right: 2%;
+  }
+  button{
+    margin:5px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    img{
+      width: 85%;
+    }
+  }
+}
+/deep/ .half-filled-box{
+  padding: 0!important;
+}
+/deep/  .carousel-wrapper {
+  margin-top: 0;
+  min-height: auto;
+}
+  // All have vw as divide operation units must be the same for all
+$width: 750px;
+$height: 750px;
+$clipped-length: 90px;
+
+$widths-and-heights: (
+  clipped-shape-width: $width,
+  clipped-shape-height: $height,
+  clipped-length: $clipped-length,
+  clipped-shape-width-xs: (
+    $width - 250px
+  ),
+  clipped-shape-height-xs: (
+    $height - 250px
+  ),
+  clipped-length-xs: $clipped-length,
+  clipped-shape-width-sm: (
+    $width - 250px
+  ),
+  clipped-shape-height-sm: (
+    $height - 250px
+  ),
+  clipped-length-sm: $clipped-length,
+  clipped-shape-width-md: $width - 200px,
+  clipped-shape-height-md: $height - 200px,
+  clipped-length-md: $clipped-length,
+  clipped-shape-width-lg: $width - 150px,
+  clipped-shape-height-lg: $height - 150px,
+  clipped-length-lg: $clipped-length,
+  clipped-shape-width-xlg: $width - 150px,
+  clipped-shape-height-xlg: $height - 150px,
+  clipped-length-xlg: $clipped-length,
+  clipped-shape-width-xxlg: $width,
+  clipped-shape-height-xxlg: $height,
+  clipped-length-xxlg: $clipped-length
+);
+
+// use /deep/ to apply scss classes to the child components
+div /deep/ {
+  @include filled-half-clipped-shape($widths-and-heights, transparent);
+}
