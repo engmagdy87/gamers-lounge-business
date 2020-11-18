@@ -3,13 +3,14 @@
   <HalfClippedShape> 
     <template #content>
         <Carousel
+        :autoPlay="false"
         :slides="slides"
         customBulletsStyleClass="hero-bullets"
         >
             <template #carouselSlide="{slide}">
-                <div class="hero-carousel__container">
-                    <h1 class="hero-carousel__container--title"> {{slide.title}}</h1>
-                    <h4 class="hero-carousel__container--content">{{slide.content}}</h4>
+                <div>
+                    <h1 class="hero-carousel__title"> {{slide.title}}</h1>
+                    <h4 class="hero-carousel__content">{{slide.content}}</h4>
                 </div>
             </template>
         </Carousel>

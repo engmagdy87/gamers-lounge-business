@@ -17,9 +17,8 @@
     @include is-desktop {
       margin-top: 300px;
     }
-    &__container{
 
-      &--title{
+      &__title{
         font-family: 'Segoe UI Bold';
         width: 80%;
         margin: auto;
@@ -44,12 +43,11 @@
         }
 
       }
-      &--content{
+      &__content{
         text-align: left;
         width: 80%;
         margin: auto;
       }
-    }
   }
 
 /deep/ .hero-bullets{
