@@ -2,122 +2,163 @@
 @import "../../color-palette.scss";
 @import "../../shared/half-clipped-shape.scss";
 
-.services-carousel{
+.services-carousel {
   padding-top: 100px;
   padding-bottom: 100px;
   background-color: $primary;
-  .services-header{
+  .services-header {
     text-align: center;
     padding-bottom: 100px;
-    &__sub-text{
+    &__sub-text {
       color: $header-item;
     }
-    &__title{
+    &__title {
       color: $header-item;
-      font-family: 'Segoe UI Bold';
+      font-family: "Segoe UI Bold";
       font-size: 2.6rem;
       letter-spacing: 4px;
     }
-    &__view-link{
+    &__view-link {
       color: $accent;
     }
   }
-    &__title{
-      font-family: 'Segoe UI Bold';
-      width: 80%;
-      padding-top: 80px;
-      font-size: 2rem;
-      text-align: left;
-      color: $accent;
-      margin-bottom: 0;
-      text-transform: uppercase;
-      @include is-extra-small-mobile {
-        font-size: 1.5rem;
-      }
-      @include is-mobile {
-        font-size: 1.7rem;
-      }
-      @include is-tablet {
-        font-size: 1.7rem;
-      }
-      @include is-desktop {
-        font-size: 1.7rem;
-      }
+  &__text {
+    z-index: 10;
+  }
+  &__img-wrapper {
+    z-index: 9;
+    @include is-extra-small-mobile {
+      position: absolute;
+      top: 0;
+      left: 0;
     }
-    &__text{
-      text-align: left;
-      font-size: 1.2rem;
-      line-height: 35px;
-      margin-top: 10px;
-      @include is-extra-small-mobile {
-        padding-top: 10px;
-        font-size: .9rem;
-      }
-      @include is-mobile {
-        padding-top: 10px;
-        font-size: 1rem;
-      }
-  
-      @include is-tablet {
-        padding-top: 10px;
-        font-size: 1rem;
-      }
-  
-      @include is-desktop {
-        padding-top: 10px;
-        font-size: 1rem;
-      }
+    @include is-mobile {
+      position: absolute;
+      top: 0;
+      left: 0;
     }
-    &__img{
-      object-fit: cover;
-      max-width: 680px;
-      height: 100%;
+    @include is-tablet {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    @include is-desktop {
+      position: relative;
     }
   }
+  &__title {
+    font-family: "Segoe UI Bold";
+    width: 80%;
+    padding-top: 80px;
+    font-size: 2rem;
+    text-align: left;
+    color: $accent;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    @include is-extra-small-mobile {
+      font-size: 1.5rem;
+    }
+    @include is-mobile {
+      font-size: 1.7rem;
+    }
+    @include is-tablet {
+      font-size: 1.7rem;
+    }
+    @include is-desktop {
+      font-size: 1.7rem;
+    }
+  }
+  &__content {
+    text-align: left;
+    font-size: 1.2rem;
+    line-height: 35px;
+    margin-top: 10px;
+    @include is-extra-small-mobile {
+      padding-top: 10px;
+      font-size: 0.9rem;
+      height: 35%;
+      overflow-y: auto;
+    }
+    @include is-mobile {
+      padding-top: 10px;
+      font-size: 1rem;
+    }
 
-/deep/ div.outline-box__inside.outline-box__inside--is-button{
+    @include is-tablet {
+      padding-top: 10px;
+      font-size: 1rem;
+    }
+
+    @include is-desktop {
+      padding-top: 10px;
+      font-size: 1rem;
+    }
+  }
+  &__img {
+    object-fit: cover;
+    max-width: 680px;
+    height: 100%;
+    @include is-extra-small-mobile {
+      max-width: 100vw;
+      height: 100%;
+      filter: brightness(30%);
+      margin-left: -40px;
+      margin-top: -40px;
+    }
+    @include is-mobile {
+      max-width: 100vw;
+      filter: brightness(30%);
+    }
+    @include is-tablet {
+      max-width: 100vw;
+      filter: brightness(30%);
+    }
+  }
+}
+
+/deep/ div.outline-box__inside.outline-box__inside--is-button {
   background-color: $accent;
   color: $header-item;
-  &:hover{
+  &:hover {
     background-color: $accent;
     color: $header-item;
   }
 }
-/deep/ .outline-box{
-  height: 50px!important;
-  width: 158px!important;
+/deep/ .outline-box {
+  height: 50px !important;
+  width: 158px !important;
   margin-left: auto;
   margin-top: 50px;
   margin-bottom: 30px;
 }
-/deep/ .hero-bullets{
+/deep/ .hero-bullets {
   display: none;
 }
-/deep/ .half-filled-box{
+/deep/ .half-filled-box {
   min-height: 555px;
 }
 
-@media (max-width: 1600px){
-  /deep/ .half-filled-box{
+@media (max-width: 1600px) {
+  /deep/ .half-filled-box {
     min-height: 675px;
   }
 }
-@media (max-width: 1100px){
-  /deep/ .half-filled-box{
+@media (max-width: 1100px) {
+  /deep/ .half-filled-box {
     min-height: 820px;
   }
 }
-@media (max-width: 767px){
-  /deep/ .half-filled-box{
+@media (max-width: 767px) {
+  /deep/ .half-filled-box {
     min-height: 993px;
   }
 }
-@media (max-width: 600px){
-  /deep/ .half-filled-box{
-    min-height: 1047px;
+@media (max-width: 600px) {
+  /deep/ .half-filled-box {
+    min-height: 90vh;
   }
 }
-/deep/ .carousel-wrapper__slide{
+/deep/ .carousel-wrapper__slide {
   padding-left: 40px;
   @include is-extra-small-mobile {
     padding-left: 0px;
@@ -126,30 +167,31 @@
     padding-left: 0px;
   }
 }
-/deep/ .carousel-navigation{
+/deep/ .carousel-navigation {
   position: absolute;
   left: 2%;
   margin-top: 25px;
-  button{
-    margin:20px 20px 20px 10px;
+  z-index: 120;
+  button {
+    margin: 20px 20px 20px 10px;
     background-color: transparent;
     border: none;
     outline: none;
-    img{
+    img {
       width: 85%;
     }
   }
 }
-@media (max-width: 600px){
-  /deep/  .carousel-wrapper {
+@media (max-width: 600px) {
+  /deep/ .carousel-wrapper {
     margin-top: 0;
     min-height: auto;
-    &__slide{
+    &__slide {
       padding-left: 0px;
     }
   }
 }
-  // All have vw as divide operation units must be the same for all
+// All have vw as divide operation units must be the same for all
 $width: 85vw;
 $height: 20vw;
 $clipped-length: 4vw;
@@ -167,10 +209,10 @@ $widths-and-heights: (
   clipped-length-xs: $clipped-length * 0,
   clipped-shape-width-sm: (
     $width + 10vw
-  ) ,
+  ),
   clipped-shape-height-sm: (
     $height + 5vw
-  ) ,
+  ),
   clipped-length-sm: $clipped-length * 0,
   clipped-shape-width-md: $width + 10vw,
   clipped-shape-height-md: $height * 2,
