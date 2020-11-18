@@ -29,10 +29,10 @@
           </p>
         </div>
 
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 footer-socialmedia">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 footer-social-media">
           <h5 class="footer-followus">Follow US</h5>
 
-          <div class="socialMedia row">
+          <div class="social-media row">
             <div class="social-logos-container" @click="goToLink('facebook')">
               <img
                 class="fb-logo"
@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <div class="row CopyrightDiv m-0 p-0">
+    <div class="row copyrights m-0 p-0">
       <h5>
         Copyright © 2020 <a href="#"> Gamers lounge </a> For Esports E.S.C All
         Rights Reserved

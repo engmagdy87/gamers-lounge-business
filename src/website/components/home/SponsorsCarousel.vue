@@ -7,8 +7,9 @@
             class="sponsors-carousel-wrapper__slide"
             v-for="(sponsor, index) in sponsors"
             :key="index"
+            @click="goToUrl(sponsor.url)"
           >
-            <img :src="sponsor" alt="sponsor text" />
+            <img :src="sponsor.path" :alt="sponsor.name" />
           </div>
         </VueSlickCarousel>
       </template>
@@ -27,14 +28,14 @@ export default {
   data() {
     return {
       sponsors: [
-        "images/clients/bloody-logo-png-5.png",
-        "images/clients/asus.svg",
-        "images/clients/dell.svg",
-        "images/clients/hp.svg",
-        "images/clients/lenovo.svg",
-        "images/clients/Amazon.ae-Logo.wine.png",
-        "images/clients/Image 1.png",
-        "images/clients/Nile-FM.png"
+        { name: "", path: "images/clients/bloody-logo-png-5.png", url: "" },
+        { name: "", path: "images/clients/asus.svg", url: "" },
+        { name: "", path: "images/clients/dell.svg", url: "" },
+        { name: "", path: "images/clients/hp.svg", url: "" },
+        { name: "", path: "images/clients/lenovo.svg", url: "" },
+        { name: "", path: "images/clients/Amazon.ae-Logo.wine.png", url: "" },
+        { name: "", path: "images/clients/Image 1.png", url: "" },
+        { name: "", path: "images/clients/Nile-FM.png", url: "" }
       ],
       settings: {
         dots: false,
@@ -80,6 +81,11 @@ export default {
   components: {
     VueSlickCarousel,
     HalfClippedShape
+  },
+  methods: {
+    goToUrl(url) {
+      window.open(url, "_blank");
+    }
   }
 };
 </script>

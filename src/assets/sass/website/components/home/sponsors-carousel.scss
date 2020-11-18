@@ -29,6 +29,7 @@ $total-padding: $half-clipped-shape-padding * 2;
   color: white;
   left: 0;
   right: 0;
+  z-index: 10;
   @include is-extra-small-mobile {
     bottom: -$height-xs/2;
   }
@@ -48,6 +49,7 @@ $total-padding: $half-clipped-shape-padding * 2;
     bottom: -$height-xxlg/2;
   }
   &__slide {
+    cursor: pointer;
     display: flex !important;
     justify-content: center;
     align-items: center;
