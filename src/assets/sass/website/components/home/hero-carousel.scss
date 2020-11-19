@@ -17,6 +17,9 @@
     @include is-desktop {
       margin-top: 300px;
     }
+    @media (max-width: 1600px) {
+      margin-top: 300px;
+    }
 
       &__title{
         font-family: 'Segoe UI Bold';
