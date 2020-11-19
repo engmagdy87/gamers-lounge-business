@@ -55,7 +55,7 @@
         }
         &--is-image{
             height: 809px;
-            @include cover-image("~/images/about.png");
+            @include cover-image("~/images/stadiumpic.png");
             filter: brightness(80%);
         }
   }
