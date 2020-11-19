@@ -4,6 +4,7 @@ const Contact = () => import(/* webpackChunkName: "Contact" */ '../website/conta
 const About = () => import(/* webpackChunkName: "About" */ '../website/containers/About.vue')
 const Jobs = () => import(/* webpackChunkName: "Jobs" */ '../website/containers/Jobs.vue')
 const JobDetails = () => import(/* webpackChunkName: "Job-Details" */ '../website/containers/JobDetails.vue')
+const OurWork = () => import(/* webpackChunkName: "OurWork" */ '../website/containers/OurWork.vue')
 
 // GeneralViews
 const NotFound = () => import(/* webpackChunkName: "NotFound" */ '../dashboard/pages/NotFoundPage.vue')
@@ -45,6 +46,11 @@ const routes = [
     path: '/job/:jobName',
     name: 'job',
     component: JobDetails,
+  },
+  {
+    path: '/work',
+    name: 'work',
+    component: OurWork,
   },
   {
     path: '/dashboard',
