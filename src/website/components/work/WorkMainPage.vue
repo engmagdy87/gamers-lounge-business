@@ -1,30 +1,27 @@
 <template>
-<div class="work-page-wrapper row">
-
-  <div
-    v-for="work in workData"
-    :key="work.id"
-    class="work-page-wrapper__content-wrapper col-xs-12 col-sm-12 col-md-6 col-lg-4"
-  >
-    <!-- <router-link :to="`/work/${work.id}-${reformatURL(work.title)}`"> -->
+  <div class="work-page-wrapper row">
+    <div
+      v-for="work in workData"
+      :key="work.id"
+      class="work-page-wrapper__content-wrapper col-xs-12 col-sm-12 col-md-6 col-lg-4"
+    >
+      <!-- <router-link :to="`/work/${work.id}-${reformatURL(work.title)}`"> -->
       <div class="work-page-wrapper__content col-12 p-0 mt-3 mb-3">
-        <img :src="work.img" draggable="false">
+        <img :src="work.img" draggable="false" />
 
-          <p>{{ work.subtitle }}</p>
+        <p>{{ work.subtitle }}</p>
 
         <div class="work-page-wrapper__text">
           <h2>{{ work.title }}</h2>
         </div>
-
       </div>
-    <!-- </router-link> -->
+      <!-- </router-link> -->
+    </div>
   </div>
-
-</div>
 </template>
 
 <script>
-import { reformatStringToBeInURL } from "../../helpers/StringsHelper";
+import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 
 export default {
   data() {

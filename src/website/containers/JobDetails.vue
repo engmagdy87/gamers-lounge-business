@@ -34,7 +34,7 @@
 <script>
 import JobForm from "../components/jobs/JobForm";
 import Breadcrumb from "../shared/Breadcrumb";
-import { getEntityId } from "../helpers/StringsHelper";
+import { getEntityId } from "../../helpers/StringsHelper";
 
 export default {
   data() {

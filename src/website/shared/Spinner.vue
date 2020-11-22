@@ -21,7 +21,12 @@
 import { mapState } from "vuex";
 
 export default {
-  props: ["smallLoader", "showSpinnerFlag"]
+  props: ["smallLoader"],
+  computed: {
+    ...mapState({
+      showSpinnerFlag: state => state.app.showSpinnerFlag
+    })
+  }
 };
 </script>
 

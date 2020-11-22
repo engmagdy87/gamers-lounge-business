@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { QUERY, MUTATION } from '../graphql';
-import { getTokenCookie } from '../helpers/CookieHelper';
+import { getTokenCookie } from './CookieHelper';
 import BASE_URL from '../constants/APIs';
 
 const fetchDepartments = async () => {
@@ -49,14 +49,13 @@ const fetchJobApplication = async (jobId) => {
 }
 
 const adminLogin = async (credentials) => {
-  const token = getTokenCookie()
   try {
     const response = await request({
       query: MUTATION.LOGIN(credentials),
-    }, token);
-    return response.data
+    });
+    return response.data.data.login
   } catch (error) {
-    return false;
+    throw error;
   }
 }
 
@@ -175,12 +174,9 @@ const request = async (data, token) => {
       'Authorization': `Bearer ${token}`
     }
   });
-  console.log(response);
-  if (response.status !== 200 && response.status !== 304)
-    throw new Error(
-      `response status code ${response.status
-      },\n data passed object:\n ${JSON.stringify(data)}`
-    );
+
+  if (response.data.errors)
+    throw new Error(response.data.errors[0].message);
 
   return response;
 }

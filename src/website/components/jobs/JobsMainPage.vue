@@ -34,7 +34,7 @@
 
 <script>
 import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
-import { reformatStringToBeInURL } from "../../helpers/StringsHelper";
+import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 
 export default {
   data() {
