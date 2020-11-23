@@ -1,5 +1,5 @@
 <template>
-  <div class="job-main-content-wrapper">
+  <div class="job-main-content-wrapper" v-if="isJobsFetched">
     <div class="job-main-content-wrapper__container row">
       <div class="col-12 p-0 job-main-content-wrapper__title">
         <h1>let's work together</h1>
@@ -12,17 +12,17 @@
 
       <div class="job-main-content-wrapper__jobs row m-0">
         <div
-          v-for="job in jobsData"
+          v-for="job in jobs"
           :key="job.id"
           class="job-main-content-wrapper__jobs__content col-xs-12 col-sm-12 col-md-6 col-lg-4"
         >
           <div class="job-main-content-wrapper__job-title col-12">
-            <p>{{ job.department }}</p>
-            <h3>{{ job.jobTitle }}</h3>
+            <p>{{ job.department.name }}</p>
+            <h3>{{ job.title }}</h3>
           </div>
 
           <div class="job-main-content-wrapper__details-btn col-12">
-            <router-link :to="`/job/${job.id}-${reformatURL(job.jobTitle)}`">
+            <router-link :to="`/job/${job.id}-${reformatURL(job.title)}`">
               <HalfClippedOutlineButton text="View" />
             </router-link>
           </div>
@@ -33,48 +33,31 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+import types from "../../../store/types";
 import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
-import { reformatStringToBeInURL } from "../../helpers/StringsHelper";
+import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 
 export default {
-  data() {
-    return {
-      jobsData: [
-        {
-          id: "1",
-          department: "Department name",
-          jobTitle: "Job title"
-        },
-        {
-          id: "2",
-          department: "Department name",
-          jobTitle: "Job title"
-        },
-        {
-          id: "3",
-          department: "Department name",
-          jobTitle: "Job title"
-        },
-        {
-          id: "4",
-          department: "Department name",
-          jobTitle: "Job title"
-        },
-        {
-          id: "5",
-          department: "Department name",
-          jobTitle: "Job title"
-        }
-      ]
-    };
+  computed: {
+    ...mapState({
+      jobs: state => state.jobs.jobs.data,
+      isJobsFetched: state => state.jobs.isJobsFetched
+    })
+  },
+  methods: {
+    ...mapActions({
+      fetchJobs: types.jobs.actions.FETCH_JOBS
+    }),
+    reformatURL(id) {
+      return reformatStringToBeInURL(id);
+    }
   },
   components: {
     HalfClippedOutlineButton
   },
-  methods: {
-    reformatURL(id) {
-      return reformatStringToBeInURL(id);
-    }
+  mounted() {
+    this.fetchJobs();
   }
 };
 </script>

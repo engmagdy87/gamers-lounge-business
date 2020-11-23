@@ -197,7 +197,6 @@ import { mapState, mapGetters } from "vuex";
 import store from "../../store/index";
 import types from "../../store/types";
 import HalfClippedOutlineButton from "./HalfClippedOutlineButton";
-import { removeCookie, getUserCookie } from "../helpers/CookieHelper";
 
 export default {
   data() {
@@ -213,20 +212,12 @@ export default {
     closeNav() {
       this.$refs.myNav.style.height = "0%";
     },
-    logoutUser() {
-      removeCookie();
-      store.commit(types.user.mutations.SET_USER_PERSONA, {});
-      this.closeNav();
-    },
     goToLink(value) {
       window.open("https://" + value + ".com", "_blank");
     }
   },
   components: {
     HalfClippedOutlineButton
-  },
-  mounted() {
-    if (getUserCookie() !== undefined) this.userCookie = getUserCookie();
   }
 };
 </script>

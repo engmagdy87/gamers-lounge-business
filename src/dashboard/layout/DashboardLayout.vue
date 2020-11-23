@@ -1,20 +1,24 @@
 <template>
   <div class="wrapper">
     <side-bar>
-      <mobile-menu slot="content"></mobile-menu>
+      <MobileMenu slot="content"></MobileMenu>
       <sidebar-link to="/dashboard/overview">
         <i class="nc-icon nc-chart-pie-35"></i>
         <p>Dashboard</p>
       </sidebar-link>
+      <sidebar-link to="/dashboard/departments">
+        <i class="nc-icon nc-vector"></i>
+        <p>Departments</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
-      <top-navbar></top-navbar>
-      <dashboard-content @click="toggleSidebar"> </dashboard-content>
+      <TopNavbar></TopNavbar>
+      <DashboardContent @click="toggleSidebar"></DashboardContent>
     </div>
     <Spinner :smallLoader="false" />
   </div>
 </template>
-<style lang="scss"></style>
+
 <script>
 import TopNavbar from "./TopNavbar.vue";
 // import ContentFooter from "./ContentFooter.vue";

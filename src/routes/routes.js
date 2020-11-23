@@ -1,9 +1,13 @@
+
+import store from "../store/index";
+import types from "../store/types";
+
 // Website containers
 const Home = () => import(/* webpackChunkName: "Home" */ '../website/containers/Home.vue')
 const Contact = () => import(/* webpackChunkName: "Contact" */ '../website/containers/Contact.vue')
 const About = () => import(/* webpackChunkName: "About" */ '../website/containers/About.vue')
 const Jobs = () => import(/* webpackChunkName: "Jobs" */ '../website/containers/Jobs.vue')
-const JobDetails = () => import(/* webpackChunkName: "Job-Details" */ '../website/containers/JobDetails.vue')
+const JobDetails = () => import(/* webpackChunkName: "JobDetails" */ '../website/containers/JobDetails.vue')
 const OurWork = () => import(/* webpackChunkName: "OurWork" */ '../website/containers/OurWork.vue')
 
 // GeneralViews
@@ -11,54 +15,94 @@ const NotFound = () => import(/* webpackChunkName: "NotFound" */ '../dashboard/p
 
 // Admin container
 const DashboardLayout = () => import(/* webpackChunkName: "DashboardLayout" */ '../dashboard/layout/DashboardLayout.vue')
+const DashboardContent = () => import(/* webpackChunkName: "DashboardLayout" */ '../dashboard/layout/Content.vue')
 
 // Admin pages
 const Overview = () => import(/* webpackChunkName: "Overview" */ 'src/dashboard/pages/Overview.vue')
 
-const TableList = () => import(/* webpackChunkName: "TableList" */ 'src/dashboard/pages/TableList.vue')
+const DepartmentsList = () => import(/* webpackChunkName: "DepartmentsList" */ 'src/dashboard/pages/Departments/DepartmentsList.vue')
+const DepartmentsAddEdit = () => import(/* webpackChunkName: "DepartmentsList" */ 'src/dashboard/pages/Departments/DepartmentsAddEdit.vue')
+
+const Login = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/Login.vue')
+
 const Icons = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/Icons.vue')
 const Notifications = () => import(/* webpackChunkName: "Notifications" */ 'src/dashboard/pages/Notifications.vue')
 
-import { getUserCookie } from '../website/helpers/CookieHelper'
+import { getTokenCookie } from '../helpers/CookieHelper'
+
+const showHeaderAndFooterForWebsite = (next, flag = true) => {
+  store.commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, flag);
+  next();
+}
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: Home,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next)
+    }
   },
   {
     path: '/contact',
     name: 'contact',
     component: Contact,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next)
+    }
   },
   {
     path: '/about',
     name: 'about',
     component: About,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next)
+    }
   },
   {
     path: '/jobs',
     name: 'jobs',
     component: Jobs,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next, false)
+    }
   },
   {
     path: '/job/:jobName',
     name: 'job',
     component: JobDetails,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next, false)
+    }
   },
   {
     path: '/work',
     name: 'work',
     component: OurWork,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next)
+    }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+    beforeEnter(to, from, next) {
+      store.commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+      const token = getTokenCookie()
+      if (token) next('/dashboard');
+      else next();
+    },
   },
   {
     path: '/dashboard',
     component: DashboardLayout,
     redirect: '/dashboard/overview',
     beforeEnter(to, from, next) {
-      const token = getUserCookie()
-      if (!token || !token.is_admin) next('/');
+      store.commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+      const token = getTokenCookie()
+      if (!token) next('/login');
       else next();
     },
     children: [
@@ -68,9 +112,27 @@ const routes = [
         component: Overview
       },
       {
-        path: 'table-list',
-        name: 'Table List',
-        component: TableList
+        path: 'departments',
+        name: 'Departments',
+        component: DashboardContent,
+        redirect: '/dashboard/departments/list',
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: DepartmentsList
+          },
+          {
+            path: 'create',
+            name: 'Create Department',
+            component: DepartmentsAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit Department',
+            component: DepartmentsAddEdit
+          }
+        ]
       },
       {
         path: 'icons',
