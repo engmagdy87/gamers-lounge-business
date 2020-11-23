@@ -65,8 +65,10 @@ export default {
     login: async function() {
       try {
         await this.loginToDashboard(this.credentials);
-      } catch (error) {
-        this.notifyVue(error, "danger");
+      } catch (errors) {
+        JSON.parse(errors).forEach(error => {
+          this.notifyVue(error.message, "danger");
+        });
       }
     },
     onEnter() {

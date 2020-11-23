@@ -2,15 +2,16 @@ import axios from 'axios';
 import { QUERY, MUTATION } from '../graphql';
 import { getTokenCookie } from './CookieHelper';
 import BASE_URL from '../constants/APIs';
+import { isArray } from 'core-js/fn/array';
 
 const fetchDepartments = async () => {
   try {
     const response = await request({
       query: QUERY.DEPARTMENTS(),
     });
-    return response.data
+    return response.data.data.departments
   } catch (error) {
-    return false;
+    throw error;
   }
 }
 
@@ -19,9 +20,9 @@ const fetchJobs = async () => {
     const response = await request({
       query: QUERY.JOBS(),
     });
-    return response.data
+    return response.data.data.jobs
   } catch (error) {
-    return false;
+    throw error;
   }
 }
 
@@ -30,9 +31,9 @@ const fetchJob = async (jobId) => {
     const response = await request({
       query: QUERY.JOB(jobId),
     });
-    return response.data
+    return response.data.data.job
   } catch (error) {
-    return false;
+    throw error;
   }
 }
 
@@ -42,9 +43,9 @@ const fetchJobApplication = async (jobId) => {
     const response = await request({
       query: QUERY.JOB_APPLICATION(jobId),
     }, token);
-    return response.data
+    return response.data.data.jobApplication
   } catch (error) {
-    return false;
+    throw error;
   }
 }
 
@@ -65,9 +66,9 @@ const createDepartment = async (name) => {
     const response = await request({
       query: MUTATION.CREATE_DEPARTMENT(name),
     }, token);
-    return response.data
+    return response.data.data.createDepartment
   } catch (error) {
-    return false;
+    throw error;
   }
 }
 
@@ -77,9 +78,9 @@ const deleteDepartment = async (id) => {
     const response = await request({
       query: MUTATION.DELETE_DEPARTMENT(id),
     }, token);
-    return response.data
+    return response.data.data.deleteDepartment
   } catch (error) {
-    return false;
+    throw error;
   }
 }
 
@@ -89,9 +90,9 @@ const updateDepartment = async (data) => {
     const response = await request({
       query: MUTATION.UPDATE_DEPARTMENT(data),
     }, token);
-    return response.data
+    return response.data.data.updateDepartment
   } catch (error) {
-    return false;
+    throw error;
   }
 }
 
@@ -101,21 +102,21 @@ const createJob = async (data) => {
     const response = await request({
       query: MUTATION.CREATE_JOB(data),
     }, token);
-    return response.data
+    return response.data.data.createJob
   } catch (error) {
-    return false;
+    throw error;
   }
 }
 
-const deleteJob = async (id) => {
+const deleteJob = async (jobId) => {
   const token = getTokenCookie()
   try {
     const response = await request({
-      query: MUTATION.DELETE_JOB(id),
+      query: MUTATION.DELETE_JOB(jobId),
     }, token);
-    return response.data
+    return response.data.data.deleteJob
   } catch (error) {
-    return false;
+    throw error;
   }
 }
 
@@ -125,24 +126,22 @@ const updateJob = async (data) => {
     const response = await request({
       query: MUTATION.UPDATE_JOB(data),
     }, token);
-    return response.data
+    return response.data.data.updateJob
   } catch (error) {
-    return false;
+    throw error;
   }
 }
 
 const applyJob = async (data) => {
-  const { resume, ...applicantInfo } = data;
+  const { resumeFile, ...applicantInfo } = data;
+
+  const query = MUTATION.APPLY_JOB(applicantInfo);
+
   try {
-    const response = await request({
-      query: MUTATION.APPLY_JOB(applicantInfo),
-      variables: {
-        file: resume
-      }
-    });
-    return response.data
+    const response = await requestMultipart(constructMultipartFormData(resumeFile, query));
+    return response.data.data.applyJob
   } catch (error) {
-    return false;
+    throw error;
   }
 }
 
@@ -176,7 +175,62 @@ const request = async (data, token) => {
   });
 
   if (response.data.errors)
-    throw new Error(response.data.errors[0].message);
+    throw new Error(JSON.stringify(response.data.errors))
 
   return response;
+}
+
+const requestMultipart = async (data, token) => {
+  let response;
+  if (!token)
+    response = await axios.post(BASE_URL, data);
+  else response = await axios.post(BASE_URL, data, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  if (response.data.errors)
+    throw new Error(JSON.stringify(response.data.errors))
+
+  return response;
+}
+
+const constructMultipartFormData = (files, query) => {
+  const formData = new FormData()
+  let map = {};
+  let glQuery;
+
+  if (isArray(files)) {
+    glQuery = {
+      query,
+      variables: {
+        file: files.map(() => null) // file key may be renamed in GraphQL schema in future
+      }
+    }
+    files.forEach((file, index) => {
+      map = { ...map, index: ["variables.file." + index] }
+    })
+    formData.append('operations', JSON.stringify(glQuery))
+    formData.append('map', JSON.stringify(map))
+    files.forEach((file, index) => {
+      formData.append(index.toString(), file)
+    })
+
+  }
+  else {
+    glQuery = {
+      query,
+      variables: {
+        file: null
+      }
+    }
+    map = { 0: ["variables.file"] }
+    formData.append('operations', JSON.stringify(glQuery))
+    formData.append('map', JSON.stringify(map))
+    formData.append('0', files)
+  }
+
+
+  return formData
 }

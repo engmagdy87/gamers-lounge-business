@@ -24,9 +24,13 @@ import { getTokenCookie } from "./helpers/CookieHelper";
 export default {
   data() {
     return {
-      headerActiveItem: null,
-      showHeaderAndFooter: false
+      headerActiveItem: null
     };
+  },
+  computed: {
+    ...mapState({
+      showHeaderAndFooter: state => state.app.showHeaderAndFooter
+    })
   },
   components: {
     Header,
@@ -35,10 +39,6 @@ export default {
   },
   updated() {
     this.headerActiveItem = this.$route.name;
-    this.showHeaderAndFooter = !(
-      this.$route.path.includes("dashboard") ||
-      this.$route.path.includes("login")
-    );
   }
 };
 </script>

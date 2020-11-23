@@ -1,3 +1,7 @@
+
+import store from "../store/index";
+import types from "../store/types";
+
 // Website containers
 const Home = () => import(/* webpackChunkName: "Home" */ '../website/containers/Home.vue')
 const Contact = () => import(/* webpackChunkName: "Contact" */ '../website/containers/Contact.vue')
@@ -26,42 +30,66 @@ const Notifications = () => import(/* webpackChunkName: "Notifications" */ 'src/
 
 import { getTokenCookie } from '../helpers/CookieHelper'
 
+const showHeaderAndFooterForWebsite = (next, flag = true) => {
+  store.commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, flag);
+  next();
+}
+
 const routes = [
   {
     path: '/',
     name: 'home',
     component: Home,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next)
+    }
   },
   {
     path: '/contact',
     name: 'contact',
     component: Contact,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next)
+    }
   },
   {
     path: '/about',
     name: 'about',
     component: About,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next)
+    }
   },
   {
     path: '/jobs',
     name: 'jobs',
     component: Jobs,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next, false)
+    }
   },
   {
     path: '/job/:jobName',
     name: 'job',
     component: JobDetails,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next, false)
+    }
   },
   {
     path: '/work',
     name: 'work',
     component: OurWork,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next)
+    }
   },
   {
     path: '/login',
     name: 'login',
     component: Login,
     beforeEnter(to, from, next) {
+      store.commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
       const token = getTokenCookie()
       if (token) next('/dashboard');
       else next();
@@ -72,6 +100,7 @@ const routes = [
     component: DashboardLayout,
     redirect: '/dashboard/overview',
     beforeEnter(to, from, next) {
+      store.commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
       const token = getTokenCookie()
       if (!token) next('/login');
       else next();

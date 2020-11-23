@@ -1,30 +1,22 @@
 <template>
-  <div class="job-details-wrapper pb-5">
+  <div class="job-details-wrapper pb-5" v-if="isJobFetched">
     <div class="container">
       <div class="row">
         <div class="col-12 pt-5"><Breadcrumb :tree="breadcrumbTree" /></div>
         <div class="col-12 col-lg-6 job-details-wrapper__details">
-          <h2>Department name</h2>
-          <h1>Job title</h1>
+          <h2>{{ job.department.name }}</h2>
+          <h1>{{ job.title }}</h1>
           <hr />
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima eum
-            debitis id dolorem neque quod eos laboriosam repellendus porro
-            magnam, esse quibusdam dolor adipisci iusto enim aperiam veritatis
-            suscipit doloribus?
+            {{ job.description }}
           </p>
           <h3>Job requirements</h3>
           <p>
-            Must have's Bachelors Degree 5+ year work experience Previous
-            experience working with brands in a client-facing capacity Skills
-            Personable Able to navigate difficult conversations with clients and
-            internal teams Detail-oriented and organized Able to handle
-            high-pressure situations Willingness to travel frequently and
-            internationally
+            {{ job.requirements }}
           </p>
         </div>
         <div class="col-12 col-lg-6">
-          <JobForm />
+          <JobForm :job="job" />
         </div>
       </div>
     </div>
@@ -32,6 +24,8 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+import types from "../../store/types";
 import JobForm from "../components/jobs/JobForm";
 import Breadcrumb from "../shared/Breadcrumb";
 import { getEntityId } from "../../helpers/StringsHelper";
@@ -39,16 +33,27 @@ import { getEntityId } from "../../helpers/StringsHelper";
 export default {
   data() {
     return {
-      jobId: getEntityId(this.$route.params.jobName),
       breadcrumbTree: [{ title: "Jobs", path: "/jobs" }]
     };
+  },
+  computed: {
+    ...mapState({
+      job: state => state.jobs.job,
+      isJobFetched: state => state.jobs.isJobFetched
+    })
+  },
+  methods: {
+    ...mapActions({
+      fetchJob: types.jobs.actions.FETCH_JOB
+    })
   },
   components: {
     JobForm,
     Breadcrumb
   },
   mounted() {
-    this.breadcrumbTree.push({ title: "Job Title", path: this.$route.path });
+    this.fetchJob(getEntityId(this.$route.params.jobName));
+    this.breadcrumbTree.push({ title: this.job.title, path: this.$route.path });
   }
 };
 </script>

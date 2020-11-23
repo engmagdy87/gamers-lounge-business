@@ -10,7 +10,7 @@ const loginToDashboard = async ({ commit }, credentials) => {
         window.open('/dashboard', '_self')
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 

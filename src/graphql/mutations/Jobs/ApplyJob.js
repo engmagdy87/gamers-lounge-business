@@ -23,7 +23,8 @@ const APPLY_JOB = (
           }
        }
     ) {
-       id       
+       id    
+       resume
     }
  }
  `;
