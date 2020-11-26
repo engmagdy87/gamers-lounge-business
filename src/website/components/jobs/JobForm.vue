@@ -12,15 +12,7 @@
                 v-model="applicantInfo.fullName"
               />
             </div>
-            <span v-if="errors.fullName !== undefined">
-              <p
-                class="error-message"
-                v-for="(error, i) in errors.fullName"
-                :key="i"
-              >
-                {{ error }}
-              </p>
-            </span>
+            <ErrorMessage :fieldErrors="errors.fullName" />
           </div>
           <div class="form-group">
             <label class="form-group__long-label">Phone Number</label>
@@ -32,15 +24,7 @@
                 min="1"
               />
             </div>
-            <span v-if="errors.phone !== undefined">
-              <p
-                class="error-message"
-                v-for="(error, i) in errors.phone"
-                :key="i"
-              >
-                {{ error }}
-              </p>
-            </span>
+            <ErrorMessage :fieldErrors="errors.phone" />
           </div>
           <div class="form-group">
             <label class="form-group__short-label">Email</label>
@@ -51,15 +35,7 @@
                 v-model="applicantInfo.email"
               />
             </div>
-            <span v-if="errors.email !== undefined">
-              <p
-                class="error-message"
-                v-for="(error, i) in errors.email"
-                :key="i"
-              >
-                {{ error }}
-              </p>
-            </span>
+            <ErrorMessage :fieldErrors="errors.email" />
           </div>
           <div class="form-group">
             <label class="form-group__mid-label">Country</label>
@@ -80,15 +56,7 @@
                 >
               </select>
             </div>
-            <span v-if="errors.country !== undefined">
-              <p
-                class="error-message"
-                v-for="(error, i) in errors.country"
-                :key="i"
-              >
-                {{ error }}
-              </p>
-            </span>
+            <ErrorMessage :fieldErrors="errors.country" />
           </div>
           <div class="form-group">
             <label class="form-group__mid-label">City</label>
@@ -105,15 +73,7 @@
                 >
               </select>
             </div>
-            <span v-if="errors.city !== undefined">
-              <p
-                class="error-message"
-                v-for="(error, i) in errors.city"
-                :key="i"
-              >
-                {{ error }}
-              </p>
-            </span>
+            <ErrorMessage :fieldErrors="errors.city" />
           </div>
           <div class="form-group">
             <label class="form-group__long-label">Behance Link</label>
@@ -124,15 +84,7 @@
                 v-model="applicantInfo.behance_link"
               />
             </div>
-            <span v-if="errors.behance_link !== undefined">
-              <p
-                class="error-message"
-                v-for="(error, i) in errors.behance_link"
-                :key="i"
-              >
-                {{ error }}
-              </p>
-            </span>
+            <ErrorMessage :fieldErrors="errors.behance_link" />
           </div>
           <div class="form-group">
             <label class="form-group__long-label">Linkedin Link</label>
@@ -143,15 +95,7 @@
                 v-model="applicantInfo.linkedin_link"
               />
             </div>
-            <span v-if="errors.linkedin_link !== undefined">
-              <p
-                class="error-message"
-                v-for="(error, i) in errors.linkedin_link"
-                :key="i"
-              >
-                {{ error }}
-              </p>
-            </span>
+            <ErrorMessage :fieldErrors="errors.linkedin_link" />
           </div>
           <div
             class="form-group d-flex justify-content-start align-items-center"
@@ -174,15 +118,7 @@
             </HalfClippedOutlinedShape>
             <span class="ml-3">{{ applicantInfo.resumeFile.name }}</span>
           </div>
-          <span v-if="errors.resumeFile !== undefined">
-            <p
-              class="error-message"
-              v-for="(error, i) in errors.resumeFile"
-              :key="i"
-            >
-              {{ error }}
-            </p>
-          </span>
+          <ErrorMessage :fieldErrors="errors.resumeFile" />
           <HalfClippedButton text="Submit" :onClickAction="applyToJob" />
         </form>
       </template>
@@ -195,9 +131,10 @@ import { mapActions, mapState } from "vuex";
 import types from "../../../store/types";
 import HalfClippedShape from "../../shared/HalfClippedShape";
 import HalfClippedOutlinedShape from "../../shared/HalfClippedOutlinedShape";
+import ErrorMessage from "../../shared/ErrorMessage";
 import HalfClippedButton from "../../shared/HalfClippedButton";
 import countryCodes from "../../../assets/json/CountryCodes.json";
-import validateForm from "../../../helpers/FormValidation";
+import isValidationErrorExist from "../../../helpers/FormValidation";
 
 const emptyForm = {
   fullName: "",
@@ -243,7 +180,8 @@ export default {
   components: {
     HalfClippedShape,
     HalfClippedButton,
-    HalfClippedOutlinedShape
+    HalfClippedOutlinedShape,
+    ErrorMessage
   },
   computed: {
     targetCities() {
@@ -257,7 +195,13 @@ export default {
       applyJob: types.jobs.actions.APPLY_JOB
     }),
     applyToJob: async function() {
-      if (this.isErrorExist() !== 0) return;
+      const errorObject = isValidationErrorExist(
+        this.applicantInfo,
+        this.aliases,
+        this.validation
+      );
+      this.errors = { ...errorObject.errors };
+      if (errorObject.length !== 0) return;
       try {
         await this.applyJob({ ...this.applicantInfo, jobId: this.job.id });
         this.notifyVue(
@@ -273,22 +217,6 @@ export default {
     },
     getSelectedIndex(e) {
       this.selectedIndex = e.target.selectedIndex;
-    },
-    validateFormFields(value, field, alias) {
-      this.errors = {
-        ...this.errors,
-        [field]: validateForm(value, this.validation[alias], alias)
-      };
-    },
-    isErrorExist() {
-      let errorsLength = 0;
-      Object.keys(this.applicantInfo).forEach(key =>
-        this.validateFormFields(this.applicantInfo[key], key, this.aliases[key])
-      );
-      Object.keys(this.errors).forEach(
-        error => (errorsLength += this.errors[error].length)
-      );
-      return errorsLength;
     },
     setFile(e, key) {
       const files = e.target.files;

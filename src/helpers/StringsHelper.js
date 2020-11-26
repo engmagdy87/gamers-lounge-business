@@ -28,4 +28,8 @@ const getEntityId = (text) => {
     return text.split("-")[0]
 }
 
-export { getFirstLettersOfString, truncateText, changeTextDirection, reformatStringToBeInURL, getEntityId }
+const getEntityName = (text) => {
+    return text.split("-").slice(1).join(" ")
+}
+
+export { getFirstLettersOfString, truncateText, changeTextDirection, reformatStringToBeInURL, getEntityId, getEntityName }

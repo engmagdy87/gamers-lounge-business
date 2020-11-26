@@ -17,8 +17,8 @@ const jobs = {
         SET_IS_JOBS_FETCHED: 'jobs/mutations/SET_IS_JOBS_FETCHED',
         SET_JOB: 'jobs/mutations/SET_JOB',
         SET_IS_JOB_FETCHED: 'jobs/mutations/SET_IS_JOB_FETCHED',
-        SET_JOB_APPLICATION: 'jobs/mutations/SET_JOB_APPLICATION',
         SET_IS_JOB_APPLICATION_FETCHED: 'jobs/mutations/SET_IS_JOB_APPLICATION_FETCHED',
+        REMOVE_DELETED_JOB: 'jobs/mutations/REMOVE_DELETED_JOB',
     },
     actions: {
         FETCH_JOBS: 'jobs/actions/FETCH_JOBS',
@@ -34,6 +34,8 @@ const jobs = {
 const departments = {
     mutations: {
         SET_DEPARTMENTS: 'departments/mutations/SET_DEPARTMENTS',
+        SET_IS_DEPARTMENTS_FETCHED: 'departments/mutations/SET_IS_DEPARTMENTS_FETCHED',
+        REMOVE_DELETED_DEPARTMENT: 'departments/mutations/REMOVE_DELETED_DEPARTMENT',
     },
     actions: {
         FETCH_DEPARTMENTS: 'departments/actions/FETCH_DEPARTMENTS',

@@ -15,11 +15,11 @@ module.exports = {
         'chart.js': 'chart.js/dist/Chart.js'
       }
     },
-    plugins: [
-      new webpack.optimize.LimitChunkCountPlugin({
-        maxChunks: 20
-      })
-    ]
+    // plugins: [
+    //   new webpack.optimize.LimitChunkCountPlugin({
+    //     maxChunks: 50
+    //   })
+    // ]
   },
   pwa: {
     name: 'Vue Light Bootstrap Dashboard',

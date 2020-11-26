@@ -7,13 +7,9 @@
           <h2>{{ job.department.name }}</h2>
           <h1>{{ job.title }}</h1>
           <hr />
-          <p>
-            {{ job.description }}
-          </p>
+          <div v-html="job.description"></div>
           <h3>Job requirements</h3>
-          <p>
-            {{ job.requirements }}
-          </p>
+          <div v-html="job.requirements"></div>
         </div>
         <div class="col-12 col-lg-6">
           <JobForm :job="job" />
@@ -28,7 +24,7 @@ import { mapActions, mapState } from "vuex";
 import types from "../../store/types";
 import JobForm from "../components/jobs/JobForm";
 import Breadcrumb from "../shared/Breadcrumb";
-import { getEntityId } from "../../helpers/StringsHelper";
+import { getEntityId, getEntityName } from "../../helpers/StringsHelper";
 
 export default {
   data() {
@@ -52,8 +48,15 @@ export default {
     Breadcrumb
   },
   mounted() {
-    this.fetchJob(getEntityId(this.$route.params.jobName));
-    this.breadcrumbTree.push({ title: this.job.title, path: this.$route.path });
+    const requestSource = {
+      jobId: getEntityId(this.$route.params.jobName),
+      requestSource: "website"
+    };
+    this.fetchJob(requestSource);
+    this.breadcrumbTree.push({
+      title: getEntityName(this.$route.params.jobName),
+      path: ""
+    });
   }
 };
 </script>

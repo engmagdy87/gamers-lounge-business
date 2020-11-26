@@ -37,13 +37,13 @@ const fetchJob = async (jobId) => {
   }
 }
 
-const fetchJobApplication = async (jobId) => {
+const fetchDashboardJob = async (jobId) => {
   const token = getTokenCookie()
   try {
     const response = await request({
-      query: QUERY.JOB_APPLICATION(jobId),
+      query: QUERY.JOB(jobId),
     }, token);
-    return response.data.data.jobApplication
+    return response.data.data.job
   } catch (error) {
     throw error;
   }
@@ -149,7 +149,7 @@ export {
   fetchDepartments,
   fetchJobs,
   fetchJob,
-  fetchJobApplication,
+  fetchDashboardJob,
   adminLogin,
   createDepartment,
   deleteDepartment,

@@ -1,4 +1,4 @@
-import { applyJob, createJob, deleteJob, fetchJob, fetchJobApplication, fetchJobs, updateJob } from '../../helpers/APIsHelper';
+import { applyJob, createJob, deleteJob, fetchJob, fetchDashboardJob, fetchJobs, updateJob } from '../../helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -23,21 +23,20 @@ const mutations = {
     [types.jobs.mutations.SET_IS_JOB_FETCHED]: (currentState, flag) => {
         currentState.isJobFetched = flag;
     },
-    [types.jobs.mutations.SET_JOB_APPLICATION]: (currentState, jobApplication) => {
-        currentState.jobApplication = jobApplication;
-    },
-    [types.jobs.mutations.SET_IS_JOB_APPLICATION_FETCHED]: (currentState, flag) => {
-        currentState.isJobApplicationFetched = flag;
+    [types.jobs.mutations.REMOVE_DELETED_JOB]: (currentState, index) => {
+        currentState.jobs.splice(index, 1);
     },
 }
 
-const fetchJobsData = async ({ commit }) => {
+const fetchJobsData = async ({ commit }, requestSource) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
         const response = await fetchJobs()
-        commit(types.jobs.mutations.SET_JOBS, response)
+        commit(types.jobs.mutations.SET_JOBS, response.data)
         commit(types.jobs.mutations.SET_IS_JOBS_FETCHED, true)
-        commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
+        if (requestSource === 'website')
+            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
+        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -46,31 +45,24 @@ const fetchJobsData = async ({ commit }) => {
     }
 };
 
-const fetchJobData = async ({ commit }, jobId) => {
+const fetchJobData = async ({ commit }, { jobId, requestSource }) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await fetchJob(jobId)
+        let response;
+        if (requestSource === 'website') {
+            response = await fetchJob(jobId)
+            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
+        }
+        else {
+            response = await fetchDashboardJob(jobId)
+            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+        }
         commit(types.jobs.mutations.SET_JOB, response)
         commit(types.jobs.mutations.SET_IS_JOB_FETCHED, true)
-        commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.jobs.mutations.SET_IS_JOB_FETCHED, false)
-        throw error.message
-    }
-};
-
-const fetchJobApplicationData = async ({ commit }, jobId) => {
-    commit(types.app.mutations.SET_SPINNER_FLAG, true)
-    try {
-        const response = await fetchJobApplication(jobId)
-        commit(types.jobs.mutations.SET_JOB_APPLICATION, response)
-        commit(types.jobs.mutations.SET_IS_JOB_APPLICATION_FETCHED, true)
-        commit(types.app.mutations.SET_SPINNER_FLAG, false)
-    } catch (error) {
-        commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        commit(types.jobs.mutations.SET_IS_JOB_APPLICATION_FETCHED, false)
         throw error.message
     }
 };
@@ -86,10 +78,12 @@ const createJobData = async ({ commit }, data) => {
     }
 };
 
-const deleteJobData = async ({ commit }, jobId) => {
+const deleteJobData = async ({ commit }, payload) => {
+    const { jobId, locationInDataArray } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
         await deleteJob(jobId)
+        commit(types.jobs.mutations.REMOVE_DELETED_JOB, locationInDataArray);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -122,7 +116,6 @@ const applyJobData = async ({ commit }, data) => {
 const actions = {
     [types.jobs.actions.FETCH_JOBS]: fetchJobsData,
     [types.jobs.actions.FETCH_JOB]: fetchJobData,
-    [types.jobs.actions.FETCH_JOB_APPLICATION]: fetchJobApplicationData,
     [types.jobs.actions.CREATE_JOB]: createJobData,
     [types.jobs.actions.DELETE_JOB]: deleteJobData,
     [types.jobs.actions.UPDATE_JOB]: updateJobData,

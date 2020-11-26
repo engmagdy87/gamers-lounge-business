@@ -21,7 +21,11 @@ const DashboardContent = () => import(/* webpackChunkName: "DashboardLayout" */ 
 const Overview = () => import(/* webpackChunkName: "Overview" */ 'src/dashboard/pages/Overview.vue')
 
 const DepartmentsList = () => import(/* webpackChunkName: "DepartmentsList" */ 'src/dashboard/pages/Departments/DepartmentsList.vue')
-const DepartmentsAddEdit = () => import(/* webpackChunkName: "DepartmentsList" */ 'src/dashboard/pages/Departments/DepartmentsAddEdit.vue')
+const DepartmentsAddEdit = () => import(/* webpackChunkName: "DepartmentsAdd" */ 'src/dashboard/pages/Departments/DepartmentsAddEdit.vue')
+
+const JobsList = () => import(/* webpackChunkName: "JobsList" */ 'src/dashboard/pages/Jobs/JobsList.vue')
+const JobsAddEdit = () => import(/* webpackChunkName: "JobsAdd" */ 'src/dashboard/pages/Jobs/JobsAddEdit.vue')
+const JobApplicantsList = () => import(/* webpackChunkName: "JobApplicantsList" */ 'src/dashboard/pages/Jobs/JobApplicantsList.vue')
 
 const Login = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/Login.vue')
 
@@ -131,6 +135,34 @@ const routes = [
             path: 'edit',
             name: 'Edit Department',
             component: DepartmentsAddEdit
+          }
+        ]
+      },
+      {
+        path: 'jobs',
+        name: 'Jobs',
+        component: DashboardContent,
+        redirect: '/dashboard/jobs/list',
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: JobsList
+          },
+          {
+            path: 'applicants/:jobId',
+            name: 'List Job Applicants',
+            component: JobApplicantsList
+          },
+          {
+            path: 'create',
+            name: 'Create Job',
+            component: JobsAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit Job',
+            component: JobsAddEdit
           }
         ]
       },
