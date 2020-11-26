@@ -11,7 +11,7 @@
     <div class="work-carousel__bg"></div>
 
     <div class="work-carousel__carousel-container">
-      <Carousel
+      <WorkSlider
         :autoPlay="false"
         :slides="slides"
         customBulletsStyleClass="hero-bullets"
@@ -49,19 +49,19 @@
             </button>
           </div>
         </template>
-      </Carousel>
+      </WorkSlider>
     </div>
   </div>
 </template>
 
 <script>
-import Carousel from "../../shared/Carousel/Carousel";
+import WorkSlider from "../../shared/Carousel/WorkSlider";
 import HalfClippedShape from "../../shared/HalfClippedShape";
 import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
 
 export default {
   components: {
-    Carousel,
+    WorkSlider,
     HalfClippedShape,
     HalfClippedOutlineButton
   },

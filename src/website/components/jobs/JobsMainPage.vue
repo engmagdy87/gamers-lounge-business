@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 import types from "../../../store/types";
 import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
@@ -49,6 +49,10 @@ export default {
     ...mapActions({
       fetchJobs: types.jobs.actions.FETCH_JOBS
     }),
+    ...mapMutations({
+      setShowHeaderAndFooterFlag:
+        types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG
+    }),
     reformatURL(id) {
       return reformatStringToBeInURL(id);
     }
@@ -57,7 +61,8 @@ export default {
     HalfClippedOutlineButton
   },
   mounted() {
-    this.fetchJobs("website");
+    if (!this.isJobsFetched) this.fetchJobs("website");
+    else this.setShowHeaderAndFooterFlag(true);
   }
 };
 </script>

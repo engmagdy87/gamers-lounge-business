@@ -12,7 +12,10 @@
         <slot name="carouselSlide" :slide="slide"></slot>
       </div>
     </transition-group>
-    <div :class="`carousel-wrapper__bullets ${customBulletsStyleClass}`" v-if="showBullets">
+    <div
+      :class="`carousel-wrapper__bullets ${customBulletsStyleClass}`"
+      v-if="showBullets"
+    >
       <button
         v-for="(slide, i) in slides"
         :key="i"
@@ -49,7 +52,7 @@ export default {
     },
     customBulletsStyleClass: {
       type: String,
-      default: ''
+      default: ""
     }
   },
   data() {
@@ -111,6 +114,8 @@ export default {
 @import "../../../assets/sass/website/variables.scss";
 @import "../../../assets/sass/website/mixins.scss";
 
+$time: 0.5s;
+
 .carousel-wrapper {
   @include initializePageStyle;
   position: relative;
@@ -138,6 +143,7 @@ export default {
       height: 13px;
       margin: 5px;
       outline: none;
+      transition: all 0.2s;
     }
   }
 }
@@ -151,17 +157,22 @@ button.carousel-wrapper__bullets--active {
 
 .slide-enter-active,
 .slide-leave-active {
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease;
+  transition: opacity $time ease-in-out, transform $time ease;
 }
 .slide-enter-active {
-  transition-delay: 0.5s;
+  transition-delay: $time;
 }
-.slide-enter,
+.slide-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
 .slide-leave-to {
   opacity: 0;
+  transform: translateX(-100%);
 }
 .slide-enter-to,
 .slide-leave {
   opacity: 1;
+  transform: translateX(0);
 }
 </style>

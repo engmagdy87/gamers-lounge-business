@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 import types from "../../store/types";
 import JobForm from "../components/jobs/JobForm";
 import Breadcrumb from "../shared/Breadcrumb";
@@ -41,22 +41,29 @@ export default {
   methods: {
     ...mapActions({
       fetchJob: types.jobs.actions.FETCH_JOB
+    }),
+    ...mapMutations({
+      setIsJobFetched: types.jobs.mutations.SET_IS_JOB_FETCHED
     })
   },
   components: {
     JobForm,
     Breadcrumb
   },
+  beforeMount() {
+    this.setIsJobFetched(false);
+  },
   mounted() {
     const requestSource = {
       jobId: getEntityId(this.$route.params.jobName),
       requestSource: "website"
     };
-    this.fetchJob(requestSource);
     this.breadcrumbTree.push({
       title: getEntityName(this.$route.params.jobName),
       path: ""
     });
+
+    this.fetchJob(requestSource);
   }
 };
 </script>

@@ -9,11 +9,7 @@
     </div>
     <HalfClippedShape>
       <template #content>
-        <Carousel
-          :slides="slides"
-          customBulletsStyleClass="hero-bullets"
-          :autoPlay="false"
-        >
+        <ServiceSlider :slides="slides" customBulletsStyleClass="hero-bullets">
           <template #carouselSlide="{slide}">
             <div class="row m-0 position-relative">
               <div class="col-12 col-md-6 services-carousel__text">
@@ -46,20 +42,20 @@
               </button>
             </div>
           </template>
-        </Carousel>
+        </ServiceSlider>
       </template>
     </HalfClippedShape>
   </div>
 </template>
 
 <script>
-import Carousel from "../../shared/Carousel/Carousel";
+import ServiceSlider from "../../shared/Carousel/ServiceSlider";
 import HalfClippedShape from "../../shared/HalfClippedShape";
 import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
 
 export default {
   components: {
-    Carousel,
+    ServiceSlider,
     HalfClippedShape,
     HalfClippedOutlineButton
   },
