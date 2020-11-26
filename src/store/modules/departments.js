@@ -3,11 +3,18 @@ import types from '../types';
 
 const state = {
     departments: [],
+    isDepartmentsDataFetched: false
 }
 
 const mutations = {
     [types.departments.mutations.SET_DEPARTMENTS]: (currentState, departments) => {
         currentState.departments = departments;
+    },
+    [types.departments.mutations.SET_IS_DEPARTMENTS_FETCHED]: (currentState, flag) => {
+        currentState.isDepartmentsDataFetched = flag;
+    },
+    [types.departments.mutations.REMOVE_DELETED_DEPARTMENT]: (currentState, index) => {
+        currentState.departments.splice(index, 1);
     },
 }
 
@@ -16,8 +23,10 @@ const fetchDepartmentsData = async ({ commit }) => {
     try {
         const response = await fetchDepartments()
         commit(types.departments.mutations.SET_DEPARTMENTS, response)
+        commit(types.departments.mutations.SET_IS_DEPARTMENTS_FETCHED, true)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
+        commit(types.departments.mutations.SET_IS_DEPARTMENTS_FETCHED, false)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         throw error.message
     }
@@ -34,10 +43,12 @@ const createDepartmentData = async ({ commit }, data) => {
     }
 };
 
-const deleteDepartmentData = async ({ commit }, jobId) => {
+const deleteDepartmentData = async ({ commit }, payload) => {
+    const { departmentId, locationInDataArray } = payload
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await deleteDepartment(jobId)
+        await deleteDepartment(departmentId)
+        commit(types.departments.mutations.REMOVE_DELETED_DEPARTMENT, locationInDataArray);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)

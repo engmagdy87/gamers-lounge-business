@@ -182,11 +182,11 @@
   {
     "code2": "AX",
     "code3": "ALA",
-    "name": "Åland islands",
+    "name": "Aland islands",
     "capital": "Mariehamn",
     "region": "Europe",
     "subregion": "Northern Europe",
-    "states": []
+    "states": [{ "name": "Aland islands" }]
   },
   {
     "code2": "AL",
@@ -288,7 +288,7 @@
       },
       {
         "code": "46",
-        "name": "Aïn Témouchent",
+        "name": "Aïn Temouchent",
         "subdivision": null
       },
       {
@@ -308,7 +308,7 @@
       },
       {
         "code": "34",
-        "name": "Bordj Bou Arréridj",
+        "name": "Bordj Bou Arreridj",
         "subdivision": null
       },
       {
@@ -323,12 +323,12 @@
       },
       {
         "code": "08",
-        "name": "Béchar",
+        "name": "Bechar",
         "subdivision": null
       },
       {
         "code": "06",
-        "name": "Béjaïa",
+        "name": "Bejaïa",
         "subdivision": null
       },
       {
@@ -413,7 +413,7 @@
       },
       {
         "code": "26",
-        "name": "Médéa",
+        "name": "Medea",
         "subdivision": null
       },
       {
@@ -463,7 +463,7 @@
       },
       {
         "code": "19",
-        "name": "Sétif",
+        "name": "Setif",
         "subdivision": null
       },
       {
@@ -503,7 +503,7 @@
       },
       {
         "code": "12",
-        "name": "Tébessa",
+        "name": "Tebessa",
         "subdivision": null
       }
     ]
@@ -515,7 +515,7 @@
     "capital": "Pago Pago",
     "region": "Oceania",
     "subregion": "Polynesia",
-    "states": []
+    "states": [{ "name": "American Samoa" }]
   },
   {
     "code2": "AD",
@@ -582,7 +582,7 @@
       },
       {
         "code": "BiE",
-        "name": "Bié",
+        "name": "Bie",
         "subdivision": null
       },
       {
@@ -669,7 +669,7 @@
     "capital": "The Valley",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Anguilla" }]
   },
   {
     "code2": "AQ",
@@ -678,7 +678,7 @@
     "capital": "",
     "region": "Polar",
     "subregion": "",
-    "states": []
+    "states": [{ "name": "Antarctica" }]
   },
   {
     "code2": "AG",
@@ -810,7 +810,7 @@
       },
       {
         "code": "Q",
-        "name": "Neuquén",
+        "name": "Neuquen",
         "subdivision": null
       },
       {
@@ -932,7 +932,7 @@
     "capital": "Oranjestad",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Aruba" }]
   },
   {
     "code2": "AU",
@@ -1424,7 +1424,7 @@
       },
       {
         "code": "WAL",
-        "name": "Région Wallonne",
+        "name": "Region Wallonne",
         "subdivision": null
       },
       {
@@ -1529,7 +1529,7 @@
       },
       {
         "code": "OU",
-        "name": "Ouémé",
+        "name": "Oueme",
         "subdivision": null
       },
       {
@@ -1551,7 +1551,7 @@
     "capital": "Hamilton",
     "region": "Americas",
     "subregion": "Northern America",
-    "states": []
+    "states": [{ "name": "Bermuda" }]
   },
   {
     "code2": "BT",
@@ -1725,7 +1725,7 @@
     "capital": "Kralendijk",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Bonaire" }]
   },
   {
     "code2": "BA",
@@ -1849,7 +1849,7 @@
     "capital": "",
     "region": "",
     "subregion": "",
-    "states": []
+    "states": [{ "name": "Bouvet island" }]
   },
   {
     "code2": "BR",
@@ -2003,7 +2003,7 @@
     "capital": "Diego Garcia",
     "region": "Africa",
     "subregion": "Eastern Africa",
-    "states": []
+    "states": [{ "name": "British indian Ocean Territory" }]
   },
   {
     "code2": "UM",
@@ -2067,7 +2067,7 @@
     "capital": "Road Town",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Virgin islands (British)" }]
   },
   {
     "code2": "Vi",
@@ -2076,7 +2076,7 @@
     "capital": "Charlotte Amalie",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Virgin islands (U.S.)" }]
   },
   {
     "code2": "BN",
@@ -2562,7 +2562,7 @@
     "code2": "CM",
     "code3": "CMR",
     "name": "Cameroon",
-    "capital": "Yaoundé",
+    "capital": "Yaounde",
     "region": "Africa",
     "subregion": "Middle Africa",
     "states": [
@@ -2720,7 +2720,7 @@
     "capital": "George Town",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Cayman islands" }]
   },
   {
     "code2": "CF",
@@ -2762,12 +2762,12 @@
       },
       {
         "code": "HS",
-        "name": "Haute-Sangha / Mambéré-Kadéï",
+        "name": "Haute-Sangha / Mambere-Kadeï",
         "subdivision": null
       },
       {
         "code": "KG",
-        "name": "Kémo-Gribingui",
+        "name": "Kemo-Gribingui",
         "subdivision": null
       },
       {
@@ -2782,7 +2782,7 @@
       },
       {
         "code": "NM",
-        "name": "Nana-Mambéré",
+        "name": "Nana-Mambere",
         "subdivision": null
       },
       {
@@ -2802,7 +2802,7 @@
       },
       {
         "code": "OP",
-        "name": "Ouham-Pendé",
+        "name": "Ouham-Pende",
         "subdivision": null
       },
       {
@@ -2947,7 +2947,7 @@
     "states": [
       {
         "code": "Ai",
-        "name": "Aisén del General Carlos ibañez del Campo",
+        "name": "Aisen del General Carlos ibanez del Campo",
         "subdivision": null
       },
       {
@@ -3224,7 +3224,7 @@
     "capital": "Flying Fish Cove",
     "region": "Oceania",
     "subregion": "Australia and New Zealand",
-    "states": []
+    "states": [{ "name": "Christmas island" }]
   },
   {
     "code2": "CC",
@@ -3233,7 +3233,7 @@
     "capital": "West island",
     "region": "Oceania",
     "subregion": "Australia and New Zealand",
-    "states": []
+    "states": [{ "name": "Cocos (Keeling) islands" }]
   },
   {
     "code2": "CO",
@@ -3350,7 +3350,7 @@
       },
       {
         "code": "NAR",
-        "name": "Nariño",
+        "name": "Narino",
         "subdivision": null
       },
       {
@@ -3375,7 +3375,7 @@
       },
       {
         "code": "SAP",
-        "name": "San Andrés, Providencia y Santa Catalina",
+        "name": "San Andres, Providencia y Santa Catalina",
         "subdivision": null
       },
       {
@@ -3400,7 +3400,7 @@
       },
       {
         "code": "VAU",
-        "name": "Vaupés",
+        "name": "Vaupes",
         "subdivision": null
       },
       {
@@ -3430,7 +3430,7 @@
       },
       {
         "code": "M",
-        "name": "Mohéli",
+        "name": "Moheli",
         "subdivision": null
       }
     ]
@@ -3475,7 +3475,7 @@
       },
       {
         "code": "2",
-        "name": "Lékoumou",
+        "name": "Lekoumou",
         "subdivision": null
       },
       {
@@ -3565,7 +3565,7 @@
       },
       {
         "code": "EQ",
-        "name": "Équateur",
+        "name": "equateur",
         "subdivision": null
       }
     ]
@@ -3577,13 +3577,13 @@
     "capital": "Avarua",
     "region": "Oceania",
     "subregion": "Polynesia",
-    "states": []
+    "states": [{ "name": "Cook islands" }]
   },
   {
     "code2": "CR",
     "code3": "CRi",
     "name": "Costa Rica",
-    "capital": "San José",
+    "capital": "San Jose",
     "region": "Americas",
     "subregion": "Central America",
     "states": [
@@ -3619,7 +3619,7 @@
       },
       {
         "code": "SJ",
-        "name": "San José",
+        "name": "San Jose",
         "subdivision": null
       }
     ]
@@ -3836,7 +3836,7 @@
     "capital": "Willemstad",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Curaçao" }]
   },
   {
     "code2": "CY",
@@ -3903,7 +3903,7 @@
       },
       {
         "code": "KR",
-        "name": "Kralovéhradecký kraj",
+        "name": "Kralovehradecký kraj",
         "subdivision": null
       },
       {
@@ -4178,7 +4178,7 @@
       },
       {
         "code": "F",
-        "name": "Cañar",
+        "name": "Canar",
         "subdivision": null
       },
       {
@@ -4453,7 +4453,7 @@
       },
       {
         "code": "CA",
-        "name": "Cabañas",
+        "name": "Cabanas",
         "subdivision": null
       },
       {
@@ -4735,7 +4735,7 @@
     "capital": "Stanley",
     "region": "Americas",
     "subregion": "South America",
-    "states": []
+    "states": [{ "name": "Falkland islands" }]
   },
   {
     "code2": "FO",
@@ -4744,7 +4744,7 @@
     "capital": "Torshavn",
     "region": "Europe",
     "subregion": "Northern Europe",
-    "states": []
+    "states": [{ "name": "Faroe islands" }]
   },
   {
     "code2": "FJ",
@@ -4936,7 +4936,7 @@
       },
       {
         "code": "i",
-        "name": "Franche-Comté",
+        "name": "Franche-Comte",
         "subdivision": "Metropolitan region"
       },
       {
@@ -4961,7 +4961,7 @@
       },
       {
         "code": "N",
-        "name": "Midi-Pyrénées",
+        "name": "Midi-Pyrenees",
         "subdivision": "Metropolitan region"
       },
       {
@@ -5013,7 +5013,7 @@
     "capital": "Cayenne",
     "region": "Americas",
     "subregion": "South America",
-    "states": []
+    "states": [{ "name": "French Guiana" }]
   },
   {
     "code2": "PF",
@@ -5022,7 +5022,7 @@
     "capital": "Papeetē",
     "region": "Oceania",
     "subregion": "Polynesia",
-    "states": []
+    "states": [{ "name": "French Polynesia" }]
   },
   {
     "code2": "TF",
@@ -5031,7 +5031,7 @@
     "capital": "Port-aux-Français",
     "region": "Africa",
     "subregion": "Southern Africa",
-    "states": []
+    "states": [{ "name": "French Southern and Antarctic Lands" }]
   },
   {
     "code2": "GA",
@@ -5048,17 +5048,17 @@
       },
       {
         "code": "2",
-        "name": "Haut-Ogooué",
+        "name": "Haut-Ogooue",
         "subdivision": null
       },
       {
         "code": "3",
-        "name": "Moyen-Ogooué",
+        "name": "Moyen-Ogooue",
         "subdivision": null
       },
       {
         "code": "4",
-        "name": "Ngounié",
+        "name": "Ngounie",
         "subdivision": null
       },
       {
@@ -5068,17 +5068,17 @@
       },
       {
         "code": "6",
-        "name": "Ogooué-ivindo",
+        "name": "Ogooue-ivindo",
         "subdivision": null
       },
       {
         "code": "7",
-        "name": "Ogooué-Lolo",
+        "name": "Ogooue-Lolo",
         "subdivision": null
       },
       {
         "code": "8",
-        "name": "Ogooué-Maritime",
+        "name": "Ogooue-Maritime",
         "subdivision": null
       },
       {
@@ -5355,7 +5355,7 @@
     "capital": "Gibraltar",
     "region": "Europe",
     "subregion": "Southern Europe",
-    "states": []
+    "states": [{ "name": "Gibraltar" }]
   },
   {
     "code2": "GR",
@@ -5514,16 +5514,16 @@
     "capital": "Basse-Terre",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Guadeloupe" }]
   },
   {
     "code2": "GU",
     "code3": "GUM",
     "name": "Guam",
-    "capital": "Hagåtña",
+    "capital": "Hagatna",
     "region": "Oceania",
     "subregion": "Micronesia",
-    "states": []
+    "states": [{ "name": "Guam" }]
   },
   {
     "code2": "GT",
@@ -5590,7 +5590,7 @@
       },
       {
         "code": "PE",
-        "name": "Petén",
+        "name": "Peten",
         "subdivision": null
       },
       {
@@ -5600,7 +5600,7 @@
       },
       {
         "code": "QC",
-        "name": "Quiché",
+        "name": "Quiche",
         "subdivision": null
       },
       {
@@ -5610,7 +5610,7 @@
       },
       {
         "code": "SA",
-        "name": "Sacatepéquez",
+        "name": "Sacatepequez",
         "subdivision": null
       },
       {
@@ -5630,7 +5630,7 @@
       },
       {
         "code": "SU",
-        "name": "Suchitepéquez",
+        "name": "Suchitepequez",
         "subdivision": null
       },
       {
@@ -5652,7 +5652,7 @@
     "capital": "St. Peter Port",
     "region": "Europe",
     "subregion": "Northern Europe",
-    "states": []
+    "states": [{ "name": "Guernsey" }]
   },
   {
     "code2": "GN",
@@ -5664,7 +5664,7 @@
     "states": [
       {
         "code": "B",
-        "name": "Boké",
+        "name": "Boke",
         "subdivision": null
       },
       {
@@ -5689,7 +5689,7 @@
       },
       {
         "code": "L",
-        "name": "Labé",
+        "name": "Labe",
         "subdivision": null
       },
       {
@@ -5699,7 +5699,7 @@
       },
       {
         "code": "N",
-        "name": "Nzérékoré",
+        "name": "Nzerekore",
         "subdivision": null
       }
     ]
@@ -5856,7 +5856,7 @@
     "capital": "",
     "region": "",
     "subregion": "",
-    "states": []
+    "states": [{ "name": "Heard island and McDonald islands" }]
   },
   {
     "code2": "VA",
@@ -5865,7 +5865,7 @@
     "capital": "Rome",
     "region": "Europe",
     "subregion": "Southern Europe",
-    "states": []
+    "states": [{ "name": "Holy See" }]
   },
   {
     "code2": "HN",
@@ -5902,7 +5902,7 @@
       },
       {
         "code": "CR",
-        "name": "Cortés",
+        "name": "Cortes",
         "subdivision": null
       },
       {
@@ -5974,7 +5974,7 @@
     "capital": "City of Victoria",
     "region": "Asia",
     "subregion": "Eastern Asia",
-    "states": []
+    "states": [{ "name": "Hong Kong" }]
   },
   {
     "code2": "HU",
@@ -5991,7 +5991,7 @@
       },
       {
         "code": "BZ",
-        "name": "Borsod-Abaúj-Zemplén",
+        "name": "Borsod-Abaúj-Zemplen",
         "subdivision": null
       },
       {
@@ -6006,12 +6006,12 @@
       },
       {
         "code": "BE",
-        "name": "Békés",
+        "name": "Bekes",
         "subdivision": null
       },
       {
         "code": "BC",
-        "name": "Békéscsaba",
+        "name": "Bekescsaba",
         "subdivision": null
       },
       {
@@ -6036,7 +6036,7 @@
       },
       {
         "code": "FE",
-        "name": "Fejér",
+        "name": "Fejer",
         "subdivision": null
       },
       {
@@ -6076,7 +6076,7 @@
       },
       {
         "code": "KM",
-        "name": "Kecskemét",
+        "name": "Kecskemet",
         "subdivision": null
       },
       {
@@ -6111,7 +6111,7 @@
       },
       {
         "code": "PS",
-        "name": "Pécs",
+        "name": "Pecs",
         "subdivision": null
       },
       {
@@ -6156,7 +6156,7 @@
       },
       {
         "code": "SF",
-        "name": "Székesfehérvar",
+        "name": "Szekesfehervar",
         "subdivision": null
       },
       {
@@ -6176,12 +6176,12 @@
       },
       {
         "code": "VE",
-        "name": "Veszprém",
+        "name": "Veszprem",
         "subdivision": null
       },
       {
         "code": "VM",
-        "name": "Veszprém",
+        "name": "Veszprem",
         "subdivision": null
       },
       {
@@ -6196,7 +6196,7 @@
       },
       {
         "code": "ER",
-        "name": "Érd",
+        "name": "erd",
         "subdivision": null
       }
     ]
@@ -6506,7 +6506,7 @@
       },
       {
         "code": "16",
-        "name": "Agnébi",
+        "name": "Agnebi",
         "subdivision": null
       },
       {
@@ -6521,7 +6521,7 @@
       },
       {
         "code": "10",
-        "name": "Denguélé",
+        "name": "Denguele",
         "subdivision": null
       },
       {
@@ -6546,7 +6546,7 @@
       },
       {
         "code": "12",
-        "name": "Marahoué",
+        "name": "Marahoue",
         "subdivision": null
       },
       {
@@ -6556,12 +6556,12 @@
       },
       {
         "code": "05",
-        "name": "Moyen-Comoé",
+        "name": "Moyen-Comoe",
         "subdivision": null
       },
       {
         "code": "11",
-        "name": "Nzi-Comoé",
+        "name": "Nzi-Comoe",
         "subdivision": null
       },
       {
@@ -6576,12 +6576,12 @@
       },
       {
         "code": "13",
-        "name": "Sud-Comoé",
+        "name": "Sud-Comoe",
         "subdivision": null
       },
       {
         "code": "04",
-        "name": "Vallée du Bandama",
+        "name": "Vallee du Bandama",
         "subdivision": null
       },
       {
@@ -6898,7 +6898,7 @@
     "capital": "Douglas",
     "region": "Europe",
     "subregion": "Northern Europe",
-    "states": []
+    "states": [{ "name": "isle of Man" }]
   },
   {
     "code2": "iL",
@@ -7382,7 +7382,7 @@
     "capital": "Saint Helier",
     "region": "Europe",
     "subregion": "Northern Europe",
-    "states": []
+    "states": [{ "name": "Jersey" }]
   },
   {
     "code2": "JO",
@@ -7774,7 +7774,7 @@
       },
       {
         "code": "SV",
-        "name": "Savannakhét",
+        "name": "Savannakhet",
         "subdivision": null
       },
       {
@@ -7804,7 +7804,7 @@
       },
       {
         "code": "XE",
-        "name": "Xékong",
+        "name": "Xekong",
         "subdivision": null
       }
     ]
@@ -8439,7 +8439,7 @@
       },
       {
         "code": "Bi",
-        "name": "Béqaa",
+        "name": "Beqaa",
         "subdivision": null
       },
       {
@@ -8459,7 +8459,7 @@
       },
       {
         "code": "NA",
-        "name": "Nabatîyé",
+        "name": "Nabatîye",
         "subdivision": null
       }
     ]
@@ -8886,7 +8886,7 @@
     "capital": "",
     "region": "Asia",
     "subregion": "Eastern Asia",
-    "states": []
+    "states": [{ "name": "Macau" }]
   },
   {
     "code2": "MK",
@@ -9477,7 +9477,7 @@
     "code2": "MV",
     "code3": "MDV",
     "name": "Maldives",
-    "capital": "Malé",
+    "capital": "Male",
     "region": "Asia",
     "subregion": "Southern Asia",
     "states": [
@@ -9568,7 +9568,7 @@
       },
       {
         "code": "4",
-        "name": "Ségou",
+        "name": "Segou",
         "subdivision": null
       },
       {
@@ -9955,7 +9955,7 @@
     "capital": "Fort-de-France",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Martinique" }]
   },
   {
     "code2": "MR",
@@ -10134,7 +10134,7 @@
     "capital": "Mamoudzou",
     "region": "Africa",
     "subregion": "Eastern Africa",
-    "states": []
+    "states": [{ "name": "Mayotte" }]
   },
   {
     "code2": "MX",
@@ -10226,7 +10226,7 @@
       },
       {
         "code": "MEX",
-        "name": "México",
+        "name": "Mexico",
         "subdivision": "state"
       },
       {
@@ -10251,7 +10251,7 @@
       },
       {
         "code": "QUE",
-        "name": "Querétaro",
+        "name": "Queretaro",
         "subdivision": "state"
       },
       {
@@ -10611,12 +10611,12 @@
       },
       {
         "code": "SD",
-        "name": "Sainte-Dévote",
+        "name": "Sainte-Devote",
         "subdivision": null
       },
       {
         "code": "SP",
-        "name": "Spélugues",
+        "name": "Spelugues",
         "subdivision": null
       },
       {
@@ -10878,7 +10878,7 @@
     "capital": "Plymouth",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Montserrat" }]
   },
   {
     "code2": "MA",
@@ -10945,7 +10945,7 @@
       },
       {
         "code": "07",
-        "name": "Rabat-Salé-Zemmour-Zaer",
+        "name": "Rabat-Sale-Zemmour-Zaer",
         "subdivision": null
       },
       {
@@ -10960,7 +10960,7 @@
       },
       {
         "code": "01",
-        "name": "Tanger-Tétouan",
+        "name": "Tanger-Tetouan",
         "subdivision": null
       },
       {
@@ -11030,7 +11030,7 @@
       },
       {
         "code": "Q",
-        "name": "Zambézia",
+        "name": "Zambezia",
         "subdivision": null
       }
     ]
@@ -11414,10 +11414,10 @@
     "code2": "NC",
     "code3": "NCL",
     "name": "New Caledonia",
-    "capital": "Nouméa",
+    "capital": "Noumea",
     "region": "Oceania",
     "subregion": "Melanesia",
-    "states": []
+    "states": [{ "name": "New Caledonia" }]
   },
   {
     "code2": "NZ",
@@ -11659,7 +11659,7 @@
       },
       {
         "code": "6",
-        "name": "Tillabéri",
+        "name": "Tillaberi",
         "subdivision": null
       },
       {
@@ -11871,7 +11871,7 @@
     "capital": "Alofi",
     "region": "Oceania",
     "subregion": "Polynesia",
-    "states": []
+    "states": [{ "name": "Niue" }]
   },
   {
     "code2": "NF",
@@ -11880,7 +11880,7 @@
     "capital": "Kingston",
     "region": "Oceania",
     "subregion": "Australia and New Zealand",
-    "states": []
+    "states": [{ "name": "Norfolk island" }]
   },
   {
     "code2": "KP",
@@ -11954,7 +11954,7 @@
     "capital": "Saipan",
     "region": "Oceania",
     "subregion": "Micronesia",
-    "states": []
+    "states": [{ "name": "Northern Mariana islands" }]
   },
   {
     "code2": "NO",
@@ -12376,7 +12376,7 @@
       },
       {
         "code": "2",
-        "name": "Coclé",
+        "name": "Cocle",
         "subdivision": null
       },
       {
@@ -12386,7 +12386,7 @@
       },
       {
         "code": "5",
-        "name": "Darién",
+        "name": "Darien",
         "subdivision": null
       },
       {
@@ -12411,7 +12411,7 @@
       },
       {
         "code": "NB",
-        "name": "Ngöbe-Buglé",
+        "name": "Ngöbe-Bugle",
         "subdivision": null
       },
       {
@@ -12636,7 +12636,7 @@
       },
       {
         "code": "12",
-        "name": "Ñeembucú",
+        "name": "neembucú",
         "subdivision": null
       }
     ]
@@ -12883,7 +12883,7 @@
     "capital": "Adamstown",
     "region": "Oceania",
     "subregion": "Polynesia",
-    "states": []
+    "states": [{ "name": "Pitcairn islands" }]
   },
   {
     "code2": "PL",
@@ -13055,7 +13055,7 @@
       },
       {
         "code": "14",
-        "name": "Santarém",
+        "name": "Santarem",
         "subdivision": null
       },
       {
@@ -13080,7 +13080,7 @@
       },
       {
         "code": "07",
-        "name": "Évora",
+        "name": "evora",
         "subdivision": null
       }
     ]
@@ -13092,7 +13092,7 @@
     "capital": "San Juan",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Puerto Rico" }]
   },
   {
     "code2": "QA",
@@ -13146,16 +13146,16 @@
     "capital": "Pristina",
     "region": "Europe",
     "subregion": "Eastern Europe",
-    "states": []
+    "states": [{ "name": "Republic of Kosovo" }]
   },
   {
     "code2": "RE",
     "code3": "REU",
-    "name": "Réunion",
+    "name": "Reunion",
     "capital": "Saint-Denis",
     "region": "Africa",
     "subregion": "Eastern Africa",
-    "states": []
+    "states": [{ "name": "Reunion" }]
   },
   {
     "code2": "RO",
@@ -13840,11 +13840,11 @@
   {
     "code2": "BL",
     "code3": "BLM",
-    "name": "Saint Barthélemy",
+    "name": "Saint Barthelemy",
     "capital": "Gustavia",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Saint Barthelemy" }]
   },
   {
     "code2": "SH",
@@ -13963,7 +13963,7 @@
     "capital": "Marigot",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Saint Martin" }]
   },
   {
     "code2": "PM",
@@ -13972,7 +13972,7 @@
     "capital": "Saint-Pierre",
     "region": "Americas",
     "subregion": "Northern America",
-    "states": []
+    "states": [{ "name": "Saint Pierre and Miquelon" }]
   },
   {
     "code2": "VC",
@@ -14137,8 +14137,8 @@
   {
     "code2": "ST",
     "code3": "STP",
-    "name": "São Tomé and Príncipe",
-    "capital": "São Tomé",
+    "name": "São Tome and Príncipe",
+    "capital": "São Tome",
     "region": "Africa",
     "subregion": "Middle Africa",
     "states": [
@@ -14149,7 +14149,7 @@
       },
       {
         "code": "S",
-        "name": "São Tomé",
+        "name": "São Tome",
         "subdivision": null
       }
     ]
@@ -14269,7 +14269,7 @@
       },
       {
         "code": "KE",
-        "name": "Kédougou",
+        "name": "Kedougou",
         "subdivision": null
       },
       {
@@ -14289,7 +14289,7 @@
       },
       {
         "code": "SE",
-        "name": "Sédhiou",
+        "name": "Sedhiou",
         "subdivision": null
       },
       {
@@ -14536,7 +14536,7 @@
     "capital": "Philipsburg",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Sint Maarten" }]
   },
   {
     "code2": "SK",
@@ -15870,7 +15870,7 @@
     "capital": "King Edward Point",
     "region": "Americas",
     "subregion": "South America",
-    "states": []
+    "states": [{ "name": "South Georgia" }]
   },
   {
     "code2": "KR",
@@ -16037,7 +16037,7 @@
     "states": [
       {
         "code": "C",
-        "name": "A Coruña",
+        "name": "A Coruna",
         "subdivision": "Province"
       },
       {
@@ -16147,7 +16147,7 @@
       },
       {
         "code": "J",
-        "name": "Jaén",
+        "name": "Jaen",
         "subdivision": "Province"
       },
       {
@@ -16599,7 +16599,7 @@
     "capital": "Longyearbyen",
     "region": "Europe",
     "subregion": "Northern Europe",
-    "states": []
+    "states": [{ "name": "Svalbard and Jan Mayen" }]
   },
   {
     "code2": "SZ",
@@ -16691,7 +16691,7 @@
       },
       {
         "code": "M",
-        "name": "Skåne län",
+        "name": "Skane län",
         "subdivision": null
       },
       {
@@ -17740,7 +17740,7 @@
     "code2": "TG",
     "code3": "TGO",
     "name": "Togo",
-    "capital": "Lomé",
+    "capital": "Lome",
     "region": "Africa",
     "subregion": "Western Africa",
     "states": [
@@ -17778,7 +17778,7 @@
     "capital": "Fakaofo",
     "region": "Oceania",
     "subregion": "Polynesia",
-    "states": []
+    "states": [{ "name": "Tokelau" }]
   },
   {
     "code2": "TO",
@@ -17930,7 +17930,7 @@
       },
       {
         "code": "31",
-        "name": "Béja",
+        "name": "Beja",
         "subdivision": null
       },
       {
@@ -18497,7 +18497,7 @@
     "capital": "Cockburn Town",
     "region": "Americas",
     "subregion": "Caribbean",
-    "states": []
+    "states": [{ "name": "Turks and Caicos islands" }]
   },
   {
     "code2": "TV",
@@ -20354,7 +20354,7 @@
       },
       {
         "code": "SJ",
-        "name": "San José",
+        "name": "San Jose",
         "subdivision": null
       },
       {
@@ -20469,7 +20469,7 @@
       },
       {
         "code": "PAM",
-        "name": "Pénama",
+        "name": "Penama",
         "subdivision": null
       },
       {
@@ -20479,12 +20479,12 @@
       },
       {
         "code": "SEE",
-        "name": "Shéfa",
+        "name": "Shefa",
         "subdivision": null
       },
       {
         "code": "TAE",
-        "name": "Taféa",
+        "name": "Tafea",
         "subdivision": null
       },
       {
@@ -20584,7 +20584,7 @@
       },
       {
         "code": "L",
-        "name": "Mérida",
+        "name": "Merida",
         "subdivision": null
       },
       {
@@ -20966,7 +20966,7 @@
     "capital": "Mata-Utu",
     "region": "Oceania",
     "subregion": "Polynesia",
-    "states": []
+    "states": [{ "name": "Wallis and Futuna" }]
   },
   {
     "code2": "EH",
@@ -20975,7 +20975,7 @@
     "capital": "El Aaiún",
     "region": "Africa",
     "subregion": "Northern Africa",
-    "states": []
+    "states": [{ "name": "Western Sahara" }]
   },
   {
     "code2": "YE",

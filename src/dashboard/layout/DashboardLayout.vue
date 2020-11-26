@@ -10,6 +10,10 @@
         <i class="nc-icon nc-vector"></i>
         <p>Departments</p>
       </sidebar-link>
+      <sidebar-link to="/dashboard/jobs">
+        <i class="nc-icon nc-bag"></i>
+        <p>Jobs</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <TopNavbar></TopNavbar>

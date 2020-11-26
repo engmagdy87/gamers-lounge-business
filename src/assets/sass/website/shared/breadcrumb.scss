@@ -5,6 +5,7 @@
   &__link {
     font-size: 20px;
     color: $header-item;
+    text-transform: capitalize;
   }
   &__separator {
     color: $gray;

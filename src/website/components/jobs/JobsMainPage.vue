@@ -41,7 +41,7 @@ import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 export default {
   computed: {
     ...mapState({
-      jobs: state => state.jobs.jobs.data,
+      jobs: state => state.jobs.jobs,
       isJobsFetched: state => state.jobs.isJobsFetched
     })
   },
@@ -57,7 +57,7 @@ export default {
     HalfClippedOutlineButton
   },
   mounted() {
-    this.fetchJobs();
+    this.fetchJobs("website");
   }
 };
 </script>

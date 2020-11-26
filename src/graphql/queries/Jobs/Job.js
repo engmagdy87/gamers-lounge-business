@@ -24,4 +24,4 @@ query {
  }  
 `;
 
-module.exports = JOB;
+export default JOB;

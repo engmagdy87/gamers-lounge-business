@@ -7,4 +7,4 @@ query{
  }
 `;
 
-module.exports = DEPARTMENTS;
+export default DEPARTMENTS;

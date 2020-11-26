@@ -4,12 +4,15 @@ query {
        data {
           id
           title        
+          description
+          requirements
           department {
-             name
+            id 
+            name
           }
        }
     }
  }
 `;
 
-module.exports = JOBS;
+export default JOBS;
