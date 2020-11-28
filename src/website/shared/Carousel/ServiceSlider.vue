@@ -1,17 +1,12 @@
 <template>
   <div class="carousel-wrapper">
-    <transition-group name="service-slide">
-      <div
-        @mouseover="stopTimer"
-        @mouseleave="resetTimer"
-        v-for="(slide, i) in slides"
-        :key="i"
-        v-if="isSlideVisible(i)"
-        class="carousel-wrapper__slide"
-      >
-        <slot name="carouselSlide" :slide="slide"></slot>
-      </div>
-    </transition-group>
+    <div v-for="(slide, i) in slides" :key="i" class="carousel-wrapper__slide">
+      <slot
+        name="carouselSlide"
+        :slide="slide"
+        :index="isSlideVisible(i)"
+      ></slot>
+    </div>
     <div
       :class="`carousel-wrapper__bullets ${customBulletsStyleClass}`"
       v-if="showBullets"
@@ -42,6 +37,10 @@ export default {
       type: Array,
       default: () => []
     },
+    changeAnimation: {
+      type: Function,
+      default: () => {}
+    },
     autoPlay: {
       type: Boolean,
       default: true
@@ -66,7 +65,8 @@ export default {
       if (!this.autoPlay) return null;
 
       return setInterval(() => {
-        this.goToNext();
+        this.nextSlide();
+        this.resetTimer();
       }, time);
     },
     nextSlide() {
@@ -78,10 +78,12 @@ export default {
       else this.currentSlide--;
     },
     goToNext() {
+      this.changeAnimation("next");
       this.nextSlide();
       this.resetTimer();
     },
     goToPrev() {
+      this.changeAnimation("prev");
       this.prevSlide();
       this.resetTimer();
     },
@@ -153,26 +155,5 @@ button.carousel-wrapper__bullets--active {
   width: 56px;
   height: 13px;
   border-radius: 11px;
-}
-
-.service-slide-enter-active,
-.service-slide-leave-active {
-  transition: opacity $time ease-in-out, transform $time ease;
-}
-.service-slide-enter-active {
-  // transition-delay: $time;
-}
-.service-slide-enter {
-  opacity: 0;
-  transform: translateX(100%);
-}
-.service-slide-leave-to {
-  opacity: 0;
-  transform: translateX(-100%);
-}
-.service-slide-enter-to,
-.service-slide-leave {
-  opacity: 1;
-  transform: translateX(0);
 }
 </style>
