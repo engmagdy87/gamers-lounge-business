@@ -14,7 +14,6 @@
           :timeInMillisecond="7000"
           customBulletsStyleClass="hero-bullets"
           :changeAnimation="changeAnimation"
-          :autoPlay="false"
         >
           <template #carouselSlide="{slide,index}">
             <div class="row m-0 position-relative">
