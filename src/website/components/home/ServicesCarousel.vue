@@ -37,18 +37,19 @@
                   />
                 </div>
               </div>
-              <div
-                class="col-12 col-md-6 services-carousel__img-wrapper"
-                v-show="index"
-              >
-                <img
-                  :class="['services-carousel__img', imageDirection]"
-                  draggable="false"
-                  :src="slide.img"
-                  alt=""
-                  srcset=""
-                />
-              </div>
+              <transition :name="imageDirection">
+                <div
+                  class="col-12 col-md-6 services-carousel__img-wrapper"
+                  v-show="index"
+                >
+                  <img
+                    class="services-carousel__img"
+                    draggable="false"
+                    :src="slide.img"
+                    :alt="slide.title"
+                  />
+                </div>
+              </transition>
             </div>
           </template>
 
@@ -142,19 +143,17 @@ $blur: 10px;
   opacity: 0;
   transform: translateX(100%);
   filter: blur($blur);
-  text-shadow: -5px 0 5px rgba($accent, 1);
-}
-.service-title-next-leave-to {
-  opacity: 0;
-  transform: translateX(-100%);
-  filter: blur($blur);
-  text-shadow: -5px 0 5px rgba($accent, 1);
 }
 .service-title-next-enter-to,
 .service-title-next-leave {
   opacity: 1;
   transform: translateX(0);
   filter: blur(0);
+}
+.service-title-next-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
+  filter: blur($blur);
 }
 //********************* */
 .service-title-prev-enter-active,
@@ -166,13 +165,11 @@ $blur: 10px;
   opacity: 0;
   transform: translateX(-100%);
   filter: blur($blur);
-  text-shadow: -5px 0 5px rgba($accent, 1);
 }
 .service-title-prev-leave-to {
   opacity: 0;
   transform: translateX(100%);
   filter: blur($blur);
-  text-shadow: -5px 0 5px rgba($accent, 1);
 }
 .service-title-prev-enter-to,
 .service-title-prev-leave {
@@ -190,13 +187,11 @@ $blur: 10px;
   opacity: 0;
   transform: translateX(200%);
   filter: blur($blur);
-  text-shadow: -5px 0 5px rgba(255, 255, 255, 1);
 }
 .service-content-next-leave-to {
   opacity: 0;
   transform: translateX(-200%);
   filter: blur($blur);
-  text-shadow: -5px 0 5px rgba(255, 255, 255, 1);
 }
 .service-content-next-enter-to {
   transition-delay: $delay;
@@ -217,13 +212,11 @@ $blur: 10px;
   opacity: 0;
   transform: translateX(-200%);
   filter: blur($blur);
-  text-shadow: -5px 0 5px rgba(255, 255, 255, 1);
 }
 .service-content-prev-leave-to {
   opacity: 0;
   transform: translateX(200%);
   filter: blur($blur);
-  text-shadow: -5px 0 5px rgba(255, 255, 255, 1);
 }
 .service-content-prev-enter-to {
   transition-delay: $delay;
@@ -236,39 +229,34 @@ $blur: 10px;
 }
 //***********************************/
 
-.service-image-next {
-  animation: next-move;
-  animation-duration: 4 * $time;
+.service-image-next-enter-active,
+.service-image-next-leave-active {
+  transition: opacity $time ease-in-out, transform $time ease-in-out;
 }
-@keyframes next-move {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  70% {
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0;
-  }
+.service-image-next-enter {
+  opacity: 0;
 }
-.service-image-prev {
-  animation: prev-move;
-  animation-duration: 4 * $time;
+.service-image-next-leave,
+.service-image-next-enter-to {
+  opacity: 1;
 }
-@keyframes prev-move {
-  0% {
-    transform: scale(1);
-    opacity: 0;
-  }
-  70% {
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
+.service-image-next-leave-to {
+  opacity: 0;
+}
+//***********************************/
+.service-image-prev-enter-active,
+.service-image-prev-leave-active {
+  transition: opacity $time ease-in-out, transform $time ease-in-out;
+}
+.service-image-prev-enter {
+  opacity: 0;
+}
+.service-image-prev-leave,
+.service-image-prev-enter-to {
+  opacity: 1;
+}
+.service-image-prev-leave-to {
+  opacity: 0;
 }
 //***********************************/
 
@@ -279,7 +267,7 @@ $blur: 10px;
   position: absolute;
   right: 0;
   animation: button-mask-animation-next;
-  animation-duration: $time;
+  animation-duration: 1.8 * $time;
   transform: translateX(200px);
   z-index: 9;
 }
@@ -300,7 +288,7 @@ $blur: 10px;
   position: absolute;
   right: 0;
   animation: button-mask-animation-prev;
-  animation-duration: $time;
+  animation-duration: 1.8 * $time;
   transform: translateX(-200px);
   z-index: 9;
 }

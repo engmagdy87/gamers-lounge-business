@@ -29,6 +29,9 @@
   }
   &__img-wrapper {
     z-index: 9;
+    animation: xx;
+    animation-duration: 6.9s;
+    animation-timing-function: ease-in-out;
     @include is-extra-small-mobile {
       position: absolute;
       top: 0;
@@ -120,6 +123,7 @@
     position: absolute;
     bottom: 10%;
     left: 50%;
+    cursor: pointer;
   }
 }
 
@@ -238,4 +242,16 @@ $widths-and-heights: (
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
   @include filled-half-clipped-shape($widths-and-heights, $form-background);
+}
+
+@keyframes xx {
+  0% {
+    transform: scale(0.8);
+  }
+  30% {
+    transform: scale(0.86);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
