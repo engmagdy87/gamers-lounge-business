@@ -130,14 +130,14 @@ export default {
 @import "../../../assets/sass/website/color-palette.scss";
 @import "../../../assets/sass/website/components/home/services-carousel.scss";
 
-$time: 2s;
+$time: 3s;
 $delay: 0.5s;
 $blur: 10px;
 
 .service-title-next-enter-active,
 .service-title-next-leave-active {
-  transition: opacity $time ease-in-out, transform $time ease,
-    filter $time linear;
+  transition: opacity $time ease-in-out,
+    transform $time cubic-bezier(0, 0.47, 0.36, 0.36), filter $time linear;
 }
 .service-title-next-enter {
   opacity: 0;
@@ -158,7 +158,8 @@ $blur: 10px;
 //********************* */
 .service-title-prev-enter-active,
 .service-title-prev-leave-active {
-  transition: opacity $time ease-in-out, transform $time ease,
+  transition: opacity $time ease-in-out,
+    transform $time cubic-bezier(0, 0.47, 0.36, 0.36), filter $time linear,
     filter $time linear;
 }
 .service-title-prev-enter {
@@ -180,7 +181,8 @@ $blur: 10px;
 //***********************************/
 .service-content-next-enter-active,
 .service-content-next-leave-active {
-  transition: opacity $time ease-in-out, transform $time ease,
+  transition: opacity $time ease-in-out,
+    transform $time cubic-bezier(0, 0.47, 0.36, 0.36), filter $time linear,
     filter $time linear;
 }
 .service-content-next-enter {
@@ -205,7 +207,8 @@ $blur: 10px;
 //***********************************/
 .service-content-prev-enter-active,
 .service-content-prev-leave-active {
-  transition: opacity $time ease-in-out, transform $time ease,
+  transition: opacity $time ease-in-out,
+    transform $time cubic-bezier(0, 0.47, 0.36, 0.36), filter $time linear,
     filter $time linear;
 }
 .service-content-prev-enter {
@@ -231,12 +234,14 @@ $blur: 10px;
 
 .service-image-next-enter-active,
 .service-image-next-leave-active {
-  transition: opacity $time ease-in-out, transform $time ease-in-out;
+  transition: opacity $time ease-in-out;
 }
 .service-image-next-enter {
   opacity: 0;
 }
-.service-image-next-leave,
+.service-image-next-leave {
+  opacity: 0;
+}
 .service-image-next-enter-to {
   opacity: 1;
 }
@@ -246,7 +251,8 @@ $blur: 10px;
 //***********************************/
 .service-image-prev-enter-active,
 .service-image-prev-leave-active {
-  transition: opacity $time ease-in-out, transform $time ease-in-out;
+  transition: opacity $time ease-in-out,
+    transform $time cubic-bezier(0, 0.47, 0.36, 0.36), filter $time linear;
 }
 .service-image-prev-enter {
   opacity: 0;
