@@ -58,8 +58,7 @@ export default {
   },
   computed: {
     ...mapState({
-      jobsData: state => state.jobs.jobs,
-      isJobsFetched: state => state.jobs.isJobsFetched
+      jobsData: state => state.jobs.jobs
     })
   },
   methods: {

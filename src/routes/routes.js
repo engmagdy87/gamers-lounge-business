@@ -1,4 +1,3 @@
-
 import store from "../store/index";
 import types from "../store/types";
 
@@ -26,6 +25,11 @@ const DepartmentsAddEdit = () => import(/* webpackChunkName: "DepartmentsAdd" */
 const JobsList = () => import(/* webpackChunkName: "JobsList" */ 'src/dashboard/pages/Jobs/JobsList.vue')
 const JobsAddEdit = () => import(/* webpackChunkName: "JobsAdd" */ 'src/dashboard/pages/Jobs/JobsAddEdit.vue')
 const JobApplicantsList = () => import(/* webpackChunkName: "JobApplicantsList" */ 'src/dashboard/pages/Jobs/JobApplicantsList.vue')
+
+const ServicesAddEdit = () => import(/* webpackChunkName: "ServicesAddEdit" */ 'src/dashboard/pages/Services/ServicesAddEdit.vue')
+const ServicesList = () => import(/* webpackChunkName: "ServicesList" */ 'src/dashboard/pages/Services/ServicesList.vue')
+const SectionsList = () => import(/* webpackChunkName: "SectionsList" */ 'src/dashboard/pages/Services/Sections/SectionsList.vue')
+const SectionsAddEdit = () => import(/* webpackChunkName: "SectionsAddEdit" */ 'src/dashboard/pages/Services/Sections/SectionsAddEdit.vue')
 
 const Login = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/Login.vue')
 
@@ -163,6 +167,44 @@ const routes = [
             path: 'edit',
             name: 'Edit Job',
             component: JobsAddEdit
+          }
+        ]
+      },
+      {
+        path: 'services',
+        name: 'Services',
+        component: DashboardContent,
+        redirect: '/dashboard/services/list',
+        children: [
+          {
+            path: 'list',
+            name: 'List',
+            component: ServicesList
+          },
+          {
+            path: 'sections/list/:serviceId',
+            name: 'List Service Sections',
+            component: SectionsList
+          },
+          {
+            path: 'sections/create/:serviceId',
+            name: 'Create Service Section',
+            component: SectionsAddEdit
+          },
+          {
+            path: 'sections/edit/:serviceId',
+            name: 'Edit Service Section',
+            component: SectionsAddEdit
+          },
+          {
+            path: 'create',
+            name: 'Create Service',
+            component: ServicesAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit Service',
+            component: ServicesAddEdit
           }
         ]
       },

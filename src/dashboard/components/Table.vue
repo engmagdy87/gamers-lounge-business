@@ -41,6 +41,26 @@
         >
         </JobApplicantsTableRow>
       </tbody>
+      <tbody v-if="tableType === 'services'">
+        <ServiceTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </ServiceTabelRow>
+      </tbody>
+      <tbody v-if="tableType === 'serviceSections'">
+        <ServiceSectionTableRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </ServiceSectionTableRow>
+      </tbody>
     </table>
   </div>
 </template>
@@ -48,6 +68,8 @@
 import DepartmentTabelRow from "../components/Departments/DepartmentTabelRow";
 import JobTabelRow from "../components/Jobs/JobTabelRow";
 import JobApplicantsTableRow from "../components/Jobs/JobApplicantsTableRow";
+import ServiceTabelRow from "../components/Services/ServiceTabelRow";
+import ServiceSectionTableRow from "../components/Services/ServiceSectionTableRow";
 
 export default {
   name: "l-table",
@@ -55,7 +77,9 @@ export default {
   components: {
     DepartmentTabelRow,
     JobTabelRow,
-    JobApplicantsTableRow
+    JobApplicantsTableRow,
+    ServiceTabelRow,
+    ServiceSectionTableRow
   }
 };
 </script>

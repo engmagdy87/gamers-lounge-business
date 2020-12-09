@@ -3,7 +3,7 @@
     <div class="close" role="button" @click="fireDeleteModal">
       &times;
     </div>
-    <img :src="image.path" alt="preview" />
+    <img :src="image.url" alt="preview" />
   </div>
 </template>
 

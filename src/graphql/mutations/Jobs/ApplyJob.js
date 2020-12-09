@@ -24,7 +24,6 @@ const APPLY_JOB = (
        }
     ) {
        id    
-       resume
     }
  }
  `;

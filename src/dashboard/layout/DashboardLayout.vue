@@ -14,6 +14,10 @@
         <i class="nc-icon nc-bag"></i>
         <p>Jobs</p>
       </sidebar-link>
+      <sidebar-link to="/dashboard/services">
+        <i class="nc-icon nc-layers-3"></i>
+        <p>Services</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <TopNavbar></TopNavbar>

@@ -2,6 +2,10 @@ const app = {
     mutations: {
         SET_SPINNER_FLAG: 'app/mutations/SET_SPINNER_FLAG',
         SET_SHOW_HEADER_AND_FOOTER_FLAG: 'app/mutations/SET_SHOW_HEADER_AND_FOOTER_FLAG',
+    },
+    actions: {
+        DELETE_IMAGE: 'app/actions/DELETE_IMAGE',
+        DELETE_VIDEO: 'app/actions/DELETE_VIDEO'
     }
 };
 
@@ -45,9 +49,31 @@ const departments = {
     }
 };
 
+const services = {
+    mutations: {
+        SET_SERVICES: 'services/mutations/SET_SERVICES',
+        SET_IS_SERVICE_SECTIONS_FETCHED: 'services/mutations/SET_IS_SERVICE_SECTIONS_FETCHED',
+        SET_SERVICE_SECTIONS: 'services/mutations/SET_SERVICE_SECTIONS',
+        SET_IS_SERVICES_FETCHED: 'services/mutations/SET_IS_SERVICES_FETCHED',
+        REMOVE_DELETED_SERVICE: 'services/mutations/REMOVE_DELETED_SERVICE',
+        REMOVE_DELETED_SERVICE_SECTION: 'services/mutations/REMOVE_DELETED_SERVICE_SECTION',
+    },
+    actions: {
+        FETCH_SERVICES: 'services/actions/FETCH_SERVICES',
+        CREATE_SERVICE: 'services/actions/CREATE_SERVICE',
+        DELETE_SERVICE: 'services/actions/DELETE_SERVICE',
+        UPDATE_SERVICE: 'services/actions/UPDATE_SERVICE',
+        FETCH_SERVICE_SECTION: 'services/actions/FETCH_SERVICE_SECTION',
+        CREATE_SERVICE_SECTION: 'services/actions/CREATE_SERVICE_SECTION',
+        DELETE_SERVICE_SECTION: 'services/actions/DELETE_SERVICE_SECTION',
+        UPDATE_SERVICE_SECTION: 'services/actions/UPDATE_SERVICE_SECTION',
+    }
+};
+
 export default {
     app,
     login,
     jobs,
-    departments
+    departments,
+    services
 };

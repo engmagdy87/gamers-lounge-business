@@ -2,7 +2,6 @@ import axios from 'axios';
 import { QUERY, MUTATION } from '../graphql';
 import { getTokenCookie } from './CookieHelper';
 import BASE_URL from '../constants/APIs';
-import { isArray } from 'core-js/fn/array';
 
 const fetchDepartments = async () => {
   try {
@@ -138,8 +137,137 @@ const applyJob = async (data) => {
   const query = MUTATION.APPLY_JOB(applicantInfo);
 
   try {
-    const response = await requestMultipart(constructMultipartFormData(resumeFile, query));
+    const response = await requestMultipart(constructFormDataForSingleFile(resumeFile, query));
     return response.data.data.applyJob
+  } catch (error) {
+    throw error;
+  }
+}
+
+const fetchServices = async () => {
+  try {
+    const response = await request({
+      query: QUERY.SERVICES(),
+    });
+    return response.data.data.services
+  } catch (error) {
+    throw error;
+  }
+}
+
+const createService = async (data) => {
+  const { imagesData, ...serviceInfo } = data;
+  const token = getTokenCookie()
+
+  const query = MUTATION.CREATE_SERVICE(serviceInfo);
+
+  try {
+    const response = await requestMultipart(constructFormDataForMultipleFile(imagesData, query), token);
+    return response.data.data.applyJob
+  } catch (error) {
+    throw error;
+  }
+}
+
+const updateService = async (data) => {
+  let response;
+  const { imagesData, ...serviceInfo } = data;
+  const token = getTokenCookie()
+  try {
+    const query = MUTATION.UPDATE_SERVICE(serviceInfo, imagesData)
+    if (imagesData)
+      response = await requestMultipart(constructFormDataForMultipleFile(imagesData, query), token);
+    else response = await request({
+      query
+    }, token);
+    return response.data.data.updateService
+  } catch (error) {
+    throw error;
+  }
+}
+
+const deleteService = async (serviceId) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.DELETE_SERVICE(serviceId),
+    }, token);
+    return response.data.data.deleteService
+  } catch (error) {
+    throw error;
+  }
+}
+
+const deleteServiceSection = async (serviceSectionId) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.DELETE_SERVICE_SECTION(serviceSectionId),
+    }, token);
+    return response.data.data.deleteServiceSection
+  } catch (error) {
+    throw error;
+  }
+}
+
+const fetchServiceSections = async (serviceId) => {
+  try {
+    const response = await request({
+      query: QUERY.SERVICE(serviceId),
+    });
+    return response.data.data.service
+  } catch (error) {
+    throw error;
+  }
+}
+
+const createServiceSection = async (data) => {
+  const { imagesData, videosData, ...sectionInfo } = data;
+  const token = getTokenCookie()
+
+  const query = MUTATION.CREATE_SERVICE_SECTION(sectionInfo, imagesData, videosData);
+
+  try {
+    const response = await requestMultipart(constructFormDataForArrayOfFiles({ ...imagesData, ...videosData }, query), token);
+    return response.data.data.createServiceSection
+  } catch (error) {
+    throw error;
+  }
+}
+
+const updateServiceSection = async (data) => {
+  const { imagesData, videosData, ...sectionInfo } = data;
+  const token = getTokenCookie()
+
+  const query = MUTATION.UPDATE_SERVICE_SECTION(sectionInfo, imagesData, videosData);
+
+  try {
+    const response = await requestMultipart(constructFormDataForArrayOfFiles({ ...imagesData, ...videosData }, query), token);
+    return response.data.data.updateServiceSection
+  } catch (error) {
+    throw error;
+  }
+}
+
+const deleteImage = async (imageId) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.DELETE_IMAGE(imageId),
+    }, token);
+    return response.data.data.deleteImage
+  } catch (error) {
+    throw error;
+  }
+}
+
+const deleteVideo = async (videoId) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.DELETE_VIDEO(videoId),
+    }, token);
+    return response.data.data.deleteImage
   } catch (error) {
     throw error;
   }
@@ -157,7 +285,17 @@ export {
   createJob,
   deleteJob,
   updateJob,
-  applyJob
+  applyJob,
+  fetchServices,
+  createService,
+  updateService,
+  deleteService,
+  fetchServiceSections,
+  createServiceSection,
+  updateServiceSection,
+  deleteServiceSection,
+  deleteImage,
+  deleteVideo,
 }
 
 const request = async (data, token) => {
@@ -196,41 +334,74 @@ const requestMultipart = async (data, token) => {
   return response;
 }
 
-const constructMultipartFormData = (files, query) => {
+const constructFormDataForSingleFile = (file, query) => {
   const formData = new FormData()
   let map = {};
   let glQuery;
 
-  if (isArray(files)) {
-    glQuery = {
-      query,
-      variables: {
-        file: files.map(() => null) // file key may be renamed in GraphQL schema in future
-      }
+  glQuery = {
+    query,
+    variables: {
+      file: null
     }
-    files.forEach((file, index) => {
-      map = { ...map, index: ["variables.file." + index] }
-    })
-    formData.append('operations', JSON.stringify(glQuery))
-    formData.append('map', JSON.stringify(map))
-    files.forEach((file, index) => {
-      formData.append(index.toString(), file)
-    })
-
   }
-  else {
-    glQuery = {
-      query,
-      variables: {
-        file: null
-      }
+  map = { 0: ["variables.file"] }
+  formData.append('operations', JSON.stringify(glQuery))
+  formData.append('map', JSON.stringify(map))
+  formData.append('0', file)
+
+  return formData
+}
+const constructFormDataForMultipleFile = (files, query) => {
+  const formData = new FormData()
+  let map = {};
+  let queryVariables = {}
+  let glQuery;
+
+  Object.keys(files).forEach((file, index) => {
+    queryVariables = { ...queryVariables, [file]: null }
+    map = { ...map, [index]: ["variables." + file] }
+    formData.append(index.toString(), files[file])
+  })
+
+  glQuery = {
+    query,
+    variables: {
+      ...queryVariables
     }
-    map = { 0: ["variables.file"] }
-    formData.append('operations', JSON.stringify(glQuery))
-    formData.append('map', JSON.stringify(map))
-    formData.append('0', files)
+  }
+  formData.append('operations', JSON.stringify(glQuery))
+  formData.append('map', JSON.stringify(map))
+
+  return formData
+}
+
+const constructFormDataForArrayOfFiles = (files, query) => {
+  const formData = new FormData()
+  let map = {};
+  let queryVariables = {}
+  let glQuery;
+
+  const keys = Object.keys(files)
+
+  keys.forEach((key) => {
+    queryVariables = { ...queryVariables, [key]: Object.keys(files[key]).map(() => null) }
+    const mapLength = Object.keys(map).length
+    Object.values(files[key]).forEach((content, i) => {
+      map = { ...map, [i + mapLength]: ["variables." + key + '.' + i] }
+      formData.append((i + mapLength).toString(), content)
+    })
+  })
+
+  glQuery = {
+    query,
+    variables: {
+      ...queryVariables
+    }
   }
 
+  formData.append('operations', JSON.stringify(glQuery))
+  formData.append('map', JSON.stringify(map))
 
   return formData
 }

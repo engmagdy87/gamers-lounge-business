@@ -2,8 +2,8 @@ import isEmailValid from './EmailValidation'
 
 const validateForm = (value, criteria, alias) => {
     let errors = [];
-    // "" for empty string and "-1" for default option in select tag
-    if ((value === "" || value === "-1") && criteria.isRequired) errors.push(`${alias} is required`)
+    // "" for empty string and "-1" for default option in select tag    
+    if ((value === "" || value === "-1" || value.length === 0) && criteria.isRequired) errors.push(`${alias} is required`)
 
     if (value.length < criteria.minLength) errors.push(`${alias} at least ${criteria.minLength} character`)
 

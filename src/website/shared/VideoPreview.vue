@@ -4,20 +4,21 @@
       &times;
     </div>
     <video autoplay muted loop style="width: 100%;">
-      <source :src="video.path" type="video/mp4" />
+      <source :src="video.url" type="video/mp4" />
     </video>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["video", "setShowDeleteDialogFlag", "openedFor"],
+  props: ["video", "setShowDeleteDialogFlag", "openedFor", "videoIndex"],
   methods: {
     fireDeleteModal() {
       this.setShowDeleteDialogFlag(
         true,
         this.video.id,
         this.openedFor,
+        this.videoIndex,
         "video"
       );
     }

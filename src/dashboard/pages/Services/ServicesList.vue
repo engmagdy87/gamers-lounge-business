@@ -2,17 +2,15 @@
   <div>
     <div class="row">
       <div class="col-sm">
-        <h2 class="heading-margin">
-          Departments ({{ departmentsData.length }})
-        </h2>
+        <h2 class="heading-margin">Services ({{ servicesData.length }})</h2>
       </div>
       <div class="col-sm">
-        <router-link to="/dashboard/departments/create">
+        <router-link to="/dashboard/services/create">
           <button
             type="button"
             class="btn btn-secondary d-block ml-auto heading-margin"
           >
-            Add Department
+            Add Service
           </button>
         </router-link>
       </div>
@@ -20,16 +18,16 @@
     <Table
       class="table-hover table-striped"
       :columns="table.columns"
-      :data="departmentsData"
-      tableType="departments"
-      :setShowDeleteDialogFlag="setDepartmentDataFlags"
+      :data="servicesData"
+      tableType="services"
+      :setShowDeleteDialogFlag="setServiceDataFlags"
     >
     </Table>
     <DeleteDialog
       :showFlag="showFlag"
-      item="Department"
-      :deleteAction="removeDepartment"
-      :setShowDeleteDialogFlag="setDepartmentDataFlags"
+      item="Service"
+      :deleteAction="removeService"
+      :setShowDeleteDialogFlag="setServiceDataFlags"
     />
   </div>
 </template>
@@ -37,7 +35,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import types from "../../../store/types";
-import Table from "src/dashboard/components/Table.vue";
+import Table from "../../../dashboard/components/Table";
 import DeleteDialog from "../../../website/shared/DeleteDialog";
 
 export default {
@@ -47,34 +45,41 @@ export default {
       targetId: null,
       locationInDataArray: null,
       table: {
-        columns: ["Id", "Name", "Actions"]
+        columns: [
+          "Id",
+          "Title",
+          "Description",
+          "Card Image",
+          "Cover Image",
+          "Actions"
+        ]
       }
     };
   },
   computed: {
     ...mapState({
-      departmentsData: state => state.departments.departments
+      servicesData: state => state.services.services
     })
   },
   methods: {
     ...mapActions({
-      fetchDepartments: types.departments.actions.FETCH_DEPARTMENTS,
-      deleteDepartment: types.departments.actions.DELETE_DEPARTMENT
+      fetchServices: types.services.actions.FETCH_SERVICES,
+      deleteService: types.services.actions.DELETE_SERVICE
     }),
-    async removeDepartment() {
+    async removeService() {
       const payload = {
-        departmentId: this.targetId,
+        serviceId: this.targetId,
         locationInDataArray: this.locationInDataArray
       };
       try {
-        await this.deleteDepartment(payload);
-        this.setDepartmentDataFlags(false, null, null);
-        this.notifyVue("Department Deleted Successfully", "success");
+        await this.deleteService(payload);
+        this.setServiceDataFlags(false, null, null);
+        this.notifyVue("Service Deleted Successfully", "success");
       } catch (error) {
         this.notifyVue("Error Happened", "danger");
       }
     },
-    setDepartmentDataFlags(flag, id, locationInDataArray) {
+    setServiceDataFlags(flag, id, locationInDataArray) {
       this.showFlag = flag;
       this.targetId = id;
       this.locationInDataArray = locationInDataArray;
@@ -93,7 +98,7 @@ export default {
     DeleteDialog
   },
   mounted() {
-    this.fetchDepartments();
+    this.fetchServices();
   }
 };
 </script>

@@ -1,0 +1,11 @@
+const TEMPLATE_1 = 'TEMPLATE_1'
+const TEMPLATE_2 = 'TEMPLATE_2'
+const TEMPLATE_3 = 'TEMPLATE_3'
+const TEMPLATE_4 = 'TEMPLATE_4'
+
+export {
+    TEMPLATE_1,
+    TEMPLATE_2,
+    TEMPLATE_3,
+    TEMPLATE_4
+}

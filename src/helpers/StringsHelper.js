@@ -32,4 +32,8 @@ const getEntityName = (text) => {
     return text.split("-").slice(1).join(" ")
 }
 
-export { getFirstLettersOfString, truncateText, changeTextDirection, reformatStringToBeInURL, getEntityId, getEntityName }
+const reformatHTMLString = (text) => {
+    return text.replace(/"/g, "'")
+}
+
+export { getFirstLettersOfString, truncateText, changeTextDirection, reformatStringToBeInURL, getEntityId, getEntityName, reformatHTMLString }
