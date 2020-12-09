@@ -5,7 +5,7 @@
     <td>
       <div class="description" v-html="rowData.description_first"></div>
     </td>
-    <td v-if="rowData.description_second !== 'undefined'">
+    <td v-if="rowData.description_second">
       <div class="description" v-html="rowData.description_second"></div>
     </td>
     <td v-else></td>

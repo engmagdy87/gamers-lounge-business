@@ -636,10 +636,7 @@ export default {
     if (this.$route.name === "Edit Service Section") {
       this.serviceSection.title = this.editData.title;
       this.serviceSection.description_first = this.editData.description_first;
-      this.serviceSection.description_second =
-        this.editData.description_second === "undefined"
-          ? ""
-          : this.editData.description_second;
+      this.serviceSection.description_second = this.editData.description_second;
       this.serviceSection.template = this.editData.type;
       this.serviceSection.order = this.editData.order;
       this.serviceSection.media_type_first =

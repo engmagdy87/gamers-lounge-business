@@ -1,4 +1,5 @@
 const buildQuery = (serviceSectionInfo, imagesData, videosData) => {
+   let secondDescription = ''
    let secondMediaType = ''
    let queryParams = '($img_content_first: [Upload!], $vid_content_first: [Upload!], ';
    let imagesKeys = `
@@ -35,6 +36,7 @@ const buildQuery = (serviceSectionInfo, imagesData, videosData) => {
       media_type_second } = serviceSectionInfo;
 
    if (media_type_second) secondMediaType = `media_type_second: ${media_type_second}`
+   if (description_second) secondDescription = `description_second: "${description_second}"`
 
    return `mutation${queryParams} {
       createServiceSection(
@@ -42,7 +44,7 @@ const buildQuery = (serviceSectionInfo, imagesData, videosData) => {
           service_id: ${serviceId}
           title: "${title}"
           description_first: "${description_first}"
-          description_second: "${description_second}"
+          ${secondDescription}
           media_type_first: ${media_type_first}
           ${secondMediaType}
           type: ${template}
