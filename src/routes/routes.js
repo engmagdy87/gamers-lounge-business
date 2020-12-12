@@ -8,6 +8,8 @@ const About = () => import(/* webpackChunkName: "About" */ '../website/container
 const Jobs = () => import(/* webpackChunkName: "Jobs" */ '../website/containers/Jobs.vue')
 const JobDetails = () => import(/* webpackChunkName: "JobDetails" */ '../website/containers/JobDetails.vue')
 const OurWork = () => import(/* webpackChunkName: "OurWork" */ '../website/containers/OurWork.vue')
+const Services = () => import(/* webpackChunkName: "Services" */ '../website/containers/Services.vue')
+const ServicesDetails = () => import(/* webpackChunkName: "ServicesDetails" */ '../website/containers/ServicesDetails.vue')
 
 // GeneralViews
 const NotFound = () => import(/* webpackChunkName: "NotFound" */ '../dashboard/pages/NotFoundPage.vue')
@@ -80,6 +82,22 @@ const routes = [
     path: '/job/:jobName',
     name: 'job',
     component: JobDetails,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next, false)
+    }
+  },
+  {
+    path: '/services',
+    name: 'services',
+    component: Services,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next, false)
+    }
+  },
+  {
+    path: '/services/:serviceName',
+    name: 'service',
+    component: ServicesDetails,
     beforeEnter(to, from, next) {
       showHeaderAndFooterForWebsite(next, false)
     }

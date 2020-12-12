@@ -1,0 +1,151 @@
+@import "../../color-palette.scss";
+@import "../../variables.scss";
+@import "../../mixins.scss";
+
+::-webkit-scrollbar{
+  width: 5px;
+}
+::-webkit-scrollbar-track{
+  background-color: $accent;
+}
+::-webkit-scrollbar-thumb{
+  background: $dark-background;
+}
+.section-container{
+    background-color: $dark-background;
+    padding: 110px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    max-height: 950px;
+    clip-path: polygon(7% 0, 100% 0, 100% 90%, 93% 100%, 0 100%, 0 10%);
+    @include is-extra-small-mobile {
+        padding: 40px;
+        clip-path: polygon(14% 0, 100% 0, 100% 92%, 86% 100%, 0 100%, 0 8%);
+    }
+    @include is-mobile {
+        padding: 50px;
+        clip-path: polygon(11% 0, 100% 0, 100% 93%, 89% 100%, 0 100%, 0 7%);
+    }
+    @include is-tablet {
+        padding: 50px;
+        clip-path: polygon(9% 0, 100% 0, 100% 93%, 90% 100%, 0 100%, 0 8%)
+    }
+    @include is-desktop {
+        padding: 50px;
+    }
+
+    &__title{
+        color: $accent;
+        font-family: 'Segoe UI Bold';
+        @include is-extra-small-mobile {
+            font-size:1.6rem;
+          }
+          @include is-mobile {
+            font-size:2rem;
+          }
+          @include is-tablet {
+            font-size:2rem;
+          }
+          @include is-desktop {
+            font-size:2rem;
+          }
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            top: 74px;
+            left: 0px;
+            height: 5px;
+            width: 220px;
+            background: $accent;
+            @include is-extra-small-mobile {
+                top: 44px;
+                width: 200px;
+              }
+              @include is-mobile {
+                top: 50px;
+                width: 220px;
+              }
+              @include is-tablet {
+                top: 50px;
+                width: 220px;
+              }
+              @include is-desktop {
+                top: 50px;
+                width: 150px;
+              }
+          }
+    }
+    &__media{
+        padding-bottom: 50px;
+        max-height: 550px;
+        overflow: hidden;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            padding-bottom: 50px;
+        }
+        video{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            padding-bottom: 50px;
+        }
+        @include is-extra-small-mobile {
+          padding-top: 40px;
+        }
+        @include is-mobile {
+          padding-top: 40px;
+        }
+        @include is-tablet {
+          padding-top: 40px;
+        }
+    }
+    &__template{
+        padding-top: 50px;
+        p{
+            font-size: 1.3rem;
+            color: $sub-text;
+            padding: 0;
+            max-height: 400px;
+            overflow-y: scroll;
+            @include is-extra-small-mobile {
+              font-size: 1rem;
+            }
+            @include is-mobile {
+              font-size: 1rem;
+            }
+            @include is-tablet {
+              font-size: 1rem;
+            }
+            @include is-desktop {
+              font-size: 1.2rem;
+            }
+        }
+    }
+}
+.sections-temp4{
+  max-height: 1260px;
+  clip-path: polygon(7% 0, 100% 0, 100% 92.5%, 93% 100%, 0 100%, 0 7.5%);
+  @include is-extra-small-mobile {
+      padding: 40px;
+      clip-path: polygon(13% 0, 100% 0, 100% 95%, 87% 100%, 0 100%, 0 5%);
+
+  }
+  @include is-mobile {
+      padding: 50px;
+      clip-path: polygon(10% 0, 100% 0, 100% 94%, 90% 100%, 0 100%, 0 6%)
+  }
+  @include is-tablet {
+      padding: 50px;
+      max-height: 1430px;
+      clip-path: polygon(10% 0, 100% 0, 100% 94%, 90% 100%, 0 100%, 0 6%);
+  }
+  @include is-desktop {
+      padding: 50px;
+      clip-path: polygon(7% 0, 100% 0, 100% 92.5%, 93% 100%, 0 100%, 0 7.5%);
+  }
+}

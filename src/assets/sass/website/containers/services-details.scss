@@ -1,0 +1,86 @@
+@import "../color-palette.scss";
+@import "../variables.scss";
+@import "../mixins.scss";
+
+
+.services-details-wrapper{
+    background-color: $primary;
+    height: max-content;
+    margin-top: -$header-height;
+    min-height: calc(100vh - #{$footer-height});
+    @include is-mobile {
+      margin-top: -$header-height-mobile - 45;
+      min-height: calc(100vh - #{$footer-height-mobile});
+    }
+    @include is-extra-small-mobile{
+      margin-top: -75px;
+    }
+    &__cover-container{
+        width: 100%;
+        max-height: 730px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $header-item;
+        img{
+            width: 100%;
+            object-fit: cover;
+            filter: brightness(50%);
+        }
+        h1{
+            position: absolute;
+            font-family: "Segoe UI Bold";
+            @include is-extra-small-mobile {
+                font-size: 1.8rem;
+              }
+              @include is-mobile {
+                font-size: 1.8rem;
+              }
+              @include is-tablet {
+                font-size: 2rem;
+              }
+              @include is-desktop {
+                font-size: 2rem;
+              }
+        }
+        p{
+            position: absolute;
+            margin-top: 145px;
+            font-size: 1.2rem;
+            @include is-extra-small-mobile {
+                margin-top: 100px;
+                font-size: .8rem;
+              }
+              @include is-mobile {
+                margin-top: 100px;
+                font-size: .9rem;
+              }
+              @include is-tablet {
+                margin-top: 110px;
+                font-size: 1rem;
+              }
+              @include is-desktop {
+                margin-top: 110px;
+                font-size: 1rem;
+              }
+        }
+    }
+    &__service-section{
+        width: 80%;
+        margin: auto;
+        @include is-extra-small-mobile {
+          width: 90%;
+        }
+        @include is-mobile {
+          width: 90%;
+        }
+        @include is-tablet {
+          width: 90%;
+        }
+        @include is-desktop {
+          width: 90%;
+        }
+    }
+}
