@@ -484,12 +484,22 @@ export default {
       this.validation[
         "second media type"
       ].isRequired = isTemplateHasTwoSections;
-      this.validation[
-        "second images content"
-      ].isRequired = isTemplateHasTwoSections;
-      this.validation[
-        "second videos content"
-      ].isRequired = isTemplateHasTwoSections;
+
+      this.validation["first images content"].isRequired =
+        this.serviceSection.media_type_first === this.MEDIA_TYPES.IMG ||
+        this.serviceSection.media_type_first === this.MEDIA_TYPES.SLIDER;
+
+      this.validation["first videos content"].isRequired =
+        this.serviceSection.media_type_first === this.MEDIA_TYPES.VIDEO;
+
+      this.validation["second images content"].isRequired =
+        isTemplateHasTwoSections &&
+        (this.serviceSection.media_type_second === this.MEDIA_TYPES.IMG ||
+          this.serviceSection.media_type_second === this.MEDIA_TYPES.SLIDER);
+
+      this.validation["second videos content"].isRequired =
+        isTemplateHasTwoSections &&
+        this.serviceSection.media_type_second === this.MEDIA_TYPES.VIDEO;
 
       document
         .querySelector(".second-description .vp-editor .pell-content")
@@ -636,7 +646,8 @@ export default {
     if (this.$route.name === "Edit Service Section") {
       this.serviceSection.title = this.editData.title;
       this.serviceSection.description_first = this.editData.description_first;
-      this.serviceSection.description_second = this.editData.description_second;
+      this.serviceSection.description_second =
+        this.editData.description_second || "";
       this.serviceSection.template = this.editData.type;
       this.serviceSection.order = this.editData.order;
       this.serviceSection.media_type_first =
