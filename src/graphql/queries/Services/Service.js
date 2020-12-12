@@ -2,7 +2,12 @@ const SERVICE = (id) => `
 query {
     service(id: ${id}) {    
        id 
-       title   
+       title
+       description
+       img_cover{
+         id
+         url
+      }
        sections(first: 50) {
           data {
             id

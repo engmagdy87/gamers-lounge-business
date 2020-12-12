@@ -1,21 +1,18 @@
 <template>
   <div class="services-details-wrapper" v-if="isServiceSectionsFetched">
-    <div class="col-12 pt-5"><Breadcrumb :tree="breadcrumbTree" /></div>
-        <div
-            v-for="service in serviceSections.sections.data"
-            :key="service.id"
-            class=""
-            >
-            <h1 style="color:white;">{{service.title }}</h1>
 
-            <h1 style="color:red;">{{ service.title }}</h1>
+    <div class="services-details-wrapper__cover-container">
+      <img :src="serviceSections.img_cover.url" alt="">
+        <h1 v-html="serviceSections.title"></h1>
+        <p v-html="serviceSections.description"> </p>
+    </div>
 
-            <h1  v-html="service.description_first" style="color:red;"></h1>
+    <div class="services-details-wrapper__service-section pt-5 pb-5">
+      <div class="col-12 pt-5 pl-0" ><Breadcrumb :tree="breadcrumbTree" /></div>
 
-            <h1 style="color:red;"> {{ service.type }}</h1>
-            <h1 style="color:purple;"> {{ service.img_content_first }}</h1>
+      <DetailsSection :sectionData="serviceSections.sections.data" />
+    </div>
 
-        </div>
   </div>
 </template>
 
@@ -23,16 +20,18 @@
 import { mapActions, mapState, mapMutations } from "vuex";
 import types from "../../store/types";
 import Breadcrumb from "../shared/Breadcrumb";
+import DetailsSection from "../components/services/DetailsSections"
 import { getEntityId, getEntityName } from "../../helpers/StringsHelper";
 
 export default {  
   data() {
     return {
-      breadcrumbTree: [{ title: "service", path: "/services" }]
+      breadcrumbTree: [{ title: "services", path: "/services" }]
     };
   },
   components: {
-    Breadcrumb
+    Breadcrumb,
+    DetailsSection
   },
   computed: {
     ...mapState({
