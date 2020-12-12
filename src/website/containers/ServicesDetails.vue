@@ -10,7 +10,7 @@
     <div class="services-details-wrapper__service-section pt-5 pb-5">
       <div class="col-12 pt-5 pl-0" ><Breadcrumb :tree="breadcrumbTree" /></div>
 
-      <DetailsSection :sectionData="serviceSections.sections.data" />
+      <DetailsSection  :sectionData="serviceSections.sections.data" />
     </div>
 
   </div>
@@ -42,10 +42,7 @@ export default {
   methods: {
     ...mapActions({
       fetchServiceSections: types.services.actions.FETCH_SERVICE_SECTION
-    }),
-    ...mapMutations({
-        setIsServiceFetched: types.services.mutations.SET_IS_SERVICE_SECTIONS_FETCHED,
-    }),
+    })
   },
   beforeMount() {
     this.setIsServiceFetched(false);
@@ -61,7 +58,8 @@ export default {
     });
 
     this.fetchServiceSections(requestSource);
-  }
+  },
+
 };
 </script>
 

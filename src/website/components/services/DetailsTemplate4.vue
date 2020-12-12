@@ -1,7 +1,5 @@
 <template>
-<div>
-      <div v-for="service in sectionData" :key="service.id">
-        <div class="section-container sections-temp4">
+<div class="section-container sections-temp4">
         <div class="section-container__template row m-0"
         >
             <h1 class="col-12 p-0 m-0 section-container__title pb-5" > {{service.title}} </h1>
@@ -19,7 +17,7 @@
                   > </video>
             </div>
 
-            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 pr-3">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 ">
                 <p v-html="service.description_first"></p>
             </div>
 
@@ -40,43 +38,14 @@
                   > </video>
             </div>
         </div>
-        </div>
-
-        <Template1 :data="service" v-if="service.type == 'TEMPLATE_1'"/>
-
-        <Template2 :data="service" v-else-if="service.type == 'TEMPLATE_2'"/>
-
-
-        <Template3 :data="service" v-else-if="service.type == 'TEMPLATE_3'"/>
-
-        <Template4 :data="service" v-else/>
-
-      </div>
-
 </div>
 </template>
 
 <script>
-import Template1 from "./DetailsTemplate1"
-import Template2 from "./DetailsTemplate2"
-import Template3 from "./DetailsTemplate3"
-import Template4 from "./DetailsTemplate4"
 import * as SERVICE_TEMPLATES from "../../../constants/ServiceTemplates";
 export default {
-  props: [ "sectionData"],
-
-  components: {
-    Template1,
-    Template2,
-    Template3,
-    Template4
-  },
-  computed:{
-    SERVICE_TEMPLATES() {
-      return SERVICE_TEMPLATES;
-    }
-  },
-};
+    props: [ "service"]
+}
 </script>
 
 <style lang="scss" scoped>

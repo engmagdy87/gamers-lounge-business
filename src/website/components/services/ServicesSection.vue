@@ -1,4 +1,7 @@
 <template>
+<div v-if="isServicesFetched">
+  <ServicesHero />
+
   <div class="services-page-wrapper row">
     <div
       v-for="service in services"
@@ -16,14 +19,17 @@
     </router-link> 
     </div>
   </div>
+
+</div>
 </template>
 
 <script>
 import { mapActions, mapState, mapMutations } from "vuex";
 import types from "../../../store/types";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
-
+import ServicesHero from "../../components/services/ServicesHero";
 export default {
+  components:{ ServicesHero },
   computed: {
     ...mapState({
       services: state => state.services.services,
