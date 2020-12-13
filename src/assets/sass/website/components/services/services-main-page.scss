@@ -8,6 +8,10 @@
   padding-top: 100px;
   padding-bottom: 100px;
   user-select: none;
+  @include is-extra-small-mobile {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
   &__content-wrapper {
     &:hover {
       img {
@@ -29,6 +33,9 @@
       object-fit: cover;
       clip-path: polygon(0% 0, 100% 0, 100% 100%, 100% 100%, 0 100%, 0 0%);
       transition: all 0.2s ease-in-out;
+      @include is-extra-small-mobile {
+        min-height: 250px;
+      }
     }
   }
   &__text {
