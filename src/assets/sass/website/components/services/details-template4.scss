@@ -78,7 +78,7 @@
     }
   }
   &__media {
-    max-height: $template-height / 1.4;
+    max-height: $template-height / 1.8;
     overflow: hidden;
     outline: none;
     &--img {
@@ -138,6 +138,28 @@
     @include is-mobile {
       padding: 30px;
     }
+    .first-description{
+      @include is-extra-small-mobile {
+        padding: 0!important;
+      }
+      @include is-mobile {
+        padding: 0!important;
+      }
+      @include is-tablet {
+        padding: 0!important;
+      }
+    }
+    .second-description{
+      @include is-extra-small-mobile {
+        padding: 0!important;
+      }
+      @include is-mobile {
+        padding: 0!important;
+      }
+      @include is-tablet {
+        padding: 0!important;
+      }
+    }
     p {
       font-size: 1.2rem;
       color: $sub-text;
@@ -163,7 +185,11 @@
       }
       @include is-desktop {
         font-size: 1.2rem;
+        max-height: $template-height/2;
         line-height: 35px;
+      }
+      @include is-large-desktop {
+        max-height: $template-height/2;
       }
     }
   }
@@ -171,8 +197,8 @@
 
 // All have % as divide operation units must be the same for all
 $width: 80%;
-$height: 45%;
-$clipped-length: 5.5%;
+$height: 20%;
+$clipped-length: 3%;
 
 $widths-and-heights: (
   clipped-shape-width: $width,
@@ -182,28 +208,28 @@ $widths-and-heights: (
     $width + 10%
   ),
   clipped-shape-height-xs: (
-    $height + 90%
+    $height + 190%
   ),
   clipped-length-xs: 12%,
   clipped-shape-width-sm: (
-    $width
+    $width + 10%
   ),
   clipped-shape-height-sm: (
-    $height + 70%
+    $height + 130%
   ),
-  clipped-length-sm: $clipped-length + 4%,
+  clipped-length-sm: $clipped-length + 6%,
   clipped-shape-width-md: $width + 10%,
-  clipped-shape-height-md: $height + 60%,
-  clipped-length-md: $clipped-length + 4%,
+  clipped-shape-height-md: $height + 110%,
+  clipped-length-md: $clipped-length + 6.5%,
   clipped-shape-width-lg: $width + 10%,
-  clipped-shape-height-lg: $height + 25%,
-  clipped-length-lg: $clipped-length + 2%,
+  clipped-shape-height-lg: $height + 45%,
+  clipped-length-lg: $clipped-length + 5%,
   clipped-shape-width-xlg: $width + 10%,
-  clipped-shape-height-xlg: $height + 10%,
-  clipped-length-xlg: $clipped-length,
+  clipped-shape-height-xlg: $height + 35%,
+  clipped-length-xlg: $clipped-length + 3.5%,
   clipped-shape-width-xxlg: $width,
-  clipped-shape-height-xxlg: $height,
-  clipped-length-xxlg: $clipped-length
+  clipped-shape-height-xxlg: $height + 30%,
+  clipped-length-xxlg: $clipped-length + 2%
 );
 
 // use /deep/ to apply scss classes to the child components

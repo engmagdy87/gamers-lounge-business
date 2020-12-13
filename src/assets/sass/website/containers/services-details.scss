@@ -70,6 +70,7 @@
     &__service-section{
         width: 80%;
         margin: auto;
+        transition: all .5s ease-in-out;
         @include is-extra-small-mobile {
           width: 90%;
         }
@@ -82,5 +83,9 @@
         @include is-desktop {
           width: 90%;
         }
+        @include is-large-desktop {
+          width: 90%;
+        }
+        
     }
 }
