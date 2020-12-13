@@ -554,16 +554,18 @@ export default {
             vid_content_second: this.$refs.vid_content_second.files
           }
         };
-        const secondMediaType = this.serviceSection.media_type_second;
-        if (secondMediaType === SERVICE_TEMPLATES.TEMPLATE_4)
+        const secondTemplate = this.serviceSection.template;
+        if (secondTemplate === SERVICE_TEMPLATES.TEMPLATE_4)
           payload = {
             ...payload,
-            media_type_second: secondMediaType,
+            media_type_second: this.serviceSection.media_type_second,
             description_second: reformatHTMLString(
               this.serviceSection.description_second
             )
           };
-
+        console.log("====================================");
+        console.log(payload);
+        console.log("====================================");
         if (this.operation === "Edit Service Section") {
           await this.updateServiceSection({
             ...payload,

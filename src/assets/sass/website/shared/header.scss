@@ -47,10 +47,6 @@
   &--desktop {
     display: none;
     width: 100%;
-    @include is-large-desktop {
-      display: block;
-      margin-right: 20px;
-    }
     @include is-extra-large-desktop {
       display: block;
       margin-right: 20px;
@@ -58,9 +54,6 @@
   }
   &--mobile {
     display: block;
-    @include is-large-desktop {
-      display: none;
-    }
     @include is-extra-large-desktop {
       display: none;
     }
@@ -106,20 +99,6 @@
         @include header-item-hover-effect(0, $header-item-underline-height);
       }
       &:hover::before {
-        @include header-item-hover-effect(
-          $header-item-underline-width,
-          $header-item-underline-height
-        );
-      }
-    }
-    &--active {
-      font-size: $header-active-item-font;
-      font-weight: bold;
-      &::before {
-        @include header-item-hover-effect(
-          $header-item-underline-width,
-          $header-item-underline-height
-        );
         @include is-extra-small-mobile {
           @include header-item-hover-effect(0, $header-item-underline-height);
         }
@@ -131,6 +110,36 @@
         }
         @include is-desktop {
           @include header-item-hover-effect(0, $header-item-underline-height);
+        }
+        @include is-extra-large-desktop {
+          @include header-item-hover-effect(
+            $header-item-underline-width,
+            $header-item-underline-height
+          );
+        }
+      }
+    }
+    &--active {
+      font-size: $header-active-item-font;
+      font-weight: bold;
+      &::before {
+        @include is-extra-small-mobile {
+          @include header-item-hover-effect(0, $header-item-underline-height);
+        }
+        @include is-mobile {
+          @include header-item-hover-effect(0, $header-item-underline-height);
+        }
+        @include is-tablet {
+          @include header-item-hover-effect(0, $header-item-underline-height);
+        }
+        @include is-desktop {
+          @include header-item-hover-effect(0, $header-item-underline-height);
+        }
+        @include is-extra-large-desktop {
+          @include header-item-hover-effect(
+            $header-item-underline-width,
+            $header-item-underline-height
+          );
         }
       }
     }
@@ -207,7 +216,7 @@
 
 .overlay li a:hover,
 .overlay li a:focus {
-  color: $primary;
+  color: $accent;
 }
 
 .overlay .closebtn {
