@@ -8,7 +8,7 @@
       <div class="col-12 section-container__media">
         <div
           v-if="data.media_type_first === MEDIA_TYPES.IMG"
-          class="sections-temp3__list"
+          class="section-container__media--img"
         >
           <img
             v-for="(img, i) in data.img_content_first"
@@ -22,7 +22,28 @@
             :src="img.url"
           />
         </div>
-        <div v-if="data.media_type_first === MEDIA_TYPES.VIDEO">
+        <div
+          v-if="data.media_type_first === MEDIA_TYPES.SLIDER"
+          class="section-container__media--slider"
+        >
+          <Carousel3d
+            :autoplay="true"
+            :autoplay-timeout="3000"
+            :autoplayHoverPause="true"
+          >
+            <Slide
+              v-for="(img, i) in data.img_content_first"
+              :index="i"
+              :key="i"
+            >
+              <img :src="img.url" />
+            </Slide>
+          </Carousel3d>
+        </div>
+        <div
+          v-if="data.media_type_first === MEDIA_TYPES.VIDEO"
+          class="section-container__media--video"
+        >
           <video
             v-for="(video, i) in data.vid_content_first"
             :key="i"
@@ -40,6 +61,7 @@
 </template>
 
 <script>
+import { Carousel3d, Slide } from "vue-carousel-3d";
 import * as MEDIA_TYPES from "../../../constants/MediaTypes";
 
 export default {
@@ -48,6 +70,10 @@ export default {
     MEDIA_TYPES() {
       return MEDIA_TYPES;
     }
+  },
+  components: {
+    Carousel3d,
+    Slide
   }
 };
 </script>
