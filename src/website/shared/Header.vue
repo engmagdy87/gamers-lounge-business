@@ -62,7 +62,7 @@
           <li>
             <a
               :class="[
-                activeItem === 'services'
+                activeItem === 'services' || activeItem === 'service'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -138,7 +138,7 @@
             </li>
             <li
               :class="[
-                activeItem === 'services'
+                activeItem === 'services' || activeItem === 'service'
                   ? 'header-wrapper__navLinks--active'
                   : ''
               ]"
