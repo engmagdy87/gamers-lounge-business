@@ -6,11 +6,11 @@
       <p v-html="serviceSections.description"></p>
     </div>
 
-    <div class="services-details-wrapper__service-section pt-5 pb-5">
+    <div class="services-details-wrapper__service-section pt-5">
       <div class="col-12 pt-5 pl-0"><Breadcrumb :tree="breadcrumbTree" /></div>
-
-      <DetailsSection :sectionData="serviceSections.sections.data" />
     </div>
+
+    <DetailsSection :sectionData="serviceSections.sections.data" />
   </div>
 </template>
 

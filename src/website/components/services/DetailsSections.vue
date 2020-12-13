@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sections-wrapper">
     <div v-for="section in sectionData" :key="section.id">
       <Template1
         v-if="section.type === SERVICE_TEMPLATES.TEMPLATE_1"
@@ -42,5 +42,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/sass/website/components/services/details-section.scss";
 </style>
