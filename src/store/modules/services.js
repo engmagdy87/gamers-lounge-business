@@ -4,7 +4,7 @@ import types from '../types';
 const state = {
     services: [],
     isServicesFetched: false,
-    serviceSections: [],
+    serviceSections: {},
     isServiceSectionsFetched: false,
 }
 

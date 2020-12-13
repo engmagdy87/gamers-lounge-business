@@ -9,7 +9,13 @@
       <div class="description" v-html="rowData.description_second"></div>
     </td>
     <td v-else></td>
-    <td>{{ rowData.type }}</td>
+    <td>
+      <img
+        class="template"
+        :src="getTemplateImageSrc(rowData.type)"
+        :alt="rowData.order"
+      />
+    </td>
     <td>{{ rowData.order }}</td>
     <td>{{ rowData.media_type_first }}</td>
     <td v-if="rowData.img_content_first">
@@ -73,6 +79,9 @@ export default {
         name: "Edit Service Section",
         params: { data: this.rowData }
       });
+    },
+    getTemplateImageSrc(template) {
+      return `/images/templates/template-${template.split("_")[1]}.png`;
     }
   }
 };

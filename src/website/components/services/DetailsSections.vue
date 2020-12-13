@@ -1,41 +1,43 @@
 <template>
-<div>
-      <div v-for="service in sectionData" :key="service.id">
-
-        <Template1 :data="service" v-if="service.type == 'TEMPLATE_1'"/>
-
-        <Template2 :data="service" v-else-if="service.type == 'TEMPLATE_2'"/>
-
-
-        <Template3 :data="service" v-else-if="service.type == 'TEMPLATE_3'"/>
-
-        <Template4 :data="service" v-else/>
-
-      </div>
-
-</div>
+  <div>
+    <div v-for="section in sectionData" :key="section.id">
+      <Template1
+        v-if="section.type === SERVICE_TEMPLATES.TEMPLATE_1"
+        :data="section"
+      />
+      <Template2
+        :data="section"
+        v-else-if="section.type === SERVICE_TEMPLATES.TEMPLATE_2"
+      />
+      <Template3
+        :data="section"
+        v-else-if="section.type === SERVICE_TEMPLATES.TEMPLATE_3"
+      />
+      <Template4 :data="section" v-else />
+    </div>
+  </div>
 </template>
 
 <script>
-import Template1 from "./DetailsTemplate1"
-import Template2 from "./DetailsTemplate2"
-import Template3 from "./DetailsTemplate3"
-import Template4 from "./DetailsTemplate4"
+import Template1 from "./DetailsTemplate1";
+import Template2 from "./DetailsTemplate2";
+import Template3 from "./DetailsTemplate3";
+import Template4 from "./DetailsTemplate4";
 import * as SERVICE_TEMPLATES from "../../../constants/ServiceTemplates";
-export default {
-  props: [ "sectionData"],
 
+export default {
+  props: ["sectionData"],
   components: {
     Template1,
     Template2,
     Template3,
     Template4
   },
-  computed:{
+  computed: {
     SERVICE_TEMPLATES() {
       return SERVICE_TEMPLATES;
     }
-  },
+  }
 };
 </script>
 
