@@ -56,7 +56,7 @@
           </div>
 
           <div class="col-12 pr-2 pl-2 pt-3">
-            <p v-html="data.description_first"></p>
+            <p class="p-2" v-html="data.description_first"></p>
           </div>
         </div>
       </template>

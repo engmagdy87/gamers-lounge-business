@@ -563,9 +563,6 @@ export default {
               this.serviceSection.description_second
             )
           };
-        console.log("====================================");
-        console.log(payload);
-        console.log("====================================");
         if (this.operation === "Edit Service Section") {
           await this.updateServiceSection({
             ...payload,

@@ -63,6 +63,7 @@
     justify-content: center;
     align-items: baseline;
     margin-right: auto;
+    margin-left: 30px;
     width: 300px;
     @include is-extra-small-mobile {
       justify-content: start;
@@ -70,7 +71,7 @@
       margin-left: 20px;
     }
     img {
-      width: 200px;
+      width: 220px;
     }
     p {
       display: inline-block;
@@ -96,25 +97,42 @@
     &--inactive {
       font-size: $header-inactive-item-font;
       &::before {
-        @include header-item-hover-effect(0, $header-item-underline-height);
+        @include header-item-hover-effect(0, $header-item-underline-height, 0);
       }
       &:hover::before {
         @include is-extra-small-mobile {
-          @include header-item-hover-effect(0, $header-item-underline-height);
+          @include header-item-hover-effect(
+            0,
+            $header-item-underline-height,
+            0
+          );
         }
         @include is-mobile {
-          @include header-item-hover-effect(0, $header-item-underline-height);
+          @include header-item-hover-effect(
+            0,
+            $header-item-underline-height,
+            0
+          );
         }
         @include is-tablet {
-          @include header-item-hover-effect(0, $header-item-underline-height);
+          @include header-item-hover-effect(
+            0,
+            $header-item-underline-height,
+            0
+          );
         }
         @include is-desktop {
-          @include header-item-hover-effect(0, $header-item-underline-height);
+          @include header-item-hover-effect(
+            0,
+            $header-item-underline-height,
+            0
+          );
         }
         @include is-extra-large-desktop {
           @include header-item-hover-effect(
             $header-item-underline-width,
-            $header-item-underline-height
+            $header-item-underline-height,
+            1
           );
         }
       }
@@ -124,21 +142,38 @@
       font-weight: bold;
       &::before {
         @include is-extra-small-mobile {
-          @include header-item-hover-effect(0, $header-item-underline-height);
+          @include header-item-hover-effect(
+            0,
+            $header-item-underline-height,
+            0
+          );
         }
         @include is-mobile {
-          @include header-item-hover-effect(0, $header-item-underline-height);
+          @include header-item-hover-effect(
+            0,
+            $header-item-underline-height,
+            0
+          );
         }
         @include is-tablet {
-          @include header-item-hover-effect(0, $header-item-underline-height);
+          @include header-item-hover-effect(
+            0,
+            $header-item-underline-height,
+            0
+          );
         }
         @include is-desktop {
-          @include header-item-hover-effect(0, $header-item-underline-height);
+          @include header-item-hover-effect(
+            0,
+            $header-item-underline-height,
+            0
+          );
         }
         @include is-extra-large-desktop {
           @include header-item-hover-effect(
             $header-item-underline-width,
-            $header-item-underline-height
+            $header-item-underline-height,
+            1
           );
         }
       }

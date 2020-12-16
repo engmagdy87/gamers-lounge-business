@@ -3,11 +3,14 @@
     <HalfClippedShape>
       <template #content>
         <div class="section-container__template row m-0">
-          <h1 class="col-12 p-0 m-0 section-container__title ">
+          <h1 class="col-12 p-0 m-0 section-container__title pb-4">
             {{ data.title }}
           </h1>
+          <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0">
+            <p class="p-2" v-html="data.description_first"></p>
+          </div>
           <div
-            class="col-sm-12 col-md-12 col-lg-6 col-xl-6 section-container__media p-0 pt-4"
+            class="col-sm-12 col-md-12 col-lg-6 col-xl-6 section-container__media"
           >
             <div
               v-if="data.media_type_first === MEDIA_TYPES.IMG"
@@ -49,10 +52,6 @@
               />
             </div>
           </div>
-
-          <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0">
-            <p v-html="data.description_first"></p>
-          </div>
         </div>
       </template>
     </HalfClippedShape>
@@ -63,6 +62,7 @@
 import { Carousel3d, Slide } from "vue-carousel-3d";
 import * as MEDIA_TYPES from "../../../constants/MediaTypes";
 import HalfClippedShape from "../../shared/HalfClippedShape";
+
 export default {
   props: ["data"],
   computed: {

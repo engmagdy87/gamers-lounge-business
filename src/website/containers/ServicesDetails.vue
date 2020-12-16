@@ -1,8 +1,8 @@
 <template>
   <div class="services-details-wrapper" v-if="isServiceSectionsFetched">
     <div class="services-details-wrapper__cover-container">
-      <img :src="serviceSections.img_cover.url" alt="" />
-      <h1 v-html="serviceSections.title"></h1>
+      <img :src="serviceSections.img_cover.url" :alt="serviceSections.title" />
+      <h1>{{ serviceSections.title }}</h1>
       <p v-html="serviceSections.description"></p>
     </div>
 

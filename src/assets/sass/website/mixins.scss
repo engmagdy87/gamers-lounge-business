@@ -177,14 +177,15 @@
   );
 }
 
-@mixin header-item-hover-effect($width, $height) {
+@mixin header-item-hover-effect($width, $height, $opacity) {
   content: "";
   width: $width;
   height: $height;
+  opacity: $opacity;
   background-color: $accent;
   position: absolute;
   bottom: 0;
-  transition: width $transition-time ease;
+  transition: all $transition-time ease;
   transform: translateX(0%) translateY(5px);
 }
 

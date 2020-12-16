@@ -7,18 +7,13 @@
             {{ data.title }}
           </h1>
 
-          <div class="col-12 col-lg-5 col-xl-5 pb-3 section-container__media p-0">
+          <div
+            class="col-12 col-lg-5 col-xl-5 pb-3 section-container__media p-0"
+          >
             <div
               v-if="data.media_type_first === MEDIA_TYPES.IMG"
               class="section-container__media--img"
             >
-              <img
-                v-for="(img, i) in data.img_content_first"
-                :key="i"
-                :src="img.url"
-              />
-            </div>
-            <div v-if="data.media_type_first === MEDIA_TYPES.SLIDER">
               <img
                 v-for="(img, i) in data.img_content_first"
                 :key="i"
@@ -37,7 +32,7 @@
                 <Slide
                   v-for="(img, i) in data.img_content_first"
                   :index="i"
-                  :key="i"
+                  :key="img.id"
                 >
                   <img :src="img.url" />
                 </Slide>
@@ -56,14 +51,16 @@
             </div>
           </div>
 
-          <div class="col-sm-12 col-md-12 col-lg-7 col-xl-7 pb-3 pl-5 first-description">
-            <p v-html="data.description_first"></p>
+          <div
+            class="col-sm-12 col-md-12 col-lg-7 col-xl-7 pb-3 pl-4 first-description"
+          >
+            <p class="p-2" v-html="data.description_first"></p>
           </div>
 
           <div
-            class="col-sm-12 col-md-12 col-lg-7 col-xl-7 pr-3 pr-5 order-2 order-lg-1 second-description"
+            class="col-sm-12 col-md-12 col-lg-7 col-xl-7 pr-3 pr-4 order-2 order-lg-1 second-description"
           >
-            <p v-html="data.description_second"></p>
+            <p class="p-2" v-html="data.description_second"></p>
           </div>
 
           <div
@@ -91,7 +88,7 @@
                 <Slide
                   v-for="(img, i) in data.img_content_second"
                   :index="i"
-                  :key="i"
+                  :key="img.id"
                 >
                   <img :src="img.url" />
                 </Slide>

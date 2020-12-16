@@ -8,6 +8,7 @@
   padding-top: $header-height;
   &__details {
     color: $header-item;
+    word-break: break-all;
     hr {
       border: 1px solid $header-item;
       margin-bottom: 30px;

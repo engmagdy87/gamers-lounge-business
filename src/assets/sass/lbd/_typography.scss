@@ -118,7 +118,9 @@ p {
   font-size: $font-paragraph;
   line-height: $line-height-general;
 }
-p > * {
+p > *,
+p > div,
+p > div > span {
   color: white !important;
   background-color: transparent !important;
   word-break: break-word;
