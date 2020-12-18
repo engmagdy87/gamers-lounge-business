@@ -273,6 +273,19 @@ const deleteVideo = async (videoId) => {
   }
 }
 
+const isUserAuthenticated = async () => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: QUERY.IS_USER_AUTHENTICATED(),
+    }, token);
+    return response.data.data.me
+  } catch (error) {
+    throw error;
+  }
+}
+
+
 export {
   fetchDepartments,
   fetchJobs,
@@ -296,6 +309,7 @@ export {
   deleteServiceSection,
   deleteImage,
   deleteVideo,
+  isUserAuthenticated
 }
 
 const request = async (data, token) => {

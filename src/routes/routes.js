@@ -39,10 +39,15 @@ const Icons = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/
 const Notifications = () => import(/* webpackChunkName: "Notifications" */ 'src/dashboard/pages/Notifications.vue')
 
 import { getTokenCookie } from '../helpers/CookieHelper'
+import { isUserAuthenticated } from '../helpers/APIsHelper'
 
 const showHeaderAndFooterForWebsite = (next, flag = true) => {
   store.commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, flag);
   next();
+}
+const getUserAuthenticatedFlag = async () => {
+  const response = await isUserAuthenticated()
+  return response
 }
 
 const routes = [
@@ -114,10 +119,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login,
-    beforeEnter(to, from, next) {
+    beforeEnter: async (to, from, next) => {
       store.commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
       const token = getTokenCookie()
-      if (token) next('/dashboard');
+      const isUserAuthenticatedFlag = await getUserAuthenticatedFlag()
+      if (token && isUserAuthenticatedFlag) next('/dashboard');
       else next();
     },
   },
@@ -125,10 +131,11 @@ const routes = [
     path: '/dashboard',
     component: DashboardLayout,
     redirect: '/dashboard/overview',
-    beforeEnter(to, from, next) {
+    beforeEnter: async (to, from, next) => {
       store.commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
       const token = getTokenCookie()
-      if (!token) next('/login');
+      const isUserAuthenticatedFlag = await getUserAuthenticatedFlag()
+      if (!token && !isUserAuthenticatedFlag) next('/login');
       else next();
     },
     children: [

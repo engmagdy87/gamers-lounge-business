@@ -4,6 +4,7 @@ import JOBS from './Jobs/Jobs';
 import JOB from './Jobs/Job';
 import SERVICES from './Services/Services';
 import SERVICE from './Services/Service';
+import IS_USER_AUTHENTICATED from './User';
 
 export default {
   DEPARTMENTS,
@@ -11,5 +12,6 @@ export default {
   JOBS,
   JOB,
   SERVICES,
-  SERVICE
+  SERVICE,
+  IS_USER_AUTHENTICATED
 };
