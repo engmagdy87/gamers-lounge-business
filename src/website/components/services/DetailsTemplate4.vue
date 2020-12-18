@@ -8,7 +8,7 @@
           </h1>
 
           <div
-            class="col-12 col-lg-5 col-xl-5 pb-3 section-container__media p-0"
+            class="col-12 col-lg-5 col-xl-5 section-container__media p-0 mb-5"
           >
             <div
               v-if="data.media_type_first === MEDIA_TYPES.IMG"
@@ -52,15 +52,15 @@
           </div>
 
           <div
-            class="col-sm-12 col-md-12 col-lg-7 col-xl-7 pb-3 pl-4 first-description"
+            class="col-sm-12 col-md-12 col-lg-7 col-xl-7 pb-3 pl-4 pr-0 mb-5 first-description"
           >
-            <p class="p-2" v-html="data.description_first"></p>
+            <p class="pl-2" v-html="data.description_first"></p>
           </div>
 
           <div
-            class="col-sm-12 col-md-12 col-lg-7 col-xl-7 pr-3 pr-4 order-2 order-lg-1 second-description"
+            class="col-sm-12 col-md-12 col-lg-7 col-xl-7 pr-3 pr-4 order-2 order-lg-1 second-description pl-0"
           >
-            <p class="p-2" v-html="data.description_second"></p>
+            <p class="pr-2" v-html="data.description_second"></p>
           </div>
 
           <div

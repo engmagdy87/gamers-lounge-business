@@ -7,7 +7,7 @@
             {{ data.title }}
           </h1>
 
-          <div class="col-12 section-container__media p-0">
+          <div class="col-12 section-container__media p-0 pt-4">
             <div
               v-if="data.media_type_first === MEDIA_TYPES.IMG"
               class="section-container__media--img"
@@ -56,7 +56,7 @@
           </div>
 
           <div class="col-12 pr-2 pl-2 pt-3">
-            <p class="p-2" v-html="data.description_first"></p>
+            <p class="pl-2 pr-2" v-html="data.description_first"></p>
           </div>
         </div>
       </template>

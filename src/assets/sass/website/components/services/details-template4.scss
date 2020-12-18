@@ -78,7 +78,7 @@
     }
   }
   &__media {
-    max-height: $template-height / 1.4;
+    max-height: $template-height / 1.2;
     overflow: hidden;
     outline: none;
     &--img {
@@ -98,6 +98,9 @@
     &--slider {
       height: 100%;
       width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       img {
         object-fit: cover;
         height: 100%;
@@ -106,10 +109,13 @@
     &--video {
       height: 100%;
       width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       video {
-        height: 100%;
+        // height: 100%;
         width: 100%;
-        object-fit: cover;
+        object-fit: contain;
       }
     }
 
@@ -167,7 +173,7 @@
       overflow-y: auto;
       text-align: justify;
       line-height: 40px;
-      max-height: $template-height/1.4;
+      max-height: $template-height/1.2;
       @include is-extra-small-mobile {
         font-size: 1rem;
         max-height: $template-height/2;

@@ -3,15 +3,15 @@
     <HalfClippedShape>
       <template #content>
         <div class="section-container__template row m-0">
-          <h1 class="col-12 p-0 m-0 section-container__title ">
+          <h1 class="col-12 p-0 m-0 section-container__title">
             {{ data.title }}
           </h1>
           <div
-            class="col-sm-12 col-md-12 col-lg-6 col-xl-6 section-container__media p-0 pt-4"
+            class="col-sm-12 col-md-12 col-lg-6 col-xl-6 section-container__media p-0"
           >
             <div
               v-if="data.media_type_first === MEDIA_TYPES.IMG"
-              class="section-container__media--img"
+              class="section-container__media--img pt-4"
             >
               <img
                 v-for="(img, i) in data.img_content_first"
@@ -50,8 +50,8 @@
             </div>
           </div>
 
-          <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 pl-4">
-            <p class="p-2" v-html="data.description_first"></p>
+          <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 pl-4 pt-4">
+            <p class="pl-2 pr-2" v-html="data.description_first"></p>
           </div>
         </div>
       </template>
