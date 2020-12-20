@@ -1,11 +1,11 @@
-import { adminLogin } from '../../helpers/APIsHelper';
+import * as APIs from '../../helpers/APIsHelper';
 import { setTokenCookie } from '../../helpers/CookieHelper';
 import types from '../types';
 
 const loginToDashboard = async ({ commit }, credentials) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await adminLogin(credentials)
+        const response = await APIs.adminLogin(credentials)
         setTokenCookie(response.access_token)
         window.open('/dashboard', '_self')
     } catch (error) {

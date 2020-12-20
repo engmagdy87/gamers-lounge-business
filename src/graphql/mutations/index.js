@@ -16,6 +16,19 @@ import CREATE_SERVICE_SECTION from './Services/Sections/CreateSection';
 import UPDATE_SERVICE_SECTION from './Services/Sections/UpdateSection';
 import DELETE_SERVICE_SECTION from './Services/Sections/DeleteSection';
 
+import CREATE_WORK from './Works/CreateWork';
+import UPDATE_WORK from './Works/UpdateWork';
+import DELETE_WORK from './Works/DeleteWork';
+import CREATE_WORK_SECTION from './Works/Sections/CreateSection';
+import UPDATE_WORK_SECTION from './Works/Sections/UpdateSection';
+import DELETE_WORK_SECTION from './Works/Sections/DeleteSection';
+import CREATE_WORK_ROW from './Works/Rows/CreateRow';
+import UPDATE_WORK_ROW from './Works/Rows/UpdateRow';
+import DELETE_WORK_ROW from './Works/Rows/DeleteRow';
+import CREATE_WORK_COLUMN from './Works/Columns/CreateColumn';
+import UPDATE_WORK_COLUMN from './Works/Columns/UpdateColumn';
+import DELETE_WORK_COLUMN from './Works/Columns/DeleteColumn';
+
 import DELETE_IMAGE from './DeleteImage';
 import DELETE_VIDEO from './DeleteVideo';
 
@@ -34,6 +47,18 @@ export default {
     CREATE_SERVICE_SECTION,
     UPDATE_SERVICE_SECTION,
     DELETE_SERVICE_SECTION,
+    CREATE_WORK,
+    UPDATE_WORK,
+    DELETE_WORK,
+    CREATE_WORK_SECTION,
+    UPDATE_WORK_SECTION,
+    DELETE_WORK_SECTION,
+    CREATE_WORK_ROW,
+    UPDATE_WORK_ROW,
+    DELETE_WORK_ROW,
+    CREATE_WORK_COLUMN,
+    UPDATE_WORK_COLUMN,
+    DELETE_WORK_COLUMN,
     DELETE_IMAGE,
     DELETE_VIDEO
 };

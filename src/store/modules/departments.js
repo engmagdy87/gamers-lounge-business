@@ -1,4 +1,4 @@
-import { createDepartment, deleteDepartment, fetchDepartments, updateDepartment } from '../../helpers/APIsHelper';
+import * as APIs from '../../helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -21,7 +21,7 @@ const mutations = {
 const fetchDepartmentsData = async ({ commit }) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await fetchDepartments()
+        const response = await APIs.fetchDepartments()
         commit(types.departments.mutations.SET_DEPARTMENTS, response)
         commit(types.departments.mutations.SET_IS_DEPARTMENTS_FETCHED, true)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -35,7 +35,7 @@ const fetchDepartmentsData = async ({ commit }) => {
 const createDepartmentData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await createDepartment(data)
+        await APIs.createDepartment(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -47,7 +47,7 @@ const deleteDepartmentData = async ({ commit }, payload) => {
     const { departmentId, locationInDataArray } = payload
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await deleteDepartment(departmentId)
+        await APIs.deleteDepartment(departmentId)
         commit(types.departments.mutations.REMOVE_DELETED_DEPARTMENT, locationInDataArray);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
@@ -59,7 +59,7 @@ const deleteDepartmentData = async ({ commit }, payload) => {
 const updateDepartmentData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await updateDepartment(data)
+        await APIs.updateDepartment(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)

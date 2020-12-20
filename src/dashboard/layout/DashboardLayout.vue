@@ -18,6 +18,10 @@
         <i class="nc-icon nc-layers-3"></i>
         <p>Services</p>
       </sidebar-link>
+      <sidebar-link to="/dashboard/works">
+        <i class="nc-icon nc-ruler-pencil"></i>
+        <p>Work</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <TopNavbar></TopNavbar>

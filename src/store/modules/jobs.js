@@ -1,4 +1,4 @@
-import { applyJob, createJob, deleteJob, fetchJob, fetchDashboardJob, fetchJobs, updateJob } from '../../helpers/APIsHelper';
+import * as APIs from '../../helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -31,7 +31,7 @@ const mutations = {
 const fetchJobsData = async ({ commit }, requestSource) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await fetchJobs()
+        const response = await APIs.fetchJobs()
         commit(types.jobs.mutations.SET_JOBS, response.data)
         commit(types.jobs.mutations.SET_IS_JOBS_FETCHED, true)
         if (requestSource === 'website')
@@ -50,11 +50,11 @@ const fetchJobData = async ({ commit }, { jobId, requestSource }) => {
     try {
         let response;
         if (requestSource === 'website') {
-            response = await fetchJob(jobId)
+            response = await APIs.fetchJob(jobId)
             commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
         }
         else {
-            response = await fetchDashboardJob(jobId)
+            response = await APIs.fetchDashboardJob(jobId)
             commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
         }
         commit(types.jobs.mutations.SET_JOB, response)
@@ -70,7 +70,7 @@ const fetchJobData = async ({ commit }, { jobId, requestSource }) => {
 const createJobData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await createJob(data)
+        await APIs.createJob(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -82,7 +82,7 @@ const deleteJobData = async ({ commit }, payload) => {
     const { jobId, locationInDataArray } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await deleteJob(jobId)
+        await APIs.deleteJob(jobId)
         commit(types.jobs.mutations.REMOVE_DELETED_JOB, locationInDataArray);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
@@ -94,7 +94,7 @@ const deleteJobData = async ({ commit }, payload) => {
 const updateJobData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await updateJob(data)
+        await APIs.updateJob(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -105,7 +105,7 @@ const updateJobData = async ({ commit }, data) => {
 const applyJobData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await applyJob(data)
+        await APIs.applyJob(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)

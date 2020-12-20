@@ -163,7 +163,7 @@ const createService = async (data) => {
 
   try {
     const response = await requestMultipart(constructFormDataForMultipleFile(imagesData, query), token);
-    return response.data.data.applyJob
+    return response.data.data.createService
   } catch (error) {
     throw error;
   }
@@ -285,6 +285,220 @@ const isUserAuthenticated = async () => {
   }
 }
 
+//*************** */
+const fetchWorks = async () => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: QUERY.WORKS(),
+    }, token);
+    return response.data.data.works
+  } catch (error) {
+    throw error;
+  }
+}
+
+const fetchWebsiteWorks = async () => {
+  try {
+    const response = await request({
+      query: QUERY.WORKS_WEBSITE(),
+    });
+    return response.data.data.works
+  } catch (error) {
+    throw error;
+  }
+}
+
+const fetchWorkSections = async (workId) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: QUERY.WORK_SECTIONS(workId),
+    }, token);
+    return response.data.data.work
+  } catch (error) {
+    throw error;
+  }
+}
+
+const fetchWorkSection = async (workId) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: QUERY.WORK_SECTION(workId),
+    }, token);
+    return response.data.data.section
+  } catch (error) {
+    throw error;
+  }
+}
+
+const fetchWorkRows = async (workSectionId) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: QUERY.WORK_ROWS(workSectionId),
+    }, token);
+    return response.data.data.section
+  } catch (error) {
+    throw error;
+  }
+}
+
+const createWork = async (data) => {
+  const { imagesData, ...workInfo } = data;
+  const token = getTokenCookie()
+
+  const query = MUTATION.CREATE_WORK(workInfo);
+
+  try {
+    const response = await requestMultipart(constructFormDataForMultipleFile(imagesData, query), token);
+    return response.data.data.createWork
+  } catch (error) {
+    throw error;
+  }
+}
+
+const updateWork = async (data) => {
+  let response;
+  const { imagesData, ...workInfo } = data;
+  const token = getTokenCookie()
+  try {
+    const query = MUTATION.UPDATE_WORK(workInfo, imagesData)
+    if (imagesData)
+      response = await requestMultipart(constructFormDataForMultipleFile(imagesData, query), token);
+    else response = await request({
+      query
+    }, token);
+    return response.data.data.updateWork
+  } catch (error) {
+    throw error;
+  }
+}
+
+const deleteWork = async (workId) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.DELETE_WORK(workId),
+    }, token);
+    return response.data.data.deleteWork
+  } catch (error) {
+    throw error;
+  }
+}
+const createWorkSection = async (data) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.CREATE_WORK_SECTION(data),
+    }, token);
+    return response.data.data.createSection
+  } catch (error) {
+    throw error;
+  }
+}
+
+const updateWorkSection = async (data) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.UPDATE_WORK_SECTION(data),
+    }, token);
+    return response.data.data.updateSection
+  } catch (error) {
+    throw error;
+  }
+}
+
+const deleteWorkSection = async (workSectionId) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.DELETE_WORK_SECTION(workSectionId),
+    }, token);
+    return response.data.data.deleteSection
+  } catch (error) {
+    throw error;
+  }
+}
+
+const createWorkRow = async (data) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.CREATE_WORK_ROW(data),
+    }, token);
+    return response.data.data.createRow
+  } catch (error) {
+    throw error;
+  }
+}
+
+const updateWorkRow = async (data) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.UPDATE_WORK_ROW(data),
+    }, token);
+    return response.data.data.updateRow
+  } catch (error) {
+    throw error;
+  }
+}
+
+const deleteWorkRow = async (workRowId) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.DELETE_WORK_ROW(workRowId),
+    }, token);
+    return response.data.data.deleteRow
+  } catch (error) {
+    throw error;
+  }
+}
+const createWorkColumn = async (data) => {
+  const { imagesData, videosData, ...rowInfo } = data;
+  const token = getTokenCookie()
+
+  const query = MUTATION.CREATE_WORK_ROW(rowInfo, imagesData, videosData);
+
+  try {
+    const response = await requestMultipart(constructFormDataForArrayOfFiles({ ...imagesData, ...videosData }, query), token);
+    return response.data.data.createColumn
+  } catch (error) {
+    throw error;
+  }
+}
+
+const updateWorkColumn = async (data) => {
+  const { imagesData, videosData, ...rowInfo } = data;
+  const token = getTokenCookie()
+
+  const query = MUTATION.UPDATE_WORK_ROW(rowInfo, imagesData, videosData);
+
+  try {
+    const response = await requestMultipart(constructFormDataForArrayOfFiles({ ...imagesData, ...videosData }, query), token);
+    return response.data.data.createColumn
+  } catch (error) {
+    throw error;
+  }
+}
+
+const deleteWorkColumn = async (workColumnId) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.DELETE_WORK_ROW(workColumnId),
+    }, token);
+    return response.data.data.deleteColumn
+  } catch (error) {
+    throw error;
+  }
+}
+
+/*********************** */
 
 export {
   fetchDepartments,
@@ -309,7 +523,24 @@ export {
   deleteServiceSection,
   deleteImage,
   deleteVideo,
-  isUserAuthenticated
+  isUserAuthenticated,
+  fetchWorks,
+  fetchWebsiteWorks,
+  fetchWorkSections,
+  fetchWorkSection,
+  fetchWorkRows,
+  createWork,
+  updateWork,
+  deleteWork,
+  createWorkSection,
+  updateWorkSection,
+  deleteWorkSection,
+  createWorkRow,
+  updateWorkRow,
+  deleteWorkRow,
+  createWorkColumn,
+  updateWorkColumn,
+  deleteWorkColumn
 }
 
 const request = async (data, token) => {
@@ -327,7 +558,7 @@ const request = async (data, token) => {
   });
 
   if (response.data.errors)
-    throw new Error(JSON.stringify(response.data.errors))
+    throw JSON.stringify(response.data.errors)
 
   return response;
 }
@@ -343,7 +574,7 @@ const requestMultipart = async (data, token) => {
   });
 
   if (response.data.errors)
-    throw new Error(JSON.stringify(response.data.errors))
+    throw JSON.stringify(response.data.errors)
 
   return response;
 }

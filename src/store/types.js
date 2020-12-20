@@ -70,10 +70,49 @@ const services = {
     }
 };
 
+const works = {
+    mutations: {
+        SET_WORKS: 'works/mutations/SET_WORKS',
+        SET_IS_WORKS_FETCHED: 'works/mutations/SET_IS_WORKS_FETCHED',
+        SET_WEBSITE_WORKS: 'works/mutations/SET_WEBSITE_WORKS',
+        SET_IS_WEBSITE_WORKS_FETCHED: 'works/mutations/SET_IS_WEBSITE_WORKS_FETCHED',
+        SET_WORK_SECTIONS: 'works/mutations/SET_WORK_SECTIONS',
+        SET_IS_WORK_SECTIONS_FETCHED: 'works/mutations/SET_IS_WORK_SECTIONS_FETCHED',
+        SET_WORK_SECTION: 'works/mutations/SET_WORK_SECTION',
+        SET_IS_WORK_SECTION_FETCHED: 'works/mutations/SET_IS_WORK_SECTION_FETCHED',
+        SET_WORK_ROWS: 'works/mutations/SET_WORK_ROWS',
+        SET_IS_WORK_ROWS_FETCHED: 'works/mutations/SET_IS_WORK_ROWS_FETCHED',
+        REMOVE_DELETED_WORK: 'works/mutations/REMOVE_DELETED_WORK',
+        REMOVE_DELETED_WORK_SECTION: 'works/mutations/REMOVE_DELETED_WORK_SECTION',
+        REMOVE_DELETED_WORK_ROW: 'works/mutations/REMOVE_DELETED_WORK_ROW',
+        REMOVE_DELETED_WORK_COLUMN: 'works/mutations/REMOVE_DELETED_WORK_COLUMN',
+    },
+    actions: {
+        FETCH_WORKS: 'works/actions/FETCH_WORKS',
+        FETCH_WEBSITE_WORKS: 'works/actions/FETCH_WEBSITE_WORKS',
+        CREATE_WORK: 'works/actions/CREATE_WORK',
+        DELETE_WORK: 'works/actions/DELETE_WORK',
+        UPDATE_WORK: 'works/actions/UPDATE_WORK',
+        FETCH_WORK_SECTIONS: 'works/actions/FETCH_WORK_SECTIONS',
+        FETCH_WORK_SECTION: 'works/actions/FETCH_WORK_SECTION',
+        CREATE_WORK_SECTION: 'works/actions/CREATE_WORK_SECTION',
+        DELETE_WORK_SECTION: 'works/actions/DELETE_WORK_SECTION',
+        UPDATE_WORK_SECTION: 'works/actions/UPDATE_WORK_SECTION',
+        FETCH_WORK_ROWS: 'works/actions/FETCH_WORK_ROWS',
+        CREATE_WORK_ROW: 'works/actions/CREATE_WORK_ROW',
+        DELETE_WORK_ROW: 'works/actions/DELETE_WORK_ROW',
+        UPDATE_WORK_ROW: 'works/actions/UPDATE_WORK_ROW',
+        CREATE_WORK_COLUMN: 'works/actions/CREATE_WORK_COLUMN',
+        DELETE_WORK_COLUMN: 'works/actions/DELETE_WORK_COLUMN',
+        UPDATE_WORK_COLUMN: 'works/actions/UPDATE_WORK_COLUMN',
+    }
+};
+
 export default {
     app,
     login,
     jobs,
     departments,
-    services
+    services,
+    works
 };

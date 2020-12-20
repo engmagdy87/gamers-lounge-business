@@ -6,6 +6,7 @@ import login from './modules/login';
 import jobs from './modules/jobs';
 import departments from './modules/departments';
 import services from './modules/services';
+import works from './modules/works';
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
                 login,
                 jobs,
                 departments,
-                services
+                services,
+                works
         }
 });

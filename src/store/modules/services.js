@@ -1,4 +1,4 @@
-import { createService, fetchServices, deleteService, updateService, createServiceSection, fetchServiceSections, deleteServiceSection, updateServiceSection } from '../../helpers/APIsHelper';
+import * as APIs from '../../helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -32,7 +32,7 @@ const mutations = {
 const fetchServicesData = async ({ commit }, requestSource) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await fetchServices()
+        const response = await APIs.fetchServices()
         commit(types.services.mutations.SET_SERVICES, response.data)
         commit(types.services.mutations.SET_IS_SERVICES_FETCHED, true)
         if (requestSource === 'website')
@@ -50,7 +50,7 @@ const fetchServiceSectionData = async ({ commit }, payload) => {
     const { serviceId, requestSource } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await fetchServiceSections(serviceId)
+        const response = await APIs.fetchServiceSections(serviceId)
         commit(types.services.mutations.SET_SERVICE_SECTIONS, response)
         commit(types.services.mutations.SET_IS_SERVICE_SECTIONS_FETCHED, true)
         if (requestSource === 'website')
@@ -67,7 +67,7 @@ const fetchServiceSectionData = async ({ commit }, payload) => {
 const createServiceData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await createService(data)
+        await APIs.createService(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -78,7 +78,7 @@ const createServiceData = async ({ commit }, data) => {
 const createServiceSectionData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await createServiceSection(data)
+        await APIs.createServiceSection(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -90,7 +90,7 @@ const deleteServiceData = async ({ commit }, payload) => {
     const { serviceId, locationInDataArray } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await deleteService(serviceId)
+        await APIs.deleteService(serviceId)
         commit(types.services.mutations.REMOVE_DELETED_SERVICE, locationInDataArray);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
@@ -103,7 +103,7 @@ const deleteServiceSectionData = async ({ commit }, payload) => {
     const { serviceSectionId, locationInDataArray } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await deleteServiceSection(serviceSectionId)
+        await APIs.deleteServiceSection(serviceSectionId)
         commit(types.services.mutations.REMOVE_DELETED_SERVICE_SECTION, locationInDataArray);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
@@ -115,7 +115,7 @@ const deleteServiceSectionData = async ({ commit }, payload) => {
 const updateServiceData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await updateService(data)
+        await APIs.updateService(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -126,7 +126,7 @@ const updateServiceData = async ({ commit }, data) => {
 const updateServiceSectionData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await updateServiceSection(data)
+        await APIs.updateServiceSection(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)

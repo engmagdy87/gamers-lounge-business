@@ -1,4 +1,4 @@
-import { deleteImage, deleteVideo } from '../../helpers/APIsHelper';
+import * as APIs from '../../helpers/APIsHelper';
 import types from '../types';
 
 const state = {
@@ -18,7 +18,7 @@ const mutations = {
 const removeImage = async ({ commit }, imageId) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await deleteImage(imageId)
+        await APIs.deleteImage(imageId)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -29,7 +29,7 @@ const removeImage = async ({ commit }, imageId) => {
 const removeVideo = async ({ commit }, videoId) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await deleteVideo(videoId)
+        await APIs.deleteVideo(videoId)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)

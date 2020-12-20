@@ -36,4 +36,8 @@ const reformatHTMLString = (text) => {
     return text.replace(/"/g, "'")
 }
 
-export { getFirstLettersOfString, truncateText, changeTextDirection, reformatStringToBeInURL, getEntityId, getEntityName, reformatHTMLString }
+const reverseReformatHTMLString = (text) => {
+    return text.replace(/'/g, "\"")
+}
+
+export { getFirstLettersOfString, truncateText, changeTextDirection, reformatStringToBeInURL, getEntityId, getEntityName, reformatHTMLString, reverseReformatHTMLString }

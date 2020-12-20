@@ -1,0 +1,314 @@
+import * as APIs from '../../helpers/APIsHelper';
+import types from '../types';
+
+const state = {
+    works: [],
+    isWorksFetched: false,
+    websiteWorks: [],
+    isWebsiteWorksFetched: false,
+    workSections: {},
+    isWorkSectionsFetched: false,
+    workSection: {},
+    isWorkSectionFetched: false,
+    workRows: [],
+    isWorkRowsFetched: false,
+}
+
+const mutations = {
+    [types.works.mutations.SET_WORKS]: (currentState, works) => {
+        currentState.works = works;
+    },
+    [types.works.mutations.SET_IS_WORKS_FETCHED]: (currentState, flag) => {
+        currentState.isWorksFetched = flag;
+    },
+    [types.works.mutations.SET_WEBSITE_WORKS]: (currentState, websiteWorks) => {
+        currentState.websiteWorks = websiteWorks;
+    },
+    [types.works.mutations.SET_IS_WEBSITE_WORKS_FETCHED]: (currentState, flag) => {
+        currentState.isWebsiteWorksFetched = flag;
+    },
+    [types.works.mutations.SET_WORK_SECTIONS]: (currentState, works) => {
+        currentState.workSections = works;
+    },
+    [types.works.mutations.SET_IS_WORK_SECTIONS_FETCHED]: (currentState, flag) => {
+        currentState.isWorkSectionsFetched = flag;
+    },
+    [types.works.mutations.SET_WORK_SECTION]: (currentState, works) => {
+        currentState.workSection = works;
+    },
+    [types.works.mutations.SET_IS_WORK_SECTION_FETCHED]: (currentState, flag) => {
+        currentState.isWorkSectionFetched = flag;
+    },
+    [types.works.mutations.SET_WORK_ROWS]: (currentState, works) => {
+        currentState.workRows = works;
+    },
+    [types.works.mutations.SET_IS_WORK_ROWS_FETCHED]: (currentState, flag) => {
+        currentState.isWorkRowsFetched = flag;
+    },
+    [types.works.mutations.REMOVE_DELETED_WORK]: (currentState, index) => {
+        currentState.works.splice(index, 1);
+    },
+    [types.works.mutations.REMOVE_DELETED_WORK_SECTION]: (currentState, index) => {
+        currentState.workSections.sections.data.splice(index, 1);
+    },
+    [types.works.mutations.REMOVE_DELETED_WORK_ROW]: (currentState, index) => {
+        currentState.workRows.rows.splice(index, 1);
+    },
+    [types.works.mutations.REMOVE_DELETED_WORK_COLUMN]: (currentState, index) => {
+        currentState.workRows.columns.data.splice(index, 1);
+    },
+}
+
+const fetchWorksData = async ({ commit }, requestSource) => {
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        const response = await APIs.fetchWorks()
+        commit(types.works.mutations.SET_WORKS, response.data)
+        commit(types.works.mutations.SET_IS_WORKS_FETCHED, true)
+        if (requestSource === 'website')
+            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
+        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        commit(types.works.mutations.SET_IS_WORKS_FETCHED, false)
+        throw error.message
+    }
+};
+
+const fetchWebsiteWorksData = async ({ commit }, requestSource) => {
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        const response = await APIs.fetchWebsiteWorks()
+        commit(types.works.mutations.SET_WEBSITE_WORKS, response.data)
+        commit(types.works.mutations.SET_IS_WEBSITE_WORKS_FETCHED, true)
+        if (requestSource === 'website')
+            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
+        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        commit(types.works.mutations.SET_IS_WEBSITE_WORKS_FETCHED, false)
+        throw error.message
+    }
+};
+
+const fetchWorkSectionsData = async ({ commit }, payload) => {
+    const { workId, requestSource } = payload;
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        const response = await APIs.fetchWorkSections(workId)
+        commit(types.works.mutations.SET_WORK_SECTIONS, response)
+        commit(types.works.mutations.SET_IS_WORK_SECTIONS_FETCHED, true)
+        if (requestSource === 'website')
+            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
+        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        commit(types.works.mutations.SET_IS_WORK_SECTIONS_FETCHED, false)
+        throw error.message
+    }
+};
+
+const fetchWorkSectionData = async ({ commit }, payload) => {
+    const { workId, requestSource } = payload;
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        const response = await APIs.fetchWorkSection(workId)
+        commit(types.works.mutations.SET_WORK_SECTION, response)
+        commit(types.works.mutations.SET_IS_WORK_SECTION_FETCHED, true)
+        if (requestSource === 'website')
+            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
+        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        commit(types.works.mutations.SET_IS_WORK_SECTION_FETCHED, false)
+        throw error.message
+    }
+};
+
+const fetchWorkRowData = async ({ commit }, payload) => {
+    const { workSectionId, requestSource } = payload;
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        const response = await APIs.fetchWorkRows(workSectionId)
+        commit(types.works.mutations.SET_WORK_ROWS, response)
+        commit(types.works.mutations.SET_IS_WORK_ROWS_FETCHED, true)
+        if (requestSource === 'website')
+            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
+        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        commit(types.works.mutations.SET_IS_WORK_ROWS_FETCHED, false)
+        throw error.message
+    }
+};
+
+const createWorkData = async ({ commit }, data) => {
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        await APIs.createWork(data)
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
+const createWorkSectionData = async ({ commit }, data) => {
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        await APIs.createWorkSection(data)
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
+const createWorkRowData = async ({ commit }, data) => {
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        await APIs.createWorkRow(data)
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
+const createWorkColumnData = async ({ commit }, data) => {
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        await APIs.createWorkColumn(data)
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
+const deleteWorkData = async ({ commit }, payload) => {
+    const { workId, locationInDataArray } = payload;
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        await APIs.deleteWork(workId)
+        commit(types.works.mutations.REMOVE_DELETED_WORK, locationInDataArray);
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
+const deleteWorkRowData = async ({ commit }, payload) => {
+    const { workRowId, locationInDataArray } = payload;
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        await APIs.deleteWorkRow(workRowId)
+        commit(types.works.mutations.REMOVE_DELETED_WORK_ROW, locationInDataArray);
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
+const deleteWorkSectionData = async ({ commit }, payload) => {
+    const { workSectionId, locationInDataArray } = payload;
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        await APIs.deleteWorkSection(workSectionId)
+        commit(types.works.mutations.REMOVE_DELETED_WORK_SECTION, locationInDataArray);
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
+const deleteWorkColumnData = async ({ commit }, payload) => {
+    const { workColumnId, locationInDataArray } = payload;
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        await APIs.deleteWorkColumn(workColumnId)
+        commit(types.works.mutations.REMOVE_DELETED_WORK_COLUMN, locationInDataArray);
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
+const updateWorkData = async ({ commit }, data) => {
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        await APIs.updateWork(data)
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
+const updateWorkSectionData = async ({ commit }, data) => {
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        await APIs.updateWorkSection(data)
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
+const updateWorkRowData = async ({ commit }, data) => {
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        await APIs.updateWorkRow(data)
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
+const updateWorkColumnData = async ({ commit }, data) => {
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        await APIs.updateWorkColumn(data)
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
+const actions = {
+    [types.works.actions.FETCH_WORKS]: fetchWorksData,
+    [types.works.actions.FETCH_WEBSITE_WORKS]: fetchWebsiteWorksData,
+    [types.works.actions.CREATE_WORK]: createWorkData,
+    [types.works.actions.DELETE_WORK]: deleteWorkData,
+    [types.works.actions.UPDATE_WORK]: updateWorkData,
+    [types.works.actions.FETCH_WORK_SECTIONS]: fetchWorkSectionsData,
+    [types.works.actions.FETCH_WORK_SECTION]: fetchWorkSectionData,
+    [types.works.actions.CREATE_WORK_SECTION]: createWorkSectionData,
+    [types.works.actions.DELETE_WORK_SECTION]: deleteWorkSectionData,
+    [types.works.actions.UPDATE_WORK_SECTION]: updateWorkSectionData,
+    [types.works.actions.FETCH_WORK_ROWS]: fetchWorkRowData,
+    [types.works.actions.CREATE_WORK_ROW]: createWorkRowData,
+    [types.works.actions.DELETE_WORK_ROW]: deleteWorkRowData,
+    [types.works.actions.UPDATE_WORK_ROW]: updateWorkRowData,
+    [types.works.actions.CREATE_WORK_COLUMN]: createWorkColumnData,
+    [types.works.actions.DELETE_WORK_COLUMN]: deleteWorkColumnData,
+    [types.works.actions.UPDATE_WORK_COLUMN]: updateWorkColumnData,
+};
+
+export default {
+    state,
+    mutations,
+    actions
+};

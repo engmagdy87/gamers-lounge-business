@@ -33,6 +33,15 @@ const ServicesList = () => import(/* webpackChunkName: "ServicesList" */ 'src/da
 const SectionsList = () => import(/* webpackChunkName: "SectionsList" */ 'src/dashboard/pages/Services/Sections/SectionsList.vue')
 const SectionsAddEdit = () => import(/* webpackChunkName: "SectionsAddEdit" */ 'src/dashboard/pages/Services/Sections/SectionsAddEdit.vue')
 
+const WorksList = () => import(/* webpackChunkName: "WorksList" */ 'src/dashboard/pages/Works/WorksList.vue')
+const WorksAddEdit = () => import(/* webpackChunkName: "WorksAddEdit" */ 'src/dashboard/pages/Works/WorksAddEdit.vue')
+const WorkSectionsList = () => import(/* webpackChunkName: "WorkSectionsList" */ 'src/dashboard/pages/Works/Sections/WorkSectionsList.vue')
+const WorkSectionsAddEdit = () => import(/* webpackChunkName: "WorkSectionsAddEdit" */ 'src/dashboard/pages/Works/Sections/WorkSectionsAddEdit.vue')
+const WorkRowsList = () => import(/* webpackChunkName: "WorkRowsList" */ 'src/dashboard/pages/Works/Rows/WorkRowsList.vue')
+const WorkRowsAddEdit = () => import(/* webpackChunkName: "WorkRowsAddEdit" */ 'src/dashboard/pages/Works/Rows/WorkRowsAddEdit.vue')
+const WorkColumnsList = () => import(/* webpackChunkName: "WorkColumnsList" */ 'src/dashboard/pages/Works/Columns/WorkColumnsList.vue')
+const WorkColumnsAddEdit = () => import(/* webpackChunkName: "WorkColumnsAddEdit" */ 'src/dashboard/pages/Works/Columns/WorkColumnsAddEdit.vue')
+
 const Login = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/Login.vue')
 
 const Icons = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/Icons.vue')
@@ -152,7 +161,7 @@ const routes = [
         children: [
           {
             path: 'list',
-            name: 'List',
+            name: 'List Departments',
             component: DepartmentsList
           },
           {
@@ -175,7 +184,7 @@ const routes = [
         children: [
           {
             path: 'list',
-            name: 'List',
+            name: 'List Jobs',
             component: JobsList
           },
           {
@@ -203,7 +212,7 @@ const routes = [
         children: [
           {
             path: 'list',
-            name: 'List',
+            name: 'List Services',
             component: ServicesList
           },
           {
@@ -216,6 +225,7 @@ const routes = [
             name: 'Create Service Section',
             component: SectionsAddEdit
           },
+          //*************************************/
           {
             path: 'sections/edit/:serviceId',
             name: 'Edit Service Section',
@@ -231,6 +241,77 @@ const routes = [
             name: 'Edit Service',
             component: ServicesAddEdit
           }
+        ]
+      },
+      {
+        path: 'works',
+        name: 'Works',
+        component: DashboardContent,
+        redirect: '/dashboard/works/list',
+        children: [
+          {
+            path: 'list',
+            name: 'List Works',
+            component: WorksList
+          },
+          {
+            path: 'create',
+            name: 'Create Work',
+            component: WorksAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit Work',
+            component: WorksAddEdit
+          },
+          //*************************************/
+          {
+            path: 'sections/list/:workId',
+            name: 'List Work Sections',
+            component: WorkSectionsList
+          },
+          {
+            path: 'sections/create/:workId',
+            name: 'Create Work Section',
+            component: WorkSectionsAddEdit
+          },
+          {
+            path: 'sections/edit/:workId',
+            name: 'Edit Work Section',
+            component: WorkSectionsAddEdit
+          },
+          //*************************************/
+          {
+            path: 'rows/list/:workSectionId',
+            name: 'List Work Rows',
+            component: WorkRowsList
+          },
+          {
+            path: 'rows/create/:workSectionId',
+            name: 'Create Work Row',
+            component: WorkRowsAddEdit
+          },
+          {
+            path: 'rows/edit/:workSectionId',
+            name: 'Edit Work Row',
+            component: WorkRowsAddEdit
+          },
+          //*************************************/
+          {
+            path: 'columns/list/:workRowId',
+            name: 'List Work Columns',
+            component: WorkColumnsList
+          },
+          {
+            path: 'columns/create/:workRowId',
+            name: 'Create Work Column',
+            component: WorkColumnsAddEdit
+          },
+          {
+            path: 'columns/edit/:workRowId',
+            name: 'Edit Work Column',
+            component: WorkColumnsAddEdit
+          },
         ]
       },
       {
