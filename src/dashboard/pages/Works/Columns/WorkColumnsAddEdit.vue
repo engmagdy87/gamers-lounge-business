@@ -3,9 +3,22 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a :href="`/dashboard/services/sections/list/${servicesData.id}`"
-            >{{ servicesData.title }} Service Sections</a
+          <a href="/dashboard/works">Works</a>
+        </li>
+        <li class="breadcrumb-item">
+          <router-link :to="`/dashboard/works/sections/list/${workSections.id}`"
+            >{{ workSections.title }} Work Sections</router-link
           >
+        </li>
+        <li class="breadcrumb-item">
+          <router-link :to="`/dashboard/works/rows/list/${workRowsData.id}`"
+            >Section {{ workRowsData.order }} Rows</router-link
+          >
+        </li>
+        <li class="breadcrumb-item" aria-current="page">
+          <router-link :to="`/dashboard/works/columns/list/${workRowId}`">
+            Columns
+          </router-link>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
           {{ operation }}
@@ -14,61 +27,108 @@
     </nav>
     <h4 slot="header" class="card-name">{{ operation }}</h4>
     <form>
+      <div class="row d-flex">
+        <div
+          :class="[
+            'column',
+            currentWidth() === 100 ? 'column--full' : 'column--not-full'
+          ]"
+          v-for="(col, i) in workRowData.columns"
+          :key="i"
+          :style="`width:${col.ratio - 2}%`"
+        >
+          <p>{{ col.type }}</p>
+          <p>{{ col.ratio }}%</p>
+        </div>
+      </div>
       <div class="row">
         <div class="col-12 col-md-6">
           <base-input
-            type="text"
-            label="Title"
-            placeholder="Enter Title"
-            v-model="serviceSection.title"
+            type="number"
+            label="Order"
+            placeholder="Enter Order"
+            v-model="workColumn.order"
             :autofocus="true"
             :isRequired="true"
           >
           </base-input>
-          <ErrorMessage :fieldErrors="errors.title" />
+          <ErrorMessage :fieldErrors="errors.order" />
         </div>
-      </div>
-      <div class="row d-block">
-        <div class="col d-flex justify-content-center align-items-center">
-          <img
-            v-for="i in 4"
-            :key="i"
-            :src="`/images/templates/template-${i}.png`"
-            :alt="`template ${i}`"
-            :class="[
-              'm-3 section-templates-img',
-              isTemplateActive(SERVICE_TEMPLATES[`TEMPLATE_${i}`])
-            ]"
-            @click="setActiveTemplate(SERVICE_TEMPLATES[`TEMPLATE_${i}`])"
-          />
-        </div>
-        <div class="section-templates-img--error">
-          <ErrorMessage :fieldErrors="errors.template" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
+        <div class="col-12 col-md-6">
           <div class="form-group">
             <label
-              >First Description<span class="error-message"> *</span></label
+              >Column Content Type<span class="error-message"> *</span></label
             >
-            <vue-pell-editor
-              :actions="editorOptions"
-              :style-with-css="false"
-              placeholder=""
-              v-model="serviceSection.description_first"
-            />
-            <ErrorMessage :fieldErrors="errors.description_first" />
+            <select
+              class="form-control"
+              v-model="workColumn.type"
+              @change="
+                e => setRequiredFieldsAccrodingToContentType(e.target.value)
+              "
+            >
+              <option value="-1">--Please choose content type</option>
+              <option
+                v-for="(type, i) in WORK_COLUMNS_CONTENT_TYPES"
+                :key="i"
+                ::selected="workColumn.type === type"
+                :value="type"
+                >{{ type.toLowerCase() }}</option
+              >
+            </select>
+            <ErrorMessage :fieldErrors="errors.type" />
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col">
-          <div class="form-group second-description">
+        <div class="col-12 col-md-6">
+          <base-input
+            type="number"
+            label="Width in %"
+            placeholder="Enter Width in %"
+            v-model="workColumn.ratio"
+            :isRequired="true"
+          >
+          </base-input>
+          <ErrorMessage :fieldErrors="errors.ratio" />
+        </div>
+        <div class="col-12 col-md-6 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="fillable"
+              v-model="workColumn.fillable"
+            />
+            <label class="custom-control-label" for="fillable"
+              >Has Content</label
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <base-input
+            type="text"
+            label="Tile"
+            placeholder="Enter Title"
+            v-model="workColumn.title"
+            :isRequired="workColumn.type === WORK_COLUMNS_CONTENT_TYPES.TITLE"
+          >
+          </base-input>
+          <div v-if="workColumn.type === WORK_COLUMNS_CONTENT_TYPES.TITLE">
+            <ErrorMessage :fieldErrors="errors.title" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
             <label
-              >Second Description<span
-                v-if="validation['second description'].isRequired"
+              >Description<span
                 class="error-message"
+                v-if="
+                  workColumn.type === WORK_COLUMNS_CONTENT_TYPES.DESCRIPTION
+                "
               >
                 *</span
               ></label
@@ -77,96 +137,13 @@
               :actions="editorOptions"
               :style-with-css="false"
               placeholder=""
-              v-model="serviceSection.description_second"
+              v-model="workColumn.description"
             />
-            <div v-if="validation['second description'].isRequired">
-              <ErrorMessage :fieldErrors="errors.description_second" />
+            <div
+              v-if="workColumn.type === WORK_COLUMNS_CONTENT_TYPES.DESCRIPTION"
+            >
+              <ErrorMessage :fieldErrors="errors.description" />
             </div>
-          </div>
-        </div>
-      </div>
-      <!-- *********************** -->
-      <div class="row">
-        <div class="col-12 col-md-4">
-          <div class="form-group">
-            <label for="region"
-              >First Media Type<span class="error-message"> *</span></label
-            >
-            <select
-              class="form-control"
-              v-model="serviceSection.media_type_first"
-              @change="setRequiredFieldsAccrodingToMediaType('first')"
-            >
-              <option value="-1">--Please choose media type</option>
-              <option
-                ::selected="serviceSection.media_type_first === MEDIA_TYPES.IMG"
-                :value="MEDIA_TYPES.IMG"
-                >{{ MEDIA_TYPES.IMG.toLowerCase() }}</option
-              >
-              <option
-                ::selected="serviceSection.media_type_first === MEDIA_TYPES.SLIDER"
-                :value="MEDIA_TYPES.SLIDER"
-                >{{ MEDIA_TYPES.SLIDER.toLowerCase() }}</option
-              >
-              <option
-                ::selected="serviceSection.media_type_first === MEDIA_TYPES.VIDEO"
-                :value="MEDIA_TYPES.VIDEO"
-                >{{ MEDIA_TYPES.VIDEO.toLowerCase() }}</option
-              >
-            </select>
-            <ErrorMessage :fieldErrors="errors.media_type_first" />
-          </div>
-        </div>
-        <div class="col-12 col-md-4">
-          <div class="form-group">
-            <label for="region"
-              >Second Media Type<span
-                v-if="validation['second media type'].isRequired"
-                class="error-message"
-              >
-                *</span
-              ></label
-            >
-            <select
-              class="form-control"
-              v-model="serviceSection.media_type_second"
-              @change="setRequiredFieldsAccrodingToMediaType('second')"
-              :disabled="!validation['second media type'].isRequired"
-            >
-              <option value="-1">--Please choose media type</option>
-              <option
-                ::selected="serviceSection.media_type_second === MEDIA_TYPES.IMG"
-                :value="MEDIA_TYPES.IMG"
-                >{{ MEDIA_TYPES.IMG.toLowerCase() }}</option
-              >
-              <option
-                ::selected="serviceSection.media_type_second === MEDIA_TYPES.SLIDER"
-                :value="MEDIA_TYPES.SLIDER"
-                >{{ MEDIA_TYPES.SLIDER.toLowerCase() }}</option
-              >
-              <option
-                ::selected="serviceSection.media_type_second === MEDIA_TYPES.VIDEO"
-                :value="MEDIA_TYPES.VIDEO"
-                >{{ MEDIA_TYPES.VIDEO.toLowerCase() }}</option
-              >
-            </select>
-            <div v-if="validation['second media type'].isRequired">
-              <ErrorMessage :fieldErrors="errors.media_type_second" />
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-4">
-          <div class="form-group">
-            <base-input
-              type="number"
-              label="Section Order"
-              placeholder="Enter Section Order"
-              v-model="serviceSection.order"
-              :isRequired="true"
-              min="1"
-            >
-            </base-input>
-            <ErrorMessage :fieldErrors="errors.order" />
           </div>
         </div>
       </div>
@@ -175,8 +152,11 @@
         <div class="col">
           <div>
             <label class="mr-5"
-              >Choose First Content Images<span
-                v-if="validation['first images content'].isRequired"
+              >Choose Content Images<span
+                v-if="
+                  workColumn.type === WORK_COLUMNS_CONTENT_TYPES.IMAGE ||
+                    workColumn.type === WORK_COLUMNS_CONTENT_TYPES.SLIDER
+                "
                 class="error-message"
               >
                 *</span
@@ -187,75 +167,35 @@
               id="media-images"
               accept="image/png, image/jpeg"
               multiple
-              ref="img_content_first"
-              @change="e => setFile(e, 'img_content_first')"
+              ref="img_content"
+              @change="e => setFile(e, 'img_content')"
             />
             <br />
             <div
               v-if="
                 editData !== undefined &&
-                  (operation === 'Edit Service Section' ||
-                    (editData.img_content_first !== null &&
-                      editData.img_content_first !== null))
+                  (operation === 'Edit Work Column' ||
+                    (editData.img_content !== null &&
+                      editData.img_content !== null))
               "
               class="image-preview-list"
             >
               <ImagePreview
-                v-for="(img, index) in editData.img_content_first"
+                v-for="(img, index) in editData.img_content"
                 :key="img.id"
                 :image="img"
                 :setShowDeleteDialogFlag="setImageDataFlag"
-                openedFor="img_content_first"
+                openedFor="img_content"
                 :imageIndex="index"
               />
             </div>
-            <div v-if="validation['first images content'].isRequired">
-              <ErrorMessage :fieldErrors="errors.img_content_first" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col">
-          <div>
-            <label class="mr-5"
-              >Choose Second Content Images<span
-                v-if="validation['second images content'].isRequired"
-                class="error-message"
-              >
-                *</span
-              ></label
-            >
-            <input
-              type="file"
-              id="media-images"
-              accept="image/png, image/jpeg"
-              multiple
-              ref="img_content_second"
-              @change="e => setFile(e, 'img_content_second')"
-              :disabled="!validation['second images content'].isRequired"
-            />
-            <br />
             <div
               v-if="
-                editData !== undefined &&
-                  (operation === 'Edit Service Section' ||
-                    (editData.img_content_second !== null &&
-                      editData.img_content_second !== null))
+                workColumn.type === WORK_COLUMNS_CONTENT_TYPES.IMAGE ||
+                  workColumn.type === WORK_COLUMNS_CONTENT_TYPES.SLIDER
               "
-              class="image-preview-list"
             >
-              <ImagePreview
-                v-for="(img, index) in editData.img_content_second"
-                :key="img.id"
-                :image="img"
-                :setShowDeleteDialogFlag="setImageDataFlag"
-                openedFor="img_content_second"
-                :imageIndex="index"
-              />
-            </div>
-            <div v-if="validation['second images content'].isRequired">
-              <ErrorMessage :fieldErrors="errors.img_content_second" />
+              <ErrorMessage :fieldErrors="errors.img_content" />
             </div>
           </div>
         </div>
@@ -266,8 +206,8 @@
         <div class="col">
           <div>
             <label class="mr-5"
-              >Choose First Content Videos<span
-                v-if="validation['first videos content'].isRequired"
+              >Choose Content Videos<span
+                v-if="workColumn.type === WORK_COLUMNS_CONTENT_TYPES.VIDEO"
                 class="error-message"
               >
                 *</span
@@ -278,75 +218,30 @@
               id="logo"
               accept="video/*"
               multiple
-              ref="vid_content_first"
-              @change="e => setFile(e, 'vid_content_first')"
+              ref="vid_content"
+              @change="e => setFile(e, 'vid_content')"
             />
             <br />
             <div
               v-if="
                 editData !== undefined &&
-                  (operation === 'Edit Service Section' ||
-                    (editData.vid_content_first !== null &&
-                      editData.vid_content_first !== null))
+                  (operation === 'Edit Work Column' ||
+                    (editData.vid_content !== null &&
+                      editData.vid_content !== null))
               "
               class="image-preview-list"
             >
               <VideoPreview
-                v-for="(vid, index) in editData.vid_content_first"
+                v-for="(vid, index) in editData.vid_content"
                 :key="vid.id"
                 :video="vid"
                 :setShowDeleteDialogFlag="setVideoDataFlag"
-                openedFor="vid_content_first"
+                openedFor="vid_content"
                 :videoIndex="index"
               />
             </div>
-            <div v-if="validation['first videos content'].isRequired">
-              <ErrorMessage :fieldErrors="errors.vid_content_first" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col">
-          <div>
-            <label class="mr-5"
-              >Choose Second Content Videos<span
-                v-if="validation['second videos content'].isRequired"
-                class="error-message"
-              >
-                *</span
-              ></label
-            >
-            <input
-              type="file"
-              id="logo"
-              accept="video/*"
-              multiple
-              ref="vid_content_second"
-              @change="e => setFile(e, 'vid_content_second')"
-              :disabled="!validation['second videos content'].isRequired"
-            />
-            <br />
-            <div
-              v-if="
-                editData !== undefined &&
-                  (operation === 'Edit Service Section' ||
-                    (editData.vid_content_second !== null &&
-                      editData.vid_content_second !== null))
-              "
-              class="image-preview-list"
-            >
-              <VideoPreview
-                v-for="(vid, index) in editData.vid_content_second"
-                :key="vid.id"
-                :video="vid"
-                :setShowDeleteDialogFlag="setVideoDataFlag"
-                openedFor="vid_content_second"
-                :videoIndex="index"
-              />
-            </div>
-            <div v-if="validation['second videos content'].isRequired">
-              <ErrorMessage :fieldErrors="errors.vid_content_second" />
+            <div v-if="workColumn.type === WORK_COLUMNS_CONTENT_TYPES.VIDEO">
+              <ErrorMessage :fieldErrors="errors.vid_content" />
             </div>
           </div>
         </div>
@@ -385,21 +280,17 @@ import ImagePreview from "../../../../website/shared/ImagePreview.vue";
 import VideoPreview from "../../../../website/shared/VideoPreview";
 import DeleteDialog from "../../../../website/shared/DeleteDialog";
 import { reformatHTMLString } from "../../../../helpers/StringsHelper";
-import * as MEDIA_TYPES from "../../../../constants/MediaTypes";
-import * as SERVICE_TEMPLATES from "../../../../constants/ServiceTemplates";
+import * as WORK_COLUMNS_CONTENT_TYPES from "../../../../constants/WorkColumnsContentTypes";
 
-const emptyServiceSection = {
-  title: "",
-  template: "",
+const emptyColumnSection = {
   order: 1,
-  description_first: "",
-  description_second: "",
-  media_type_first: "-1",
-  media_type_second: "-1",
-  img_content_first: [],
-  img_content_second: [],
-  vid_content_first: [],
-  vid_content_second: []
+  type: "-1",
+  title: "",
+  description: "",
+  ratio: 0,
+  fillable: false,
+  img_content: [],
+  vid_content: []
 };
 
 export default {
@@ -407,8 +298,8 @@ export default {
     return {
       editData: this.$router.history.current.params.data,
       operation: this.$route.name,
-      serviceSection: {
-        ...emptyServiceSection
+      workColumn: {
+        ...emptyColumnSection
       },
       openedFor: "",
       contentType: "",
@@ -418,101 +309,85 @@ export default {
       videoId: null,
       errors: {},
       validation: {
-        title: { isRequired: true },
-        template: { isRequired: true },
         order: { isRequired: true },
-        "first description": { isRequired: true },
-        "second description": { isRequired: false },
-        "first media type": { isRequired: true },
-        "second media type": { isRequired: false },
-        "first images content": { isRequired: true },
-        "second images content": { isRequired: false },
-        "first videos content": { isRequired: true },
-        "second videos content": { isRequired: false }
+        type: { isRequired: true },
+        title: { isRequired: true },
+        description: { isRequired: true },
+        ratio: { isRequired: true },
+        fillable: { isRequired: true },
+        "images content": { isRequired: true },
+        "videos content": { isRequired: true }
       },
       aliases: {
-        title: "title",
-        description_first: "first description",
-        description_second: "second description",
-        template: "template",
         order: "order",
-        media_type_first: "first media type",
-        media_type_second: "second media type",
-        img_content_first: "first images content",
-        img_content_second: "second images content",
-        vid_content_first: "first videos content",
-        vid_content_second: "second videos content"
+        type: "type",
+        title: "title",
+        description: "description",
+        ratio: "ratio",
+        fillable: "fillable",
+        img_content: "images content",
+        vid_content: "videos content"
       },
       editorOptions
     };
   },
   computed: {
     ...mapState({
-      servicesData: state => state.services.serviceSections
+      workRowData: state => state.works.workRow,
+      workRowsData: state => state.works.workRows,
+      workSections: state => state.works.workSections
     }),
-    MEDIA_TYPES() {
-      return MEDIA_TYPES;
+    WORK_COLUMNS_CONTENT_TYPES() {
+      return WORK_COLUMNS_CONTENT_TYPES;
     },
-    SERVICE_TEMPLATES() {
-      return SERVICE_TEMPLATES;
+    workRowId() {
+      return this.$router.history.current.params.workRowId;
     }
   },
   methods: {
     ...mapActions({
-      createServiceSection: types.services.actions.CREATE_SERVICE_SECTION,
-      updateServiceSection: types.services.actions.UPDATE_SERVICE_SECTION,
+      fetchColumnsRows: types.works.actions.FETCH_WORK_COLUMNS,
+      createColumn: types.works.actions.CREATE_WORK_COLUMN,
+      updateColumn: types.works.actions.UPDATE_WORK_COLUMN,
       deleteImage: types.app.actions.DELETE_IMAGE,
       deleteVideo: types.app.actions.DELETE_VIDEO
     }),
-    setActiveTemplate(template) {
-      this.serviceSection.template = template;
-      this.setRequiredFieldsAccrodingToTemplate(template);
-    },
-    setRequiredFieldsAccrodingToMediaType(order) {
-      const mediaType = this.serviceSection[`media_type_${order}`];
-      const isImage =
-        mediaType === MEDIA_TYPES.IMG || mediaType === MEDIA_TYPES.SLIDER;
-      this.validation[`${order} images content`].isRequired = isImage;
-      this.validation[`${order} videos content`].isRequired = !isImage;
-    },
-    setRequiredFieldsAccrodingToTemplate(template) {
-      const isTemplateHasTwoSections =
-        template === SERVICE_TEMPLATES.TEMPLATE_4;
-      this.validation[
-        "second description"
-      ].isRequired = isTemplateHasTwoSections;
-      this.validation[
-        "second media type"
-      ].isRequired = isTemplateHasTwoSections;
+    setRequiredFieldsAccrodingToContentType(value) {
+      let key;
+      const targetKeys = [
+        "title",
+        "description",
+        "images content",
+        "videos content"
+      ];
+      switch (value) {
+        case WORK_COLUMNS_CONTENT_TYPES.TITLE:
+          key = "title";
+          break;
+        case WORK_COLUMNS_CONTENT_TYPES.DESCRIPTION:
+          key = "description";
+          break;
+        case WORK_COLUMNS_CONTENT_TYPES.IMAGE:
+          key = "images content";
+          break;
+        case WORK_COLUMNS_CONTENT_TYPES.SLIDER:
+          key = "images content";
+          break;
+        case WORK_COLUMNS_CONTENT_TYPES.VIDEO:
+          key = "videos content";
+          break;
 
-      this.validation["first images content"].isRequired =
-        this.serviceSection.media_type_first === this.MEDIA_TYPES.IMG ||
-        this.serviceSection.media_type_first === this.MEDIA_TYPES.SLIDER;
-
-      this.validation["first videos content"].isRequired =
-        this.serviceSection.media_type_first === this.MEDIA_TYPES.VIDEO;
-
-      this.validation["second images content"].isRequired =
-        isTemplateHasTwoSections &&
-        (this.serviceSection.media_type_second === this.MEDIA_TYPES.IMG ||
-          this.serviceSection.media_type_second === this.MEDIA_TYPES.SLIDER);
-
-      this.validation["second videos content"].isRequired =
-        isTemplateHasTwoSections &&
-        this.serviceSection.media_type_second === this.MEDIA_TYPES.VIDEO;
-
-      document
-        .querySelector(".second-description .vp-editor .pell-content")
-        .setAttribute("contenteditable", isTemplateHasTwoSections);
-    },
-    isTemplateActive(template) {
-      if (this.serviceSection.template === template)
-        return "section-templates-img--active";
+        default:
+          break;
+      }
+      targetKeys.forEach(item => {
+        this.validation[item].isRequired = item === key;
+      });
     },
     setFile(e, key) {
       const files = e.target.files;
       if (!files.length) return;
-      this.serviceSection[key] = files;
+      this.workColumn[key] = files;
     },
     setImageDataFlag(flag, imageId, openedFor, imageIndex, contentType) {
       this.showFlag = flag;
@@ -528,57 +403,80 @@ export default {
       this.videoIndex = videoIndex;
       this.contentType = contentType;
     },
+    currentWidth() {
+      let sum = 0;
+      if (this.operation === "Edit Work Column")
+        this.workRowData.columns.forEach(col => {
+          if (col.id !== this.editData.id) sum += Number.parseInt(col.ratio);
+        });
+      else
+        this.workRowData.columns.forEach(col => {
+          sum += Number.parseInt(col.ratio);
+        });
+      return sum;
+    },
+    calculateTotalWidth() {
+      let sum = this.currentWidth();
+
+      sum += Number.parseInt(this.workColumn.ratio);
+      return sum;
+    },
     saveData: async function() {
       const errorObject = isValidationErrorExist(
-        this.serviceSection,
+        this.workColumn,
         this.aliases,
         this.validation
       );
       this.errors = { ...errorObject.errors };
       if (errorObject.length !== 0) return;
+
+      if (this.calculateTotalWidth() > 100) {
+        this.notifyVue(
+          "Row Width will be greater than 100%, Please adjust column width",
+          "danger"
+        );
+        return;
+      }
       try {
+        let content = "";
+        if (this.workColumn.type === WORK_COLUMNS_CONTENT_TYPES.TITLE)
+          content = this.workColumn.title;
+        if (this.workColumn.type === WORK_COLUMNS_CONTENT_TYPES.DESCRIPTION)
+          content = reformatHTMLString(this.workColumn.description);
         let payload = {
-          title: this.serviceSection.title,
-          template: this.serviceSection.template,
-          order: this.serviceSection.order,
-          description_first: reformatHTMLString(
-            this.serviceSection.description_first
-          ),
-          media_type_first: this.serviceSection.media_type_first,
+          order: this.workColumn.order,
+          type: this.workColumn.type,
+          content,
+          ratio: this.workColumn.ratio,
+          fillable: this.workColumn.fillable,
           imagesData: {
-            img_content_first: this.$refs.img_content_first.files,
-            img_content_second: this.$refs.img_content_second.files
+            img_content: this.$refs.img_content.files
           },
           videosData: {
-            vid_content_first: this.$refs.vid_content_first.files,
-            vid_content_second: this.$refs.vid_content_second.files
+            vid_content: this.$refs.vid_content.files
           }
         };
-        const secondTemplate = this.serviceSection.template;
-        if (secondTemplate === SERVICE_TEMPLATES.TEMPLATE_4)
-          payload = {
+        const rowId = this.$router.history.current.params.workRowId;
+        const { id } = this.workRowData;
+        if (this.operation === "Edit Work Column") {
+          await this.updateColumn({
             ...payload,
-            media_type_second: this.serviceSection.media_type_second,
-            description_second: reformatHTMLString(
-              this.serviceSection.description_second
-            )
-          };
-        if (this.operation === "Edit Service Section") {
-          await this.updateServiceSection({
-            ...payload,
-            serviceSectionId: this.editData.id
+            columnId: this.editData.id,
+            rowId
           });
           this.notifyVue("Service Section Updated Successfully", "success");
+          this.workColumn = { ...emptyColumnSection };
+          this.$router.push(`/dashboard/works/columns/list/${id}`);
         } else {
-          await this.createServiceSection({
+          await this.createColumn({
             ...payload,
-            serviceId: this.$router.history.current.params.serviceId
+            rowId
           });
+          const fetchPayload = { workRowId: rowId, requestSource: "dashboard" };
+          await this.fetchColumnsRows(fetchPayload);
+          this.workColumn = { ...emptyColumnSection };
           this.notifyVue("Service Section Created Successfully", "success");
         }
-        const { id } = this.servicesData;
-        this.serviceSection = { ...emptyServiceSection };
-        this.$router.push(`/dashboard/services/sections/list/${id}`);
       } catch (errors) {
         JSON.parse(errors).forEach(error => {
           this.notifyVue(error.message, "danger");
@@ -589,12 +487,8 @@ export default {
       const response = await this.deleteImage(this.imageId);
 
       switch (this.openedFor) {
-        case "img_content_first":
-          this.serviceSection.img_content_first.splice(this.imageIndex, 1);
-          break;
-
-        case "img_content_second":
-          this.serviceSection.img_content_second.splice(this.imageIndex, 1);
+        case "img_content":
+          this.workColumn.img_content.splice(this.imageIndex, 1);
           break;
 
         default:
@@ -608,12 +502,8 @@ export default {
       const response = await this.deleteVideo(this.videoId);
 
       switch (this.openedFor) {
-        case "vid_content_first":
-          this.serviceSection.vid_content_first.splice(this.videoIndex, 1);
-          break;
-
-        case "vid_content_second":
-          this.serviceSection.vid_content_second.splice(this.videoIndex, 1);
+        case "vid_content":
+          this.workColumn.vid_content.splice(this.videoIndex, 1);
           break;
 
         default:
@@ -635,29 +525,25 @@ export default {
   beforeMount() {
     if (
       !this.$router.history.current.params.data &&
-      this.$route.name === "Edit Service Section"
+      this.$route.name === "Edit Work Column"
     )
       this.$router.push({
-        path: "/dashboard/services"
+        path: "/dashboard/works"
       });
   },
   mounted() {
-    if (this.$route.name === "Edit Service Section") {
-      this.serviceSection.title = this.editData.title;
-      this.serviceSection.description_first = this.editData.description_first;
-      this.serviceSection.description_second =
-        this.editData.description_second || "";
-      this.serviceSection.template = this.editData.type;
-      this.serviceSection.order = this.editData.order;
-      this.serviceSection.media_type_first =
-        this.editData.media_type_first || "-1";
-      this.serviceSection.media_type_second =
-        this.editData.media_type_second || "-1";
-      this.serviceSection.img_content_first = this.editData.img_content_first;
-      this.serviceSection.img_content_second = this.editData.img_content_second;
-      this.serviceSection.vid_content_first = this.editData.vid_content_first;
-      this.serviceSection.vid_content_second = this.editData.vid_content_second;
-      this.setRequiredFieldsAccrodingToTemplate(this.editData.type);
+    if (this.$route.name === "Edit Work Column") {
+      this.workColumn.order = this.editData.order || "-1";
+      this.workColumn.type = this.editData.type;
+      this.workColumn.ratio = this.editData.ratio;
+      this.workColumn.fillable = this.editData.fillable;
+      this.workColumn.img_content = this.editData.img_content;
+      this.workColumn.vid_content = this.editData.vid_content;
+      if (this.editData.type === WORK_COLUMNS_CONTENT_TYPES.TITLE)
+        this.workColumn.title = this.editData.content;
+      if (this.editData.type === WORK_COLUMNS_CONTENT_TYPES.DESCRIPTION)
+        this.workColumn.description = this.editData.content;
+      this.setRequiredFieldsAccrodingToContentType(this.editData.type);
     }
   },
   components: {
@@ -680,6 +566,23 @@ export default {
   &--error {
     margin: auto;
     width: fit-content;
+  }
+}
+.column {
+  height: 150px;
+  text-align: center;
+  margin: 1%;
+  &--not-full {
+    background: lightgray;
+    color: black;
+  }
+  &--full {
+    background: #04ca04;
+    color: white;
+  }
+  p {
+    font-size: 30px;
+    margin-top: 15px;
   }
 }
 </style>

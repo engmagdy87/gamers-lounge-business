@@ -91,6 +91,16 @@
         >
         </WorkRowTabelRow>
       </tbody>
+      <tbody v-if="tableType === 'workColumns'">
+        <WorkColumnTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </WorkColumnTabelRow>
+      </tbody>
     </table>
   </div>
 </template>
@@ -103,6 +113,7 @@ import ServiceSectionTableRow from "../components/Services/ServiceSectionTableRo
 import WorkTabelRow from "../components/Works/WorkTabelRow";
 import WorkSectionTabelRow from "../components/Works/WorkSectionTabelRow";
 import WorkRowTabelRow from "../components/Works/WorkRowTabelRow";
+import WorkColumnTabelRow from "../components/Works/WorkColumnTabelRow";
 
 export default {
   name: "l-table",
@@ -115,7 +126,8 @@ export default {
     ServiceSectionTableRow,
     WorkTabelRow,
     WorkSectionTabelRow,
-    WorkRowTabelRow
+    WorkRowTabelRow,
+    WorkColumnTabelRow
   }
 };
 </script>

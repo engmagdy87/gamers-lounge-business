@@ -12,6 +12,8 @@ const state = {
     isWorkSectionFetched: false,
     workRows: [],
     isWorkRowsFetched: false,
+    workRow: {},
+    isWorkRowFetched: false,
 }
 
 const mutations = {
@@ -45,6 +47,12 @@ const mutations = {
     [types.works.mutations.SET_IS_WORK_ROWS_FETCHED]: (currentState, flag) => {
         currentState.isWorkRowsFetched = flag;
     },
+    [types.works.mutations.SET_WORK_COLUMNS]: (currentState, works) => {
+        currentState.workRow = works;
+    },
+    [types.works.mutations.SET_IS_WORK_COLUMNS_FETCHED]: (currentState, flag) => {
+        currentState.isWorkRowFetched = flag;
+    },
     [types.works.mutations.REMOVE_DELETED_WORK]: (currentState, index) => {
         currentState.works.splice(index, 1);
     },
@@ -55,7 +63,7 @@ const mutations = {
         currentState.workRows.rows.splice(index, 1);
     },
     [types.works.mutations.REMOVE_DELETED_WORK_COLUMN]: (currentState, index) => {
-        currentState.workRows.columns.data.splice(index, 1);
+        currentState.workRow.columns.splice(index, 1);
     },
 }
 
@@ -176,6 +184,24 @@ const createWorkRowData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
+const fetchWorkColumnsData = async ({ commit }, payload) => {
+    const { workRowId, requestSource } = payload;
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        const response = await APIs.fetchWorkColumns(workRowId)
+        commit(types.works.mutations.SET_WORK_COLUMNS, response)
+        commit(types.works.mutations.SET_IS_WORK_COLUMNS_FETCHED, true)
+        if (requestSource === 'website')
+            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
+        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        commit(types.works.mutations.SET_IS_WORK_COLUMNS_FETCHED, false)
         throw error.message
     }
 };
@@ -302,6 +328,7 @@ const actions = {
     [types.works.actions.CREATE_WORK_ROW]: createWorkRowData,
     [types.works.actions.DELETE_WORK_ROW]: deleteWorkRowData,
     [types.works.actions.UPDATE_WORK_ROW]: updateWorkRowData,
+    [types.works.actions.FETCH_WORK_COLUMNS]: fetchWorkColumnsData,
     [types.works.actions.CREATE_WORK_COLUMN]: createWorkColumnData,
     [types.works.actions.DELETE_WORK_COLUMN]: deleteWorkColumnData,
     [types.works.actions.UPDATE_WORK_COLUMN]: updateWorkColumnData,

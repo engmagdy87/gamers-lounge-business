@@ -9,6 +9,7 @@ import WORKS from './Works/Works';
 import WORK_SECTIONS from './Works/Sections';
 import WORK_SECTION from './Works/Section';
 import WORK_ROWS from './Works/Rows';
+import WORK_COLUMNS from './Works/Columns';
 import WORKS_WEBSITE from './Works/WorksWebsite';
 
 export default {
@@ -23,5 +24,6 @@ export default {
   WORK_SECTIONS,
   WORK_SECTION,
   WORK_ROWS,
+  WORK_COLUMNS,
   WORKS_WEBSITE
 };

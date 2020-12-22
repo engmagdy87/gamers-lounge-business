@@ -3,8 +3,9 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a :href="`/dashboard/services/sections/list/${servicesData.id}`"
-            >{{ servicesData.title }} Service Sections</a
+          <router-link
+            :to="`/dashboard/services/sections/list/${servicesData.id}`"
+            >{{ servicesData.title }} Service Sections</router-link
           >
         </li>
         <li class="breadcrumb-item active" aria-current="page">

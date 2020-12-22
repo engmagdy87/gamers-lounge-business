@@ -345,6 +345,18 @@ const fetchWorkRows = async (workSectionId) => {
   }
 }
 
+const fetchWorkColumns = async (workRowId) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: QUERY.WORK_COLUMNS(workRowId),
+    }, token);
+    return response.data.data.row
+  } catch (error) {
+    throw error;
+  }
+}
+
 const createWork = async (data) => {
   const { imagesData, ...workInfo } = data;
   const token = getTokenCookie()
@@ -462,7 +474,7 @@ const createWorkColumn = async (data) => {
   const { imagesData, videosData, ...rowInfo } = data;
   const token = getTokenCookie()
 
-  const query = MUTATION.CREATE_WORK_ROW(rowInfo, imagesData, videosData);
+  const query = MUTATION.CREATE_WORK_COLUMN(rowInfo, imagesData, videosData);
 
   try {
     const response = await requestMultipart(constructFormDataForArrayOfFiles({ ...imagesData, ...videosData }, query), token);
@@ -476,7 +488,7 @@ const updateWorkColumn = async (data) => {
   const { imagesData, videosData, ...rowInfo } = data;
   const token = getTokenCookie()
 
-  const query = MUTATION.UPDATE_WORK_ROW(rowInfo, imagesData, videosData);
+  const query = MUTATION.UPDATE_WORK_COLUMN(rowInfo, imagesData, videosData);
 
   try {
     const response = await requestMultipart(constructFormDataForArrayOfFiles({ ...imagesData, ...videosData }, query), token);
@@ -490,7 +502,7 @@ const deleteWorkColumn = async (workColumnId) => {
   const token = getTokenCookie()
   try {
     const response = await request({
-      query: MUTATION.DELETE_WORK_ROW(workColumnId),
+      query: MUTATION.DELETE_WORK_COLUMN(workColumnId),
     }, token);
     return response.data.data.deleteColumn
   } catch (error) {
@@ -529,6 +541,7 @@ export {
   fetchWorkSections,
   fetchWorkSection,
   fetchWorkRows,
+  fetchWorkColumns,
   createWork,
   updateWork,
   deleteWork,

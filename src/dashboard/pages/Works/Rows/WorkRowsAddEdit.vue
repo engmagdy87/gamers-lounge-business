@@ -6,13 +6,13 @@
           <a href="/dashboard/works">Works</a>
         </li>
         <li class="breadcrumb-item">
-          <a :href="`/dashboard/works/sections/list/${workRowData.id}`"
-            >{{ workSectionData.title }} Work Sections</a
+          <router-link :to="`/dashboard/works/sections/list/${workRowData.id}`"
+            >{{ workSectionData.title }} Work Sections</router-link
           >
         </li>
         <li class="breadcrumb-item">
-          <a :href="`/dashboard/works/rows/list/${workRowData.id}`"
-            >Section {{ workRowData.order }} Rows</a
+          <router-link :to="`/dashboard/works/rows/list/${workRowData.id}`"
+            >Section {{ workRowData.order }} Rows</router-link
           >
         </li>
         <li class="breadcrumb-item active" aria-current="page">
