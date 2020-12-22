@@ -95,7 +95,7 @@
           <li>
             <a
               :class="[
-                activeItem === 'work'
+                activeItem === 'work' || activeItem === 'works'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"

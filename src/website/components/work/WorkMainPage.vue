@@ -1,69 +1,47 @@
 <template>
-  <div class="work-page-wrapper row">
+  <div class="work-page-wrapper row" v-if="isWorksFetched">
     <div
-      v-for="work in workData"
+      v-for="work in ourWorks"
       :key="work.id"
       class="work-page-wrapper__content-wrapper col-xs-12 col-sm-12 col-md-6 col-lg-4"
     >
-      <!-- <router-link :to="`/work/${work.id}-${reformatURL(work.title)}`"> -->
-      <div class="work-page-wrapper__content col-12 p-0 mt-3 mb-3">
-        <img :src="work.img" draggable="false" />
+      <router-link :to="`/work/${work.id}-${reformatURL(work.title)}`">
+        <div class="work-page-wrapper__content col-12 p-0 mt-3 mb-3">
+          <img :src="work.img_card.url" draggable="false" />
 
-        <p>{{ work.subtitle }}</p>
+          <p>{{ work.title }}</p>
 
-        <div class="work-page-wrapper__text">
-          <h2>{{ work.title }}</h2>
+          <div class="work-page-wrapper__text">
+            <h2 v-html="work.description"> </h2>
+          </div>
         </div>
-      </div>
-      <!-- </router-link> -->
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapState, mapMutations } from "vuex";
+import types from "../../../store/types";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 
 export default {
-  data() {
-    return {
-      workData: [
-        {
-          id: "1",
-          img: "./images/stadiumpic.png",
-          title: "Esports tournaments",
-          subtitle: "the top Esports work"
-        },
-        {
-          id: "2",
-          img: "./images/hero.jpg",
-          title: "Esports tournaments",
-          subtitle: "the top Esports work"
-        },
-        {
-          id: "3",
-          img: "./images/stadiumpic.png",
-          title: "Esports tournaments",
-          subtitle: "the top Esports work"
-        },
-        {
-          id: "4",
-          img: "./images/hero.jpg",
-          title: "Esports tournaments",
-          subtitle: "the top Esports work"
-        },
-        {
-          id: "5",
-          img: "./images/stadiumpic.png",
-          title: "Esports tournaments",
-          subtitle: "the top Esports work"
-        }
-      ]
-    };
+  computed: {
+    ...mapState({
+      ourWorks: state => state.works.works,
+      isWorksFetched: state => state.works.isWorksFetched
+    })
   },
   methods: {
+  ...mapActions({
+    fetchWorks: types.works.actions.FETCH_WORKS
+  }),
     reformatURL(id) {
       return reformatStringToBeInURL(id);
     }
+  },
+  mounted() {
+    if (!this.isWorksFetched) this.fetchWorks("website");
   }
 };
 </script>
