@@ -10,7 +10,7 @@ import WORK_SECTIONS from './Works/Sections';
 import WORK_SECTION from './Works/Section';
 import WORK_ROWS from './Works/Rows';
 import WORK_COLUMNS from './Works/Columns';
-import WORKS_WEBSITE from './Works/WorksWebsite';
+import WORK_WEBSITE from './Works/WorkWebsite';
 
 export default {
   DEPARTMENTS,
@@ -25,5 +25,5 @@ export default {
   WORK_SECTION,
   WORK_ROWS,
   WORK_COLUMNS,
-  WORKS_WEBSITE
+  WORK_WEBSITE
 };

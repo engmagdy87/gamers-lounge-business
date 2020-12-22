@@ -1,6 +1,7 @@
 <template>
-<div v-if="isWorkSectionsFetched">
-  <WorkDetails :workSections="workSections" />
+<div v-if="isWebsiteWorkFetched">
+
+  <WorkDetails :websiteWork="websiteWork" />
 </div>
 </template>
 
@@ -9,27 +10,21 @@
 import WorkDetails from "../components/work/WorkDetails";
 import { mapActions, mapState, mapMutations } from "vuex";
 import types from "../../store/types";
-import Breadcrumb from "../shared/Breadcrumb";
 import { getEntityId, getEntityName } from "../../helpers/StringsHelper";
 
 export default {
-  data() {
-    return {
-      breadcrumbTree: [{ title: "work", path: "/work" }]
-    };
-  },
   components:{
     WorkDetails
   },
   computed: {
     ...mapState({
-      workSections: state => state.works.workSections, 
-      isWorkSectionsFetched: state => state.works.isWorkSectionsFetched
+      websiteWork: state => state.works.websiteWork, 
+      isWebsiteWorkFetched: state => state.works.isWebsiteWorkFetched
     })
   },
   methods: {
     ...mapActions({
-      fetchWorkSections: types.works.actions.FETCH_WORK_SECTIONS
+      fetchWork: types.works.actions.FETCH_WEBSITE_WORK
     })
   },
   mounted() {
@@ -37,12 +32,10 @@ export default {
       workId: getEntityId(this.$route.params.workName),
       requestSource: "website"
     };
-    this.breadcrumbTree.push({
-      title: getEntityName(this.$route.params.workName),
-      path: ""
-    });
+    this.fetchWork(requestSource);
 
-    this.fetchWorkSections(requestSource);
+
+    console.log(this.websiteWork);
   }
 }
 </script>
