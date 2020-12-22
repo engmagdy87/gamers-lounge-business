@@ -25,6 +25,11 @@
         </li>
       </ol>
     </nav>
+    <div class="alert alert-primary" role="alert">
+      <strong>Hint</strong> Total Width must be less than or equal<strong>
+        100%</strong
+      >
+    </div>
     <h4 slot="header" class="card-name">{{ operation }}</h4>
     <form>
       <div class="row d-flex">
@@ -166,7 +171,7 @@
               type="file"
               id="media-images"
               accept="image/png, image/jpeg"
-              multiple
+              :multiple="workColumn.type === WORK_COLUMNS_CONTENT_TYPES.SLIDER"
               ref="img_content"
               @change="e => setFile(e, 'img_content')"
             />
@@ -217,7 +222,6 @@
               type="file"
               id="logo"
               accept="video/*"
-              multiple
               ref="vid_content"
               @change="e => setFile(e, 'vid_content')"
             />
