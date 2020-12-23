@@ -1,9 +1,10 @@
 <template>
-<div style="color:white;">
+<div>
     <div v-for="row in section.rows" :key="row.id"  class="row m-0 p-0">
-        <div  v-for="column in row.columns" :key="column.index" :style="{width: column.ratio +'%'}" >
+        <div v-for="column in row.columns" :key="column.index" :style="{width: getWidth(column.ratio)}">
 
             {{ column.ratio}}
+            
             <div v-if="column.type === 'TITLE' && column.fillable === true" class="work-details-sections__title-normal">
                 {{column.content}}
             </div>
@@ -43,11 +44,17 @@
 
 <script>
 import { Carousel3d, Slide } from "vue-carousel-3d";
+import isDeviceSmart from "../../../helpers/DetectIsDeviceSmart"
 export default {
   props: ["section"],
   components: {
     Carousel3d,
     Slide
+  },
+  methods:{
+    getWidth(ratio){
+     return isDeviceSmart() ? '100%' : ratio +'%';
+    }
   }
 }
 </script>

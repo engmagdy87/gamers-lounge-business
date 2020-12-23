@@ -32,9 +32,6 @@ export default {
       return WORK_COLUMNS_TYPES;
     }
   },
-  mounted(){
-    console.log(this.websiteWork);
-  }
 }
 </script>
 

@@ -8,7 +8,7 @@
 
       <div class="work-details-wrapper__cover-statistics">
         <div v-for="statistic in statistics" :key="statistic.id">
-          <h1> <countTo :startVal='0' :endVal='parseInt(statistic.value)' :duration='2000'></countTo> </h1>
+          <h1> <countTo :startVal='0' :endVal='parseInt(statistic.value)' separator=''  :duration='2000'></countTo> </h1>
           <p>{{statistic.key}} </p>
         </div>
       </div>
