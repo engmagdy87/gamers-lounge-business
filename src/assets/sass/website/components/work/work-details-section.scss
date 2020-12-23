@@ -1,0 +1,170 @@
+@import "../../color-palette.scss";
+@import "../../variables.scss";
+@import "../../mixins.scss";
+@import "../../shared/half-clipped-shape.scss";
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: $dark-background;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $accent;
+}
+.work-details-sections{
+    width: 80%;
+    margin: auto;
+    &__section{
+        margin: 60px 0 60px 0;
+    }
+    &__title {
+        position: relative;
+        color: $accent;
+        font-family: "Segoe UI Bold";
+        text-align: left;
+        font-size: 2.3rem;
+        height: 65px;
+        @include is-extra-small-mobile {
+          font-size: 1.4rem;
+        }
+        @include is-mobile {
+          font-size: 1.8rem;
+        }
+        @include is-tablet {
+          font-size: 2rem;
+        }
+        @include is-desktop {
+          font-size: 2rem;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          top: 58px;
+          left: 0px;
+          height: 5px;
+          width: 220px;
+          background: $accent;
+          transition: all .5s ease-in-out;
+          @include is-extra-small-mobile {
+            top: 40px;
+            width: 150px;
+          }
+          @include is-mobile {
+            top: 50px;
+            width: 180px;
+          }
+          @include is-tablet {
+            top: 50px;
+            width: 200px;
+          }
+          @include is-desktop {
+            top: 50px;
+            width: 150px;
+          }
+        }
+      }
+      &__title-normal{
+        position: relative;
+        color: $accent;
+        font-family: "Segoe UI Bold";
+        text-align: center;
+        font-size: 2.3rem;
+        height: 65px;
+        @include is-extra-small-mobile {
+          font-size: 1.4rem;
+        }
+        @include is-mobile {
+          font-size: 1.8rem;
+        }
+        @include is-tablet {
+          font-size: 2rem;
+        }
+        @include is-desktop {
+          font-size: 2rem;
+        }
+      }
+      &__description{
+          font-size: 1.25rem;
+          max-height: $template-height/1.25;
+          overflow-y: auto;
+          text-align: justify;
+          line-height: 40px;
+          padding: 20px;
+          @include is-extra-small-mobile {
+            font-size: .8rem;
+            max-height: $template-height/2;
+            line-height: 30px;
+            padding: 5px;
+          }
+          @include is-mobile {
+            font-size: .9rem;
+            max-height: $template-height/2;
+            line-height: 30px;
+            padding: 10px;
+          }
+          @include is-tablet {
+            font-size: 1rem;
+            max-height: $template-height/2;
+            line-height: 30px;
+            padding: 10px;
+          }
+          @include is-desktop {
+            font-size: 1.2rem;
+            line-height: 35px;
+            padding: 15px;
+          }
+      }
+}
+
+.carousel-3d-slide img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+
+/deep/ .half-filled-box{
+    padding: 70px!important;
+}
+// All have % as divide operation units must be the same for all
+$width: 100%;
+$height: 55%;
+$clipped-length: 5.5%;
+
+$widths-and-heights: (
+  clipped-shape-width: $width,
+  clipped-shape-height: $height,
+  clipped-length: $clipped-length,
+  clipped-shape-width-xs: (
+    $width + 10%
+  ),
+  clipped-shape-height-xs: (
+    $height + 90%
+  ),
+  clipped-length-xs: 12%,
+  clipped-shape-width-sm: (
+    $width
+  ),
+  clipped-shape-height-sm: (
+    $height + 70%
+  ),
+  clipped-length-sm: $clipped-length + 4%,
+  clipped-shape-width-md: $width + 10%,
+  clipped-shape-height-md: $height + 60%,
+  clipped-length-md: $clipped-length + 4%,
+  clipped-shape-width-lg: $width + 10%,
+  clipped-shape-height-lg: $height + 25%,
+  clipped-length-lg: $clipped-length + 2%,
+  clipped-shape-width-xlg: $width + 10%,
+  clipped-shape-height-xlg: $height + 10%,
+  clipped-length-xlg: $clipped-length,
+  clipped-shape-width-xxlg: $width,
+  clipped-shape-height-xxlg: $height,
+  clipped-length-xxlg: $clipped-length
+);
+
+// use /deep/ to apply scss classes to the child components
+div /deep/ {
+  @include filled-half-clipped-shape($widths-and-heights, $dark-background);
+}

@@ -5,6 +5,10 @@ query {
      title
      description
      statistics
+     img_cover{
+      id
+      url
+     }
      sections(first: 5, orderBy: { field: "order", order: ASC }) {
        data {
          id
