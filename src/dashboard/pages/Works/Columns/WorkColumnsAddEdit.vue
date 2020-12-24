@@ -170,7 +170,7 @@
             <input
               type="file"
               id="media-images"
-              accept="image/png, image/jpeg"
+              accept="image/png, image/jpeg, image/gif"
               :multiple="workColumn.type === WORK_COLUMNS_CONTENT_TYPES.SLIDER"
               ref="img_content"
               @change="e => setFile(e, 'img_content')"

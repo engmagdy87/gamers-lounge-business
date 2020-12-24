@@ -25,6 +25,22 @@
     &__section{
         margin: 60px 0 60px 0;
     }
+    &__container{
+      background-color: $dark-background;
+      padding: 0 110px  0 110px ;
+      @include is-extra-small-mobile {
+        padding: 0 20px  0 20px ;
+      }
+      @include is-mobile {
+        padding: 0 30px  0 30px ;
+      }
+      @include is-tablet {
+        padding: 0 40px  0 40px ;
+      }
+      @include is-desktop {
+        padding: 0 50px  0 50px ;
+      }
+    }
     &__title {
         position: relative;
         color: $accent;
@@ -32,6 +48,7 @@
         text-align: left;
         font-size: 2.3rem;
         height: 65px;
+        margin-bottom: 35px;
         @include is-extra-small-mobile {
           font-size: 1.1rem;
         }
@@ -48,7 +65,7 @@
           content: "";
           position: absolute;
           bottom: 0;
-          top: 58px;
+          top: 60px;
           left: 0px;
           height: 5px;
           width: 220px;
@@ -79,6 +96,7 @@
         text-align: center;
         font-size: 2.3rem;
         height: 65px;
+        margin-bottom: 35px;
         @include is-extra-small-mobile {
           font-size: 1.1rem;
         }
@@ -90,6 +108,13 @@
         }
         @include is-desktop {
           font-size: 2rem;
+        }
+      }
+      &__video{
+        video{
+          &:focus{
+            outline: none;
+          }
         }
       }
       &__description{
@@ -104,18 +129,21 @@
             max-height: $template-height/2;
             line-height: 30px;
             padding: 5px;
+            margin: 15px 0 15px 0;
           }
           @include is-mobile {
             font-size: .9rem;
             max-height: $template-height/2;
             line-height: 30px;
             padding: 10px;
+            margin: 15px 0 15px 0;
           }
           @include is-tablet {
             font-size: 1rem;
             max-height: $template-height/2;
             line-height: 30px;
             padding: 10px;
+            margin: 15px 0 15px 0;
           }
           @include is-desktop {
             font-size: 1.2rem;
@@ -129,61 +157,4 @@
     width: 100%;
     object-fit: cover;
     height: 100%;
-}
-
-/deep/ .half-filled-box{
-    padding: 70px!important;
-    @include is-extra-small-mobile {
-      padding: 20px!important;
-    }
-    @include is-mobile {
-      padding: 30px!important;
-    }
-    @include is-tablet {
-      padding: 40px!important;
-    }
-    @include is-desktop {
-      padding: 50px!important;
-    }
-}
-// All have % as divide operation units must be the same for all
-$width: 100%;
-$height: 55%;
-$clipped-length: 5.5%;
-
-$widths-and-heights: (
-  clipped-shape-width: $width,
-  clipped-shape-height: $height,
-  clipped-length: $clipped-length,
-  clipped-shape-width-xs: (
-    $width
-  ),
-  clipped-shape-height-xs: (
-    $height + 90%
-  ),
-  clipped-length-xs: 12%,
-  clipped-shape-width-sm: (
-    $width
-  ),
-  clipped-shape-height-sm: (
-    $height + 70%
-  ),
-  clipped-length-sm: $clipped-length + 4%,
-  clipped-shape-width-md: $width + 10%,
-  clipped-shape-height-md: $height + 60%,
-  clipped-length-md: $clipped-length + 4%,
-  clipped-shape-width-lg: $width + 10%,
-  clipped-shape-height-lg: $height + 25%,
-  clipped-length-lg: $clipped-length + 2%,
-  clipped-shape-width-xlg: $width + 10%,
-  clipped-shape-height-xlg: $height + 10%,
-  clipped-length-xlg: $clipped-length,
-  clipped-shape-width-xxlg: $width,
-  clipped-shape-height-xxlg: $height,
-  clipped-length-xxlg: $clipped-length
-);
-
-// use /deep/ to apply scss classes to the child components
-div /deep/ {
-  @include filled-half-clipped-shape($widths-and-heights, $dark-background);
 }

@@ -3,11 +3,9 @@
 
     <div class="work-details-sections__section" v-for="section in websiteWork.sections.data" :key="section.id">
       <DetailsNormalSection
-      v-if="section.type === 'NORMAL'"
-      :WORK_COLUMNS_TYPES="WORK_COLUMNS_TYPES"
+      v-if="section.type === WORK_SECTIONS_TYPES.NORMAL"
       :section="section"/>
-
-      <DetailsSpecialSection :section="section" :WORK_COLUMNS_TYPES="WORK_COLUMNS_TYPES" v-else />
+      <DetailsSpecialSection :section="section" v-else />
 
     </div>
   </div>
@@ -16,8 +14,7 @@
 <script>
 import DetailsNormalSection from "./DetailsNormalSection"
 import DetailsSpecialSection from "./DetailsSpecialSection"
-import * as WORK_TEMPLATES from "../../../constants/WorkSectionsTypes";
-import * as WORK_COLUMNS_TYPES from "../../../constants/WorkColumnsContentTypes";
+import * as WORK_SECTIONS_TYPES from "../../../constants/WorkSectionsTypes";
 export default {
   props: ["websiteWork"],
   components:{
@@ -25,11 +22,8 @@ export default {
     DetailsSpecialSection,
   },
   computed: {
-    WORK_TEMPLATES() {
-      return WORK_TEMPLATES;
-    },
-    WORK_COLUMNS_TYPES(){
-      return WORK_COLUMNS_TYPES;
+    WORK_SECTIONS_TYPES(){
+      return WORK_SECTIONS_TYPES;
     }
   },
 }
