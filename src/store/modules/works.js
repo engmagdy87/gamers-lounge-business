@@ -4,8 +4,8 @@ import types from '../types';
 const state = {
     works: [],
     isWorksFetched: false,
-    websiteWorks: [],
-    isWebsiteWorksFetched: false,
+    websiteWork: {},
+    isWebsiteWorkFetched: false,
     workSections: {},
     isWorkSectionsFetched: false,
     workSection: {},
@@ -23,11 +23,11 @@ const mutations = {
     [types.works.mutations.SET_IS_WORKS_FETCHED]: (currentState, flag) => {
         currentState.isWorksFetched = flag;
     },
-    [types.works.mutations.SET_WEBSITE_WORKS]: (currentState, websiteWorks) => {
-        currentState.websiteWorks = websiteWorks;
+    [types.works.mutations.SET_WEBSITE_WORK]: (currentState, websiteWork) => {
+        currentState.websiteWork = websiteWork;
     },
-    [types.works.mutations.SET_IS_WEBSITE_WORKS_FETCHED]: (currentState, flag) => {
-        currentState.isWebsiteWorksFetched = flag;
+    [types.works.mutations.SET_IS_WEBSITE_WORK_FETCHED]: (currentState, flag) => {
+        currentState.isWebsiteWorkFetched = flag;
     },
     [types.works.mutations.SET_WORK_SECTIONS]: (currentState, works) => {
         currentState.workSections = works;
@@ -84,19 +84,20 @@ const fetchWorksData = async ({ commit }, requestSource) => {
     }
 };
 
-const fetchWebsiteWorksData = async ({ commit }, requestSource) => {
+const fetchWebsiteWorkData = async ({ commit }, payload) => {
+    const { workId, requestSource } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await APIs.fetchWebsiteWorks()
-        commit(types.works.mutations.SET_WEBSITE_WORKS, response.data)
-        commit(types.works.mutations.SET_IS_WEBSITE_WORKS_FETCHED, true)
+        const response = await APIs.fetchWebsiteWork(workId)
+        commit(types.works.mutations.SET_WEBSITE_WORK, response)
+        commit(types.works.mutations.SET_IS_WEBSITE_WORK_FETCHED, true)
         if (requestSource === 'website')
             commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
         else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        commit(types.works.mutations.SET_IS_WEBSITE_WORKS_FETCHED, false)
+        commit(types.works.mutations.SET_IS_WEBSITE_WORK_FETCHED, false)
         throw error.message
     }
 };
@@ -315,7 +316,7 @@ const updateWorkColumnData = async ({ commit }, data) => {
 
 const actions = {
     [types.works.actions.FETCH_WORKS]: fetchWorksData,
-    [types.works.actions.FETCH_WEBSITE_WORKS]: fetchWebsiteWorksData,
+    [types.works.actions.FETCH_WEBSITE_WORK]: fetchWebsiteWorkData,
     [types.works.actions.CREATE_WORK]: createWorkData,
     [types.works.actions.DELETE_WORK]: deleteWorkData,
     [types.works.actions.UPDATE_WORK]: updateWorkData,

@@ -1,0 +1,160 @@
+@import "../../color-palette.scss";
+@import "../../variables.scss";
+@import "../../mixins.scss";
+@import "../../shared/half-clipped-shape.scss";
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: $dark-background;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $accent;
+}
+.work-details-sections{
+    width: 80%;
+    margin: auto;
+    color: $header-item;
+    @include is-extra-small-mobile {
+      width: 90%;
+    }
+    @include is-mobile {
+      width: 90%;
+    }
+    &__section{
+        margin: 60px 0 60px 0;
+    }
+    &__container{
+      background-color: $dark-background;
+      padding: 0 110px  0 110px ;
+      @include is-extra-small-mobile {
+        padding: 0 20px  0 20px ;
+      }
+      @include is-mobile {
+        padding: 0 30px  0 30px ;
+      }
+      @include is-tablet {
+        padding: 0 40px  0 40px ;
+      }
+      @include is-desktop {
+        padding: 0 50px  0 50px ;
+      }
+    }
+    &__title {
+        position: relative;
+        color: $accent;
+        font-family: "Segoe UI Bold";
+        text-align: left;
+        font-size: 2.3rem;
+        height: 65px;
+        margin-bottom: 35px;
+        @include is-extra-small-mobile {
+          font-size: 1.1rem;
+        }
+        @include is-mobile {
+          font-size: 1.8rem;
+        }
+        @include is-tablet {
+          font-size: 2rem;
+        }
+        @include is-desktop {
+          font-size: 2rem;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          top: 60px;
+          left: 0px;
+          height: 5px;
+          width: 220px;
+          background: $accent;
+          transition: all .5s ease-in-out;
+          @include is-extra-small-mobile {
+            top: 40px;
+            width: 150px;
+          }
+          @include is-mobile {
+            top: 50px;
+            width: 180px;
+          }
+          @include is-tablet {
+            top: 50px;
+            width: 200px;
+          }
+          @include is-desktop {
+            top: 50px;
+            width: 150px;
+          }
+        }
+      }
+      &__title-normal{
+        position: relative;
+        color: $accent;
+        font-family: "Segoe UI Bold";
+        text-align: center;
+        font-size: 2.3rem;
+        height: 65px;
+        margin-bottom: 35px;
+        @include is-extra-small-mobile {
+          font-size: 1.1rem;
+        }
+        @include is-mobile {
+          font-size: 1.8rem;
+        }
+        @include is-tablet {
+          font-size: 2rem;
+        }
+        @include is-desktop {
+          font-size: 2rem;
+        }
+      }
+      &__video{
+        video{
+          &:focus{
+            outline: none;
+          }
+        }
+      }
+      &__description{
+          font-size: 1.25rem;
+          max-height: $template-height/1.25;
+          overflow-y: auto;
+          text-align: justify;
+          line-height: 40px;
+          padding: 20px;
+          @include is-extra-small-mobile {
+            font-size: .8rem;
+            max-height: $template-height/2;
+            line-height: 30px;
+            padding: 5px;
+            margin: 15px 0 15px 0;
+          }
+          @include is-mobile {
+            font-size: .9rem;
+            max-height: $template-height/2;
+            line-height: 30px;
+            padding: 10px;
+            margin: 15px 0 15px 0;
+          }
+          @include is-tablet {
+            font-size: 1rem;
+            max-height: $template-height/2;
+            line-height: 30px;
+            padding: 10px;
+            margin: 15px 0 15px 0;
+          }
+          @include is-desktop {
+            font-size: 1.2rem;
+            line-height: 35px;
+            padding: 15px;
+          }
+      }
+}
+
+.carousel-3d-slide img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}

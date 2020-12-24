@@ -7,7 +7,8 @@ const Contact = () => import(/* webpackChunkName: "Contact" */ '../website/conta
 const About = () => import(/* webpackChunkName: "About" */ '../website/containers/About.vue')
 const Jobs = () => import(/* webpackChunkName: "Jobs" */ '../website/containers/Jobs.vue')
 const JobDetails = () => import(/* webpackChunkName: "JobDetails" */ '../website/containers/JobDetails.vue')
-const OurWork = () => import(/* webpackChunkName: "OurWork" */ '../website/containers/OurWork.vue')
+const OurWorks = () => import(/* webpackChunkName: "OurWorks" */ '../website/containers/OurWorks.vue')
+const OurWorkDetails = () => import(/* webpackChunkName: "OurWorkDetails" */ '../website/containers/OurWorkDetails.vue')
 const Services = () => import(/* webpackChunkName: "Services" */ '../website/containers/Services.vue')
 const ServicesDetails = () => import(/* webpackChunkName: "ServicesDetails" */ '../website/containers/ServicesDetails.vue')
 
@@ -118,8 +119,16 @@ const routes = [
   },
   {
     path: '/work',
+    name: 'works',
+    component: OurWorks,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next)
+    }
+  },
+  {
+    path: '/work/:workName',
     name: 'work',
-    component: OurWork,
+    component: OurWorkDetails,
     beforeEnter(to, from, next) {
       showHeaderAndFooterForWebsite(next)
     }

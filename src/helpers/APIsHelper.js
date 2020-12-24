@@ -298,12 +298,12 @@ const fetchWorks = async () => {
   }
 }
 
-const fetchWebsiteWorks = async () => {
+const fetchWebsiteWork = async (id) => {
   try {
     const response = await request({
-      query: QUERY.WORKS_WEBSITE(),
+      query: QUERY.WORK_WEBSITE(id),
     });
-    return response.data.data.works
+    return response.data.data.work
   } catch (error) {
     throw error;
   }
@@ -537,7 +537,7 @@ export {
   deleteVideo,
   isUserAuthenticated,
   fetchWorks,
-  fetchWebsiteWorks,
+  fetchWebsiteWork,
   fetchWorkSections,
   fetchWorkSection,
   fetchWorkRows,

@@ -83,7 +83,7 @@ import store from "../../../../store/index";
 import types from "../../../../store/types";
 import isValidationErrorExist from "../../../../helpers/FormValidation";
 import { reformatHTMLString } from "../../../../helpers/StringsHelper";
-import WORK_SECTIONS_TYPES from "../../../../constants/WorkSectionsTypes";
+import * as WORK_SECTIONS_TYPES from "../../../../constants/WorkSectionsTypes";
 
 const emptyWorkSection = {
   order: 1,

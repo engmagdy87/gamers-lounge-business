@@ -74,8 +74,8 @@ const works = {
     mutations: {
         SET_WORKS: 'works/mutations/SET_WORKS',
         SET_IS_WORKS_FETCHED: 'works/mutations/SET_IS_WORKS_FETCHED',
-        SET_WEBSITE_WORKS: 'works/mutations/SET_WEBSITE_WORKS',
-        SET_IS_WEBSITE_WORKS_FETCHED: 'works/mutations/SET_IS_WEBSITE_WORKS_FETCHED',
+        SET_WEBSITE_WORK: 'works/mutations/SET_WEBSITE_WORK',
+        SET_IS_WEBSITE_WORK_FETCHED: 'works/mutations/SET_IS_WEBSITE_WORK_FETCHED',
         SET_WORK_SECTIONS: 'works/mutations/SET_WORK_SECTIONS',
         SET_IS_WORK_SECTIONS_FETCHED: 'works/mutations/SET_IS_WORK_SECTIONS_FETCHED',
         SET_WORK_SECTION: 'works/mutations/SET_WORK_SECTION',
@@ -92,7 +92,7 @@ const works = {
     },
     actions: {
         FETCH_WORKS: 'works/actions/FETCH_WORKS',
-        FETCH_WEBSITE_WORKS: 'works/actions/FETCH_WEBSITE_WORKS',
+        FETCH_WEBSITE_WORK: 'works/actions/FETCH_WEBSITE_WORK',
         CREATE_WORK: 'works/actions/CREATE_WORK',
         DELETE_WORK: 'works/actions/DELETE_WORK',
         UPDATE_WORK: 'works/actions/UPDATE_WORK',
