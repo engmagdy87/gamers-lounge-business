@@ -314,6 +314,17 @@ const updateWorkColumnData = async ({ commit }, data) => {
     }
 };
 
+const updateVideoData = async ({ commit }, data) => {
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    try {
+        await APIs.updateVideo(data)
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+    } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        throw error.message
+    }
+};
+
 const actions = {
     [types.works.actions.FETCH_WORKS]: fetchWorksData,
     [types.works.actions.FETCH_WEBSITE_WORK]: fetchWebsiteWorkData,
@@ -333,6 +344,7 @@ const actions = {
     [types.works.actions.CREATE_WORK_COLUMN]: createWorkColumnData,
     [types.works.actions.DELETE_WORK_COLUMN]: deleteWorkColumnData,
     [types.works.actions.UPDATE_WORK_COLUMN]: updateWorkColumnData,
+    [types.works.actions.UPDATE_VIDEO]: updateVideoData,
 };
 
 export default {

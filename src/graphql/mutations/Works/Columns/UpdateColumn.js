@@ -2,7 +2,7 @@ const buildQuery = (workColumnInfo, imagesData, videosData) => {
    const { columnId, rowId,
       order,
       content,
-      type, ratio, fillable, isAutoPlay } = workColumnInfo;
+      type, ratio, fillable } = workColumnInfo;
 
    let queryParams = '(';
    let imagesKeys = 'images: {'
@@ -15,10 +15,7 @@ const buildQuery = (workColumnInfo, imagesData, videosData) => {
 
    if (videosData.vid_content.length > 0) {
       queryParams += '$vid_content: [Upload!],';
-      videosKeys += `vid_content: { upload: { file: $vid_content, is_auto_play:${isAutoPlay} } }`
-   }
-   else {
-      videosKeys += `vid_content: { upload: { is_auto_play:${isAutoPlay} } }`
+      videosKeys += `vid_content: { upload: { file: $vid_content } }`
    }
 
    if (queryParams === '(') queryParams = ''

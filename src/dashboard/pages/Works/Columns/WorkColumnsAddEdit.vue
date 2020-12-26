@@ -116,6 +116,7 @@
               class="custom-control-input"
               id="isAutoPlay"
               v-model="workColumn.isAutoPlay"
+              @change="updateVideoData"
             />
             <label class="custom-control-label" for="isAutoPlay"
               >Is Autoplay Video</label
@@ -369,9 +370,19 @@ export default {
       fetchColumnsRows: types.works.actions.FETCH_WORK_COLUMNS,
       createColumn: types.works.actions.CREATE_WORK_COLUMN,
       updateColumn: types.works.actions.UPDATE_WORK_COLUMN,
+      updateVideo: types.works.actions.UPDATE_VIDEO,
       deleteImage: types.app.actions.DELETE_IMAGE,
       deleteVideo: types.app.actions.DELETE_VIDEO
     }),
+    updateVideoData: async function() {
+      if (this.operation === "Edit Work Column") {
+        const payload = {
+          videoId: this.workColumn.vid_content[0].id,
+          isAutoPlay: this.workColumn.isAutoPlay
+        };
+        await this.updateVideo(payload);
+      }
+    },
     setRequiredFieldsAccrodingToContentType(value) {
       let key;
       const targetKeys = [
@@ -469,7 +480,6 @@ export default {
           content,
           ratio: this.workColumn.ratio,
           fillable: this.workColumn.fillable,
-          isAutoPlay: this.workColumn.isAutoPlay,
           imagesData: {
             img_content: this.$refs.img_content.files
           },
@@ -491,7 +501,8 @@ export default {
         } else {
           await this.createColumn({
             ...payload,
-            rowId
+            rowId,
+            isAutoPlay: this.workColumn.isAutoPlay
           });
           const fetchPayload = { workRowId: rowId, requestSource: "dashboard" };
           await this.fetchColumnsRows(fetchPayload);

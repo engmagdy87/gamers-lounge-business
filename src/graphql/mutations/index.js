@@ -28,6 +28,7 @@ import DELETE_WORK_ROW from './Works/Rows/DeleteRow';
 import CREATE_WORK_COLUMN from './Works/Columns/CreateColumn';
 import UPDATE_WORK_COLUMN from './Works/Columns/UpdateColumn';
 import DELETE_WORK_COLUMN from './Works/Columns/DeleteColumn';
+import UPDATE_VIDEO from './Works/Columns/UpdateVideo';
 
 import DELETE_IMAGE from './DeleteImage';
 import DELETE_VIDEO from './DeleteVideo';
@@ -59,6 +60,7 @@ export default {
     CREATE_WORK_COLUMN,
     UPDATE_WORK_COLUMN,
     DELETE_WORK_COLUMN,
+    UPDATE_VIDEO,
     DELETE_IMAGE,
     DELETE_VIDEO
 };

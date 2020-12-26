@@ -510,7 +510,17 @@ const deleteWorkColumn = async (workColumnId) => {
   }
 }
 
-/*********************** */
+const updateVideo = async (data) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.UPDATE_VIDEO(data),
+    }, token);
+    return response.data.data.updateVideo
+  } catch (error) {
+    throw error;
+  }
+}
 
 export {
   fetchDepartments,
@@ -553,7 +563,8 @@ export {
   deleteWorkRow,
   createWorkColumn,
   updateWorkColumn,
-  deleteWorkColumn
+  deleteWorkColumn,
+  updateVideo
 }
 
 const request = async (data, token) => {

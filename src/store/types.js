@@ -109,6 +109,7 @@ const works = {
         CREATE_WORK_COLUMN: 'works/actions/CREATE_WORK_COLUMN',
         DELETE_WORK_COLUMN: 'works/actions/DELETE_WORK_COLUMN',
         UPDATE_WORK_COLUMN: 'works/actions/UPDATE_WORK_COLUMN',
+        UPDATE_VIDEO: 'works/actions/UPDATE_VIDEO'
     }
 };
 
