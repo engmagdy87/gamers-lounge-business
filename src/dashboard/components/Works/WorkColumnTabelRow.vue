@@ -8,6 +8,14 @@
     </td>
     <td>{{ rowData.ratio }}</td>
     <td>{{ rowData.fillable ? "Yes" : "No" }}</td>
+    <td
+      v-if="
+        rowData.type === MEDIA_TYPES.VIDEO && rowData.vid_content.length > 0
+      "
+    >
+      {{ rowData.vid_content[0].is_auto_play ? "Yes" : "No" }}
+    </td>
+    <td v-else></td>
     <td v-if="rowData.img_content">
       <a
         v-for="(img, i) in rowData.img_content"
@@ -40,8 +48,14 @@
 </template>
 
 <script>
+import * as MEDIA_TYPES from "../../../constants/MediaTypes";
 export default {
   props: ["id", "rowData", "setShowDeleteDialogFlag"],
+  computed: {
+    MEDIA_TYPES() {
+      return MEDIA_TYPES;
+    }
+  },
   methods: {
     redirectTo() {
       this.$router.push({

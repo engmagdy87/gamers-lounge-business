@@ -85,7 +85,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-4">
           <base-input
             type="number"
             label="Width in %"
@@ -96,7 +96,7 @@
           </base-input>
           <ErrorMessage :fieldErrors="errors.ratio" />
         </div>
-        <div class="col-12 col-md-6 mt-auto mb-auto">
+        <div class="col-12 col-md-4 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -106,6 +106,19 @@
             />
             <label class="custom-control-label" for="fillable"
               >Has Content</label
+            >
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="isAutoPlay"
+              v-model="workColumn.isAutoPlay"
+            />
+            <label class="custom-control-label" for="isAutoPlay"
+              >Is Autoplay Video</label
             >
           </div>
         </div>
@@ -293,6 +306,7 @@ const emptyColumnSection = {
   description: "",
   ratio: 0,
   fillable: false,
+  isAutoPlay: false,
   img_content: [],
   vid_content: []
 };
@@ -319,6 +333,7 @@ export default {
         description: { isRequired: true },
         ratio: { isRequired: true },
         fillable: { isRequired: true },
+        "is auto play": { isRequired: false },
         "images content": { isRequired: true },
         "videos content": { isRequired: true }
       },
@@ -329,6 +344,7 @@ export default {
         description: "description",
         ratio: "ratio",
         fillable: "fillable",
+        isAutoPlay: "is auto play",
         img_content: "images content",
         vid_content: "videos content"
       },
@@ -453,6 +469,7 @@ export default {
           content,
           ratio: this.workColumn.ratio,
           fillable: this.workColumn.fillable,
+          isAutoPlay: this.workColumn.isAutoPlay,
           imagesData: {
             img_content: this.$refs.img_content.files
           },
@@ -541,6 +558,7 @@ export default {
       this.workColumn.type = this.editData.type;
       this.workColumn.ratio = this.editData.ratio;
       this.workColumn.fillable = this.editData.fillable;
+      this.workColumn.isAutoPlay = this.editData.vid_content[0].is_auto_play;
       this.workColumn.img_content = this.editData.img_content;
       this.workColumn.vid_content = this.editData.vid_content;
       if (this.editData.type === WORK_COLUMNS_CONTENT_TYPES.TITLE)

@@ -1,4 +1,9 @@
 const buildQuery = (workColumnInfo, imagesData, videosData) => {
+   const { rowId,
+      order,
+      content,
+      type, ratio, fillable, isAutoPlay } = workColumnInfo;
+
    let queryParams = '(';
    let imagesKeys = 'images: {'
    let videosKeys = 'videos: {'
@@ -10,7 +15,7 @@ const buildQuery = (workColumnInfo, imagesData, videosData) => {
 
    if (videosData.vid_content.length > 0) {
       queryParams += '$vid_content: [Upload!],';
-      videosKeys += 'vid_content: { upload: { file: $vid_content } }'
+      videosKeys += `vid_content: { upload: { file: $vid_content, is_auto_play:${isAutoPlay} } }`
    }
 
    if (queryParams === '(') queryParams = ''
@@ -21,11 +26,6 @@ const buildQuery = (workColumnInfo, imagesData, videosData) => {
 
    if (videosKeys === 'videos: {') videosKeys = ''
    else videosKeys += '}'
-
-   const { rowId,
-      order,
-      content,
-      type, ratio, fillable } = workColumnInfo;
 
    return `mutation${queryParams} {
       createColumn(

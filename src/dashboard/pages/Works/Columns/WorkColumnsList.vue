@@ -74,6 +74,7 @@ export default {
           "Content",
           "Width in %",
           "Has Content",
+          "Is Video Autoplay",
           "Images Content",
           "Videos Content",
           "Actions"

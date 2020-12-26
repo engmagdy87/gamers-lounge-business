@@ -32,6 +32,7 @@ query {
              vid_content {
                id
                url
+               is_auto_play
              }
            }
          }
