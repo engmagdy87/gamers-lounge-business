@@ -1,32 +1,35 @@
 <template>
   <div class="work-details-sections">
-
-    <div class="work-details-sections__section" v-for="section in websiteWork.sections.data" :key="section.id">
+    <div
+      class="work-details-sections__section"
+      v-for="section in websiteWork.sections.data"
+      :key="section.id"
+    >
       <DetailsNormalSection
-      v-if="section.type === WORK_SECTIONS_TYPES.NORMAL"
-      :section="section"/>
+        v-if="section.type === WORK_SECTIONS_TYPES.NORMAL"
+        :section="section"
+      />
       <DetailsSpecialSection :section="section" v-else />
-
     </div>
   </div>
 </template>
 
 <script>
-import DetailsNormalSection from "./DetailsNormalSection"
-import DetailsSpecialSection from "./DetailsSpecialSection"
+import DetailsNormalSection from "./DetailsNormalSection";
+import DetailsSpecialSection from "./DetailsSpecialSection";
 import * as WORK_SECTIONS_TYPES from "../../../constants/WorkSectionsTypes";
 export default {
   props: ["websiteWork"],
-  components:{
+  components: {
     DetailsNormalSection,
-    DetailsSpecialSection,
+    DetailsSpecialSection
   },
   computed: {
-    WORK_SECTIONS_TYPES(){
+    WORK_SECTIONS_TYPES() {
       return WORK_SECTIONS_TYPES;
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped>

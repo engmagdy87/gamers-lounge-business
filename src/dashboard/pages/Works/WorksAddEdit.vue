@@ -199,11 +199,6 @@ export default {
       editorOptions
     };
   },
-  computed: {
-    ...mapState({
-      worksData: state => state.works.works
-    })
-  },
   methods: {
     ...mapActions({
       createWork: types.works.actions.CREATE_WORK,

@@ -2,7 +2,7 @@ import * as APIs from '../../helpers/APIsHelper';
 import types from '../types';
 
 const state = {
-    works: [],
+    works: {},
     isWorksFetched: false,
     websiteWork: {},
     isWebsiteWorkFetched: false,
@@ -18,13 +18,27 @@ const state = {
 
 const mutations = {
     [types.works.mutations.SET_WORKS]: (currentState, works) => {
-        currentState.works = works;
+        const { data, paginatorInfo } = works
+        const oldSections = currentState.works.data || []
+
+        currentState.works = {
+            paginatorInfo,
+            data: [...oldSections, ...data]
+        }
     },
     [types.works.mutations.SET_IS_WORKS_FETCHED]: (currentState, flag) => {
         currentState.isWorksFetched = flag;
     },
     [types.works.mutations.SET_WEBSITE_WORK]: (currentState, websiteWork) => {
-        currentState.websiteWork = websiteWork;
+        const { sections, ...workData } = websiteWork
+        const { data, paginatorInfo } = sections
+        const oldSections = Object.keys(currentState.websiteWork).length === 0 ? [] : currentState.websiteWork.sections.data
+        currentState.websiteWork = {
+            ...workData, sections: {
+                paginatorInfo,
+                data: [...oldSections, ...data]
+            }
+        }
     },
     [types.works.mutations.SET_IS_WEBSITE_WORK_FETCHED]: (currentState, flag) => {
         currentState.isWebsiteWorkFetched = flag;
@@ -67,11 +81,12 @@ const mutations = {
     },
 }
 
-const fetchWorksData = async ({ commit }, requestSource) => {
+const fetchWorksData = async ({ commit }, payload) => {
+    const { data, requestSource } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await APIs.fetchWorks()
-        commit(types.works.mutations.SET_WORKS, response.data)
+        const response = await APIs.fetchWorks(data)
+        commit(types.works.mutations.SET_WORKS, response)
         commit(types.works.mutations.SET_IS_WORKS_FETCHED, true)
         if (requestSource === 'website')
             commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
@@ -85,10 +100,10 @@ const fetchWorksData = async ({ commit }, requestSource) => {
 };
 
 const fetchWebsiteWorkData = async ({ commit }, payload) => {
-    const { workId, requestSource } = payload;
+    const { data, requestSource } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await APIs.fetchWebsiteWork(workId)
+        const response = await APIs.fetchWebsiteWork(data)
         commit(types.works.mutations.SET_WEBSITE_WORK, response)
         commit(types.works.mutations.SET_IS_WEBSITE_WORK_FETCHED, true)
         if (requestSource === 'website')

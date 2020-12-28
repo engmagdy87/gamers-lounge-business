@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col-sm">
-        <h2 class="heading-margin">Works ({{ worksData.length }})</h2>
+        <h2 class="heading-margin">Works ({{ getWorksDataLength }})</h2>
       </div>
       <div class="col-sm">
         <router-link to="/dashboard/works/create">
@@ -18,7 +18,7 @@
     <Table
       class="table-hover table-striped"
       :columns="table.columns"
-      :data="worksData"
+      :data="getWorksData"
       tableType="works"
       :setShowDeleteDialogFlag="setWorkDataFlags"
     >
@@ -60,7 +60,13 @@ export default {
   computed: {
     ...mapState({
       worksData: state => state.works.works
-    })
+    }),
+    getWorksData() {
+      return this.worksData.data || [];
+    },
+    getWorksDataLength() {
+      return this.worksData.data ? this.worksData.data.length : 0;
+    }
   },
   methods: {
     ...mapActions({
@@ -99,7 +105,15 @@ export default {
     DeleteDialog
   },
   mounted() {
-    this.fetchWorks();
+    const data = {
+      first: 100,
+      page: 1
+    };
+    const requestSource = {
+      data,
+      requestSource: "dashboard"
+    };
+    this.fetchWorks(requestSource);
   }
 };
 </script>

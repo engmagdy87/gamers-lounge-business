@@ -1,6 +1,9 @@
-const WORKS = () => `
+const WORKS = ({ first, page }) => `
 query {
-    works(first: 20) {
+    works(first: ${first}, page: ${page}) {
+       paginatorInfo{                            
+          hasMorePages
+       }
        data {
           id
           title
@@ -9,10 +12,6 @@ query {
           img_card{
             id
             url
-          }
-          img_cover{
-             id
-             url
           }
        }
     }

@@ -1,6 +1,6 @@
-const WORK = (id) => `
+const WORK = ({ workId, first, page }) => `
 query {
-   work(id: ${id}) {
+   work(id: ${workId}) {
      id
      title
      description
@@ -9,7 +9,10 @@ query {
       id
       url
      }
-     sections(first: 5, orderBy: { field: "order", order: ASC }) {
+     sections(first: ${first}, page: ${page}, orderBy: { field: "order", order: ASC }) {
+       paginatorInfo{                            
+         hasMorePages            
+       } 
        data {
          id
          order

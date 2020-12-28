@@ -286,11 +286,11 @@ const isUserAuthenticated = async () => {
 }
 
 //*************** */
-const fetchWorks = async () => {
+const fetchWorks = async (data) => {
   const token = getTokenCookie()
   try {
     const response = await request({
-      query: QUERY.WORKS(),
+      query: QUERY.WORKS(data),
     }, token);
     return response.data.data.works
   } catch (error) {
@@ -298,10 +298,10 @@ const fetchWorks = async () => {
   }
 }
 
-const fetchWebsiteWork = async (id) => {
+const fetchWebsiteWork = async (data) => {
   try {
     const response = await request({
-      query: QUERY.WORK_WEBSITE(id),
+      query: QUERY.WORK_WEBSITE(data),
     });
     return response.data.data.work
   } catch (error) {
