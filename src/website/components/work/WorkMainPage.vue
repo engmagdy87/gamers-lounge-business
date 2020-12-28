@@ -52,19 +52,20 @@ export default {
     reformatURL(id) {
       return reformatStringToBeInURL(id);
     },
-    generateWorkPayload() {
+    generateWorkPayload(loadMoreFlag) {
       const data = {
         first: this.queriedWorksCounts,
         page: this.worksPage
       };
       const requestSource = {
         data,
-        requestSource: "website"
+        requestSource: "website",
+        loadMoreFlag
       };
       return requestSource;
     },
     loadMoreWorks: async function() {
-      const payload = this.generateWorkPayload();
+      const payload = this.generateWorkPayload("more");
       if (this.ourWorks.paginatorInfo.hasMorePages) {
         await this.fetchWork(payload);
         this.worksPage++;

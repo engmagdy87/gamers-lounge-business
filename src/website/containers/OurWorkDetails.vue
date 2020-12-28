@@ -69,7 +69,7 @@ export default {
     ...mapActions({
       fetchWork: types.works.actions.FETCH_WEBSITE_WORK
     }),
-    generateWorkPayload() {
+    generateWorkPayload(loadMoreFlag) {
       const data = {
         workId: getEntityId(this.$route.params.workName),
         first: this.queriedWorksCounts,
@@ -77,12 +77,13 @@ export default {
       };
       const requestSource = {
         data,
-        requestSource: "website"
+        requestSource: "website",
+        loadMoreFlag
       };
       return requestSource;
     },
     loadMoreWorks: async function() {
-      const payload = this.generateWorkPayload();
+      const payload = this.generateWorkPayload("more");
       if (this.websiteWork.sections.paginatorInfo.hasMorePages) {
         await this.fetchWork(payload);
         this.worksPage++;

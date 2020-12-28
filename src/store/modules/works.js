@@ -82,8 +82,9 @@ const mutations = {
 }
 
 const fetchWorksData = async ({ commit }, payload) => {
-    const { data, requestSource } = payload;
-    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    const { data, requestSource, loadMoreFlag } = payload;
+    if (!loadMoreFlag)
+        commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
         const response = await APIs.fetchWorks(data)
         commit(types.works.mutations.SET_WORKS, response)
@@ -100,8 +101,9 @@ const fetchWorksData = async ({ commit }, payload) => {
 };
 
 const fetchWebsiteWorkData = async ({ commit }, payload) => {
-    const { data, requestSource } = payload;
-    commit(types.app.mutations.SET_SPINNER_FLAG, true)
+    const { data, requestSource, loadMoreFlag } = payload;
+    if (!loadMoreFlag)
+        commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
         const response = await APIs.fetchWebsiteWork(data)
         commit(types.works.mutations.SET_WEBSITE_WORK, response)
