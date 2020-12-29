@@ -18,13 +18,7 @@ const state = {
 
 const mutations = {
     [types.works.mutations.SET_WORKS]: (currentState, works) => {
-        const { data, paginatorInfo } = works
-        const oldSections = currentState.works.data || []
-
-        currentState.works = {
-            paginatorInfo,
-            data: [...oldSections, ...data]
-        }
+        currentState.works = works
     },
     [types.works.mutations.SET_IS_WORKS_FETCHED]: (currentState, flag) => {
         currentState.isWorksFetched = flag;

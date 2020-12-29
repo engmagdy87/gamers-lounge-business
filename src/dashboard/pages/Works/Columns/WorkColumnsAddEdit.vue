@@ -30,9 +30,33 @@
         100%</strong
       >
     </div>
+    <div class="alert alert-dark w-100 m-0 p-0 d-flex" role="alert">
+      <div
+        class="alert alert-info m-0"
+        :style="`width:${calculateTotalWidth()}%`"
+        role="alert"
+        v-if="calculateTotalWidth() > 0"
+      >
+        Used Width:
+        <strong
+          ><h2>{{ calculateTotalWidth() }}%</h2></strong
+        >
+      </div>
+      <div
+        class="alert alert-dark m-0 text-dark"
+        :style="`width:${100 - calculateTotalWidth()}%`"
+        role="alert"
+        v-if="100 - calculateTotalWidth() > 0"
+      >
+        Remain Width:
+        <strong
+          ><h2>{{ 100 - calculateTotalWidth() }}%</h2></strong
+        >
+      </div>
+    </div>
     <h4 slot="header" class="card-name">{{ operation }}</h4>
     <form>
-      <div class="row d-flex">
+      <div class="row d-flex m-0">
         <div
           :class="[
             'column',
@@ -40,10 +64,11 @@
           ]"
           v-for="(col, i) in workRowData.columns"
           :key="i"
-          :style="`width:${col.ratio - 2}%`"
+          :style="`width:${col.ratio}%`"
         >
-          <p>{{ col.type }}</p>
           <p>{{ col.ratio }}%</p>
+          <p v-if="col.fillable">{{ col.type }}</p>
+          <p v-else></p>
         </div>
       </div>
       <div class="row">
@@ -375,7 +400,10 @@ export default {
       deleteVideo: types.app.actions.DELETE_VIDEO
     }),
     updateVideoData: async function() {
-      if (this.operation === "Edit Work Column") {
+      if (
+        this.operation === "Edit Work Column" &&
+        this.workColumn.type === WORK_COLUMNS_CONTENT_TYPES.VIDEO
+      ) {
         const payload = {
           videoId: this.workColumn.vid_content[0].id,
           isAutoPlay: this.workColumn.isAutoPlay
@@ -495,7 +523,7 @@ export default {
             columnId: this.editData.id,
             rowId
           });
-          this.notifyVue("Service Section Updated Successfully", "success");
+          this.notifyVue("Service Column Updated Successfully", "success");
           this.workColumn = { ...emptyColumnSection };
           this.$router.push(`/dashboard/works/columns/list/${id}`);
         } else {
@@ -507,7 +535,7 @@ export default {
           const fetchPayload = { workRowId: rowId, requestSource: "dashboard" };
           await this.fetchColumnsRows(fetchPayload);
           this.workColumn = { ...emptyColumnSection };
-          this.notifyVue("Service Section Created Successfully", "success");
+          this.notifyVue("Service Column Created Successfully", "success");
         }
       } catch (errors) {
         JSON.parse(errors).forEach(error => {
@@ -569,7 +597,9 @@ export default {
       this.workColumn.type = this.editData.type;
       this.workColumn.ratio = this.editData.ratio;
       this.workColumn.fillable = this.editData.fillable;
-      this.workColumn.isAutoPlay = this.editData.vid_content[0].is_auto_play;
+      this.workColumn.isAutoPlay = this.editData.vid_content[0]
+        ? this.editData.vid_content[0].is_auto_play
+        : false;
       this.workColumn.img_content = this.editData.img_content;
       this.workColumn.vid_content = this.editData.vid_content;
       if (this.editData.type === WORK_COLUMNS_CONTENT_TYPES.TITLE)
@@ -604,7 +634,7 @@ export default {
 .column {
   height: 150px;
   text-align: center;
-  margin: 1%;
+  border: 1px gray solid;
   &--not-full {
     background: lightgray;
     color: black;

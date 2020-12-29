@@ -87,7 +87,7 @@
               v-if="
                 editData !== undefined &&
                   operation === 'Edit Work' &&
-                  editData.img_card !== null
+                  editData.img_card !== ''
               "
               :image="editData.img_card"
               :setShowDeleteDialogFlag="setImageDataFlag"
@@ -115,7 +115,7 @@
               v-if="
                 editData !== undefined &&
                   operation === 'Edit Work' &&
-                  editData.img_cover !== null
+                  editData.img_cover !== ''
               "
               :image="editData.img_cover"
               :setShowDeleteDialogFlag="setImageDataFlag"
@@ -271,11 +271,13 @@ export default {
 
       switch (this.openedFor) {
         case "img_card":
-          this.work.img_card = null;
+          this.editData.img_card = "";
+          this.work.img_card = "";
           break;
 
         case "img_cover":
-          this.work.img_cover = null;
+          this.editData.img_cover = "";
+          this.work.img_cover = "";
           break;
 
         default:
@@ -332,8 +334,8 @@ export default {
       this.work.statistics = JSON.parse(
         reverseReformatHTMLString(this.editData.statistics)
       );
-      this.work.img_card = this.editData.img_card;
-      this.work.img_cover = this.editData.img_cover;
+      this.work.img_card = this.editData.img_card || "";
+      this.work.img_cover = this.editData.img_cover || "";
     }
   },
   components: {

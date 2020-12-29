@@ -2,6 +2,7 @@ import axios from 'axios';
 import { QUERY, MUTATION } from '../graphql';
 import { getTokenCookie } from './CookieHelper';
 import BASE_URL from '../constants/APIs';
+import { removeTokenCookie } from '../helpers/CookieHelper';
 
 const fetchDepartments = async () => {
   try {
@@ -567,6 +568,11 @@ export {
   updateVideo
 }
 
+const logout = () => {
+  removeTokenCookie();
+  window.open('/login', '_self')
+}
+
 const request = async (data, token) => {
   let response;
   if (!token)
@@ -581,8 +587,10 @@ const request = async (data, token) => {
     }
   });
 
-  if (response.data.errors)
-    throw JSON.stringify(response.data.errors)
+  if (response.data.errors) {
+    if (response.data.errors[0].debugMessage && response.data.errors[0].debugMessage.includes("Unauthenticated")) logout();
+    else throw JSON.stringify(response.data.errors)
+  }
 
   return response;
 }
@@ -597,8 +605,10 @@ const requestMultipart = async (data, token) => {
     }
   });
 
-  if (response.data.errors)
-    throw JSON.stringify(response.data.errors)
+  if (response.data.errors) {
+    if (response.data.errors[0].debugMessage && response.data.errors[0].debugMessage.includes("Unauthenticated")) logout();
+    else throw JSON.stringify(response.data.errors)
+  }
 
   return response;
 }

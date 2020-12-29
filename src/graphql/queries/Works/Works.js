@@ -13,6 +13,10 @@ query {
             id
             url
           }
+          img_cover{
+            id
+            url
+          }
        }
     }
  }
