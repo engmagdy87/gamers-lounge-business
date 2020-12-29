@@ -18,10 +18,10 @@ query {
          order
          type
          enabled
-         rows {
+         rows(orderBy: { field: "order", order: ASC }) {
            id
            order
-           columns {
+           columns(orderBy: { field: "order", order: ASC }) {
              id
              order
              type

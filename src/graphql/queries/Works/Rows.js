@@ -3,7 +3,7 @@ query {
     section(id: ${id}) {
        id
        order
-       rows {
+       rows(orderBy: { field: "order", order: ASC }) {
          id
          order
       }

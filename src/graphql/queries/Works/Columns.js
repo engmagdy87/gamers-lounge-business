@@ -3,7 +3,7 @@ query {
     row(id: ${id}) {
        id
        order
-       columns {
+       columns(orderBy: { field: "order", order: ASC }) {
           id
           order
           type
