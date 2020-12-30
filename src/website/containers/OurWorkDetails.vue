@@ -25,9 +25,9 @@
       </div>
     </div>
 
-    <WorkDetails :websiteWork="websiteWork" />
-    <Intersect @enter="loadMoreWorks"
-      ><div style="width:100%,height: 1px;"></div>
+    <WorkDetails :websiteWork="websiteWork" v-if="websiteWork.sections" />
+    <Intersect @enter="loadMoreWorks" v-if="worksPage > 1"
+      ><div style="width:100%;height: 1px;"></div>
     </Intersect>
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       queriedWorksCounts: 2,
-      worksPage: 1
+      worksPage: 0
     };
   },
   components: {
@@ -69,21 +69,33 @@ export default {
     ...mapActions({
       fetchWork: types.works.actions.FETCH_WEBSITE_WORK
     }),
-    generateWorkPayload(loadMoreFlag) {
-      const data = {
-        workId: getEntityId(this.$route.params.workName),
-        first: this.queriedWorksCounts,
-        page: this.worksPage
+    fetchHeroAndFirstSection: async function() {
+      let payload = this.generateWorkPayload(true, true);
+      await this.fetchWork(payload);
+      this.worksPage++;
+      payload = this.generateWorkPayload(false, false);
+      await this.fetchWork(payload);
+      this.worksPage++;
+    },
+    generateWorkPayload(showSpinner, firstFetch) {
+      let data = {
+        workId: getEntityId(this.$route.params.workName)
       };
+      if (!firstFetch)
+        data = {
+          ...data,
+          first: this.queriedWorksCounts,
+          page: this.worksPage
+        };
       const requestSource = {
         data,
-        requestSource: "website",
-        loadMoreFlag
+        showSpinner,
+        requestSource: "website"
       };
       return requestSource;
     },
     loadMoreWorks: async function() {
-      const payload = this.generateWorkPayload("more");
+      const payload = this.generateWorkPayload(false, false);
       if (this.websiteWork.sections.paginatorInfo.hasMorePages) {
         await this.fetchWork(payload);
         this.worksPage++;
@@ -91,9 +103,7 @@ export default {
     }
   },
   mounted() {
-    const payload = this.generateWorkPayload();
-    this.fetchWork(payload);
-    this.worksPage++;
+    this.fetchHeroAndFirstSection();
   }
 };
 </script>

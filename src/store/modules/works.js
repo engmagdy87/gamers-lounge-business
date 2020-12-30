@@ -25,12 +25,16 @@ const mutations = {
     },
     [types.works.mutations.SET_WEBSITE_WORK]: (currentState, websiteWork) => {
         const { sections, ...workData } = websiteWork
-        const { data, paginatorInfo } = sections
-        const oldSections = Object.keys(currentState.websiteWork).length === 0 ? [] : currentState.websiteWork.sections.data
-        currentState.websiteWork = {
-            ...workData, sections: {
-                paginatorInfo,
-                data: [...oldSections, ...data]
+        if (!sections)
+            currentState.websiteWork = { ...workData, sections: { data: [] } }
+        else {
+            const { data, paginatorInfo } = sections
+            const oldSections = currentState.websiteWork.sections.data
+            currentState.websiteWork = {
+                ...currentState.websiteWork, sections: {
+                    paginatorInfo,
+                    data: [...oldSections, ...data]
+                }
             }
         }
     },
@@ -76,8 +80,8 @@ const mutations = {
 }
 
 const fetchWorksData = async ({ commit }, payload) => {
-    const { data, requestSource, loadMoreFlag } = payload;
-    if (!loadMoreFlag)
+    const { data, requestSource, showSpinner } = payload;
+    if (showSpinner)
         commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
         const response = await APIs.fetchWorks(data)
@@ -95,8 +99,8 @@ const fetchWorksData = async ({ commit }, payload) => {
 };
 
 const fetchWebsiteWorkData = async ({ commit }, payload) => {
-    const { data, requestSource, loadMoreFlag } = payload;
-    if (!loadMoreFlag)
+    const { data, requestSource, showSpinner } = payload;
+    if (showSpinner)
         commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
         const response = await APIs.fetchWebsiteWork(data)
