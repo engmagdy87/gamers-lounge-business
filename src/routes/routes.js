@@ -52,7 +52,8 @@ import { getTokenCookie } from '../helpers/CookieHelper'
 import { isUserAuthenticated } from '../helpers/APIsHelper'
 
 const showHeaderAndFooterForWebsite = (next, flag = true) => {
-  store.commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, flag);
+  store.commit(types.app.mutations.SET_SHOW_HEADER_FLAG, flag);
+  store.commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, flag);
   next();
 }
 const getUserAuthenticatedFlag = async () => {
@@ -122,7 +123,7 @@ const routes = [
     name: 'works',
     component: OurWorks,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next)
+      showHeaderAndFooterForWebsite(next, false)
     }
   },
   {
@@ -130,7 +131,7 @@ const routes = [
     name: 'work',
     component: OurWorkDetails,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next)
+      showHeaderAndFooterForWebsite(next, false)
     }
   },
   {
@@ -138,7 +139,8 @@ const routes = [
     name: 'login',
     component: Login,
     beforeEnter: async (to, from, next) => {
-      store.commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+      store.commit(types.app.mutations.SET_SHOW_HEADER_FLAG, false);
+      store.commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, false);
       const token = getTokenCookie()
       const isUserAuthenticatedFlag = await getUserAuthenticatedFlag()
       if (token && isUserAuthenticatedFlag) next('/dashboard');
@@ -150,10 +152,11 @@ const routes = [
     component: DashboardLayout,
     redirect: '/dashboard/overview',
     beforeEnter: async (to, from, next) => {
-      store.commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+      store.commit(types.app.mutations.SET_SHOW_HEADER_FLAG, false);
+      store.commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, false);
       const token = getTokenCookie()
       const isUserAuthenticatedFlag = await getUserAuthenticatedFlag()
-      if (!token && !isUserAuthenticatedFlag) next('/login');
+      if (!token || !isUserAuthenticatedFlag) next('/login');
       else next();
     },
     children: [

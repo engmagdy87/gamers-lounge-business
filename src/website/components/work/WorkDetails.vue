@@ -4,6 +4,7 @@
       class="work-details-sections__section"
       v-for="section in websiteWork.sections.data"
       :key="section.id"
+      v-if="section.enabled"
     >
       <DetailsNormalSection
         v-if="section.type === WORK_SECTIONS_TYPES.NORMAL"

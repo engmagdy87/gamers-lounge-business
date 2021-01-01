@@ -28,6 +28,11 @@ const mutations = {
     },
 }
 
+const showHeaderAndFooter = (commit, flag) => {
+    commit(types.app.mutations.SET_SHOW_HEADER_FLAG, flag)
+    commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, flag)
+}
+
 const fetchJobsData = async ({ commit }, requestSource) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
@@ -35,8 +40,8 @@ const fetchJobsData = async ({ commit }, requestSource) => {
         commit(types.jobs.mutations.SET_JOBS, response.data)
         commit(types.jobs.mutations.SET_IS_JOBS_FETCHED, true)
         if (requestSource === 'website')
-            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
-        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+            showHeaderAndFooter(commit, true);
+        else showHeaderAndFooter(commit, false);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -51,11 +56,11 @@ const fetchJobData = async ({ commit }, { jobId, requestSource }) => {
         let response;
         if (requestSource === 'website') {
             response = await APIs.fetchJob(jobId)
-            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
+            showHeaderAndFooter(commit, true);
         }
         else {
             response = await APIs.fetchDashboardJob(jobId)
-            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+            showHeaderAndFooter(commit, false);
         }
         commit(types.jobs.mutations.SET_JOB, response)
         commit(types.jobs.mutations.SET_IS_JOB_FETCHED, true)

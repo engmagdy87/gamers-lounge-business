@@ -33,7 +33,7 @@ const getEntityName = (text) => {
 }
 
 const reformatHTMLString = (text) => {
-    return text.replace(/"/g, "'")
+    return text.replace(/"/g, "\'")
 }
 
 const reverseReformatHTMLString = (text) => {

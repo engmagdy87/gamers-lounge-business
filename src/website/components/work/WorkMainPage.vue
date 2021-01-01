@@ -12,7 +12,7 @@
           <p>{{ work.title }}</p>
 
           <div class="work-page-wrapper__text">
-            <h2 v-html="work.description"></h2>
+            <h2 v-html="work.short_description"></h2>
           </div>
         </div>
       </router-link>
@@ -32,8 +32,7 @@ import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 export default {
   data() {
     return {
-      queriedWorksCounts: 8,
-      worksPage: 1
+      queriedWorksCounts: 8
     };
   },
   components: {
@@ -49,35 +48,42 @@ export default {
     ...mapActions({
       fetchWorks: types.works.actions.FETCH_WORKS
     }),
+    ...mapMutations({
+      setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
+    }),
     reformatURL(id) {
       return reformatStringToBeInURL(id);
     },
-    generateWorkPayload(loadMoreFlag) {
+    generateWorkPayload(showSpinner) {
       const data = {
         first: this.queriedWorksCounts,
-        page: this.worksPage
+        page:
+          Object.keys(this.ourWorks).length > 0
+            ? this.ourWorks.paginatorInfo.currentPage + 1
+            : 1
       };
       const requestSource = {
         data,
         requestSource: "website",
-        loadMoreFlag
+        showSpinner
       };
       return requestSource;
     },
     loadMoreWorks: async function() {
-      const payload = this.generateWorkPayload("more");
-      if (this.ourWorks.paginatorInfo.hasMorePages) {
-        await this.fetchWork(payload);
-        this.worksPage++;
-      }
+      const payload = this.generateWorkPayload(false);
+      if (this.ourWorks.paginatorInfo.hasMorePages)
+        await this.fetchWorks(payload);
     }
   },
   mounted() {
+    this.setShowFooterFlag(false);
     if (!this.isWorksFetched) {
-      const payload = this.generateWorkPayload();
+      const payload = this.generateWorkPayload(true);
       this.fetchWorks(payload);
-      this.worksPage++;
     }
+  },
+  updated() {
+    if (!this.ourWorks.paginatorInfo.hasMorePages) this.setShowFooterFlag(true);
   }
 };
 </script>

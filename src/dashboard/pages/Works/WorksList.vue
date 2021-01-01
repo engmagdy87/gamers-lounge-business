@@ -48,6 +48,7 @@ export default {
         columns: [
           "Id",
           "Title",
+          "Short Description",
           "Description",
           "Statistics",
           "Card Image",
@@ -111,7 +112,8 @@ export default {
     };
     const requestSource = {
       data,
-      requestSource: "dashboard"
+      requestSource: "dashboard",
+      showSpinner: true
     };
     this.fetchWorks(requestSource);
   }

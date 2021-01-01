@@ -29,6 +29,11 @@ const mutations = {
     },
 }
 
+const showHeaderAndFooter = (commit, flag) => {
+    commit(types.app.mutations.SET_SHOW_HEADER_FLAG, flag)
+    commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, flag)
+}
+
 const fetchServicesData = async ({ commit }, requestSource) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
@@ -36,8 +41,8 @@ const fetchServicesData = async ({ commit }, requestSource) => {
         commit(types.services.mutations.SET_SERVICES, response.data)
         commit(types.services.mutations.SET_IS_SERVICES_FETCHED, true)
         if (requestSource === 'website')
-            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
-        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+            showHeaderAndFooter(commit, true);
+        else showHeaderAndFooter(commit, false);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -54,8 +59,8 @@ const fetchServiceSectionData = async ({ commit }, payload) => {
         commit(types.services.mutations.SET_SERVICE_SECTIONS, response)
         commit(types.services.mutations.SET_IS_SERVICE_SECTIONS_FETCHED, true)
         if (requestSource === 'website')
-            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
-        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+            showHeaderAndFooter(commit, true);
+        else showHeaderAndFooter(commit, false);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)

@@ -17,8 +17,16 @@ const state = {
 }
 
 const mutations = {
-    [types.works.mutations.SET_WORKS]: (currentState, works) => {
-        currentState.works = works
+    [types.works.mutations.SET_WORKS]: (currentState, { works, requestSource }) => {
+        if (requestSource !== 'website') currentState.works = works
+        else {
+            const { data, paginatorInfo } = works
+            const oldData = currentState.works.data || []
+            currentState.works = {
+                ...currentState.works, paginatorInfo,
+                data: [...oldData, ...data]
+            }
+        }
     },
     [types.works.mutations.SET_IS_WORKS_FETCHED]: (currentState, flag) => {
         currentState.isWorksFetched = flag;
@@ -79,17 +87,22 @@ const mutations = {
     },
 }
 
+const showHeaderAndFooter = (commit, flag) => {
+    commit(types.app.mutations.SET_SHOW_HEADER_FLAG, flag)
+    commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, flag)
+}
+
 const fetchWorksData = async ({ commit }, payload) => {
     const { data, requestSource, showSpinner } = payload;
     if (showSpinner)
         commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
         const response = await APIs.fetchWorks(data)
-        commit(types.works.mutations.SET_WORKS, response)
+        commit(types.works.mutations.SET_WORKS, { works: response, requestSource })
         commit(types.works.mutations.SET_IS_WORKS_FETCHED, true)
         if (requestSource === 'website')
-            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
-        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+            commit(types.app.mutations.SET_SHOW_HEADER_FLAG, true)
+        else showHeaderAndFooter(commit, false);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -107,8 +120,8 @@ const fetchWebsiteWorkData = async ({ commit }, payload) => {
         commit(types.works.mutations.SET_WEBSITE_WORK, response)
         commit(types.works.mutations.SET_IS_WEBSITE_WORK_FETCHED, true)
         if (requestSource === 'website')
-            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
-        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+            commit(types.app.mutations.SET_SHOW_HEADER_FLAG, true)
+        else showHeaderAndFooter(commit, false);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -125,8 +138,8 @@ const fetchWorkSectionsData = async ({ commit }, payload) => {
         commit(types.works.mutations.SET_WORK_SECTIONS, response)
         commit(types.works.mutations.SET_IS_WORK_SECTIONS_FETCHED, true)
         if (requestSource === 'website')
-            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
-        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+            showHeaderAndFooter(commit, true);
+        else showHeaderAndFooter(commit, false);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -143,8 +156,8 @@ const fetchWorkSectionData = async ({ commit }, payload) => {
         commit(types.works.mutations.SET_WORK_SECTION, response)
         commit(types.works.mutations.SET_IS_WORK_SECTION_FETCHED, true)
         if (requestSource === 'website')
-            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
-        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+            showHeaderAndFooter(commit, true);
+        else showHeaderAndFooter(commit, false);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -161,8 +174,8 @@ const fetchWorkRowData = async ({ commit }, payload) => {
         commit(types.works.mutations.SET_WORK_ROWS, response)
         commit(types.works.mutations.SET_IS_WORK_ROWS_FETCHED, true)
         if (requestSource === 'website')
-            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
-        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+            showHeaderAndFooter(commit, true);
+        else showHeaderAndFooter(commit, false);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -212,8 +225,8 @@ const fetchWorkColumnsData = async ({ commit }, payload) => {
         commit(types.works.mutations.SET_WORK_COLUMNS, response)
         commit(types.works.mutations.SET_IS_WORK_COLUMNS_FETCHED, true)
         if (requestSource === 'website')
-            commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, true);
-        else commit(types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG, false);
+            showHeaderAndFooter(commit, true);
+        else showHeaderAndFooter(commit, false);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)

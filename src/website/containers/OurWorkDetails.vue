@@ -69,6 +69,9 @@ export default {
     ...mapActions({
       fetchWork: types.works.actions.FETCH_WEBSITE_WORK
     }),
+    ...mapMutations({
+      setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
+    }),
     fetchHeroAndFirstSection: async function() {
       let payload = this.generateWorkPayload(true, true);
       await this.fetchWork(payload);
@@ -103,7 +106,15 @@ export default {
     }
   },
   mounted() {
+    this.setShowFooterFlag(false);
     this.fetchHeroAndFirstSection();
+  },
+  updated() {
+    if (
+      this.websiteWork.sections.paginatorInfo &&
+      !this.websiteWork.sections.paginatorInfo.hasMorePages
+    )
+      this.setShowFooterFlag(true);
   }
 };
 </script>

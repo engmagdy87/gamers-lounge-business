@@ -3,10 +3,13 @@ query {
     works(first: ${first}, page: ${page}) {
        paginatorInfo{                            
           hasMorePages
+          currentPage    
+          total      
        }
        data {
           id
           title
+          short_description
           description
           statistics
           img_card{

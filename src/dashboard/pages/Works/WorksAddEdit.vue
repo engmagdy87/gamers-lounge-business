@@ -29,6 +29,22 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
+            <label
+              >Short Description<span class="error-message"> *</span></label
+            >
+            <vue-pell-editor
+              :actions="editorOptions"
+              :style-with-css="false"
+              placeholder=""
+              v-model="work.short_description"
+            />
+            <ErrorMessage :fieldErrors="errors.short_description" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
             <label>Description<span class="error-message"> *</span></label>
             <vue-pell-editor
               :actions="editorOptions"
@@ -163,6 +179,7 @@ import {
 
 const emptyWork = {
   title: "",
+  short_description: "",
   description: "",
   statistics: [],
   img_card: "",
@@ -184,6 +201,7 @@ export default {
       errors: {},
       validation: {
         title: { isRequired: true },
+        "short description": { isRequired: true },
         description: { isRequired: true },
         statistics: { isRequired: true },
         "card image": { isRequired: true },
@@ -191,6 +209,7 @@ export default {
       },
       aliases: {
         title: "title",
+        short_description: "short description",
         description: "description",
         statistics: "statistics",
         img_card: "card image",
@@ -229,6 +248,7 @@ export default {
       try {
         let payload = {
           title: this.work.title,
+          shortDescription: reformatHTMLString(this.work.short_description),
           description: reformatHTMLString(this.work.description),
           statistics: reformatHTMLString(JSON.stringify(this.work.statistics))
         };
@@ -330,6 +350,7 @@ export default {
   mounted() {
     if (this.$route.name === "Edit Work") {
       this.work.title = this.editData.title;
+      this.work.short_description = this.editData.short_description;
       this.work.description = this.editData.description;
       this.work.statistics = JSON.parse(
         reverseReformatHTMLString(this.editData.statistics)

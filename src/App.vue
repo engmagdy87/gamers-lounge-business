@@ -1,14 +1,10 @@
 <template>
   <div :class="['app-wrapper', { 'nav-open': $sidebar.showSidebar }]">
-    <Header
-      id="top"
-      :activeItem="headerActiveItem"
-      v-if="showHeaderAndFooter"
-    />
+    <Header id="top" :activeItem="headerActiveItem" v-if="showHeader" />
     <notifications></notifications>
     <router-view></router-view>
     <Spinner :smallLoader="false" />
-    <Footer v-if="showHeaderAndFooter" />
+    <Footer v-if="showFooter" />
   </div>
 </template>
 
@@ -29,7 +25,8 @@ export default {
   },
   computed: {
     ...mapState({
-      showHeaderAndFooter: state => state.app.showHeaderAndFooter
+      showHeader: state => state.app.showHeader,
+      showFooter: state => state.app.showFooter
     })
   },
   components: {

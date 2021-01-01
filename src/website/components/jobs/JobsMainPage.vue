@@ -50,8 +50,8 @@ export default {
       fetchJobs: types.jobs.actions.FETCH_JOBS
     }),
     ...mapMutations({
-      setShowHeaderAndFooterFlag:
-        types.app.mutations.SET_SHOW_HEADER_AND_FOOTER_FLAG
+      setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG,
+      setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
     }),
     reformatURL(id) {
       return reformatStringToBeInURL(id);
@@ -62,7 +62,10 @@ export default {
   },
   mounted() {
     if (!this.isJobsFetched) this.fetchJobs("website");
-    else this.setShowHeaderAndFooterFlag(true);
+    else {
+      this.setShowHeaderFlag(true);
+      this.setShowFooterFlag(true);
+    }
   }
 };
 </script>

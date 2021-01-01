@@ -3,6 +3,7 @@ query {
    work(id: ${workId}) {
      id
      title
+     short_description
      description
      statistics
      img_cover{

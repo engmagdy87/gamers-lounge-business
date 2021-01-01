@@ -3,6 +3,9 @@
     <th scope="row">{{ id }}</th>
     <td>{{ rowData.title }}</td>
     <td>
+      <div class="description" v-html="rowData.short_description"></div>
+    </td>
+    <td>
       <div class="description" v-html="rowData.description"></div>
     </td>
     <td>

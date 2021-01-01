@@ -1,7 +1,8 @@
 const app = {
     mutations: {
         SET_SPINNER_FLAG: 'app/mutations/SET_SPINNER_FLAG',
-        SET_SHOW_HEADER_AND_FOOTER_FLAG: 'app/mutations/SET_SHOW_HEADER_AND_FOOTER_FLAG',
+        SET_SHOW_HEADER_FLAG: 'app/mutations/SET_SHOW_HEADER_FLAG',
+        SET_SHOW_FOOTER_FLAG: 'app/mutations/SET_SHOW_FOOTER_FLAG',
     },
     actions: {
         DELETE_IMAGE: 'app/actions/DELETE_IMAGE',
