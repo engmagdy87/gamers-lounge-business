@@ -48,6 +48,7 @@ export default {
         columns: [
           "Id",
           "Title",
+          "Order",
           "Short Description",
           "Description",
           "Statistics",

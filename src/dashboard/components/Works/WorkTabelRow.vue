@@ -2,6 +2,7 @@
   <tr>
     <th scope="row">{{ id }}</th>
     <td>{{ rowData.title }}</td>
+    <td>{{ rowData.order }}</td>
     <td>
       <div class="description" v-html="rowData.short_description"></div>
     </td>

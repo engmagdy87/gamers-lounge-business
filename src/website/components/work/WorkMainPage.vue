@@ -1,24 +1,28 @@
 <template>
-  <div class="work-page-wrapper row" v-if="isWorksFetched">
-    <div
-      v-for="work in ourWorks.data"
-      :key="work.id"
-      class="work-page-wrapper__content-wrapper col-xs-12 col-sm-12 col-md-6 col-lg-4"
-    >
-      <router-link :to="`/work/${work.id}-${reformatURL(work.title)}`">
-        <div class="work-page-wrapper__content col-12 p-0 mt-3 mb-3">
-          <img :src="work.img_card.url" draggable="false" />
+  <div>
+    <div class="work-page-wrapper row" v-if="isWorksFetched">
+      <div
+        v-for="work in ourWorks.data"
+        :key="work.id"
+        class="work-page-wrapper__content-wrapper col-xs-12 col-sm-12 col-md-6 col-lg-4"
+      >
+        <router-link :to="`/work/${work.id}-${reformatURL(work.title)}`">
+          <div class="work-page-wrapper__content col-12 p-0 mt-3 mb-3">
+            <img :src="work.img_card.url" draggable="false" />
 
-          <p>{{ work.title }}</p>
+            <p>{{ work.title }}</p>
 
-          <div class="work-page-wrapper__text">
-            <h2 v-html="work.short_description"></h2>
+            <div class="work-page-wrapper__text">
+              <h2 v-html="work.short_description"></h2>
+            </div>
           </div>
-        </div>
-      </router-link>
+        </router-link>
+      </div>
     </div>
     <Intersect @enter="loadMoreWorks"
-      ><div style="width:100%,height: 1px;"></div>
+      ><div class="threshold">
+        <Loading :showLoading="showLoading" />
+      </div>
     </Intersect>
   </div>
 </template>
@@ -26,17 +30,20 @@
 <script>
 import { mapActions, mapState, mapMutations } from "vuex";
 import Intersect from "vue-intersect";
+import Loading from "../../../website/shared/Loading";
 import types from "../../../store/types";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 
 export default {
   data() {
     return {
-      queriedWorksCounts: 8
+      queriedWorksCounts: 8,
+      showLoading: false
     };
   },
   components: {
-    Intersect
+    Intersect,
+    Loading
   },
   computed: {
     ...mapState({
@@ -71,8 +78,14 @@ export default {
     },
     loadMoreWorks: async function() {
       const payload = this.generateWorkPayload(false);
-      if (this.ourWorks.paginatorInfo.hasMorePages)
-        await this.fetchWorks(payload);
+
+      if (Object.keys(this.ourWorks).length > 0) {
+        if (this.ourWorks.paginatorInfo.hasMorePages) {
+          this.showLoading = true;
+          await this.fetchWorks(payload);
+          this.showLoading = false;
+        }
+      }
     }
   },
   mounted() {
@@ -83,7 +96,11 @@ export default {
     }
   },
   updated() {
-    if (!this.ourWorks.paginatorInfo.hasMorePages) this.setShowFooterFlag(true);
+    if (Object.keys(this.ourWorks).length > 0) {
+      if (!this.ourWorks.paginatorInfo.hasMorePages) {
+        this.setShowFooterFlag(true);
+      }
+    }
   }
 };
 </script>

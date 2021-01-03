@@ -74,7 +74,7 @@ const mutations = {
         currentState.isWorkRowFetched = flag;
     },
     [types.works.mutations.REMOVE_DELETED_WORK]: (currentState, index) => {
-        currentState.works.splice(index, 1);
+        currentState.works.data.splice(index, 1);
     },
     [types.works.mutations.REMOVE_DELETED_WORK_SECTION]: (currentState, index) => {
         currentState.workSections.sections.data.splice(index, 1);

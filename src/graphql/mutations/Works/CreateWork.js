@@ -2,7 +2,8 @@ const CREATE_WORK = (
    { title,
       shortDescription,
       description,
-      statistics }
+      statistics,
+      order }
 ) => `mutation($img_card: Upload!, $img_cover: Upload!) {
     createWork(
        input: {
@@ -10,6 +11,7 @@ const CREATE_WORK = (
           short_description: "${shortDescription}"
           description: "${description}"
           statistics: "${statistics}"
+          order: ${order}
           images: {
              img_card: { upload: { file: $img_card } }
              img_cover: { upload: { file: $img_cover } }

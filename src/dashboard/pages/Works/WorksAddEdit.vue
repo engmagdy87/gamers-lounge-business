@@ -13,7 +13,7 @@
     <h4 slot="header" class="card-name">{{ operation }}</h4>
     <form>
       <div class="row">
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-6">
           <base-input
             type="text"
             label="Title"
@@ -24,6 +24,17 @@
           >
           </base-input>
           <ErrorMessage :fieldErrors="errors.title" />
+        </div>
+        <div class="col-12 col-md-6">
+          <base-input
+            type="number"
+            label="Order"
+            placeholder="Enter Order"
+            v-model="work.order"
+            :isRequired="true"
+          >
+          </base-input>
+          <ErrorMessage :fieldErrors="errors.order" />
         </div>
       </div>
       <div class="row">
@@ -179,9 +190,9 @@ import {
 
 const emptyWork = {
   title: "",
+  order: 1,
   short_description: "",
   description: "",
-  statistics: [],
   img_card: "",
   img_cover: ""
 };
@@ -192,7 +203,8 @@ export default {
       editData: this.$router.history.current.params.data,
       operation: this.$route.name,
       work: {
-        ...emptyWork
+        ...emptyWork,
+        statistics: []
       },
       openedFor: "",
       imageIndex: null,
@@ -201,6 +213,7 @@ export default {
       errors: {},
       validation: {
         title: { isRequired: true },
+        order: { isRequired: true },
         "short description": { isRequired: true },
         description: { isRequired: true },
         statistics: { isRequired: true },
@@ -209,6 +222,7 @@ export default {
       },
       aliases: {
         title: "title",
+        order: "order",
         short_description: "short description",
         description: "description",
         statistics: "statistics",
@@ -248,6 +262,7 @@ export default {
       try {
         let payload = {
           title: this.work.title,
+          order: this.work.order,
           shortDescription: reformatHTMLString(this.work.short_description),
           description: reformatHTMLString(this.work.description),
           statistics: reformatHTMLString(JSON.stringify(this.work.statistics))
@@ -278,7 +293,7 @@ export default {
           await this.createWork(payload);
           this.notifyVue("Work Created Successfully", "success");
         }
-        this.work = { ...emptyWork };
+        this.work = { ...emptyWork, statistics: [] };
         this.$router.push("/dashboard/works");
       } catch (errors) {
         JSON.parse(errors).forEach(error => {
@@ -350,8 +365,9 @@ export default {
   mounted() {
     if (this.$route.name === "Edit Work") {
       this.work.title = this.editData.title;
-      this.work.short_description = this.editData.short_description;
-      this.work.description = this.editData.description;
+      this.work.order = this.editData.order;
+      this.work.short_description = this.editData.short_description || "";
+      this.work.description = this.editData.description || "";
       this.work.statistics = JSON.parse(
         reverseReformatHTMLString(this.editData.statistics)
       );

@@ -593,7 +593,7 @@ export default {
   },
   mounted() {
     if (this.$route.name === "Edit Work Column") {
-      this.workColumn.order = this.editData.order || "-1";
+      this.workColumn.order = this.editData.order;
       this.workColumn.type = this.editData.type;
       this.workColumn.ratio = this.editData.ratio;
       this.workColumn.fillable = this.editData.fillable;

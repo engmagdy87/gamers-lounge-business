@@ -7,6 +7,7 @@ const buildQuery = (workInfo, imagesData) => {
              short_description: "${workInfo.shortDescription}"
              description: "${workInfo.description}"
              statistics: "${workInfo.statistics}"
+             order: ${workInfo.order}
           }
        ) {
           id
@@ -43,6 +44,7 @@ const buildQuery = (workInfo, imagesData) => {
           short_description: "${workInfo.shortDescription}"
           description: "${workInfo.description}"
           statistics: "${workInfo.statistics}"
+          order: ${workInfo.order}
           ${queryKeys}
        }
     ) {

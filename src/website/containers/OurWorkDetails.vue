@@ -1,33 +1,36 @@
 <template>
-  <div class="work-details-wrapper" v-if="isWebsiteWorkFetched">
-    <div class="work-details-wrapper__cover-container">
-      <img :src="websiteWork.img_cover.url" :alt="websiteWork.title" />
-      <h1 class="work-details-wrapper__cover-container__title">
-        {{ websiteWork.title }}
-      </h1>
-      <p
-        class="work-details-wrapper__cover-container__description"
-        v-html="websiteWork.description"
-      ></p>
+  <div>
+    <div class="work-details-wrapper" v-if="isWebsiteWorkFetched">
+      <div class="work-details-wrapper__cover-container">
+        <img :src="websiteWork.img_cover.url" :alt="websiteWork.title" />
+        <h1 class="work-details-wrapper__cover-container__title">
+          {{ websiteWork.title }}
+        </h1>
+        <p
+          class="work-details-wrapper__cover-container__description"
+          v-html="websiteWork.description"
+        ></p>
 
-      <div class="work-details-wrapper__cover-statistics">
-        <div v-for="statistic in statistics" :key="statistic.id">
-          <h1>
-            <countTo
-              :startVal="0"
-              :endVal="parseInt(statistic.value)"
-              separator=""
-              :duration="2000"
-            ></countTo>
-          </h1>
-          <p>{{ statistic.key }}</p>
+        <div class="work-details-wrapper__cover-statistics">
+          <div v-for="statistic in statistics" :key="statistic.id">
+            <h1>
+              <countTo
+                :startVal="0"
+                :endVal="parseInt(statistic.value)"
+                separator=""
+                :duration="2000"
+              ></countTo>
+            </h1>
+            <p>{{ statistic.key }}</p>
+          </div>
         </div>
       </div>
+      <WorkDetails :websiteWork="websiteWork" v-if="websiteWork.sections" />
     </div>
-
-    <WorkDetails :websiteWork="websiteWork" v-if="websiteWork.sections" />
     <Intersect @enter="loadMoreWorks" v-if="worksPage > 1"
-      ><div style="width:100%;height: 1px;"></div>
+      ><div class="threshold">
+        <Loading :showLoading="showLoading" />
+      </div>
     </Intersect>
   </div>
 </template>
@@ -37,6 +40,7 @@ import { mapActions, mapState, mapMutations } from "vuex";
 import countTo from "vue-count-to";
 import Intersect from "vue-intersect";
 import WorkDetails from "../components/work/WorkDetails";
+import Loading from "../../website/shared/Loading";
 import types from "../../store/types";
 import {
   getEntityId,
@@ -48,13 +52,15 @@ export default {
   data() {
     return {
       queriedWorksCounts: 2,
-      worksPage: 0
+      worksPage: 0,
+      showLoading: false
     };
   },
   components: {
     WorkDetails,
     countTo,
-    Intersect
+    Intersect,
+    Loading
   },
   computed: {
     ...mapState({
@@ -99,9 +105,14 @@ export default {
     },
     loadMoreWorks: async function() {
       const payload = this.generateWorkPayload(false, false);
-      if (this.websiteWork.sections.paginatorInfo.hasMorePages) {
-        await this.fetchWork(payload);
-        this.worksPage++;
+
+      if (Object.keys(this.websiteWork.sections).length > 0) {
+        if (this.websiteWork.sections.paginatorInfo.hasMorePages) {
+          this.showLoading = true;
+          await this.fetchWork(payload);
+          this.worksPage++;
+          this.showLoading = false;
+        }
       }
     }
   },
