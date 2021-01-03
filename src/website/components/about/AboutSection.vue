@@ -3,6 +3,7 @@
     <AboutSectionData>
         <template #content>
                 <div class="about-section-wrapper__inside--is-text col-md-6">
+                  <div>
                     <h1>Esports Tounaments</h1>
                     <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
                         nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
@@ -16,6 +17,7 @@
                         gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
                         et, consetetur sadipscing elitr, sed diam nonumy eirmod Lorem ipsum dolor sit amet, 
                         ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod</p>
+                  </div>
                 </div>
                 <div class="about-section-wrapper__inside--is-image col-md-6">
 
@@ -29,6 +31,7 @@
                 </div>
 
                 <div class="about-section-wrapper__inside--is-text col-md-6">
+                  <div>
                     <h1>Esports Tounaments</h1>
                     <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
                         nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
@@ -42,6 +45,7 @@
                         gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
                         et, consetetur sadipscing elitr, sed diam nonumy eirmod Lorem ipsum dolor sit amet, 
                         ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod</p>
+                  </div>
                 </div>
         </template>
     </AboutSectionData>

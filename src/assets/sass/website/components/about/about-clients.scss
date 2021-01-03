@@ -11,8 +11,20 @@
       text-align: center;
       color: $header-item;
       margin: 100px 0 150px 0;
+      @include is-mobile {
+        margin: 100px 0 100px 0;
+      }
+      @include is-extra-small-mobile{
+        margin: 100px 0 100px 0;
+      }
       h1{
         font-family: "Segoe UI Bold";
+        @include is-mobile {
+          font-size: 2rem;
+        }
+        @include is-extra-small-mobile{
+          font-size: 2rem;
+        }
       }
     }
 

@@ -1,17 +1,41 @@
 @import "../../color-palette.scss";
 @import "../../variables.scss";
 @import "../../mixins.scss";
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: $dark-background;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $accent;
+}
+$text-maxheight-mob:500px;
+$text-minheight-mob:500px;
+$text-minheight-pc:706px;
 
 .about-section-wrapper{
   &__inside{
       
       &--is-text{
+        div{
+          max-height: $text-maxheight-mob - 80;
+          overflow: hidden;
+          overflow-y: auto;
+        }
           padding: 35px;
           background-color: $form-background;
-          min-height: 706px;
+          min-height: $text-minheight-pc;
+          overflow: hidden;
+          overflow-y: auto;
           @include is-mobile {
-             min-height: 500px;
+             min-height: $text-maxheight-mob;
+             max-height: $text-maxheight-mob;
            }
+           @include is-extra-small-mobile{
+            min-height: $text-maxheight-mob;
+            max-height: $text-maxheight-mob;
+          }
             h1{
                 color: $header-item;
                 font-size: 2.3rem;
@@ -57,11 +81,12 @@
             height: 809px;
             @include cover-image("~/images/stadiumpic.png");
             filter: brightness(80%);
+            @include is-extra-small-mobile{
+              max-height: 500px;
+            }
+            @include is-mobile {
+              max-height: 500px;
+            }
         }
   }
 }
-
-
-
-
-

@@ -18,6 +18,12 @@
             text-transform: uppercase;
             font-family: "Segoe UI Bold";
             color: $header-item;
+            @include is-mobile {
+                font-size: 2rem;
+            }
+            @include is-extra-small-mobile{
+                font-size: 2rem;
+            }
         }
         p{
             color: $sub-text;
@@ -34,9 +40,11 @@
             }
             @include is-mobile {
                 width: 100%;
+                font-size: 1.1rem;
             }
             @include is-extra-small-mobile{
                 width: 100%;
+                font-size: 1.1rem;
             }
         }
     }
@@ -65,6 +73,7 @@
 
     }
    &__job-title{
+    overflow: auto;
        p{
         color: $sub-text;
         font-size: 1.2rem;
