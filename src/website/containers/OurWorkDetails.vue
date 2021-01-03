@@ -5,11 +5,11 @@
         <img :src="websiteWork.img_cover.url" :alt="websiteWork.title" />
         <h1 class="work-details-wrapper__cover-container__title">
           {{ websiteWork.title }}
+          <p
+            class="work-details-wrapper__cover-container__description"
+            v-html="websiteWork.description"
+          ></p>
         </h1>
-        <p
-          class="work-details-wrapper__cover-container__description"
-          v-html="websiteWork.description"
-        ></p>
 
         <div class="work-details-wrapper__cover-statistics">
           <div v-for="statistic in statistics" :key="statistic.id">

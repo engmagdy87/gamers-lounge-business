@@ -31,6 +31,8 @@
     &__title {
       font-family: "Segoe UI Bold";
       position: absolute;
+      width: 100%;
+      text-align: center;
       @include is-extra-small-mobile {
         font-size: 1.5rem;
       }
@@ -46,23 +48,20 @@
     }
     &__description {
       position: absolute;
+      width: 100%;
       text-align: center;
-      margin-top: 220px;
+      margin-top: 10px;
       font-size: 1.2rem;
       @include is-extra-small-mobile {
-        margin-top: 90px;
         font-size: 0.8rem;
       }
       @include is-mobile {
-        margin-top: 100px;
         font-size: 0.9rem;
       }
       @include is-tablet {
-        margin-top: 110px;
         font-size: 1rem;
       }
       @include is-desktop {
-        margin-top: 110px;
         font-size: 1rem;
       }
     }
