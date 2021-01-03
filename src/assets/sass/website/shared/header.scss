@@ -72,6 +72,9 @@
     }
     img {
       width: 220px;
+      @include is-extra-small-mobile {
+        width: 135px;
+      }
     }
     p {
       display: inline-block;

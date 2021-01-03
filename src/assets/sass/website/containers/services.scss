@@ -101,8 +101,8 @@ $widths-and-heights: (
   ) * 3,
   clipped-length-xs: $clipped-length,
   clipped-shape-width-sm: (
-    $width + 10vw
-  ) * 1.5,
+    $width + 25vw
+  ),
   clipped-shape-height-sm: (
     $height + 9vw
   ) * 2,

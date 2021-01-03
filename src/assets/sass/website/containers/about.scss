@@ -8,6 +8,15 @@
     @content;
   }
 }
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: $dark-background;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $accent;
+}
 
 .about-wrapper {
   background-color: $primary;
@@ -79,6 +88,12 @@
   }
 }
 
+/deep/ .half-filled-box{
+  .about-container__heroContent{
+    overflow-y: auto;
+  }
+  min-height: 300px;
+}
 
 // All have vw as divide operation units must be the same for all
 $width: 80vw;
@@ -96,7 +111,7 @@ $widths-and-heights: (
   clipped-length-xs: $clipped-length,
   clipped-shape-width-sm: (
     $width + 10vw
-  ) * 1.5,
+  ) ,
   clipped-shape-height-sm: (
     $height + 9vw
   ) * 2,
