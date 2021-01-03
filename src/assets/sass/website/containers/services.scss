@@ -8,7 +8,15 @@
       @content;
     }
 }
-
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: $dark-background;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $accent;
+}
 
 .services-wrapper {
     background-color: $primary;
@@ -42,7 +50,7 @@
           margin-top: 100px;
         }
         @include is-extra-small-mobile {
-            padding-top: 80px;
+            padding-top: 20px;
         }
       }
       &__heroContent{
@@ -50,7 +58,8 @@
         height: 100%;
         margin: auto;
         text-align: left;
-  
+        overflow: hidden;
+        overflow-y: auto;
           h1{
             color: $header-item;
             user-select: none;

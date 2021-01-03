@@ -10,22 +10,31 @@
 ::-webkit-scrollbar-thumb {
   background-color: $accent;
 }
+$text-maxheight-mob:500px;
+$text-minheight-mob:500px;
+$text-minheight-pc:706px;
+
 .about-section-wrapper{
   &__inside{
       
       &--is-text{
+        div{
+          max-height: $text-maxheight-mob - 80;
+          overflow: hidden;
+          overflow-y: auto;
+        }
           padding: 35px;
           background-color: $form-background;
-          min-height: 706px;
+          min-height: $text-minheight-pc;
           overflow: hidden;
           overflow-y: auto;
           @include is-mobile {
-             min-height: 500px;
-             max-height: 500px;
+             min-height: $text-maxheight-mob;
+             max-height: $text-maxheight-mob;
            }
            @include is-extra-small-mobile{
-            min-height: 500px;
-            max-height: 500px;
+            min-height: $text-maxheight-mob;
+            max-height: $text-maxheight-mob;
           }
             h1{
                 color: $header-item;
