@@ -17,17 +17,32 @@
         >
           <template #carouselSlide="{slide,index}">
             <div class="row m-0 position-relative">
-              <div class="col-12 col-md-6 services-carousel__text">
-                <transition :name="titleDirection">
-                  <h1 class="services-carousel__title" v-if="index">
+              <div class="col-12 col-md-6 services-carousel__text p-0">
+                <transition-group :name="titleDirection" appear>
+                  <h1
+                    v-if="index"
+                    v-for="i in 20"
+                    :key="i"
+                    :class="
+                      `services-carousel__title services-carousel__title${i}`
+                    "
+                  >
                     {{ slide.title }}
                   </h1>
-                </transition>
-                <transition :name="contentDirection">
-                  <p class="services-carousel__content" v-if="index">
+                </transition-group>
+
+                <transition-group :name="contentDirection" appear>
+                  <p
+                    v-if="index"
+                    v-for="i in 20"
+                    :key="i"
+                    :class="
+                      `services-carousel__content services-carousel__content${i}`
+                    "
+                  >
                     {{ slide.text }}
                   </p>
-                </transition>
+                </transition-group>
 
                 <div class="services-carousel__btn" v-if="index">
                   <HalfClippedOutlineButton
@@ -37,10 +52,10 @@
                   />
                 </div>
               </div>
-              <transition :name="imageDirection">
+              <transition :name="imageDirection" appear>
                 <div
                   class="col-12 col-md-6 services-carousel__img-wrapper"
-                  v-show="index"
+                  v-if="index"
                 >
                   <img
                     class="services-carousel__img"
@@ -99,11 +114,11 @@ export default {
           title: "Esports Tournaments3",
           text:
             "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e",
-          img: "./images/pubgpic.png"
+          img: "./images/fifa-logo.png"
         }
       ],
       titleDirection: "service-title-next",
-      contentDirection: "service-title-next",
+      contentDirection: "service-content-next",
       imageDirection: "service-image-next",
       buttonMaskCSSStyle: "button-mask-next"
     };
@@ -128,143 +143,154 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../assets/sass/website/color-palette.scss";
+@import "../../../assets/sass/website/mixins.scss";
 @import "../../../assets/sass/website/components/home/services-carousel.scss";
 
 $time: 3s;
-$delay: 0.5s;
+$delay: 8ms;
+$offset: 0.3s;
 $blur: 10px;
 
-.service-title-next-enter-active,
-.service-title-next-leave-active {
-  transition: opacity $time ease-in-out,
-    transform $time cubic-bezier(0, 0.47, 0.36, 0.36), filter $time linear;
+//********title*********
+@for $i from 1 through 20 {
+  .service-title-next-enter-to.services-carousel__title#{$i},
+  .service-title-next-enter.services-carousel__title#{$i} {
+    right: -100%;
+    opacity: 0;
+  }
+  .service-title-next-enter-active.services-carousel__title#{$i} {
+    @include generateTextAnimation($time, $delay, 0, $i, next-enter);
+  }
+  .service-title-next-leave-active.services-carousel__title#{$i} {
+    @include generateTextAnimation($time, $delay, 0, $i, next-leave);
+  }
+  .service-title-prev-enter-to.services-carousel__title#{$i},
+  .service-title-prev-enter.services-carousel__title#{$i} {
+    right: 100%;
+    opacity: 0;
+  }
+  .service-title-prev-enter-active.services-carousel__title#{$i} {
+    @include generateTextAnimation($time, $delay, 0, $i, prev-enter);
+  }
+  .service-title-prev-leave-active.services-carousel__title#{$i} {
+    @include generateTextAnimation($time, $delay, 0, $i, prev-leave);
+  }
 }
-.service-title-next-enter {
-  opacity: 0;
-  transform: translateX(100%);
-  filter: blur($blur);
+//********content*********
+@for $i from 1 through 20 {
+  .service-content-next-enter-to.services-carousel__content#{$i},
+  .service-content-next-enter.services-carousel__content#{$i} {
+    right: -100%;
+    opacity: 0;
+  }
+  .service-content-next-enter-active.services-carousel__content#{$i} {
+    @include generateTextAnimation($time, $delay, $offset, $i, next-enter);
+  }
+  .service-content-next-leave-active.services-carousel__content#{$i} {
+    @include generateTextAnimation($time, $delay, $offset, $i, next-leave);
+  }
+  .service-content-prev-enter-to.services-carousel__content#{$i},
+  .service-content-prev-enter.services-carousel__content#{$i} {
+    right: 100%;
+    opacity: 0;
+  }
+  .service-content-prev-enter-active.services-carousel__content#{$i} {
+    @include generateTextAnimation($time, $delay, $offset, $i, prev-enter);
+  }
+  .service-content-prev-leave-active.services-carousel__content#{$i} {
+    @include generateTextAnimation($time, $delay, $offset, $i, prev-leave);
+  }
 }
-.service-title-next-enter-to,
-.service-title-next-leave {
-  opacity: 1;
-  transform: translateX(0);
-  filter: blur(0);
+
+@keyframes next-enter {
+  0% {
+    right: -100%;
+    opacity: 0;
+  }
+  100% {
+    right: 0;
+    opacity: 0.2;
+  }
 }
-.service-title-next-leave-to {
-  opacity: 0;
-  transform: translateX(-100%);
-  filter: blur($blur);
+@keyframes next-leave {
+  0% {
+    right: 0;
+    opacity: 0.2;
+  }
+  100% {
+    right: 100%;
+    opacity: 0;
+  }
 }
-//********************* */
-.service-title-prev-enter-active,
-.service-title-prev-leave-active {
-  transition: opacity $time ease-in-out,
-    transform $time cubic-bezier(0, 0.47, 0.36, 0.36), filter $time linear,
-    filter $time linear;
+
+@keyframes prev-enter {
+  0% {
+    right: 100%;
+    opacity: 0;
+  }
+  100% {
+    right: 0;
+    opacity: 0.2;
+  }
 }
-.service-title-prev-enter {
-  opacity: 0;
-  transform: translateX(-100%);
-  filter: blur($blur);
+@keyframes prev-leave {
+  0% {
+    right: 0;
+    opacity: 0.2;
+  }
+  100% {
+    right: -100%;
+    opacity: 0;
+  }
 }
-.service-title-prev-leave-to {
-  opacity: 0;
-  transform: translateX(100%);
-  filter: blur($blur);
-}
-.service-title-prev-enter-to,
-.service-title-prev-leave {
-  opacity: 1;
-  transform: translateX(0);
-  filter: blur(0);
-}
-//***********************************/
-.service-content-next-enter-active,
-.service-content-next-leave-active {
-  transition: opacity $time ease-in-out,
-    transform $time cubic-bezier(0, 0.47, 0.36, 0.36), filter $time linear,
-    filter $time linear;
-}
-.service-content-next-enter {
-  opacity: 0;
-  transform: translateX(200%);
-  filter: blur($blur);
-}
-.service-content-next-leave-to {
-  opacity: 0;
-  transform: translateX(-200%);
-  filter: blur($blur);
-}
-.service-content-next-enter-to {
-  transition-delay: $delay;
-}
-.service-content-next-enter-to,
-.service-content-next-leave {
-  opacity: 1;
-  transform: translateX(0);
-  filter: blur(0);
-}
-//***********************************/
-.service-content-prev-enter-active,
-.service-content-prev-leave-active {
-  transition: opacity $time ease-in-out,
-    transform $time cubic-bezier(0, 0.47, 0.36, 0.36), filter $time linear,
-    filter $time linear;
-}
-.service-content-prev-enter {
-  opacity: 0;
-  transform: translateX(-200%);
-  filter: blur($blur);
-}
-.service-content-prev-leave-to {
-  opacity: 0;
-  transform: translateX(200%);
-  filter: blur($blur);
-}
-.service-content-prev-enter-to {
-  transition-delay: $delay;
-}
-.service-content-prev-enter-to,
-.service-content-prev-leave {
-  opacity: 1;
-  transform: translateX(0);
-  filter: blur(0);
-}
-//***********************************/
+
+// //***********************************/
 
 .service-image-next-enter-active,
 .service-image-next-leave-active {
-  transition: opacity $time ease-in-out;
+  animation: animateImage;
+  animation-duration: 10s;
+  animation-timing-function: cubic-bezier(0.4, 0.3, 0.5, 1);
+  transition: all 3s;
 }
 .service-image-next-enter {
   opacity: 0;
 }
-.service-image-next-leave {
-  opacity: 0;
-}
-.service-image-next-enter-to {
-  opacity: 1;
-}
 .service-image-next-leave-to {
   opacity: 0;
 }
-//***********************************/
+// //***********************************/
 .service-image-prev-enter-active,
 .service-image-prev-leave-active {
-  transition: opacity $time ease-in-out,
-    transform $time cubic-bezier(0, 0.47, 0.36, 0.36), filter $time linear;
+  animation: reverseAnimateImage;
+  animation-duration: 10s;
+  animation-timing-function: cubic-bezier(0.4, 0.3, 0.5, 1);
+  transition: all 3s;
 }
 .service-image-prev-enter {
   opacity: 0;
 }
-.service-image-prev-leave,
-.service-image-prev-enter-to {
-  opacity: 1;
-}
 .service-image-prev-leave-to {
   opacity: 0;
 }
-//***********************************/
+@keyframes animateImage {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes reverseAnimateImage {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}
+
+// //***********************************/
 
 /deep/ .button-mask-next {
   width: 200px;

@@ -253,3 +253,10 @@
     );
   }
 }
+
+@mixin generateTextAnimation($time, $delay, $offset, $i, $animation) {
+  animation: $animation;
+  animation-duration: $time;
+  animation-delay: $i * $delay + $offset;
+  animation-timing-function: cubic-bezier(0.4, 0.3, 0.5, 1);
+}
