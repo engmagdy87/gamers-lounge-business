@@ -21,7 +21,7 @@
                 <transition-group :name="titleDirection" appear>
                   <h1
                     v-if="index"
-                    v-for="i in 1"
+                    v-for="i in 10"
                     :key="i"
                     :class="
                       `services-carousel__title services-carousel__title${i}`
@@ -34,7 +34,7 @@
                 <transition-group :name="contentDirection" appear>
                   <p
                     v-if="index"
-                    v-for="i in 1"
+                    v-for="i in 10"
                     :key="i"
                     :class="
                       `services-carousel__content services-carousel__content${i}`
@@ -130,6 +130,12 @@ export default {
         this.contentDirection = "service-content-prev";
         this.imageDirection = "service-image-prev";
         this.buttonMaskCSSStyle = "button-mask-prev";
+        setTimeout(() => {
+          this.titleDirection = "service-title-next";
+          this.contentDirection = "service-content-next";
+          this.imageDirection = "service-image-next";
+          this.buttonMaskCSSStyle = "button-mask-next";
+        }, 7000);
       } else {
         this.titleDirection = "service-title-next";
         this.contentDirection = "service-content-next";
@@ -152,7 +158,12 @@ $offset: 0.3s;
 $blur: 10px;
 
 //********title*********
-@for $i from 1 through 1 {
+@for $i from 2 through 10 {
+  .services-carousel__title.services-carousel__title1 {
+    opacity: 0;
+  }
+}
+@for $i from 1 through 10 {
   .service-title-next-enter-to.services-carousel__title#{$i},
   .service-title-next-enter.services-carousel__title#{$i} {
     right: -100%;
@@ -177,7 +188,12 @@ $blur: 10px;
   }
 }
 //********content*********
-@for $i from 1 through 1 {
+@for $i from 2 through 10 {
+  .services-carousel__content.services-carousel__content#{$i} {
+    opacity: 0;
+  }
+}
+@for $i from 1 through 10 {
   .service-content-next-enter-to.services-carousel__content#{$i},
   .service-content-next-enter.services-carousel__content#{$i} {
     right: -100%;
@@ -262,7 +278,7 @@ $blur: 10px;
 // //***********************************/
 .service-image-prev-enter-active,
 .service-image-prev-leave-active {
-  animation: reverseAnimateImage;
+  animation: animateImage;
   animation-duration: 10s;
   animation-timing-function: cubic-bezier(0.4, 0.3, 0.5, 1);
   transition: all 3s;
@@ -279,14 +295,6 @@ $blur: 10px;
   }
   100% {
     transform: scale(1);
-  }
-}
-@keyframes reverseAnimateImage {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0.8);
   }
 }
 
