@@ -162,6 +162,9 @@ $blur: 10px;
   .services-carousel__title.services-carousel__title#{$i} {
     opacity: 0;
   }
+  .service-title-next-leave-active.services-carousel__title#{$i} {
+    opacity: 0.1 !important;
+  }
 }
 @for $i from 1 through 15 {
   .service-title-next-enter-to.services-carousel__title#{$i},
@@ -174,7 +177,6 @@ $blur: 10px;
   }
   .service-title-next-leave-active.services-carousel__title#{$i} {
     @include generateTextAnimation($time, $delay, 0, $i, next-leave);
-    opacity: 0.1 !important;
   }
   .service-title-prev-enter-to.services-carousel__title#{$i},
   .service-title-prev-enter.services-carousel__title#{$i} {
@@ -195,6 +197,10 @@ $blur: 10px;
 @for $i from 2 through 15 {
   .services-carousel__content.services-carousel__content#{$i} {
     opacity: 0;
+  }
+  .service-content-next-leave-active.services-carousel__content#{$i} {
+    opacity: 0.1 !important;
+    font-weight: bold;
   }
 }
 @for $i from 1 through 15 {
