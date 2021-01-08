@@ -174,6 +174,7 @@ $blur: 10px;
   }
   .service-title-next-leave-active.services-carousel__title#{$i} {
     @include generateTextAnimation($time, $delay, 0, $i, next-leave);
+    opacity: 0.1 !important;
   }
   .service-title-prev-enter-to.services-carousel__title#{$i},
   .service-title-prev-enter.services-carousel__title#{$i} {
