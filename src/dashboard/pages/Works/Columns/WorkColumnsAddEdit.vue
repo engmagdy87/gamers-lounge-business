@@ -467,19 +467,19 @@ export default {
       let sum = 0;
       if (this.operation === "Edit Work Column")
         this.workRowData.columns.forEach(col => {
-          if (col.id !== this.editData.id)
-            sum += Number.parseFloat(col.ratio).toFixed(1);
+          if (col.id !== this.editData.id) sum += Number.parseFloat(col.ratio);
         });
       else
         this.workRowData.columns.forEach(col => {
-          sum += Number.parseFloat(col.ratio).toFixed(1);
+          sum += Number.parseFloat(col.ratio);
         });
-      return sum;
+      return sum.toFixed(1);
     },
     calculateTotalWidth() {
-      let sum = this.currentWidth();
+      let sum = Number.parseFloat(this.currentWidth());
 
       sum += Number.parseFloat(this.workColumn.ratio);
+
       return sum.toFixed(1);
     },
     saveData: async function() {
