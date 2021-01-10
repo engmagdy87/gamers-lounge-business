@@ -25,7 +25,7 @@
           </base-input>
           <ErrorMessage :fieldErrors="errors.title" />
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-3">
           <base-input
             type="number"
             label="Order"
@@ -35,6 +35,19 @@
           >
           </base-input>
           <ErrorMessage :fieldErrors="errors.order" />
+        </div>
+        <div class="col-12 col-md-3 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="is_featured"
+              v-model="work.is_featured"
+            />
+            <label class="custom-control-label" for="is_featured"
+              >Featured</label
+            >
+          </div>
         </div>
       </div>
       <div class="row">
@@ -193,6 +206,7 @@ const emptyWork = {
   order: 1,
   short_description: "",
   description: "",
+  is_featured: false,
   img_card: "",
   img_cover: ""
 };
@@ -215,6 +229,7 @@ export default {
         title: { isRequired: true },
         order: { isRequired: true },
         "short description": { isRequired: true },
+        is_featured: { isRequired: false },
         description: { isRequired: true },
         statistics: { isRequired: true },
         "card image": { isRequired: true },
@@ -224,6 +239,7 @@ export default {
         title: "title",
         order: "order",
         short_description: "short description",
+        is_featured: "is_featured",
         description: "description",
         statistics: "statistics",
         img_card: "card image",
@@ -263,6 +279,7 @@ export default {
         let payload = {
           title: this.work.title,
           order: this.work.order,
+          isFeatured: this.work.is_featured,
           shortDescription: reformatHTMLString(this.work.short_description),
           description: reformatHTMLString(this.work.description),
           statistics: reformatHTMLString(JSON.stringify(this.work.statistics))
@@ -366,6 +383,7 @@ export default {
     if (this.$route.name === "Edit Work") {
       this.work.title = this.editData.title;
       this.work.order = this.editData.order;
+      this.work.is_featured = this.editData.is_featured;
       this.work.short_description = this.editData.short_description || "";
       this.work.description = this.editData.description || "";
       this.work.statistics = JSON.parse(

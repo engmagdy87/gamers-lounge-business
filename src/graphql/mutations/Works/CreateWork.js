@@ -1,6 +1,7 @@
 const CREATE_WORK = (
    { title,
       shortDescription,
+      isFeatured,
       description,
       statistics,
       order }
@@ -10,6 +11,7 @@ const CREATE_WORK = (
           title: "${title}"
           short_description: "${shortDescription}"
           description: "${description}"
+          is_featured: ${isFeatured}
           statistics: "${statistics}"
           order: ${order}
           images: {

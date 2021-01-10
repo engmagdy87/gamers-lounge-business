@@ -279,3 +279,9 @@ h1 .subtitle {
 .text-danger:hover {
   color: $danger-color !important;
 }
+
+.work-page-wrapper__text {
+  h2 span {
+    color: white !important;
+  }
+}

@@ -49,6 +49,7 @@ export default {
           "Id",
           "Title",
           "Order",
+          "Featured",
           "Short Description",
           "Description",
           "Statistics",

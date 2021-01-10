@@ -4,6 +4,7 @@ const buildQuery = (workInfo, imagesData) => {
           id: ${workInfo.workId},
           input: {
              title: "${workInfo.title}"
+             is_featured: ${workInfo.isFeatured}
              short_description: "${workInfo.shortDescription}"
              description: "${workInfo.description}"
              statistics: "${workInfo.statistics}"
@@ -11,9 +12,9 @@ const buildQuery = (workInfo, imagesData) => {
           }
        ) {
           id
-       }
+         }
     } 
-     `;
+    `;
    //********************/
    const imagesKeys = Object.keys(imagesData)
    let queryParams = '('
@@ -25,22 +26,23 @@ const buildQuery = (workInfo, imagesData) => {
    //********************/   
    if (imagesKeys.length === 1)
       queryKeys = `
- images: {
-    ${imagesKeys[0]}: { upload: { file: $${imagesKeys[0]} } }
- }
+   images: {
+      ${imagesKeys[0]}: { upload: { file: $${imagesKeys[0]} } }
+   }
  `
    if (imagesKeys.length === 2)
       queryKeys = `
  images: {
     ${imagesKeys[0]}: { upload: { file: $${imagesKeys[0]} } }
     ${imagesKeys[1]}: { upload: { file: $${imagesKeys[1]} } }
- }
- `
+   }
+   `
    return `mutation${queryParams} {
-    updateWork(
-       id: ${workInfo.workId},
-       input: {
+      updateWork(
+         id: ${workInfo.workId},
+         input: {
           title: "${workInfo.title}"
+          is_featured: ${workInfo.isFeatured}
           short_description: "${workInfo.shortDescription}"
           description: "${workInfo.description}"
           statistics: "${workInfo.statistics}"

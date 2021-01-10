@@ -11,6 +11,7 @@ query {
           title
           short_description
           description
+          is_featured
           statistics
           order
           img_card{

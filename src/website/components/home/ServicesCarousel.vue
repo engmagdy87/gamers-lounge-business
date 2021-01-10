@@ -244,7 +244,7 @@ $blur: 10px;
     opacity: 0.2;
   }
   100% {
-    right: 100%;
+    right: 110%;
     opacity: 0;
   }
 }

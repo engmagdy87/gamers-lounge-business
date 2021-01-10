@@ -16,7 +16,8 @@
             <h1>
               <countTo
                 :startVal="0"
-                :endVal="parseInt(statistic.value)"
+                :endVal="parseFloat(statistic.value)"
+                :decimals="numberOfDecimalsInStringNumber(statistic.value)"
                 separator=""
                 :duration="2000"
               ></countTo>
@@ -27,7 +28,7 @@
       </div>
       <WorkDetails :websiteWork="websiteWork" v-if="websiteWork.sections" />
     </div>
-    <Intersect @enter="loadMoreWorks" v-if="worksPage > 1"
+    <Intersect @enter="loadMoreWorks" v-if="worksPage > 0"
       ><div class="threshold">
         <Loading :showLoading="showLoading" />
       </div>
@@ -47,6 +48,7 @@ import {
   getEntityName,
   reverseReformatHTMLString
 } from "../../helpers/StringsHelper";
+import { numberOfDecimalsInStringNumber } from "../../helpers/NumbersHelper";
 
 export default {
   data() {
@@ -78,11 +80,11 @@ export default {
     ...mapMutations({
       setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
     }),
+    numberOfDecimalsInStringNumber(statistic) {
+      return numberOfDecimalsInStringNumber(statistic);
+    },
     fetchHeroAndFirstSection: async function() {
       let payload = this.generateWorkPayload(true, true);
-      await this.fetchWork(payload);
-      this.worksPage++;
-      payload = this.generateWorkPayload(false, false);
       await this.fetchWork(payload);
       this.worksPage++;
     },
@@ -104,15 +106,16 @@ export default {
       return requestSource;
     },
     loadMoreWorks: async function() {
-      const payload = this.generateWorkPayload(false, false);
-
-      if (Object.keys(this.websiteWork.sections).length > 0) {
-        if (this.websiteWork.sections.paginatorInfo.hasMorePages) {
-          this.showLoading = true;
-          await this.fetchWork(payload);
-          this.worksPage++;
-          this.showLoading = false;
-        }
+      if (
+        !this.showLoading &&
+        (this.websiteWork.sections.data.length === 0 ||
+          this.websiteWork.sections.paginatorInfo.hasMorePages)
+      ) {
+        this.showLoading = true;
+        const payload = this.generateWorkPayload(false, false);
+        await this.fetchWork(payload);
+        this.worksPage++;
+        this.showLoading = false;
       }
     }
   },
