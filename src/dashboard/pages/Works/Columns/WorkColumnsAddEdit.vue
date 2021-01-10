@@ -44,13 +44,13 @@
       </div>
       <div
         class="alert alert-dark m-0 text-dark"
-        :style="`width:${100 - calculateTotalWidth()}%`"
+        :style="`width:${(100 - calculateTotalWidth()).toFixed(1)}%`"
         role="alert"
-        v-if="100 - calculateTotalWidth() > 0"
+        v-if="(100 - calculateTotalWidth()).toFixed(1) > 0"
       >
         Remain Width:
         <strong
-          ><h2>{{ 100 - calculateTotalWidth() }}%</h2></strong
+          ><h2>{{ (100 - calculateTotalWidth()).toFixed(1) }}%</h2></strong
         >
       </div>
     </div>
@@ -113,6 +113,7 @@
         <div class="col-12 col-md-4">
           <base-input
             type="number"
+            step="0.1"
             label="Width in %"
             placeholder="Enter Width in %"
             v-model="workColumn.ratio"
@@ -466,19 +467,20 @@ export default {
       let sum = 0;
       if (this.operation === "Edit Work Column")
         this.workRowData.columns.forEach(col => {
-          if (col.id !== this.editData.id) sum += Number.parseInt(col.ratio);
+          if (col.id !== this.editData.id)
+            sum += Number.parseFloat(col.ratio).toFixed(1);
         });
       else
         this.workRowData.columns.forEach(col => {
-          sum += Number.parseInt(col.ratio);
+          sum += Number.parseFloat(col.ratio).toFixed(1);
         });
       return sum;
     },
     calculateTotalWidth() {
       let sum = this.currentWidth();
 
-      sum += Number.parseInt(this.workColumn.ratio);
-      return sum;
+      sum += Number.parseFloat(this.workColumn.ratio);
+      return sum.toFixed(1);
     },
     saveData: async function() {
       const errorObject = isValidationErrorExist(

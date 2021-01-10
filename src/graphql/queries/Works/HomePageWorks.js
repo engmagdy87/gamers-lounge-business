@@ -4,17 +4,11 @@ query {
        data {
           id
           title
-          short_description
-          description
-          is_featured          
+          short_description                    
           img_card{
             id
             url
-          }
-          img_cover{
-            id
-            url
-          }
+          }          
        }
     }
  }
