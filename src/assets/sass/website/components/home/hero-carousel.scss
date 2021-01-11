@@ -2,80 +2,89 @@
 @import "../../color-palette.scss";
 @import "../../shared/half-clipped-shape.scss";
 
-.hero-carousel{
-    margin-top: 400px;
+.hero-carousel {
+  margin-top: 400px;
+  @include is-extra-small-mobile {
+    margin-top: 200px;
+  }
+  @include is-mobile {
+    margin-top: 250px;
+  }
+  @include is-tablet {
+    margin-top: 250px;
+  }
+
+  @include is-desktop {
+    margin-top: 300px;
+  }
+  @media (max-width: 1600px) {
+    margin-top: 300px;
+  }
+  &__text {
+    z-index: 10;
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+  &__title {
+    font-family: "Segoe UI Bold";
+    position: absolute;
+    width: 100%;
+    text-align: left;
+    margin: auto;
+    padding-top: 50px;
+    padding-left: 30px;
+    font-size: 3rem;
     @include is-extra-small-mobile {
-      margin-top: 200px;
+      font-size: 1.3rem;
     }
     @include is-mobile {
-      margin-top: 250px;
+      font-size: 1.8rem;
     }
     @include is-tablet {
-      margin-top: 250px;
+      font-size: 2rem;
     }
 
     @include is-desktop {
-      margin-top: 300px;
+      font-size: 2rem;
     }
-    @media (max-width: 1600px) {
-      margin-top: 300px;
+    @include is-large-desktop {
+      font-size: 2.2rem;
     }
-
-      &__title{
-        font-family: 'Segoe UI Bold';
-        width: 80%;
-        margin: auto;
-        padding-top: 50px;
-        font-size: 3rem;
-        text-align: left;
-        @include is-extra-small-mobile {
-          font-size: 1.3rem;
-        }
-        @include is-mobile {
-          font-size: 1.8rem;
-        }
-        @include is-tablet {
-          font-size: 2rem;
-        }
-  
-        @include is-desktop {
-          font-size: 2rem;
-        }
-        @include is-large-desktop {
-          font-size: 2.2rem;
-        }
-
-      }
-      &__content{
-        text-align: left;
-        width: 80%;
-        margin: auto;
-      }
   }
+  &__content {
+    width: 100%;
+    margin: auto;
+    position: absolute;
+    top: 170px;
+    padding-left: 30px;
+    text-align: left;
+  }
+}
 
-/deep/ .hero-bullets{
+/deep/ .hero-bullets {
   position: absolute;
   bottom: 0%;
   width: 100%;
   margin: auto;
 }
-@media (max-width: 600px){
+@media (max-width: 600px) {
   .carousel-wrapper {
     margin-top: 0;
     min-height: auto;
   }
 }
 
-@media (min-width: 1400px) and (max-width: 1600px){
-  /deep/ .half-filled-box{
+@media (min-width: 1400px) and (max-width: 1600px) {
+  /deep/ .half-filled-box {
     min-height: 300px;
   }
-  /deep/ .hero-bullets{
+  /deep/ .hero-bullets {
     bottom: 7%;
   }
 }
 
-  // All have vw as divide operation units must be the same for all
+// All have vw as divide operation units must be the same for all
 $width: 50vw;
 $height: 17vw;
 $clipped-length: 3vw;

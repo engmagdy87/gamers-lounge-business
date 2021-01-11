@@ -135,6 +135,7 @@ $time: 0.5s;
     }
   }
   &__bullets {
+    z-index: 500;
     & > button {
       background-color: gray;
       border: none;
