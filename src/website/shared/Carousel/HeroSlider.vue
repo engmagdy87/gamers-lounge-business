@@ -114,7 +114,7 @@ export default {
 @import "../../../assets/sass/website/variables.scss";
 @import "../../../assets/sass/website/mixins.scss";
 
-$time: 0.5s;
+$time: 2s;
 
 .carousel-wrapper {
   @include initializePageStyle;

@@ -2,7 +2,11 @@
   <div class="hero-carousel">
     <HalfClippedShape>
       <template #content>
-        <HeroSlider :slides="slides" customBulletsStyleClass="hero-bullets">
+        <HeroSlider
+          :slides="slides"
+          customBulletsStyleClass="hero-bullets"
+          :timeInMillisecond="7000"
+        >
           <template #carouselSlide="{slide}">
             <div class="hero-carousel__text">
               <transition-group name="hero-title" appear>
@@ -65,7 +69,7 @@ export default {
 @import "../../../assets/sass/website/mixins.scss";
 
 $time: 3s;
-$delay: 3ms;
+$delay: 4ms;
 $offset: 0.3s;
 $blur: 10px;
 
@@ -88,7 +92,7 @@ $blur: 10px;
     @include generateTextAnimation($time, $delay, 0, $i, next-enter);
   }
   .hero-title-leave-active.hero-carousel__title#{$i} {
-    @include generateTextAnimation($time * 3, $delay, 0, $i, next-leave);
+    @include generateTextAnimation($time, $delay, 0, $i, next-leave);
   }
 }
 //********content*********
