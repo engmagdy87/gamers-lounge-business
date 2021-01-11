@@ -310,6 +310,17 @@ const fetchWebsiteWork = async (data) => {
   }
 }
 
+const fetchHomePageWork = async () => {
+  try {
+    const response = await request({
+      query: QUERY.HOME_PAGE_WORKS(),
+    });
+    return response.data.data.works.data
+  } catch (error) {
+    throw error;
+  }
+}
+
 const fetchWorkSections = async (workId) => {
   const token = getTokenCookie()
   try {
@@ -549,6 +560,7 @@ export {
   isUserAuthenticated,
   fetchWorks,
   fetchWebsiteWork,
+  fetchHomePageWork,
   fetchWorkSections,
   fetchWorkSection,
   fetchWorkRows,

@@ -14,6 +14,8 @@ const state = {
     isWorkRowsFetched: false,
     workRow: {},
     isWorkRowFetched: false,
+    homePageWorks: [],
+    isHomePageWorksFetched: false,
 }
 
 const mutations = {
@@ -48,6 +50,12 @@ const mutations = {
     },
     [types.works.mutations.SET_IS_WEBSITE_WORK_FETCHED]: (currentState, flag) => {
         currentState.isWebsiteWorkFetched = flag;
+    },
+    [types.works.mutations.SET_HOME_PAGE_WORKS]: (currentState, works) => {
+        currentState.homePageWorks = works;
+    },
+    [types.works.mutations.SET_IS_HOME_PAGE_WORKS_FETCHED]: (currentState, flag) => {
+        currentState.isHomePageWorksFetched = flag;
     },
     [types.works.mutations.SET_WORK_SECTIONS]: (currentState, works) => {
         currentState.workSections = works;
@@ -126,6 +134,18 @@ const fetchWebsiteWorkData = async ({ commit }, payload) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.works.mutations.SET_IS_WEBSITE_WORK_FETCHED, false)
+        throw error.message
+    }
+};
+
+const fetchHomePageWorkData = async ({ commit }) => {
+    try {
+        const response = await APIs.fetchHomePageWork()
+        commit(types.works.mutations.SET_HOME_PAGE_WORKS, response)
+        commit(types.works.mutations.SET_IS_HOME_PAGE_WORKS_FETCHED, true)
+        showHeaderAndFooter(commit, true);
+    } catch (error) {
+        commit(types.works.mutations.SET_IS_HOME_PAGE_WORKS_FETCHED, false)
         throw error.message
     }
 };
@@ -356,6 +376,7 @@ const updateVideoData = async ({ commit }, data) => {
 const actions = {
     [types.works.actions.FETCH_WORKS]: fetchWorksData,
     [types.works.actions.FETCH_WEBSITE_WORK]: fetchWebsiteWorkData,
+    [types.works.actions.FETCH_HOME_PAGE_WORKS]: fetchHomePageWorkData,
     [types.works.actions.CREATE_WORK]: createWorkData,
     [types.works.actions.DELETE_WORK]: deleteWorkData,
     [types.works.actions.UPDATE_WORK]: updateWorkData,

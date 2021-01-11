@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 import store from "../../store/index";
 import types from "../../store/types";
 import Hero from "../shared/Hero";
@@ -28,6 +28,20 @@ export default {
     ServicesCarousel,
     WorkCarousel,
     SponsorsCarousel
+  },
+  computed: {
+    ...mapState({
+      homePageWorks: state => state.works.homePageWorks,
+      isHomePageWorksFetched: state => state.works.isHomePageWorksFetched
+    })
+  },
+  methods: {
+    ...mapActions({
+      fetchHomePageWork: types.works.actions.FETCH_HOME_PAGE_WORKS
+    })
+  },
+  mounted() {
+    this.fetchHomePageWork();
   }
 };
 </script>

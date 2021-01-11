@@ -1,6 +1,6 @@
-const HOME_PAGE_WORKS = ({ first, page }) => `
+const HOME_PAGE_WORKS = () => `
 query {
-    works(first: ${first}, page: ${page},orderBy: { field: "order", order: ASC },is_featured:true) {       
+    works(first: 100, page: 1,orderBy: { field: "order", order: ASC },is_featured:true) {       
        data {
           id
           title
