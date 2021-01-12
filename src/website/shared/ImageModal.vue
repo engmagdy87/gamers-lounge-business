@@ -1,43 +1,21 @@
 <template>
-  <div ref="imageModal" class="image-modal">
+  <div ref="imageModal" class="image-modal" @click="closeModal">
     <span class="close" @click="closeModal">&times;</span>
-    <img
-      class="image-modal__previous"
-      src="/website/img/next.svg"
-      alt="previous"
-      @click="setImageIndex(currentImageIndex - 1)"
-    />
-    <img class="image-modal-content" id="img01" :src="clickedImageInMedia" />
-    <img
-      class="image-modal__next"
-      src="/website/img/next.svg"
-      alt="next"
-      @click="setImageIndex(currentImageIndex + 1)"
-    />
+    <img class="image-modal-content" :src="imageUrl" />
   </div>
 </template>
 
 <script>
 export default {
-  props: [
-    "showImageModalModal",
-    "setShowImageModalModal",
-    "clickedImageInMedia",
-    "currentImageIndex",
-    "setCurrentImageIndex"
-  ],
+  props: ["showImageModal", "setShowImageModal", "imageUrl"],
   methods: {
     closeModal() {
-      this.setShowImageModalModal(false);
-    },
-    setImageIndex(index) {
-      this.setCurrentImageIndex(index);
+      this.setShowImageModal(false);
     }
   },
   watch: {
-    showImageModalModal() {
-      if (this.showImageModalModal)
-        this.$refs.imageModal.style.display = "flex";
+    showImageModal() {
+      if (this.showImageModal) this.$refs.imageModal.style.display = "flex";
       else this.$refs.imageModal.style.display = "none";
     }
   }
@@ -76,7 +54,7 @@ export default {
 .image-modal-content {
   margin: auto;
   display: block;
-  max-width: 60vw;
+  max-width: 70vw;
 }
 
 /* Add Animation */

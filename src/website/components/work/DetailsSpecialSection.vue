@@ -25,6 +25,8 @@
               "
               v-for="img in column.img_content"
               :key="img.id"
+              @click="openImageModal(img.url)"
+              style="cursor:pointer"
             >
               <img :src="img.url" width="100%" draggable="false" />
             </div>
@@ -74,6 +76,11 @@
         </div>
       </template>
     </CustomHalfClipped>
+    <ImageModal
+      :showImageModal="showImageModal"
+      :setShowImageModal="setShowImageModal"
+      :imageUrl="targetImage"
+    />
   </div>
 </template>
 
@@ -81,13 +88,22 @@
 import { Carousel3d, Slide } from "vue-carousel-3d";
 import isDeviceSmart from "../../../helpers/DetectIsDeviceSmart";
 import CustomHalfClipped from "../../shared/CustomHalfClipped";
+import ImageModal from "../../shared/ImageModal";
 import * as WORK_COLUMNS_TYPES from "../../../constants/WorkColumnsContentTypes";
+
 export default {
   props: ["section"],
+  data() {
+    return {
+      showImageModal: false,
+      targetImage: ""
+    };
+  },
   components: {
     Carousel3d,
     Slide,
-    CustomHalfClipped
+    CustomHalfClipped,
+    ImageModal
   },
   computed: {
     WORK_COLUMNS_TYPES() {
@@ -97,6 +113,13 @@ export default {
   methods: {
     getWidth(ratio) {
       return isDeviceSmart() ? "100%" : ratio + "%";
+    },
+    setShowImageModal(flag) {
+      this.showImageModal = flag;
+    },
+    openImageModal(imgUrl) {
+      this.targetImage = imgUrl;
+      this.setShowImageModal(true);
     }
   }
 };

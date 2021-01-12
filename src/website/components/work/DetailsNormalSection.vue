@@ -19,6 +19,8 @@
           "
           v-for="img in column.img_content"
           :key="img.id"
+          @click="openImageModal(img.url)"
+          style="cursor:pointer"
         >
           <img :src="img.url" width="100%" draggable="false" alt="" />
         </div>
@@ -73,18 +75,32 @@
         </div>
       </div>
     </div>
+    <ImageModal
+      :showImageModal="showImageModal"
+      :setShowImageModal="setShowImageModal"
+      :imageUrl="targetImage"
+    />
   </div>
 </template>
 
 <script>
 import { Carousel3d, Slide } from "vue-carousel-3d";
+import ImageModal from "../../shared/ImageModal";
 import isDeviceSmart from "../../../helpers/DetectIsDeviceSmart";
 import * as WORK_COLUMNS_TYPES from "../../../constants/WorkColumnsContentTypes";
+
 export default {
   props: ["section"],
+  data() {
+    return {
+      showImageModal: false,
+      targetImage: ""
+    };
+  },
   components: {
     Carousel3d,
-    Slide
+    Slide,
+    ImageModal
   },
   computed: {
     WORK_COLUMNS_TYPES() {
@@ -110,6 +126,13 @@ export default {
           document.exitFullscreen();
         }
       }
+    },
+    setShowImageModal(flag) {
+      this.showImageModal = flag;
+    },
+    openImageModal(imgUrl) {
+      this.targetImage = imgUrl;
+      this.setShowImageModal(true);
     }
   }
 };
