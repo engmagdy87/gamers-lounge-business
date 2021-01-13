@@ -13,7 +13,7 @@
     <DetailsSection :websiteServices="serviceSections.sections.data" v-if="serviceSections.sections" />
 
     <div>
-      <Intersect @enter="loadMoreWorkSections" v-if="worksPage > 0"
+      <Intersect @enter="loadMoreWorkSections" v-if="servicePage > 0"
         ><div class="threshold">
           <Loading :showLoading="showLoading" />
         </div>
