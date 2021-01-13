@@ -56,6 +56,9 @@ export default {
     ...mapActions({
       fetchServiceSections: types.services.actions.FETCH_SERVICE_SECTION
     }),
+    ...mapMutations({
+      setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
+    }),
     fetchHeroAndFirstSection: async function() {
       let payload = this.generateWorkPayload(true, true);
       await this.fetchServiceSections(payload);
@@ -102,7 +105,8 @@ export default {
       path: ""
     });
 
-    this.fetchServiceSections(requestSource);
+    this.setShowFooterFlag(false);
+    this.fetchHeroAndFirstSection();
   },
   updated() {
     if (
