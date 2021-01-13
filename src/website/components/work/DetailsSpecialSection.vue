@@ -89,7 +89,7 @@ import { Carousel3d, Slide } from "vue-carousel-3d";
 import isDeviceSmart from "../../../helpers/DetectIsDeviceSmart";
 import CustomHalfClipped from "../../shared/CustomHalfClipped";
 import ImageModal from "../../shared/ImageModal";
-import * as WORK_COLUMNS_TYPES from "../../../constants/WorkColumnsContentTypes";
+import * as WORK_COLUMNS_TYPES from "../../../constants/ColumnsContentTypes";
 
 export default {
   props: ["section"],

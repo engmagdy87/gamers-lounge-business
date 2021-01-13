@@ -61,6 +61,26 @@
         >
         </ServiceSectionTableRow>
       </tbody>
+      <tbody v-if="tableType === 'serviceRows'">
+        <ServiceRowTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </ServiceRowTabelRow>
+      </tbody>
+      <tbody v-if="tableType === 'serviceColumns'">
+        <ServiceColumnTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </ServiceColumnTabelRow>
+      </tbody>
       <tbody v-if="tableType === 'works'">
         <WorkTabelRow
           v-for="(item, index) in data"
@@ -110,6 +130,8 @@ import JobTabelRow from "../components/Jobs/JobTabelRow";
 import JobApplicantsTableRow from "../components/Jobs/JobApplicantsTableRow";
 import ServiceTabelRow from "../components/Services/ServiceTabelRow";
 import ServiceSectionTableRow from "../components/Services/ServiceSectionTableRow";
+import ServiceRowTabelRow from "../components/Services/ServiceRowTabelRow";
+import ServiceColumnTabelRow from "../components/Services/ServiceColumnTabelRow";
 import WorkTabelRow from "../components/Works/WorkTabelRow";
 import WorkSectionTabelRow from "../components/Works/WorkSectionTabelRow";
 import WorkRowTabelRow from "../components/Works/WorkRowTabelRow";
@@ -124,6 +146,8 @@ export default {
     JobApplicantsTableRow,
     ServiceTabelRow,
     ServiceSectionTableRow,
+    ServiceRowTabelRow,
+    ServiceColumnTabelRow,
     WorkTabelRow,
     WorkSectionTabelRow,
     WorkRowTabelRow,

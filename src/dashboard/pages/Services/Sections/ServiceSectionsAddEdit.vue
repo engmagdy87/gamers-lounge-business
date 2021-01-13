@@ -3,12 +3,12 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/dashboard/works">Works</a>
+          <a href="/dashboard/services">Services</a>
         </li>
         <li class="breadcrumb-item">
           <router-link
-            :to="`/dashboard/works/sections/list/${workSectionData.id}`"
-            >{{ workSectionData.title }} Work Sections</router-link
+            :to="`/dashboard/services/sections/list/${serviceSectionData.id}`"
+            >{{ serviceSectionData.title }} Service Sections</router-link
           >
         </li>
         <li class="breadcrumb-item active" aria-current="page">
@@ -24,7 +24,7 @@
             type="number"
             label="Section Order"
             placeholder="Enter Section Order"
-            v-model="workSection.order"
+            v-model="serviceSection.order"
             :isRequired="true"
             min="1"
           >
@@ -37,7 +37,7 @@
               type="checkbox"
               class="custom-control-input"
               id="enabled"
-              v-model="workSection.enabled"
+              v-model="serviceSection.enabled"
             />
             <label class="custom-control-label" for="enabled"
               >Publish Section</label
@@ -49,12 +49,12 @@
         <div class="col-12 col-md-4">
           <div class="form-group">
             <label>Section Type<span class="error-message"> *</span></label>
-            <select class="form-control" v-model="workSection.type">
+            <select class="form-control" v-model="serviceSection.type">
               <option value="-1">--Please choose media type</option>
               <option
-                v-for="(type, i) in WORK_SECTIONS_TYPES"
+                v-for="(type, i) in SERVICE_SECTIONS_TYPES"
                 :key="i"
-                ::selected="workSection.type === type"
+                ::selected="serviceSection.type === type"
                 :value="type"
                 >{{ type.toLowerCase() }}</option
               >
@@ -83,9 +83,9 @@ import store from "../../../../store/index";
 import types from "../../../../store/types";
 import isValidationErrorExist from "../../../../helpers/FormValidation";
 import { reformatHTMLString } from "../../../../helpers/StringsHelper";
-import * as WORK_SECTIONS_TYPES from "../../../../constants/SectionsTypes";
+import * as SERVICE_SECTIONS_TYPES from "../../../../constants/SectionsTypes";
 
-const emptyWorkSection = {
+const emptyServiceSection = {
   order: 1,
   enabled: false,
   type: "-1"
@@ -96,8 +96,8 @@ export default {
     return {
       editData: this.$router.history.current.params.data,
       operation: this.$route.name,
-      workSection: {
-        ...emptyWorkSection
+      serviceSection: {
+        ...emptyServiceSection
       },
       errors: {},
       validation: {
@@ -114,20 +114,20 @@ export default {
   },
   computed: {
     ...mapState({
-      workSectionData: state => state.works.workSections
+      serviceSectionData: state => state.services.serviceSections
     }),
-    WORK_SECTIONS_TYPES() {
-      return WORK_SECTIONS_TYPES;
+    SERVICE_SECTIONS_TYPES() {
+      return SERVICE_SECTIONS_TYPES;
     }
   },
   methods: {
     ...mapActions({
-      createWorkSection: types.works.actions.CREATE_WORK_SECTION,
-      updateWorkSection: types.works.actions.UPDATE_WORK_SECTION
+      createServiceSection: types.services.actions.CREATE_SERVICE_SECTION,
+      updateServiceSection: types.services.actions.UPDATE_SERVICE_SECTION
     }),
     saveData: async function() {
       const errorObject = isValidationErrorExist(
-        this.workSection,
+        this.serviceSection,
         this.aliases,
         this.validation
       );
@@ -135,28 +135,28 @@ export default {
       if (errorObject.length !== 0) return;
       try {
         let payload = {
-          order: this.workSection.order,
-          type: this.workSection.type,
-          enabled: this.workSection.enabled,
-          sectionType: "OUR_WORK"
+          order: this.serviceSection.order,
+          type: this.serviceSection.type,
+          enabled: this.serviceSection.enabled,
+          sectionType: "OUR_SERVICE"
         };
-        if (this.operation === "Edit Work Section") {
-          await this.updateWorkSection({
+        if (this.operation === "Edit Service Section") {
+          await this.updateServiceSection({
             ...payload,
             sectionId: this.editData.id,
             id: this.$router.history.current.params.id
           });
-          this.notifyVue("Work Section Updated Successfully", "success");
+          this.notifyVue("Service Section Updated Successfully", "success");
         } else {
-          await this.createWorkSection({
+          await this.createServiceSection({
             ...payload,
             id: this.$router.history.current.params.id
           });
-          this.notifyVue("Work Section Created Successfully", "success");
+          this.notifyVue("Service Section Created Successfully", "success");
         }
-        const { id } = this.workSectionData;
-        this.workSection = { ...emptyWorkSection };
-        this.$router.push(`/dashboard/works/sections/list/${id}`);
+        const { id } = this.serviceSectionData;
+        this.serviceSection = { ...emptyServiceSection };
+        this.$router.push(`/dashboard/services/sections/list/${id}`);
       } catch (errors) {
         JSON.parse(errors).forEach(error => {
           this.notifyVue(error.message, "danger");
@@ -175,17 +175,17 @@ export default {
   beforeMount() {
     if (
       !this.$router.history.current.params.data &&
-      this.$route.name === "Edit Work Section"
+      this.$route.name === "Edit Service Section"
     )
       this.$router.push({
-        path: "/dashboard/works"
+        path: "/dashboard/services"
       });
   },
   mounted() {
-    if (this.$route.name === "Edit Work Section") {
-      this.workSection.order = this.editData.order;
-      this.workSection.type = this.editData.type;
-      this.workSection.enabled = this.editData.enabled;
+    if (this.$route.name === "Edit Service Section") {
+      this.serviceSection.order = this.editData.order;
+      this.serviceSection.type = this.editData.type;
+      this.serviceSection.enabled = this.editData.enabled;
     }
   },
   components: {

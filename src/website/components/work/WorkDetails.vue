@@ -18,7 +18,7 @@
 <script>
 import DetailsNormalSection from "./DetailsNormalSection";
 import DetailsSpecialSection from "./DetailsSpecialSection";
-import * as WORK_SECTIONS_TYPES from "../../../constants/WorkSectionsTypes";
+import * as WORK_SECTIONS_TYPES from "../../../constants/SectionsTypes";
 export default {
   props: ["websiteWork"],
   components: {

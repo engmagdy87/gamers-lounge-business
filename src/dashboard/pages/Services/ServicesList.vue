@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col-sm">
-        <h2 class="heading-margin">Services ({{ servicesData.length }})</h2>
+        <h2 class="heading-margin">Services ({{ getServicesDataLength }})</h2>
       </div>
       <div class="col-sm">
         <router-link to="/dashboard/services/create">
@@ -18,7 +18,7 @@
     <Table
       class="table-hover table-striped"
       :columns="table.columns"
-      :data="servicesData"
+      :data="getServicesData"
       tableType="services"
       :setShowDeleteDialogFlag="setServiceDataFlags"
     >
@@ -48,6 +48,8 @@ export default {
         columns: [
           "Id",
           "Title",
+          "Order",
+          "Featured",
           "Description",
           "Card Image",
           "Cover Image",
@@ -59,7 +61,13 @@ export default {
   computed: {
     ...mapState({
       servicesData: state => state.services.services
-    })
+    }),
+    getServicesData() {
+      return this.servicesData.data || [];
+    },
+    getServicesDataLength() {
+      return this.servicesData.data ? this.servicesData.data.length : 0;
+    }
   },
   methods: {
     ...mapActions({
@@ -68,7 +76,7 @@ export default {
     }),
     async removeService() {
       const payload = {
-        serviceId: this.targetId,
+        id: this.targetId,
         locationInDataArray: this.locationInDataArray
       };
       try {
@@ -98,7 +106,16 @@ export default {
     DeleteDialog
   },
   mounted() {
-    this.fetchServices();
+    const data = {
+      first: 100,
+      page: 1
+    };
+    const requestSource = {
+      data,
+      requestSource: "dashboard",
+      showSpinner: true
+    };
+    this.fetchServices(requestSource);
   }
 };
 </script>

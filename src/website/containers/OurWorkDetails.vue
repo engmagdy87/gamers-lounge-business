@@ -28,7 +28,7 @@
       </div>
       <WorkDetails :websiteWork="websiteWork" v-if="websiteWork.sections" />
     </div>
-    <Intersect @enter="loadMoreWorks" v-if="worksPage > 0"
+    <Intersect @enter="loadMoreWorkSections" v-if="worksPage > 0"
       ><div class="threshold">
         <Loading :showLoading="showLoading" />
       </div>
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchWork: types.works.actions.FETCH_WEBSITE_WORK
+      fetchWorkSections: types.works.actions.FETCH_WEBSITE_WORK
     }),
     ...mapMutations({
       setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
@@ -85,12 +85,12 @@ export default {
     },
     fetchHeroAndFirstSection: async function() {
       let payload = this.generateWorkPayload(true, true);
-      await this.fetchWork(payload);
+      await this.fetchWorkSections(payload);
       this.worksPage++;
     },
     generateWorkPayload(showSpinner, firstFetch) {
       let data = {
-        workId: getEntityId(this.$route.params.workName)
+        id: getEntityId(this.$route.params.workName)
       };
       if (!firstFetch)
         data = {
@@ -105,7 +105,7 @@ export default {
       };
       return requestSource;
     },
-    loadMoreWorks: async function() {
+    loadMoreWorkSections: async function() {
       if (
         !this.showLoading &&
         (this.websiteWork.sections.data.length === 0 ||
@@ -113,7 +113,7 @@ export default {
       ) {
         this.showLoading = true;
         const payload = this.generateWorkPayload(false, false);
-        await this.fetchWork(payload);
+        await this.fetchWorkSections(payload);
         this.worksPage++;
         this.showLoading = false;
       }

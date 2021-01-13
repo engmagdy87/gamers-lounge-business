@@ -1,11 +1,10 @@
-const WORK_HERO = (id) => `
+const SERVICE_HERO = (id) => `
 query {
-   work(id: ${id}) {
+   service(id: ${id}) {
      id
      title
-     short_description
      description
-     statistics
+     order
      img_cover{
       id
       url
@@ -14,9 +13,9 @@ query {
  }
 `;
 
-const WORK_SECTIONS = (id, first, page) => `
+const SERVICE_SECTIONS = (id, first, page) => `
 query {
-   work(id: ${id}) {
+   service(id: ${id}) {
      sections(first: ${first}, page: ${page}, orderBy: { field: "order", order: ASC }) {
        paginatorInfo{                            
          hasMorePages            
@@ -53,9 +52,9 @@ query {
  }
 `;
 
-const WORK = ({ id, first, page }) => {
-  if (!first && !page) return WORK_HERO(id)
-  return WORK_SECTIONS(id, first, page)
+const SERVICE = ({ id, first, page }) => {
+  if (!first && !page) return SERVICE_HERO(id)
+  return SERVICE_SECTIONS(id, first, page)
 }
 
-export default WORK;
+export default SERVICE;

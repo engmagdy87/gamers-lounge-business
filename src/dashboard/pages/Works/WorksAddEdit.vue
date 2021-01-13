@@ -297,7 +297,7 @@ export default {
 
           if (Object.keys(imagesData).length > 0)
             payload = { ...payload, imagesData };
-          await this.updateWork({ ...payload, workId: this.editData.id });
+          await this.updateWork({ ...payload, id: this.editData.id });
           this.notifyVue("Work Updated Successfully", "success");
         } else {
           payload = {

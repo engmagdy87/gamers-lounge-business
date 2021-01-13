@@ -1,7 +1,7 @@
 const buildQuery = (workInfo, imagesData) => {
    if (!imagesData) return `mutation {
        updateWork(
-          id: ${workInfo.workId},
+          id: ${workInfo.id},
           input: {
              title: "${workInfo.title}"
              is_featured: ${workInfo.isFeatured}
@@ -39,7 +39,7 @@ const buildQuery = (workInfo, imagesData) => {
    `
    return `mutation${queryParams} {
       updateWork(
-         id: ${workInfo.workId},
+         id: ${workInfo.id},
          input: {
           title: "${workInfo.title}"
           is_featured: ${workInfo.isFeatured}

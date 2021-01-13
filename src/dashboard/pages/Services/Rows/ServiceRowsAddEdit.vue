@@ -3,16 +3,18 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/dashboard/works">Works</a>
+          <a href="/dashboard/services">Services</a>
         </li>
         <li class="breadcrumb-item">
-          <router-link :to="`/dashboard/works/sections/list/${workRowData.id}`"
-            >{{ workSectionData.title }} Work Sections</router-link
+          <router-link
+            :to="`/dashboard/services/sections/list/${serviceRowData.id}`"
+            >{{ serviceSectionData.title }} Service Sections</router-link
           >
         </li>
         <li class="breadcrumb-item">
-          <router-link :to="`/dashboard/works/rows/list/${workRowData.id}`"
-            >Section {{ workRowData.order }} Rows</router-link
+          <router-link
+            :to="`/dashboard/services/rows/list/${serviceRowData.id}`"
+            >Section {{ serviceRowData.order }} Rows</router-link
           >
         </li>
         <li class="breadcrumb-item active" aria-current="page">
@@ -28,7 +30,7 @@
             type="number"
             label="Row Order"
             placeholder="Enter Row Order"
-            v-model="workRow.order"
+            v-model="serviceRow.order"
             :isRequired="true"
             min="1"
           >
@@ -55,7 +57,7 @@ import store from "../../../../store/index";
 import types from "../../../../store/types";
 import isValidationErrorExist from "../../../../helpers/FormValidation";
 
-const emptyWorkRow = {
+const emptyServiceRow = {
   order: 1
 };
 
@@ -64,8 +66,8 @@ export default {
     return {
       editData: this.$router.history.current.params.data,
       operation: this.$route.name,
-      workRow: {
-        ...emptyWorkRow
+      serviceRow: {
+        ...emptyServiceRow
       },
       errors: {},
       validation: {
@@ -78,8 +80,8 @@ export default {
   },
   computed: {
     ...mapState({
-      workRowData: state => state.works.workRows,
-      workSectionData: state => state.works.workSections
+      serviceRowData: state => state.services.serviceRows,
+      serviceSectionData: state => state.services.serviceSections
     }),
     sectionId() {
       return this.$router.history.current.params.sectionId;
@@ -87,12 +89,12 @@ export default {
   },
   methods: {
     ...mapActions({
-      createWorkRow: types.works.actions.CREATE_WORK_ROW,
-      updateWorkRow: types.works.actions.UPDATE_WORK_ROW
+      createServiceRow: types.services.actions.CREATE_SERVICE_ROW,
+      updateServiceRow: types.services.actions.UPDATE_SERVICE_ROW
     }),
     saveData: async function() {
       const errorObject = isValidationErrorExist(
-        this.workRow,
+        this.serviceRow,
         this.aliases,
         this.validation
       );
@@ -100,26 +102,26 @@ export default {
       if (errorObject.length !== 0) return;
       try {
         let payload = {
-          order: this.workRow.order
+          order: this.serviceRow.order
         };
         const { sectionId } = this.$router.history.current.params;
-        if (this.operation === "Edit Work Row") {
-          await this.updateWorkRow({
+        if (this.operation === "Edit Service Row") {
+          await this.updateServiceRow({
             ...payload,
             rowId: this.editData.id,
             sectionId: sectionId
           });
-          this.notifyVue("Work Row Updated Successfully", "success");
+          this.notifyVue("Service Row Updated Successfully", "success");
         } else {
-          await this.createWorkRow({
+          await this.createServiceRow({
             ...payload,
             sectionId: sectionId
           });
-          this.notifyVue("Work Row Created Successfully", "success");
+          this.notifyVue("Service Row Created Successfully", "success");
         }
-        const { id } = this.workRowData;
-        this.workRow = { ...emptyWorkRow };
-        this.$router.push(`/dashboard/works/rows/list/${id}`);
+        const { id } = this.serviceRowData;
+        this.serviceRow = { ...emptyServiceRow };
+        this.$router.push(`/dashboard/services/rows/list/${id}`);
       } catch (errors) {
         JSON.parse(errors).forEach(error => {
           this.notifyVue(error.message, "danger");
@@ -138,15 +140,15 @@ export default {
   beforeMount() {
     if (
       !this.$router.history.current.params.data &&
-      this.$route.name === "Edit Work Row"
+      this.$route.name === "Edit Service Row"
     )
       this.$router.push({
-        path: "/dashboard/works"
+        path: "/dashboard/services"
       });
   },
   mounted() {
-    if (this.$route.name === "Edit Work Row") {
-      this.workRow.order = this.editData.order;
+    if (this.$route.name === "Edit Service Row") {
+      this.serviceRow.order = this.editData.order;
     }
   },
   components: {

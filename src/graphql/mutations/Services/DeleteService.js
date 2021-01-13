@@ -1,8 +1,8 @@
 const DELETE_SERVICE = (
-    serviceId
+    id
 ) => `
 mutation{
-    deleteService(id: ${serviceId}){
+    deleteService(id: ${id}){
       id
    }
 }

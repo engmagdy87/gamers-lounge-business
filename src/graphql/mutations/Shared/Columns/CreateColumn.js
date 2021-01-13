@@ -1,8 +1,8 @@
-const buildQuery = (workColumnInfo, imagesData, videosData) => {
-   const { columnId, rowId,
+const buildQuery = (columnInfo, imagesData, videosData) => {
+   const { rowId,
       order,
       content,
-      type, ratio, fillable } = workColumnInfo;
+      type, ratio, fillable, isAutoPlay } = columnInfo;
 
    let queryParams = '(';
    let imagesKeys = 'images: {'
@@ -15,7 +15,7 @@ const buildQuery = (workColumnInfo, imagesData, videosData) => {
 
    if (videosData.vid_content.length > 0) {
       queryParams += '$vid_content: [Upload!],';
-      videosKeys += `vid_content: { upload: { file: $vid_content } }`
+      videosKeys += `vid_content: { upload: { file: $vid_content, is_auto_play:${isAutoPlay} } }`
    }
 
    if (queryParams === '(') queryParams = ''
@@ -28,9 +28,8 @@ const buildQuery = (workColumnInfo, imagesData, videosData) => {
    else videosKeys += '}'
 
    return `mutation${queryParams} {
-      updateColumn(
+      createColumn(
          input: {
-            column_id: ${columnId}
             row_id: ${rowId}
             order: ${order}
             content: "${content}"
@@ -47,8 +46,8 @@ const buildQuery = (workColumnInfo, imagesData, videosData) => {
     `
 }
 
-const UPDATE_WORK_COLUMN = (
-   workColumnInfo, imagesData, videosData
-) => buildQuery(workColumnInfo, imagesData, videosData)
+const CREATE_COLUMN = (
+   columnInfo, imagesData, videosData
+) => buildQuery(columnInfo, imagesData, videosData)
 
-export default UPDATE_WORK_COLUMN;
+export default CREATE_COLUMN;

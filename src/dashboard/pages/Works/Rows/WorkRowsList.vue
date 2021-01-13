@@ -22,7 +22,7 @@
         </h2>
       </div>
       <div class="col-sm">
-        <router-link :to="`/dashboard/works/rows/create/${workSectionId}`">
+        <router-link :to="`/dashboard/works/rows/create/${sectionId}`">
           <button
             type="button"
             class="btn btn-secondary d-block ml-auto heading-margin"
@@ -72,18 +72,18 @@ export default {
       workSections: state => state.works.workSections,
       isWorkRowsFetched: state => state.works.isWorkRowsFetched
     }),
-    workSectionId() {
-      return this.$route.params.workSectionId;
+    sectionId() {
+      return this.$route.params.sectionId;
     }
   },
   methods: {
     ...mapActions({
-      fetchWorkRows: types.works.actions.FETCH_WORK_ROWS,
+      fetchRows: types.works.actions.FETCH_WORK_ROWS,
       deleteWorkRow: types.works.actions.DELETE_WORK_ROW
     }),
     async removeWorkRow() {
       const payload = {
-        workRowId: this.targetId,
+        rowId: this.targetId,
         locationInDataArray: this.locationInDataArray
       };
       try {
@@ -113,9 +113,9 @@ export default {
     DeleteDialog
   },
   mounted() {
-    const { workSectionId } = this.$route.params;
-    const payload = { workSectionId, requestSource: "dashboard" };
-    this.fetchWorkRows(payload);
+    const { sectionId } = this.$route.params;
+    const payload = { sectionId, requestSource: "dashboard" };
+    this.fetchRows(payload);
   }
 };
 </script>

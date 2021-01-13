@@ -3,20 +3,22 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/dashboard/works">Works</a>
+          <a href="/dashboard/services">Services</a>
         </li>
         <li class="breadcrumb-item">
-          <router-link :to="`/dashboard/works/sections/list/${workSections.id}`"
-            >{{ workSections.title }} Work Sections</router-link
+          <router-link
+            :to="`/dashboard/services/sections/list/${serviceSections.id}`"
+            >{{ serviceSections.title }} Service Sections</router-link
           >
         </li>
         <li class="breadcrumb-item">
-          <router-link :to="`/dashboard/works/rows/list/${workRowsData.id}`"
-            >Section {{ workRowsData.order }} Rows</router-link
+          <router-link
+            :to="`/dashboard/services/rows/list/${serviceRowsData.id}`"
+            >Section {{ serviceRowsData.order }} Rows</router-link
           >
         </li>
         <li class="breadcrumb-item" aria-current="page">
-          <router-link :to="`/dashboard/works/columns/list/${rowId}`">
+          <router-link :to="`/dashboard/services/columns/list/${rowId}`">
             Columns
           </router-link>
         </li>
@@ -62,7 +64,7 @@
             'column',
             currentWidth() === 100 ? 'column--full' : 'column--not-full'
           ]"
-          v-for="(col, i) in workRowData.columns"
+          v-for="(col, i) in serviceRowData.columns"
           :key="i"
           :style="`width:${col.ratio}%`"
         >
@@ -77,7 +79,7 @@
             type="number"
             label="Order"
             placeholder="Enter Order"
-            v-model="workColumn.order"
+            v-model="serviceColumn.order"
             :autofocus="true"
             :isRequired="true"
           >
@@ -91,16 +93,16 @@
             >
             <select
               class="form-control"
-              v-model="workColumn.type"
+              v-model="serviceColumn.type"
               @change="
                 e => setRequiredFieldsAccrodingToContentType(e.target.value)
               "
             >
               <option value="-1">--Please choose content type</option>
               <option
-                v-for="(type, i) in WORK_COLUMNS_CONTENT_TYPES"
+                v-for="(type, i) in SERVICE_COLUMNS_CONTENT_TYPES"
                 :key="i"
-                ::selected="workColumn.type === type"
+                ::selected="serviceColumn.type === type"
                 :value="type"
                 >{{ type.toLowerCase() }}</option
               >
@@ -116,7 +118,7 @@
             step="0.1"
             label="Width in %"
             placeholder="Enter Width in %"
-            v-model="workColumn.ratio"
+            v-model="serviceColumn.ratio"
             :isRequired="true"
           >
           </base-input>
@@ -128,7 +130,7 @@
               type="checkbox"
               class="custom-control-input"
               id="fillable"
-              v-model="workColumn.fillable"
+              v-model="serviceColumn.fillable"
             />
             <label class="custom-control-label" for="fillable"
               >Has Content</label
@@ -141,7 +143,7 @@
               type="checkbox"
               class="custom-control-input"
               id="isAutoPlay"
-              v-model="workColumn.isAutoPlay"
+              v-model="serviceColumn.isAutoPlay"
               @change="updateVideoData"
             />
             <label class="custom-control-label" for="isAutoPlay"
@@ -156,11 +158,15 @@
             type="text"
             label="Tile"
             placeholder="Enter Title"
-            v-model="workColumn.title"
-            :isRequired="workColumn.type === WORK_COLUMNS_CONTENT_TYPES.TITLE"
+            v-model="serviceColumn.title"
+            :isRequired="
+              serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.TITLE
+            "
           >
           </base-input>
-          <div v-if="workColumn.type === WORK_COLUMNS_CONTENT_TYPES.TITLE">
+          <div
+            v-if="serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.TITLE"
+          >
             <ErrorMessage :fieldErrors="errors.title" />
           </div>
         </div>
@@ -172,7 +178,8 @@
               >Description<span
                 class="error-message"
                 v-if="
-                  workColumn.type === WORK_COLUMNS_CONTENT_TYPES.DESCRIPTION
+                  serviceColumn.type ===
+                    SERVICE_COLUMNS_CONTENT_TYPES.DESCRIPTION
                 "
               >
                 *</span
@@ -182,10 +189,12 @@
               :actions="editorOptions"
               :style-with-css="false"
               placeholder=""
-              v-model="workColumn.description"
+              v-model="serviceColumn.description"
             />
             <div
-              v-if="workColumn.type === WORK_COLUMNS_CONTENT_TYPES.DESCRIPTION"
+              v-if="
+                serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.DESCRIPTION
+              "
             >
               <ErrorMessage :fieldErrors="errors.description" />
             </div>
@@ -199,8 +208,8 @@
             <label class="mr-5"
               >Choose Content Images<span
                 v-if="
-                  workColumn.type === WORK_COLUMNS_CONTENT_TYPES.IMAGE ||
-                    workColumn.type === WORK_COLUMNS_CONTENT_TYPES.SLIDER
+                  serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.IMAGE ||
+                    serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.SLIDER
                 "
                 class="error-message"
               >
@@ -211,7 +220,9 @@
               type="file"
               id="media-images"
               accept="image/png, image/jpeg, image/gif"
-              :multiple="workColumn.type === WORK_COLUMNS_CONTENT_TYPES.SLIDER"
+              :multiple="
+                serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.SLIDER
+              "
               ref="img_content"
               @change="e => setFile(e, 'img_content')"
             />
@@ -219,7 +230,7 @@
             <div
               v-if="
                 editData !== undefined &&
-                  (operation === 'Edit Work Column' ||
+                  (operation === 'Edit Service Column' ||
                     (editData.img_content !== null &&
                       editData.img_content !== null))
               "
@@ -236,8 +247,8 @@
             </div>
             <div
               v-if="
-                workColumn.type === WORK_COLUMNS_CONTENT_TYPES.IMAGE ||
-                  workColumn.type === WORK_COLUMNS_CONTENT_TYPES.SLIDER
+                serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.IMAGE ||
+                  serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.SLIDER
               "
             >
               <ErrorMessage :fieldErrors="errors.img_content" />
@@ -252,7 +263,9 @@
           <div>
             <label class="mr-5"
               >Choose Content Videos<span
-                v-if="workColumn.type === WORK_COLUMNS_CONTENT_TYPES.VIDEO"
+                v-if="
+                  serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.VIDEO
+                "
                 class="error-message"
               >
                 *</span
@@ -269,7 +282,7 @@
             <div
               v-if="
                 editData !== undefined &&
-                  (operation === 'Edit Work Column' ||
+                  (operation === 'Edit Service Column' ||
                     (editData.vid_content !== null &&
                       editData.vid_content !== null))
               "
@@ -284,7 +297,9 @@
                 :videoIndex="index"
               />
             </div>
-            <div v-if="workColumn.type === WORK_COLUMNS_CONTENT_TYPES.VIDEO">
+            <div
+              v-if="serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.VIDEO"
+            >
               <ErrorMessage :fieldErrors="errors.vid_content" />
             </div>
           </div>
@@ -324,7 +339,7 @@ import ImagePreview from "../../../../website/shared/ImagePreview.vue";
 import VideoPreview from "../../../../website/shared/VideoPreview";
 import DeleteDialog from "../../../../website/shared/DeleteDialog";
 import { reformatHTMLString } from "../../../../helpers/StringsHelper";
-import * as WORK_COLUMNS_CONTENT_TYPES from "../../../../constants/ColumnsContentTypes";
+import * as SERVICE_COLUMNS_CONTENT_TYPES from "../../../../constants/ColumnsContentTypes";
 
 const emptyColumnSection = {
   order: 1,
@@ -343,7 +358,7 @@ export default {
     return {
       editData: this.$router.history.current.params.data,
       operation: this.$route.name,
-      workColumn: {
+      serviceColumn: {
         ...emptyColumnSection
       },
       openedFor: "",
@@ -380,12 +395,12 @@ export default {
   },
   computed: {
     ...mapState({
-      workRowData: state => state.works.workRow,
-      workRowsData: state => state.works.workRows,
-      workSections: state => state.works.workSections
+      serviceRowData: state => state.services.serviceRow,
+      serviceRowsData: state => state.services.serviceRows,
+      serviceSections: state => state.services.serviceSections
     }),
-    WORK_COLUMNS_CONTENT_TYPES() {
-      return WORK_COLUMNS_CONTENT_TYPES;
+    SERVICE_COLUMNS_CONTENT_TYPES() {
+      return SERVICE_COLUMNS_CONTENT_TYPES;
     },
     rowId() {
       return this.$router.history.current.params.rowId;
@@ -393,21 +408,21 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchColumnsRows: types.works.actions.FETCH_WORK_COLUMNS,
-      createColumn: types.works.actions.CREATE_WORK_COLUMN,
-      updateColumn: types.works.actions.UPDATE_WORK_COLUMN,
-      updateVideo: types.works.actions.UPDATE_VIDEO,
+      fetchColumnsRows: types.services.actions.FETCH_SERVICE_COLUMNS,
+      createColumn: types.services.actions.CREATE_SERVICE_COLUMN,
+      updateColumn: types.services.actions.UPDATE_SERVICE_COLUMN,
+      updateVideo: types.services.actions.UPDATE_VIDEO,
       deleteImage: types.app.actions.DELETE_IMAGE,
       deleteVideo: types.app.actions.DELETE_VIDEO
     }),
     updateVideoData: async function() {
       if (
-        this.operation === "Edit Work Column" &&
-        this.workColumn.type === WORK_COLUMNS_CONTENT_TYPES.VIDEO
+        this.operation === "Edit Service Column" &&
+        this.serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.VIDEO
       ) {
         const payload = {
-          videoId: this.workColumn.vid_content[0].id,
-          isAutoPlay: this.workColumn.isAutoPlay
+          videoId: this.serviceColumn.vid_content[0].id,
+          isAutoPlay: this.serviceColumn.isAutoPlay
         };
         await this.updateVideo(payload);
       }
@@ -421,19 +436,19 @@ export default {
         "videos content"
       ];
       switch (value) {
-        case WORK_COLUMNS_CONTENT_TYPES.TITLE:
+        case SERVICE_COLUMNS_CONTENT_TYPES.TITLE:
           key = "title";
           break;
-        case WORK_COLUMNS_CONTENT_TYPES.DESCRIPTION:
+        case SERVICE_COLUMNS_CONTENT_TYPES.DESCRIPTION:
           key = "description";
           break;
-        case WORK_COLUMNS_CONTENT_TYPES.IMAGE:
+        case SERVICE_COLUMNS_CONTENT_TYPES.IMAGE:
           key = "images content";
           break;
-        case WORK_COLUMNS_CONTENT_TYPES.SLIDER:
+        case SERVICE_COLUMNS_CONTENT_TYPES.SLIDER:
           key = "images content";
           break;
-        case WORK_COLUMNS_CONTENT_TYPES.VIDEO:
+        case SERVICE_COLUMNS_CONTENT_TYPES.VIDEO:
           key = "videos content";
           break;
 
@@ -447,7 +462,7 @@ export default {
     setFile(e, key) {
       const files = e.target.files;
       if (!files.length) return;
-      this.workColumn[key] = files;
+      this.serviceColumn[key] = files;
     },
     setImageDataFlag(flag, imageId, openedFor, imageIndex, contentType) {
       this.showFlag = flag;
@@ -465,12 +480,12 @@ export default {
     },
     currentWidth() {
       let sum = 0;
-      if (this.operation === "Edit Work Column")
-        this.workRowData.columns.forEach(col => {
+      if (this.operation === "Edit Service Column")
+        this.serviceRowData.columns.forEach(col => {
           if (col.id !== this.editData.id) sum += Number.parseFloat(col.ratio);
         });
       else
-        this.workRowData.columns.forEach(col => {
+        this.serviceRowData.columns.forEach(col => {
           sum += Number.parseFloat(col.ratio);
         });
       return sum.toFixed(1);
@@ -478,13 +493,13 @@ export default {
     calculateTotalWidth() {
       let sum = Number.parseFloat(this.currentWidth());
 
-      sum += Number.parseFloat(this.workColumn.ratio);
+      sum += Number.parseFloat(this.serviceColumn.ratio);
 
       return sum.toFixed(1);
     },
     saveData: async function() {
       const errorObject = isValidationErrorExist(
-        this.workColumn,
+        this.serviceColumn,
         this.aliases,
         this.validation
       );
@@ -500,16 +515,18 @@ export default {
       }
       try {
         let content = "";
-        if (this.workColumn.type === WORK_COLUMNS_CONTENT_TYPES.TITLE)
-          content = this.workColumn.title;
-        if (this.workColumn.type === WORK_COLUMNS_CONTENT_TYPES.DESCRIPTION)
-          content = reformatHTMLString(this.workColumn.description);
+        if (this.serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.TITLE)
+          content = this.serviceColumn.title;
+        if (
+          this.serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.DESCRIPTION
+        )
+          content = reformatHTMLString(this.serviceColumn.description);
         let payload = {
-          order: this.workColumn.order,
-          type: this.workColumn.type,
+          order: this.serviceColumn.order,
+          type: this.serviceColumn.type,
           content,
-          ratio: this.workColumn.ratio,
-          fillable: this.workColumn.fillable,
+          ratio: this.serviceColumn.ratio,
+          fillable: this.serviceColumn.fillable,
           imagesData: {
             img_content: this.$refs.img_content.files
           },
@@ -518,26 +535,29 @@ export default {
           }
         };
         const rowId = this.$router.history.current.params.rowId;
-        const { id } = this.workRowData;
-        if (this.operation === "Edit Work Column") {
+        const { id } = this.serviceRowData;
+        if (this.operation === "Edit Service Column") {
           await this.updateColumn({
             ...payload,
             columnId: this.editData.id,
             rowId
           });
-          this.notifyVue("Work Column Updated Successfully", "success");
-          this.workColumn = { ...emptyColumnSection };
-          this.$router.push(`/dashboard/works/columns/list/${id}`);
+          this.notifyVue("Service Column Updated Successfully", "success");
+          this.serviceColumn = { ...emptyColumnSection };
+          this.$router.push(`/dashboard/services/columns/list/${id}`);
         } else {
           await this.createColumn({
             ...payload,
             rowId,
-            isAutoPlay: this.workColumn.isAutoPlay
+            isAutoPlay: this.serviceColumn.isAutoPlay
           });
-          const fetchPayload = { rowId: rowId, requestSource: "dashboard" };
+          const fetchPayload = {
+            rowId: rowId,
+            requestSource: "dashboard"
+          };
           await this.fetchColumnsRows(fetchPayload);
-          this.workColumn = { ...emptyColumnSection };
-          this.notifyVue("Work Column Created Successfully", "success");
+          this.serviceColumn = { ...emptyColumnSection };
+          this.notifyVue("Service Column Created Successfully", "success");
         }
       } catch (errors) {
         JSON.parse(errors).forEach(error => {
@@ -550,7 +570,7 @@ export default {
 
       switch (this.openedFor) {
         case "img_content":
-          this.workColumn.img_content.splice(this.imageIndex, 1);
+          this.serviceColumn.img_content.splice(this.imageIndex, 1);
           break;
 
         default:
@@ -565,7 +585,7 @@ export default {
 
       switch (this.openedFor) {
         case "vid_content":
-          this.workColumn.vid_content.splice(this.videoIndex, 1);
+          this.serviceColumn.vid_content.splice(this.videoIndex, 1);
           break;
 
         default:
@@ -587,27 +607,27 @@ export default {
   beforeMount() {
     if (
       !this.$router.history.current.params.data &&
-      this.$route.name === "Edit Work Column"
+      this.$route.name === "Edit Service Column"
     )
       this.$router.push({
-        path: "/dashboard/works"
+        path: "/dashboard/services"
       });
   },
   mounted() {
-    if (this.$route.name === "Edit Work Column") {
-      this.workColumn.order = this.editData.order;
-      this.workColumn.type = this.editData.type;
-      this.workColumn.ratio = this.editData.ratio;
-      this.workColumn.fillable = this.editData.fillable;
-      this.workColumn.isAutoPlay = this.editData.vid_content[0]
+    if (this.$route.name === "Edit Service Column") {
+      this.serviceColumn.order = this.editData.order;
+      this.serviceColumn.type = this.editData.type;
+      this.serviceColumn.ratio = this.editData.ratio;
+      this.serviceColumn.fillable = this.editData.fillable;
+      this.serviceColumn.isAutoPlay = this.editData.vid_content[0]
         ? this.editData.vid_content[0].is_auto_play
         : false;
-      this.workColumn.img_content = this.editData.img_content;
-      this.workColumn.vid_content = this.editData.vid_content;
-      if (this.editData.type === WORK_COLUMNS_CONTENT_TYPES.TITLE)
-        this.workColumn.title = this.editData.content;
-      if (this.editData.type === WORK_COLUMNS_CONTENT_TYPES.DESCRIPTION)
-        this.workColumn.description = this.editData.content;
+      this.serviceColumn.img_content = this.editData.img_content;
+      this.serviceColumn.vid_content = this.editData.vid_content;
+      if (this.editData.type === SERVICE_COLUMNS_CONTENT_TYPES.TITLE)
+        this.serviceColumn.title = this.editData.content;
+      if (this.editData.type === SERVICE_COLUMNS_CONTENT_TYPES.DESCRIPTION)
+        this.serviceColumn.description = this.editData.content;
       this.setRequiredFieldsAccrodingToContentType(this.editData.type);
     }
   },

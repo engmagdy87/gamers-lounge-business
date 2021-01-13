@@ -80,7 +80,7 @@ export default {
       const payload = this.generateWorkPayload(false);
 
       if (Object.keys(this.ourWorks).length > 0) {
-        if (this.ourWorks.paginatorInfo.hasMorePages) {
+        if (!this.showLoading && this.ourWorks.paginatorInfo.hasMorePages) {
           this.showLoading = true;
           await this.fetchWorks(payload);
           this.showLoading = false;

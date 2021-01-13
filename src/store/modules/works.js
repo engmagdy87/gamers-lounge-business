@@ -151,10 +151,10 @@ const fetchHomePageWorkData = async ({ commit }) => {
 };
 
 const fetchWorkSectionsData = async ({ commit }, payload) => {
-    const { workId, requestSource } = payload;
+    const { id, requestSource } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await APIs.fetchWorkSections(workId)
+        const response = await APIs.fetchWorkSections(id)
         commit(types.works.mutations.SET_WORK_SECTIONS, response)
         commit(types.works.mutations.SET_IS_WORK_SECTIONS_FETCHED, true)
         if (requestSource === 'website')
@@ -169,10 +169,10 @@ const fetchWorkSectionsData = async ({ commit }, payload) => {
 };
 
 const fetchWorkSectionData = async ({ commit }, payload) => {
-    const { workId, requestSource } = payload;
+    const { id, requestSource } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await APIs.fetchWorkSection(workId)
+        const response = await APIs.fetchWorkSection(id)
         commit(types.works.mutations.SET_WORK_SECTION, response)
         commit(types.works.mutations.SET_IS_WORK_SECTION_FETCHED, true)
         if (requestSource === 'website')
@@ -187,10 +187,10 @@ const fetchWorkSectionData = async ({ commit }, payload) => {
 };
 
 const fetchWorkRowData = async ({ commit }, payload) => {
-    const { workSectionId, requestSource } = payload;
+    const { sectionId, requestSource } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await APIs.fetchWorkRows(workSectionId)
+        const response = await APIs.fetchRows(sectionId)
         commit(types.works.mutations.SET_WORK_ROWS, response)
         commit(types.works.mutations.SET_IS_WORK_ROWS_FETCHED, true)
         if (requestSource === 'website')
@@ -218,7 +218,7 @@ const createWorkData = async ({ commit }, data) => {
 const createWorkSectionData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await APIs.createWorkSection(data)
+        await APIs.createSection(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -229,7 +229,7 @@ const createWorkSectionData = async ({ commit }, data) => {
 const createWorkRowData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await APIs.createWorkRow(data)
+        await APIs.createRow(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -237,11 +237,11 @@ const createWorkRowData = async ({ commit }, data) => {
     }
 };
 
-const fetchWorkColumnsData = async ({ commit }, payload) => {
-    const { workRowId, requestSource } = payload;
+const fetchColumnsData = async ({ commit }, payload) => {
+    const { rowId, requestSource } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await APIs.fetchWorkColumns(workRowId)
+        const response = await APIs.fetchColumns(rowId)
         commit(types.works.mutations.SET_WORK_COLUMNS, response)
         commit(types.works.mutations.SET_IS_WORK_COLUMNS_FETCHED, true)
         if (requestSource === 'website')
@@ -258,7 +258,7 @@ const fetchWorkColumnsData = async ({ commit }, payload) => {
 const createWorkColumnData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await APIs.createWorkColumn(data)
+        await APIs.createColumn(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -267,10 +267,10 @@ const createWorkColumnData = async ({ commit }, data) => {
 };
 
 const deleteWorkData = async ({ commit }, payload) => {
-    const { workId, locationInDataArray } = payload;
+    const { id, locationInDataArray } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await APIs.deleteWork(workId)
+        await APIs.deleteWork(id)
         commit(types.works.mutations.REMOVE_DELETED_WORK, locationInDataArray);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
@@ -280,10 +280,10 @@ const deleteWorkData = async ({ commit }, payload) => {
 };
 
 const deleteWorkRowData = async ({ commit }, payload) => {
-    const { workRowId, locationInDataArray } = payload;
+    const { rowId, locationInDataArray } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await APIs.deleteWorkRow(workRowId)
+        await APIs.deleteRow(rowId)
         commit(types.works.mutations.REMOVE_DELETED_WORK_ROW, locationInDataArray);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
@@ -293,10 +293,10 @@ const deleteWorkRowData = async ({ commit }, payload) => {
 };
 
 const deleteWorkSectionData = async ({ commit }, payload) => {
-    const { workSectionId, locationInDataArray } = payload;
+    const { sectionId, locationInDataArray } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await APIs.deleteWorkSection(workSectionId)
+        await APIs.deleteSection(sectionId)
         commit(types.works.mutations.REMOVE_DELETED_WORK_SECTION, locationInDataArray);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
@@ -306,10 +306,10 @@ const deleteWorkSectionData = async ({ commit }, payload) => {
 };
 
 const deleteWorkColumnData = async ({ commit }, payload) => {
-    const { workColumnId, locationInDataArray } = payload;
+    const { columnId, locationInDataArray } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await APIs.deleteWorkColumn(workColumnId)
+        await APIs.deleteColumn(columnId)
         commit(types.works.mutations.REMOVE_DELETED_WORK_COLUMN, locationInDataArray);
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
@@ -332,7 +332,7 @@ const updateWorkData = async ({ commit }, data) => {
 const updateWorkSectionData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await APIs.updateWorkSection(data)
+        await APIs.updateSection(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -343,7 +343,7 @@ const updateWorkSectionData = async ({ commit }, data) => {
 const updateWorkRowData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await APIs.updateWorkRow(data)
+        await APIs.updateRow(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -354,7 +354,7 @@ const updateWorkRowData = async ({ commit }, data) => {
 const updateWorkColumnData = async ({ commit }, data) => {
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        await APIs.updateWorkColumn(data)
+        await APIs.updateColumn(data)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
@@ -389,7 +389,7 @@ const actions = {
     [types.works.actions.CREATE_WORK_ROW]: createWorkRowData,
     [types.works.actions.DELETE_WORK_ROW]: deleteWorkRowData,
     [types.works.actions.UPDATE_WORK_ROW]: updateWorkRowData,
-    [types.works.actions.FETCH_WORK_COLUMNS]: fetchWorkColumnsData,
+    [types.works.actions.FETCH_WORK_COLUMNS]: fetchColumnsData,
     [types.works.actions.CREATE_WORK_COLUMN]: createWorkColumnData,
     [types.works.actions.DELETE_WORK_COLUMN]: deleteWorkColumnData,
     [types.works.actions.UPDATE_WORK_COLUMN]: updateWorkColumnData,

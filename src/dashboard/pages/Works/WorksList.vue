@@ -78,7 +78,7 @@ export default {
     }),
     async removeWork() {
       const payload = {
-        workId: this.targetId,
+        id: this.targetId,
         locationInDataArray: this.locationInDataArray
       };
       try {

@@ -1,30 +1,36 @@
 <template>
-  <div v-if="isServiceSectionsFetched">
+  <div v-if="isServiceRowsFetched">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="/dashboard/services">Services</a>
         </li>
+        <li class="breadcrumb-item">
+          <router-link
+            :to="`/dashboard/services/sections/list/${serviceSections.id}`"
+            >{{ serviceSections.title }} Service Sections</router-link
+          >
+        </li>
         <li class="breadcrumb-item active" aria-current="page">
-          {{ serviceData.title }} Sections
+          Section {{ serviceRowsData.order }} Rows
         </li>
       </ol>
     </nav>
     <div class="row">
       <div class="col-sm">
         <h2 class="heading-margin">
-          {{ serviceData.title }} Sections ({{
-            serviceData.sections.data.length
+          Section {{ serviceRowsData.order }} Rows ({{
+            serviceRowsData.rows.length
           }})
         </h2>
       </div>
       <div class="col-sm">
-        <router-link :to="`/dashboard/services/sections/create/${serviceId}`">
+        <router-link :to="`/dashboard/services/rows/create/${sectionId}`">
           <button
             type="button"
             class="btn btn-secondary d-block ml-auto heading-margin"
           >
-            Add Service Section
+            Add Row in Service Row
           </button>
         </router-link>
       </div>
@@ -32,16 +38,16 @@
     <Table
       class="table-hover table-striped"
       :columns="table.columns"
-      :data="serviceData.sections.data"
-      tableType="serviceSections"
-      :setShowDeleteDialogFlag="setServiceSectionDataFlags"
+      :data="serviceRowsData.rows"
+      tableType="serviceRows"
+      :setShowDeleteDialogFlag="setServiceRowDataFlags"
     >
     </Table>
     <DeleteDialog
       :showFlag="showFlag"
-      item="Service Section"
-      :deleteAction="removeServiceSection"
-      :setShowDeleteDialogFlag="setServiceSectionDataFlags"
+      item="Service Row"
+      :deleteAction="removeServiceRow"
+      :setShowDeleteDialogFlag="setServiceRowDataFlags"
     />
   </div>
 </template>
@@ -59,52 +65,39 @@ export default {
       targetId: null,
       locationInDataArray: null,
       table: {
-        columns: [
-          "Id",
-          "Title",
-          "First Description",
-          "Second Description",
-          "Template",
-          "Order",
-          "First Media Type",
-          "First Images Content",
-          "First Videos Content",
-          "Second Media Type",
-          "Second Images Content",
-          "Second Videos Content",
-          "Actions"
-        ]
+        columns: ["Id", "Order", "Actions"]
       }
     };
   },
   computed: {
     ...mapState({
-      serviceData: state => state.services.serviceSections,
-      isServiceSectionsFetched: state => state.services.isServiceSectionsFetched
+      serviceRowsData: state => state.services.serviceRows,
+      serviceSections: state => state.services.serviceSections,
+      isServiceRowsFetched: state => state.services.isServiceRowsFetched
     }),
-    serviceId() {
-      return this.$route.params.serviceId;
+    sectionId() {
+      return this.$route.params.sectionId;
     }
   },
   methods: {
     ...mapActions({
-      fetchServiceSections: types.services.actions.FETCH_SERVICE_SECTION,
-      deleteServiceSection: types.services.actions.DELETE_SERVICE_SECTION
+      fetchServiceRows: types.services.actions.FETCH_SERVICE_ROWS,
+      deleteServiceRow: types.services.actions.DELETE_SERVICE_ROW
     }),
-    async removeServiceSection() {
+    async removeServiceRow() {
       const payload = {
-        serviceSectionId: this.targetId,
+        rowId: this.targetId,
         locationInDataArray: this.locationInDataArray
       };
       try {
-        await this.deleteServiceSection(payload);
-        this.setServiceSectionDataFlags(false, null, null);
-        this.notifyVue("Service Section Deleted Successfully", "success");
+        await this.deleteServiceRow(payload);
+        this.setServiceRowDataFlags(false, null, null);
+        this.notifyVue("Service Row Deleted Successfully", "success");
       } catch (error) {
         this.notifyVue("Error Happened", "danger");
       }
     },
-    setServiceSectionDataFlags(flag, id, locationInDataArray) {
+    setServiceRowDataFlags(flag, id, locationInDataArray) {
       this.showFlag = flag;
       this.targetId = id;
       this.locationInDataArray = locationInDataArray;
@@ -123,9 +116,9 @@ export default {
     DeleteDialog
   },
   mounted() {
-    const { serviceId } = this.$route.params;
-    const payload = { serviceId, requestSource: "dashboard" };
-    this.fetchServiceSections(payload);
+    const { sectionId } = this.$route.params;
+    const payload = { sectionId, requestSource: "dashboard" };
+    this.fetchServiceRows(payload);
   }
 };
 </script>

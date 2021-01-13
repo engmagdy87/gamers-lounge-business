@@ -13,7 +13,7 @@
     <h4 slot="header" class="card-name">{{ operation }}</h4>
     <form>
       <div class="row">
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-6">
           <base-input
             type="text"
             label="Title"
@@ -24,6 +24,30 @@
           >
           </base-input>
           <ErrorMessage :fieldErrors="errors.title" />
+        </div>
+        <div class="col-12 col-md-3">
+          <base-input
+            type="number"
+            label="Order"
+            placeholder="Enter Order"
+            v-model="service.order"
+            :isRequired="true"
+          >
+          </base-input>
+          <ErrorMessage :fieldErrors="errors.order" />
+        </div>
+        <div class="col-12 col-md-3 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="is_featured"
+              v-model="service.is_featured"
+            />
+            <label class="custom-control-label" for="is_featured"
+              >Featured</label
+            >
+          </div>
         </div>
       </div>
       <div class="row">
@@ -58,7 +82,7 @@
               v-if="
                 editData !== undefined &&
                   operation === 'Edit Service' &&
-                  editData.img_card !== null
+                  editData.img_card !== ''
               "
               :image="editData.img_card"
               :setShowDeleteDialogFlag="setImageDataFlag"
@@ -86,7 +110,7 @@
               v-if="
                 editData !== undefined &&
                   operation === 'Edit Service' &&
-                  editData.img_cover !== null
+                  editData.img_cover !== ''
               "
               :image="editData.img_cover"
               :setShowDeleteDialogFlag="setImageDataFlag"
@@ -126,11 +150,16 @@ import isValidationErrorExist from "../../../helpers/FormValidation";
 import editorOptions from "../../../dashboard/wysiwyg-factory/options";
 import ImagePreview from "../../../website/shared/ImagePreview.vue";
 import DeleteDialog from "../../../website/shared/DeleteDialog";
-import { reformatHTMLString } from "../../../helpers/StringsHelper";
+import {
+  reformatHTMLString,
+  reverseReformatHTMLString
+} from "../../../helpers/StringsHelper";
 
 const emptyService = {
   title: "",
+  order: 1,
   description: "",
+  is_featured: false,
   img_card: "",
   img_cover: ""
 };
@@ -150,23 +179,22 @@ export default {
       errors: {},
       validation: {
         title: { isRequired: true },
+        order: { isRequired: true },
+        is_featured: { isRequired: false },
         description: { isRequired: true },
         "card image": { isRequired: true },
         "cover image": { isRequired: true }
       },
       aliases: {
         title: "title",
+        order: "order",
+        is_featured: "is_featured",
         description: "description",
         img_card: "card image",
         img_cover: "cover image"
       },
       editorOptions
     };
-  },
-  computed: {
-    ...mapState({
-      servicesData: state => state.services.services
-    })
   },
   methods: {
     ...mapActions({
@@ -198,6 +226,8 @@ export default {
       try {
         let payload = {
           title: this.service.title,
+          order: this.service.order,
+          isFeatured: this.service.is_featured,
           description: reformatHTMLString(this.service.description)
         };
 
@@ -213,7 +243,7 @@ export default {
 
           if (Object.keys(imagesData).length > 0)
             payload = { ...payload, imagesData };
-          await this.updateService({ ...payload, serviceId: this.editData.id });
+          await this.updateService({ ...payload, id: this.editData.id });
           this.notifyVue("Service Updated Successfully", "success");
         } else {
           payload = {
@@ -239,11 +269,13 @@ export default {
 
       switch (this.openedFor) {
         case "img_card":
-          this.service.img_card = null;
+          this.editData.img_card = "";
+          this.service.img_card = "";
           break;
 
         case "img_cover":
-          this.service.img_cover = null;
+          this.editData.img_cover = "";
+          this.service.img_cover = "";
           break;
 
         default:
@@ -274,9 +306,11 @@ export default {
   mounted() {
     if (this.$route.name === "Edit Service") {
       this.service.title = this.editData.title;
-      this.service.description = this.editData.description;
-      this.service.img_card = this.editData.img_card;
-      this.service.img_cover = this.editData.img_cover;
+      this.service.order = this.editData.order;
+      this.service.is_featured = this.editData.is_featured;
+      this.service.description = this.editData.description || "";
+      this.service.img_card = this.editData.img_card || "";
+      this.service.img_cover = this.editData.img_cover || "";
     }
   },
   components: {

@@ -1,18 +1,20 @@
 <template>
-  <div v-if="isWorkRowFetched">
+  <div v-if="isServiceRowFetched">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/dashboard/works">Works</a>
+          <a href="/dashboard/services">Services</a>
         </li>
         <li class="breadcrumb-item">
-          <router-link :to="`/dashboard/works/sections/list/${workSections.id}`"
-            >{{ workSections.title }} Work Sections</router-link
+          <router-link
+            :to="`/dashboard/services/sections/list/${serviceSections.id}`"
+            >{{ serviceSections.title }} Service Sections</router-link
           >
         </li>
         <li class="breadcrumb-item">
-          <router-link :to="`/dashboard/works/rows/list/${workRowsData.id}`"
-            >Section {{ workRowsData.order }} Rows</router-link
+          <router-link
+            :to="`/dashboard/services/rows/list/${serviceRowsData.id}`"
+            >Section {{ serviceRowsData.order }} Rows</router-link
           >
         </li>
         <li class="breadcrumb-item active" aria-current="page">
@@ -23,16 +25,16 @@
     <div class="row">
       <div class="col-sm">
         <h2 class="heading-margin">
-          Columns ({{ workRowData.columns.length }})
+          Columns ({{ serviceRowData.columns.length }})
         </h2>
       </div>
       <div class="col-sm">
-        <router-link :to="`/dashboard/works/columns/create/${rowId}`">
+        <router-link :to="`/dashboard/services/columns/create/${rowId}`">
           <button
             type="button"
             class="btn btn-secondary d-block ml-auto heading-margin"
           >
-            Add Work Column
+            Add Service Column
           </button>
         </router-link>
       </div>
@@ -40,16 +42,16 @@
     <Table
       class="table-hover table-striped"
       :columns="table.columns"
-      :data="workRowData.columns"
-      tableType="workColumns"
-      :setShowDeleteDialogFlag="setWorkRowDataFlags"
+      :data="serviceRowData.columns"
+      tableType="serviceColumns"
+      :setShowDeleteDialogFlag="setServiceRowDataFlags"
     >
     </Table>
     <DeleteDialog
       :showFlag="showFlag"
-      item="Work Column"
-      :deleteAction="removeWorkRow"
-      :setShowDeleteDialogFlag="setWorkRowDataFlags"
+      item="Service Column"
+      :deleteAction="removeServiceRow"
+      :setShowDeleteDialogFlag="setServiceRowDataFlags"
     />
   </div>
 </template>
@@ -84,10 +86,10 @@ export default {
   },
   computed: {
     ...mapState({
-      workRowsData: state => state.works.workRows,
-      workRowData: state => state.works.workRow,
-      workSections: state => state.works.workSections,
-      isWorkRowFetched: state => state.works.isWorkRowFetched
+      serviceRowsData: state => state.services.serviceRows,
+      serviceRowData: state => state.services.serviceRow,
+      serviceSections: state => state.services.serviceSections,
+      isServiceRowFetched: state => state.services.isServiceRowFetched
     }),
     rowId() {
       return this.$route.params.rowId;
@@ -95,23 +97,23 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchColumnsRows: types.works.actions.FETCH_WORK_COLUMNS,
-      deleteColumnRow: types.works.actions.DELETE_WORK_COLUMN
+      fetchColumnsRows: types.services.actions.FETCH_SERVICE_COLUMNS,
+      deleteColumnRow: types.services.actions.DELETE_SERVICE_COLUMN
     }),
-    async removeWorkRow() {
+    async removeServiceRow() {
       const payload = {
         columnId: this.targetId,
         locationInDataArray: this.locationInDataArray
       };
       try {
         await this.deleteColumnRow(payload);
-        this.setWorkRowDataFlags(false, null, null);
-        this.notifyVue("Work Row Deleted Successfully", "success");
+        this.setServiceRowDataFlags(false, null, null);
+        this.notifyVue("Service Row Deleted Successfully", "success");
       } catch (error) {
         this.notifyVue("Error Happened", "danger");
       }
     },
-    setWorkRowDataFlags(flag, id, locationInDataArray) {
+    setServiceRowDataFlags(flag, id, locationInDataArray) {
       this.showFlag = flag;
       this.targetId = id;
       this.locationInDataArray = locationInDataArray;

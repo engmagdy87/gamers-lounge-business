@@ -44,7 +44,7 @@ export default {
   },
   mounted() {
     const requestSource = {
-      serviceId: getEntityId(this.$route.params.serviceName),
+      id: getEntityId(this.$route.params.serviceName),
       requestSource: "website"
     };
     this.breadcrumbTree.push({

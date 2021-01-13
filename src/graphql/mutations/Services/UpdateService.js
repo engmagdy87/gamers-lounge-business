@@ -1,10 +1,12 @@
 const buildQuery = (serviceInfo, imagesData) => {
    if (!imagesData) return `mutation {
       updateService(
-         id: ${serviceInfo.serviceId},
+         id: ${serviceInfo.id},
          input: {
             title: "${serviceInfo.title}"
             description: "${serviceInfo.description}"
+            order: ${serviceInfo.order}
+            is_featured: ${serviceInfo.isFeatured}
          }
       ) {
          id
@@ -35,10 +37,12 @@ images: {
 `
    return `mutation${queryParams} {
    updateService(
-      id: ${serviceInfo.serviceId},
+      id: ${serviceInfo.id},
       input: {
          title: "${serviceInfo.title}"
          description: "${serviceInfo.description}"
+         order: ${serviceInfo.order}
+         is_featured: ${serviceInfo.isFeatured}
          ${queryKeys}
       }
    ) {

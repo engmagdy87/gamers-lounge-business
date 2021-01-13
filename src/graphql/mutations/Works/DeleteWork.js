@@ -1,8 +1,8 @@
 const DELETE_WORK = (
-    workId
+    id
 ) => `
 mutation{
-    deleteWork(id: ${workId}){
+    deleteWork(id: ${id}){
       id
    }
 }

@@ -1,10 +1,17 @@
-const SERVICES = () => `
+const SERVICES = ({ first, page }) => `
 query{
-    services(first:50){      
+    services(first: ${first}, page: ${page},orderBy: { field: "order", order: ASC }) {    
+       paginatorInfo{                            
+          hasMorePages
+          currentPage    
+          total      
+       }  
        data{
           id
           title
           description
+          order
+          is_featured
           img_card{
              id
              url

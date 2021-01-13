@@ -2,8 +2,6 @@
   <tr>
     <th scope="row">{{ id }}</th>
     <td>{{ rowData.order }}</td>
-    <td>{{ rowData.type }}</td>
-    <td>{{ rowData.enabled ? "Yes" : "No" }}</td>
     <td class="table-actions">
       <img src="/images/edit.svg" alt="edit" @click="redirectTo" />
       <img
@@ -13,7 +11,7 @@
       />
       <router-link
         :to="{
-          path: `/dashboard/services/rows/list/${rowData.id}`
+          path: `/dashboard/services/columns/list/${rowData.id}`
         }"
       >
         <img src="/images/visibility.svg" alt="show" />
@@ -23,19 +21,12 @@
 </template>
 
 <script>
-import { reverseReformatHTMLString } from "../../../helpers/StringsHelper";
-
 export default {
   props: ["id", "rowData", "setShowDeleteDialogFlag"],
-  computed: {
-    statistics() {
-      return JSON.parse(reverseReformatHTMLString(this.rowData.statistics));
-    }
-  },
   methods: {
     redirectTo() {
       this.$router.push({
-        name: "Edit Service Section",
+        name: "Edit Service Row",
         params: { data: this.rowData }
       });
     }

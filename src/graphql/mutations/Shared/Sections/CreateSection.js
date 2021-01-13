@@ -1,15 +1,16 @@
-const CREATE_WORK_SECTION = (
+const CREATE_SECTION = (
    { type,
       enabled,
       order,
-      workId }
+      id,
+      sectionType }
 ) => `mutation {
    createSection(
       input: {
          type: ${type}
          enabled: ${enabled}
          order: ${order}
-         sectionable: { connect: { type: OUR_WORk, id: ${workId} } }
+         sectionable: { connect: { type: ${sectionType}, id: ${id} } }
       }
    ) {
       id
@@ -18,4 +19,4 @@ const CREATE_WORK_SECTION = (
 
  `;
 
-export default CREATE_WORK_SECTION;
+export default CREATE_SECTION;

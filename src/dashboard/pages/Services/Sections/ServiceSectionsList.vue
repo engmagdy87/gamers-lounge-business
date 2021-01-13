@@ -1,30 +1,30 @@
 <template>
-  <div v-if="isWorkSectionsFetched">
+  <div v-if="isServiceSectionsFetched">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/dashboard/works">Works</a>
+          <a href="/dashboard/services">Services</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
-          {{ workSections.title }} Work Sections
+          {{ serviceSections.title }} Service Sections
         </li>
       </ol>
     </nav>
     <div class="row">
       <div class="col-sm">
         <h2 class="heading-margin">
-          {{ workSections.title }} Work Sections ({{
-            workSections.sections.data.length
+          {{ serviceSections.title }} Service Sections ({{
+            serviceSections.sections.data.length
           }})
         </h2>
       </div>
       <div class="col-sm">
-        <router-link :to="`/dashboard/works/sections/create/${id}`">
+        <router-link :to="`/dashboard/services/sections/create/${id}`">
           <button
             type="button"
             class="btn btn-secondary d-block ml-auto heading-margin"
           >
-            Add Work Section
+            Add Service Section
           </button>
         </router-link>
       </div>
@@ -32,16 +32,16 @@
     <Table
       class="table-hover table-striped"
       :columns="table.columns"
-      :data="workSections.sections.data"
-      tableType="workSections"
-      :setShowDeleteDialogFlag="setWorkSectionDataFlags"
+      :data="serviceSections.sections.data"
+      tableType="serviceSections"
+      :setShowDeleteDialogFlag="setServiceSectionDataFlags"
     >
     </Table>
     <DeleteDialog
       :showFlag="showFlag"
-      item="Work Section"
-      :deleteAction="removeWorkSection"
-      :setShowDeleteDialogFlag="setWorkSectionDataFlags"
+      item="Service Section"
+      :deleteAction="removeServiceSection"
+      :setShowDeleteDialogFlag="setServiceSectionDataFlags"
     />
   </div>
 </template>
@@ -65,8 +65,8 @@ export default {
   },
   computed: {
     ...mapState({
-      workSections: state => state.works.workSections,
-      isWorkSectionsFetched: state => state.works.isWorkSectionsFetched
+      serviceSections: state => state.services.serviceSections,
+      isServiceSectionsFetched: state => state.services.isServiceSectionsFetched
     }),
     id() {
       return this.$route.params.id;
@@ -74,23 +74,23 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchWorkSections: types.works.actions.FETCH_WORK_SECTIONS,
-      deleteWorkSection: types.works.actions.DELETE_WORK_SECTION
+      fetchServiceSections: types.services.actions.FETCH_SERVICE_SECTIONS,
+      deleteServiceSection: types.services.actions.DELETE_SERVICE_SECTION
     }),
-    async removeWorkSection() {
+    async removeServiceSection() {
       const payload = {
         sectionId: this.targetId,
         locationInDataArray: this.locationInDataArray
       };
       try {
-        await this.deleteWorkSection(payload);
-        this.setWorkSectionDataFlags(false, null, null);
-        this.notifyVue("Work Section Deleted Successfully", "success");
+        await this.deleteServiceSection(payload);
+        this.setServiceSectionDataFlags(false, null, null);
+        this.notifyVue("Service Section Deleted Successfully", "success");
       } catch (error) {
         this.notifyVue("Error Happened", "danger");
       }
     },
-    setWorkSectionDataFlags(flag, id, locationInDataArray) {
+    setServiceSectionDataFlags(flag, id, locationInDataArray) {
       this.showFlag = flag;
       this.targetId = id;
       this.locationInDataArray = locationInDataArray;
@@ -111,7 +111,7 @@ export default {
   mounted() {
     const { id } = this.$route.params;
     const payload = { id, requestSource: "dashboard" };
-    this.fetchWorkSections(payload);
+    this.fetchServiceSections(payload);
   }
 };
 </script>
