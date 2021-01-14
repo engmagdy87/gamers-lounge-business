@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import DetailsNormalSection from "./DetailsNormalSection";
-import DetailsSpecialSection from "./DetailsSpecialSection";
+import DetailsNormalSection from "../../shared/WorkServiceSections/DetailsNormalSection";
+import DetailsSpecialSection from "../../shared/WorkServiceSections/DetailsSpecialSection";
 import * as WORK_SECTIONS_TYPES from "../../../constants/SectionsTypes";
 export default {
   props: ["websiteWork"],
@@ -34,5 +34,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/sass/website/components/work/work-details-section.scss";
+@import "../../../assets/sass/website/components/work/work-details.scss";
 </style>

@@ -172,7 +172,7 @@ const fetchServiceSectionData = async ({ commit }, payload) => {
     const { id, requestSource } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
-        const response = await APIs.fetchServiceSections(id)
+        const response = await APIs.fetchServiceSection(id)
         commit(types.services.mutations.SET_SERVICE_SECTION, response)
         commit(types.services.mutations.SET_IS_SERVICE_SECTION_FETCHED, true)
         if (requestSource === 'website')

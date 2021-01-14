@@ -2,7 +2,7 @@
   <div class="work-details-sections">
     <div
       class="work-details-sections__section"
-      v-for="section in websiteServices.sections.data"
+      v-for="section in websiteService.sections.data"
       :key="section.id"
       v-if="section.enabled"
     >
@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import DetailsNormalSection from "./DetailsNormalSection";
-import DetailsSpecialSection from "./DetailsSpecialSection";
+import DetailsNormalSection from "../../shared/WorkServiceSections/DetailsNormalSection";
+import DetailsSpecialSection from "../../shared/WorkServiceSections/DetailsSpecialSection";
 import * as WORK_SECTIONS_TYPES from "../../../constants/SectionsTypes";
 export default {
-  props: ["websiteServices"],
+  props: ["websiteService"],
   components: {
     DetailsNormalSection,
     DetailsSpecialSection
@@ -34,5 +34,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/sass/website/components/work/work-details-section.scss";
+@import "../../../assets/sass/website/components/work/work-details.scss";
 </style>
