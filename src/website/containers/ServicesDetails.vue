@@ -107,9 +107,6 @@ export default {
 
     this.setShowFooterFlag(false);
     this.fetchHeroAndFirstSection();
-    setTimeout(() => {
-      console.log(this.isWebsiteServiceFetched)
-    }, 10000);
     
   },
   updated() {
