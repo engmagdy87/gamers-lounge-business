@@ -1,19 +1,19 @@
 <template>
-  <div class="services-details-wrapper" v-if="isServiceSectionsFetched">
+  <div class="services-details-wrapper" v-if="isWebsiteServiceFetched">
     <div class="services-details-wrapper__cover-container">
-      <img :src="serviceSections.img_cover.url" :alt="serviceSections.title" />
-      <h1>{{ serviceSections.title }}</h1>
-      <p v-html="serviceSections.description"></p>
+      <img :src="websiteService.img_cover.url" :alt="websiteService.title" />
+      <h1>{{ websiteService.title }}</h1>
+      <p v-html="websiteService.description"></p>
     </div>
 
     <div class="services-details-wrapper__service-section pt-5">
       <div class="col-12 pt-5 pl-0"><Breadcrumb :tree="breadcrumbTree" /></div>
     </div>
 
-    <DetailsSection :websiteServices="serviceSections.sections.data" v-if="serviceSections.sections" />
+    <ServiceDetails :websiteService="websiteService" v-if="websiteService.sections" />
 
     <div>
-      <Intersect @enter="loadMoreWorkSections" v-if="servicePage > 0"
+      <Intersect @enter="loadMoreServiceSections" v-if="servicePage > 0"
         ><div class="threshold">
           <Loading :showLoading="showLoading" />
         </div>
@@ -26,7 +26,7 @@
 import { mapActions, mapState, mapMutations } from "vuex";
 import types from "../../store/types";
 import Breadcrumb from "../shared/Breadcrumb";
-import DetailsSection from "../components/services/ServiceDetails";
+import ServiceDetails from "../components/services/ServiceDetails";
 import Intersect from "vue-intersect";
 import Loading from "../../website/shared/Loading";
 import { getEntityId, getEntityName } from "../../helpers/StringsHelper";
@@ -42,29 +42,29 @@ export default {
   },
   components: {
     Breadcrumb,
-    DetailsSection,
+    ServiceDetails,
     Intersect,
     Loading
   },
   computed: {
     ...mapState({
-      serviceSections: state => state.services.serviceSections,
-      isServiceSectionsFetched: state => state.services.isServiceSectionsFetched
+      websiteService: state => state.services.websiteService,
+      isWebsiteServiceFetched: state => state.services.isWebsiteServiceFetched
     })
   },
   methods: {
     ...mapActions({
-      fetchServiceSections: types.services.actions.FETCH_SERVICE_SECTION
+      fetchServiceSections: types.services.actions.FETCH_WEBSITE_SERVICE
     }),
     ...mapMutations({
       setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
     }),
     fetchHeroAndFirstSection: async function() {
-      let payload = this.generateWorkPayload(true, true);
+      let payload = this.generateServicePayload(true, true);
       await this.fetchServiceSections(payload);
       this.servicePage++;
     },
-    generateWorkPayload(showSpinner, firstFetch) {
+    generateServicePayload(showSpinner, firstFetch) {
       let data = {
         id: getEntityId(this.$route.params.serviceName)
       };
@@ -81,14 +81,14 @@ export default {
       };
       return requestSource;
     },
-    loadMoreWorkSections: async function() {
+    loadMoreServiceSections: async function() {
       if (
         !this.showLoading &&
-        (this.serviceSections.sections.data.length === 0 ||
-          this.serviceSections.sections.paginatorInfo.hasMorePages)
+        (this.websiteService.sections.data.length === 0 ||
+          this.websiteService.sections.paginatorInfo.hasMorePages)
       ) {
         this.showLoading = true;
-        const payload = this.generateWorkPayload(false, false);
+        const payload = this.generateServicePayload(false, false);
         await this.fetchServiceSections(payload);
         this.servicePage++;
         this.showLoading = false;
@@ -107,11 +107,15 @@ export default {
 
     this.setShowFooterFlag(false);
     this.fetchHeroAndFirstSection();
+    setTimeout(() => {
+      console.log(this.isWebsiteServiceFetched)
+    }, 10000);
+    
   },
   updated() {
     if (
-      this.serviceSections.sections.paginatorInfo &&
-      !this.serviceSections.sections.paginatorInfo.hasMorePages
+      this.websiteService.sections.paginatorInfo &&
+      !this.websiteService.sections.paginatorInfo.hasMorePages
     )
       this.setShowFooterFlag(true);
   }

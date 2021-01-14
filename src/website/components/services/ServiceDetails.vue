@@ -2,7 +2,7 @@
   <div class="work-details-sections">
     <div
       class="work-details-sections__section"
-      v-for="section in websiteServices"
+      v-for="section in websiteServices.sections.data"
       :key="section.id"
       v-if="section.enabled"
     >
