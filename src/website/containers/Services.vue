@@ -1,7 +1,7 @@
 <template>
   <div class="services-wrapper">
     
-    <ServicesSection />
+    <ServicesMainPage />
 
   </div>
 </template>
@@ -10,10 +10,10 @@
 import { mapGetters, mapState, mapActions } from "vuex";
 import store from "../../store/index";
 import types from "../../store/types";
-import ServicesSection from "../components/services/ServicesSection";
+import ServicesMainPage from "../components/services/ServicesMainPage";
 
 export default {
-  components: { ServicesSection }
+  components: { ServicesMainPage }
 };
 </script>
 

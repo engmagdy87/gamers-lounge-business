@@ -2,7 +2,7 @@
   <div class="work-details-sections">
     <div
       class="work-details-sections__section"
-      v-for="section in websiteWork.sections.data"
+      v-for="section in websiteService.sections.data"
       :key="section.id"
       v-if="section.enabled"
     >
@@ -20,7 +20,7 @@ import DetailsNormalSection from "../../shared/WorkServiceSections/DetailsNormal
 import DetailsSpecialSection from "../../shared/WorkServiceSections/DetailsSpecialSection";
 import * as WORK_SECTIONS_TYPES from "../../../constants/SectionsTypes";
 export default {
-  props: ["websiteWork"],
+  props: ["websiteService"],
   components: {
     DetailsNormalSection,
     DetailsSpecialSection

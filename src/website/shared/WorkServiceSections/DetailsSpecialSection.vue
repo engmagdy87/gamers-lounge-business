@@ -126,5 +126,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/sass/website/components/work/work-details-section.scss";
+@import "../../../assets/sass/website/shared/work-service-sections/work-details-section.scss";
 </style>

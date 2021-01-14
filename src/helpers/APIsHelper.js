@@ -275,7 +275,7 @@ const fetchWebsiteServices = async (data) => {
     const response = await request({
       query: QUERY.SERVICES_WEBSITE(data),
     });
-    return response.data.data.services
+    return response.data.data.service
   } catch (error) {
     throw error;
   }
