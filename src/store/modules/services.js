@@ -168,24 +168,6 @@ const fetchServiceSectionsData = async ({ commit }, payload) => {
     }
 };
 
-const fetchServiceSectionData = async ({ commit }, payload) => {
-    const { id, requestSource } = payload;
-    commit(types.app.mutations.SET_SPINNER_FLAG, true)
-    try {
-        const response = await APIs.fetchServiceSection(id)
-        commit(types.services.mutations.SET_SERVICE_SECTION, response)
-        commit(types.services.mutations.SET_IS_SERVICE_SECTION_FETCHED, true)
-        if (requestSource === 'website')
-            showHeaderAndFooter(commit, true);
-        else showHeaderAndFooter(commit, false);
-        commit(types.app.mutations.SET_SPINNER_FLAG, false)
-    } catch (error) {
-        commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        commit(types.services.mutations.SET_IS_SERVICE_SECTION_FETCHED, false)
-        throw error.message
-    }
-};
-
 const fetchServiceRowData = async ({ commit }, payload) => {
     const { sectionId, requestSource } = payload;
     commit(types.app.mutations.SET_SPINNER_FLAG, true)
@@ -381,7 +363,6 @@ const actions = {
     [types.services.actions.DELETE_SERVICE]: deleteServiceData,
     [types.services.actions.UPDATE_SERVICE]: updateServiceData,
     [types.services.actions.FETCH_SERVICE_SECTIONS]: fetchServiceSectionsData,
-    [types.services.actions.FETCH_SERVICE_SECTION]: fetchServiceSectionData,
     [types.services.actions.CREATE_SERVICE_SECTION]: createServiceSectionData,
     [types.services.actions.DELETE_SERVICE_SECTION]: deleteServiceSectionData,
     [types.services.actions.UPDATE_SERVICE_SECTION]: updateServiceSectionData,

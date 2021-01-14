@@ -204,7 +204,6 @@ const fetchServiceSections = async (id) => {
     const response = await request({
       query: QUERY.SERVICES_SECTIONS(id),
     });
-    console.log(response);
     return response.data.data.service
   } catch (error) {
     throw error;

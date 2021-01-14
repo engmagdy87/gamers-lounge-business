@@ -80,7 +80,6 @@ const services = {
         DELETE_SERVICE: 'services/actions/DELETE_SERVICE',
         UPDATE_SERVICE: 'services/actions/UPDATE_SERVICE',
         FETCH_SERVICE_SECTIONS: 'services/actions/FETCH_SERVICE_SECTIONS',
-        FETCH_SERVICE_SECTION: 'services/actions/FETCH_SERVICE_SECTION',
         CREATE_SERVICE_SECTION: 'services/actions/CREATE_SERVICE_SECTION',
         DELETE_SERVICE_SECTION: 'services/actions/DELETE_SERVICE_SECTION',
         UPDATE_SERVICE_SECTION: 'services/actions/UPDATE_SERVICE_SECTION',
