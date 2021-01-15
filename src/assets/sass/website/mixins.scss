@@ -260,3 +260,28 @@
   animation-delay: $i * $delay + $offset;
   animation-timing-function: cubic-bezier(0.4, 0.3, 0.5, 1);
 }
+
+@mixin is-1600-or-less {
+  // Extra large devices (large desktops, 1200px and up)
+  @media (max-width: 1600px) {
+    @content;
+  }
+}
+@mixin is-large-desktop-or-less {
+  // Extra large devices (large desktops, 1200px and up)
+  @media (max-width: 1400px) {
+    @content;
+  }
+}
+@mixin is-desktop-or-less {
+  // Extra large devices (large desktops, 1200px and up)
+  @media (max-width: 1200px) {
+    @content;
+  }
+}
+@mixin is-767px-or-less {
+  // Extra large devices (large desktops, 1200px and up)
+  @media (max-width: 767px) {
+    @content;
+  }
+}

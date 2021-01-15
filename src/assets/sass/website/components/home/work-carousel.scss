@@ -4,30 +4,6 @@
 
 $carousel-height: 1100px;
 
-@mixin is-1600-or-less {
-  // Extra large devices (large desktops, 1200px and up)
-  @media (max-width: 1600px) {
-    @content;
-  }
-}
-@mixin is-large-desktop-or-less {
-  // Extra large devices (large desktops, 1200px and up)
-  @media (max-width: 1400px) {
-    @content;
-  }
-}
-@mixin is-desktop-or-less {
-  // Extra large devices (large desktops, 1200px and up)
-  @media (max-width: 1200px) {
-    @content;
-  }
-}
-@mixin is-767px-or-less {
-  // Extra large devices (large desktops, 1200px and up)
-  @media (max-width: 767px) {
-    @content;
-  }
-}
 .work-carousel {
   position: relative;
   .work-header {
@@ -49,6 +25,7 @@ $carousel-height: 1100px;
   &__bg {
     position: absolute;
     width: 63%;
+    cursor: pointer;
     right: 0;
     height: $carousel-height;
     background-color: $accent;
@@ -85,7 +62,7 @@ $carousel-height: 1100px;
   }
   &__inside {
     position: relative;
-    &--img {
+    &__img {
       position: absolute;
       left: 8%;
       @include is-extra-small-mobile {
@@ -114,11 +91,14 @@ $carousel-height: 1100px;
         object-position: center center;
       }
     }
-    &--title {
+    &__title {
       font-family: "Segoe UI Bold";
       font-size: 2.4rem;
-      position: relative;
       height: 48px;
+      width: max-content;
+      position: absolute;
+      top: 0;
+      margin-top: 0;
       @include is-extra-small-mobile {
         font-size: 1.6rem;
       }
@@ -141,19 +121,24 @@ $carousel-height: 1100px;
         top: 55px;
         left: 0px;
         height: 4px;
-        width: 35%;
+        width: 55%;
         background: $header-item;
       }
     }
-    &--content {
+    &__content {
+      position: absolute;
+      top: 80px;
+      width: 90%;
+      font-size: 1.2rem;
       @include is-extra-small-mobile {
         height: 100%;
       }
     }
-    &--text {
+    &__text {
       color: $header-item;
       width: 63%;
       margin-left: auto;
+      position: relative;
       @include is-extra-small-mobile {
         font-size: 1.1rem;
         position: absolute;
@@ -180,13 +165,27 @@ $carousel-height: 1100px;
         width: 90%;
       }
     }
-    &--text-container {
+    &__mask {
+      width: 120px;
+      min-height: 650px;
+      background-color: $accent;
+      position: absolute;
+      right: 0;
+      z-index: 1000;
+      @media (min-width: 1400px) and (max-width: 1600px) {
+        width: 50px;
+      }
+      @media (max-width: 1400px) {
+        width: 0;
+      }
+    }
+    &__text-container {
+      position: relative;
       min-height: 650px;
       border-right: solid 1px $header-item;
       margin-top: 110px;
       margin-left: 320px;
       margin-right: 120px;
-      padding-right: 128px;
       @include is-large-desktop-or-less {
         margin-right: 0;
         padding-right: 0;
@@ -313,4 +312,13 @@ $widths-and-heights: (
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
   @include filled-half-clipped-shape($widths-and-heights, transparent);
+}
+
+@keyframes animateImage {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

@@ -120,7 +120,7 @@ export default {
       titleDirection: "service-title-next",
       contentDirection: "service-content-next",
       imageDirection: "service-image-next",
-      buttonMaskCSSStyle: "button-mask-next"
+      buttonMaskCSSStyle: "service-button-mask-next"
     };
   },
   methods: {
@@ -129,18 +129,18 @@ export default {
         this.titleDirection = "service-title-prev";
         this.contentDirection = "service-content-prev";
         this.imageDirection = "service-image-prev";
-        this.buttonMaskCSSStyle = "button-mask-prev";
+        this.buttonMaskCSSStyle = "service-button-mask-prev";
         setTimeout(() => {
           this.titleDirection = "service-title-next";
           this.contentDirection = "service-content-next";
           this.imageDirection = "service-image-next";
-          this.buttonMaskCSSStyle = "button-mask-next";
+          this.buttonMaskCSSStyle = "service-button-mask-next";
         }, 7000);
       } else {
         this.titleDirection = "service-title-next";
         this.contentDirection = "service-content-next";
         this.imageDirection = "service-image-next";
-        this.buttonMaskCSSStyle = "button-mask-next";
+        this.buttonMaskCSSStyle = "service-button-mask-next";
       }
     }
   }
@@ -310,19 +310,19 @@ $blur: 10px;
 
 // //***********************************/
 
-/deep/ .button-mask-next {
+/deep/ .service-button-mask-next {
   width: 200px;
   height: 200px;
   background-color: $dark-accent;
   position: absolute;
   right: 0;
-  animation: button-mask-animation-next;
+  animation: service-button-mask-animation-next;
   animation-duration: 1.8 * $time;
   transform: translateX(200px);
   z-index: 9;
 }
 
-@keyframes button-mask-animation-next {
+@keyframes service-button-mask-animation-next {
   0% {
     transform: rotate(30deg) translateX(200px);
   }
@@ -331,19 +331,19 @@ $blur: 10px;
   }
 }
 
-/deep/ .button-mask-prev {
+/deep/ .service-button-mask-prev {
   width: 200px;
   height: 200px;
   background-color: $dark-accent;
   position: absolute;
   right: 0;
-  animation: button-mask-animation-prev;
+  animation: service-button-mask-animation-prev;
   animation-duration: 1.8 * $time;
   transform: translateX(-200px);
   z-index: 9;
 }
 
-@keyframes button-mask-animation-prev {
+@keyframes service-button-mask-animation-prev {
   0% {
     transform: rotate(30deg) translateX(-200px);
   }
