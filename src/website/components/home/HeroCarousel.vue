@@ -11,7 +11,7 @@
             <div class="hero-carousel__text">
               <transition-group name="hero-title" appear>
                 <h1
-                  v-for="i in 15"
+                  v-for="i in 10"
                   :key="i"
                   :class="`hero-carousel__title hero-carousel__title${i}`"
                 >
@@ -20,7 +20,7 @@
               </transition-group>
               <transition-group name="hero-content" appear>
                 <h4
-                  v-for="i in 15"
+                  v-for="i in 10"
                   :key="i"
                   :class="`hero-carousel__content hero-carousel__content${i}`"
                 >
@@ -74,7 +74,7 @@ $offset: 0.3s;
 $blur: 10px;
 
 //********title*********
-@for $i from 2 through 15 {
+@for $i from 2 through 10 {
   .hero-carousel__title.hero-carousel__title#{$i} {
     opacity: 0;
   }
@@ -82,7 +82,7 @@ $blur: 10px;
     opacity: 0.1 !important;
   }
 }
-@for $i from 1 through 15 {
+@for $i from 1 through 10 {
   .hero-title-enter-to.hero-carousel__title#{$i},
   .hero-title-enter.hero-carousel__title#{$i} {
     right: -100%;
@@ -99,7 +99,7 @@ $blur: 10px;
 .hero-carousel__content.hero-carousel__content1 {
   font-weight: bold;
 }
-@for $i from 2 through 15 {
+@for $i from 2 through 10 {
   .hero-carousel__content.hero-carousel__content#{$i} {
     opacity: 0;
   }
@@ -108,7 +108,7 @@ $blur: 10px;
     font-weight: bold;
   }
 }
-@for $i from 1 through 15 {
+@for $i from 1 through 10 {
   .hero-content-enter-to.hero-carousel__content#{$i},
   .hero-content-enter.hero-carousel__content#{$i} {
     right: -100%;

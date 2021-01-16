@@ -21,7 +21,7 @@
                 <transition-group :name="titleDirection" appear>
                   <h1
                     v-if="index"
-                    v-for="i in 15"
+                    v-for="i in 10"
                     :key="i"
                     :class="
                       `services-carousel__title services-carousel__title${i}`
@@ -34,7 +34,7 @@
                 <transition-group :name="contentDirection" appear>
                   <p
                     v-if="index"
-                    v-for="i in 15"
+                    v-for="i in 10"
                     :key="i"
                     :class="
                       `services-carousel__content services-carousel__content${i}`
@@ -158,7 +158,7 @@ $offset: 0.3s;
 $blur: 10px;
 
 //********title*********
-@for $i from 2 through 15 {
+@for $i from 2 through 10 {
   .services-carousel__title.services-carousel__title#{$i} {
     opacity: 0;
   }
@@ -166,7 +166,7 @@ $blur: 10px;
     opacity: 0.1 !important;
   }
 }
-@for $i from 1 through 15 {
+@for $i from 1 through 10 {
   .service-title-next-enter-to.services-carousel__title#{$i},
   .service-title-next-enter.services-carousel__title#{$i} {
     right: -100%;
@@ -194,7 +194,7 @@ $blur: 10px;
 .services-carousel__content.services-carousel__content1 {
   font-weight: bold;
 }
-@for $i from 2 through 15 {
+@for $i from 2 through 10 {
   .services-carousel__content.services-carousel__content#{$i} {
     opacity: 0;
   }
@@ -203,7 +203,7 @@ $blur: 10px;
     font-weight: bold;
   }
 }
-@for $i from 1 through 15 {
+@for $i from 1 through 10 {
   .service-content-next-enter-to.services-carousel__content#{$i},
   .service-content-next-enter.services-carousel__content#{$i} {
     right: -100%;

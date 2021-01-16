@@ -34,7 +34,7 @@
                 <transition-group :name="titleDirection" appear>
                   <h1
                     v-if="index"
-                    v-for="i in 15"
+                    v-for="i in 10"
                     :key="i"
                     :class="
                       `work-carousel__inside__title work-carousel__inside__title${i}`
@@ -46,7 +46,7 @@
                 <transition-group :name="contentDirection" appear>
                   <p
                     v-if="index"
-                    v-for="i in 15"
+                    v-for="i in 10"
                     :key="i"
                     :class="
                       `work-carousel__inside__content work-carousel__inside__content${i}`
@@ -159,12 +159,12 @@ $blur: 10px;
 $enter-left: 100%;
 
 //********title*********
-@for $i from 2 through 15 {
+@for $i from 2 through 10 {
   .work-carousel__inside__title.work-carousel__inside__title#{$i} {
     opacity: 0;
   }
 }
-@for $i from 1 through 15 {
+@for $i from 1 through 10 {
   .work-title-next-enter-to.work-carousel__inside__title#{$i},
   .work-title-next-enter.work-carousel__inside__title#{$i} {
     left: $enter-left;
@@ -192,7 +192,7 @@ $enter-left: 100%;
 .work-carousel__inside__content.work-carousel__inside__content1 {
   font-weight: bold;
 }
-@for $i from 2 through 15 {
+@for $i from 2 through 10 {
   .work-carousel__inside__content.work-carousel__inside__content#{$i} {
     opacity: 0;
   }
@@ -200,7 +200,7 @@ $enter-left: 100%;
     font-weight: bold;
   }
 }
-@for $i from 1 through 15 {
+@for $i from 1 through 10 {
   .work-content-next-enter-to.work-carousel__inside__content#{$i},
   .work-content-next-enter.work-carousel__inside__content#{$i} {
     left: $enter-left;
