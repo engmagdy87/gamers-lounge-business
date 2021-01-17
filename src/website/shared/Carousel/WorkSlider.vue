@@ -84,7 +84,7 @@ export default {
     },
     goToPrev() {
       this.changeAnimation("prev");
-      this.nextSlide();
+      this.prevSlide();
       this.resetTimer();
     },
     isSlideVisible(i) {

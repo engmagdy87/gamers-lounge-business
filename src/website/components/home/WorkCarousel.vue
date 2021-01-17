@@ -9,6 +9,7 @@
     </div>
 
     <div class="work-carousel__bg"></div>
+    <div class="work-carousel__big-mask"></div>
 
     <div class="work-carousel__carousel-container">
       <WorkSlider
@@ -34,7 +35,7 @@
                 <transition-group :name="titleDirection" appear>
                   <h1
                     v-if="index"
-                    v-for="i in 10"
+                    v-for="i in 5"
                     :key="i"
                     :class="
                       `work-carousel__inside__title work-carousel__inside__title${i}`
@@ -46,7 +47,7 @@
                 <transition-group :name="contentDirection" appear>
                   <p
                     v-if="index"
-                    v-for="i in 10"
+                    v-for="i in 5"
                     :key="i"
                     :class="
                       `work-carousel__inside__content work-carousel__inside__content${i}`
@@ -106,7 +107,7 @@ export default {
         {
           title: "Esports Tournaments2",
           text:
-            " Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam eLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam eLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e",
+            " Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam eLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e  Lorem ipsum dolor sit amet",
           img: "./images/hero.jpg"
         },
         {
@@ -152,122 +153,323 @@ export default {
 @import "../../../assets/sass/website/mixins.scss";
 
 $time: 3s;
-$delay: 4ms;
+$delay: 0.04s;
 $offset: 0.3s;
-$blur: 10px;
 
-$enter-left: 100%;
-
-//********title*********
-@for $i from 2 through 10 {
-  .work-carousel__inside__title.work-carousel__inside__title#{$i} {
+//********title************************************************************
+.work-title-next-enter.work-carousel__inside__title1,
+.work-title-next-enter-to.work-carousel__inside__title1 {
+  left: 100%;
+  opacity: 0;
+}
+.work-title-next-leave.work-carousel__inside__title1 {
+  left: 0;
+  opacity: 1;
+}
+.work-title-next-leave-to.work-carousel__inside__title1 {
+  left: 0;
+  opacity: 1;
+}
+.work-title-prev-enter.work-carousel__inside__title1 {
+  left: -100%;
+  opacity: 1;
+}
+.work-title-prev-leave.work-carousel__inside__title1 {
+  left: 0;
+  opacity: 1;
+}
+.work-title-next-enter-active.work-carousel__inside__title1 {
+  @include generateTextAnimation($time, $delay, 0, 1, next-enter-bluprint);
+}
+.work-title-next-leave-active.work-carousel__inside__title1 {
+  @include generateTextAnimation($time, $delay, 0, 1, next-leave-bluprint);
+}
+.work-title-prev-enter-active.work-carousel__inside__title1 {
+  @include generateTextAnimation($time, $delay, 0, 1, prev-enter-bluprint);
+}
+.work-title-prev-leave-active.work-carousel__inside__title1 {
+  @include generateTextAnimation($time, $delay, 0, 1, prev-leave-bluprint);
+}
+@for $i from 2 through 5 {
+  .work-title-next-enter.work-carousel__inside__title#{$i} {
+    left: 100%;
     opacity: 0;
   }
-}
-@for $i from 1 through 10 {
-  .work-title-next-enter-to.work-carousel__inside__title#{$i},
-  .work-title-next-enter.work-carousel__inside__title#{$i} {
-    left: $enter-left;
+  .work-title-next-enter-to.work-carousel__inside__title#{$i} {
+    left: 100%;
+    opacity: 0;
+  }
+  .work-title-next-leave.work-carousel__inside__title#{$i} {
+    left: 0;
+    opacity: 1;
+  }
+  .work-title-next-leave-to.work-carousel__inside__title#{$i} {
+    left: 0;
     opacity: 0;
   }
   .work-title-next-enter-active.work-carousel__inside__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, next-enter);
+    @include generateTextAnimation($time, $delay, 0, $i, next-enter-replica);
   }
   .work-title-next-leave-active.work-carousel__inside__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, next-leave);
+    @include generateTextAnimation($time, $delay, 0, $i, next-leave-replica);
   }
-  .work-title-prev-enter-to.work-carousel__inside__title#{$i},
   .work-title-prev-enter.work-carousel__inside__title#{$i} {
-    left: 0;
+    left: -100%;
     opacity: 0;
+  }
+  .work-title-prev-leave.work-carousel__inside__title#{$i} {
+    left: 0;
+    opacity: 1;
   }
   .work-title-prev-enter-active.work-carousel__inside__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, prev-enter);
+    @include generateTextAnimation($time, $delay, 0, $i, prev-enter-replica);
   }
   .work-title-prev-leave-active.work-carousel__inside__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, prev-leave);
+    @include generateTextAnimation($time, $delay, 0, $i, prev-leave-replica);
   }
 }
-//********content*********
-.work-carousel__inside__content.work-carousel__inside__content1 {
-  font-weight: bold;
+//********content************************************************************
+.work-content-next-enter-to {
+  opacity: 0;
 }
-@for $i from 2 through 10 {
-  .work-carousel__inside__content.work-carousel__inside__content#{$i} {
-    opacity: 0;
-  }
-  .work-content-next-leave-active.work-carousel__inside__content#{$i} {
-    font-weight: bold;
-  }
+.work-content-next-enter-active {
+  left: -150%;
 }
-@for $i from 1 through 10 {
-  .work-content-next-enter-to.work-carousel__inside__content#{$i},
+.work-content-prev-enter-active {
+  left: -150%;
+}
+.work-content-next-enter.work-carousel__inside__content1,
+.work-content-next-enter-to.work-carousel__inside__content1 {
+  left: 100%;
+  opacity: 0;
+}
+.work-content-next-leave.work-carousel__inside__content1 {
+  left: 0;
+  opacity: 1;
+}
+.work-content-prev-enter.work-carousel__inside__content1 {
+  left: -150%;
+  opacity: 0;
+}
+.work-content-prev-leave.work-carousel__inside__content1 {
+  left: 0;
+  opacity: 1;
+}
+.work-content-next-enter-active.work-carousel__inside__content1 {
+  @include generateTextAnimation(
+    $time,
+    $delay,
+    $offset,
+    1,
+    next-enter-bluprint
+  );
+}
+.work-content-next-leave-active.work-carousel__inside__content1 {
+  @include generateTextAnimation(
+    $time,
+    $delay,
+    $offset,
+    1,
+    next-leave-bluprint
+  );
+}
+.work-content-prev-enter-active.work-carousel__inside__content1 {
+  @include generateTextAnimation(
+    $time,
+    $delay,
+    $offset,
+    1,
+    prev-enter-bluprint
+  );
+}
+.work-content-prev-leave-active.work-carousel__inside__content1 {
+  @include generateTextAnimation(
+    $time,
+    $delay,
+    $offset,
+    1,
+    prev-leave-bluprint
+  );
+}
+@for $i from 2 through 5 {
   .work-content-next-enter.work-carousel__inside__content#{$i} {
-    left: $enter-left;
+    left: 100%;
     opacity: 0;
+  }
+  .work-content-next-enter-to.work-carousel__inside__content#{$i} {
+    left: 100%;
+    opacity: 0;
+  }
+  .work-content-next-leave.work-carousel__inside__content#{$i} {
+    left: 0;
+    opacity: 1;
   }
   .work-content-next-enter-active.work-carousel__inside__content#{$i} {
-    @include generateTextAnimation($time, $delay, $offset, $i, next-enter);
+    @include generateTextAnimation(
+      $time,
+      $delay,
+      $offset,
+      $i,
+      next-enter-replica
+    );
   }
   .work-content-next-leave-active.work-carousel__inside__content#{$i} {
-    @include generateTextAnimation($time, $delay, $offset, $i, next-leave);
+    @include generateTextAnimation(
+      $time,
+      $delay,
+      $offset,
+      $i,
+      next-leave-replica
+    );
   }
-  .work-content-prev-enter-to.work-carousel__inside__content#{$i},
   .work-content-prev-enter.work-carousel__inside__content#{$i} {
-    left: 0;
+    left: -150%;
     opacity: 0;
+  }
+  .work-content-prev-leave.work-carousel__inside__content#{$i} {
+    left: 0;
+    opacity: 1;
   }
   .work-content-prev-enter-active.work-carousel__inside__content#{$i} {
-    @include generateTextAnimation($time, $delay, $offset, $i, prev-enter);
+    @include generateTextAnimation(
+      $time,
+      $delay,
+      $offset,
+      $i,
+      prev-enter-replica
+    );
   }
   .work-content-prev-leave-active.work-carousel__inside__content#{$i} {
-    @include generateTextAnimation($time, $delay, $offset, $i, prev-leave);
+    @include generateTextAnimation(
+      $time,
+      $delay,
+      $offset,
+      $i,
+      prev-leave-replica
+    );
+  }
+}
+//***************************************************************************
+// next animation
+@keyframes next-enter-replica {
+  0% {
+    left: 100%;
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+@keyframes next-leave-replica {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  80% {
+    opacity: 0.2;
+  }
+  100% {
+    left: -150%;
+    opacity: 0;
+  }
+}
+@keyframes next-enter-bluprint {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: 0;
+  }
+}
+@keyframes next-leave-bluprint {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -150%;
+  }
+}
+// previous animation
+@keyframes prev-enter-replica {
+  0% {
+    left: -150%;
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.25;
+  }
+  100% {
+    left: 0;
+    opacity: 0;
+  }
+}
+@keyframes prev-leave-replica {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  80% {
+    opacity: 0.2;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+@keyframes prev-enter-bluprint {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 0;
+  }
+}
+@keyframes prev-leave-bluprint {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
   }
 }
 
-@keyframes next-enter {
-  0% {
-    left: $enter-left;
-    opacity: 0;
-  }
-  100% {
-    left: 0;
-    opacity: 0.2;
-  }
-}
-@keyframes next-leave {
-  0% {
-    left: 0;
-    opacity: 0.2;
-  }
-  100% {
-    left: $enter-left * -1;
-    opacity: 0;
-  }
-}
-
-@keyframes prev-enter {
-  0% {
-    left: $enter-left * -1;
-    opacity: 0;
-  }
-  100% {
-    left: 0;
-    opacity: 0.2;
-  }
-}
-@keyframes prev-leave {
-  0% {
-    left: 0;
-    opacity: 0.2;
-  }
-  100% {
-    left: $enter-left;
-    opacity: 0;
-  }
-}
-
-// //***********************************/
+//***********************************/
 
 .work-image-next-enter-active,
 .work-image-next-leave-active {
@@ -282,7 +484,7 @@ $enter-left: 100%;
 .work-image-next-leave-to {
   opacity: 0;
 }
-// //***********************************/
+//***********************************/
 .work-image-prev-enter-active,
 .work-image-prev-leave-active {
   animation: animateImage;

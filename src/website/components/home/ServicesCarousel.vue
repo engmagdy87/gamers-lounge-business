@@ -153,11 +153,8 @@ export default {
 @import "../../../assets/sass/website/components/home/services-carousel.scss";
 
 $time: 3s;
-// $time: 30s;
 $delay: 0.04s;
-// $delay: 5s;
 $offset: 0.3s;
-// $offset: 3s;
 
 //********title************************************************************
 .service-title-next-enter.services-carousel__title1,
