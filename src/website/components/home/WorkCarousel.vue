@@ -355,41 +355,48 @@ $offset: 0.3s;
   0% {
     left: 100%;
     opacity: 0;
+    filter: blur(4px);
   }
   25% {
     opacity: 0.25;
+    filter: blur(3px);
   }
   50% {
     opacity: 0.5;
+    filter: blur(2px);
   }
   75% {
     opacity: 0.75;
+    filter: blur(1px);
   }
   100% {
     left: 0;
     opacity: 1;
+    filter: blur(0);
   }
 }
 @keyframes next-leave-replica {
   0% {
     left: 0;
     opacity: 1;
+    filter: blur(0);
   }
-  20% {
-    opacity: 0.8;
+  25% {
+    opacity: 0.75;
+    filter: blur(1px);
   }
-  40% {
-    opacity: 0.6;
+  50% {
+    opacity: 0.5;
+    filter: blur(2px);
   }
-  60% {
-    opacity: 0.4;
-  }
-  80% {
-    opacity: 0.2;
+  75% {
+    opacity: 0.25;
+    filter: blur(4px);
   }
   100% {
     left: -150%;
     opacity: 0;
+    filter: blur(4px);
   }
 }
 @keyframes next-enter-bluprint {
@@ -413,41 +420,48 @@ $offset: 0.3s;
   0% {
     left: -150%;
     opacity: 1;
+    filter: blur(4px);
   }
   25% {
     opacity: 0.75;
+    filter: blur(3px);
   }
   50% {
     opacity: 0.5;
+    filter: blur(2px);
   }
   75% {
     opacity: 0.25;
+    filter: blur(1px);
   }
   100% {
     left: 0;
     opacity: 0;
+    filter: blur(0);
   }
 }
 @keyframes prev-leave-replica {
   0% {
     left: 0;
     opacity: 1;
+    filter: blur(0);
   }
-  20% {
-    opacity: 0.8;
+  25% {
+    opacity: 0.75;
+    filter: blur(1px);
   }
-  40% {
-    opacity: 0.6;
+  50% {
+    opacity: 0.5;
+    filter: blur(2px);
   }
-  60% {
-    opacity: 0.4;
-  }
-  80% {
-    opacity: 0.2;
+  75% {
+    opacity: 0.25;
+    filter: blur(3px);
   }
   100% {
     left: 100%;
     opacity: 0;
+    filter: blur(4px);
   }
 }
 @keyframes prev-enter-bluprint {
