@@ -2,7 +2,7 @@
   <header class="header-wrapper">
     <div class="row header-wrapper__social-media">
       <div class="col-12 col-sm-6 d-flex justify-content-center d-sm-block">
-        <a href="https://www.google.com" target="__blank">
+        <a href="https://www.google.com" target="__blank" v-if="false">
           <HalfClippedOutlineButton text="GL Games" />
         </a>
       </div>
