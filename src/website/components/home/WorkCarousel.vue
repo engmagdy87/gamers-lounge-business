@@ -153,7 +153,8 @@ export default {
 @import "../../../assets/sass/website/mixins.scss";
 
 $time: 3s;
-$delay: 0.04s;
+// $delay: 0.04s;
+$delay: 0s;
 $offset: 0.3s;
 
 //********title************************************************************

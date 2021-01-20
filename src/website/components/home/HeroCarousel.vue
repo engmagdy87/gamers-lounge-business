@@ -69,9 +69,9 @@ export default {
 @import "../../../assets/sass/website/mixins.scss";
 
 $time: 3s;
-$delay: 4ms;
+// $delay: 4ms;
+$delay: 0s;
 $offset: 0.3s;
-$blur: 10px;
 
 //********title*********
 @for $i from 2 through 10 {
