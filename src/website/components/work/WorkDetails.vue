@@ -4,7 +4,6 @@
       class="work-details-sections__section"
       v-for="section in websiteWork.sections.data"
       :key="section.id"
-      v-if="section.enabled"
     >
       <DetailsNormalSection
         v-if="section.type === WORK_SECTIONS_TYPES.NORMAL"
@@ -28,7 +27,7 @@ export default {
   },
   computed: {
     ...mapState({
-      isWebsiteWorkFetched: state => state.services.isWebsiteWorkFetched
+      isWebsiteWorkFetched: state => state.works.isWebsiteWorkFetched
     }),
     WORK_SECTIONS_TYPES() {
       return WORK_SECTIONS_TYPES;
