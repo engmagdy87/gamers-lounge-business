@@ -143,7 +143,6 @@ const fetchHomePageWorkData = async ({ commit }) => {
         const response = await APIs.fetchHomePageWork()
         commit(types.works.mutations.SET_HOME_PAGE_WORKS, response)
         commit(types.works.mutations.SET_IS_HOME_PAGE_WORKS_FETCHED, true)
-        showHeaderAndFooter(commit, true);
     } catch (error) {
         commit(types.works.mutations.SET_IS_HOME_PAGE_WORKS_FETCHED, false)
         throw error.message

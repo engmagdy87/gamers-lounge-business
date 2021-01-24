@@ -3,7 +3,7 @@
     <div class="work-header">
       <h4 class="work-header__sub-text">What we Do?</h4>
       <h1 class="work-header__title">OUR WORK</h1>
-      <router-link to="/" class="work-header__view-link">
+      <router-link to="/work" class="work-header__view-link">
         View all
       </router-link>
     </div>
@@ -13,7 +13,7 @@
 
     <div class="work-carousel__carousel-container">
       <WorkSlider
-        :slides="slides"
+        :slides="homePageWorks"
         :timeInMillisecond="7000"
         customBulletsStyleClass="hero-bullets"
         :changeAnimation="changeAnimation"
@@ -24,7 +24,11 @@
               <div class="work-carousel__inside__img" v-if="index">
                 <HalfClippedShape>
                   <template #content>
-                    <img draggable="false" :src="slide.img" />
+                    <img
+                      draggable="false"
+                      :src="slide.img_cover.url"
+                      :alt="slide.title"
+                    />
                   </template>
                 </HalfClippedShape>
               </div>
@@ -52,19 +56,22 @@
                     :class="
                       `work-carousel__inside__content work-carousel__inside__content${i}`
                     "
-                  >
-                    {{ slide.text }}
-                  </p>
+                    v-html="slide.description"
+                  ></p>
                 </transition-group>
               </div>
 
-              <div class="work-carousel__btn" v-if="index">
-                <HalfClippedOutlineButton
-                  text="Read More"
-                  :showMaskEffect="true"
-                  :buttonMaskCSSStyle="buttonMaskCSSStyle"
-                />
-              </div>
+              <router-link
+                :to="`/work/${slide.id}-${reformatURL(slide.title)}`"
+              >
+                <div class="work-carousel__btn" v-if="index">
+                  <HalfClippedOutlineButton
+                    text="Read More"
+                    :showMaskEffect="true"
+                    :buttonMaskCSSStyle="buttonMaskCSSStyle"
+                  />
+                </div>
+              </router-link>
             </div>
           </div>
         </template>
@@ -85,9 +92,11 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import WorkSlider from "../../shared/Carousel/WorkSlider";
 import HalfClippedShape from "../../shared/HalfClippedShape";
 import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
+import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 
 export default {
   components: {
@@ -97,31 +106,16 @@ export default {
   },
   data() {
     return {
-      slides: [
-        {
-          title: "Esports Tournaments1",
-          text:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam eLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam eLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam eLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam eLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e",
-          img: "./images/hero.jpg"
-        },
-        {
-          title: "Esports Tournaments2",
-          text:
-            " Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam eLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e  Lorem ipsum dolor sit amet",
-          img: "./images/hero.jpg"
-        },
-        {
-          title: "Esports Tournaments3",
-          text:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e",
-          img: "./images/hero.jpg"
-        }
-      ],
       titleDirection: "work-title-next",
       contentDirection: "work-content-next",
       imageDirection: "work-image-next",
       buttonMaskCSSStyle: "work-button-mask-next"
     };
+  },
+  computed: {
+    ...mapState({
+      homePageWorks: state => state.works.homePageWorks
+    })
   },
   methods: {
     changeAnimation(dir) {
@@ -142,6 +136,9 @@ export default {
         this.imageDirection = "work-image-next";
         this.buttonMaskCSSStyle = "work-button-mask-next";
       }
+    },
+    reformatURL(id) {
+      return reformatStringToBeInURL(id);
     }
   }
 };

@@ -11,7 +11,10 @@
         <router-link
           :to="`/services/${service.id}-${reformatURL(service.title)}`"
         >
-          <div class="services-page-wrapper__content col-12 p-0 mt-3 mb-3">
+          <div
+            class="services-page-wrapper__content col-12 p-0 mt-3 mb-3"
+            @click="setIsServiceFetched(false)"
+          >
             <img :src="service.img_card.url" draggable="false" />
 
             <div class="services-page-wrapper__text">
@@ -43,7 +46,7 @@ export default {
       showLoading: false
     };
   },
-  components: { 
+  components: {
     ServicesHero,
     Intersect,
     Loading
@@ -59,7 +62,10 @@ export default {
       fetchServices: types.services.actions.FETCH_SERVICES
     }),
     ...mapMutations({
-      setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG
+      setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG,
+      setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG,
+      setIsServiceFetched:
+        types.services.mutations.SET_IS_WEBSITE_SERVICE_FETCHED
     }),
     reformatURL(id) {
       return reformatStringToBeInURL(id);
@@ -92,16 +98,22 @@ export default {
     }
   },
   mounted() {
-    this.setShowHeaderFlag(false);
     if (!this.isServicesFetched) {
+      this.setShowFooterFlag(false);
       const payload = this.generateWorkPayload(true);
       this.fetchServices(payload);
+    } else if (Object.keys(this.services).length > 0) {
+      if (!this.services.paginatorInfo.hasMorePages) {
+        this.setShowFooterFlag(true);
+      }
+    } else {
+      this.setShowHeaderFlag(true);
     }
   },
   updated() {
     if (Object.keys(this.services).length > 0) {
       if (!this.services.paginatorInfo.hasMorePages) {
-        this.setShowHeaderFlag(true);
+        this.setShowFooterFlag(true);
       }
     }
   }

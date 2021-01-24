@@ -45,7 +45,6 @@ import Loading from "../../website/shared/Loading";
 import types from "../../store/types";
 import {
   getEntityId,
-  getEntityName,
   reverseReformatHTMLString
 } from "../../helpers/StringsHelper";
 import { numberOfDecimalsInStringNumber } from "../../helpers/NumbersHelper";

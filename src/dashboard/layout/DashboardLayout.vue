@@ -22,6 +22,10 @@
         <i class="nc-icon nc-ruler-pencil"></i>
         <p>Work</p>
       </sidebar-link>
+      <sidebar-link to="/dashboard/sponsors">
+        <i class="nc-icon nc-money-coins"></i>
+        <p>Sponsors</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <TopNavbar></TopNavbar>

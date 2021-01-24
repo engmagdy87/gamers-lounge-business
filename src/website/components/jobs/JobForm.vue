@@ -127,7 +127,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions } from "vuex";
 import types from "../../../store/types";
 import HalfClippedShape from "../../shared/HalfClippedShape";
 import HalfClippedOutlinedShape from "../../shared/HalfClippedOutlinedShape";

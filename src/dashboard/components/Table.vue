@@ -121,6 +121,16 @@
         >
         </WorkColumnTabelRow>
       </tbody>
+      <tbody v-if="tableType === 'sponsors'">
+        <SponsorTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </SponsorTabelRow>
+      </tbody>
     </table>
   </div>
 </template>
@@ -136,6 +146,7 @@ import WorkTabelRow from "../components/Works/WorkTabelRow";
 import WorkSectionTabelRow from "../components/Works/WorkSectionTabelRow";
 import WorkRowTabelRow from "../components/Works/WorkRowTabelRow";
 import WorkColumnTabelRow from "../components/Works/WorkColumnTabelRow";
+import SponsorTabelRow from "../components/Sponsors/SponsorTabelRow";
 
 export default {
   name: "l-table",
@@ -151,7 +162,8 @@ export default {
     WorkTabelRow,
     WorkSectionTabelRow,
     WorkRowTabelRow,
-    WorkColumnTabelRow
+    WorkColumnTabelRow,
+    SponsorTabelRow
   }
 };
 </script>

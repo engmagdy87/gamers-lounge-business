@@ -139,12 +139,15 @@ const fetchWebsiteServiceData = async ({ commit }, payload) => {
 };
 
 const fetchHomePageServiceData = async ({ commit }) => {
+    commit(types.app.mutations.SET_SPINNER_FLAG, true)
     try {
         const response = await APIs.fetchHomePageServices()
         commit(types.services.mutations.SET_HOME_PAGE_SERVICES, response)
         commit(types.services.mutations.SET_IS_HOME_PAGE_SERVICES_FETCHED, true)
-        showHeaderAndFooter(commit, true);
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
+        commit(types.app.mutations.SET_SHOW_HEADER_FLAG, true)
     } catch (error) {
+        commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.services.mutations.SET_IS_HOME_PAGE_SERVICES_FETCHED, false)
         throw error.message
     }

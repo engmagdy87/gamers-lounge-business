@@ -18,6 +18,9 @@ import SECTION from './Shared/Section';
 import ROWS from './Shared/Rows';
 import COLUMNS from './Shared/Columns';
 
+import SPONSORS from './Sponsors/Sponsors';
+import SPONSORS_WEBSITE from './Sponsors/SponsorsWebsite';
+
 export default {
   DEPARTMENTS,
   JOB_APPLICATION,
@@ -34,5 +37,7 @@ export default {
   ROWS,
   COLUMNS,
   WORK_WEBSITE,
-  HOME_PAGE_WORKS
+  HOME_PAGE_WORKS,
+  SPONSORS,
+  SPONSORS_WEBSITE
 };

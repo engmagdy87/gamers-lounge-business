@@ -141,11 +141,27 @@ const works = {
     }
 };
 
+const sponsors = {
+    mutations: {
+        SET_SPONSORS: 'sponsors/mutations/SET_SPONSORS',
+        SET_IS_SPONSORS_FETCHED: 'sponsors/mutations/SET_IS_SPONSORS_FETCHED',
+        REMOVE_DELETED_SPONSOR: 'sponsors/mutations/REMOVE_DELETED_SPONSOR',
+    },
+    actions: {
+        FETCH_SPONSORS: 'sponsors/actions/FETCH_SPONSORS',
+        FETCH_WEBSITE_SPONSORS: 'sponsors/actions/FETCH_WEBSITE_SPONSORS',
+        CREATE_SPONSOR: 'sponsors/actions/CREATE_SPONSOR',
+        DELETE_SPONSOR: 'sponsors/actions/DELETE_SPONSOR',
+        UPDATE_SPONSOR: 'sponsors/actions/UPDATE_SPONSOR',
+    }
+};
+
 export default {
     app,
     login,
     jobs,
     departments,
     services,
-    works
+    works,
+    sponsors
 };

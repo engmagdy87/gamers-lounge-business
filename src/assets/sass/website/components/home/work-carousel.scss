@@ -154,6 +154,7 @@ $carousel-height: 1100px;
       width: 63%;
       margin-left: auto;
       position: relative;
+      z-index: 900;
       @include is-extra-small-mobile {
         font-size: 1.1rem;
         position: absolute;
@@ -228,6 +229,8 @@ $carousel-height: 1100px;
   &__btn {
     display: flex;
     justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
   }
 }
 

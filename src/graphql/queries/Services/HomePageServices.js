@@ -5,7 +5,7 @@ query {
           id
           title
           description
-          img_card{
+          img_cover{
             id
             url
           }          

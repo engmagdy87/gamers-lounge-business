@@ -4,8 +4,8 @@ query {
        data {
           id
           title
-          short_description                    
-          img_card{
+          description                    
+          img_cover{
             id
             url
           }          

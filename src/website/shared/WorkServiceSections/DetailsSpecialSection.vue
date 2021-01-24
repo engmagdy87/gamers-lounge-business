@@ -3,12 +3,12 @@
     <CustomHalfClipped>
       <template #content>
         <div
-          v-for="row in section.rows"
+          v-for="(row, rowId) in section.rows"
           :key="row.id"
           class="work-details-sections__container row m-0"
         >
           <div
-            v-for="column in row.columns"
+            v-for="(column, colId) in row.columns"
             :key="column.index"
             :style="{ width: getWidth(column.ratio) }"
           >
@@ -25,7 +25,7 @@
               "
               v-for="img in column.img_content"
               :key="img.id"
-              @click="openImageModal(img.url)"
+              @click="openImageModal(rowId, colId)"
               style="cursor:pointer"
             >
               <img :src="img.url" width="100%" draggable="false" />
@@ -71,7 +71,7 @@
               "
               class="work-details-sections__description"
               v-html="column.content"
-            ></div>
+            />
           </div>
         </div>
       </template>
@@ -79,7 +79,8 @@
     <ImageModal
       :showImageModal="showImageModal"
       :setShowImageModal="setShowImageModal"
-      :imageUrl="targetImage"
+      :imageUrl="targetImageUrl"
+      :setImageIndex="setImageIndex"
     />
   </div>
 </template>
@@ -96,7 +97,11 @@ export default {
   data() {
     return {
       showImageModal: false,
-      targetImage: ""
+      targetImageIndeces: {
+        rowId: null,
+        colId: null
+      },
+      targetImageUrl: ""
     };
   },
   components: {
@@ -117,9 +122,33 @@ export default {
     setShowImageModal(flag) {
       this.showImageModal = flag;
     },
-    openImageModal(imgUrl) {
-      this.targetImage = imgUrl;
+    openImageModal(rowId, colId) {
+      this.targetImageIndeces = {
+        ...this.targetImageIndeces,
+        rowId,
+        colId
+      };
+      this.targetImageUrl = this.section.rows[rowId].columns[
+        colId
+      ].img_content[0].url;
       this.setShowImageModal(true);
+    },
+    setImageIndex(dir) {
+      const { rowId, colId } = this.targetImageIndeces;
+      const imagesLength = this.section.rows[rowId].columns.length;
+
+      if (dir === "next")
+        this.targetImageIndeces = {
+          ...this.targetImageIndeces,
+          colId: colId === imagesLength - 1 ? 0 : colId + 1
+        };
+      else
+        this.targetImageIndeces.colId =
+          colId === 0 ? imagesLength - 1 : colId - 1;
+
+      this.targetImageUrl = this.section.rows[rowId].columns[
+        this.targetImageIndeces.colId
+      ].img_content[0].url;
     }
   }
 };

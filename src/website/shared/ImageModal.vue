@@ -1,13 +1,25 @@
 <template>
-  <div ref="imageModal" class="image-modal" @click="closeModal">
+  <div ref="imageModal" class="image-modal">
     <span class="close" @click="closeModal">&times;</span>
+    <img
+      class="image-modal__previous"
+      src="/images/next.svg"
+      alt="previous"
+      @click="setImageIndex('prev')"
+    />
     <img class="image-modal-content" :src="imageUrl" />
+    <img
+      class="image-modal__next"
+      src="/images/next.svg"
+      alt="next"
+      @click="setImageIndex('next')"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  props: ["showImageModal", "setShowImageModal", "imageUrl"],
+  props: ["showImageModal", "setShowImageModal", "imageUrl", "setImageIndex"],
   methods: {
     closeModal() {
       this.setShowImageModal(false);
@@ -55,6 +67,7 @@ export default {
   margin: auto;
   display: block;
   max-width: 70vw;
+  max-height: 100vh;
 }
 
 /* Add Animation */

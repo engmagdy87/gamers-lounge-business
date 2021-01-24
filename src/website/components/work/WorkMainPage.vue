@@ -7,7 +7,10 @@
         class="work-page-wrapper__content-wrapper col-xs-12 col-sm-12 col-md-6 col-lg-4"
       >
         <router-link :to="`/work/${work.id}-${reformatURL(work.title)}`">
-          <div class="work-page-wrapper__content col-12 p-0 mt-3 mb-3">
+          <div
+            class="work-page-wrapper__content col-12 p-0 mt-3 mb-3"
+            @click="setIsWorkFetched(false)"
+          >
             <img :src="work.img_card.url" draggable="false" />
 
             <p>{{ work.title }}</p>
@@ -56,7 +59,9 @@ export default {
       fetchWorks: types.works.actions.FETCH_WORKS
     }),
     ...mapMutations({
-      setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
+      setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG,
+      setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG,
+      setIsWorkFetched: types.works.mutations.SET_IS_WEBSITE_WORK_FETCHED
     }),
     reformatURL(id) {
       return reformatStringToBeInURL(id);
@@ -89,10 +94,16 @@ export default {
     }
   },
   mounted() {
-    this.setShowFooterFlag(false);
     if (!this.isWorksFetched) {
+      this.setShowFooterFlag(false);
       const payload = this.generateWorkPayload(true);
       this.fetchWorks(payload);
+    } else if (Object.keys(this.ourWorks).length > 0) {
+      if (!this.ourWorks.paginatorInfo.hasMorePages) {
+        this.setShowFooterFlag(true);
+      }
+    } else {
+      this.setShowHeaderFlag(true);
     }
   },
   updated() {

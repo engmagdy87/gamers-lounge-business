@@ -5,11 +5,11 @@
         <VueSlickCarousel v-bind="settings">
           <div
             class="sponsors-carousel-wrapper__slide"
-            v-for="(sponsor, index) in sponsors"
+            v-for="(sponsor, index) in homePageSponsors"
             :key="index"
-            @click="goToUrl(sponsor.url)"
+            @click="goToUrl(sponsor.link)"
           >
-            <img :src="sponsor.path" :alt="sponsor.name" />
+            <img :src="sponsor.image.url" :alt="sponsor.name" />
           </div>
         </VueSlickCarousel>
       </template>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import VueSlickCarousel from "vue-slick-carousel";
 import HalfClippedShape from "../../shared/HalfClippedShape";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
@@ -27,16 +28,6 @@ import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 export default {
   data() {
     return {
-      sponsors: [
-        { name: "", path: "images/clients/bloody-logo-png-5.png", url: "" },
-        { name: "", path: "images/clients/asus.svg", url: "" },
-        { name: "", path: "images/clients/dell.svg", url: "" },
-        { name: "", path: "images/clients/hp.svg", url: "" },
-        { name: "", path: "images/clients/lenovo.svg", url: "" },
-        { name: "", path: "images/clients/Amazon.ae-Logo.wine.png", url: "" },
-        { name: "", path: "images/clients/Image 1.png", url: "" },
-        { name: "", path: "images/clients/Nile-FM.png", url: "" }
-      ],
       settings: {
         dots: false,
         arrows: false,
@@ -48,7 +39,6 @@ export default {
         autoplaySpeed: 3000,
         cssEase: "linear",
         pauseOnHover: true,
-
         responsive: [
           {
             breakpoint: 1024,
@@ -81,6 +71,11 @@ export default {
   components: {
     VueSlickCarousel,
     HalfClippedShape
+  },
+  computed: {
+    ...mapState({
+      homePageSponsors: state => state.sponsors.sponsors
+    })
   },
   methods: {
     goToUrl(url) {

@@ -3,14 +3,14 @@
     <div class="services-header">
       <h4 class="services-header__sub-text">What we Serve?</h4>
       <h1 class="services-header__title">OUR SERVICES</h1>
-      <router-link to="/" class="services-header__view-link">
+      <router-link to="/services" class="services-header__view-link">
         View all
       </router-link>
     </div>
     <HalfClippedShape>
       <template #content>
         <ServiceSlider
-          :slides="slides"
+          :slides="homePageServices"
           :timeInMillisecond="7000"
           customBulletsStyleClass="hero-bullets"
           :changeAnimation="changeAnimation"
@@ -39,18 +39,21 @@
                     :class="
                       `services-carousel__content services-carousel__content${i}`
                     "
-                  >
-                    {{ slide.text }}
-                  </p>
+                    v-html="slide.description"
+                  ></p>
                 </transition-group>
 
-                <div class="services-carousel__btn" v-if="index">
-                  <HalfClippedOutlineButton
-                    text="Read More"
-                    :showMaskEffect="true"
-                    :buttonMaskCSSStyle="buttonMaskCSSStyle"
-                  />
-                </div>
+                <router-link
+                  :to="`/services/${slide.id}-${reformatURL(slide.title)}`"
+                >
+                  <div class="services-carousel__btn" v-if="index">
+                    <HalfClippedOutlineButton
+                      text="Read More"
+                      :showMaskEffect="true"
+                      :buttonMaskCSSStyle="buttonMaskCSSStyle"
+                    />
+                  </div>
+                </router-link>
               </div>
               <transition :name="imageDirection" appear>
                 <div
@@ -60,7 +63,7 @@
                   <img
                     class="services-carousel__img"
                     draggable="false"
-                    :src="slide.img"
+                    :src="slide.img_cover.url"
                     :alt="slide.title"
                   />
                 </div>
@@ -85,9 +88,11 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import ServiceSlider from "../../shared/Carousel/ServiceSlider";
 import HalfClippedShape from "../../shared/HalfClippedShape";
 import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
+import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 
 export default {
   components: {
@@ -97,31 +102,16 @@ export default {
   },
   data() {
     return {
-      slides: [
-        {
-          title: "Esports Tournaments1",
-          text:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam eLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam eLorem ipsum dolor sit amet, consetetur sadipscing elitr",
-          img: "./images/pubgpic.png"
-        },
-        {
-          title: "Esports Tournaments2",
-          text:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e",
-          img: "./images/hero.jpg"
-        },
-        {
-          title: "Esports Tournaments3",
-          text:
-            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e Lorem ipsum dolor sit amet, consetetur sadipscing elitr,sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam e",
-          img: "./images/fifa-logo.png"
-        }
-      ],
       titleDirection: "service-title-next",
       contentDirection: "service-content-next",
       imageDirection: "service-image-next",
       buttonMaskCSSStyle: "service-button-mask-next"
     };
+  },
+  computed: {
+    ...mapState({
+      homePageServices: state => state.services.homePageServices
+    })
   },
   methods: {
     changeAnimation(dir) {
@@ -142,6 +132,9 @@ export default {
         this.imageDirection = "service-image-next";
         this.buttonMaskCSSStyle = "service-button-mask-next";
       }
+    },
+    reformatURL(id) {
+      return reformatStringToBeInURL(id);
     }
   }
 };

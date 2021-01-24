@@ -25,6 +25,9 @@ const Overview = () => import(/* webpackChunkName: "Overview" */ 'src/dashboard/
 const DepartmentsList = () => import(/* webpackChunkName: "DepartmentsList" */ 'src/dashboard/pages/Departments/DepartmentsList.vue')
 const DepartmentsAddEdit = () => import(/* webpackChunkName: "DepartmentsAdd" */ 'src/dashboard/pages/Departments/DepartmentsAddEdit.vue')
 
+const SponsorsList = () => import(/* webpackChunkName: "SponsorsList" */ 'src/dashboard/pages/Sponsors/SponsorsList.vue')
+const SponsorsAddEdit = () => import(/* webpackChunkName: "SponsorsAddEdit" */ 'src/dashboard/pages/Sponsors/SponsorsAddEdit.vue')
+
 const JobsList = () => import(/* webpackChunkName: "JobsList" */ 'src/dashboard/pages/Jobs/JobsList.vue')
 const JobsAddEdit = () => import(/* webpackChunkName: "JobsAdd" */ 'src/dashboard/pages/Jobs/JobsAddEdit.vue')
 const JobApplicantsList = () => import(/* webpackChunkName: "JobApplicantsList" */ 'src/dashboard/pages/Jobs/JobApplicantsList.vue')
@@ -71,7 +74,7 @@ const routes = [
     name: 'home',
     component: Home,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next)
+      showHeaderAndFooterForWebsite(next, false)
     }
   },
   {
@@ -79,7 +82,7 @@ const routes = [
     name: 'contact',
     component: Contact,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next)
+      showHeaderAndFooterForWebsite(next, false)
     }
   },
   {
@@ -87,7 +90,7 @@ const routes = [
     name: 'about',
     component: About,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next)
+      showHeaderAndFooterForWebsite(next, false)
     }
   },
   {
@@ -189,6 +192,29 @@ const routes = [
             path: 'edit',
             name: 'Edit Department',
             component: DepartmentsAddEdit
+          }
+        ]
+      },
+      {
+        path: 'sponsors',
+        name: 'Sponsors',
+        component: DashboardContent,
+        redirect: '/dashboard/sponsors/list',
+        children: [
+          {
+            path: 'list',
+            name: 'List Sponsors',
+            component: SponsorsList
+          },
+          {
+            path: 'create',
+            name: 'Create Sponsor',
+            component: SponsorsAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit Sponsor',
+            component: SponsorsAddEdit
           }
         ]
       },

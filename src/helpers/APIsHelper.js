@@ -15,6 +15,28 @@ const fetchDepartments = async () => {
   }
 }
 
+const fetchSponsors = async () => {
+  try {
+    const response = await request({
+      query: QUERY.SPONSORS(),
+    });
+    return response.data.data.sponsors
+  } catch (error) {
+    throw error;
+  }
+}
+
+const fetchWebsiteSponsors = async (data) => {
+  try {
+    const response = await request({
+      query: QUERY.SPONSORS_WEBSITE(data),
+    });
+    return response.data.data.sponsors
+  } catch (error) {
+    throw error;
+  }
+}
+
 const fetchJobs = async () => {
   try {
     const response = await request({
@@ -138,7 +160,7 @@ const applyJob = async (data) => {
   const query = MUTATION.APPLY_JOB(applicantInfo);
 
   try {
-    const response = await requestMultipart(constructFormDataForSingleFile(resumeFile, query));
+    const response = await requestMultipart(constructFormDataForSingleFile(resumeFile, query, 'file'));
     return response.data.data.applyJob
   } catch (error) {
     throw error;
@@ -504,6 +526,46 @@ const deleteColumn = async (columnId) => {
   }
 }
 
+const createSponsor = async (data) => {
+  const { img_main, ...sponsorInfo } = data;
+  const token = getTokenCookie()
+
+  const query = MUTATION.CREATE_SPONSOR(sponsorInfo);
+
+  try {
+    const response = await requestMultipart(constructFormDataForSingleFile(img_main, query, 'img_main'), token);
+    return response.data.data.createSponsor
+  } catch (error) {
+    throw error;
+  }
+}
+
+const updateSponsor = async (data) => {
+  const { imagesData, videosData, ...sponsorInfo } = data;
+  const token = getTokenCookie()
+
+  const query = MUTATION.UPDATE_SPONSOR(sponsorInfo, imagesData);
+
+  try {
+    const response = await requestMultipart(constructFormDataForSingleFile(img_main, query, 'img_main'), token);
+    return response.data.data.updateSponsor
+  } catch (error) {
+    throw error;
+  }
+}
+
+const deleteSponsor = async (sponsorId) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.DELETE_SPONSOR(sponsorId),
+    }, token);
+    return response.data.data.deleteSponsor
+  } catch (error) {
+    throw error;
+  }
+}
+
 const updateVideo = async (data) => {
   const token = getTokenCookie()
   try {
@@ -518,6 +580,8 @@ const updateVideo = async (data) => {
 
 export {
   fetchDepartments,
+  fetchSponsors,
+  fetchWebsiteSponsors,
   fetchJobs,
   fetchJob,
   fetchDashboardJob,
@@ -558,7 +622,10 @@ export {
   createColumn,
   updateColumn,
   deleteColumn,
-  updateVideo
+  updateVideo,
+  createSponsor,
+  updateSponsor,
+  deleteSponsor,
 }
 
 const logout = () => {
@@ -606,7 +673,7 @@ const requestMultipart = async (data, token) => {
   return response;
 }
 
-const constructFormDataForSingleFile = (file, query) => {
+const constructFormDataForSingleFile = (file, query, key) => {
   const formData = new FormData()
   let map = {};
   let glQuery;
@@ -617,7 +684,7 @@ const constructFormDataForSingleFile = (file, query) => {
       file: null
     }
   }
-  map = { 0: ["variables.file"] }
+  map = { 0: [`variables.${key}`] }
   formData.append('operations', JSON.stringify(glQuery))
   formData.append('map', JSON.stringify(map))
   formData.append('0', file)

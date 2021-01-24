@@ -34,6 +34,10 @@ import UPDATE_VIDEO from './Shared/Columns/UpdateVideo';
 import DELETE_IMAGE from './DeleteImage';
 import DELETE_VIDEO from './DeleteVideo';
 
+import CREATE_SPONSOR from './Sponsors/CreateSponsor';
+import UPDATE_SPONSOR from './Sponsors/UpdateSponsor';
+import DELETE_SPONSOR from './Sponsors/DeleteSponsor';
+
 export default {
     LOGIN,
     CREATE_DEPARTMENT,
@@ -60,5 +64,8 @@ export default {
     DELETE_COLUMN,
     UPDATE_VIDEO,
     DELETE_IMAGE,
-    DELETE_VIDEO
+    DELETE_VIDEO,
+    CREATE_SPONSOR,
+    UPDATE_SPONSOR,
+    DELETE_SPONSOR
 };
