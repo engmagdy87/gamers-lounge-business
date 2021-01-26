@@ -6,7 +6,7 @@ const buildQuery = (workInfo, imagesData) => {
       statistics,
       order } = workInfo;
 
-   let queryParams = '(';
+   let queryParams = '($img_card: Upload!,$img_cover: Upload!,';
    let imagesKeys = `images: {
             img_card: { upload: { file: $img_card } }
             img_cover: { upload: { file: $img_cover } }`
@@ -17,8 +17,7 @@ const buildQuery = (workInfo, imagesData) => {
       imagesKeys += 'img_slider: { upload: { file: $img_slider } }'
    }
 
-   if (queryParams === '(') queryParams = ''
-   else queryParams += ')'
+   queryParams += ')'
 
    if (imagesKeys === 'images: {') imagesKeys = ''
    else imagesKeys += '}'

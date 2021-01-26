@@ -182,7 +182,7 @@ const createService = async (data) => {
   const { imagesData, ...serviceInfo } = data;
   const token = getTokenCookie()
 
-  const query = MUTATION.CREATE_SERVICE(serviceInfo);
+  const query = MUTATION.CREATE_SERVICE(serviceInfo, imagesData);
 
   try {
     const response = await requestMultipart(constructFormDataForMultipleFile(imagesData, query), token);
@@ -377,7 +377,7 @@ const createWork = async (data) => {
   const { imagesData, ...workInfo } = data;
   const token = getTokenCookie()
 
-  const query = MUTATION.CREATE_WORK(workInfo);
+  const query = MUTATION.CREATE_WORK(workInfo, imagesData);
 
   try {
     const response = await requestMultipart(constructFormDataForMultipleFile(imagesData, query), token);
