@@ -37,6 +37,7 @@
     h1 {
       position: absolute;
       font-family: "Segoe UI Bold";
+      top: 45%;
       @include is-extra-small-mobile {
         font-size: 1.8rem;
       }
@@ -53,22 +54,22 @@
     p {
       position: absolute;
       text-align: center;
-      margin-top: 200px;
+      top: 60%;
       font-size: 1.2rem;
       @include is-extra-small-mobile {
-        margin-top: 100px;
+        top: 60%;
         font-size: 0.8rem;
       }
       @include is-mobile {
-        margin-top: 100px;
+        top: 60%;
         font-size: 0.9rem;
       }
       @include is-tablet {
-        margin-top: 110px;
+        top: 60%;
         font-size: 1rem;
       }
       @include is-desktop {
-        margin-top: 110px;
+        top: 60%;
         font-size: 1rem;
       }
     }

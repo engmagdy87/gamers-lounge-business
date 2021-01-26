@@ -39,6 +39,7 @@
       position: absolute;
       width: 100%;
       text-align: center;
+      top: 45%;
       @include is-extra-small-mobile {
         font-size: 1.5rem;
       }
