@@ -144,7 +144,7 @@
               v-if="
                 editData !== undefined &&
                   operation === 'Edit Service' &&
-                  editData.img_slider !== null
+                  editData.img_slider !== '' && editData.img_slider !== null
               "
               :image="editData.img_slider"
               :setShowDeleteDialogFlag="setImageDataFlag"

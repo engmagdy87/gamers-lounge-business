@@ -189,6 +189,7 @@
               v-if="
                 editData !== undefined &&
                   operation === 'Edit Work' &&
+                  editData.img_slider !== '' &&
                   editData.img_slider !== null
               "
               :image="editData.img_slider"
