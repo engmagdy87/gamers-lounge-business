@@ -1,28 +1,48 @@
-const CREATE_WORK = (
-   { title,
+const buildQuery = (workInfo, imagesData) => {
+   const { title,
       shortDescription,
       isFeatured,
       description,
       statistics,
-      order }
-) => `mutation($img_card: Upload!, $img_cover: Upload!) {
-    createWork(
-       input: {
-          title: "${title}"
-          short_description: "${shortDescription}"
-          description: "${description}"
-          is_featured: ${isFeatured}
-          statistics: "${statistics}"
-          order: ${order}
-          images: {
-             img_card: { upload: { file: $img_card } }
-             img_cover: { upload: { file: $img_cover } }
-          }
-       }
-    ) {
-       id
-    }
- }
- `;
+      order } = workInfo;
+
+   let queryParams = '(';
+   let imagesKeys = `images: {
+            img_card: { upload: { file: $img_card } }
+            img_cover: { upload: { file: $img_cover } }`
+
+
+   if (imagesData.img_slider.length > 0) {
+      queryParams += '$img_slider: Upload,';
+      imagesKeys += 'img_slider: { upload: { file: $img_slider } }'
+   }
+
+   if (queryParams === '(') queryParams = ''
+   else queryParams += ')'
+
+   if (imagesKeys === 'images: {') imagesKeys = ''
+   else imagesKeys += '}'
+
+   return `mutation${queryParams} {
+      createWork(
+         input: {
+            title: "${title}"
+            short_description: "${shortDescription}"
+            description: "${description}"
+            is_featured: ${isFeatured}
+            statistics: "${statistics}"
+            order: ${order}
+            ${imagesKeys}
+         }
+      ) {
+         id
+      }
+   } 
+    `
+}
+
+const CREATE_WORK = (
+   workInfo, imagesData
+) => buildQuery(workInfo, imagesData)
 
 export default CREATE_WORK;

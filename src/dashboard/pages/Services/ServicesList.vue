@@ -53,6 +53,7 @@ export default {
           "Description",
           "Card Image",
           "Cover Image",
+          "Slider Image",
           "Actions"
         ]
       }

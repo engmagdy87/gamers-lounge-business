@@ -22,6 +22,10 @@ query {
             id
             url
           }
+          img_slider{
+            id
+            url
+          }
        }
     }
  }

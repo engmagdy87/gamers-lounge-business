@@ -43,6 +43,7 @@
               class="custom-control-input"
               id="is_featured"
               v-model="service.is_featured"
+              @change="setIsSliderImageRequired"
             />
             <label class="custom-control-label" for="is_featured"
               >Featured</label
@@ -120,6 +121,42 @@
           </div>
         </div>
       </div>
+      <div class="row mt-3 mb-3">
+        <div class="col">
+          <div>
+            <label for="logo" class="mr-5"
+              >Choose Slider Image<span
+                v-if="service.is_featured"
+                class="error-message"
+              >
+                *</span
+              ></label
+            >
+            <input
+              type="file"
+              id="logo"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_slider')"
+              ref="img_slider"
+            />
+            <br />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Service' &&
+                  editData.img_slider !== null
+              "
+              :image="editData.img_slider"
+              :setShowDeleteDialogFlag="setImageDataFlag"
+              openedFor="img_slider"
+            />
+            <ErrorMessage
+              v-if="service.is_featured"
+              :fieldErrors="errors.img_slider"
+            />
+          </div>
+        </div>
+      </div>
 
       <div class="text-center">
         <button
@@ -141,19 +178,14 @@
   </div>
 </template>
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions } from "vuex";
 import ErrorMessage from "../../../website/shared/ErrorMessage";
-import store from "../../../store/index";
 import types from "../../../store/types";
-import { createService } from "../../../helpers/APIsHelper";
 import isValidationErrorExist from "../../../helpers/FormValidation";
 import editorOptions from "../../../dashboard/wysiwyg-factory/options";
 import ImagePreview from "../../../website/shared/ImagePreview.vue";
 import DeleteDialog from "../../../website/shared/DeleteDialog";
-import {
-  reformatHTMLString,
-  reverseReformatHTMLString
-} from "../../../helpers/StringsHelper";
+import { reformatHTMLString } from "../../../helpers/StringsHelper";
 
 const emptyService = {
   title: "",
@@ -161,7 +193,8 @@ const emptyService = {
   description: "",
   is_featured: false,
   img_card: "",
-  img_cover: ""
+  img_cover: "",
+  img_slider: ""
 };
 
 export default {
@@ -183,7 +216,8 @@ export default {
         is_featured: { isRequired: false },
         description: { isRequired: true },
         "card image": { isRequired: true },
-        "cover image": { isRequired: true }
+        "cover image": { isRequired: true },
+        "slider image": { isRequired: false }
       },
       aliases: {
         title: "title",
@@ -191,7 +225,8 @@ export default {
         is_featured: "is_featured",
         description: "description",
         img_card: "card image",
-        img_cover: "cover image"
+        img_cover: "cover image",
+        img_slider: "slider image"
       },
       editorOptions
     };
@@ -233,13 +268,16 @@ export default {
 
         if (this.operation === "Edit Service") {
           let imagesData = {};
-          const { img_card, img_cover } = this.service;
+          const { img_card, img_cover, img_slider } = this.service;
 
           if (!img_card.url)
             imagesData = { ...imagesData, img_card: this.service.img_card };
 
           if (!img_cover.url)
             imagesData = { ...imagesData, img_cover: this.service.img_cover };
+
+          if (!img_slider.url && this.service.is_featured)
+            imagesData = { ...imagesData, img_slider: this.service.img_slider };
 
           if (Object.keys(imagesData).length > 0)
             payload = { ...payload, imagesData };
@@ -250,7 +288,8 @@ export default {
             ...payload,
             imagesData: {
               img_card: this.service.img_card,
-              img_cover: this.service.img_cover
+              img_cover: this.service.img_cover,
+              img_slider: this.service.img_slider
             }
           };
           await this.createService(payload);
@@ -265,7 +304,7 @@ export default {
       }
     },
     removeImage: async function() {
-      const response = await this.deleteImage(this.imageId);
+      await this.deleteImage(this.imageId);
 
       switch (this.openedFor) {
         case "img_card":
@@ -278,12 +317,20 @@ export default {
           this.service.img_cover = "";
           break;
 
+        case "img_slider":
+          this.editData.img_slider = "";
+          this.service.img_slider = "";
+          break;
+
         default:
           break;
       }
 
       this.notifyVue("Image Deleted Successfully", "success");
       this.setImageDataFlag(false, null, "", null);
+    },
+    setIsSliderImageRequired(e) {
+      this.validation["slider image"].isRequired = e.target.checked;
     },
     notifyVue(message, color) {
       this.$notifications.notify({
@@ -311,6 +358,8 @@ export default {
       this.service.description = this.editData.description || "";
       this.service.img_card = this.editData.img_card || "";
       this.service.img_cover = this.editData.img_cover || "";
+      this.service.img_slider = this.editData.img_slider || "";
+      this.validation["slider image"].isRequired = this.editData.is_featured;
     }
   },
   components: {

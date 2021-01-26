@@ -69,7 +69,7 @@
                 column.type === WORK_COLUMNS_TYPES.DESCRIPTION &&
                   column.fillable
               "
-              class="work-details-sections__description"
+              class="description-container work-details-sections__description"
               v-html="column.content"
             />
           </div>
@@ -88,6 +88,7 @@
 <script>
 import { Carousel3d, Slide } from "vue-carousel-3d";
 import isDeviceSmart from "../../../helpers/DetectIsDeviceSmart";
+import redirectToNewTab from "../../../helpers/RedirectToNewTab";
 import CustomHalfClipped from "../../shared/CustomHalfClipped";
 import ImageModal from "../../shared/ImageModal";
 import * as WORK_COLUMNS_TYPES from "../../../constants/ColumnsContentTypes";
@@ -150,6 +151,9 @@ export default {
         this.targetImageIndeces.colId
       ].img_content[0].url;
     }
+  },
+  updated() {
+    redirectToNewTab("description-container");
   }
 };
 </script>

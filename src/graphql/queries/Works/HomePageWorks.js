@@ -5,7 +5,7 @@ query {
           id
           title
           description                    
-          img_cover{
+          img_slider{
             id
             url
           }          

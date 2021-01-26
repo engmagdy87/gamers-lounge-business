@@ -16,7 +16,10 @@
             <p>{{ work.title }}</p>
 
             <div class="work-page-wrapper__text">
-              <h2 v-html="work.short_description"></h2>
+              <h2
+                class="description-container"
+                v-html="work.short_description"
+              ></h2>
             </div>
           </div>
         </router-link>
@@ -36,6 +39,7 @@ import Intersect from "vue-intersect";
 import Loading from "../../../website/shared/Loading";
 import types from "../../../store/types";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
+import redirectToNewTab from "../../../helpers/RedirectToNewTab";
 
 export default {
   data() {
@@ -107,6 +111,7 @@ export default {
     }
   },
   updated() {
+    redirectToNewTab("description-container");
     if (Object.keys(this.ourWorks).length > 0) {
       if (!this.ourWorks.paginatorInfo.hasMorePages) {
         this.setShowFooterFlag(true);

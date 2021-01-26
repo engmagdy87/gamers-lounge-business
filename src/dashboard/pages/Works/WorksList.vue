@@ -55,6 +55,7 @@ export default {
           "Statistics",
           "Card Image",
           "Cover Image",
+          "Slider Image",
           "Actions"
         ]
       }

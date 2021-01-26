@@ -35,6 +35,14 @@ images: {
    ${imagesKeys[1]}: { upload: { file: $${imagesKeys[1]} } }
 }
 `
+   if (imagesKeys.length === 3)
+      queryKeys = `
+images: {
+   ${imagesKeys[0]}: { upload: { file: $${imagesKeys[0]} } }
+   ${imagesKeys[1]}: { upload: { file: $${imagesKeys[1]} } }
+   ${imagesKeys[2]}: { upload: { file: $${imagesKeys[2]} } }
+}
+`
    return `mutation${queryParams} {
    updateService(
       id: ${serviceInfo.id},

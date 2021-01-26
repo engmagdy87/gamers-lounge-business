@@ -27,6 +27,14 @@
         >URL</a
       >
     </td>
+    <td>
+      <a
+        v-if="rowData.img_slider"
+        :href="rowData.img_slider.url"
+        target="__blank"
+        >URL</a
+      >
+    </td>
     <td class="table-actions">
       <img src="/images/edit.svg" alt="edit" @click="redirectTo" />
       <img

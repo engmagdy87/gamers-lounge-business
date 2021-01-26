@@ -26,7 +26,7 @@
                   <template #content>
                     <img
                       draggable="false"
-                      :src="slide.img_cover.url"
+                      :src="slide.img_slider.url"
                       :alt="slide.title"
                     />
                   </template>
@@ -54,7 +54,7 @@
                     v-for="i in 5"
                     :key="i"
                     :class="
-                      `work-carousel__inside__content work-carousel__inside__content${i}`
+                      `description-container work-carousel__inside__content work-carousel__inside__content${i}`
                     "
                     v-html="slide.description"
                   ></p>
@@ -97,6 +97,7 @@ import WorkSlider from "../../shared/Carousel/WorkSlider";
 import HalfClippedShape from "../../shared/HalfClippedShape";
 import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
+import redirectToNewTab from "../../../helpers/RedirectToNewTab";
 
 export default {
   components: {
@@ -140,6 +141,9 @@ export default {
     reformatURL(id) {
       return reformatStringToBeInURL(id);
     }
+  },
+  updated() {
+    redirectToNewTab("description-container");
   }
 };
 </script>

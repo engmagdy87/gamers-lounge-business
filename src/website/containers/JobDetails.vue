@@ -7,9 +7,9 @@
           <h2>{{ job.department.name }}</h2>
           <h1>{{ job.title }}</h1>
           <hr />
-          <div v-html="job.description"></div>
+          <div class="description-container" v-html="job.description"></div>
           <h3>Job requirements</h3>
-          <div v-html="job.requirements"></div>
+          <div class="description-container" v-html="job.requirements"></div>
         </div>
         <div class="col-12 col-lg-6">
           <JobForm :job="job" />
@@ -25,6 +25,7 @@ import types from "../../store/types";
 import JobForm from "../components/jobs/JobForm";
 import Breadcrumb from "../shared/Breadcrumb";
 import { getEntityId, getEntityName } from "../../helpers/StringsHelper";
+import redirectToNewTab from "../../helpers/RedirectToNewTab";
 
 export default {
   data() {
@@ -64,6 +65,9 @@ export default {
     });
 
     this.fetchJob(requestSource);
+  },
+  updated() {
+    redirectToNewTab("description-container");
   }
 };
 </script>

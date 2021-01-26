@@ -6,7 +6,7 @@
         <h1 class="work-details-wrapper__cover-container__title">
           {{ websiteWork.title }}
           <p
-            class="work-details-wrapper__cover-container__description"
+            class="description-container work-details-wrapper__cover-container__description"
             v-html="websiteWork.description"
           ></p>
         </h1>
@@ -48,6 +48,7 @@ import {
   reverseReformatHTMLString
 } from "../../helpers/StringsHelper";
 import { numberOfDecimalsInStringNumber } from "../../helpers/NumbersHelper";
+import redirectToNewTab from "../../helpers/RedirectToNewTab";
 
 export default {
   data() {
@@ -123,6 +124,7 @@ export default {
     this.fetchHeroAndFirstSection();
   },
   updated() {
+    redirectToNewTab("description-container");
     if (
       this.websiteWork.sections.paginatorInfo &&
       !this.websiteWork.sections.paginatorInfo.hasMorePages

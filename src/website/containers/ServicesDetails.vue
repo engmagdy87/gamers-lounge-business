@@ -3,14 +3,17 @@
     <div class="services-details-wrapper__cover-container">
       <img :src="websiteService.img_cover.url" :alt="websiteService.title" />
       <h1>{{ websiteService.title }}</h1>
-      <p v-html="websiteService.description"></p>
+      <p class="description-container" v-html="websiteService.description"></p>
     </div>
 
     <div class="services-details-wrapper__service-section pt-5">
       <div class="col-12 pt-5 pl-0"><Breadcrumb :tree="breadcrumbTree" /></div>
     </div>
 
-    <ServiceDetails :websiteService="websiteService" v-if="websiteService.sections" />
+    <ServiceDetails
+      :websiteService="websiteService"
+      v-if="websiteService.sections"
+    />
 
     <div>
       <Intersect @enter="loadMoreServiceSections" v-if="servicePage > 0"
@@ -30,6 +33,7 @@ import ServiceDetails from "../components/services/ServiceDetails";
 import Intersect from "vue-intersect";
 import Loading from "../../website/shared/Loading";
 import { getEntityId, getEntityName } from "../../helpers/StringsHelper";
+import redirectToNewTab from "../../helpers/RedirectToNewTab";
 
 export default {
   data() {
@@ -107,9 +111,9 @@ export default {
 
     this.setShowFooterFlag(false);
     this.fetchHeroAndFirstSection();
-    
   },
   updated() {
+    redirectToNewTab("description-container");
     if (
       this.websiteService.sections.paginatorInfo &&
       !this.websiteService.sections.paginatorInfo.hasMorePages

@@ -37,7 +37,7 @@
                     v-for="i in 5"
                     :key="i"
                     :class="
-                      `services-carousel__content services-carousel__content${i}`
+                      `description-container services-carousel__content services-carousel__content${i}`
                     "
                     v-html="slide.description"
                   ></p>
@@ -63,7 +63,7 @@
                   <img
                     class="services-carousel__img"
                     draggable="false"
-                    :src="slide.img_cover.url"
+                    :src="slide.img_slider.url"
                     :alt="slide.title"
                   />
                 </div>
@@ -93,6 +93,7 @@ import ServiceSlider from "../../shared/Carousel/ServiceSlider";
 import HalfClippedShape from "../../shared/HalfClippedShape";
 import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
+import redirectToNewTab from "../../../helpers/RedirectToNewTab";
 
 export default {
   components: {
@@ -136,6 +137,9 @@ export default {
     reformatURL(id) {
       return reformatStringToBeInURL(id);
     }
+  },
+  updated() {
+    redirectToNewTab("description-container");
   }
 };
 </script>

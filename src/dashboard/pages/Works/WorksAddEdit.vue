@@ -43,6 +43,7 @@
               class="custom-control-input"
               id="is_featured"
               v-model="work.is_featured"
+              @change="setIsSliderImageRequired"
             />
             <label class="custom-control-label" for="is_featured"
               >Featured</label
@@ -165,6 +166,42 @@
           </div>
         </div>
       </div>
+      <div class="row mt-3 mb-3">
+        <div class="col">
+          <div>
+            <label for="logo" class="mr-5"
+              >Choose Slider Image<span
+                v-if="work.is_featured"
+                class="error-message"
+              >
+                *</span
+              ></label
+            >
+            <input
+              type="file"
+              id="logo"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_slider')"
+              ref="img_slider"
+            />
+            <br />
+            <ImagePreview
+              v-if="
+                editData !== undefined &&
+                  operation === 'Edit Work' &&
+                  editData.img_slider !== null
+              "
+              :image="editData.img_slider"
+              :setShowDeleteDialogFlag="setImageDataFlag"
+              openedFor="img_slider"
+            />
+            <ErrorMessage
+              v-if="work.is_featured"
+              :fieldErrors="errors.img_slider"
+            />
+          </div>
+        </div>
+      </div>
 
       <div class="text-center">
         <button
@@ -186,11 +223,9 @@
   </div>
 </template>
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions } from "vuex";
 import ErrorMessage from "../../../website/shared/ErrorMessage";
-import store from "../../../store/index";
 import types from "../../../store/types";
-import { createWork } from "../../../helpers/APIsHelper";
 import isValidationErrorExist from "../../../helpers/FormValidation";
 import editorOptions from "../../../dashboard/wysiwyg-factory/options";
 import StatisticsInput from "../../components/Works/StatisticsInput";
@@ -208,7 +243,8 @@ const emptyWork = {
   description: "",
   is_featured: false,
   img_card: "",
-  img_cover: ""
+  img_cover: "",
+  img_slider: ""
 };
 
 export default {
@@ -233,7 +269,8 @@ export default {
         description: { isRequired: true },
         statistics: { isRequired: true },
         "card image": { isRequired: true },
-        "cover image": { isRequired: true }
+        "cover image": { isRequired: true },
+        "slider image": { isRequired: false }
       },
       aliases: {
         title: "title",
@@ -243,7 +280,8 @@ export default {
         description: "description",
         statistics: "statistics",
         img_card: "card image",
-        img_cover: "cover image"
+        img_cover: "cover image",
+        img_slider: "slider image"
       },
       editorOptions
     };
@@ -287,13 +325,16 @@ export default {
 
         if (this.operation === "Edit Work") {
           let imagesData = {};
-          const { img_card, img_cover } = this.work;
+          const { img_card, img_cover, img_slider } = this.work;
 
           if (!img_card.url)
             imagesData = { ...imagesData, img_card: this.work.img_card };
 
           if (!img_cover.url)
             imagesData = { ...imagesData, img_cover: this.work.img_cover };
+
+          if (!img_slider.url && this.work.is_featured)
+            imagesData = { ...imagesData, img_slider: this.work.img_slider };
 
           if (Object.keys(imagesData).length > 0)
             payload = { ...payload, imagesData };
@@ -304,7 +345,8 @@ export default {
             ...payload,
             imagesData: {
               img_card: this.work.img_card,
-              img_cover: this.work.img_cover
+              img_cover: this.work.img_cover,
+              img_slider: this.work.img_slider
             }
           };
           await this.createWork(payload);
@@ -319,7 +361,7 @@ export default {
       }
     },
     removeImage: async function() {
-      const response = await this.deleteImage(this.imageId);
+      await this.deleteImage(this.imageId);
 
       switch (this.openedFor) {
         case "img_card":
@@ -330,6 +372,11 @@ export default {
         case "img_cover":
           this.editData.img_cover = "";
           this.work.img_cover = "";
+          break;
+
+        case "img_slider":
+          this.editData.img_slider = "";
+          this.work.img_slider = "";
           break;
 
         default:
@@ -361,6 +408,9 @@ export default {
         value: null
       });
     },
+    setIsSliderImageRequired(e) {
+      this.validation["slider image"].isRequired = e.target.checked;
+    },
     notifyVue(message, color) {
       this.$notifications.notify({
         message: `<span>${message}</span>`,
@@ -391,6 +441,8 @@ export default {
       );
       this.work.img_card = this.editData.img_card || "";
       this.work.img_cover = this.editData.img_cover || "";
+      this.work.img_slider = this.editData.img_slider || "";
+      this.validation["slider image"].isRequired = this.editData.is_featured;
     }
   },
   components: {
