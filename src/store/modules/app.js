@@ -26,7 +26,7 @@ const removeImage = async ({ commit }, imageId) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -37,7 +37,7 @@ const removeVideo = async ({ commit }, videoId) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 

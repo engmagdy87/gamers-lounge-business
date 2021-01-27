@@ -197,6 +197,12 @@ span {
   }
 }
 
+.pell-content > *,
+.pell-content > p > *,
+.pell-content > span > *,
+.pell-content > div > * {
+  font-family: "Segoe UI" !important;
+}
 .pell-content > p > * {
   color: black !important;
 }

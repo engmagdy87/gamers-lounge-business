@@ -36,7 +36,7 @@ const fetchSponsorsData = async ({ commit }, requestSource) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.sponsors.mutations.SET_IS_SPONSORS_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -48,7 +48,7 @@ const fetchWebsiteSponsorsData = async ({ commit }, data) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.sponsors.mutations.SET_IS_SPONSORS_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -59,7 +59,7 @@ const createSponsorData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -72,7 +72,7 @@ const deleteSponsorData = async ({ commit }, payload) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -83,7 +83,7 @@ const updateSponsorData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 

@@ -115,7 +115,7 @@ const fetchWorksData = async ({ commit }, payload) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.works.mutations.SET_IS_WORKS_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -134,7 +134,7 @@ const fetchWebsiteWorkData = async ({ commit }, payload) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.works.mutations.SET_IS_WEBSITE_WORK_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -145,7 +145,7 @@ const fetchHomePageWorkData = async ({ commit }) => {
         commit(types.works.mutations.SET_IS_HOME_PAGE_WORKS_FETCHED, true)
     } catch (error) {
         commit(types.works.mutations.SET_IS_HOME_PAGE_WORKS_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -163,7 +163,7 @@ const fetchWorkSectionsData = async ({ commit }, payload) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.works.mutations.SET_IS_WORK_SECTIONS_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -181,7 +181,7 @@ const fetchWorkSectionData = async ({ commit }, payload) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.works.mutations.SET_IS_WORK_SECTION_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -199,7 +199,7 @@ const fetchWorkRowData = async ({ commit }, payload) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.works.mutations.SET_IS_WORK_ROWS_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -210,7 +210,7 @@ const createWorkData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -221,7 +221,7 @@ const createWorkSectionData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -232,7 +232,7 @@ const createWorkRowData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -250,7 +250,7 @@ const fetchColumnsData = async ({ commit }, payload) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.works.mutations.SET_IS_WORK_COLUMNS_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -261,7 +261,7 @@ const createWorkColumnData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -274,7 +274,7 @@ const deleteWorkData = async ({ commit }, payload) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -287,7 +287,7 @@ const deleteWorkRowData = async ({ commit }, payload) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -300,7 +300,7 @@ const deleteWorkSectionData = async ({ commit }, payload) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -313,7 +313,7 @@ const deleteWorkColumnData = async ({ commit }, payload) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -324,7 +324,7 @@ const updateWorkData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -335,7 +335,7 @@ const updateWorkSectionData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -346,7 +346,7 @@ const updateWorkRowData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -357,7 +357,7 @@ const updateWorkColumnData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -368,7 +368,7 @@ const updateVideoData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 

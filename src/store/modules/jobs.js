@@ -46,7 +46,7 @@ const fetchJobsData = async ({ commit }, requestSource) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.jobs.mutations.SET_IS_JOBS_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -68,7 +68,7 @@ const fetchJobData = async ({ commit }, { jobId, requestSource }) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.jobs.mutations.SET_IS_JOB_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -79,7 +79,7 @@ const createJobData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -92,7 +92,7 @@ const deleteJobData = async ({ commit }, payload) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -103,7 +103,7 @@ const updateJobData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -114,7 +114,7 @@ const applyJobData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 

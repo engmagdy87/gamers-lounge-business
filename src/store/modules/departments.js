@@ -28,7 +28,7 @@ const fetchDepartmentsData = async ({ commit }) => {
     } catch (error) {
         commit(types.departments.mutations.SET_IS_DEPARTMENTS_FETCHED, false)
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -39,7 +39,7 @@ const createDepartmentData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -52,7 +52,7 @@ const deleteDepartmentData = async ({ commit }, payload) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -63,7 +63,7 @@ const updateDepartmentData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 

@@ -115,7 +115,7 @@ const fetchServicesData = async ({ commit }, payload) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.services.mutations.SET_IS_SERVICES_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -134,7 +134,7 @@ const fetchWebsiteServiceData = async ({ commit }, payload) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.services.mutations.SET_IS_WEBSITE_SERVICE_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -149,7 +149,7 @@ const fetchHomePageServiceData = async ({ commit }) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.services.mutations.SET_IS_HOME_PAGE_SERVICES_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -167,7 +167,7 @@ const fetchServiceSectionsData = async ({ commit }, payload) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.services.mutations.SET_IS_SERVICE_SECTIONS_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -185,7 +185,7 @@ const fetchServiceRowData = async ({ commit }, payload) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.services.mutations.SET_IS_SERVICE_ROWS_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -196,7 +196,7 @@ const createServiceData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -207,7 +207,7 @@ const createServiceSectionData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -218,7 +218,7 @@ const createServiceRowData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -236,7 +236,7 @@ const fetchColumnsData = async ({ commit }, payload) => {
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
         commit(types.services.mutations.SET_IS_SERVICE_COLUMNS_FETCHED, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -247,7 +247,7 @@ const createServiceColumnData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -260,7 +260,7 @@ const deleteServiceData = async ({ commit }, payload) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -273,7 +273,7 @@ const deleteServiceRowData = async ({ commit }, payload) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -286,7 +286,7 @@ const deleteServiceSectionData = async ({ commit }, payload) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -299,7 +299,7 @@ const deleteServiceColumnData = async ({ commit }, payload) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -310,7 +310,7 @@ const updateServiceData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -321,7 +321,7 @@ const updateServiceSectionData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -332,7 +332,7 @@ const updateServiceRowData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -343,7 +343,7 @@ const updateServiceColumnData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 
@@ -354,7 +354,7 @@ const updateVideoData = async ({ commit }, data) => {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
     } catch (error) {
         commit(types.app.mutations.SET_SPINNER_FLAG, false)
-        throw error.message
+        throw error
     }
 };
 

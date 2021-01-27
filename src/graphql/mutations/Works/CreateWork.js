@@ -12,8 +12,8 @@ const buildQuery = (workInfo, imagesData) => {
             img_cover: { upload: { file: $img_cover } }`
 
 
-   if (imagesData.img_slider.length > 0) {
-      queryParams += '$img_slider: Upload,';
+   if (imagesData.img_slider) {
+      queryParams += '$img_slider: Upload!,';
       imagesKeys += 'img_slider: { upload: { file: $img_slider } }'
    }
 
