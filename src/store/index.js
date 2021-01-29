@@ -8,6 +8,7 @@ import departments from './modules/departments';
 import services from './modules/services';
 import works from './modules/works';
 import sponsors from './modules/sponsors';
+import about from './modules/about';
 
 Vue.use(Vuex);
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
                 departments,
                 services,
                 works,
-                sponsors
+                sponsors,
+                about
         }
 });

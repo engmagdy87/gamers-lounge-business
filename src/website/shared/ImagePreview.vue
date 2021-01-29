@@ -1,6 +1,6 @@
 <template>
   <div class="preview-image">
-    <div class="close" role="button" @click="fireDeleteModal">
+    <div class="close" role="button" @click="fireDeleteModal" v-if="!disabled">
       &times;
     </div>
     <img :src="image.url" alt="preview" />
@@ -9,7 +9,13 @@
 
 <script>
 export default {
-  props: ["image", "setShowDeleteDialogFlag", "openedFor", "imageIndex"],
+  props: [
+    "image",
+    "setShowDeleteDialogFlag",
+    "openedFor",
+    "imageIndex",
+    "disabled"
+  ],
   methods: {
     fireDeleteModal() {
       this.setShowDeleteDialogFlag(

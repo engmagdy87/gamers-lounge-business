@@ -26,6 +26,14 @@
         <i class="nc-icon nc-money-coins"></i>
         <p>Sponsors</p>
       </sidebar-link>
+      <sidebar-link to="/dashboard/about">
+        <i class="nc-icon nc-quote"></i>
+        <p>About</p>
+      </sidebar-link>
+      <sidebar-link to="/dashboard/contact">
+        <i class="nc-icon nc-mobile"></i>
+        <p>Contact</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <TopNavbar></TopNavbar>

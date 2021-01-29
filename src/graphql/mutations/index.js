@@ -38,6 +38,10 @@ import CREATE_SPONSOR from './Sponsors/CreateSponsor';
 import UPDATE_SPONSOR from './Sponsors/UpdateSponsor';
 import DELETE_SPONSOR from './Sponsors/DeleteSponsor';
 
+import CREATE_ABOUT from './About/CreateAbout';
+import UPDATE_ABOUT from './About/UpdateAbout';
+import DELETE_ABOUT from './About/DeleteAbout';
+
 export default {
     LOGIN,
     CREATE_DEPARTMENT,
@@ -67,5 +71,8 @@ export default {
     DELETE_VIDEO,
     CREATE_SPONSOR,
     UPDATE_SPONSOR,
-    DELETE_SPONSOR
+    DELETE_SPONSOR,
+    CREATE_ABOUT,
+    UPDATE_ABOUT,
+    DELETE_ABOUT
 };

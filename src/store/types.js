@@ -156,6 +156,44 @@ const sponsors = {
     }
 };
 
+const about = {
+    mutations: {
+        SET_ABOUT: 'about/mutations/SET_ABOUT',
+        SET_IS_ABOUT_FETCHED: 'about/mutations/SET_IS_ABOUT_FETCHED',
+        SET_WEBSITE_ABOUT: 'about/mutations/SET_WEBSITE_ABOUT',
+        SET_IS_WEBSITE_ABOUT_FETCHED: 'about/mutations/SET_IS_WEBSITE_ABOUT_FETCHED',
+        SET_ABOUT_SECTIONS: 'about/mutations/SET_ABOUT_SECTIONS',
+        SET_IS_ABOUT_SECTIONS_FETCHED: 'about/mutations/SET_IS_ABOUT_SECTIONS_FETCHED',
+        SET_ABOUT_SECTION: 'about/mutations/SET_ABOUT_SECTION',
+        SET_IS_ABOUT_SECTION_FETCHED: 'about/mutations/SET_IS_ABOUT_SECTION_FETCHED',
+        SET_ABOUT_ROWS: 'about/mutations/SET_ABOUT_ROWS',
+        SET_IS_ABOUT_ROWS_FETCHED: 'about/mutations/SET_IS_ABOUT_ROWS_FETCHED',
+        SET_ABOUT_COLUMNS: 'about/mutations/SET_ABOUT_COLUMNS',
+        SET_IS_ABOUT_COLUMNS_FETCHED: 'about/mutations/SET_IS_ABOUT_COLUMNS_FETCHED',
+        REMOVE_DELETED_ABOUT_SECTION: 'about/mutations/REMOVE_DELETED_ABOUT_SECTION',
+        REMOVE_DELETED_ABOUT_ROW: 'about/mutations/REMOVE_DELETED_ABOUT_ROW',
+        REMOVE_DELETED_ABOUT_COLUMN: 'about/mutations/REMOVE_DELETED_ABOUT_COLUMN',
+    },
+    actions: {
+        FETCH_ABOUT: 'about/actions/FETCH_ABOUT',
+        FETCH_WEBSITE_ABOUT: 'about/actions/FETCH_WEBSITE_ABOUT',
+        CREATE_ABOUT: 'about/actions/CREATE_ABOUT',
+        UPDATE_ABOUT: 'about/actions/UPDATE_ABOUT',
+        CREATE_ABOUT_SECTION: 'about/actions/CREATE_ABOUT_SECTION',
+        DELETE_ABOUT_SECTION: 'about/actions/DELETE_ABOUT_SECTION',
+        UPDATE_ABOUT_SECTION: 'about/actions/UPDATE_ABOUT_SECTION',
+        FETCH_ABOUT_ROWS: 'about/actions/FETCH_ABOUT_ROWS',
+        CREATE_ABOUT_ROW: 'about/actions/CREATE_ABOUT_ROW',
+        DELETE_ABOUT_ROW: 'about/actions/DELETE_ABOUT_ROW',
+        UPDATE_ABOUT_ROW: 'about/actions/UPDATE_ABOUT_ROW',
+        FETCH_ABOUT_COLUMNS: 'about/actions/FETCH_ABOUT_COLUMNS',
+        CREATE_ABOUT_COLUMN: 'about/actions/CREATE_ABOUT_COLUMN',
+        DELETE_ABOUT_COLUMN: 'about/actions/DELETE_ABOUT_COLUMN',
+        UPDATE_ABOUT_COLUMN: 'about/actions/UPDATE_ABOUT_COLUMN',
+        UPDATE_VIDEO: 'about/actions/UPDATE_VIDEO',
+    }
+};
+
 export default {
     app,
     login,
@@ -163,5 +201,6 @@ export default {
     departments,
     services,
     works,
-    sponsors
+    sponsors,
+    about
 };

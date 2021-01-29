@@ -221,6 +221,71 @@ const deleteService = async (id) => {
   }
 }
 
+const fetchAbout = async (data) => {
+  try {
+    const response = await request({
+      query: QUERY.ABOUT(data),
+    });
+    return response.data.data.aboutUs
+  } catch (error) {
+    throw error;
+  }
+}
+
+const createAbout = async (data) => {
+  const { imagesData, ...aboutInfo } = data;
+  const token = getTokenCookie()
+
+  const query = MUTATION.CREATE_ABOUT(aboutInfo, imagesData);
+
+  try {
+    const response = await requestMultipart(constructFormDataForMultipleFile(imagesData, query), token);
+    return response.data.data.createAboutUs
+  } catch (error) {
+    throw error;
+  }
+}
+
+const updateAbout = async (data) => {
+  let response;
+  const { imagesData, ...aboutInfo } = data;
+  const token = getTokenCookie()
+  try {
+    const query = MUTATION.UPDATE_ABOUT(aboutInfo, imagesData)
+    if (imagesData)
+      response = await requestMultipart(constructFormDataForMultipleFile(imagesData, query), token);
+    else response = await request({
+      query
+    }, token);
+    return response.data.data.updateAboutUs
+  } catch (error) {
+    throw error;
+  }
+}
+
+const deleteAbout = async (id) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.DELETE_ABOUT(id),
+    }, token);
+    return response.data.data.deleteAboutUs
+  } catch (error) {
+    throw error;
+  }
+}
+
+const fetchWebsiteAbout = async (data) => {
+  try {
+    const response = await request({
+      query: QUERY.ABOUT_WEBSITE(data),
+    });
+    return response.data.data.aboutUs
+  } catch (error) {
+    throw error;
+  }
+}
+
 const fetchServiceSections = async (id) => {
   try {
     const response = await request({
@@ -626,6 +691,11 @@ export {
   createSponsor,
   updateSponsor,
   deleteSponsor,
+  fetchAbout,
+  createAbout,
+  updateAbout,
+  deleteAbout,
+  fetchWebsiteAbout,
 }
 
 const logout = () => {

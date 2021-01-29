@@ -18,19 +18,19 @@ const editorOptions = [
         result: () => window.pell.exec('fontSize', Math.max(Number(queryCommandValue('FontSize')) - 1, 1))
     },
     {
-        icon: '<img src="/images/align-left.svg" />',
+        icon: '<i class="nc-icon nc-align-left-2"></i>',
         title: 'Align Left',
         state: () => queryCommandState('justifyLeft'),
         result: () => window.pell.exec('justifyLeft')
     },
     {
-        icon: '<img src="/images/align-center.svg" />',
+        icon: '<i class="nc-icon nc-align-center"></i>',
         title: 'Align Center',
         state: () => queryCommandState('justifyCenter'),
         result: () => window.pell.exec('justifyCenter')
     },
     {
-        icon: '<img src="/images/align-right.svg" />',
+        icon: '<i class="nc-icon nc-align-left-2" style="transform:rotateZ(180deg);margin-top:5px"></i>',
         title: 'Align Right',
         state: () => queryCommandState('justifyRight'),
         result: () => window.pell.exec('justifyRight')

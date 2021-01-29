@@ -14,6 +14,9 @@ import WORK_SECTIONS from './Works/Sections';
 import WORK_WEBSITE from './Works/WorkWebsite';
 import HOME_PAGE_WORKS from './Works/HomePageWorks';
 
+import ABOUT from './About/About';
+import ABOUT_WEBSITE from './About/AboutWebsite';
+
 import SECTION from './Shared/Section';
 import ROWS from './Shared/Rows';
 import COLUMNS from './Shared/Columns';
@@ -39,5 +42,7 @@ export default {
   WORK_WEBSITE,
   HOME_PAGE_WORKS,
   SPONSORS,
-  SPONSORS_WEBSITE
+  SPONSORS_WEBSITE,
+  ABOUT,
+  ABOUT_WEBSITE,
 };

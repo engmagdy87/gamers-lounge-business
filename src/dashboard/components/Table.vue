@@ -121,6 +121,36 @@
         >
         </WorkColumnTabelRow>
       </tbody>
+      <tbody v-if="tableType === 'aboutSections'">
+        <AboutSectionTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </AboutSectionTabelRow>
+      </tbody>
+      <tbody v-if="tableType === 'aboutRows'">
+        <AboutRowTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </AboutRowTabelRow>
+      </tbody>
+      <tbody v-if="tableType === 'aboutColumns'">
+        <AboutColumnTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </AboutColumnTabelRow>
+      </tbody>
       <tbody v-if="tableType === 'sponsors'">
         <SponsorTabelRow
           v-for="(item, index) in data"
@@ -146,6 +176,9 @@ import WorkTabelRow from "../components/Works/WorkTabelRow";
 import WorkSectionTabelRow from "../components/Works/WorkSectionTabelRow";
 import WorkRowTabelRow from "../components/Works/WorkRowTabelRow";
 import WorkColumnTabelRow from "../components/Works/WorkColumnTabelRow";
+import AboutSectionTabelRow from "../components/About/AboutSectionTabelRow";
+import AboutRowTabelRow from "../components/About/AboutRowTabelRow";
+import AboutColumnTabelRow from "../components/About/AboutColumnTabelRow";
 import SponsorTabelRow from "../components/Sponsors/SponsorTabelRow";
 
 export default {
@@ -163,6 +196,9 @@ export default {
     WorkSectionTabelRow,
     WorkRowTabelRow,
     WorkColumnTabelRow,
+    AboutSectionTabelRow,
+    AboutRowTabelRow,
+    AboutColumnTabelRow,
     SponsorTabelRow
   }
 };

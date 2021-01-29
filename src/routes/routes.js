@@ -50,6 +50,13 @@ const WorkRowsAddEdit = () => import(/* webpackChunkName: "WorkRowsAddEdit" */ '
 const WorkColumnsList = () => import(/* webpackChunkName: "WorkColumnsList" */ 'src/dashboard/pages/Works/Columns/WorkColumnsList.vue')
 const WorkColumnsAddEdit = () => import(/* webpackChunkName: "WorkColumnsAddEdit" */ 'src/dashboard/pages/Works/Columns/WorkColumnsAddEdit.vue')
 
+const AboutSectionsList = () => import(/* webpackChunkName: "AboutSectionsList" */ 'src/dashboard/pages/About/Sections/AboutSectionsList.vue')
+const AboutSectionsAddEdit = () => import(/* webpackChunkName: "AboutSectionsAddEdit" */ 'src/dashboard/pages/About/Sections/AboutSectionsAddEdit.vue')
+const AboutRowsAddEdit = () => import(/* webpackChunkName: "AboutRowsAddEdit" */ 'src/dashboard/pages/About/Rows/AboutRowsAddEdit.vue')
+const AboutRowsList = () => import(/* webpackChunkName: "AboutRowsList" */ 'src/dashboard/pages/About/Rows/AboutRowsList.vue')
+const AboutColumnsAddEdit = () => import(/* webpackChunkName: "AboutColumnsAddEdit" */ 'src/dashboard/pages/About/Columns/AboutColumnsAddEdit.vue')
+const AboutColumnsList = () => import(/* webpackChunkName: "AboutColumnsList" */ 'src/dashboard/pages/About/Columns/AboutColumnsList.vue')
+
 const Login = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/Login.vue')
 
 const Icons = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/Icons.vue')
@@ -385,6 +392,61 @@ const routes = [
             path: 'columns/edit/:rowId',
             name: 'Edit Work Column',
             component: WorkColumnsAddEdit
+          },
+        ]
+      },
+      {
+        path: 'about',
+        name: 'About',
+        component: DashboardContent,
+        redirect: '/dashboard/about/list',
+        children: [
+          {
+            path: 'list',
+            name: 'List About',
+            component: AboutSectionsList
+          },
+          {
+            path: 'create',
+            name: 'Create About Section',
+            component: AboutSectionsAddEdit
+          },
+          {
+            path: 'edit',
+            name: 'Edit About Section',
+            component: AboutSectionsAddEdit
+          },
+          // //*************************************/
+          {
+            path: 'rows/list/:sectionId',
+            name: 'List About Rows',
+            component: AboutRowsList
+          },
+          {
+            path: 'rows/create/:sectionId',
+            name: 'Create About Row',
+            component: AboutRowsAddEdit
+          },
+          {
+            path: 'rows/edit/:sectionId',
+            name: 'Edit About Row',
+            component: AboutRowsAddEdit
+          },
+          // //*************************************/
+          {
+            path: 'columns/list/:rowId',
+            name: 'List About Columns',
+            component: AboutColumnsList
+          },
+          {
+            path: 'columns/create/:rowId',
+            name: 'Create About Column',
+            component: AboutColumnsAddEdit
+          },
+          {
+            path: 'columns/edit/:rowId',
+            name: 'Edit About Column',
+            component: AboutColumnsAddEdit
           },
         ]
       },
