@@ -53,7 +53,7 @@ query {
 
 const ABOUT = ({ id, first, page }) => {
     if (!first && !page) return ABOUT_HERO(id)
-    return ABOUT_SECTIONS(id, first, page)
+    return ABOUT_SECTIONS(first, page)
 }
 
 export default ABOUT;

@@ -1,7 +1,7 @@
 <template>
-  <div class="about-wrapper">
+  <div class="about-wrapper" v-if="isWebsiteAboutFetched">
     <Hero>
-      <template #hero-content>
+      <template #hero-content >
         <div
           class="row align-items-end h-100 justify-content-center about-container"
         >
@@ -9,20 +9,11 @@
             <template #content>
               <div class="about-container__heroContent">
                 <h1>OUR VISION</h1>
-                <p>
-                  Bridge amateur, semi-pro & professional gamers via one
-                  platform <br />
-                  to help develop the esports scene & gamer culture, while
-                  changing the mindset towards esports in the
+                <p v-html="about.vision">
                 </p>
 
                 <h1>OUR MISSION & OBJECTIVES</h1>
-                <p>
-                  Operate top notch eports tournaments & events, creating more
-                  opportunities for ameteurs and semi-professionals to compete &
-                  evolve into professional gamers they aspire to be, while
-                  fostering an inclusive enviroment for esports players across
-                  the region
+                <p v-html="about.mission">
                 </p>
               </div>
             </template>
@@ -31,36 +22,125 @@
       </template>
     </Hero>
 
-    <AboutSection />
+    <AboutSection  :about="about" v-if="about.sections"/>
 
-    <Clients />
+      <Intersect @enter="loadMoreAboutSections" v-if="aboutPage > 0"
+        ><div class="threshold">
+          <Loading :showLoading="showLoading" />
+        </div>
+      </Intersect>
+
+    <Clients :sponsors="sponsors"  v-if="isSponsorsFetched"/>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 import types from "../../store/types";
 import Hero from "../shared/Hero";
 import HalfClippedShape from "../shared/HalfClippedShape";
 import AboutSection from "../components/about/AboutSection";
 import Clients from "../components/about/Clients";
+import Intersect from "vue-intersect";
+import Loading from "../../website/shared/Loading";
 
 export default {
   components: {
     Hero,
     HalfClippedShape,
     AboutSection,
-    Clients
+    Clients,
+    Intersect,
+    Loading
+  },
+  data() {
+    return {
+      queriedAboutCounts: 2,
+      aboutPage: 0,
+      showLoading: false
+    };
+  },
+  computed:{
+    ...mapState({
+      about: state => state.about.websiteAbout,
+      isWebsiteAboutFetched: state => state.about.isWebsiteAboutFetched,
+      isSponsorsFetched: state => state.sponsors.isSponsorsFetched,
+      sponsors: state => state.sponsors.sponsors
+    })
   },
   methods: {
     ...mapActions({
-      fetchAboutUsPageSponsors: types.sponsors.actions.FETCH_WEBSITE_SPONSORS
-    })
+      fetchAboutUsPageSponsors: types.sponsors.actions.FETCH_WEBSITE_SPONSORS,
+      fetchAbout: types.about.actions.FETCH_WEBSITE_ABOUT
+    }),
+    ...mapMutations({
+      setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
+    }),
+    generateAboutPayload(showSpinner) {
+      const data = {
+        first: this.queriedAboutCounts,
+        page:
+          Object.keys(this.about).length > 0
+            ? this.about.paginatorInfo.currentPage + 1
+            : 1
+      };
+      const requestSource = {
+        data,
+        requestSource: "website",
+        showSpinner
+      };
+      return requestSource;
+    },
+
+    fetchHeroAndFirstSection: async function() {
+      let payload = this.generateAboutPayload(true, true);
+      await this.fetchAbout(payload);
+      this.aboutPage++;
+    },
+    generateAboutPayload(showSpinner, firstFetch) {
+      let data = {};
+      if (!firstFetch)
+        data = {
+          first: this.queriedAboutCounts,
+          page: this.aboutPage
+        };
+      const requestSource = {
+        data,
+        showSpinner,
+        requestSource: "website"
+      };
+      return requestSource;
+    },
+    loadMoreAboutSections: async function() {
+      if (
+        !this.showLoading &&
+        (this.about.sections.data.length === 0 ||
+          this.about.sections.paginatorInfo.hasMorePages)
+      ) {
+        this.showLoading = true;
+        const payload = this.generateAboutPayload(false, false);
+        await this.fetchAbout(payload);
+        this.aboutPage++;
+        this.showLoading = false;
+      }
+      if(!this.about.sections.paginatorInfo.hasMorePages){
+        const data = { places: "ABOUT_US" };
+        this.fetchAboutUsPageSponsors(data);
+      }
+    }
   },
   mounted() {
-    const data = { places: "ABOUT_US" };
-    this.fetchAboutUsPageSponsors(data);
+    this.setShowFooterFlag(false);
+    this.fetchHeroAndFirstSection();
+  },
+  updated() {
+    if (
+      this.about.sections.paginatorInfo &&
+      !this.about.sections.paginatorInfo.hasMorePages
+    )
+      this.setShowFooterFlag(true);
   }
+  
 };
 </script>
 

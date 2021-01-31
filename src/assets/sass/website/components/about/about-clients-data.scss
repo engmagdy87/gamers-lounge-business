@@ -13,7 +13,8 @@
     object-fit: contain;
     padding: 30px;
     width: 65%;
-    margin-right: auto;
+    margin: auto;
+    cursor: pointer;
         @include is-large-desktop {
             width: 70%;
         }
@@ -40,11 +41,5 @@
     width: .01rem;
     background-color: rgba($light-gray, .2);
     margin-top: -50px;
-    }
-    &__rightline{
-    margin-left: auto;
-    }
-    &__leftline{
-    margin-right: auto;
     }
 }
