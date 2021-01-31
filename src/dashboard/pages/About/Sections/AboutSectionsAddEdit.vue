@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/dashboard/about">Abouts</a>
+          <a href="/dashboard/about">About</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
           {{ operation }}
@@ -70,6 +70,7 @@
     </form>
   </div>
 </template>
+
 <script>
 import { mapActions, mapState } from "vuex";
 import ErrorMessage from "../../../../website/shared/ErrorMessage";

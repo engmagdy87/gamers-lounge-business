@@ -57,6 +57,8 @@ const AboutRowsList = () => import(/* webpackChunkName: "AboutRowsList" */ 'src/
 const AboutColumnsAddEdit = () => import(/* webpackChunkName: "AboutColumnsAddEdit" */ 'src/dashboard/pages/About/Columns/AboutColumnsAddEdit.vue')
 const AboutColumnsList = () => import(/* webpackChunkName: "AboutColumnsList" */ 'src/dashboard/pages/About/Columns/AboutColumnsList.vue')
 
+const ContactAddEdit = () => import(/* webpackChunkName: "ContactAddEdit" */ 'src/dashboard/pages/Contact/ContactAddEdit.vue')
+
 const Login = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/Login.vue')
 
 const Icons = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/Icons.vue')
@@ -447,6 +449,19 @@ const routes = [
             path: 'columns/edit/:rowId',
             name: 'Edit About Column',
             component: AboutColumnsAddEdit
+          },
+        ]
+      },
+      {
+        path: 'contact',
+        name: 'Contact',
+        component: DashboardContent,
+        redirect: '/dashboard/contact/list',
+        children: [
+          {
+            path: 'list',
+            name: 'Create Contact',
+            component: ContactAddEdit
           },
         ]
       },

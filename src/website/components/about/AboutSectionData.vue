@@ -1,21 +1,25 @@
 <template>
-<div class="about-section-wrapper">   
-    <div class="about-section-wrapper__container">  
-        <div v-for="(row, rowId) in section.rows" :key="row.id" class="row m-0 p-0 w-100">
+  <div class="about-section-wrapper">
+    <div class="about-section-wrapper__container">
+      <div
+        v-for="(row, rowId) in section.rows"
+        :key="row.id"
+        class="row m-0 p-0 w-100"
+      >
         <div
-            v-for="(column, colId) in row.columns"
-            :key="column.index"
-            :style="{ width: getWidth(column.ratio) }"
+          v-for="(column, colId) in row.columns"
+          :key="column.index"
+          :style="{ width: getWidth(column.ratio) }"
         >
-            <div
-                v-if="column.type === ABOUT_COLUMNS_TYPES.TITLE && column.fillable"
-                class="work-details-sections__title-normal"
-                >
-                {{ column.content }}
-            </div>
-            <div
+          <div
+            v-if="column.type === ABOUT_COLUMNS_TYPES.TITLE && column.fillable"
+            class="work-details-sections__title-normal"
+          >
+            {{ column.content }}
+          </div>
+          <div
             v-else-if="
-                column.type === ABOUT_COLUMNS_TYPES.IMAGE && column.fillable
+              column.type === ABOUT_COLUMNS_TYPES.IMAGE && column.fillable
             "
             v-for="img in column.img_content"
             :key="img.id"
@@ -23,68 +27,66 @@
             style="cursor:pointer"
             class="about-section-wrapper__inside--is-image"
             :style="{ 'background-image': 'url(' + img.url + ')' }"
-            >
-            
-            </div>
+          ></div>
 
-            <div
+          <div
             class="work-details-sections__video"
             v-else-if="
-                column.type === ABOUT_COLUMNS_TYPES.VIDEO && column.fillable
+              column.type === ABOUT_COLUMNS_TYPES.VIDEO && column.fillable
             "
             v-for="video in column.vid_content"
             :key="video.id"
-            >
+          >
             <video
-                :id="`video${video.id}`"
-                :src="video.url"
-                width="100%"
-                :style="{ cursor: video.is_auto_play ? 'pointer' : 'unset' }"
-                :controls="!video.is_auto_play"
-                :muted="video.is_auto_play"
-                :loop="video.is_auto_play"
-                :autoplay="video.is_auto_play"
-                @click="e => toggleFullScreenMode(e, video)"
+              :id="`video${video.id}`"
+              :src="video.url"
+              width="100%"
+              :style="{ cursor: video.is_auto_play ? 'pointer' : 'unset' }"
+              :controls="!video.is_auto_play"
+              :muted="video.is_auto_play"
+              :loop="video.is_auto_play"
+              :autoplay="video.is_auto_play"
+              @click="e => toggleFullScreenMode(e, video)"
             ></video>
-            </div>
+          </div>
 
-            <div
+          <div
             v-else-if="
-                column.type === ABOUT_COLUMNS_TYPES.SLIDER && column.fillable
+              column.type === ABOUT_COLUMNS_TYPES.SLIDER && column.fillable
             "
-            >
+          >
             <Carousel3d
-                :autoplay="true"
-                :autoplay-timeout="3000"
-                :autoplayHoverPause="true"
-                :height="400"
-                :width="500"
-                :border="0"
+              :autoplay="true"
+              :autoplay-timeout="3000"
+              :autoplayHoverPause="true"
+              :height="400"
+              :width="500"
+              :border="0"
             >
-                <Slide v-for="(img, i) in column.img_content" :index="i" :key="i">
+              <Slide v-for="(img, i) in column.img_content" :index="i" :key="i">
                 <img :src="img.url" draggable="false" />
-                </Slide>
+              </Slide>
             </Carousel3d>
-            </div>
+          </div>
 
-            <div v-if="
-                column.type === ABOUT_COLUMNS_TYPES.DESCRIPTION && column.fillable
+          <div
+            v-if="
+              column.type === ABOUT_COLUMNS_TYPES.DESCRIPTION && column.fillable
             "
             class="description-container about-section-wrapper__inside--is-text"
-            >
+          >
             <div v-html="column.content" />
-            </div>
+          </div>
         </div>
-        </div>
-        <ImageModal
+      </div>
+      <ImageModal
         :showImageModal="showImageModal"
         :setShowImageModal="setShowImageModal"
         :imageUrl="targetImageUrl"
         :setImageIndex="setImageIndex"
-        />
-
+      />
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -95,7 +97,7 @@ import redirectToNewTab from "../../../helpers/RedirectToNewTab";
 import * as ABOUT_COLUMNS_TYPES from "../../../constants/ColumnsContentTypes";
 export default {
   props: ["section"],
-data() {
+  data() {
     return {
       showImageModal: false,
       targetImageIndeces: {
@@ -170,7 +172,7 @@ data() {
   updated() {
     redirectToNewTab("description-container");
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
