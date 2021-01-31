@@ -643,6 +643,71 @@ const updateVideo = async (data) => {
   }
 }
 
+const fetchContact = async () => {
+  try {
+    const response = await request({
+      query: QUERY.CONTACT(),
+    });
+    return response.data.data.contactUs
+  } catch (error) {
+    throw error;
+  }
+}
+
+const createContact = async (data) => {
+  const { imagesData, ...contactInfo } = data;
+  const token = getTokenCookie()
+
+  const query = MUTATION.CREATE_CONTACT(contactInfo, imagesData);
+
+  try {
+    const response = await requestMultipart(constructFormDataForMultipleFile(imagesData, query), token);
+    return response.data.data.createContactUs
+  } catch (error) {
+    throw error;
+  }
+}
+
+const updateContact = async (data) => {
+  let response;
+  const { imagesData, ...contactInfo } = data;
+  const token = getTokenCookie()
+  try {
+    const query = MUTATION.UPDATE_CONTACT(contactInfo, imagesData)
+    if (imagesData)
+      response = await requestMultipart(constructFormDataForMultipleFile(imagesData, query), token);
+    else response = await request({
+      query
+    }, token);
+    return response.data.data.updateContactUs
+  } catch (error) {
+    throw error;
+  }
+}
+
+const deleteContact = async (id) => {
+  const token = getTokenCookie()
+  try {
+    const response = await request({
+      query: MUTATION.DELETE_CONTACT(id),
+    }, token);
+    return response.data.data.deleteContactUs
+  } catch (error) {
+    throw error;
+  }
+}
+
+const sendEmail = async (data) => {
+  const query = MUTATION.SEND_EMAIL(data);
+
+  try {
+    const response = await request(query);
+    return response.data.data.sendContactUsEmail
+  } catch (error) {
+    throw error;
+  }
+}
+
 export {
   fetchDepartments,
   fetchSponsors,
@@ -696,6 +761,11 @@ export {
   updateAbout,
   deleteAbout,
   fetchWebsiteAbout,
+  fetchContact,
+  createContact,
+  updateContact,
+  deleteContact,
+  sendEmail
 }
 
 const logout = () => {

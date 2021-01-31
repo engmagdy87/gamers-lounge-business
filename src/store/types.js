@@ -194,6 +194,20 @@ const about = {
     }
 };
 
+const contact = {
+    mutations: {
+        SET_CONTACT: 'contact/mutations/SET_CONTACT',
+        SET_IS_CONTACT_FETCHED: 'contact/mutations/SET_IS_CONTACT_FETCHED',
+    },
+    actions: {
+        FETCH_CONTACT: 'contact/actions/FETCH_CONTACT',
+        CREATE_CONTACT: 'contact/actions/CREATE_CONTACT',
+        DELETE_CONTACT: 'contact/actions/DELETE_CONTACT',
+        UPDATE_CONTACT: 'contact/actions/UPDATE_CONTACT',
+        SEND_EMAIL: 'contact/actions/SEND_EMAIL',
+    }
+};
+
 export default {
     app,
     login,
@@ -202,5 +216,6 @@ export default {
     services,
     works,
     sponsors,
-    about
+    about,
+    contact
 };

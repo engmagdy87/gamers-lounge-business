@@ -9,6 +9,7 @@ import services from './modules/services';
 import works from './modules/works';
 import sponsors from './modules/sponsors';
 import about from './modules/about';
+import contact from './modules/contact';
 
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
                 services,
                 works,
                 sponsors,
-                about
+                about,
+                contact
         }
 });

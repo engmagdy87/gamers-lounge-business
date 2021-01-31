@@ -4,10 +4,10 @@
       <template #content>
         <div class="contact-data-box-wrapper">
           <div class="contact-data-box-wrapper__img">
-            <img :src="data.icon" />
+            <img :src="icon" />
           </div>
-          <p class="contact-data-box-wrapper__title">{{ data.title }}</p>
-          <p class="contact-data-box-wrapper__details">{{ data.details }}</p>
+          <p class="contact-data-box-wrapper__title">{{ title }}</p>
+          <p class="contact-data-box-wrapper__details">{{ content }}</p>
         </div>
       </template>
     </HalfClippedShape>
@@ -18,7 +18,7 @@
 import HalfClippedShape from "../../shared/HalfClippedShape";
 
 export default {
-  props: ["data"],
+  props: ["title", "icon", "content"],
   components: {
     HalfClippedShape
   }

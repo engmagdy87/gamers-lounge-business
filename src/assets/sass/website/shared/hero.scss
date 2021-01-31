@@ -5,7 +5,7 @@
   height: 100vh;
   padding-top: $header-height;
   background-attachment: fixed;
-  @include cover-image("~/images/hero.jpg");
+  @include cover-image();
   @include is-extra-small-mobile {
     padding-top: $header-height-mobile;
   }
