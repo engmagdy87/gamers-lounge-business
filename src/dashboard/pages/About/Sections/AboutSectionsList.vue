@@ -164,7 +164,7 @@ export default {
       targetId: null,
       locationInDataArray: null,
       table: {
-        columns: ["Id", "Order", "Template", "Published", "Actions"]
+        columns: ["Id", "Order", "Published", "Actions"]
       },
       editMode: false,
       errors: {},
@@ -204,6 +204,7 @@ export default {
       fetchAbout: types.about.actions.FETCH_ABOUT,
       createAbout: types.about.actions.CREATE_ABOUT,
       updateAbout: types.about.actions.UPDATE_ABOUT,
+      deleteAboutSection: types.about.actions.DELETE_ABOUT_SECTION,
       deleteImage: types.app.actions.DELETE_IMAGE
     }),
     isAboutDataExists() {

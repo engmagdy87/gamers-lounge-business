@@ -27,16 +27,16 @@
     margin-top: -$header-height-mobile - 45;
     min-height: calc(100vh - #{$footer-height-mobile});
   }
-  @include is-extra-small-mobile{
+  @include is-extra-small-mobile {
     margin-top: -75px;
   }
-  .hero-wrapper{
-    @include is-extra-small-mobile{
+  .hero-wrapper {
+    @include is-extra-small-mobile {
       padding-top: 150px;
     }
   }
-  .about-container{
-    .half-filled-box{
+  .about-container {
+    .half-filled-box {
       margin: 0;
       margin-bottom: 100px;
       @include is-large-desktop {
@@ -53,44 +53,45 @@
         margin-top: 100px;
       }
     }
-    &__heroContent{
+    &__heroContent {
       width: 80%;
       height: 100%;
       margin: auto;
       text-align: left;
 
-        h1{
-            color: $header-item;
-            user-select: none;
-            font-size: 2.5rem;
-            font-family: "Segoe UI Bold";
-            @include max-width-1650{
-              font-size: 2rem;
-            }
-            @include is-mobile {
-                font-size: 1.5rem;
-              }
+      h1 {
+        color: $header-item;
+        user-select: none;
+        font-size: 2.5rem;
+        font-family: "Segoe UI Bold";
+        margin-top: 20px;
+        @include max-width-1650 {
+          font-size: 2rem;
         }
-        p{
-            color: $sub-text;
-            user-select: none;
-            font-size: 1.1rem;
-            line-height: 40px;
-            @include max-width-1650{
-              font-size: 1rem;
-              line-height: 30px;
-            }
-            @include is-mobile {
-              font-size: 1rem;
-            }
+        @include is-mobile {
+          font-size: 1.5rem;
         }
+      }
+      p {
+        color: $sub-text;
+        user-select: none;
+        font-size: 1.1rem;
+        line-height: 40px;
+        @include max-width-1650 {
+          font-size: 1rem;
+          line-height: 30px;
+        }
+        @include is-mobile {
+          font-size: 1rem;
+        }
+      }
     }
   }
 }
 
-/deep/ .half-filled-box{
-  .about-container__heroContent{
-    overflow-y: auto;
+/deep/ .half-filled-box {
+  .about-container__heroContent {
+    // overflow-y: auto;
   }
   min-height: 300px;
 }
@@ -111,7 +112,7 @@ $widths-and-heights: (
   clipped-length-xs: $clipped-length,
   clipped-shape-width-sm: (
     $width + 10vw
-  ) ,
+  ),
   clipped-shape-height-sm: (
     $height + 9vw
   ) * 2,
@@ -133,5 +134,4 @@ $widths-and-heights: (
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
   @include filled-half-clipped-shape($widths-and-heights, rgba($primary, 0.7));
-}  
-
+}

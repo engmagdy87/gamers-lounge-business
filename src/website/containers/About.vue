@@ -1,6 +1,6 @@
 <template>
   <div class="about-wrapper" v-if="isWebsiteAboutFetched">
-    <Hero>
+    <Hero :heroImage="about.img_cover.url">
       <template #hero-content>
         <div
           class="row align-items-end h-100 justify-content-center about-container"

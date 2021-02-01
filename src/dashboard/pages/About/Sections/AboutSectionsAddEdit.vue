@@ -39,24 +39,6 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12 col-md-4">
-          <div class="form-group">
-            <label>Section Type<span class="error-message"> *</span></label>
-            <select class="form-control" v-model="aboutSection.type">
-              <option value="-1">--Please choose media type</option>
-              <option
-                v-for="(type, i) in SERVICE_SECTIONS_TYPES"
-                :key="i"
-                ::selected="aboutSection.type === type"
-                :value="type"
-                >{{ type.toLowerCase() }}</option
-              >
-            </select>
-            <ErrorMessage :fieldErrors="errors.type" />
-          </div>
-        </div>
-      </div>
 
       <div class="text-center">
         <button
@@ -80,8 +62,7 @@ import * as SERVICE_SECTIONS_TYPES from "../../../../constants/SectionsTypes";
 
 const emptyAboutSection = {
   order: 1,
-  enabled: false,
-  type: "-1"
+  enabled: false
 };
 
 export default {
@@ -95,12 +76,10 @@ export default {
       errors: {},
       validation: {
         order: { isRequired: true },
-        type: { isRequired: true },
         enabled: { isRequired: false }
       },
       aliases: {
         order: "order",
-        type: "type",
         enabled: "enabled"
       }
     };
@@ -109,10 +88,7 @@ export default {
     ...mapState({
       aboutSectionData: state => state.about.aboutSections,
       aboutData: state => state.about.about
-    }),
-    SERVICE_SECTIONS_TYPES() {
-      return SERVICE_SECTIONS_TYPES;
-    }
+    })
   },
   methods: {
     ...mapActions({
@@ -130,7 +106,7 @@ export default {
       try {
         let payload = {
           order: this.aboutSection.order,
-          type: this.aboutSection.type,
+          type: SERVICE_SECTIONS_TYPES.NORMAL,
           enabled: this.aboutSection.enabled,
           sectionType: "ABOUT_US"
         };
@@ -177,7 +153,6 @@ export default {
   mounted() {
     if (this.$route.name === "Edit About Section") {
       this.aboutSection.order = this.editData.order;
-      this.aboutSection.type = this.editData.type;
       this.aboutSection.enabled = this.editData.enabled;
     }
   },

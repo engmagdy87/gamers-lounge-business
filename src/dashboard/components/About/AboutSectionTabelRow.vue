@@ -2,7 +2,6 @@
   <tr>
     <th scope="row">{{ id }}</th>
     <td>{{ rowData.order }}</td>
-    <td>{{ rowData.type }}</td>
     <td>{{ rowData.enabled ? "Yes" : "No" }}</td>
     <td class="table-actions">
       <img src="/images/edit.svg" alt="edit" @click="redirectTo" />

@@ -12,7 +12,7 @@
           :to="`/services/${service.id}-${reformatURL(service.title)}`"
         >
           <div
-            class="services-page-wrapper__content col-12 p-0 mt-3 mb-3"
+            class="services-page-wrapper__content"
             @click="setIsServiceFetched(false)"
           >
             <img :src="service.img_card.url" draggable="false" />

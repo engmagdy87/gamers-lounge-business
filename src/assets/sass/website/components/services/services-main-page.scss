@@ -27,9 +27,37 @@
   &__content {
     position: relative;
     color: $header-item;
+    margin: 20px;
+    @media (min-width: 2000px) {
+      width: 490px;
+      height: 490px;
+    }
+    @media (min-width: 1500px) and (max-width: 1999px) {
+      width: 420px;
+      height: 420px;
+    }
+    @media (min-width: 1200px) and (max-width: 1499px) {
+      width: 360px;
+      height: 360px;
+    }
+    @media (min-width: 800px) and (max-width: 1199px) {
+      width: 280px;
+      height: 280px;
+    }
+    @media (min-width: 500px) and (max-width: 767px) {
+      width: 380px;
+      height: 380px;
+      margin: 15px auto;
+    }
+    @media (max-width: 499px) {
+      width: 100%;
+      height: auto;
+      margin: 0 0 10px 0;
+    }
+
     img {
       width: 100%;
-      min-height: 500px;
+      height: 100%;
       object-fit: cover;
       clip-path: polygon(0% 0, 100% 0, 100% 100%, 100% 100%, 0 100%, 0 0%);
       transition: all 0.2s ease-in-out;
