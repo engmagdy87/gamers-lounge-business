@@ -1,5 +1,5 @@
 <template>
-  <header class="header-wrapper">
+  <header class="header-wrapper" v-if="isContactFetched">
     <div class="row header-wrapper__social-media">
       <div class="col-12 col-sm-6 d-flex justify-content-center d-sm-block">
         <a href="https://www.google.com" target="__blank" v-if="false">
@@ -10,28 +10,36 @@
         <div class="header-wrapper__social-media__logos">
           <img
             class="fb-logo"
-            src="../../../public/images/facebook.svg"
-            @click="goToLink('facebook')"
-            alt=""
-            srcset=""
+            :src="contact.img_facebook.url"
+            @click="goToLink(contact.information.facebook_link)"
+            alt="facebook"
+            v-if="
+              contact.img_facebook && contact.information.facebook_link !== ''
+            "
           />
           <img
-            src="../../../public/images/instagram.svg"
-            @click="goToLink('instagram')"
-            alt=""
-            srcset=""
+            :src="contact.img_instagram.url"
+            @click="goToLink(contact.information.instagram_link)"
+            alt="instagram"
+            v-if="
+              contact.img_instagram && contact.information.instagram_link !== ''
+            "
           />
           <img
-            src="../../../public/images/twitter.svg"
-            @click="goToLink('twitter')"
-            alt=""
-            srcset=""
+            :src="contact.img_twitter.url"
+            @click="goToLink(contact.information.twitter_link)"
+            alt="twitter"
+            v-if="
+              contact.img_twitter && contact.information.twitter_link !== ''
+            "
           />
           <img
-            src="../../../public/images/youtube.svg"
-            @click="goToLink('youtube')"
-            alt=""
-            srcset=""
+            :src="contact.img_youtube.url"
+            @click="goToLink(contact.information.youtube_link)"
+            alt="youtube"
+            v-if="
+              contact.img_youtube && contact.information.youtube_link !== ''
+            "
           />
         </div>
       </div>
@@ -193,8 +201,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
-import store from "../../store/index";
+import { mapState, mapActions } from "vuex";
 import types from "../../store/types";
 import HalfClippedOutlineButton from "./HalfClippedOutlineButton";
 
@@ -205,19 +212,37 @@ export default {
     };
   },
   props: ["activeItem", "setShowLoginModal", "isSolidHeader"],
+  computed: {
+    ...mapState({
+      contact: state => state.contact.contact,
+      isContactFetched: state => state.contact.isContactFetched
+    })
+  },
   methods: {
+    ...mapActions({
+      fetchContactUsData: types.contact.actions.FETCH_CONTACT
+    }),
     openNav() {
       this.$refs.myNav.style.height = "100%";
     },
     closeNav() {
       this.$refs.myNav.style.height = "0%";
     },
-    goToLink(value) {
-      window.open("https://" + value + ".com", "_blank");
+    goToLink(url) {
+      window.open(url, "_blank");
     }
   },
   components: {
     HalfClippedOutlineButton
+  },
+  mounted() {
+    if (!this.isContactFetched) {
+      const requestSource = {
+        requestSource: "website",
+        showSpinner: true
+      };
+      this.fetchContactUsData(requestSource);
+    }
   }
 };
 </script>

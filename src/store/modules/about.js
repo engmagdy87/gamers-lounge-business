@@ -25,7 +25,7 @@ const mutations = {
             currentState.aboutSections = sections
         }
         else {
-            const { data, paginatorInfo } = services
+            const { data, paginatorInfo } = about
             const oldData = currentState.about.data || []
             currentState.about = {
                 ...currentState.about, paginatorInfo,

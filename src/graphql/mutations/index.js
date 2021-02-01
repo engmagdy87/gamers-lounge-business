@@ -42,6 +42,11 @@ import CREATE_ABOUT from './About/CreateAbout';
 import UPDATE_ABOUT from './About/UpdateAbout';
 import DELETE_ABOUT from './About/DeleteAbout';
 
+import CREATE_CONTACT from './Contact/CreateContact';
+import UPDATE_CONTACT from './Contact/UpdateContact';
+import DELETE_CONTACT from './Contact/DeleteContact';
+import SEND_EMAIL from './Contact/SendEmail';
+
 export default {
     LOGIN,
     CREATE_DEPARTMENT,
@@ -74,5 +79,9 @@ export default {
     DELETE_SPONSOR,
     CREATE_ABOUT,
     UPDATE_ABOUT,
-    DELETE_ABOUT
+    DELETE_ABOUT,
+    CREATE_CONTACT,
+    UPDATE_CONTACT,
+    DELETE_CONTACT,
+    SEND_EMAIL
 };

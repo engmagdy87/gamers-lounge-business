@@ -100,10 +100,6 @@ export default {
     }
   },
   mounted() {
-    const requestSource = {
-      id: getEntityId(this.$route.params.serviceName),
-      requestSource: "website"
-    };
     this.breadcrumbTree.push({
       title: getEntityName(this.$route.params.serviceName),
       path: ""

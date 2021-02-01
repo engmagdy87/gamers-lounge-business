@@ -24,6 +24,8 @@ import COLUMNS from './Shared/Columns';
 import SPONSORS from './Sponsors/Sponsors';
 import SPONSORS_WEBSITE from './Sponsors/SponsorsWebsite';
 
+import CONTACT from './Contact/Contact';
+
 export default {
   DEPARTMENTS,
   JOB_APPLICATION,
@@ -45,4 +47,5 @@ export default {
   SPONSORS_WEBSITE,
   ABOUT,
   ABOUT_WEBSITE,
+  CONTACT
 };

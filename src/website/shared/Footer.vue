@@ -1,5 +1,5 @@
 <template>
-  <div class="footer-section">
+  <div class="footer-section" v-if="isContactFetched">
     <div class="footer-section__container">
       <div class="row justify-content-center">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 footer-leftside">
@@ -17,15 +17,15 @@
           <br />
           <p class="footer-location">
             <img src="../../../public/images/pin-white.svg" />
-            Villa 33 the 5th District, the 5th Settlement,New Cairo, Egypt
+            {{ contact.information.address }}
           </p>
           <p class="footer-number">
             <img src="../../../public/images/phone-white.svg" />
-            (+20) 010123456789
+            {{ contact.information.phone }}
           </p>
           <p class="footer-mail">
             <img src="../../../public/images/mail-white.svg" />
-            info@gamerslounge.com
+            {{ contact.information.email }}
           </p>
         </div>
 
@@ -33,29 +33,49 @@
           <h5 class="footer-followus">Follow US</h5>
 
           <div class="social-media row">
-            <div class="social-logos-container" @click="goToLink('facebook')">
+            <div
+              class="social-logos-container"
+              @click="goToLink(contact.information.facebook_link)"
+              v-if="
+                contact.img_facebook && contact.information.facebook_link !== ''
+              "
+            >
               <img
                 class="fb-logo"
-                src="../../../public/images/facebook.svg"
-                alt=""
-                srcset=""
+                :src="contact.img_facebook.url"
+                alt="facebook"
               />
             </div>
 
-            <div class="social-logos-container" @click="goToLink('instagram')">
-              <img
-                src="../../../public/images/instagram.svg"
-                alt=""
-                srcset=""
-              />
+            <div
+              class="social-logos-container"
+              @click="goToLink(contact.information.instagram_link)"
+              v-if="
+                contact.img_instagram &&
+                  contact.information.instagram_link !== ''
+              "
+            >
+              <img :src="contact.img_instagram.url" alt="instagram" />
             </div>
 
-            <div class="social-logos-container" @click="goToLink('twitter')">
-              <img src="../../../public/images/twitter.svg" alt="" srcset="" />
+            <div
+              class="social-logos-container"
+              @click="goToLink(contact.information.twitter_link)"
+              v-if="
+                contact.img_twitter && contact.information.twitter_link !== ''
+              "
+            >
+              <img :src="contact.img_twitter.url" alt="twitter" />
             </div>
 
-            <div class="social-logos-container" @click="goToLink('youtube')">
-              <img src="../../../public/images/youtube.svg" alt="" srcset="" />
+            <div
+              class="social-logos-container"
+              @click="goToLink(contact.information.youtube_link)"
+              v-if="
+                contact.img_youtube && contact.information.youtube_link !== ''
+              "
+            >
+              <img :src="contact.img_youtube.url" alt="youtube" />
             </div>
           </div>
         </div>
@@ -104,10 +124,31 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+import types from "../../store/types";
+
 export default {
+  computed: {
+    ...mapState({
+      contact: state => state.contact.contact,
+      isContactFetched: state => state.contact.isContactFetched
+    })
+  },
   methods: {
-    goToLink(value) {
-      window.open("https://" + value + ".com", "_blank");
+    ...mapActions({
+      fetchContactUsData: types.contact.actions.FETCH_CONTACT
+    }),
+    goToLink(url) {
+      window.open(url, "_blank");
+    }
+  },
+  mounted() {
+    if (!this.isContactFetched) {
+      const requestSource = {
+        requestSource: "website",
+        showSpinner: true
+      };
+      this.fetchContactUsData(requestSource);
     }
   }
 };
