@@ -1,13 +1,12 @@
 <template>
   <div class="image-holder">
-    <div class="image-holder__leftline bottomgrid" ></div>
-    <img
-      class="image-holder__image"
-      :src="imageUrl"
-      @click="sponserLink"
-    />
-    <div class="image-holder__rightline bottomgrid" >
-    </div>
+    <div
+      :class="['image-holder__leftline', showBottomGuard && 'bottomgrid']"
+    ></div>
+    <img class="image-holder__image" :src="imageUrl" @click="sponsorLink" />
+    <div
+      :class="['image-holder__rightline', showBottomGuard && 'bottomgrid']"
+    ></div>
   </div>
 </template>
 
@@ -18,10 +17,11 @@ export default {
     imageName: String,
     className: String,
     link: String,
+    showBottomGuard: Boolean
   },
   methods: {
-    sponserLink() {
-        window.open(this.link, '__blank');
+    sponsorLink() {
+      window.open(this.link, "__blank");
     }
   }
 };

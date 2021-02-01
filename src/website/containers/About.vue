@@ -1,7 +1,7 @@
 <template>
   <div class="about-wrapper" v-if="isWebsiteAboutFetched">
     <Hero>
-      <template #hero-content >
+      <template #hero-content>
         <div
           class="row align-items-end h-100 justify-content-center about-container"
         >
@@ -9,12 +9,10 @@
             <template #content>
               <div class="about-container__heroContent">
                 <h1>OUR VISION</h1>
-                <p v-html="about.vision">
-                </p>
+                <p v-html="about.vision"></p>
 
                 <h1>OUR MISSION & OBJECTIVES</h1>
-                <p v-html="about.mission">
-                </p>
+                <p v-html="about.mission"></p>
               </div>
             </template>
           </HalfClippedShape>
@@ -22,15 +20,15 @@
       </template>
     </Hero>
 
-    <AboutSection  :about="about" v-if="about.sections"/>
+    <AboutSection :about="about" v-if="about.sections" />
 
-      <Intersect @enter="loadMoreAboutSections" v-if="aboutPage > 0"
-        ><div class="threshold">
-          <Loading :showLoading="showLoading" />
-        </div>
-      </Intersect>
+    <Intersect @enter="loadMoreAboutSections" v-if="aboutPage > 0"
+      ><div class="threshold">
+        <Loading :showLoading="showLoading" />
+      </div>
+    </Intersect>
 
-    <Clients :sponsors="sponsors"  v-if="isSponsorsFetched"/>
+    <Clients />
   </div>
 </template>
 
@@ -60,12 +58,11 @@ export default {
       showLoading: false
     };
   },
-  computed:{
+  computed: {
     ...mapState({
       about: state => state.about.websiteAbout,
       isWebsiteAboutFetched: state => state.about.isWebsiteAboutFetched,
-      isSponsorsFetched: state => state.sponsors.isSponsorsFetched,
-      sponsors: state => state.sponsors.sponsors
+      isSponsorsFetched: state => state.sponsors.isSponsorsFetched
     })
   },
   methods: {
@@ -76,21 +73,21 @@ export default {
     ...mapMutations({
       setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
     }),
-    generateAboutPayload(showSpinner) {
-      const data = {
-        first: this.queriedAboutCounts,
-        page:
-          Object.keys(this.about).length > 0
-            ? this.about.paginatorInfo.currentPage + 1
-            : 1
-      };
-      const requestSource = {
-        data,
-        requestSource: "website",
-        showSpinner
-      };
-      return requestSource;
-    },
+    // generateAboutPayload(showSpinner) {
+    //   const data = {
+    //     first: this.queriedAboutCounts,
+    //     page:
+    //       Object.keys(this.about).length > 0
+    //         ? this.about.paginatorInfo.currentPage + 1
+    //         : 1
+    //   };
+    //   const requestSource = {
+    //     data,
+    //     requestSource: "website",
+    //     showSpinner
+    //   };
+    //   return requestSource;
+    // },
 
     fetchHeroAndFirstSection: async function() {
       let payload = this.generateAboutPayload(true, true);
@@ -123,9 +120,12 @@ export default {
         this.aboutPage++;
         this.showLoading = false;
       }
-      if(!this.about.sections.paginatorInfo.hasMorePages){
+      if (
+        !this.about.sections.paginatorInfo.hasMorePages &&
+        !this.isSponsorsFetched
+      ) {
         const data = { places: "ABOUT_US" };
-        this.fetchAboutUsPageSponsors(data);
+        await this.fetchAboutUsPageSponsors(data);
       }
     }
   },
@@ -140,7 +140,6 @@ export default {
     )
       this.setShowFooterFlag(true);
   }
-  
 };
 </script>
 
