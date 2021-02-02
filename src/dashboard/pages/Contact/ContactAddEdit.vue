@@ -51,10 +51,8 @@
             label="Phone Number"
             placeholder="Enter Phone"
             v-model="contact.phone"
-            :isRequired="true"
             :disabled="!editMode"
           />
-          <ErrorMessage :fieldErrors="errors.phone" />
         </div>
       </div>
       <div class="row">
@@ -312,7 +310,7 @@ export default {
       validation: {
         address: { isRequired: true },
         email: { isRequired: true, isEmail: true },
-        phone: { isRequired: true },
+        phone: { isRequired: false },
         facebookLink: { isRequired: false },
         instagramLink: { isRequired: false },
         twitterLink: { isRequired: false },
@@ -501,11 +499,27 @@ export default {
         this.$refs.img_twitter.value = null;
         this.$refs.img_instagram.value = null;
         this.$refs.img_youtube.value = null;
+
+        const {
+          address,
+          email,
+          phone,
+          facebook_link,
+          instagram_link,
+          twitter_link,
+          youtube_link
+        } = information;
+
         this.contact = {
-          ...this.contact,
-          ...information,
-          ...restOfData,
-          googleMapsLink
+          address,
+          email,
+          phone,
+          facebookLink: facebook_link,
+          instagramLink: instagram_link,
+          twitterLink: twitter_link,
+          youtubeLink: youtube_link,
+          googleMapsLink,
+          ...restOfData
         };
       } catch (errors) {
         JSON.parse(errors).forEach(error => {

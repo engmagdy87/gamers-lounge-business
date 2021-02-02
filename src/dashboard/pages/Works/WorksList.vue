@@ -50,6 +50,7 @@ export default {
           "Title",
           "Order",
           "Featured",
+          "Published",
           "Short Description",
           "Description",
           "Statistics",

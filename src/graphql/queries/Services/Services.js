@@ -1,6 +1,6 @@
-const SERVICES = ({ first, page }) => `
+const SERVICES = ({ first, page, isEnabled = null }) => `
 query{
-    services(first: ${first}, page: ${page},orderBy: { field: "order", order: ASC }) {    
+    services(first: ${first}, page: ${page},orderBy: { field: "order", order: ASC },${isEnabled ? 'is_enabled:true' : ''}) {    
        paginatorInfo{                            
           hasMorePages
           currentPage    
@@ -12,6 +12,7 @@ query{
           description
           order
           is_featured
+          is_enabled
           img_card{
              id
              url

@@ -32,9 +32,13 @@
       width: 490px;
       height: 490px;
     }
-    @media (min-width: 1500px) and (max-width: 1999px) {
+    @media (min-width: 1700px) and (max-width: 1999px) {
       width: 420px;
       height: 420px;
+    }
+    @media (min-width: 1500px) and (max-width: 1699px) {
+      width: 400px;
+      height: 400px;
     }
     @media (min-width: 1200px) and (max-width: 1499px) {
       width: 360px;

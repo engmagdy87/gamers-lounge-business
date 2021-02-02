@@ -25,7 +25,7 @@
           </base-input>
           <ErrorMessage :fieldErrors="errors.title" />
         </div>
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-2">
           <base-input
             type="number"
             label="Order"
@@ -36,7 +36,7 @@
           </base-input>
           <ErrorMessage :fieldErrors="errors.order" />
         </div>
-        <div class="col-12 col-md-3 mt-auto mb-auto">
+        <div class="col-12 col-md-2 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -47,6 +47,19 @@
             />
             <label class="custom-control-label" for="is_featured"
               >Featured</label
+            >
+          </div>
+        </div>
+        <div class="col-12 col-md-2 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="is_enabled"
+              v-model="service.is_enabled"
+            />
+            <label class="custom-control-label" for="is_enabled"
+              >Published</label
             >
           </div>
         </div>
@@ -193,6 +206,7 @@ const emptyService = {
   order: 1,
   description: "",
   is_featured: false,
+  is_enabled: false,
   img_card: "",
   img_cover: "",
   img_slider: ""
@@ -215,6 +229,7 @@ export default {
         title: { isRequired: true },
         order: { isRequired: true },
         is_featured: { isRequired: false },
+        is_enabled: { isRequired: false },
         description: { isRequired: true },
         "card image": { isRequired: true },
         "cover image": { isRequired: true },
@@ -224,6 +239,7 @@ export default {
         title: "title",
         order: "order",
         is_featured: "is_featured",
+        is_enabled: "is_enabled",
         description: "description",
         img_card: "card image",
         img_cover: "cover image",
@@ -264,6 +280,7 @@ export default {
           title: this.service.title,
           order: this.service.order,
           isFeatured: this.service.is_featured,
+          isEnabled: this.service.is_enabled,
           description: reformatHTMLString(this.service.description)
         };
 
@@ -356,6 +373,7 @@ export default {
       this.service.title = this.editData.title;
       this.service.order = this.editData.order;
       this.service.is_featured = this.editData.is_featured;
+      this.service.is_enabled = this.editData.is_enabled;
       this.service.description = this.editData.description || "";
       this.service.img_card = this.editData.img_card || "";
       this.service.img_cover = this.editData.img_cover || "";

@@ -29,6 +29,7 @@ const buildQuery = (workInfo, imagesData) => {
             short_description: "${shortDescription}"
             description: "${description}"
             is_featured: ${isFeatured}
+            is_enabled: ${isEnabled}
             statistics: "${statistics}"
             order: ${order}
             ${imagesKeys}

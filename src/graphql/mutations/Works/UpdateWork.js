@@ -5,6 +5,7 @@ const buildQuery = (workInfo, imagesData) => {
           input: {
              title: "${workInfo.title}"
              is_featured: ${workInfo.isFeatured}
+             is_enabled: ${workInfo.isEnabled}
              short_description: "${workInfo.shortDescription}"
              description: "${workInfo.description}"
              statistics: "${workInfo.statistics}"
@@ -53,6 +54,7 @@ images: {
          input: {
           title: "${workInfo.title}"
           is_featured: ${workInfo.isFeatured}
+          is_enabled: ${workInfo.isEnabled}
           short_description: "${workInfo.shortDescription}"
           description: "${workInfo.description}"
           statistics: "${workInfo.statistics}"

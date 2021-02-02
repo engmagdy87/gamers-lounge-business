@@ -1,6 +1,6 @@
-const WORKS = ({ first, page }) => `
+const WORKS = ({ first, page, isEnabled = null }) => `
 query {
-    works(first: ${first}, page: ${page},orderBy: { field: "order", order: ASC }) {
+    works(first: ${first}, page: ${page},orderBy: { field: "order", order: ASC },${isEnabled ? 'is_enabled:true' : ''}) {
        paginatorInfo{                            
           hasMorePages
           currentPage    
@@ -12,6 +12,7 @@ query {
           short_description
           description
           is_featured
+          is_enabled
           statistics
           order
           img_card{

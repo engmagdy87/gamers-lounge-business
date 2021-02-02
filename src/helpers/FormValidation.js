@@ -25,7 +25,10 @@ const validateFormFields = (value, field, alias, validationCriteria) => {
 const isValidationErrorExist = (targetData, aliases, validationCriteria) => {
     let errors = {};
     let errorsLength = 0;
-    Object.keys(targetData).forEach(key => { errors = { ...errors, ...validateFormFields(targetData[key], key, aliases[key], validationCriteria) } }
+    Object.keys(targetData).forEach(key => {
+
+        errors = { ...errors, ...validateFormFields(targetData[key], key, aliases[key], validationCriteria) }
+    }
     );
     Object.keys(errors).forEach(
         error => (errorsLength += errors[error].length)

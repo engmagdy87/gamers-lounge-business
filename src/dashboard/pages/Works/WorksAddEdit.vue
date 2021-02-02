@@ -25,7 +25,7 @@
           </base-input>
           <ErrorMessage :fieldErrors="errors.title" />
         </div>
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-2">
           <base-input
             type="number"
             label="Order"
@@ -36,7 +36,7 @@
           </base-input>
           <ErrorMessage :fieldErrors="errors.order" />
         </div>
-        <div class="col-12 col-md-3 mt-auto mb-auto">
+        <div class="col-12 col-md-2 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -47,6 +47,19 @@
             />
             <label class="custom-control-label" for="is_featured"
               >Featured</label
+            >
+          </div>
+        </div>
+        <div class="col-12 col-md-2 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="is_enabled"
+              v-model="work.is_enabled"
+            />
+            <label class="custom-control-label" for="is_enabled"
+              >Published</label
             >
           </div>
         </div>
@@ -243,6 +256,7 @@ const emptyWork = {
   short_description: "",
   description: "",
   is_featured: false,
+  is_enabled: false,
   img_card: "",
   img_cover: "",
   img_slider: ""
@@ -267,6 +281,7 @@ export default {
         order: { isRequired: true },
         "short description": { isRequired: true },
         is_featured: { isRequired: false },
+        is_enabled: { isRequired: false },
         description: { isRequired: true },
         statistics: { isRequired: true },
         "card image": { isRequired: true },
@@ -278,6 +293,7 @@ export default {
         order: "order",
         short_description: "short description",
         is_featured: "is_featured",
+        is_enabled: "is_enabled",
         description: "description",
         statistics: "statistics",
         img_card: "card image",
@@ -319,6 +335,7 @@ export default {
           title: this.work.title,
           order: this.work.order,
           isFeatured: this.work.is_featured,
+          isEnabled: this.work.is_enabled,
           shortDescription: reformatHTMLString(this.work.short_description),
           description: reformatHTMLString(this.work.description),
           statistics: reformatHTMLString(JSON.stringify(this.work.statistics))
@@ -435,6 +452,7 @@ export default {
       this.work.title = this.editData.title;
       this.work.order = this.editData.order;
       this.work.is_featured = this.editData.is_featured;
+      this.work.is_enabled = this.editData.is_enabled;
       this.work.short_description = this.editData.short_description || "";
       this.work.description = this.editData.description || "";
       this.work.statistics = JSON.parse(

@@ -7,6 +7,7 @@ const buildQuery = (serviceInfo, imagesData) => {
             description: "${serviceInfo.description}"
             order: ${serviceInfo.order}
             is_featured: ${serviceInfo.isFeatured}
+            is_enabled: ${serviceInfo.isEnabled}
          }
       ) {
          id
@@ -51,6 +52,7 @@ images: {
          description: "${serviceInfo.description}"
          order: ${serviceInfo.order}
          is_featured: ${serviceInfo.isFeatured}
+         is_enabled: ${serviceInfo.isEnabled}
          ${queryKeys}
       }
    ) {

@@ -5,6 +5,7 @@
         <div class="row align-items-end contact-wrapper__contact-box">
           <div
             class="col-12 col-md-4 d-flex justify-content-center justify-content-md-end mt-2 mb-sm-3 mb-1"
+            v-if="contact.information.phone !== ''"
           >
             <ContactDataBox
               title="contact number"
@@ -13,7 +14,10 @@
             />
           </div>
           <div
-            class="col-12 col-md-4 d-flex justify-content-center mb-sm-3 mb-1"
+            :class="[
+              'col-12 d-flex justify-content-center mb-sm-3 mb-1',
+              contact.information.phone === '' ? 'col-md-6' : 'col-md-4'
+            ]"
           >
             <ContactDataBox
               title="Find Location"
@@ -22,7 +26,12 @@
             />
           </div>
           <div
-            class="col-12 col-md-4 d-flex justify-content-center justify-content-md-start mb-sm-3"
+            :class="[
+              'col-12 col-md-4 d-flex justify-content-center mb-sm-3',
+              contact.information.phone === ''
+                ? 'col-md-6'
+                : 'col-md-4 justify-content-md-start'
+            ]"
           >
             <ContactDataBox
               title="Our Mail"
@@ -35,6 +44,7 @@
     </Hero>
     <FormContainer />
     <iframe
+      v-if="contact.map !== ''"
       :src="contact.map"
       width="100%"
       height="600"

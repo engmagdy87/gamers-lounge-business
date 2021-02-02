@@ -1,6 +1,6 @@
 const HOME_PAGE_SERVICES = () => `
 query {
-    services(first: 100, page: 1,orderBy: { field: "order", order: ASC },is_featured:true) {       
+    services(first: 100, page: 1,orderBy: { field: "order", order: ASC },is_featured:true,is_enabled:true) {       
        data {
           id
           title

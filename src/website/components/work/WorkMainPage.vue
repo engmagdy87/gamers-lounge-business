@@ -76,7 +76,8 @@ export default {
         page:
           Object.keys(this.ourWorks).length > 0
             ? this.ourWorks.paginatorInfo.currentPage + 1
-            : 1
+            : 1,
+        isEnabled: true
       };
       const requestSource = {
         data,

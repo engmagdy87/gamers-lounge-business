@@ -2,7 +2,8 @@ const buildQuery = (serviceInfo, imagesData) => {
    const { title,
       description,
       order,
-      isFeatured } = serviceInfo;
+      isFeatured,
+      isEnabled } = serviceInfo;
 
    let queryParams = '($img_card: Upload!,$img_cover: Upload!,';
    let imagesKeys = `images: {
@@ -27,6 +28,7 @@ const buildQuery = (serviceInfo, imagesData) => {
             description: "${description}"
             order: ${order}
             is_featured: ${isFeatured}
+            is_enabled: ${isEnabled}
             ${imagesKeys}
          }
       ) {
