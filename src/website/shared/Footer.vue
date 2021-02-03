@@ -19,7 +19,7 @@
             <img src="../../../public/images/pin-white.svg" />
             {{ contact.information.address }}
           </p>
-          <p class="footer-number">
+          <p class="footer-number" v-if="contact.information.phone !== ''">
             <img src="../../../public/images/phone-white.svg" />
             {{ contact.information.phone }}
           </p>

@@ -129,6 +129,9 @@
       width: 90vw;
       filter: brightness(30%);
     }
+    @include is-large-desktop {
+      height: 95vh;
+    }
   }
   &__btn {
     position: absolute;

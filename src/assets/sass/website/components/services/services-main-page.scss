@@ -40,9 +40,13 @@
       width: 400px;
       height: 400px;
     }
-    @media (min-width: 1200px) and (max-width: 1499px) {
-      width: 360px;
-      height: 360px;
+    @media (min-width: 1300px) and (max-width: 1499px) {
+      width: 330px;
+      height: 330px;
+    }
+    @media (min-width: 1200px) and (max-width: 1299px) {
+      width: 320px;
+      height: 320px;
     }
     @media (min-width: 800px) and (max-width: 1199px) {
       width: 280px;

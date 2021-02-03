@@ -67,9 +67,7 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label
-              >Short Description<span class="error-message"> *</span></label
-            >
+            <label>Short Description</label>
             <vue-pell-editor
               :actions="editorOptions"
               :style-with-css="false"
@@ -97,7 +95,7 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label>Statistics<span class="error-message"> *</span></label>
+            <label>Statistics</label>
             <div class="row">
               <div class="col-10">
                 <StatisticsInput
@@ -279,11 +277,11 @@ export default {
       validation: {
         title: { isRequired: true },
         order: { isRequired: true },
-        "short description": { isRequired: true },
+        "short description": { isRequired: false },
         is_featured: { isRequired: false },
         is_enabled: { isRequired: false },
         description: { isRequired: true },
-        statistics: { isRequired: true },
+        statistics: { isRequired: false },
         "card image": { isRequired: true },
         "cover image": { isRequired: true },
         "slider image": { isRequired: false }

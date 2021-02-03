@@ -1,28 +1,30 @@
 const buildQuery = (workInfo, imagesData) => {
-   const { title,
-      shortDescription,
-      isFeatured,
-      description,
-      statistics,
-      order } = workInfo;
+  const {
+    title,
+    shortDescription,
+    isFeatured,
+    isEnabled,
+    description,
+    statistics,
+    order
+  } = workInfo;
 
-   let queryParams = '($img_card: Upload!,$img_cover: Upload!,';
-   let imagesKeys = `images: {
+  let queryParams = "($img_card: Upload!,$img_cover: Upload!,";
+  let imagesKeys = `images: {
             img_card: { upload: { file: $img_card } }
-            img_cover: { upload: { file: $img_cover } }`
+            img_cover: { upload: { file: $img_cover } }`;
 
+  if (imagesData.img_slider) {
+    queryParams += "$img_slider: Upload!,";
+    imagesKeys += "img_slider: { upload: { file: $img_slider } }";
+  }
 
-   if (imagesData.img_slider) {
-      queryParams += '$img_slider: Upload!,';
-      imagesKeys += 'img_slider: { upload: { file: $img_slider } }'
-   }
+  queryParams += ")";
 
-   queryParams += ')'
+  if (imagesKeys === "images: {") imagesKeys = "";
+  else imagesKeys += "}";
 
-   if (imagesKeys === 'images: {') imagesKeys = ''
-   else imagesKeys += '}'
-
-   return `mutation${queryParams} {
+  return `mutation${queryParams} {
       createWork(
          input: {
             title: "${title}"
@@ -38,11 +40,9 @@ const buildQuery = (workInfo, imagesData) => {
          id
       }
    } 
-    `
-}
+    `;
+};
 
-const CREATE_WORK = (
-   workInfo, imagesData
-) => buildQuery(workInfo, imagesData)
+const CREATE_WORK = (workInfo, imagesData) => buildQuery(workInfo, imagesData);
 
 export default CREATE_WORK;

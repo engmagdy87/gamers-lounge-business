@@ -15,8 +15,10 @@
           </div>
           <div
             :class="[
-              'col-12 d-flex justify-content-center mb-sm-3 mb-1',
-              contact.information.phone === '' ? 'col-md-6' : 'col-md-4'
+              'col-12 d-flex mb-sm-3 mb-1',
+              contact.information.phone === ''
+                ? 'col-md-6 justify-content-end pr-5'
+                : 'col-md-4 justify-content-center'
             ]"
           >
             <ContactDataBox
@@ -27,10 +29,10 @@
           </div>
           <div
             :class="[
-              'col-12 col-md-4 d-flex justify-content-center mb-sm-3',
+              'col-12 col-md-4 d-flex mb-sm-3',
               contact.information.phone === ''
-                ? 'col-md-6'
-                : 'col-md-4 justify-content-md-start'
+                ? 'col-md-6 justify-content-start pl-5'
+                : 'col-md-4 justify-content-md-start justify-content-center'
             ]"
           >
             <ContactDataBox
