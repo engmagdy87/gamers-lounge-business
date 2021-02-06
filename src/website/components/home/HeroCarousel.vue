@@ -30,6 +30,8 @@
 <script>
 import HeroSlider from "../../shared/Carousel/HeroSlider";
 import HalfClippedShape from "../../shared/HalfClippedShape";
+import heroCarouselData from "../../../assets/json/HeroCarousel.json";
+
 export default {
   components: {
     HeroSlider,
@@ -37,20 +39,7 @@ export default {
   },
   data() {
     return {
-      slides: [
-        {
-          title: "SCULPTING A NEW ERA OF ESPORTS IN THE MENA",
-          content: "HELLO123"
-        },
-        {
-          title: "Begining456",
-          content: "HELLO456"
-        },
-        {
-          title: "Begining123",
-          content: "HELLO789"
-        }
-      ]
+      slides: heroCarouselData
     };
   }
 };
@@ -64,49 +53,11 @@ $time: 3s;
 $delay: 0s;
 $offset: 0.3s;
 
-//********title*********
-// @for $i from 2 through 10 {
-//   .hero-carousel__title.hero-carousel__title#{$i} {
-//     opacity: 0;
-//   }
-//   .hero-title-leave-active.hero-carousel__title#{$i} {
-//     opacity: 0.1 !important;
-//   }
-// }
-// @for $i from 1 through 10 {
-//   .hero-title-enter-to.hero-carousel__title#{$i},
-//   .hero-title-enter.hero-carousel__title#{$i} {
-//     right: -100%;
-//     opacity: 0;
-//   }
-// }
-.hero-title-enter-active {
-  @include generateTextAnimation($time, next-enter);
-}
-.hero-title-leave-active {
-  @include generateTextAnimation($time, next-leave);
-}
-//********content*********
-
-// @for $i from 2 through 10 {
-//   .hero-carousel__content.hero-carousel__content#{$i} {
-//     opacity: 0;
-//   }
-//   .hero-content-leave-active.hero-carousel__content#{$i} {
-//     opacity: 0.1 !important;
-//     font-weight: bold;
-//   }
-// }
-// @for $i from 1 through 10 {
-//   .hero-content-enter-to.hero-carousel__content#{$i},
-//   .hero-content-enter.hero-carousel__content#{$i} {
-//     right: -100%;
-//     opacity: 0;
-//   }
-// }
+.hero-title-enter-active,
 .hero-content-enter-active {
   @include generateTextAnimation($time, next-enter);
 }
+.hero-title-leave-active,
 .hero-content-leave-active {
   @include generateTextAnimation($time, next-leave);
 }
@@ -118,13 +69,13 @@ $offset: 0.3s;
   }
   100% {
     right: 0;
-    opacity: 0.2;
+    opacity: 1;
   }
 }
 @keyframes next-leave {
   0% {
     right: 0;
-    opacity: 0.2;
+    opacity: 1;
   }
   100% {
     right: 100%;
@@ -139,13 +90,13 @@ $offset: 0.3s;
   }
   100% {
     right: 0;
-    opacity: 0.2;
+    opacity: 1;
   }
 }
 @keyframes prev-leave {
   0% {
     right: 0;
-    opacity: 0.2;
+    opacity: 1;
   }
   100% {
     right: -100%;
