@@ -26,9 +26,10 @@ $transition-3: all 0.3s ease-in-out;
 
     .footer-leftside {
       padding-bottom: 20px;
-      p {
-        color: $light-gray;
-        font-size: $fontsize-paragraph;
+      p,
+      p a {
+        color: $light-gray !important;
+        font-size: $fontsize-paragraph !important;
         @include is-desktop {
           font-size: 1rem;
         }
@@ -38,6 +39,9 @@ $transition-3: all 0.3s ease-in-out;
         @include is-extra-small-mobile {
           font-size: 0.8rem;
         }
+      }
+      p a {
+        margin-left: 5px;
       }
       img {
         padding-right: 5px;

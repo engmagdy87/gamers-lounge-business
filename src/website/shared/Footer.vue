@@ -15,17 +15,21 @@
             experienced gamers to develop esports in Middle-Easy & North Africa.
           </p>
           <br />
-          <p class="footer-location">
+          <p>
             <img src="../../../public/images/pin-white.svg" />
-            {{ contact.information.address }}
+            <a :href="mapAddress" target="__blank">{{
+              contact.information.address
+            }}</a>
           </p>
-          <p class="footer-number" v-if="contact.information.phone !== ''">
+          <p v-if="contact.information.phone !== ''">
             <img src="../../../public/images/phone-white.svg" />
             {{ contact.information.phone }}
           </p>
-          <p class="footer-mail">
+          <p>
             <img src="../../../public/images/mail-white.svg" />
-            {{ contact.information.email }}
+            <a :href="`mailto:${contact.information.email}`">{{
+              contact.information.email
+            }}</a>
           </p>
         </div>
 
@@ -128,6 +132,12 @@ import { mapState, mapActions } from "vuex";
 import types from "../../store/types";
 
 export default {
+  data() {
+    return {
+      mapAddress:
+        "https://www.google.com.eg/maps/place/Gamers+Lounge/@30.0049123,31.4275752,17z/data=!3m1!4b1!4m5!3m4!1s0x14583cc723219aad:0x3cab9244af63e06e!8m2!3d30.0049077!4d31.4297639"
+    };
+  },
   computed: {
     ...mapState({
       contact: state => state.contact.contact,

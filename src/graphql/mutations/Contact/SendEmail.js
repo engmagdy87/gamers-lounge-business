@@ -1,6 +1,4 @@
-const SEND_EMAIL = (
-    { name, email, message }
-) => `
+const SEND_EMAIL = ({ name, email, message }) => `
 mutation{
     sendContactUsEmail(input: {
        name:"${name}"

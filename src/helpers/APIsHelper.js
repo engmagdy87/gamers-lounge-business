@@ -903,10 +903,8 @@ const deleteContact = async id => {
 };
 
 const sendEmail = async data => {
-  const query = MUTATION.SEND_EMAIL(data);
-
   try {
-    const response = await request(query);
+    const response = await request({ query: MUTATION.SEND_EMAIL(data) });
     return response.data.data.sendContactUsEmail;
   } catch (error) {
     throw error;

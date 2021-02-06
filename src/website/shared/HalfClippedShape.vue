@@ -2,6 +2,7 @@
   <div
     :class="['half-filled-box', isButton && 'half-filled-box--is-button']"
     @click="onClickAction"
+    role="button"
   >
     <slot name="content"></slot>
   </div>

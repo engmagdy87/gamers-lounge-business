@@ -10,6 +10,7 @@
             <ContactDataBox
               title="contact number"
               icon="images/phone.svg"
+              type="phone"
               :content="contact.information.phone"
             />
           </div>
@@ -24,6 +25,8 @@
             <ContactDataBox
               title="Find Location"
               icon="images/pin.svg"
+              type="address"
+              :map="contact.map"
               :content="contact.information.address"
             />
           </div>
@@ -38,6 +41,7 @@
             <ContactDataBox
               title="Our Mail"
               icon="images/env.svg"
+              type="email"
               :content="contact.information.email"
             />
           </div>
