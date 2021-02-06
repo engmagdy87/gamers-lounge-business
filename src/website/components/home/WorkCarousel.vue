@@ -14,7 +14,7 @@
     <div class="work-carousel__carousel-container">
       <WorkSlider
         :slides="homePageWorks"
-        :timeInMillisecond="7000"
+        :timeInMillisecond="4000"
         customBulletsStyleClass="hero-bullets"
         :changeAnimation="changeAnimation"
       >
@@ -110,7 +110,7 @@ export default {
           this.contentDirection = "work-content-next";
           this.imageDirection = "work-image-next";
           this.buttonMaskCSSStyle = "work-button-mask-next";
-        }, 7000);
+        }, 4000);
       } else {
         this.titleDirection = "work-title-next";
         this.contentDirection = "work-content-next";

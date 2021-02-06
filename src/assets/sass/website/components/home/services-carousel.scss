@@ -46,6 +46,13 @@
     }
     @include is-desktop {
       position: relative;
+      height: 98%;
+    }
+    @include is-large-desktop {
+      height: 98%;
+    }
+    @include is-extra-large-desktop {
+      height: 96%;
     }
   }
   &__img {
@@ -79,8 +86,17 @@
       height: 100%;
       filter: brightness(30%);
     }
+    @include is-desktop {
+      height: 97%;
+    }
     @include is-large-desktop {
-      height: 95vh;
+      height: 98%;
+    }
+    @media (min-width: 1400px) and (max-width: 1599px) {
+      height: 98%;
+    }
+    @media (min-width: 1600px) {
+      height: 100%;
     }
   }
   &__title {

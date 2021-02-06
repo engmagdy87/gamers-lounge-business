@@ -10,8 +10,9 @@
     <HalfClippedShape>
       <template #content>
         <ServiceSlider
+          :autoPlay="false"
           :slides="homePageServices"
-          :timeInMillisecond="7000"
+          :timeInMillisecond="4000"
           customBulletsStyleClass="hero-bullets"
           :changeAnimation="changeAnimation"
         >
@@ -118,7 +119,7 @@ export default {
           this.contentDirection = "service-content-next";
           this.imageDirection = "service-image-next";
           this.buttonMaskCSSStyle = "service-button-mask-next";
-        }, 7000);
+        }, 4000);
       } else {
         this.titleDirection = "service-title-next";
         this.contentDirection = "service-content-next";

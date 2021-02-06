@@ -5,7 +5,7 @@
         <HeroSlider
           :slides="slides"
           customBulletsStyleClass="hero-bullets"
-          :timeInMillisecond="7000"
+          :timeInMillisecond="4000"
         >
           <template #carouselSlide="{slide}">
             <div class="hero-carousel__text">
