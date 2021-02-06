@@ -104,6 +104,7 @@ export default {
       const payload = this.generateWorkPayload(true);
       this.fetchWorks(payload);
     } else if (Object.keys(this.ourWorks).length > 0) {
+      this.setShowHeaderFlag(true);
       if (!this.ourWorks.paginatorInfo.hasMorePages) {
         this.setShowFooterFlag(true);
       }
