@@ -2,11 +2,13 @@
 @import "../shared/half-clipped-outline-shape.scss";
 
 $clipped-shape-width: 180px;
-$clipped-shape-height: 1px;
-$clipped-length: $clipped-shape-height / 2.8;
+$clipped-shape-height: 40px;
+$clipped-length: 0px;
+// $clipped-length: $clipped-shape-height / 2.8;
 $clipped-shape-width-mobile: 180px;
-$clipped-shape-height-mobile: 1px;
-$clipped-length-mobile: $clipped-shape-height / 2.8;
+$clipped-shape-height-mobile: 40px;
+$clipped-length-mobile: 0px;
+// $clipped-length-mobile: $clipped-shape-height / 2.8;
 
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
