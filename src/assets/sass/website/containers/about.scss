@@ -133,5 +133,5 @@ $widths-and-heights: (
 
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
-  @include filled-half-clipped-shape($widths-and-heights, rgba($primary, 0.7));
+  @include filled-half-clipped-shape($widths-and-heights, rgba($primary, 0.95));
 }

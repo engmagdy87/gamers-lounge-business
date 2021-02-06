@@ -1,5 +1,6 @@
-const buildQuery = (sponsorInfo, imagesData) => {
-   if (!imagesData) return `mutation {
+const buildQuery = (sponsorInfo, img_main) => {
+  if (!img_main)
+    return `mutation {
        updateSponsor(
           id: ${sponsorInfo.id},
           input: {
@@ -14,21 +15,8 @@ const buildQuery = (sponsorInfo, imagesData) => {
        }
     } 
      `;
-   //********************/
-   const imagesKeys = Object.keys(imagesData)
-   let queryParams = '('
-   let queryKeys = ''
-   imagesKeys.forEach(key => {
-      queryParams += `$${key}: Upload!,`
-   })
-   queryParams += ')'
-   //********************/   
-   if (imagesKeys.length === 1)
-      queryKeys = `images: {
-            ${imagesKeys[0]}: { upload: { file: $${imagesKeys[0]} } }
-        }
- `
-   return `mutation${queryParams} {
+
+  return `mutation($img_main: Upload!) {
     updateSponsor(
        id: ${sponsorInfo.id},
        input: {
@@ -37,17 +25,16 @@ const buildQuery = (sponsorInfo, imagesData) => {
           is_enabled: ${sponsorInfo.isEnabled}
           order: ${sponsorInfo.order}
           places: [${sponsorInfo.places}]                                       
-          ${queryKeys}
+          image: { img_main: { upload: { file: $img_main } } }
        }
     ) {
        id
     }
  } 
-  `
-}
+  `;
+};
 
-const UPDATE_SPONSOR = (
-   sponsorInfo, imagesData
-) => buildQuery(sponsorInfo, imagesData)
+const UPDATE_SPONSOR = (sponsorInfo, img_main) =>
+  buildQuery(sponsorInfo, img_main);
 
 export default UPDATE_SPONSOR;

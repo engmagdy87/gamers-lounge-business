@@ -9,7 +9,7 @@
     </div>
 
     <div class="work-carousel__bg"></div>
-    <div class="work-carousel__big-mask"></div>
+    <!-- <div class="work-carousel__big-mask"></div> -->
 
     <div class="work-carousel__carousel-container">
       <WorkSlider
@@ -22,57 +22,38 @@
           <div class="work-carousel__inside">
             <transition :name="imageDirection" appear>
               <div class="work-carousel__inside__img" v-if="index">
-                <HalfClippedShape>
-                  <template #content>
-                    <img
-                      draggable="false"
-                      :src="slide.img_slider.url"
-                      :alt="slide.title"
-                    />
-                  </template>
-                </HalfClippedShape>
+                <img
+                  draggable="false"
+                  :src="slide.img_slider.url"
+                  :alt="slide.title"
+                />
               </div>
             </transition>
             <div class="work-carousel__inside__text">
-              <div class="work-carousel__inside__mask"></div>
               <div class="work-carousel__inside__text-container">
-                <transition-group :name="titleDirection" appear>
-                  <h1
-                    v-if="index"
-                    v-for="i in 5"
-                    :key="i"
-                    :class="
-                      `work-carousel__inside__title work-carousel__inside__title${i}`
-                    "
-                  >
+                <transition :name="titleDirection" appear>
+                  <h1 v-if="index" class="work-carousel__inside__title">
                     {{ slide.title }}
                   </h1>
-                </transition-group>
-                <transition-group :name="contentDirection" appear>
+                </transition>
+                <transition :name="contentDirection" appear>
                   <p
                     v-if="index"
-                    v-for="i in 5"
-                    :key="i"
-                    :class="
-                      `description-container work-carousel__inside__content work-carousel__inside__content${i}`
-                    "
+                    class="description-container work-carousel__inside__content"
                     v-html="slide.description"
                   ></p>
-                </transition-group>
+                </transition>
               </div>
-
-              <router-link
-                :to="`/work/${slide.id}-${reformatURL(slide.title)}`"
-              >
-                <div class="work-carousel__btn" v-if="index">
-                  <HalfClippedOutlineButton
-                    text="Read More"
-                    :showMaskEffect="true"
-                    :buttonMaskCSSStyle="buttonMaskCSSStyle"
-                  />
-                </div>
-              </router-link>
             </div>
+            <router-link :to="`/work/${slide.id}-${reformatURL(slide.title)}`">
+              <div class="work-carousel__btn" v-if="index">
+                <HalfClippedOutlineButton
+                  text="See More"
+                  :showMaskEffect="true"
+                  :buttonMaskCSSStyle="buttonMaskCSSStyle"
+                />
+              </div>
+            </router-link>
           </div>
         </template>
 
@@ -102,7 +83,6 @@ import redirectToNewTab from "../../../helpers/RedirectToNewTab";
 export default {
   components: {
     WorkSlider,
-    HalfClippedShape,
     HalfClippedOutlineButton
   },
   data() {
@@ -154,358 +134,409 @@ export default {
 @import "../../../assets/sass/website/mixins.scss";
 
 $time: 3s;
-// $delay: 0.04s;
 $delay: 0s;
 $offset: 0.3s;
 
 //********title************************************************************
-.work-title-next-enter.work-carousel__inside__title1,
-.work-title-next-enter-to.work-carousel__inside__title1 {
-  left: 100%;
-  opacity: 0;
-}
-.work-title-next-leave.work-carousel__inside__title1 {
-  left: 0;
-  opacity: 1;
-}
-.work-title-next-leave-to.work-carousel__inside__title1 {
-  left: 0;
-  opacity: 1;
-}
-.work-title-prev-enter.work-carousel__inside__title1 {
-  left: -100%;
-  opacity: 1;
-}
-.work-title-prev-leave.work-carousel__inside__title1 {
-  left: 0;
-  opacity: 1;
-}
-.work-title-next-enter-active.work-carousel__inside__title1 {
-  @include generateTextAnimation($time, $delay, 0, 1, next-enter-bluprint);
-}
-.work-title-next-leave-active.work-carousel__inside__title1 {
-  @include generateTextAnimation($time, $delay, 0, 1, next-leave-bluprint);
-}
-.work-title-prev-enter-active.work-carousel__inside__title1 {
-  @include generateTextAnimation($time, $delay, 0, 1, prev-enter-bluprint);
-}
-.work-title-prev-leave-active.work-carousel__inside__title1 {
-  @include generateTextAnimation($time, $delay, 0, 1, prev-leave-bluprint);
-}
-@for $i from 2 through 5 {
-  .work-title-next-enter.work-carousel__inside__title#{$i} {
-    left: 100%;
-    opacity: 0;
-  }
-  .work-title-next-enter-to.work-carousel__inside__title#{$i} {
-    left: 100%;
-    opacity: 0;
-  }
-  .work-title-next-leave.work-carousel__inside__title#{$i} {
-    left: 0;
-    opacity: 1;
-  }
-  .work-title-next-leave-to.work-carousel__inside__title#{$i} {
-    left: 0;
-    opacity: 0;
-  }
-  .work-title-next-enter-active.work-carousel__inside__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, next-enter-replica);
-  }
-  .work-title-next-leave-active.work-carousel__inside__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, next-leave-replica);
-  }
-  .work-title-prev-enter.work-carousel__inside__title#{$i} {
-    left: -100%;
-    opacity: 0;
-  }
-  .work-title-prev-leave.work-carousel__inside__title#{$i} {
-    left: 0;
-    opacity: 1;
-  }
-  .work-title-prev-enter-active.work-carousel__inside__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, prev-enter-replica);
-  }
-  .work-title-prev-leave-active.work-carousel__inside__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, prev-leave-replica);
-  }
-}
-//********content************************************************************
-.work-content-next-enter-to {
-  opacity: 0;
-}
+.work-title-next-enter-active,
 .work-content-next-enter-active {
-  left: -150%;
+  @include is-extra-small-mobile {
+    @include generateTextAnimation($time, next-enter-bluprint-x-mob);
+  }
+  @include is-mobile {
+    @include generateTextAnimation($time, next-enter-bluprint-mob);
+  }
+  @include is-tablet {
+    @include generateTextAnimation($time, next-enter-bluprint-tab);
+  }
+  @include is-desktop {
+    @include generateTextAnimation($time, next-enter-bluprint-dt);
+  }
+  @include is-large-desktop {
+    @include generateTextAnimation($time, next-enter-bluprint-lg);
+  }
+  @include is-extra-large-desktop {
+    @include generateTextAnimation($time, next-enter-bluprint-extra-lg);
+  }
 }
+.work-title-next-leave-active,
+.work-content-next-leave-active {
+  @include is-extra-small-mobile {
+    @include generateTextAnimation($time, next-leave-bluprint-x-mob);
+  }
+  @include is-mobile {
+    @include generateTextAnimation($time, next-leave-bluprint-mob);
+  }
+  @include is-tablet {
+    @include generateTextAnimation($time, next-leave-bluprint-tab);
+  }
+  @include is-desktop {
+    @include generateTextAnimation($time, next-leave-bluprint-dt);
+  }
+  @include is-large-desktop {
+    @include generateTextAnimation($time, next-leave-bluprint-lg);
+  }
+  @include is-extra-large-desktop {
+    @include generateTextAnimation($time, next-leave-bluprint-extra-lg);
+  }
+}
+.work-title-prev-enter-active,
 .work-content-prev-enter-active {
-  left: -150%;
-}
-.work-content-next-enter.work-carousel__inside__content1,
-.work-content-next-enter-to.work-carousel__inside__content1 {
-  left: 100%;
-  opacity: 0;
-}
-.work-content-next-leave.work-carousel__inside__content1 {
-  left: 0;
-  opacity: 1;
-}
-.work-content-prev-enter.work-carousel__inside__content1 {
-  left: -150%;
-  opacity: 0;
-}
-.work-content-prev-leave.work-carousel__inside__content1 {
-  left: 0;
-  opacity: 1;
-}
-.work-content-next-enter-active.work-carousel__inside__content1 {
-  @include generateTextAnimation(
-    $time,
-    $delay,
-    $offset,
-    1,
-    next-enter-bluprint
-  );
-}
-.work-content-next-leave-active.work-carousel__inside__content1 {
-  @include generateTextAnimation(
-    $time,
-    $delay,
-    $offset,
-    1,
-    next-leave-bluprint
-  );
-}
-.work-content-prev-enter-active.work-carousel__inside__content1 {
-  @include generateTextAnimation(
-    $time,
-    $delay,
-    $offset,
-    1,
-    prev-enter-bluprint
-  );
-}
-.work-content-prev-leave-active.work-carousel__inside__content1 {
-  @include generateTextAnimation(
-    $time,
-    $delay,
-    $offset,
-    1,
-    prev-leave-bluprint
-  );
-}
-@for $i from 2 through 5 {
-  .work-content-next-enter.work-carousel__inside__content#{$i} {
-    left: 100%;
-    opacity: 0;
+  @include is-extra-small-mobile {
+    @include generateTextAnimation($time, prev-enter-bluprint-x-mob);
   }
-  .work-content-next-enter-to.work-carousel__inside__content#{$i} {
-    left: 100%;
-    opacity: 0;
+  @include is-mobile {
+    @include generateTextAnimation($time, prev-enter-bluprint-mob);
   }
-  .work-content-next-leave.work-carousel__inside__content#{$i} {
-    left: 0;
-    opacity: 1;
+  @include is-tablet {
+    @include generateTextAnimation($time, prev-enter-bluprint-tab);
   }
-  .work-content-next-enter-active.work-carousel__inside__content#{$i} {
-    @include generateTextAnimation(
-      $time,
-      $delay,
-      $offset,
-      $i,
-      next-enter-replica
-    );
+  @include is-desktop {
+    @include generateTextAnimation($time, prev-enter-bluprint-dt);
   }
-  .work-content-next-leave-active.work-carousel__inside__content#{$i} {
-    @include generateTextAnimation(
-      $time,
-      $delay,
-      $offset,
-      $i,
-      next-leave-replica
-    );
+  @include is-large-desktop {
+    @include generateTextAnimation($time, prev-enter-bluprint-lg);
   }
-  .work-content-prev-enter.work-carousel__inside__content#{$i} {
-    left: -150%;
-    opacity: 0;
-  }
-  .work-content-prev-leave.work-carousel__inside__content#{$i} {
-    left: 0;
-    opacity: 1;
-  }
-  .work-content-prev-enter-active.work-carousel__inside__content#{$i} {
-    @include generateTextAnimation(
-      $time,
-      $delay,
-      $offset,
-      $i,
-      prev-enter-replica
-    );
-  }
-  .work-content-prev-leave-active.work-carousel__inside__content#{$i} {
-    @include generateTextAnimation(
-      $time,
-      $delay,
-      $offset,
-      $i,
-      prev-leave-replica
-    );
+  @include is-extra-large-desktop {
+    @include generateTextAnimation($time, prev-enter-bluprint-extra-lg);
   }
 }
-//***************************************************************************
-// next animation
-@keyframes next-enter-replica {
+.work-title-prev-leave-active,
+.work-content-prev-leave-active {
+  @include is-extra-small-mobile {
+    @include generateTextAnimation($time, prev-leave-bluprint-x-mob);
+  }
+  @include is-mobile {
+    @include generateTextAnimation($time, prev-leave-bluprint-mob);
+  }
+  @include is-tablet {
+    @include generateTextAnimation($time, prev-leave-bluprint-tab);
+  }
+  @include is-desktop {
+    @include generateTextAnimation($time, prev-leave-bluprint-dt);
+  }
+  @include is-large-desktop {
+    @include generateTextAnimation($time, prev-leave-bluprint-lg);
+  }
+  @include is-extra-large-desktop {
+    @include generateTextAnimation($time, prev-leave-bluprint-extra-lg);
+  }
+}
+
+@keyframes next-enter-bluprint-dt {
   0% {
-    left: 100%;
+    left: 50%;
     opacity: 0;
-  }
-  25% {
-    opacity: 0.25;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  75% {
-    opacity: 0.75;
   }
   100% {
-    left: 0;
+    left: 10%;
     opacity: 1;
   }
 }
-@keyframes next-leave-replica {
+@keyframes next-enter-bluprint-lg {
   0% {
-    left: 0;
-    opacity: 1;
-  }
-  20% {
-    opacity: 0.8;
-  }
-  40% {
-    opacity: 0.6;
-  }
-  60% {
-    opacity: 0.4;
-  }
-  80% {
-    opacity: 0.2;
+    left: 50%;
+    opacity: 0;
   }
   100% {
-    left: -150%;
+    left: 20%;
+    opacity: 1;
+  }
+}
+@keyframes next-enter-bluprint-extra-lg {
+  0% {
+    left: 50%;
+    opacity: 0;
+  }
+  100% {
+    left: 30%;
+    opacity: 1;
+  }
+}
+@keyframes next-enter-bluprint-tab {
+  0% {
+    left: 50%;
+    opacity: 0;
+  }
+  100% {
+    left: 30%;
+    opacity: 1;
+  }
+}
+@keyframes next-enter-bluprint-x-mob {
+  0% {
+    left: 50%;
+    opacity: 0;
+  }
+  100% {
+    left: 30%;
+    opacity: 1;
+  }
+}
+@keyframes next-enter-bluprint-mob {
+  0% {
+    left: 50%;
+    opacity: 0;
+  }
+  100% {
+    left: 30%;
+    opacity: 1;
+  }
+}
+
+@keyframes next-leave-bluprint-dt {
+  0% {
+    opacity: 1;
+    left: 10%;
+  }
+  30% {
+    opacity: 0;
+    left: 5%;
+  }
+  100% {
     opacity: 0;
   }
 }
-@keyframes next-enter-bluprint {
+@keyframes next-leave-bluprint-lg {
   0% {
-    left: 100%;
-  }
-  100% {
-    left: 0;
-  }
-}
-@keyframes next-leave-bluprint {
-  0% {
-    left: 0;
-  }
-  100% {
-    left: -150%;
-  }
-}
-// previous animation
-@keyframes prev-enter-replica {
-  0% {
-    left: -150%;
     opacity: 1;
+    left: 20%;
   }
-  25% {
-    opacity: 0.75;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  75% {
-    opacity: 0.25;
+  30% {
+    opacity: 0;
+    left: 10%;
   }
   100% {
-    left: 0;
     opacity: 0;
   }
 }
-@keyframes prev-leave-replica {
+@keyframes next-leave-bluprint-extra-lg {
   0% {
-    left: 0;
     opacity: 1;
+    left: 30%;
   }
-  20% {
-    opacity: 0.8;
-  }
-  40% {
-    opacity: 0.6;
-  }
-  60% {
-    opacity: 0.4;
-  }
-  80% {
-    opacity: 0.2;
+  30% {
+    opacity: 0;
+    left: 10%;
   }
   100% {
-    left: 100%;
     opacity: 0;
   }
 }
-@keyframes prev-enter-bluprint {
+@keyframes next-leave-bluprint-tab {
   0% {
-    left: -150%;
+    opacity: 1;
+    left: 30%;
+  }
+  30% {
+    opacity: 0;
+    left: 10%;
   }
   100% {
-    left: 0;
+    opacity: 0;
   }
 }
-@keyframes prev-leave-bluprint {
+@keyframes next-leave-bluprint-mob {
   0% {
-    left: 0;
     opacity: 1;
+    left: 30%;
+  }
+  30% {
+    opacity: 0;
+    left: 10%;
   }
   100% {
-    left: 100%;
+    opacity: 0;
+  }
+}
+@keyframes next-leave-bluprint-x-mob {
+  0% {
+    opacity: 1;
+    left: 30%;
+  }
+  30% {
+    opacity: 0;
+    left: 10%;
+  }
+  100% {
     opacity: 0;
   }
 }
 
-//***********************************/
+@keyframes prev-enter-bluprint-dt {
+  0% {
+    left: 5%;
+    opacity: 0;
+  }
+  100% {
+    left: 10%;
+    opacity: 1;
+  }
+}
+@keyframes prev-enter-bluprint-lg {
+  0% {
+    left: 10%;
+    opacity: 0;
+  }
+  100% {
+    left: 20%;
+    opacity: 1;
+  }
+}
+@keyframes prev-enter-bluprint-tab {
+  0% {
+    left: 10%;
+    opacity: 0;
+  }
+  100% {
+    left: 30%;
+    opacity: 1;
+  }
+}
+@keyframes prev-enter-bluprint-mob {
+  0% {
+    left: 10%;
+    opacity: 0;
+  }
+  100% {
+    left: 30%;
+    opacity: 1;
+  }
+}
+@keyframes prev-enter-bluprint-x-mob {
+  0% {
+    left: 10%;
+    opacity: 0;
+  }
+  100% {
+    left: 30%;
+    opacity: 1;
+  }
+}
+@keyframes prev-enter-bluprint-extra-lg {
+  0% {
+    left: 10%;
+    opacity: 0;
+  }
+  100% {
+    left: 30%;
+    opacity: 1;
+  }
+}
+
+@keyframes prev-leave-bluprint-dt {
+  0% {
+    left: 10%;
+    opacity: 1;
+  }
+  30% {
+    left: 50%;
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes prev-leave-bluprint-lg {
+  0% {
+    left: 20%;
+    opacity: 1;
+  }
+  30% {
+    left: 50%;
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes prev-leave-bluprint-extra-lg {
+  0% {
+    left: 30%;
+    opacity: 1;
+  }
+  30% {
+    left: 50%;
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes prev-leave-bluprint-tab {
+  0% {
+    left: 30%;
+    opacity: 1;
+  }
+  30% {
+    left: 50%;
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes prev-leave-bluprint-mob {
+  0% {
+    left: 30%;
+    opacity: 1;
+  }
+  30% {
+    left: 50%;
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes prev-leave-bluprint-x-mob {
+  0% {
+    left: 30%;
+    opacity: 1;
+  }
+  30% {
+    left: 50%;
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+// //*********************************************************************
 
 .work-image-next-enter-active,
-.work-image-next-leave-active {
-  animation: animateImage;
-  animation-duration: 10s;
-  animation-timing-function: cubic-bezier(0.4, 0.3, 0.5, 1);
-  transition: all 3s;
+.work-image-prev-enter-active {
+  animation: animateImageEnter;
 }
-.work-image-next-enter {
-  opacity: 0;
+.work-image-next-leave-active,
+.work-image-prev-leave-active {
+  animation: animateImageLeave;
 }
-.work-image-next-leave-to {
-  opacity: 0;
-}
-//***********************************/
+.work-image-next-enter-active,
+.work-image-next-leave-active,
 .work-image-prev-enter-active,
 .work-image-prev-leave-active {
-  animation: animateImage;
-  animation-duration: 10s;
-  animation-timing-function: cubic-bezier(0.4, 0.3, 0.5, 1);
+  animation-duration: 5s;
   transition: all 3s;
+  animation-timing-function: cubic-bezier(0.4, 0.3, 0.5, 1);
 }
-.work-image-prev-enter {
-  opacity: 0;
-}
-.work-image-prev-leave-to {
-  opacity: 0;
-}
-@keyframes animateImage {
+@keyframes animateImageEnter {
   0% {
-    transform: scale(0.8);
+    opacity: 0;
   }
   100% {
-    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes animateImageLeave {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 

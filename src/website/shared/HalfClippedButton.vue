@@ -19,4 +19,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../assets/sass/website/shared/half-clipped-button.scss";
+.half-filled-box .half-filled-box--is-button {
+  font-size: 18px;
+}
 </style>

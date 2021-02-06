@@ -112,7 +112,7 @@ $transition-3: all 0.3s ease-in-out;
         height: 85px;
         margin: 10px;
         background-color: $accent;
-        clip-path: $clippath-botRight-leftTop;
+        // clip-path: $clippath-botRight-leftTop;
         transition: $transition-5;
         &:hover {
           background-color: darken($accent, 30px);
@@ -229,7 +229,7 @@ $transition-3: all 0.3s ease-in-out;
     height: 65px;
     cursor: pointer;
     transition: $transition-3;
-    clip-path: $clippath-botRight-leftTop;
+    // clip-path: $clippath-botRight-leftTop;
     &:hover {
       background-color: darken($accent, 30px);
     }

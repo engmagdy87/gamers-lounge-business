@@ -160,9 +160,6 @@ button.carousel-wrapper__bullets--active {
 .hero-slide-leave-active {
   transition: opacity $time ease-in-out, transform $time ease;
 }
-.hero-slide-enter-active {
-  // transition-delay: $time;
-}
 .hero-slide-enter {
   opacity: 0;
   transform: translateX(100%);

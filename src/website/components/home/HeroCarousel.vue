@@ -9,24 +9,16 @@
         >
           <template #carouselSlide="{slide}">
             <div class="hero-carousel__text">
-              <transition-group name="hero-title" appear>
-                <h1
-                  v-for="i in 10"
-                  :key="i"
-                  :class="`hero-carousel__title hero-carousel__title${i}`"
-                >
+              <transition name="hero-title" appear>
+                <h1 class="hero-carousel__title">
                   {{ slide.title }}
                 </h1>
-              </transition-group>
-              <transition-group name="hero-content" appear>
-                <h4
-                  v-for="i in 10"
-                  :key="i"
-                  :class="`hero-carousel__content hero-carousel__content${i}`"
-                >
+              </transition>
+              <transition name="hero-content" appear>
+                <h4 class="hero-carousel__content">
                   {{ slide.content }}
                 </h4>
-              </transition-group>
+              </transition>
             </div>
           </template>
         </HeroSlider>
@@ -69,57 +61,54 @@ export default {
 @import "../../../assets/sass/website/mixins.scss";
 
 $time: 3s;
-// $delay: 4ms;
 $delay: 0s;
 $offset: 0.3s;
 
 //********title*********
-@for $i from 2 through 10 {
-  .hero-carousel__title.hero-carousel__title#{$i} {
-    opacity: 0;
-  }
-  .hero-title-leave-active.hero-carousel__title#{$i} {
-    opacity: 0.1 !important;
-  }
+// @for $i from 2 through 10 {
+//   .hero-carousel__title.hero-carousel__title#{$i} {
+//     opacity: 0;
+//   }
+//   .hero-title-leave-active.hero-carousel__title#{$i} {
+//     opacity: 0.1 !important;
+//   }
+// }
+// @for $i from 1 through 10 {
+//   .hero-title-enter-to.hero-carousel__title#{$i},
+//   .hero-title-enter.hero-carousel__title#{$i} {
+//     right: -100%;
+//     opacity: 0;
+//   }
+// }
+.hero-title-enter-active {
+  @include generateTextAnimation($time, next-enter);
 }
-@for $i from 1 through 10 {
-  .hero-title-enter-to.hero-carousel__title#{$i},
-  .hero-title-enter.hero-carousel__title#{$i} {
-    right: -100%;
-    opacity: 0;
-  }
-  .hero-title-enter-active.hero-carousel__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, next-enter);
-  }
-  .hero-title-leave-active.hero-carousel__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, next-leave);
-  }
+.hero-title-leave-active {
+  @include generateTextAnimation($time, next-leave);
 }
 //********content*********
-.hero-carousel__content.hero-carousel__content1 {
-  font-weight: bold;
+
+// @for $i from 2 through 10 {
+//   .hero-carousel__content.hero-carousel__content#{$i} {
+//     opacity: 0;
+//   }
+//   .hero-content-leave-active.hero-carousel__content#{$i} {
+//     opacity: 0.1 !important;
+//     font-weight: bold;
+//   }
+// }
+// @for $i from 1 through 10 {
+//   .hero-content-enter-to.hero-carousel__content#{$i},
+//   .hero-content-enter.hero-carousel__content#{$i} {
+//     right: -100%;
+//     opacity: 0;
+//   }
+// }
+.hero-content-enter-active {
+  @include generateTextAnimation($time, next-enter);
 }
-@for $i from 2 through 10 {
-  .hero-carousel__content.hero-carousel__content#{$i} {
-    opacity: 0;
-  }
-  .hero-content-leave-active.hero-carousel__content#{$i} {
-    opacity: 0.1 !important;
-    font-weight: bold;
-  }
-}
-@for $i from 1 through 10 {
-  .hero-content-enter-to.hero-carousel__content#{$i},
-  .hero-content-enter.hero-carousel__content#{$i} {
-    right: -100%;
-    opacity: 0;
-  }
-  .hero-content-enter-active.hero-carousel__content#{$i} {
-    @include generateTextAnimation($time, $delay, $offset, $i, next-enter);
-  }
-  .hero-content-leave-active.hero-carousel__content#{$i} {
-    @include generateTextAnimation($time, $delay, $offset, $i, next-leave);
-  }
+.hero-content-leave-active {
+  @include generateTextAnimation($time, next-leave);
 }
 
 @keyframes next-enter {

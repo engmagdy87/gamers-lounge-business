@@ -1,6 +1,12 @@
 <template>
   <div class="carousel-wrapper">
-    <div v-for="(slide, i) in slides" :key="i" class="carousel-wrapper__slide">
+    <div
+      @mouseover="stopTimer"
+      @mouseleave="resetTimer"
+      v-for="(slide, i) in slides"
+      :key="i"
+      class="carousel-wrapper__slide"
+    >
       <slot
         name="carouselSlide"
         :slide="slide"

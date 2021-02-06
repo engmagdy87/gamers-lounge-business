@@ -169,7 +169,8 @@
 // All have vw as divide operation units must be the same for all
 $width: 50vw;
 $height: 25vw;
-$clipped-length: 4vw;
+$clipped-length: 0vw;
+// $clipped-length: 4vw;
 
 $widths-and-heights: (
   clipped-shape-width: $width,

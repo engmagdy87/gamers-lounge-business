@@ -18,30 +18,22 @@
           <template #carouselSlide="{slide,index}">
             <div class="row m-0 position-relative">
               <div class="col-12 col-md-6 services-carousel__text p-0">
-                <transition-group :name="titleDirection" appear>
+                <transition :name="titleDirection" appear>
                   <h1
                     v-if="index"
-                    v-for="i in 5"
-                    :key="i"
-                    :class="
-                      `services-carousel__title services-carousel__title${i}`
-                    "
+                    class="services-carousel__title services-carousel__title"
                   >
                     {{ slide.title }}
                   </h1>
-                </transition-group>
+                </transition>
 
-                <transition-group :name="contentDirection" appear>
+                <transition :name="contentDirection" appear>
                   <p
                     v-if="index"
-                    v-for="i in 5"
-                    :key="i"
-                    :class="
-                      `description-container services-carousel__content services-carousel__content${i}`
-                    "
+                    class="description-container services-carousel__content services-carousel__content"
                     v-html="slide.description"
                   ></p>
-                </transition-group>
+                </transition>
 
                 <router-link
                   :to="`/services/${slide.id}-${reformatURL(slide.title)}`"
@@ -150,310 +142,57 @@ export default {
 @import "../../../assets/sass/website/components/home/services-carousel.scss";
 
 $time: 3s;
-// $delay: 0.04s;
 $delay: 0s;
 $offset: 0.3s;
 
 //********title************************************************************
-.service-title-next-enter.services-carousel__title1,
-.service-title-next-enter-to.services-carousel__title1 {
-  right: -100%;
-  opacity: 0;
-}
-.service-title-next-leave.services-carousel__title1 {
-  right: 0;
-  opacity: 1;
-}
-.service-title-next-leave-to.services-carousel__title1 {
-  right: 100%;
-  opacity: 1;
-}
-.service-title-prev-enter.services-carousel__title1 {
-  right: 100%;
-  opacity: 1;
-}
-.service-title-prev-leave.services-carousel__title1 {
-  right: 0;
-  opacity: 1;
-}
-.service-title-next-enter-active.services-carousel__title1 {
-  @include generateTextAnimation($time, $delay, 0, 1, next-enter-bluprint);
-}
-.service-title-next-leave-active.services-carousel__title1 {
-  @include generateTextAnimation($time, $delay, 0, 1, next-leave-bluprint);
-}
-.service-title-prev-enter-active.services-carousel__title1 {
-  @include generateTextAnimation($time, $delay, 0, 1, prev-enter-bluprint);
-}
-.service-title-prev-leave-active.services-carousel__title1 {
-  @include generateTextAnimation($time, $delay, 0, 1, prev-leave-bluprint);
-}
-@for $i from 2 through 5 {
-  .service-title-next-enter.services-carousel__title#{$i} {
-    right: -100%;
-    opacity: 0;
-  }
-  .service-title-next-enter-to.services-carousel__title#{$i} {
-    right: -100%;
-    opacity: 0;
-  }
-  .service-title-next-leave.services-carousel__title#{$i} {
-    right: 0;
-    opacity: 1;
-  }
-  .service-title-next-leave-to.services-carousel__title#{$i} {
-    right: 100%;
-    opacity: 0;
-  }
-  .service-title-next-enter-active.services-carousel__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, next-enter-replica);
-  }
-  .service-title-next-leave-active.services-carousel__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, next-leave-replica);
-  }
-  .service-title-prev-enter.services-carousel__title#{$i} {
-    right: 100%;
-    opacity: 0;
-  }
-  .service-title-prev-leave.services-carousel__title#{$i} {
-    right: 0;
-    opacity: 1;
-  }
-  .service-title-prev-enter-active.services-carousel__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, prev-enter-replica);
-  }
-  .service-title-prev-leave-active.services-carousel__title#{$i} {
-    @include generateTextAnimation($time, $delay, 0, $i, prev-leave-replica);
-  }
-}
-//********content************************************************************
-.service-content-next-enter-to {
-  opacity: 0;
-}
+.service-title-next-enter-active,
 .service-content-next-enter-active {
-  right: 120%;
+  @include generateTextAnimation($time, next-enter-bluprint);
 }
+.service-title-next-leave-active,
+.service-content-next-leave-active {
+  @include generateTextAnimation($time, next-leave-bluprint);
+}
+.service-title-prev-enter-active,
 .service-content-prev-enter-active {
-  right: 120%;
+  @include generateTextAnimation($time, prev-enter-bluprint);
 }
-.service-content-next-enter.services-carousel__content1,
-.service-content-next-enter-to.services-carousel__content1 {
-  right: -100%;
-  opacity: 0;
+.service-title-prev-leave-active,
+.service-content-prev-leave-active {
+  @include generateTextAnimation($time, prev-leave-bluprint);
 }
-.service-content-next-leave.services-carousel__content1 {
-  right: 0;
-  opacity: 1;
-}
-.service-content-prev-enter.services-carousel__content1 {
-  right: 120%;
-  opacity: 0;
-}
-.service-content-prev-leave.services-carousel__content1 {
-  right: 0;
-  opacity: 1;
-}
-.service-content-next-enter-active.services-carousel__content1 {
-  @include generateTextAnimation(
-    $time,
-    $delay,
-    $offset,
-    1,
-    next-enter-bluprint
-  );
-}
-.service-content-next-leave-active.services-carousel__content1 {
-  @include generateTextAnimation(
-    $time,
-    $delay,
-    $offset,
-    1,
-    next-leave-bluprint
-  );
-}
-.service-content-prev-enter-active.services-carousel__content1 {
-  @include generateTextAnimation(
-    $time,
-    $delay,
-    $offset,
-    1,
-    prev-enter-bluprint
-  );
-}
-.service-content-prev-leave-active.services-carousel__content1 {
-  @include generateTextAnimation(
-    $time,
-    $delay,
-    $offset,
-    1,
-    prev-leave-bluprint
-  );
-}
-@for $i from 2 through 5 {
-  .service-content-next-enter.services-carousel__content#{$i} {
-    right: -100%;
-    opacity: 0;
-  }
-  .service-content-next-enter-to.services-carousel__content#{$i} {
-    right: -100%;
-    opacity: 0;
-  }
-  .service-content-next-leave.services-carousel__content#{$i} {
-    right: 0;
-    opacity: 1;
-  }
-  .service-content-next-enter-active.services-carousel__content#{$i} {
-    @include generateTextAnimation(
-      $time,
-      $delay,
-      $offset,
-      $i,
-      next-enter-replica
-    );
-  }
-  .service-content-next-leave-active.services-carousel__content#{$i} {
-    @include generateTextAnimation(
-      $time,
-      $delay,
-      $offset,
-      $i,
-      next-leave-replica
-    );
-  }
-  .service-content-prev-enter.services-carousel__content#{$i} {
-    right: 120%;
-    opacity: 0;
-  }
-  .service-content-prev-leave.services-carousel__content#{$i} {
-    right: 0;
-    opacity: 1;
-  }
-  .service-content-prev-enter-active.services-carousel__content#{$i} {
-    @include generateTextAnimation(
-      $time,
-      $delay,
-      $offset,
-      $i,
-      prev-enter-replica
-    );
-  }
-  .service-content-prev-leave-active.services-carousel__content#{$i} {
-    @include generateTextAnimation(
-      $time,
-      $delay,
-      $offset,
-      $i,
-      prev-leave-replica
-    );
-  }
-}
-//***************************************************************************
-// next animation
-@keyframes next-enter-replica {
-  0% {
-    right: -100%;
-    opacity: 0;
-  }
-  25% {
-    opacity: 0.25;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  75% {
-    opacity: 0.75;
-  }
-  100% {
-    right: 0;
-    opacity: 1;
-  }
-}
-@keyframes next-leave-replica {
-  0% {
-    right: 0;
-    opacity: 1;
-  }
-  20% {
-    opacity: 0.8;
-  }
-  40% {
-    opacity: 0.6;
-  }
-  60% {
-    opacity: 0.4;
-  }
-  80% {
-    opacity: 0.2;
-  }
-  100% {
-    right: 120%;
-    opacity: 0;
-  }
-}
+
 @keyframes next-enter-bluprint {
   0% {
-    right: -100%;
+    right: -10%;
+    opacity: 0;
   }
   100% {
     right: 0;
+    opacity: 1;
   }
 }
 @keyframes next-leave-bluprint {
   0% {
-    right: 0;
-  }
-  100% {
-    right: 120%;
-  }
-}
-// previous animation
-@keyframes prev-enter-replica {
-  0% {
-    right: 120%;
     opacity: 1;
   }
-  25% {
-    opacity: 0.75;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  75% {
-    opacity: 0.25;
+  30% {
+    opacity: 0;
   }
   100% {
-    right: 0;
     opacity: 0;
   }
 }
-@keyframes prev-leave-replica {
-  0% {
-    right: 0;
-    opacity: 1;
-  }
-  20% {
-    opacity: 0.8;
-  }
-  40% {
-    opacity: 0.6;
-  }
-  60% {
-    opacity: 0.4;
-  }
-  80% {
-    opacity: 0.2;
-  }
-  100% {
-    right: -100%;
-    opacity: 0;
-  }
-}
+
 @keyframes prev-enter-bluprint {
   0% {
-    right: 120%;
+    right: 10%;
+    opacity: 0;
   }
   100% {
     right: 0;
+    opacity: 1;
   }
 }
 @keyframes prev-leave-bluprint {
@@ -461,8 +200,11 @@ $offset: 0.3s;
     right: 0;
     opacity: 1;
   }
+  30% {
+    right: -10%;
+    opacity: 0;
+  }
   100% {
-    right: -100%;
     opacity: 0;
   }
 }
@@ -470,38 +212,35 @@ $offset: 0.3s;
 // //*********************************************************************
 
 .service-image-next-enter-active,
-.service-image-next-leave-active {
-  animation: animateImage;
-  animation-duration: 10s;
-  animation-timing-function: cubic-bezier(0.4, 0.3, 0.5, 1);
-  transition: all 3s;
+.service-image-prev-enter-active {
+  animation: animateImageEnter;
 }
-.service-image-next-enter {
-  opacity: 0;
+.service-image-next-leave-active,
+.service-image-prev-leave-active {
+  animation: animateImageLeave;
 }
-.service-image-next-leave-to {
-  opacity: 0;
-}
-// //***********************************/
+.service-image-next-enter-active,
+.service-image-next-leave-active,
 .service-image-prev-enter-active,
 .service-image-prev-leave-active {
-  animation: animateImage;
-  animation-duration: 10s;
-  animation-timing-function: cubic-bezier(0.4, 0.3, 0.5, 1);
+  animation-duration: 5s;
   transition: all 3s;
+  animation-timing-function: cubic-bezier(0.4, 0.3, 0.5, 1);
 }
-.service-image-prev-enter {
-  opacity: 0;
-}
-.service-image-prev-leave-to {
-  opacity: 0;
-}
-@keyframes animateImage {
+@keyframes animateImageEnter {
   0% {
-    transform: scale(0.8);
+    opacity: 0;
   }
   100% {
-    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes animateImageLeave {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 

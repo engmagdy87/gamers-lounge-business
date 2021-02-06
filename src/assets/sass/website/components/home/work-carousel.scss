@@ -2,10 +2,29 @@
 @import "../../color-palette.scss";
 @import "../../shared/half-clipped-shape.scss";
 
-$carousel-height: 1100px;
+$carousel-height: 500px;
 
 .work-carousel {
   position: relative;
+
+  @include is-extra-small-mobile {
+    margin-bottom: 35%;
+  }
+  @include is-mobile {
+    margin-bottom: 20%;
+  }
+  @include is-tablet {
+    margin-bottom: 10%;
+  }
+  @include is-desktop {
+    margin-bottom: 10%;
+  }
+  @include is-large-desktop {
+    margin-bottom: 10%;
+  }
+  @include is-extra-large-desktop {
+    margin-bottom: 10%;
+  }
   .work-header {
     text-align: center;
     padding-bottom: 100px;
@@ -24,40 +43,53 @@ $carousel-height: 1100px;
   }
   &__bg {
     position: absolute;
-    width: 63%;
+    width: 50%;
+    right: 10%;
+    // top: 20%;
     cursor: pointer;
-    right: 0;
     height: $carousel-height;
     background-color: $accent;
+    @include is-extra-small-mobile {
+      background-color: transparent;
+    }
+    @include is-mobile {
+      background-color: transparent;
+    }
+    @include is-tablet {
+      background-color: transparent;
+    }
+    @include is-desktop {
+      height: 560px !important;
+    }
     @include is-large-desktop-or-less {
-      width: 100%;
-      height: 1210px;
+      width: 60%;
+      height: 520px;
     }
-    @include is-desktop-or-less {
-      height: 1280px;
-    }
+    // @include is-desktop-or-less {
+    //   height: 1280px;
+    // }
     @include is-767px-or-less {
       height: 650px;
     }
   }
-  &__big-mask {
-    position: absolute;
-    width: calc(100% - 63%);
-    cursor: pointer;
-    left: 0;
-    z-index: 1000;
-    height: $carousel-height;
-    background-color: $primary;
-    @include is-large-desktop-or-less {
-      display: none;
-    }
-    @include is-desktop-or-less {
-      height: 1280px;
-    }
-    @include is-767px-or-less {
-      height: 650px;
-    }
-  }
+  // &__big-mask {
+  //   position: absolute;
+  //   width: calc(100% - 63%);
+  //   cursor: pointer;
+  //   left: 0;
+  //   z-index: 1000;
+  //   height: $carousel-height;
+  //   background-color: $primary;
+  //   @include is-large-desktop-or-less {
+  //     display: none;
+  //   }
+  //   @include is-desktop-or-less {
+  //     height: 1280px;
+  //   }
+  //   @include is-767px-or-less {
+  //     height: 650px;
+  //   }
+  // }
   &__carousel-container {
     width: 100%;
     height: $carousel-height;
@@ -68,7 +100,7 @@ $carousel-height: 1100px;
     @include is-desktop-or-less {
       width: 100%;
       margin: 0;
-      height: 1280px;
+      height: 600px;
     }
     @include is-767px-or-less {
       height: 650px;
@@ -80,6 +112,10 @@ $carousel-height: 1100px;
       position: absolute;
       left: 8%;
       z-index: 1001;
+      width: 40%;
+      max-height: 125%;
+      height: 125%;
+      margin-top: -3.5%;
       @include is-extra-small-mobile {
         position: absolute;
         top: 0;
@@ -88,18 +124,51 @@ $carousel-height: 1100px;
         margin-top: 0 !important;
         z-index: unset;
       }
+      @include is-extra-small-mobile {
+        z-index: unset;
+        position: relative;
+        width: 100vw;
+        left: 0 !important;
+        transform: scale(1);
+        height: 100%;
+        filter: brightness(30%);
+      }
       @include is-mobile {
         z-index: unset;
+        position: relative;
+        width: 100vw;
+        left: 0 !important;
+        transform: scale(1);
+        height: 100%;
+        filter: brightness(30%);
       }
       @include is-tablet {
+        position: relative;
+        width: 100vw;
+        left: 0 !important;
+        transform: scale(1);
+        height: 100%;
+        filter: brightness(30%);
       }
       @include is-1600-or-less {
         left: 2%;
       }
+      @include is-extra-small-mobile {
+        max-height: 110%;
+        height: 110%;
+      }
+      @include is-mobile {
+        max-height: 110%;
+        height: 110%;
+      }
+      @include is-desktop {
+        max-height: 110%;
+        height: 110%;
+      }
       @include is-large-desktop-or-less {
         position: relative;
-        left: 0%;
-        margin-top: 30px;
+        left: 5%;
+        // margin-top: 30px;
       }
       img {
         height: 100%;
@@ -118,18 +187,26 @@ $carousel-height: 1100px;
       margin-top: 0;
       @include is-extra-small-mobile {
         font-size: 1.2rem;
+        left: 30%;
       }
       @include is-mobile {
         font-size: 1.4rem;
+        left: 30%;
       }
       @include is-tablet {
         font-size: 1.6rem;
+        left: 30%;
       }
       @include is-desktop {
         font-size: 1.6rem;
+        left: 10%;
       }
       @include is-large-desktop {
         font-size: 1.8rem;
+        left: 20%;
+      }
+      @include is-extra-large-desktop {
+        left: 30%;
       }
       &::after {
         content: "";
@@ -150,18 +227,26 @@ $carousel-height: 1100px;
       @include is-extra-small-mobile {
         height: 100%;
         font-size: 1rem;
+        left: 30%;
       }
       @include is-mobile {
         font-size: 1.2rem;
+        left: 30%;
       }
       @include is-tablet {
         font-size: 1.4rem;
+        left: 30%;
       }
       @include is-desktop {
         font-size: 1.6rem;
+        left: 10%;
       }
       @include is-large-desktop {
         font-size: 1.8rem;
+        left: 20%;
+      }
+      @include is-extra-large-desktop {
+        left: 30%;
       }
     }
     &__text {
@@ -183,21 +268,41 @@ $carousel-height: 1100px;
       }
       @include is-extra-small-mobile {
         height: 75vh;
+        z-index: 2000;
+        position: absolute;
+        top: 10%;
+        left: 10%;
       }
       @include is-mobile {
         font-size: 1.1rem;
+        z-index: 2000;
+        position: absolute;
+        top: 10%;
+        left: 10%;
       }
       @include is-tablet {
         font-size: 1.2rem;
+        z-index: 2000;
+        position: absolute;
+        top: 10%;
+        left: 10%;
       }
       @include is-desktop {
         font-size: 1.2rem;
+        position: absolute;
+        top: 10%;
+        right: 0%;
+        width: 50%;
       }
+      font-size: 1.2rem;
       @include is-large-desktop {
-        font-size: 1.2rem;
+        position: absolute;
+        top: 10%;
+        right: 10%;
+        width: 50%;
       }
-      @include is-large-desktop-or-less {
-        width: 90%;
+      @include is-extra-large-desktop {
+        width: 60%;
       }
     }
     &__mask {
@@ -217,16 +322,17 @@ $carousel-height: 1100px;
     &__text-container {
       position: relative;
       min-height: 650px;
-      border-right: solid 1px $header-item;
+      // border-right: solid 1px $header-item;
       margin-top: 110px;
-      margin-left: 320px;
+      // margin-left: 320px;
+      // z-index: 1000;
       margin-right: 120px;
       @include is-large-desktop-or-less {
         margin-right: 0;
         padding-right: 0;
         margin-top: 50px;
-        margin-left: 0;
-        border-right: none;
+        // margin-left: 0;
+        // border-right: none;
         min-height: 455px;
       }
       @include is-1600-or-less {
@@ -234,7 +340,7 @@ $carousel-height: 1100px;
         padding-right: 50px;
       }
       @include is-desktop-or-less {
-        margin-left: 0px;
+        // margin-left: 0px;
         margin-top: 0px;
         min-height: 400px;
       }
@@ -250,13 +356,23 @@ $carousel-height: 1100px;
     justify-content: center;
     cursor: pointer;
     z-index: 2000;
+    position: absolute;
+    bottom: 7%;
+    right: 30%;
     @include is-extra-small-mobile {
-      position: absolute;
-      bottom: 0;
+      bottom: 4%;
+      left: 0%;
     }
     @include is-mobile {
-      position: absolute;
-      bottom: 0;
+      bottom: 4%;
+      left: 30%;
+    }
+    @include is-tablet {
+      bottom: 4%;
+      left: 30%;
+    }
+    @include is-large-desktop {
+      bottom: 0%;
     }
   }
 }
@@ -280,24 +396,31 @@ $carousel-height: 1100px;
 }
 /deep/ .carousel-navigation {
   position: absolute;
-  right: 81px;
-  bottom: 15%;
-  z-index: 100;
-  @include is-1600-or-less {
-    right: 1%;
+  right: 12%;
+  bottom: 8%;
+  z-index: 2000;
+  @include is-extra-small-mobile {
+    bottom: 5%;
+    right: 5%;
   }
-  @include is-large-desktop-or-less {
-    bottom: 10%;
+  @include is-mobile {
+    bottom: 8%;
+    right: 5%;
   }
-  @include is-desktop-or-less {
+  @include is-desktop {
+    bottom: 15%;
+    right: 12%;
+  }
+  @include is-extra-large-desktop {
+    bottom: 8%;
+    right: 12%;
+  }
+  @include is-large-desktop {
     bottom: 10%;
+    right: 12%;
   }
   @include is-tablet {
     bottom: 10%;
-    right: 2%;
-  }
-  @include is-767px-or-less {
-    bottom: 15%;
     right: 2%;
   }
   button {
@@ -357,13 +480,4 @@ $widths-and-heights: (
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
   @include filled-half-clipped-shape($widths-and-heights, transparent);
-}
-
-@keyframes animateImage {
-  0% {
-    transform: scale(0.8);
-  }
-  100% {
-    transform: scale(1);
-  }
 }

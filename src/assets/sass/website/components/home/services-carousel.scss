@@ -28,7 +28,6 @@
     height: 100%;
   }
   &__img-wrapper {
-    z-index: 9;
     @include is-extra-small-mobile {
       position: absolute;
       top: 0;
@@ -43,12 +42,47 @@
       position: absolute;
       top: 0;
       left: 0;
+      height: 100%;
     }
     @include is-desktop {
       position: relative;
     }
   }
-
+  &__img {
+    object-fit: cover;
+    width: 90%;
+    height: 96%;
+    position: absolute;
+    left: 5%;
+    top: 0px;
+    @include is-extra-small-mobile {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      left: -23%;
+      transform: scale(1.1);
+      filter: brightness(30%);
+    }
+    @include is-mobile {
+      position: relative;
+      width: 95vw;
+      left: -23%;
+      transform: scale(1.1);
+      height: 100%;
+      filter: brightness(30%);
+    }
+    @include is-tablet {
+      position: relative;
+      width: 95vw;
+      left: -23%;
+      transform: scale(1.1);
+      height: 100%;
+      filter: brightness(30%);
+    }
+    @include is-large-desktop {
+      height: 95vh;
+    }
+  }
   &__title {
     width: 100%;
     font-family: "Segoe UI Bold";
@@ -87,7 +121,8 @@
     @include is-extra-small-mobile {
       padding-top: 10px;
       font-size: 0.9rem;
-      height: 35%;
+      height: 50%;
+      overflow-y: scroll;
     }
     @include is-mobile {
       padding-top: 10px;
@@ -104,41 +139,18 @@
       font-size: 1rem;
     }
   }
-  &__img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: -10px;
-    @include is-extra-small-mobile {
-      position: relative;
-      width: 80vw;
-      height: 80vh;
-      filter: brightness(30%);
-      margin-top: 10px;
-      margin-left: -5px;
-    }
-    @include is-mobile {
-      position: relative;
-      max-width: 100vw;
-      filter: brightness(30%);
-    }
-    @include is-tablet {
-      position: relative;
-      width: 90vw;
-      filter: brightness(30%);
-    }
-    @include is-large-desktop {
-      height: 95vh;
-    }
-  }
   &__btn {
     position: absolute;
     bottom: 10%;
     left: 50%;
     cursor: pointer;
     z-index: 100;
+    @include is-extra-small-mobile {
+      bottom: 0;
+    }
+    @include is-mobile {
+      bottom: 0;
+    }
   }
 }
 
@@ -220,7 +232,8 @@
 // All have vw as divide operation units must be the same for all
 $width: 85vw;
 $height: 20vw;
-$clipped-length: 4vw;
+$clipped-length: 0vw;
+// $clipped-length: 4vw;
 
 $widths-and-heights: (
   clipped-shape-width: $width,
@@ -257,13 +270,4 @@ $widths-and-heights: (
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
   @include filled-half-clipped-shape($widths-and-heights, $form-background);
-}
-
-@keyframes animateImage {
-  0% {
-    transform: scale(0.8);
-  }
-  100% {
-    transform: scale(1);
-  }
 }
