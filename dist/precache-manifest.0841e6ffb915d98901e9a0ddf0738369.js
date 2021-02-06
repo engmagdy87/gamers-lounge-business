@@ -108,12 +108,12 @@ self.__precacheManifest = [
     "url": "/js/DepartmentsList.8ad2e1a3.js"
   },
   {
-    "revision": "5e410b2a8d1c6a7eac8a",
-    "url": "/css/Home.8a7c44d0.css"
+    "revision": "d2cbcd3b596492a6a450",
+    "url": "/css/Home.6f5544d9.css"
   },
   {
-    "revision": "5e410b2a8d1c6a7eac8a",
-    "url": "/js/Home.322ebff5.js"
+    "revision": "d2cbcd3b596492a6a450",
+    "url": "/js/Home.cc95737c.js"
   },
   {
     "revision": "e0ec7f126732cd93b4c9",
@@ -360,12 +360,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.d3472f60.js"
   },
   {
-    "revision": "5aed92b93b0a685a41b7",
+    "revision": "5cf1d925f8a324c1b069",
     "url": "/css/app.8f0f0885.css"
   },
   {
-    "revision": "5aed92b93b0a685a41b7",
-    "url": "/js/app.b38c292f.js"
+    "revision": "5cf1d925f8a324c1b069",
+    "url": "/js/app.3d69e2fc.js"
   },
   {
     "revision": "e2d928018cb3ba2a805c",
@@ -420,12 +420,12 @@ self.__precacheManifest = [
     "url": "/img/top-arrow.973d1b85.svg"
   },
   {
-    "revision": "8224e0160e362e117cbe00495919e2af",
-    "url": "/fonts/nucleo-icons.8224e016.eot"
-  },
-  {
     "revision": "ff208b8d733e61a630992ee2b72c9c1c",
     "url": "/fonts/nucleo-icons.ff208b8d.woff2"
+  },
+  {
+    "revision": "8224e0160e362e117cbe00495919e2af",
+    "url": "/fonts/nucleo-icons.8224e016.eot"
   },
   {
     "revision": "b0dc05d015e91e7d28d79cd0056fe555",
@@ -440,7 +440,7 @@ self.__precacheManifest = [
     "url": "/img/next.c9e7debf.svg"
   },
   {
-    "revision": "bb7d4343407d278c379b1fe97b5a8b7b",
+    "revision": "f72bb97bda84f8ecae3e04594141967b",
     "url": "/index.html"
   },
   {
@@ -484,24 +484,24 @@ self.__precacheManifest = [
     "url": "/favicon.png"
   },
   {
-    "revision": "5b47b416f6e4dbba80a1ca269adf7580",
-    "url": "/images/decrease_font.svg"
-  },
-  {
     "revision": "a95be6e8a890f1897308ee3122a70aef",
     "url": "/images/add.svg"
-  },
-  {
-    "revision": "752d64f551b54c06f4b7280d9f74d27c",
-    "url": "/images/delete.svg"
   },
   {
     "revision": "533b554da9fa067f3e7e2a631cc83a80",
     "url": "/images/download.svg"
   },
   {
+    "revision": "752d64f551b54c06f4b7280d9f74d27c",
+    "url": "/images/delete.svg"
+  },
+  {
     "revision": "cd955919d1908c1f33233b0f8e3b05b2",
     "url": "/images/edit.svg"
+  },
+  {
+    "revision": "5b47b416f6e4dbba80a1ca269adf7580",
+    "url": "/images/decrease_font.svg"
   },
   {
     "revision": "658814864a666a3b4cab6cfdc1cf14e1",
@@ -512,20 +512,20 @@ self.__precacheManifest = [
     "url": "/images/increase_font.svg"
   },
   {
-    "revision": "6ba855e58d163e941e34e5df303e01b8",
-    "url": "/images/pin.svg"
-  },
-  {
     "revision": "0d5b244ec347b92c573030f4514a34f3",
     "url": "/images/phone.svg"
+  },
+  {
+    "revision": "8ab7e03c6fd3405f3ebfd157b2b71240",
+    "url": "/images/visibility.svg"
   },
   {
     "revision": "b92d3a8381ec141ff42c430874bca38c",
     "url": "/images/hero.jpg"
   },
   {
-    "revision": "8ab7e03c6fd3405f3ebfd157b2b71240",
-    "url": "/images/visibility.svg"
+    "revision": "6ba855e58d163e941e34e5df303e01b8",
+    "url": "/images/pin.svg"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
