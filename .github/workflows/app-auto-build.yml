@@ -1,13 +1,13 @@
 name: Build Gamers Lounge Website
-  on:
-    push:
-      branches:
-        - master
-  jobs:
-    gl-build:
-      name: Gamers Lounge Website Build
-      steps:
+"on":
+  push:
+    branches:
+      - master
+jobs:
+  gl-build:
+    name: Gamers Lounge Website Build
+    steps:
       - name: Install Dependencies
         run: npm i
-			- name: Build
+      - name: Build
         run: npm run build
