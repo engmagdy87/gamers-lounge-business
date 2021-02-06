@@ -161,6 +161,16 @@
         >
         </SponsorTabelRow>
       </tbody>
+      <tbody v-if="tableType === 'team'">
+        <TeamTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </TeamTabelRow>
+      </tbody>
     </table>
   </div>
 </template>
@@ -180,6 +190,7 @@ import AboutSectionTabelRow from "../components/About/AboutSectionTabelRow";
 import AboutRowTabelRow from "../components/About/AboutRowTabelRow";
 import AboutColumnTabelRow from "../components/About/AboutColumnTabelRow";
 import SponsorTabelRow from "../components/Sponsors/SponsorTabelRow";
+import TeamTabelRow from "../components/Team/TeamTabelRow";
 
 export default {
   name: "l-table",
@@ -199,7 +210,8 @@ export default {
     AboutSectionTabelRow,
     AboutRowTabelRow,
     AboutColumnTabelRow,
-    SponsorTabelRow
+    SponsorTabelRow,
+    TeamTabelRow
   }
 };
 </script>

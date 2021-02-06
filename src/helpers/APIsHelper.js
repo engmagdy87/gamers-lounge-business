@@ -324,6 +324,73 @@ const deleteAbout = async id => {
   }
 };
 
+const fetchTeam = async data => {
+  try {
+    const response = await request({
+      query: QUERY.TEAM(data)
+    });
+    return response.data.data.teamMembers;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const createTeamMember = async data => {
+  const { img_profile, ...teamMemberInfo } = data;
+  const token = getTokenCookie();
+
+  const query = MUTATION.CREATE_TEAM_MEMBER(teamMemberInfo, img_profile);
+
+  try {
+    const response = await requestMultipart(
+      constructFormDataForSingleFile(img_profile, query, "img_profile"),
+      token
+    );
+    return response.data.data.createTeamMember;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateTeamMember = async data => {
+  let response;
+  const { img_profile, ...teamMemberInfo } = data;
+  const token = getTokenCookie();
+  try {
+    const query = MUTATION.UPDATE_TEAM_MEMBER(teamMemberInfo, img_profile);
+    if (img_profile)
+      response = await requestMultipart(
+        constructFormDataForSingleFile(img_profile, query, "img_profile"),
+        token
+      );
+    else
+      response = await request(
+        {
+          query
+        },
+        token
+      );
+    return response.data.data.updateTeamMember;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteTeamMember = async id => {
+  const token = getTokenCookie();
+  try {
+    const response = await request(
+      {
+        query: MUTATION.DELETE_TEAM_MEMBER(id)
+      },
+      token
+    );
+    return response.data.data.deleteTeamMember;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const fetchWebsiteAbout = async data => {
   try {
     const response = await request({
@@ -903,7 +970,11 @@ export {
   createContact,
   updateContact,
   deleteContact,
-  sendEmail
+  sendEmail,
+  fetchTeam,
+  createTeamMember,
+  updateTeamMember,
+  deleteTeamMember
 };
 
 const logout = () => {

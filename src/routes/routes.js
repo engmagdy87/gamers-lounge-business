@@ -2,483 +2,639 @@ import store from "../store/index";
 import types from "../store/types";
 
 // Website containers
-const Home = () => import(/* webpackChunkName: "Home" */ '../website/containers/Home.vue')
-const Contact = () => import(/* webpackChunkName: "Contact" */ '../website/containers/Contact.vue')
-const About = () => import(/* webpackChunkName: "About" */ '../website/containers/About.vue')
-const Jobs = () => import(/* webpackChunkName: "Jobs" */ '../website/containers/Jobs.vue')
-const JobDetails = () => import(/* webpackChunkName: "JobDetails" */ '../website/containers/JobDetails.vue')
-const OurWorks = () => import(/* webpackChunkName: "OurWorks" */ '../website/containers/OurWorks.vue')
-const OurWorkDetails = () => import(/* webpackChunkName: "OurWorkDetails" */ '../website/containers/OurWorkDetails.vue')
-const Services = () => import(/* webpackChunkName: "Services" */ '../website/containers/Services.vue')
-const ServicesDetails = () => import(/* webpackChunkName: "ServicesDetails" */ '../website/containers/ServicesDetails.vue')
+const Home = () =>
+  import(/* webpackChunkName: "Home" */ "../website/containers/Home.vue");
+const Contact = () =>
+  import(/* webpackChunkName: "Contact" */ "../website/containers/Contact.vue");
+const About = () =>
+  import(/* webpackChunkName: "About" */ "../website/containers/About.vue");
+const Jobs = () =>
+  import(/* webpackChunkName: "Jobs" */ "../website/containers/Jobs.vue");
+const JobDetails = () =>
+  import(
+    /* webpackChunkName: "JobDetails" */ "../website/containers/JobDetails.vue"
+  );
+const OurWorks = () =>
+  import(
+    /* webpackChunkName: "OurWorks" */ "../website/containers/OurWorks.vue"
+  );
+const OurWorkDetails = () =>
+  import(
+    /* webpackChunkName: "OurWorkDetails" */ "../website/containers/OurWorkDetails.vue"
+  );
+const Services = () =>
+  import(
+    /* webpackChunkName: "Services" */ "../website/containers/Services.vue"
+  );
+const ServicesDetails = () =>
+  import(
+    /* webpackChunkName: "ServicesDetails" */ "../website/containers/ServicesDetails.vue"
+  );
 
 // GeneralViews
-const NotFound = () => import(/* webpackChunkName: "NotFound" */ '../dashboard/pages/NotFoundPage.vue')
+const NotFound = () =>
+  import(
+    /* webpackChunkName: "NotFound" */ "../dashboard/pages/NotFoundPage.vue"
+  );
 
 // Admin container
-const DashboardLayout = () => import(/* webpackChunkName: "DashboardLayout" */ '../dashboard/layout/DashboardLayout.vue')
-const DashboardContent = () => import(/* webpackChunkName: "DashboardLayout" */ '../dashboard/layout/Content.vue')
+const DashboardLayout = () =>
+  import(
+    /* webpackChunkName: "DashboardLayout" */ "../dashboard/layout/DashboardLayout.vue"
+  );
+const DashboardContent = () =>
+  import(
+    /* webpackChunkName: "DashboardLayout" */ "../dashboard/layout/Content.vue"
+  );
 
 // Admin pages
-const Overview = () => import(/* webpackChunkName: "Overview" */ 'src/dashboard/pages/Overview.vue')
+const Overview = () =>
+  import(/* webpackChunkName: "Overview" */ "src/dashboard/pages/Overview.vue");
 
-const DepartmentsList = () => import(/* webpackChunkName: "DepartmentsList" */ 'src/dashboard/pages/Departments/DepartmentsList.vue')
-const DepartmentsAddEdit = () => import(/* webpackChunkName: "DepartmentsAdd" */ 'src/dashboard/pages/Departments/DepartmentsAddEdit.vue')
+const DepartmentsList = () =>
+  import(
+    /* webpackChunkName: "DepartmentsList" */ "src/dashboard/pages/Departments/DepartmentsList.vue"
+  );
+const DepartmentsAddEdit = () =>
+  import(
+    /* webpackChunkName: "DepartmentsAdd" */ "src/dashboard/pages/Departments/DepartmentsAddEdit.vue"
+  );
 
-const SponsorsList = () => import(/* webpackChunkName: "SponsorsList" */ 'src/dashboard/pages/Sponsors/SponsorsList.vue')
-const SponsorsAddEdit = () => import(/* webpackChunkName: "SponsorsAddEdit" */ 'src/dashboard/pages/Sponsors/SponsorsAddEdit.vue')
+const SponsorsList = () =>
+  import(
+    /* webpackChunkName: "SponsorsList" */ "src/dashboard/pages/Sponsors/SponsorsList.vue"
+  );
+const SponsorsAddEdit = () =>
+  import(
+    /* webpackChunkName: "SponsorsAddEdit" */ "src/dashboard/pages/Sponsors/SponsorsAddEdit.vue"
+  );
 
-const JobsList = () => import(/* webpackChunkName: "JobsList" */ 'src/dashboard/pages/Jobs/JobsList.vue')
-const JobsAddEdit = () => import(/* webpackChunkName: "JobsAdd" */ 'src/dashboard/pages/Jobs/JobsAddEdit.vue')
-const JobApplicantsList = () => import(/* webpackChunkName: "JobApplicantsList" */ 'src/dashboard/pages/Jobs/JobApplicantsList.vue')
+const TeamList = () =>
+  import(
+    /* webpackChunkName: "TeamList" */ "src/dashboard/pages/Team/TeamList.vue"
+  );
+const TeamAddEdit = () =>
+  import(
+    /* webpackChunkName: "TeamAddEdit" */ "src/dashboard/pages/Team/TeamAddEdit.vue"
+  );
 
-const ServicesList = () => import(/* webpackChunkName: "ServicesList" */ 'src/dashboard/pages/Services/ServicesList.vue')
-const ServicesAddEdit = () => import(/* webpackChunkName: "ServicesAddEdit" */ 'src/dashboard/pages/Services/ServicesAddEdit.vue')
-const ServiceSectionsList = () => import(/* webpackChunkName: "ServiceSectionsList" */ 'src/dashboard/pages/Services/Sections/ServiceSectionsList.vue')
-const ServiceSectionsAddEdit = () => import(/* webpackChunkName: "ServiceSectionsAddEdit" */ 'src/dashboard/pages/Services/Sections/ServiceSectionsAddEdit.vue')
-const ServiceRowsList = () => import(/* webpackChunkName: "ServiceRowsList" */ 'src/dashboard/pages/Services/Rows/ServiceRowsList.vue')
-const ServiceRowsAddEdit = () => import(/* webpackChunkName: "ServiceRowsAddEdit" */ 'src/dashboard/pages/Services/Rows/ServiceRowsAddEdit.vue')
-const ServiceColumnsList = () => import(/* webpackChunkName: "ServiceColumnsList" */ 'src/dashboard/pages/Services/Columns/ServiceColumnsList.vue')
-const ServiceColumnsAddEdit = () => import(/* webpackChunkName: "ServiceColumnsAddEdit" */ 'src/dashboard/pages/Services/Columns/ServiceColumnsAddEdit.vue')
+const JobsList = () =>
+  import(
+    /* webpackChunkName: "JobsList" */ "src/dashboard/pages/Jobs/JobsList.vue"
+  );
+const JobsAddEdit = () =>
+  import(
+    /* webpackChunkName: "JobsAdd" */ "src/dashboard/pages/Jobs/JobsAddEdit.vue"
+  );
+const JobApplicantsList = () =>
+  import(
+    /* webpackChunkName: "JobApplicantsList" */ "src/dashboard/pages/Jobs/JobApplicantsList.vue"
+  );
 
-const WorksList = () => import(/* webpackChunkName: "WorksList" */ 'src/dashboard/pages/Works/WorksList.vue')
-const WorksAddEdit = () => import(/* webpackChunkName: "WorksAddEdit" */ 'src/dashboard/pages/Works/WorksAddEdit.vue')
-const WorkSectionsList = () => import(/* webpackChunkName: "WorkSectionsList" */ 'src/dashboard/pages/Works/Sections/WorkSectionsList.vue')
-const WorkSectionsAddEdit = () => import(/* webpackChunkName: "WorkSectionsAddEdit" */ 'src/dashboard/pages/Works/Sections/WorkSectionsAddEdit.vue')
-const WorkRowsList = () => import(/* webpackChunkName: "WorkRowsList" */ 'src/dashboard/pages/Works/Rows/WorkRowsList.vue')
-const WorkRowsAddEdit = () => import(/* webpackChunkName: "WorkRowsAddEdit" */ 'src/dashboard/pages/Works/Rows/WorkRowsAddEdit.vue')
-const WorkColumnsList = () => import(/* webpackChunkName: "WorkColumnsList" */ 'src/dashboard/pages/Works/Columns/WorkColumnsList.vue')
-const WorkColumnsAddEdit = () => import(/* webpackChunkName: "WorkColumnsAddEdit" */ 'src/dashboard/pages/Works/Columns/WorkColumnsAddEdit.vue')
+const ServicesList = () =>
+  import(
+    /* webpackChunkName: "ServicesList" */ "src/dashboard/pages/Services/ServicesList.vue"
+  );
+const ServicesAddEdit = () =>
+  import(
+    /* webpackChunkName: "ServicesAddEdit" */ "src/dashboard/pages/Services/ServicesAddEdit.vue"
+  );
+const ServiceSectionsList = () =>
+  import(
+    /* webpackChunkName: "ServiceSectionsList" */ "src/dashboard/pages/Services/Sections/ServiceSectionsList.vue"
+  );
+const ServiceSectionsAddEdit = () =>
+  import(
+    /* webpackChunkName: "ServiceSectionsAddEdit" */ "src/dashboard/pages/Services/Sections/ServiceSectionsAddEdit.vue"
+  );
+const ServiceRowsList = () =>
+  import(
+    /* webpackChunkName: "ServiceRowsList" */ "src/dashboard/pages/Services/Rows/ServiceRowsList.vue"
+  );
+const ServiceRowsAddEdit = () =>
+  import(
+    /* webpackChunkName: "ServiceRowsAddEdit" */ "src/dashboard/pages/Services/Rows/ServiceRowsAddEdit.vue"
+  );
+const ServiceColumnsList = () =>
+  import(
+    /* webpackChunkName: "ServiceColumnsList" */ "src/dashboard/pages/Services/Columns/ServiceColumnsList.vue"
+  );
+const ServiceColumnsAddEdit = () =>
+  import(
+    /* webpackChunkName: "ServiceColumnsAddEdit" */ "src/dashboard/pages/Services/Columns/ServiceColumnsAddEdit.vue"
+  );
 
-const AboutSectionsList = () => import(/* webpackChunkName: "AboutSectionsList" */ 'src/dashboard/pages/About/Sections/AboutSectionsList.vue')
-const AboutSectionsAddEdit = () => import(/* webpackChunkName: "AboutSectionsAddEdit" */ 'src/dashboard/pages/About/Sections/AboutSectionsAddEdit.vue')
-const AboutRowsAddEdit = () => import(/* webpackChunkName: "AboutRowsAddEdit" */ 'src/dashboard/pages/About/Rows/AboutRowsAddEdit.vue')
-const AboutRowsList = () => import(/* webpackChunkName: "AboutRowsList" */ 'src/dashboard/pages/About/Rows/AboutRowsList.vue')
-const AboutColumnsAddEdit = () => import(/* webpackChunkName: "AboutColumnsAddEdit" */ 'src/dashboard/pages/About/Columns/AboutColumnsAddEdit.vue')
-const AboutColumnsList = () => import(/* webpackChunkName: "AboutColumnsList" */ 'src/dashboard/pages/About/Columns/AboutColumnsList.vue')
+const WorksList = () =>
+  import(
+    /* webpackChunkName: "WorksList" */ "src/dashboard/pages/Works/WorksList.vue"
+  );
+const WorksAddEdit = () =>
+  import(
+    /* webpackChunkName: "WorksAddEdit" */ "src/dashboard/pages/Works/WorksAddEdit.vue"
+  );
+const WorkSectionsList = () =>
+  import(
+    /* webpackChunkName: "WorkSectionsList" */ "src/dashboard/pages/Works/Sections/WorkSectionsList.vue"
+  );
+const WorkSectionsAddEdit = () =>
+  import(
+    /* webpackChunkName: "WorkSectionsAddEdit" */ "src/dashboard/pages/Works/Sections/WorkSectionsAddEdit.vue"
+  );
+const WorkRowsList = () =>
+  import(
+    /* webpackChunkName: "WorkRowsList" */ "src/dashboard/pages/Works/Rows/WorkRowsList.vue"
+  );
+const WorkRowsAddEdit = () =>
+  import(
+    /* webpackChunkName: "WorkRowsAddEdit" */ "src/dashboard/pages/Works/Rows/WorkRowsAddEdit.vue"
+  );
+const WorkColumnsList = () =>
+  import(
+    /* webpackChunkName: "WorkColumnsList" */ "src/dashboard/pages/Works/Columns/WorkColumnsList.vue"
+  );
+const WorkColumnsAddEdit = () =>
+  import(
+    /* webpackChunkName: "WorkColumnsAddEdit" */ "src/dashboard/pages/Works/Columns/WorkColumnsAddEdit.vue"
+  );
 
-const ContactAddEdit = () => import(/* webpackChunkName: "ContactAddEdit" */ 'src/dashboard/pages/Contact/ContactAddEdit.vue')
+const AboutSectionsList = () =>
+  import(
+    /* webpackChunkName: "AboutSectionsList" */ "src/dashboard/pages/About/Sections/AboutSectionsList.vue"
+  );
+const AboutSectionsAddEdit = () =>
+  import(
+    /* webpackChunkName: "AboutSectionsAddEdit" */ "src/dashboard/pages/About/Sections/AboutSectionsAddEdit.vue"
+  );
+const AboutRowsAddEdit = () =>
+  import(
+    /* webpackChunkName: "AboutRowsAddEdit" */ "src/dashboard/pages/About/Rows/AboutRowsAddEdit.vue"
+  );
+const AboutRowsList = () =>
+  import(
+    /* webpackChunkName: "AboutRowsList" */ "src/dashboard/pages/About/Rows/AboutRowsList.vue"
+  );
+const AboutColumnsAddEdit = () =>
+  import(
+    /* webpackChunkName: "AboutColumnsAddEdit" */ "src/dashboard/pages/About/Columns/AboutColumnsAddEdit.vue"
+  );
+const AboutColumnsList = () =>
+  import(
+    /* webpackChunkName: "AboutColumnsList" */ "src/dashboard/pages/About/Columns/AboutColumnsList.vue"
+  );
 
-const Login = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/Login.vue')
+const ContactAddEdit = () =>
+  import(
+    /* webpackChunkName: "ContactAddEdit" */ "src/dashboard/pages/Contact/ContactAddEdit.vue"
+  );
 
-const Icons = () => import(/* webpackChunkName: "Icons" */ 'src/dashboard/pages/Icons.vue')
-const Notifications = () => import(/* webpackChunkName: "Notifications" */ 'src/dashboard/pages/Notifications.vue')
+const Login = () =>
+  import(/* webpackChunkName: "Login" */ "src/dashboard/pages/Login.vue");
 
-import { getTokenCookie } from '../helpers/CookieHelper'
-import { isUserAuthenticated } from '../helpers/APIsHelper'
+const Icons = () =>
+  import(/* webpackChunkName: "Icons" */ "src/dashboard/pages/Icons.vue");
+const Notifications = () =>
+  import(
+    /* webpackChunkName: "Notifications" */ "src/dashboard/pages/Notifications.vue"
+  );
+
+import { getTokenCookie } from "../helpers/CookieHelper";
+import { isUserAuthenticated } from "../helpers/APIsHelper";
 
 const showHeaderAndFooterForWebsite = (next, flag = true) => {
   store.commit(types.app.mutations.SET_SHOW_HEADER_FLAG, flag);
   store.commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, flag);
   next();
-}
+};
 const getUserAuthenticatedFlag = async () => {
-  const response = await isUserAuthenticated()
-  return response
-}
+  const response = await isUserAuthenticated();
+  return response;
+};
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
+    path: "/",
+    name: "home",
     component: Home,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false)
+      showHeaderAndFooterForWebsite(next, false);
     }
   },
   {
-    path: '/contact',
-    name: 'contact',
+    path: "/contact",
+    name: "contact",
     component: Contact,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false)
+      showHeaderAndFooterForWebsite(next, false);
     }
   },
   {
-    path: '/about',
-    name: 'about',
+    path: "/about",
+    name: "about",
     component: About,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false)
+      showHeaderAndFooterForWebsite(next, false);
     }
   },
   {
-    path: '/jobs',
-    name: 'jobs',
+    path: "/jobs",
+    name: "jobs",
     component: Jobs,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false)
+      showHeaderAndFooterForWebsite(next, false);
     }
   },
   {
-    path: '/job/:jobName',
-    name: 'job',
+    path: "/job/:jobName",
+    name: "job",
     component: JobDetails,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false)
+      showHeaderAndFooterForWebsite(next, false);
     }
   },
   {
-    path: '/services',
-    name: 'services',
+    path: "/services",
+    name: "services",
     component: Services,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false)
+      showHeaderAndFooterForWebsite(next, false);
     }
   },
   {
-    path: '/services/:serviceName',
-    name: 'service',
+    path: "/services/:serviceName",
+    name: "service",
     component: ServicesDetails,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false)
+      showHeaderAndFooterForWebsite(next, false);
     }
   },
   {
-    path: '/work',
-    name: 'works',
+    path: "/work",
+    name: "works",
     component: OurWorks,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false)
+      showHeaderAndFooterForWebsite(next, false);
     }
   },
   {
-    path: '/work/:workName',
-    name: 'work',
+    path: "/work/:workName",
+    name: "work",
     component: OurWorkDetails,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false)
+      showHeaderAndFooterForWebsite(next, false);
     }
   },
   {
-    path: '/login',
-    name: 'login',
+    path: "/login",
+    name: "login",
     component: Login,
     beforeEnter: async (to, from, next) => {
       store.commit(types.app.mutations.SET_SHOW_HEADER_FLAG, false);
       store.commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, false);
-      const token = getTokenCookie()
-      const isUserAuthenticatedFlag = await getUserAuthenticatedFlag()
-      if (token && isUserAuthenticatedFlag) next('/dashboard');
+      const token = getTokenCookie();
+      const isUserAuthenticatedFlag = await getUserAuthenticatedFlag();
+      if (token && isUserAuthenticatedFlag) next("/dashboard");
       else next();
-    },
+    }
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     component: DashboardLayout,
-    redirect: '/dashboard/overview',
+    redirect: "/dashboard/overview",
     beforeEnter: async (to, from, next) => {
       store.commit(types.app.mutations.SET_SHOW_HEADER_FLAG, false);
       store.commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, false);
-      const token = getTokenCookie()
-      const isUserAuthenticatedFlag = await getUserAuthenticatedFlag()
-      if (!token || !isUserAuthenticatedFlag) next('/login');
+      const token = getTokenCookie();
+      const isUserAuthenticatedFlag = await getUserAuthenticatedFlag();
+      if (!token || !isUserAuthenticatedFlag) next("/login");
       else next();
     },
     children: [
       {
-        path: 'overview',
-        name: 'Overview',
+        path: "overview",
+        name: "Overview",
         component: Overview
       },
       {
-        path: 'departments',
-        name: 'Departments',
+        path: "departments",
+        name: "Departments",
         component: DashboardContent,
-        redirect: '/dashboard/departments/list',
+        redirect: "/dashboard/departments/list",
         children: [
           {
-            path: 'list',
-            name: 'List Departments',
+            path: "list",
+            name: "List Departments",
             component: DepartmentsList
           },
           {
-            path: 'create',
-            name: 'Create Department',
+            path: "create",
+            name: "Create Department",
             component: DepartmentsAddEdit
           },
           {
-            path: 'edit',
-            name: 'Edit Department',
+            path: "edit",
+            name: "Edit Department",
             component: DepartmentsAddEdit
           }
         ]
       },
       {
-        path: 'sponsors',
-        name: 'Sponsors',
+        path: "sponsors",
+        name: "Sponsors",
         component: DashboardContent,
-        redirect: '/dashboard/sponsors/list',
+        redirect: "/dashboard/sponsors/list",
         children: [
           {
-            path: 'list',
-            name: 'List Sponsors',
+            path: "list",
+            name: "List Sponsors",
             component: SponsorsList
           },
           {
-            path: 'create',
-            name: 'Create Sponsor',
+            path: "create",
+            name: "Create Sponsor",
             component: SponsorsAddEdit
           },
           {
-            path: 'edit',
-            name: 'Edit Sponsor',
+            path: "edit",
+            name: "Edit Sponsor",
             component: SponsorsAddEdit
           }
         ]
       },
       {
-        path: 'jobs',
-        name: 'Jobs',
+        path: "team",
+        name: "Team",
         component: DashboardContent,
-        redirect: '/dashboard/jobs/list',
+        redirect: "/dashboard/team/list",
         children: [
           {
-            path: 'list',
-            name: 'List Jobs',
+            path: "list",
+            name: "List Team",
+            component: TeamList
+          },
+          {
+            path: "create",
+            name: "Create Team Member",
+            component: TeamAddEdit
+          },
+          {
+            path: "edit",
+            name: "Edit Team Member",
+            component: TeamAddEdit
+          }
+        ]
+      },
+      {
+        path: "jobs",
+        name: "Jobs",
+        component: DashboardContent,
+        redirect: "/dashboard/jobs/list",
+        children: [
+          {
+            path: "list",
+            name: "List Jobs",
             component: JobsList
           },
           {
-            path: 'applicants/:jobId',
-            name: 'List Job Applicants',
+            path: "applicants/:jobId",
+            name: "List Job Applicants",
             component: JobApplicantsList
           },
           {
-            path: 'create',
-            name: 'Create Job',
+            path: "create",
+            name: "Create Job",
             component: JobsAddEdit
           },
           {
-            path: 'edit',
-            name: 'Edit Job',
+            path: "edit",
+            name: "Edit Job",
             component: JobsAddEdit
           }
         ]
       },
       {
-        path: 'services',
-        name: 'Services',
+        path: "services",
+        name: "Services",
         component: DashboardContent,
-        redirect: '/dashboard/services/list',
+        redirect: "/dashboard/services/list",
         children: [
           {
-            path: 'list',
-            name: 'List Services',
+            path: "list",
+            name: "List Services",
             component: ServicesList
           },
           {
-            path: 'create',
-            name: 'Create Service',
+            path: "create",
+            name: "Create Service",
             component: ServicesAddEdit
           },
           {
-            path: 'edit',
-            name: 'Edit Service',
+            path: "edit",
+            name: "Edit Service",
             component: ServicesAddEdit
           },
           //*************************************/
           {
-            path: 'sections/list/:id',
-            name: 'List Service Sections',
+            path: "sections/list/:id",
+            name: "List Service Sections",
             component: ServiceSectionsList
           },
           {
-            path: 'sections/create/:id',
-            name: 'Create Service Section',
+            path: "sections/create/:id",
+            name: "Create Service Section",
             component: ServiceSectionsAddEdit
           },
           {
-            path: 'sections/edit/:id',
-            name: 'Edit Service Section',
+            path: "sections/edit/:id",
+            name: "Edit Service Section",
             component: ServiceSectionsAddEdit
           },
           //*************************************/
           {
-            path: 'rows/list/:sectionId',
-            name: 'List Service Rows',
+            path: "rows/list/:sectionId",
+            name: "List Service Rows",
             component: ServiceRowsList
           },
           {
-            path: 'rows/create/:sectionId',
-            name: 'Create Service Row',
+            path: "rows/create/:sectionId",
+            name: "Create Service Row",
             component: ServiceRowsAddEdit
           },
           {
-            path: 'rows/edit/:sectionId',
-            name: 'Edit Service Row',
+            path: "rows/edit/:sectionId",
+            name: "Edit Service Row",
             component: ServiceRowsAddEdit
           },
           //*************************************/
           {
-            path: 'columns/list/:rowId',
-            name: 'List Service Columns',
+            path: "columns/list/:rowId",
+            name: "List Service Columns",
             component: ServiceColumnsList
           },
           {
-            path: 'columns/create/:rowId',
-            name: 'Create Service Column',
+            path: "columns/create/:rowId",
+            name: "Create Service Column",
             component: ServiceColumnsAddEdit
           },
           {
-            path: 'columns/edit/:rowId',
-            name: 'Edit Service Column',
+            path: "columns/edit/:rowId",
+            name: "Edit Service Column",
             component: ServiceColumnsAddEdit
-          },
+          }
         ]
       },
       {
-        path: 'works',
-        name: 'Works',
+        path: "works",
+        name: "Works",
         component: DashboardContent,
-        redirect: '/dashboard/works/list',
+        redirect: "/dashboard/works/list",
         children: [
           {
-            path: 'list',
-            name: 'List Works',
+            path: "list",
+            name: "List Works",
             component: WorksList
           },
           {
-            path: 'create',
-            name: 'Create Work',
+            path: "create",
+            name: "Create Work",
             component: WorksAddEdit
           },
           {
-            path: 'edit',
-            name: 'Edit Work',
+            path: "edit",
+            name: "Edit Work",
             component: WorksAddEdit
           },
           //*************************************/
           {
-            path: 'sections/list/:id',
-            name: 'List Work Sections',
+            path: "sections/list/:id",
+            name: "List Work Sections",
             component: WorkSectionsList
           },
           {
-            path: 'sections/create/:id',
-            name: 'Create Work Section',
+            path: "sections/create/:id",
+            name: "Create Work Section",
             component: WorkSectionsAddEdit
           },
           {
-            path: 'sections/edit/:id',
-            name: 'Edit Work Section',
+            path: "sections/edit/:id",
+            name: "Edit Work Section",
             component: WorkSectionsAddEdit
           },
           //*************************************/
           {
-            path: 'rows/list/:sectionId',
-            name: 'List Work Rows',
+            path: "rows/list/:sectionId",
+            name: "List Work Rows",
             component: WorkRowsList
           },
           {
-            path: 'rows/create/:sectionId',
-            name: 'Create Work Row',
+            path: "rows/create/:sectionId",
+            name: "Create Work Row",
             component: WorkRowsAddEdit
           },
           {
-            path: 'rows/edit/:sectionId',
-            name: 'Edit Work Row',
+            path: "rows/edit/:sectionId",
+            name: "Edit Work Row",
             component: WorkRowsAddEdit
           },
           //*************************************/
           {
-            path: 'columns/list/:rowId',
-            name: 'List Work Columns',
+            path: "columns/list/:rowId",
+            name: "List Work Columns",
             component: WorkColumnsList
           },
           {
-            path: 'columns/create/:rowId',
-            name: 'Create Work Column',
+            path: "columns/create/:rowId",
+            name: "Create Work Column",
             component: WorkColumnsAddEdit
           },
           {
-            path: 'columns/edit/:rowId',
-            name: 'Edit Work Column',
+            path: "columns/edit/:rowId",
+            name: "Edit Work Column",
             component: WorkColumnsAddEdit
-          },
+          }
         ]
       },
       {
-        path: 'about',
-        name: 'About',
+        path: "about",
+        name: "About",
         component: DashboardContent,
-        redirect: '/dashboard/about/list',
+        redirect: "/dashboard/about/list",
         children: [
           {
-            path: 'list',
-            name: 'List About',
+            path: "list",
+            name: "List About",
             component: AboutSectionsList
           },
           {
-            path: 'create',
-            name: 'Create About Section',
+            path: "create",
+            name: "Create About Section",
             component: AboutSectionsAddEdit
           },
           {
-            path: 'edit',
-            name: 'Edit About Section',
+            path: "edit",
+            name: "Edit About Section",
             component: AboutSectionsAddEdit
           },
           // //*************************************/
           {
-            path: 'rows/list/:sectionId',
-            name: 'List About Rows',
+            path: "rows/list/:sectionId",
+            name: "List About Rows",
             component: AboutRowsList
           },
           {
-            path: 'rows/create/:sectionId',
-            name: 'Create About Row',
+            path: "rows/create/:sectionId",
+            name: "Create About Row",
             component: AboutRowsAddEdit
           },
           {
-            path: 'rows/edit/:sectionId',
-            name: 'Edit About Row',
+            path: "rows/edit/:sectionId",
+            name: "Edit About Row",
             component: AboutRowsAddEdit
           },
           // //*************************************/
           {
-            path: 'columns/list/:rowId',
-            name: 'List About Columns',
+            path: "columns/list/:rowId",
+            name: "List About Columns",
             component: AboutColumnsList
           },
           {
-            path: 'columns/create/:rowId',
-            name: 'Create About Column',
+            path: "columns/create/:rowId",
+            name: "Create About Column",
             component: AboutColumnsAddEdit
           },
           {
-            path: 'columns/edit/:rowId',
-            name: 'Edit About Column',
+            path: "columns/edit/:rowId",
+            name: "Edit About Column",
             component: AboutColumnsAddEdit
-          },
+          }
         ]
       },
       {
-        path: 'contact',
-        name: 'Contact',
+        path: "contact",
+        name: "Contact",
         component: DashboardContent,
-        redirect: '/dashboard/contact/list',
+        redirect: "/dashboard/contact/list",
         children: [
           {
-            path: 'list',
-            name: 'Create Contact',
+            path: "list",
+            name: "Create Contact",
             component: ContactAddEdit
-          },
+          }
         ]
       },
       {
-        path: 'icons',
-        name: 'Icons',
+        path: "icons",
+        name: "Icons",
         component: Icons
       },
       {
-        path: 'notifications',
-        name: 'Notifications',
+        path: "notifications",
+        name: "Notifications",
         component: Notifications
       }
     ]
   },
-  { path: '*', component: NotFound }
-]
+  { path: "*", component: NotFound }
+];
 
 /**
  * Asynchronously load view (Webpack Lazy loading compatible)
@@ -489,4 +645,4 @@ function view(name) {
    return res;
 };**/
 
-export default routes
+export default routes;

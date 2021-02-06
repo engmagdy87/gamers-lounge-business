@@ -30,6 +30,10 @@
         <i class="nc-icon nc-quote"></i>
         <p>About</p>
       </sidebar-link>
+      <sidebar-link to="/dashboard/team">
+        <i class="nc-icon nc-single-02"></i>
+        <p>Team</p>
+      </sidebar-link>
       <sidebar-link to="/dashboard/contact">
         <i class="nc-icon nc-mobile"></i>
         <p>Contact</p>
