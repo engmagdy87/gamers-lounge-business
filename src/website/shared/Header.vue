@@ -75,7 +75,7 @@
                   : 'header-wrapper__navLinks--inactive'
               ]"
               href="/services"
-              >Our Services</a
+              >Our Service</a
             >
           </li>
           <li>
