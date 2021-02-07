@@ -38,7 +38,7 @@ import CREATE_SPONSOR from "./Sponsors/CreateSponsor";
 import UPDATE_SPONSOR from "./Sponsors/UpdateSponsor";
 import DELETE_SPONSOR from "./Sponsors/DeleteSponsor";
 
-import CREATE_ABOUT from "./Team/CreateTeamMember";
+import CREATE_ABOUT from "./About/CreateAbout";
 import UPDATE_ABOUT from "./About/UpdateAbout";
 import DELETE_ABOUT from "./About/DeleteAbout";
 
