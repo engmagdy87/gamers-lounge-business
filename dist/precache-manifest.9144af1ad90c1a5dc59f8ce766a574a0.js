@@ -188,12 +188,12 @@ self.__precacheManifest = [
     "url": "/js/OurWorkDetails~ServicesDetails.349a074a.js"
   },
   {
-    "revision": "df4cb54f9493edce41df",
-    "url": "/css/OurWorks.a96b4fb3.css"
+    "revision": "785ca8ee927135f17e62",
+    "url": "/css/OurWorks.34304d6f.css"
   },
   {
-    "revision": "df4cb54f9493edce41df",
-    "url": "/js/OurWorks.a1b876f7.js"
+    "revision": "785ca8ee927135f17e62",
+    "url": "/js/OurWorks.6d92d1d4.js"
   },
   {
     "revision": "ee66678b77e30ee16161",
@@ -360,12 +360,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.d3472f60.js"
   },
   {
-    "revision": "b39c60082532d5b91617",
+    "revision": "074c7bebf0f697d0f0a0",
     "url": "/css/app.b07315d1.css"
   },
   {
-    "revision": "b39c60082532d5b91617",
-    "url": "/js/app.0c10affe.js"
+    "revision": "074c7bebf0f697d0f0a0",
+    "url": "/js/app.15c42998.js"
   },
   {
     "revision": "e2d928018cb3ba2a805c",
@@ -420,12 +420,12 @@ self.__precacheManifest = [
     "url": "/img/top-arrow.973d1b85.svg"
   },
   {
-    "revision": "8224e0160e362e117cbe00495919e2af",
-    "url": "/fonts/nucleo-icons.8224e016.eot"
-  },
-  {
     "revision": "ff208b8d733e61a630992ee2b72c9c1c",
     "url": "/fonts/nucleo-icons.ff208b8d.woff2"
+  },
+  {
+    "revision": "8224e0160e362e117cbe00495919e2af",
+    "url": "/fonts/nucleo-icons.8224e016.eot"
   },
   {
     "revision": "b0dc05d015e91e7d28d79cd0056fe555",
@@ -440,7 +440,7 @@ self.__precacheManifest = [
     "url": "/img/next.c9e7debf.svg"
   },
   {
-    "revision": "8ab2ce90ff6eec896699762000db425a",
+    "revision": "cc46b72289879d823a4f08719e3d83d1",
     "url": "/index.html"
   },
   {
@@ -484,24 +484,24 @@ self.__precacheManifest = [
     "url": "/images/add.svg"
   },
   {
-    "revision": "0d4ffe0df1a0d1e770c5138f158d94b2",
-    "url": "/favicon.png"
-  },
-  {
     "revision": "5b47b416f6e4dbba80a1ca269adf7580",
     "url": "/images/decrease_font.svg"
+  },
+  {
+    "revision": "0d4ffe0df1a0d1e770c5138f158d94b2",
+    "url": "/favicon.png"
   },
   {
     "revision": "752d64f551b54c06f4b7280d9f74d27c",
     "url": "/images/delete.svg"
   },
   {
-    "revision": "533b554da9fa067f3e7e2a631cc83a80",
-    "url": "/images/download.svg"
-  },
-  {
     "revision": "cd955919d1908c1f33233b0f8e3b05b2",
     "url": "/images/edit.svg"
+  },
+  {
+    "revision": "533b554da9fa067f3e7e2a631cc83a80",
+    "url": "/images/download.svg"
   },
   {
     "revision": "658814864a666a3b4cab6cfdc1cf14e1",
@@ -516,12 +516,12 @@ self.__precacheManifest = [
     "url": "/images/phone.svg"
   },
   {
-    "revision": "6ba855e58d163e941e34e5df303e01b8",
-    "url": "/images/pin.svg"
-  },
-  {
     "revision": "b92d3a8381ec141ff42c430874bca38c",
     "url": "/images/hero.jpg"
+  },
+  {
+    "revision": "6ba855e58d163e941e34e5df303e01b8",
+    "url": "/images/pin.svg"
   },
   {
     "revision": "8ab7e03c6fd3405f3ebfd157b2b71240",

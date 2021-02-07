@@ -13,13 +13,12 @@
           >
             <img :src="work.img_card.url" draggable="false" />
 
-            <p>{{ work.title }}</p>
-
+            <p
+              class="description-container"
+              v-html="work.short_description"
+            ></p>
             <div class="work-page-wrapper__text">
-              <h2
-                class="description-container"
-                v-html="work.short_description"
-              ></h2>
+              <h2>{{ work.title }}</h2>
             </div>
           </div>
         </router-link>
