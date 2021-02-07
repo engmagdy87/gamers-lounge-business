@@ -108,11 +108,11 @@ self.__precacheManifest = [
     "url": "/js/DepartmentsList.8ad2e1a3.js"
   },
   {
-    "revision": "4e402fc6588e64de8444",
-    "url": "/css/Home.6f5544d9.css"
+    "revision": "89c6ef8018689539eac6",
+    "url": "/css/Home.5a664f4c.css"
   },
   {
-    "revision": "4e402fc6588e64de8444",
+    "revision": "89c6ef8018689539eac6",
     "url": "/js/Home.86127845.js"
   },
   {
@@ -360,12 +360,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.d3472f60.js"
   },
   {
-    "revision": "7aa6c560fca601aa851b",
+    "revision": "b39c60082532d5b91617",
     "url": "/css/app.b07315d1.css"
   },
   {
-    "revision": "7aa6c560fca601aa851b",
-    "url": "/js/app.d313f909.js"
+    "revision": "b39c60082532d5b91617",
+    "url": "/js/app.0c10affe.js"
   },
   {
     "revision": "e2d928018cb3ba2a805c",
@@ -440,7 +440,7 @@ self.__precacheManifest = [
     "url": "/img/next.c9e7debf.svg"
   },
   {
-    "revision": "79b6b7819cfa58992456a1e85d1d9480",
+    "revision": "8ab2ce90ff6eec896699762000db425a",
     "url": "/index.html"
   },
   {
@@ -480,16 +480,16 @@ self.__precacheManifest = [
     "url": "/_redirects"
   },
   {
-    "revision": "5b47b416f6e4dbba80a1ca269adf7580",
-    "url": "/images/decrease_font.svg"
+    "revision": "a95be6e8a890f1897308ee3122a70aef",
+    "url": "/images/add.svg"
   },
   {
     "revision": "0d4ffe0df1a0d1e770c5138f158d94b2",
     "url": "/favicon.png"
   },
   {
-    "revision": "a95be6e8a890f1897308ee3122a70aef",
-    "url": "/images/add.svg"
+    "revision": "5b47b416f6e4dbba80a1ca269adf7580",
+    "url": "/images/decrease_font.svg"
   },
   {
     "revision": "752d64f551b54c06f4b7280d9f74d27c",
