@@ -40,7 +40,7 @@
                   <p
                     v-if="index"
                     class="description-container work-carousel__inside__content"
-                    v-html="slide.description"
+                    v-html="slide.short_description"
                   ></p>
                 </transition>
               </div>

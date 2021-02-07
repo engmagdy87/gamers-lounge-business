@@ -5,6 +5,7 @@
     <td>{{ rowData.order }}</td>
     <td>{{ rowData.is_featured ? "Yes" : "No" }}</td>
     <td>{{ rowData.is_enabled ? "Yes" : "No" }}</td>
+    <td>{{ rowData.is_admin_mode_enabled ? "Yes" : "No" }}</td>
     <td>
       <div class="description" v-html="rowData.description"></div>
     </td>

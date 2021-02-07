@@ -6,7 +6,8 @@ const buildQuery = (workInfo, imagesData) => {
     isEnabled,
     description,
     statistics,
-    order
+    order,
+    is_admin_mode_enabled
   } = workInfo;
 
   let queryParams = "($img_card: Upload!,$img_cover: Upload!,";
@@ -27,6 +28,7 @@ const buildQuery = (workInfo, imagesData) => {
   return `mutation${queryParams} {
       createWork(
          input: {
+            is_admin_mode_enabled: ${is_admin_mode_enabled}
             title: "${title}"
             short_description: "${shortDescription}"
             description: "${description}"

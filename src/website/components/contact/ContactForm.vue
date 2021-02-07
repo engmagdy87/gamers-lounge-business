@@ -101,6 +101,14 @@ export default {
           this.notifyVue(error.message, "danger");
         });
       }
+    },
+    notifyVue(message, color) {
+      this.$notifications.notify({
+        message: `<span>${message}</span>`,
+        horizontalAlign: "right",
+        verticalAlign: "top",
+        type: color
+      });
     }
   }
 };

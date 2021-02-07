@@ -1,4 +1,4 @@
-const SERVICE_HERO = (id) => `
+const SERVICE_HERO = id => `
 query {
    service(id: ${id}) {
      id
@@ -53,8 +53,8 @@ query {
 `;
 
 const SERVICE = ({ id, first, page }) => {
-  if (!first && !page) return SERVICE_HERO(id)
-  return SERVICE_SECTIONS(id, first, page)
-}
+  if (!first && !page) return SERVICE_HERO(id);
+  return SERVICE_SECTIONS(id, first, page);
+};
 
 export default SERVICE;

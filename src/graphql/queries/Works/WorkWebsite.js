@@ -1,4 +1,4 @@
-const WORK_HERO = (id) => `
+const WORK_HERO = id => `
 query {
    work(id: ${id}) {
      id
@@ -54,8 +54,8 @@ query {
 `;
 
 const WORK = ({ id, first, page }) => {
-  if (!first && !page) return WORK_HERO(id)
-  return WORK_SECTIONS(id, first, page)
-}
+  if (!first && !page) return WORK_HERO(id);
+  return WORK_SECTIONS(id, first, page);
+};
 
 export default WORK;

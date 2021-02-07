@@ -4,7 +4,8 @@ query {
        data {
           id
           title
-          description                    
+          description                
+          short_description    
           img_slider{
             id
             url

@@ -222,7 +222,8 @@ $carousel-height: 500px;
     &__content {
       position: absolute;
       top: 80px;
-      width: 90%;
+      width: 50%;
+      height: 30%;
       font-size: 1.2rem;
       @include is-extra-small-mobile {
         height: 100%;

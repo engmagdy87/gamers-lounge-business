@@ -36,7 +36,7 @@
           </base-input>
           <ErrorMessage :fieldErrors="errors.order" />
         </div>
-        <div class="col-12 col-md-2 mt-auto mb-auto">
+        <div class="col-12 col-md-1 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -50,7 +50,7 @@
             >
           </div>
         </div>
-        <div class="col-12 col-md-2 mt-auto mb-auto">
+        <div class="col-12 col-md-1 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -60,6 +60,19 @@
             />
             <label class="custom-control-label" for="is_enabled"
               >Published</label
+            >
+          </div>
+        </div>
+        <div class="col-12 col-md-1 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="is_admin_mode_enabled"
+              v-model="service.is_admin_mode_enabled"
+            />
+            <label class="custom-control-label" for="is_admin_mode_enabled"
+              >Admin</label
             >
           </div>
         </div>
@@ -207,6 +220,7 @@ const emptyService = {
   description: "",
   is_featured: false,
   is_enabled: false,
+  is_admin_mode_enabled: false,
   img_card: "",
   img_cover: "",
   img_slider: ""
@@ -230,6 +244,7 @@ export default {
         order: { isRequired: true },
         is_featured: { isRequired: false },
         is_enabled: { isRequired: false },
+        is_admin_mode_enabled: { isRequired: false },
         description: { isRequired: true },
         "card image": { isRequired: true },
         "cover image": { isRequired: true },
@@ -240,6 +255,7 @@ export default {
         order: "order",
         is_featured: "is_featured",
         is_enabled: "is_enabled",
+        is_admin_mode_enabled: "is_admin_mode_enabled",
         description: "description",
         img_card: "card image",
         img_cover: "cover image",
@@ -281,6 +297,7 @@ export default {
           order: this.service.order,
           isFeatured: this.service.is_featured,
           isEnabled: this.service.is_enabled,
+          is_admin_mode_enabled: this.service.is_admin_mode_enabled,
           description: reformatHTMLString(this.service.description)
         };
 
@@ -374,6 +391,7 @@ export default {
       this.service.order = this.editData.order;
       this.service.is_featured = this.editData.is_featured;
       this.service.is_enabled = this.editData.is_enabled;
+      this.service.is_admin_mode_enabled = this.editData.is_admin_mode_enabled;
       this.service.description = this.editData.description || "";
       this.service.img_card = this.editData.img_card || "";
       this.service.img_cover = this.editData.img_cover || "";

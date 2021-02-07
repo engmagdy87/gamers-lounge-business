@@ -1,6 +1,8 @@
 const WORKS = ({ first, page, isEnabled = null }) => `
 query {
-    works(first: ${first}, page: ${page},orderBy: { field: "order", order: ASC },${isEnabled ? 'is_enabled:true' : ''}) {
+    works(first: ${first}, page: ${page},orderBy: { field: "order", order: ASC },${
+  isEnabled ? "is_enabled:true" : ""
+}) {
        paginatorInfo{                            
           hasMorePages
           currentPage    
@@ -13,6 +15,7 @@ query {
           description
           is_featured
           is_enabled
+          is_admin_mode_enabled
           statistics
           order
           img_card{

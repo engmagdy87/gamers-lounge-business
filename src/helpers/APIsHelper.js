@@ -191,10 +191,14 @@ const applyJob = async data => {
 };
 
 const fetchServices = async data => {
+  const token = getTokenCookie();
   try {
-    const response = await request({
-      query: QUERY.SERVICES(data)
-    });
+    const response = await request(
+      {
+        query: QUERY.SERVICES(data)
+      },
+      token
+    );
     return response.data.data.services;
   } catch (error) {
     throw error;
@@ -475,10 +479,15 @@ const fetchWorks = async data => {
 };
 
 const fetchWebsiteWork = async data => {
+  const token = getTokenCookie();
+
   try {
-    const response = await request({
-      query: QUERY.WORK_WEBSITE(data)
-    });
+    const response = await request(
+      {
+        query: QUERY.WORK_WEBSITE(data)
+      },
+      token
+    );
     return response.data.data.work;
   } catch (error) {
     throw error;
@@ -486,10 +495,15 @@ const fetchWebsiteWork = async data => {
 };
 
 const fetchWebsiteServices = async data => {
+  const token = getTokenCookie();
+
   try {
-    const response = await request({
-      query: QUERY.SERVICES_WEBSITE(data)
-    });
+    const response = await request(
+      {
+        query: QUERY.SERVICES_WEBSITE(data)
+      },
+      token
+    );
     return response.data.data.service;
   } catch (error) {
     throw error;
@@ -497,10 +511,15 @@ const fetchWebsiteServices = async data => {
 };
 
 const fetchHomePageWork = async () => {
+  const token = getTokenCookie();
+
   try {
-    const response = await request({
-      query: QUERY.HOME_PAGE_WORKS()
-    });
+    const response = await request(
+      {
+        query: QUERY.HOME_PAGE_WORKS()
+      },
+      token
+    );
     return response.data.data.works.data;
   } catch (error) {
     throw error;
@@ -508,10 +527,15 @@ const fetchHomePageWork = async () => {
 };
 
 const fetchHomePageServices = async () => {
+  const token = getTokenCookie();
+
   try {
-    const response = await request({
-      query: QUERY.HOME_PAGE_SERVICES()
-    });
+    const response = await request(
+      {
+        query: QUERY.HOME_PAGE_SERVICES()
+      },
+      token
+    );
     return response.data.data.services.data;
   } catch (error) {
     throw error;

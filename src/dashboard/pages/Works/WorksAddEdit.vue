@@ -36,7 +36,7 @@
           </base-input>
           <ErrorMessage :fieldErrors="errors.order" />
         </div>
-        <div class="col-12 col-md-2 mt-auto mb-auto">
+        <div class="col-12 col-md-1 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -50,7 +50,7 @@
             >
           </div>
         </div>
-        <div class="col-12 col-md-2 mt-auto mb-auto">
+        <div class="col-12 col-md-1 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
@@ -60,6 +60,19 @@
             />
             <label class="custom-control-label" for="is_enabled"
               >Published</label
+            >
+          </div>
+        </div>
+        <div class="col-12 col-md-1 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="is_admin_mode_enabled"
+              v-model="work.is_admin_mode_enabled"
+            />
+            <label class="custom-control-label" for="is_admin_mode_enabled"
+              >Admin</label
             >
           </div>
         </div>
@@ -255,6 +268,7 @@ const emptyWork = {
   description: "",
   is_featured: false,
   is_enabled: false,
+  is_admin_mode_enabled: false,
   img_card: "",
   img_cover: "",
   img_slider: ""
@@ -280,6 +294,7 @@ export default {
         "short description": { isRequired: false },
         is_featured: { isRequired: false },
         is_enabled: { isRequired: false },
+        is_admin_mode_enabled: { isRequired: false },
         description: { isRequired: true },
         statistics: { isRequired: false },
         "card image": { isRequired: true },
@@ -292,6 +307,7 @@ export default {
         short_description: "short description",
         is_featured: "is_featured",
         is_enabled: "is_enabled",
+        is_admin_mode_enabled: "is_admin_mode_enabled",
         description: "description",
         statistics: "statistics",
         img_card: "card image",
@@ -334,6 +350,7 @@ export default {
           order: this.work.order,
           isFeatured: this.work.is_featured,
           isEnabled: this.work.is_enabled,
+          is_admin_mode_enabled: this.work.is_admin_mode_enabled,
           shortDescription: reformatHTMLString(this.work.short_description),
           description: reformatHTMLString(this.work.description),
           statistics: reformatHTMLString(JSON.stringify(this.work.statistics))
@@ -451,6 +468,7 @@ export default {
       this.work.order = this.editData.order;
       this.work.is_featured = this.editData.is_featured;
       this.work.is_enabled = this.editData.is_enabled;
+      this.work.is_admin_mode_enabled = this.editData.is_admin_mode_enabled;
       this.work.short_description = this.editData.short_description || "";
       this.work.description = this.editData.description || "";
       this.work.statistics = JSON.parse(

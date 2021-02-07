@@ -51,6 +51,7 @@ export default {
           "Order",
           "Featured",
           "Published",
+          "Admin",
           "Short Description",
           "Description",
           "Statistics",
