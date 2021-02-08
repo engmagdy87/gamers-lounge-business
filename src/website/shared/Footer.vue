@@ -97,7 +97,7 @@
           <router-link to="/contact" tag="li" active-class="active">
             <a class="nav-link">Contact Us</a>
           </router-link>
-          <router-link to="/ourwork" tag="li" active-class="active">
+          <router-link to="/work" tag="li" active-class="active">
             <a class="nav-link">Our Work</a>
           </router-link>
           <router-link to="/jobs" tag="li" active-class="active">
