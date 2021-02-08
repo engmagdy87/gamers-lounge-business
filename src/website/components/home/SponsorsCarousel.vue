@@ -35,9 +35,9 @@ export default {
         slidesToScroll: 1,
         infinite: true,
         autoplay: true,
-        speed: 3000,
-        autoplaySpeed: 3000,
-        cssEase: "linear",
+        speed: 1000,
+        // autoplaySpeed: 3000,
+        // cssEase: "linear",
         pauseOnHover: true,
         responsive: [
           {
