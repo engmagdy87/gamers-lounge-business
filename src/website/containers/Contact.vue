@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import types from "../../store/types";
 import Hero from "../shared/Hero";
 import ContactDataBox from "../components/contact/ContactDataBox";
@@ -80,6 +80,9 @@ export default {
   methods: {
     ...mapActions({
       fetchContactUsData: types.contact.actions.FETCH_CONTACT
+    }),
+    ...mapMutations({
+      setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
     })
   },
   components: {
@@ -93,6 +96,9 @@ export default {
       showSpinner: true
     };
     this.fetchContactUsData(requestSource);
+  },
+  updated() {
+    if (this.isContactFetched) this.setShowFooterFlag(true);
   }
 };
 </script>

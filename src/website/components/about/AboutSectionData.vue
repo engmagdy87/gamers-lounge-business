@@ -54,6 +54,7 @@
             v-else-if="
               column.type === ABOUT_COLUMNS_TYPES.SLIDER && column.fillable
             "
+            class="work-details-sections__slider"
           >
             <Carousel3d
               :autoplay="true"

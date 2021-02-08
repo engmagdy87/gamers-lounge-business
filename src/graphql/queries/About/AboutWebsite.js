@@ -8,6 +8,12 @@ query{
           id
           url
        }
+       sections(enabled:true,first: 200, page: 1) {
+          paginatorInfo{
+            hasMorePages
+            total
+        }
+       }
     }
  }
 `;
@@ -17,7 +23,8 @@ query {
     aboutUs {
      sections(enabled:true,first: ${first}, page: ${page}, orderBy: { field: "order", order: ASC }) {
        paginatorInfo{                            
-         hasMorePages            
+         hasMorePages   
+         total         
        } 
        data {
          id
@@ -52,8 +59,8 @@ query {
 `;
 
 const ABOUT = ({ id, first, page }) => {
-    if (!first && !page) return ABOUT_HERO(id)
-    return ABOUT_SECTIONS(first, page)
-}
+  if (!first && !page) return ABOUT_HERO(id);
+  return ABOUT_SECTIONS(first, page);
+};
 
 export default ABOUT;

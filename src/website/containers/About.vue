@@ -73,22 +73,6 @@ export default {
     ...mapMutations({
       setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
     }),
-    // generateAboutPayload(showSpinner) {
-    //   const data = {
-    //     first: this.queriedAboutCounts,
-    //     page:
-    //       Object.keys(this.about).length > 0
-    //         ? this.about.paginatorInfo.currentPage + 1
-    //         : 1
-    //   };
-    //   const requestSource = {
-    //     data,
-    //     requestSource: "website",
-    //     showSpinner
-    //   };
-    //   return requestSource;
-    // },
-
     fetchHeroAndFirstSection: async function() {
       let payload = this.generateAboutPayload(true, true);
       await this.fetchAbout(payload);
@@ -109,11 +93,7 @@ export default {
       return requestSource;
     },
     loadMoreAboutSections: async function() {
-      if (
-        !this.showLoading &&
-        (this.about.sections.data.length === 0 ||
-          this.about.sections.paginatorInfo.hasMorePages)
-      ) {
+      if (!this.showLoading && this.about.sections.paginatorInfo.hasMorePages) {
         this.showLoading = true;
         const payload = this.generateAboutPayload(false, false);
         await this.fetchAbout(payload);

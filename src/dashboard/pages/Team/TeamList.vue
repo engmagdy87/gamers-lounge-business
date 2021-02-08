@@ -77,9 +77,6 @@ export default {
         this.setTeamDataFlags(false, null, null);
         this.notifyVue("Team Deleted Successfully", "success");
       } catch (error) {
-        console.log("====================================");
-        console.log(error);
-        console.log("====================================");
         this.notifyVue("Error Happened", "danger");
       }
     },

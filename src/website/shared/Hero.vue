@@ -21,6 +21,6 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/sass/website/shared/hero.scss";
 .bg-image {
-  background-image: url("~/images/hero.jpg") !important;
+  background-image: url("/images/hero.jpg") !important;
 }
 </style>
