@@ -500,12 +500,12 @@ self.__precacheManifest = [
     "url": "/images/download.svg"
   },
   {
-    "revision": "cd955919d1908c1f33233b0f8e3b05b2",
-    "url": "/images/edit.svg"
-  },
-  {
     "revision": "658814864a666a3b4cab6cfdc1cf14e1",
     "url": "/images/env.svg"
+  },
+  {
+    "revision": "cd955919d1908c1f33233b0f8e3b05b2",
+    "url": "/images/edit.svg"
   },
   {
     "revision": "80ab8c35fee0090540b1acde85807338",
@@ -514,6 +514,10 @@ self.__precacheManifest = [
   {
     "revision": "b92d3a8381ec141ff42c430874bca38c",
     "url": "/images/hero.jpg"
+  },
+  {
+    "revision": "0d5b244ec347b92c573030f4514a34f3",
+    "url": "/images/phone.svg"
   },
   {
     "revision": "6ba855e58d163e941e34e5df303e01b8",
@@ -526,9 +530,5 @@ self.__precacheManifest = [
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
     "url": "/robots.txt"
-  },
-  {
-    "revision": "0d5b244ec347b92c573030f4514a34f3",
-    "url": "/images/phone.svg"
   }
 ];
