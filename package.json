@@ -10,7 +10,7 @@
     "lint": "vue-cli-service lint",
     "dev": "vue-cli-service serve --open",
     "lint-fix": "vue-cli-service lint --fix",
-    "postbuild": "rsync -a --delete dist/* ../../public_html"
+    "postbuild": "rsync -a --delete dist/* ../../public_html/gamersloungeme.com"
   },
   "dependencies": {
     "axios": "^0.21.1",

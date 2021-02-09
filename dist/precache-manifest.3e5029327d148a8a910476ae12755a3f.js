@@ -480,16 +480,16 @@ self.__precacheManifest = [
     "url": "/_redirects"
   },
   {
+    "revision": "a95be6e8a890f1897308ee3122a70aef",
+    "url": "/images/add.svg"
+  },
+  {
     "revision": "0d4ffe0df1a0d1e770c5138f158d94b2",
     "url": "/favicon.png"
   },
   {
     "revision": "5b47b416f6e4dbba80a1ca269adf7580",
     "url": "/images/decrease_font.svg"
-  },
-  {
-    "revision": "a95be6e8a890f1897308ee3122a70aef",
-    "url": "/images/add.svg"
   },
   {
     "revision": "752d64f551b54c06f4b7280d9f74d27c",
@@ -508,16 +508,16 @@ self.__precacheManifest = [
     "url": "/images/env.svg"
   },
   {
-    "revision": "80ab8c35fee0090540b1acde85807338",
-    "url": "/images/increase_font.svg"
-  },
-  {
     "revision": "0d5b244ec347b92c573030f4514a34f3",
     "url": "/images/phone.svg"
   },
   {
     "revision": "b92d3a8381ec141ff42c430874bca38c",
     "url": "/images/hero.jpg"
+  },
+  {
+    "revision": "80ab8c35fee0090540b1acde85807338",
+    "url": "/images/increase_font.svg"
   },
   {
     "revision": "6ba855e58d163e941e34e5df303e01b8",
