@@ -3,31 +3,13 @@
 @import "../../shared/half-clipped-shape.scss";
 
 .hero-carousel {
-  margin-top: 400px;
+  position: absolute;
+  bottom: 15%;
   @include is-extra-small-mobile {
-    margin-top: 200px;
+    bottom: 20%;
   }
   @include is-mobile {
-    margin-top: 250px;
-  }
-  @include is-tablet {
-    margin-top: 250px;
-  }
-
-  @include is-desktop {
-    margin-top: 300px;
-  }
-  @media (min-width: 1300px) and (max-width: 1599px) and (min-height: 300px) and (max-height: 590px) {
-    margin-top: 80px;
-  }
-  @media (min-width: 1300px) and (max-width: 1599px) and (min-height: 600px) and (max-height: 850px) {
-    margin-top: 80px;
-  }
-  @media (min-width: 1600px) and (max-width: 1850px) and (min-height: 300px) and (max-height: 590px) {
-    margin-top: 120px;
-  }
-  @media (min-width: 1600px) and (max-width: 1850px) and (min-height: 600px) and (max-height: 850px) {
-    margin-top: 120px;
+    bottom: 20%;
   }
   &__text {
     z-index: 10;

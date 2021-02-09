@@ -5,6 +5,9 @@
   height: 100vh;
   padding-top: $header-height;
   background-attachment: fixed;
+  position: relative;
+  display: flex;
+  justify-content: center;
   @include cover-image();
   @include is-extra-small-mobile {
     padding-top: $header-height-mobile;
