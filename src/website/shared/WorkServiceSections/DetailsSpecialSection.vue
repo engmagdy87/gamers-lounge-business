@@ -28,7 +28,12 @@
               @click="openImageModal(rowId, colId)"
               style="cursor:pointer"
             >
-              <img :src="img.url" width="100%" draggable="false" />
+              <img
+                :src="img.url"
+                width="100%"
+                draggable="false"
+                class="image-placeholder"
+              />
             </div>
 
             <div
@@ -59,7 +64,11 @@
                   :index="i"
                   :key="i"
                 >
-                  <img :src="img.url" draggable="false" />
+                  <img
+                    :src="img.url"
+                    draggable="false"
+                    class="image-placeholder"
+                  />
                 </Slide>
               </Carousel3d>
             </div>

@@ -18,7 +18,7 @@
             :class="[
               'col-12 d-flex mb-sm-3 mb-1',
               contact.information.phone === ''
-                ? 'col-md-6 justify-content-end pr-5'
+                ? 'col-md-6 justify-content-md-end justify-content-center pr-md-5 mt-2 mt-md-auto'
                 : 'col-md-4 justify-content-center'
             ]"
           >
@@ -34,7 +34,7 @@
             :class="[
               'col-12 col-md-4 d-flex mb-sm-3',
               contact.information.phone === ''
-                ? 'col-md-6 justify-content-start pl-5'
+                ? 'col-md-6 justify-content-md-start justify-content-center pl-md-5'
                 : 'col-md-4 justify-content-md-start justify-content-center'
             ]"
           >

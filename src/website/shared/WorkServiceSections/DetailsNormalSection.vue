@@ -22,7 +22,13 @@
           @click="openImageModal(rowId, colId)"
           style="cursor:pointer"
         >
-          <img :src="img.url" width="100%" draggable="false" alt="" />
+          <img
+            :src="img.url"
+            width="100%"
+            draggable="false"
+            alt=""
+            class="image-placeholder"
+          />
         </div>
 
         <div
@@ -60,7 +66,7 @@
             :border="0"
           >
             <Slide v-for="(img, i) in column.img_content" :index="i" :key="i">
-              <img :src="img.url" draggable="false" />
+              <img :src="img.url" draggable="false" class="image-placeholder" />
             </Slide>
           </Carousel3d>
         </div>
