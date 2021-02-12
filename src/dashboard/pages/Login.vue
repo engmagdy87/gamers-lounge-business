@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      loginToDashboard: types.login.actions.LOGIN_TO_DASHBOARD
+      loginToDashboard: types.user.actions.LOGIN_TO_DASHBOARD
     }),
     login: async function() {
       try {

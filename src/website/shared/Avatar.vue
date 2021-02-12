@@ -1,17 +1,13 @@
 <template>
-  <div>
+  <div v-if="userCookie">
     <div
       role="button"
       tabIndex="0"
-      class="avatar-wrapper mr-3"
+      class="avatar-wrapper"
       @click="handleMenuVisibility"
     >
       <div>
-        <img
-          v-if="userCookie.user.images.img_profile !== null"
-          :src="userCookie.user.images.img_profile.path"
-        />
-        <!-- <span v-else>{{ getUserAbbreviationName }}</span> -->
+        <span>{{ getUserAbbreviationName }}</span>
       </div>
     </div>
     <span
@@ -24,8 +20,8 @@
         <li>
           <a href="/profile">Profile</a>
         </li>
-        <li @click="logoutUser">
-          <a href="#">Logout</a>
+        <li @click="logout">
+          <a>Logout</a>
         </li>
       </ul>
     </span>
@@ -33,19 +29,46 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapMutations } from "vuex";
+import {
+  removeTokenCookie,
+  removeUserDataCookie,
+  getUserDataCookie
+} from "../../helpers/CookieHelper";
+import { getFirstLettersOfString } from "../../helpers/StringsHelper";
+import types from "../../store/types";
 
 export default {
-  props: ["logoutUser", "userCookie"],
   data() {
     return {
-      showMenu: false
+      showMenu: false,
+      userCookie: null
     };
   },
   methods: {
+    ...mapMutations({
+      setUserPersona: types.user.mutations.SET_USER_PERSONA
+    }),
     handleMenuVisibility() {
       this.showMenu = !this.showMenu;
+    },
+    logout() {
+      removeTokenCookie();
+      removeUserDataCookie();
+      this.handleMenuVisibility();
+      this.userCookie = null;
+      this.setUserPersona({});
     }
+  },
+  computed: {
+    getUserAbbreviationName() {
+      return getFirstLettersOfString(
+        `${this.userCookie.first_name} ${this.userCookie.last_name}`
+      );
+    }
+  },
+  mounted() {
+    this.userCookie = getUserDataCookie();
   }
 };
 </script>

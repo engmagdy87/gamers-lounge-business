@@ -42,6 +42,7 @@
             "
           />
         </div>
+        <Avatar />
       </div>
     </div>
     <div class="header-wrapper__main">
@@ -204,13 +205,9 @@
 import { mapState, mapActions } from "vuex";
 import types from "../../store/types";
 import HalfClippedOutlineButton from "./HalfClippedOutlineButton";
+import Avatar from "./Avatar";
 
 export default {
-  data() {
-    return {
-      userCookie: null
-    };
-  },
   props: ["activeItem", "setShowLoginModal", "isSolidHeader"],
   computed: {
     ...mapState({
@@ -233,7 +230,8 @@ export default {
     }
   },
   components: {
-    HalfClippedOutlineButton
+    HalfClippedOutlineButton,
+    Avatar
   },
   mounted() {
     if (!this.isContactFetched) {

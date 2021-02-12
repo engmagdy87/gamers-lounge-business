@@ -1,5 +1,9 @@
 import store from "../store/index";
 import types from "../store/types";
+import { getTokenCookie, getUserDataCookie } from "../helpers/CookieHelper";
+import { isUserAuthenticated } from "../helpers/APIsHelper";
+
+const userData = getUserDataCookie();
 
 // Website containers
 const Home = () =>
@@ -8,6 +12,8 @@ const Contact = () =>
   import(/* webpackChunkName: "Contact" */ "../website/containers/Contact.vue");
 const About = () =>
   import(/* webpackChunkName: "About" */ "../website/containers/About.vue");
+const Profile = () =>
+  import(/* webpackChunkName: "Profile" */ "../website/containers/Profile.vue");
 const Jobs = () =>
   import(/* webpackChunkName: "Jobs" */ "../website/containers/Jobs.vue");
 const JobDetails = () =>
@@ -197,13 +203,15 @@ const Notifications = () =>
     /* webpackChunkName: "Notifications" */ "src/dashboard/pages/Notifications.vue"
   );
 
-import { getTokenCookie } from "../helpers/CookieHelper";
-import { isUserAuthenticated } from "../helpers/APIsHelper";
-
 const showHeaderAndFooterForWebsite = (next, flag = true) => {
   store.commit(types.app.mutations.SET_SHOW_HEADER_FLAG, flag);
   store.commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, flag);
   next();
+};
+const userHasPermission = (next, route) => {
+  next();
+  if (userData.permissions.includes(route)) next();
+  else next("/dashboard");
 };
 const getUserAuthenticatedFlag = async () => {
   const response = await isUserAuthenticated();
@@ -231,6 +239,14 @@ const routes = [
     path: "/about",
     name: "about",
     component: About,
+    beforeEnter(to, from, next) {
+      showHeaderAndFooterForWebsite(next, false);
+    }
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: Profile,
     beforeEnter(to, from, next) {
       showHeaderAndFooterForWebsite(next, false);
     }
@@ -319,21 +335,33 @@ const routes = [
         name: "Departments",
         component: DashboardContent,
         redirect: "/dashboard/departments/list",
+        beforeEnter(to, from, next) {
+          userHasPermission(next, "job.view");
+        },
         children: [
           {
             path: "list",
             name: "List Departments",
-            component: DepartmentsList
+            component: DepartmentsList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "job.view");
+            }
           },
           {
             path: "create",
             name: "Create Department",
-            component: DepartmentsAddEdit
+            component: DepartmentsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "job.create");
+            }
           },
           {
             path: "edit",
             name: "Edit Department",
-            component: DepartmentsAddEdit
+            component: DepartmentsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "job.update");
+            }
           }
         ]
       },
@@ -342,21 +370,33 @@ const routes = [
         name: "Sponsors",
         component: DashboardContent,
         redirect: "/dashboard/sponsors/list",
+        beforeEnter(to, from, next) {
+          userHasPermission(next, "sponsor.view");
+        },
         children: [
           {
             path: "list",
             name: "List Sponsors",
-            component: SponsorsList
+            component: SponsorsList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "sponsor.view");
+            }
           },
           {
             path: "create",
             name: "Create Sponsor",
-            component: SponsorsAddEdit
+            component: SponsorsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "sponsor.create");
+            }
           },
           {
             path: "edit",
             name: "Edit Sponsor",
-            component: SponsorsAddEdit
+            component: SponsorsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "sponsor.update");
+            }
           }
         ]
       },
@@ -365,21 +405,33 @@ const routes = [
         name: "Team",
         component: DashboardContent,
         redirect: "/dashboard/team/list",
+        beforeEnter(to, from, next) {
+          userHasPermission(next, "team.view");
+        },
         children: [
           {
             path: "list",
             name: "List Team",
-            component: TeamList
+            component: TeamList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "team.view");
+            }
           },
           {
             path: "create",
             name: "Create Team Member",
-            component: TeamAddEdit
+            component: TeamAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "team.create");
+            }
           },
           {
             path: "edit",
             name: "Edit Team Member",
-            component: TeamAddEdit
+            component: TeamAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "team.update");
+            }
           }
         ]
       },
@@ -388,11 +440,17 @@ const routes = [
         name: "Jobs",
         component: DashboardContent,
         redirect: "/dashboard/jobs/list",
+        beforeEnter(to, from, next) {
+          userHasPermission(next, "job.view");
+        },
         children: [
           {
             path: "list",
             name: "List Jobs",
-            component: JobsList
+            component: JobsList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "job.view");
+            }
           },
           {
             path: "applicants/:jobId",
@@ -402,12 +460,18 @@ const routes = [
           {
             path: "create",
             name: "Create Job",
-            component: JobsAddEdit
+            component: JobsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "job.create");
+            }
           },
           {
             path: "edit",
             name: "Edit Job",
-            component: JobsAddEdit
+            component: JobsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "job.update");
+            }
           }
         ]
       },
@@ -416,69 +480,108 @@ const routes = [
         name: "Services",
         component: DashboardContent,
         redirect: "/dashboard/services/list",
+        beforeEnter(to, from, next) {
+          userHasPermission(next, "service.view");
+        },
         children: [
           {
             path: "list",
             name: "List Services",
-            component: ServicesList
+            component: ServicesList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "service.view");
+            }
           },
           {
             path: "create",
             name: "Create Service",
-            component: ServicesAddEdit
+            component: ServicesAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "service.create");
+            }
           },
           {
             path: "edit",
             name: "Edit Service",
-            component: ServicesAddEdit
+            component: ServicesAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "service.update");
+            }
           },
           //*************************************/
           {
             path: "sections/list/:id",
             name: "List Service Sections",
-            component: ServiceSectionsList
+            component: ServiceSectionsList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "section.view");
+            }
           },
           {
             path: "sections/create/:id",
             name: "Create Service Section",
-            component: ServiceSectionsAddEdit
+            component: ServiceSectionsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "section.create");
+            }
           },
           {
             path: "sections/edit/:id",
             name: "Edit Service Section",
-            component: ServiceSectionsAddEdit
+            component: ServiceSectionsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "section.update");
+            }
           },
           //*************************************/
           {
             path: "rows/list/:sectionId",
             name: "List Service Rows",
-            component: ServiceRowsList
+            component: ServiceRowsList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "row.view");
+            }
           },
           {
             path: "rows/create/:sectionId",
             name: "Create Service Row",
-            component: ServiceRowsAddEdit
+            component: ServiceRowsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "row.create");
+            }
           },
           {
             path: "rows/edit/:sectionId",
             name: "Edit Service Row",
-            component: ServiceRowsAddEdit
+            component: ServiceRowsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "row.update");
+            }
           },
           //*************************************/
           {
             path: "columns/list/:rowId",
             name: "List Service Columns",
-            component: ServiceColumnsList
+            component: ServiceColumnsList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "column.view");
+            }
           },
           {
             path: "columns/create/:rowId",
             name: "Create Service Column",
-            component: ServiceColumnsAddEdit
+            component: ServiceColumnsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "column.create");
+            }
           },
           {
             path: "columns/edit/:rowId",
             name: "Edit Service Column",
-            component: ServiceColumnsAddEdit
+            component: ServiceColumnsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "column.update");
+            }
           }
         ]
       },
@@ -487,69 +590,108 @@ const routes = [
         name: "Works",
         component: DashboardContent,
         redirect: "/dashboard/works/list",
+        beforeEnter(to, from, next) {
+          userHasPermission(next, "work.view");
+        },
         children: [
           {
             path: "list",
             name: "List Works",
-            component: WorksList
+            component: WorksList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "work.view");
+            }
           },
           {
             path: "create",
             name: "Create Work",
-            component: WorksAddEdit
+            component: WorksAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "work.create");
+            }
           },
           {
             path: "edit",
             name: "Edit Work",
-            component: WorksAddEdit
+            component: WorksAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "work.update");
+            }
           },
           //*************************************/
           {
             path: "sections/list/:id",
             name: "List Work Sections",
-            component: WorkSectionsList
+            component: WorkSectionsList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "section.view");
+            }
           },
           {
             path: "sections/create/:id",
             name: "Create Work Section",
-            component: WorkSectionsAddEdit
+            component: WorkSectionsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "section.create");
+            }
           },
           {
             path: "sections/edit/:id",
             name: "Edit Work Section",
-            component: WorkSectionsAddEdit
+            component: WorkSectionsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "section.update");
+            }
           },
           //*************************************/
           {
             path: "rows/list/:sectionId",
             name: "List Work Rows",
-            component: WorkRowsList
+            component: WorkRowsList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "row.view");
+            }
           },
           {
             path: "rows/create/:sectionId",
             name: "Create Work Row",
-            component: WorkRowsAddEdit
+            component: WorkRowsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "row.create");
+            }
           },
           {
             path: "rows/edit/:sectionId",
             name: "Edit Work Row",
-            component: WorkRowsAddEdit
+            component: WorkRowsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "row.update");
+            }
           },
           //*************************************/
           {
             path: "columns/list/:rowId",
             name: "List Work Columns",
-            component: WorkColumnsList
+            component: WorkColumnsList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "column.view");
+            }
           },
           {
             path: "columns/create/:rowId",
             name: "Create Work Column",
-            component: WorkColumnsAddEdit
+            component: WorkColumnsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "column.create");
+            }
           },
           {
             path: "columns/edit/:rowId",
             name: "Edit Work Column",
-            component: WorkColumnsAddEdit
+            component: WorkColumnsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "column.update");
+            }
           }
         ]
       },
@@ -558,53 +700,83 @@ const routes = [
         name: "About",
         component: DashboardContent,
         redirect: "/dashboard/about/list",
+        beforeEnter(to, from, next) {
+          userHasPermission(next, "about_us.view");
+        },
         children: [
           {
             path: "list",
             name: "List About",
-            component: AboutSectionsList
+            component: AboutSectionsList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "about_us.view");
+            }
           },
           {
             path: "create",
             name: "Create About Section",
-            component: AboutSectionsAddEdit
+            component: AboutSectionsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "about_us.create");
+            }
           },
           {
             path: "edit",
             name: "Edit About Section",
-            component: AboutSectionsAddEdit
+            component: AboutSectionsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "about_us.update");
+            }
           },
           // //*************************************/
           {
             path: "rows/list/:sectionId",
             name: "List About Rows",
-            component: AboutRowsList
+            component: AboutRowsList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "about_us.view");
+            }
           },
           {
             path: "rows/create/:sectionId",
             name: "Create About Row",
-            component: AboutRowsAddEdit
+            component: AboutRowsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "about_us.create");
+            }
           },
           {
             path: "rows/edit/:sectionId",
             name: "Edit About Row",
-            component: AboutRowsAddEdit
+            component: AboutRowsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "about_us.update");
+            }
           },
           // //*************************************/
           {
             path: "columns/list/:rowId",
             name: "List About Columns",
-            component: AboutColumnsList
+            component: AboutColumnsList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "about_us.view");
+            }
           },
           {
             path: "columns/create/:rowId",
             name: "Create About Column",
-            component: AboutColumnsAddEdit
+            component: AboutColumnsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "about_us.create");
+            }
           },
           {
             path: "columns/edit/:rowId",
             name: "Edit About Column",
-            component: AboutColumnsAddEdit
+            component: AboutColumnsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "about_us.update");
+            }
           }
         ]
       },
@@ -613,11 +785,17 @@ const routes = [
         name: "Contact",
         component: DashboardContent,
         redirect: "/dashboard/contact/list",
+        beforeEnter(to, from, next) {
+          userHasPermission(next, "contact_us.view");
+        },
         children: [
           {
             path: "list",
             name: "Create Contact",
-            component: ContactAddEdit
+            component: ContactAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "contact_us.create");
+            }
           }
         ]
       },

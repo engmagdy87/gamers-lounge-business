@@ -28,9 +28,12 @@
   </nav>
 </template>
 <script>
-import store from "../../store/index";
+import { mapMutations } from "vuex";
+import {
+  removeTokenCookie,
+  removeUserDataCookie
+} from "../../helpers/CookieHelper";
 import types from "../../store/types";
-import { removeTokenCookie } from "../../helpers/CookieHelper";
 
 export default {
   computed: {
@@ -45,6 +48,9 @@ export default {
     };
   },
   methods: {
+    ...mapMutations({
+      setUserPersona: types.user.mutations.SET_USER_PERSONA
+    }),
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     },
@@ -62,6 +68,8 @@ export default {
     },
     logout() {
       removeTokenCookie();
+      removeUserDataCookie();
+      this.setUserPersona({});
       this.$router.push({ path: "/login" });
     }
   }

@@ -2,7 +2,10 @@ import axios from "axios";
 import { QUERY, MUTATION } from "../graphql";
 import { getTokenCookie } from "./CookieHelper";
 import BASE_URL from "../constants/APIs";
-import { removeTokenCookie } from "../helpers/CookieHelper";
+import {
+  removeTokenCookie,
+  removeUserDataCookie
+} from "../helpers/CookieHelper";
 
 const fetchDepartments = async () => {
   try {
@@ -1001,6 +1004,7 @@ export {
 
 const logout = () => {
   removeTokenCookie();
+  removeUserDataCookie();
   window.open("/login", "_self");
 };
 

@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import app from "./modules/app";
-import login from "./modules/login";
+import user from "./modules/user";
 import jobs from "./modules/jobs";
 import departments from "./modules/departments";
 import services from "./modules/services";
@@ -17,7 +17,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     app,
-    login,
+    user,
     jobs,
     departments,
     services,

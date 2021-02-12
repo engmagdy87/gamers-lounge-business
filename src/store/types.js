@@ -10,9 +10,13 @@ const app = {
   }
 };
 
-const login = {
+const user = {
+  mutations: {
+    SET_USER_PERSONA: "user/mutations/SET_USER_PERSONA",
+    SET_IS_USER_PERSONA_FETCHED: "user/mutations/SET_IS_USER_PERSONA_FETCHED"
+  },
   actions: {
-    LOGIN_TO_DASHBOARD: "login/actions/LOGIN_TO_DASHBOARD"
+    LOGIN_TO_DASHBOARD: "user/actions/LOGIN_TO_DASHBOARD"
   }
 };
 
@@ -241,7 +245,7 @@ const team = {
 
 export default {
   app,
-  login,
+  user,
   jobs,
   departments,
   services,
