@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Hero>
+    <Hero :heroImage="ServicesCoverImage">
       <template #hero-content>
         <div
           class="row align-items-end h-100 justify-content-center services-container"
@@ -26,10 +26,17 @@
 <script>
 import Hero from "../../shared/Hero";
 import HalfClippedShape from "../../shared/HalfClippedShape";
+import ServicesCoverImage from "../../../../public/images/website-our-services-cover.jpg";
+
 export default {
   components: {
     Hero,
     HalfClippedShape
+  },
+  computed: {
+    ServicesCoverImage() {
+      return ServicesCoverImage;
+    }
   }
 };
 </script>

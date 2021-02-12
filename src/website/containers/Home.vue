@@ -1,6 +1,6 @@
 <template>
   <div class="home-wrapper" v-if="isHomePageServicesFetched">
-    <Hero>
+    <Hero :heroImage="HomeCoverImage">
       <template #hero-content>
         <HeroCarousel />
       </template>
@@ -26,6 +26,7 @@ import ServicesCarousel from "../components/home/ServicesCarousel";
 import WorkCarousel from "../components/home/WorkCarousel";
 import SponsorsCarousel from "../components/home/SponsorsCarousel";
 import Loading from "../../website/shared/Loading";
+import HomeCoverImage from "../../../public/images/website_home_cover.png";
 
 export default {
   data() {
@@ -48,7 +49,10 @@ export default {
       isHomePageServicesFetched: state =>
         state.services.isHomePageServicesFetched,
       isHomePageSponsorsFetched: state => state.sponsors.isSponsorsFetched
-    })
+    }),
+    HomeCoverImage() {
+      return HomeCoverImage;
+    }
   },
   methods: {
     ...mapActions({
