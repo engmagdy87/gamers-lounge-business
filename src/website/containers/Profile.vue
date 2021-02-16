@@ -1,10 +1,5 @@
 <template>
   <div class="profile-wrapper">
-    <Hero :heroImage="ProfileCoverImage">
-      <template #hero-content>
-        <div>Profile</div>
-      </template>
-    </Hero>
     <div class="profile-wrapper__content">
       <div class="row">
         <div class="col-12 col-md-5 profile-wrapper__content__profile-details">
@@ -131,7 +126,6 @@ import Hero from "../shared/Hero";
 import ChangePassword from "../../website/components/profile/ChangePassword";
 import RequestPassword from "../../website/components/profile/RequestPassword";
 import isValidationErrorExist from "../../helpers/FormValidation";
-import ProfileCoverImage from "../../../public/images/website_home_cover.png";
 
 export default {
   data() {
@@ -166,10 +160,7 @@ export default {
   computed: {
     ...mapState({
       userPersonaData: state => state.user.userPersona
-    }),
-    ProfileCoverImage() {
-      return ProfileCoverImage;
-    }
+    })
   },
   watch: {
     userPersonaData() {

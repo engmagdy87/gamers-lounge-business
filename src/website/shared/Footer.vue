@@ -12,7 +12,7 @@
           <br /><br />
           <p>
             The first official Esports organization in Egypt, founded by <br />
-            experienced Gamers to develop Esports in Middle-Easy & North Africa.
+            experienced Gamers to develop Esports in Middle-East & North Africa.
           </p>
           <br />
           <p>

@@ -20,6 +20,9 @@
         <li>
           <a href="/profile">Profile</a>
         </li>
+        <li>
+          <a href="/dashboard">Dashboard</a>
+        </li>
         <li @click="logout">
           <a>Logout</a>
         </li>

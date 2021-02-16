@@ -542,7 +542,6 @@ export default {
             rowId
           });
           this.notifyVue("Service Column Updated Successfully", "success");
-          this.serviceColumn = { ...emptyColumnSection };
           this.$router.push(`/dashboard/services/columns/list/${id}`);
         } else {
           await this.createColumn({
@@ -555,9 +554,11 @@ export default {
             requestSource: "dashboard"
           };
           await this.fetchColumnsRows(fetchPayload);
-          this.serviceColumn = { ...emptyColumnSection };
           this.notifyVue("Service Column Created Successfully", "success");
         }
+        this.serviceColumn = { ...emptyColumnSection };
+        this.$refs.img_content.value = null;
+        this.$refs.vid_content.value = null;
       } catch (errors) {
         JSON.parse(errors).forEach(error => {
           this.notifyVue(error.message, "danger");
@@ -565,7 +566,7 @@ export default {
       }
     },
     removeImage: async function() {
-      const response = await this.deleteImage(this.imageId);
+      await this.deleteImage(this.imageId);
 
       switch (this.openedFor) {
         case "img_content":
@@ -580,7 +581,7 @@ export default {
       this.setImageDataFlag(false, null, "", null, "");
     },
     removeVideo: async function() {
-      const response = await this.deleteVideo(this.videoId);
+      await this.deleteVideo(this.videoId);
 
       switch (this.openedFor) {
         case "vid_content":
