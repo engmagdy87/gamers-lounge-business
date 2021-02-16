@@ -11,8 +11,8 @@
           </router-link>
           <br /><br />
           <p>
-            the first official esports organization in Egypt, founded by <br />
-            experienced gamers to develop esports in Middle-Easy & North Africa.
+            The first official Esports organization in Egypt, founded by <br />
+            experienced Gamers to develop Esports in Middle-Easy & North Africa.
           </p>
           <br />
           <p>
@@ -109,8 +109,8 @@
 
     <div class="row copyrights m-0 p-0">
       <h5>
-        Copyright © 2020 <a href="#"> Gamers lounge </a> For Esports E.S.C All
-        Rights Reserved
+        Copyright © {{ new Date().getFullYear() }}
+        <a href="/"> Gamers lounge </a> For Esports E.S.C All Rights Reserved
       </h5>
     </div>
 

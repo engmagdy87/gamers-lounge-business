@@ -360,12 +360,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.7f64e606.js"
   },
   {
-    "revision": "42c220689140d9f091fb",
-    "url": "/css/app.950307bd.css"
+    "revision": "1837974ad3ffaf1f621e",
+    "url": "/css/app.047cd29c.css"
   },
   {
-    "revision": "42c220689140d9f091fb",
-    "url": "/js/app.d02bdf33.js"
+    "revision": "1837974ad3ffaf1f621e",
+    "url": "/js/app.11c54dcc.js"
   },
   {
     "revision": "bdda8698921ac61af643",
@@ -448,7 +448,7 @@ self.__precacheManifest = [
     "url": "/img/next.c9e7debf.svg"
   },
   {
-    "revision": "eea2bed6ffc748204f7945109c81ee47",
+    "revision": "c323b781fcdbaaa4da79e05a12dd33fb",
     "url": "/index.html"
   },
   {
@@ -496,48 +496,48 @@ self.__precacheManifest = [
     "url": "/_redirects"
   },
   {
-    "revision": "a95be6e8a890f1897308ee3122a70aef",
-    "url": "/images/add.svg"
-  },
-  {
     "revision": "5b47b416f6e4dbba80a1ca269adf7580",
     "url": "/images/decrease_font.svg"
-  },
-  {
-    "revision": "533b554da9fa067f3e7e2a631cc83a80",
-    "url": "/images/download.svg"
   },
   {
     "revision": "0d4ffe0df1a0d1e770c5138f158d94b2",
     "url": "/favicon.png"
   },
   {
+    "revision": "a95be6e8a890f1897308ee3122a70aef",
+    "url": "/images/add.svg"
+  },
+  {
     "revision": "752d64f551b54c06f4b7280d9f74d27c",
     "url": "/images/delete.svg"
+  },
+  {
+    "revision": "533b554da9fa067f3e7e2a631cc83a80",
+    "url": "/images/download.svg"
   },
   {
     "revision": "cd955919d1908c1f33233b0f8e3b05b2",
     "url": "/images/edit.svg"
   },
   {
-    "revision": "658814864a666a3b4cab6cfdc1cf14e1",
-    "url": "/images/env.svg"
-  },
-  {
     "revision": "80ab8c35fee0090540b1acde85807338",
     "url": "/images/increase_font.svg"
+  },
+  {
+    "revision": "658814864a666a3b4cab6cfdc1cf14e1",
+    "url": "/images/env.svg"
   },
   {
     "revision": "0d5b244ec347b92c573030f4514a34f3",
     "url": "/images/phone.svg"
   },
   {
-    "revision": "eb55acdf799a7622a48f50ce42fe93a9",
-    "url": "/images/placeholder.png"
-  },
-  {
     "revision": "6ba855e58d163e941e34e5df303e01b8",
     "url": "/images/pin.svg"
+  },
+  {
+    "revision": "eb55acdf799a7622a48f50ce42fe93a9",
+    "url": "/images/placeholder.png"
   },
   {
     "revision": "8ab7e03c6fd3405f3ebfd157b2b71240",
