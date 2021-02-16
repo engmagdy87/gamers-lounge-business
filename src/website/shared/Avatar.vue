@@ -18,10 +18,10 @@
     >
       <ul class="avatar-wrapper__navLinks">
         <li>
-          <a href="/profile">Profile</a>
+          <a href="/dashboard">Dashboard</a>
         </li>
         <li>
-          <a href="/dashboard">Dashboard</a>
+          <a href="/profile">Profile</a>
         </li>
         <li @click="logout">
           <a>Logout</a>

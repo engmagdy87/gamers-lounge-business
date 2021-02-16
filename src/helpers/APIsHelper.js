@@ -7,6 +7,8 @@ import {
   removeUserDataCookie
 } from "../helpers/CookieHelper";
 
+const token = getTokenCookie();
+
 const fetchDepartments = async () => {
   try {
     const response = await request({
@@ -63,7 +65,6 @@ const fetchJob = async jobId => {
 };
 
 const fetchDashboardJob = async jobId => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -89,7 +90,6 @@ const adminLogin = async credentials => {
 };
 
 const createDepartment = async name => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -104,7 +104,6 @@ const createDepartment = async name => {
 };
 
 const deleteDepartment = async id => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -119,7 +118,6 @@ const deleteDepartment = async id => {
 };
 
 const updateDepartment = async data => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -134,7 +132,6 @@ const updateDepartment = async data => {
 };
 
 const createJob = async data => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -149,7 +146,6 @@ const createJob = async data => {
 };
 
 const deleteJob = async jobId => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -164,7 +160,6 @@ const deleteJob = async jobId => {
 };
 
 const updateJob = async data => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -194,7 +189,6 @@ const applyJob = async data => {
 };
 
 const fetchServices = async data => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -210,7 +204,6 @@ const fetchServices = async data => {
 
 const createService = async data => {
   const { imagesData, ...serviceInfo } = data;
-  const token = getTokenCookie();
 
   const query = MUTATION.CREATE_SERVICE(serviceInfo, imagesData);
 
@@ -228,7 +221,7 @@ const createService = async data => {
 const updateService = async data => {
   let response;
   const { imagesData, ...serviceInfo } = data;
-  const token = getTokenCookie();
+
   try {
     const query = MUTATION.UPDATE_SERVICE(serviceInfo, imagesData);
     if (imagesData)
@@ -250,7 +243,6 @@ const updateService = async data => {
 };
 
 const deleteService = async id => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -277,7 +269,6 @@ const fetchAbout = async data => {
 
 const createAbout = async data => {
   const { imagesData, ...aboutInfo } = data;
-  const token = getTokenCookie();
 
   const query = MUTATION.CREATE_ABOUT(aboutInfo, imagesData);
 
@@ -295,7 +286,7 @@ const createAbout = async data => {
 const updateAbout = async data => {
   let response;
   const { imagesData, ...aboutInfo } = data;
-  const token = getTokenCookie();
+
   try {
     const query = MUTATION.UPDATE_ABOUT(aboutInfo, imagesData);
     if (imagesData)
@@ -317,7 +308,6 @@ const updateAbout = async data => {
 };
 
 const deleteAbout = async id => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -344,7 +334,6 @@ const fetchTeam = async data => {
 
 const createTeamMember = async data => {
   const { img_profile, ...teamMemberInfo } = data;
-  const token = getTokenCookie();
 
   const query = MUTATION.CREATE_TEAM_MEMBER(teamMemberInfo, img_profile);
 
@@ -362,7 +351,7 @@ const createTeamMember = async data => {
 const updateTeamMember = async data => {
   let response;
   const { img_profile, ...teamMemberInfo } = data;
-  const token = getTokenCookie();
+
   try {
     const query = MUTATION.UPDATE_TEAM_MEMBER(teamMemberInfo, img_profile);
     if (img_profile)
@@ -384,7 +373,6 @@ const updateTeamMember = async data => {
 };
 
 const deleteTeamMember = async id => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -411,9 +399,12 @@ const fetchWebsiteAbout = async data => {
 
 const fetchServiceSections = async id => {
   try {
-    const response = await request({
-      query: QUERY.SERVICES_SECTIONS(id)
-    });
+    const response = await request(
+      {
+        query: QUERY.SERVICES_SECTIONS(id)
+      },
+      token
+    );
     return response.data.data.service;
   } catch (error) {
     throw error;
@@ -421,7 +412,6 @@ const fetchServiceSections = async id => {
 };
 
 const deleteImage = async imageId => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -436,7 +426,6 @@ const deleteImage = async imageId => {
 };
 
 const deleteVideo = async videoId => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -451,7 +440,6 @@ const deleteVideo = async videoId => {
 };
 
 const isUserAuthenticated = async () => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -467,7 +455,6 @@ const isUserAuthenticated = async () => {
 
 //*************** */
 const fetchWorks = async data => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -482,8 +469,6 @@ const fetchWorks = async data => {
 };
 
 const fetchWebsiteWork = async data => {
-  const token = getTokenCookie();
-
   try {
     const response = await request(
       {
@@ -498,8 +483,6 @@ const fetchWebsiteWork = async data => {
 };
 
 const fetchWebsiteServices = async data => {
-  const token = getTokenCookie();
-
   try {
     const response = await request(
       {
@@ -514,8 +497,6 @@ const fetchWebsiteServices = async data => {
 };
 
 const fetchHomePageWork = async () => {
-  const token = getTokenCookie();
-
   try {
     const response = await request(
       {
@@ -530,8 +511,6 @@ const fetchHomePageWork = async () => {
 };
 
 const fetchHomePageServices = async () => {
-  const token = getTokenCookie();
-
   try {
     const response = await request(
       {
@@ -546,7 +525,6 @@ const fetchHomePageServices = async () => {
 };
 
 const fetchWorkSections = async id => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -561,7 +539,6 @@ const fetchWorkSections = async id => {
 };
 
 const fetchWorkSection = async id => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -576,7 +553,6 @@ const fetchWorkSection = async id => {
 };
 
 const fetchRows = async sectionId => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -591,7 +567,6 @@ const fetchRows = async sectionId => {
 };
 
 const fetchColumns = async rowId => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -607,7 +582,6 @@ const fetchColumns = async rowId => {
 
 const createWork = async data => {
   const { imagesData, ...workInfo } = data;
-  const token = getTokenCookie();
 
   const query = MUTATION.CREATE_WORK(workInfo, imagesData);
 
@@ -625,7 +599,7 @@ const createWork = async data => {
 const updateWork = async data => {
   let response;
   const { imagesData, ...workInfo } = data;
-  const token = getTokenCookie();
+
   try {
     const query = MUTATION.UPDATE_WORK(workInfo, imagesData);
     if (imagesData)
@@ -647,7 +621,6 @@ const updateWork = async data => {
 };
 
 const deleteWork = async id => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -661,7 +634,6 @@ const deleteWork = async id => {
   }
 };
 const createSection = async data => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -676,7 +648,6 @@ const createSection = async data => {
 };
 
 const updateSection = async data => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -691,7 +662,6 @@ const updateSection = async data => {
 };
 
 const deleteSection = async sectionId => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -706,7 +676,6 @@ const deleteSection = async sectionId => {
 };
 
 const createRow = async data => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -721,7 +690,6 @@ const createRow = async data => {
 };
 
 const updateRow = async data => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -736,7 +704,6 @@ const updateRow = async data => {
 };
 
 const deleteRow = async rowId => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -751,7 +718,6 @@ const deleteRow = async rowId => {
 };
 const createColumn = async data => {
   const { imagesData, videosData, ...columnInfo } = data;
-  const token = getTokenCookie();
 
   const query = MUTATION.CREATE_COLUMN(columnInfo, imagesData, videosData);
 
@@ -768,7 +734,6 @@ const createColumn = async data => {
 
 const updateColumn = async data => {
   const { imagesData, videosData, ...columnInfo } = data;
-  const token = getTokenCookie();
 
   const query = MUTATION.UPDATE_COLUMN(columnInfo, imagesData, videosData);
 
@@ -784,7 +749,6 @@ const updateColumn = async data => {
 };
 
 const deleteColumn = async columnId => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -800,7 +764,6 @@ const deleteColumn = async columnId => {
 
 const createSponsor = async data => {
   const { img_main, ...sponsorInfo } = data;
-  const token = getTokenCookie();
 
   const query = MUTATION.CREATE_SPONSOR(sponsorInfo);
 
@@ -817,7 +780,6 @@ const createSponsor = async data => {
 
 const updateSponsor = async data => {
   const { img_main, ...sponsorInfo } = data;
-  const token = getTokenCookie();
 
   const query = MUTATION.UPDATE_SPONSOR(sponsorInfo, img_main);
 
@@ -833,7 +795,6 @@ const updateSponsor = async data => {
 };
 
 const deleteSponsor = async sponsorId => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -848,7 +809,6 @@ const deleteSponsor = async sponsorId => {
 };
 
 const updateVideo = async data => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -875,7 +835,6 @@ const fetchContact = async () => {
 
 const createContact = async data => {
   const { imagesData, ...contactInfo } = data;
-  const token = getTokenCookie();
 
   const query = MUTATION.CREATE_CONTACT(contactInfo, imagesData);
 
@@ -893,7 +852,7 @@ const createContact = async data => {
 const updateContact = async data => {
   let response;
   const { imagesData, ...contactInfo } = data;
-  const token = getTokenCookie();
+
   try {
     const query = MUTATION.UPDATE_CONTACT(contactInfo, imagesData);
     if (imagesData)
@@ -915,7 +874,6 @@ const updateContact = async data => {
 };
 
 const deleteContact = async id => {
-  const token = getTokenCookie();
   try {
     const response = await request(
       {
@@ -939,7 +897,6 @@ const sendEmail = async data => {
 };
 
 const updateUserData = async data => {
-  const token = getTokenCookie();
   try {
     const query = MUTATION.UPDATE_USER_DATA(data);
     const response = await request(
@@ -955,7 +912,6 @@ const updateUserData = async data => {
 };
 
 const updateUserPassword = async data => {
-  const token = getTokenCookie();
   try {
     const query = MUTATION.UPDATE_USER_PASSWORD(data);
     const response = await request(

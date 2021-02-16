@@ -4,7 +4,7 @@ const buildQuery = (serviceInfo, imagesData) => {
       updateService(
          id: ${serviceInfo.id},
          input: {
-            is_admin_mode_enabled: true
+            is_admin_mode_enabled: ${serviceInfo.is_admin_mode_enabled}
             title: "${serviceInfo.title}"
             description: "${serviceInfo.description}"
             order: ${serviceInfo.order}
@@ -50,7 +50,7 @@ images: {
    updateService(
       id: ${serviceInfo.id},
       input: {
-         is_admin_mode_enabled: true
+         is_admin_mode_enabled: ${serviceInfo.is_admin_mode_enabled}
          title: "${serviceInfo.title}"
          description: "${serviceInfo.description}"
          order: ${serviceInfo.order}
