@@ -360,12 +360,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.7f64e606.js"
   },
   {
-    "revision": "206f3dab589ba6a02e91",
-    "url": "/css/app.8c93d1b8.css"
+    "revision": "1605017f3e3874443bc8",
+    "url": "/css/app.f6aefa6f.css"
   },
   {
-    "revision": "206f3dab589ba6a02e91",
-    "url": "/js/app.ddbc4f96.js"
+    "revision": "1605017f3e3874443bc8",
+    "url": "/js/app.15e99939.js"
   },
   {
     "revision": "bdda8698921ac61af643",
@@ -452,7 +452,7 @@ self.__precacheManifest = [
     "url": "/img/next.c9e7debf.svg"
   },
   {
-    "revision": "ab0617460eeb5fd2b221c57821fe2d76",
+    "revision": "487781b7eda36c7cb7c0d437e1bde6d4",
     "url": "/index.html"
   },
   {

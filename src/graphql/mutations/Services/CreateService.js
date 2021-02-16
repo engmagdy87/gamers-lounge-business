@@ -1,5 +1,12 @@
 const buildQuery = (serviceInfo, imagesData) => {
-  const { title, description, order, isFeatured, isEnabled } = serviceInfo;
+  const {
+    title,
+    description,
+    order,
+    isFeatured,
+    isEnabled,
+    is_admin_mode_enabled
+  } = serviceInfo;
 
   let queryParams = "($img_card: Upload!,$img_cover: Upload!,";
   let imagesKeys = `images: {
@@ -19,7 +26,7 @@ const buildQuery = (serviceInfo, imagesData) => {
   return `mutation${queryParams} {
       createService(
          input: {
-            is_admin_mode_enabled: true
+            is_admin_mode_enabled: ${is_admin_mode_enabled}
             title: "${title}"
             description: "${description}"
             order: ${order}
