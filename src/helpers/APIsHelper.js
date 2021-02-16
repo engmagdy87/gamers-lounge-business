@@ -938,6 +938,38 @@ const sendEmail = async data => {
   }
 };
 
+const updateUserData = async data => {
+  const token = getTokenCookie();
+  try {
+    const query = MUTATION.UPDATE_USER_DATA(data);
+    const response = await request(
+      {
+        query
+      },
+      token
+    );
+    return response.data.data.updatePrfile;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateUserPassword = async data => {
+  const token = getTokenCookie();
+  try {
+    const query = MUTATION.UPDATE_USER_PASSWORD(data);
+    const response = await request(
+      {
+        query
+      },
+      token
+    );
+    return response.data.data.updatePrfile;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   fetchDepartments,
   fetchSponsors,
@@ -999,7 +1031,9 @@ export {
   fetchTeam,
   createTeamMember,
   updateTeamMember,
-  deleteTeamMember
+  deleteTeamMember,
+  updateUserData,
+  updateUserPassword
 };
 
 const logout = () => {

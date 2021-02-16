@@ -5,8 +5,6 @@
 $preview-image: 150px;
 
 .profile-wrapper {
-  height: 100vh;
-  overflow-y: auto;
   overflow-x: hidden;
   &::-webkit-scrollbar {
     width: 5px !important;
@@ -143,57 +141,4 @@ $preview-image: 150px;
   font-size: 1.5em;
   text-align: center;
   padding: 10px 0;
-}
-
-.preview {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.preview img {
-  width: 100%;
-  height: $preview-image;
-  border-radius: 10px !important;
-  border: 1px solid $primary;
-  object-fit: cover;
-  @include is-mobile {
-    width: 50%;
-  }
-}
-
-.preview__close,
-.preview-cover__close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: white;
-  background-color: $primary;
-  float: right;
-  cursor: pointer;
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  z-index: 100;
-  &:hover,
-  &:focus {
-    text-decoration: none;
-    cursor: pointer;
-  }
-}
-
-.preview__close {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
-}
-.preview-cover__close {
-  font-size: 25px;
-  width: 25px;
-  height: 25px;
 }

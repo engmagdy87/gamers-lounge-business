@@ -18,29 +18,21 @@
         <h2>Change Password</h2>
       </div>
       <div class="change-password-modal-body">
-        <form>
+        <form @submit.prevent>
           <div class="form-group">
             <label for="password">Old Password</label>
             <input
               type="password"
               id="current-password"
               placeholder="Enter Old Password"
-              v-model="current_password"
+              v-model="passwords.password"
               :class="[
                 'form-control',
-                errors.current_password !== undefined ? 'is-invalid' : '',
-                errors.current_password === undefined
-                  ? 'registeration-style'
-                  : ''
+                errors.password === undefined ? 'registeration-style' : ''
               ]"
               v-on:keyup.enter="onEnter"
             />
-            <p
-              class="error-message"
-              v-if="errors.current_password !== undefined"
-            >
-              {{ errors.current_password }}
-            </p>
+            <ErrorMessage :fieldErrors="errors.password" />
           </div>
           <div class="form-group">
             <label for="password">New Password</label>
@@ -48,17 +40,14 @@
               type="password"
               id="new-password"
               placeholder="Enter New Password"
-              v-model="new_password"
+              v-model="passwords.newPassword"
               :class="[
                 'form-control',
-                errors.new_password !== undefined ? 'is-invalid' : '',
-                errors.new_password === undefined ? 'registeration-style' : ''
+                errors.newPassword === undefined ? 'registeration-style' : ''
               ]"
               v-on:keyup.enter="onEnter"
             />
-            <p class="error-message" v-if="errors.new_password !== undefined">
-              {{ errors.new_password }}
-            </p>
+            <ErrorMessage :fieldErrors="errors.newPassword" />
           </div>
           <div class="form-group">
             <label for="password">New Password Confirmation</label>
@@ -66,24 +55,16 @@
               type="password"
               id="new-password-again"
               placeholder="Enter New Password agian"
-              v-model="new_password_confirmation"
+              v-model="passwords.newPasswordConfirmation"
               :class="[
                 'form-control',
-                errors.new_password_confirmation !== undefined
-                  ? 'is-invalid'
-                  : '',
-                errors.new_password_confirmation === undefined
+                errors.newPasswordConfirmation === undefined
                   ? 'registeration-style'
                   : ''
               ]"
               v-on:keyup.enter="onEnter"
             />
-            <p
-              class="error-message"
-              v-if="errors.new_password_confirmation !== undefined"
-            >
-              {{ errors.new_password_confirmation }}
-            </p>
+            <ErrorMessage :fieldErrors="errors.newPasswordConfirmation" />
           </div>
           <button
             type="button"
@@ -99,79 +80,68 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from "vuex";
-import store from "../../../store/index";
-import types from "../../../store/types";
+import ErrorMessage from "../../shared/ErrorMessage";
+import isValidationErrorExist from "../../../helpers/FormValidation";
+
+const emptyPasswords = {
+  password: "",
+  newPassword: "",
+  newPasswordConfirmation: ""
+};
 
 export default {
   data() {
     return {
-      current_password: "",
-      new_password: "",
-      new_password_confirmation: "",
-      errors: {}
+      passwords: { ...emptyPasswords },
+      errors: {},
+      validation: {
+        Password: { isRequired: true, minLength: 6 },
+        "New Password": { isRequired: true, minLength: 6 },
+        "New Password Confirmation": { isRequired: true, minLength: 6 }
+      },
+      aliases: {
+        password: "Password",
+        newPassword: "New Password",
+        newPasswordConfirmation: "New Password Confirmation"
+      }
     };
   },
   props: ["showFlag", "setShowChangePasswordModal", "setShowReloginModalModal"],
   methods: {
-    ...mapActions({
-      updateUserPassword: types.user.actions.UPDATE_USER_PROFILE
-    }),
-    notifyVue(message, color) {
-      this.$notifications.notify({
-        message: `<span>${message}</span>`,
-        horizontalAlign: "right",
-        verticalAlign: "top",
-        type: color
-      });
-    },
     onEnter() {
       this.updatePassword();
     },
     async updatePassword() {
-      const payload = {
-        current_password: this.current_password,
-        new_password: this.new_password,
-        new_password_confirmation: this.new_password_confirmation
-      };
-      try {
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, true);
-        await this.updateUserPassword(payload);
+      const errorObject = isValidationErrorExist(
+        this.passwords,
+        this.aliases,
+        this.validation
+      );
+      this.errors = { ...errorObject.errors };
 
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-        this.current_password = "";
-        this.new_password = "";
-        this.new_password_confirmation = "";
-        this.notifyVue("Password Changed Successfully", "success");
-        this.setShowChangePasswordModal(false);
-        this.setShowReloginModalModal(true);
-      } catch (error) {
-        if (
-          error.data.errors !== undefined &&
-          error.data.message === undefined
-        ) {
-          this.errors = { ...error.data.errors };
-          Object.keys(error.data.errors).forEach(err => {
-            const errorMessage = error.data.errors[err][0];
-            this.notifyVue(errorMessage, "danger");
-            this.errors = { ...this.errors, [err]: errorMessage };
-          });
-        } else {
-          this.notifyVue(
-            "Old Password is incorrect, Please try again!",
-            "danger"
-          );
-        }
-        store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
+      if (errorObject.length !== 0) return;
+
+      if (
+        this.passwords.newPassword !== this.passwords.newPasswordConfirmation
+      ) {
+        this.errors.newPasswordConfirmation = [
+          "New password and confirm password does not match"
+        ];
+        return;
       }
+
+      this.setShowChangePasswordModal(false, this.passwords);
+      this.passwords = { ...emptyPasswords };
+      this.errors = {};
     },
     closeModal() {
       this.setShowChangePasswordModal(false);
-      this.current_password = "";
-      this.new_password = "";
-      this.new_password_confirmation = "";
+      this.passwords = { ...emptyPasswords };
       this.errors = {};
     }
+  },
+  components: {
+    ErrorMessage
   }
 };
 </script>

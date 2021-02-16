@@ -51,6 +51,9 @@ import CREATE_TEAM_MEMBER from "./Team/CreateTeamMember";
 import UPDATE_TEAM_MEMBER from "./Team/UpdateTeamMember";
 import DELETE_TEAM_MEMBER from "./Team/DeleteTeamMember";
 
+import UPDATE_USER_DATA from "./User/UpdateUserData";
+import UPDATE_USER_PASSWORD from "./User/UpdateUserPassword";
+
 export default {
   LOGIN,
   CREATE_DEPARTMENT,
@@ -90,5 +93,7 @@ export default {
   SEND_EMAIL,
   CREATE_TEAM_MEMBER,
   UPDATE_TEAM_MEMBER,
-  DELETE_TEAM_MEMBER
+  DELETE_TEAM_MEMBER,
+  UPDATE_USER_DATA,
+  UPDATE_USER_PASSWORD
 };

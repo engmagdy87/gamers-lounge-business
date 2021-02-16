@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapState } from "vuex";
 import {
   removeTokenCookie,
   removeUserDataCookie,
@@ -60,7 +60,15 @@ export default {
       this.setUserPersona({});
     }
   },
+  watch: {
+    userPersona() {
+      this.userCookie = getUserDataCookie();
+    }
+  },
   computed: {
+    ...mapState({
+      userPersona: state => state.user.userPersona
+    }),
     getUserAbbreviationName() {
       return getFirstLettersOfString(
         `${this.userCookie.first_name} ${this.userCookie.last_name}`

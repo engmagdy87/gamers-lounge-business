@@ -248,7 +248,7 @@ const routes = [
     name: "profile",
     component: Profile,
     beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false);
+      showHeaderAndFooterForWebsite(next, true);
     }
   },
   {

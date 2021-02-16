@@ -16,7 +16,9 @@ const user = {
     SET_IS_USER_PERSONA_FETCHED: "user/mutations/SET_IS_USER_PERSONA_FETCHED"
   },
   actions: {
-    LOGIN_TO_DASHBOARD: "user/actions/LOGIN_TO_DASHBOARD"
+    LOGIN_TO_DASHBOARD: "user/actions/LOGIN_TO_DASHBOARD",
+    UPDATE_USER_DATA: "user/actions/UPDATE_USER_DATA",
+    UPDATE_USER_PASSWORD: "user/actions/UPDATE_USER_PASSWORD"
   }
 };
 
