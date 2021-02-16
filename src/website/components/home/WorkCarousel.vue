@@ -13,6 +13,7 @@
 
     <div class="work-carousel__carousel-container">
       <WorkSlider
+        :autoPlay="false"
         :slides="homePageWorks"
         :timeInMillisecond="4000"
         customBulletsStyleClass="hero-bullets"
@@ -75,7 +76,6 @@
 <script>
 import { mapState } from "vuex";
 import WorkSlider from "../../shared/Carousel/WorkSlider";
-import HalfClippedShape from "../../shared/HalfClippedShape";
 import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 import redirectToNewTab from "../../../helpers/RedirectToNewTab";
@@ -269,7 +269,7 @@ $offset: 0.3s;
     opacity: 0;
   }
   100% {
-    left: 30%;
+    left: 0%;
     opacity: 1;
   }
 }
@@ -352,11 +352,11 @@ $offset: 0.3s;
 @keyframes next-leave-bluprint-x-mob {
   0% {
     opacity: 1;
-    left: 30%;
+    left: 0%;
   }
   30% {
     opacity: 0;
-    left: 10%;
+    left: -10%;
   }
   100% {
     opacity: 0;
@@ -405,11 +405,11 @@ $offset: 0.3s;
 }
 @keyframes prev-enter-bluprint-x-mob {
   0% {
-    left: 10%;
+    left: -10%;
     opacity: 0;
   }
   100% {
-    left: 30%;
+    left: 0%;
     opacity: 1;
   }
 }
@@ -493,7 +493,7 @@ $offset: 0.3s;
 }
 @keyframes prev-leave-bluprint-x-mob {
   0% {
-    left: 30%;
+    left: 0%;
     opacity: 1;
   }
   30% {
