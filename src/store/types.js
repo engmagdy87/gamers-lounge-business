@@ -245,6 +245,20 @@ const team = {
   }
 };
 
+const home = {
+  mutations: {
+    SET_HERO_SLIDES: "home/mutations/SET_HERO_SLIDES",
+    SET_IS_HERO_SLIDES_FETCHED: "home/mutations/SET_IS_HERO_SLIDES_FETCHED",
+    REMOVE_DELETED_HERO_SLIDER: "home/mutations/REMOVE_DELETED_HERO_SLIDER"
+  },
+  actions: {
+    FETCH_HERO_SLIDES: "home/actions/FETCH_HERO_SLIDES",
+    CREATE_HERO_SLIDER: "home/actions/CREATE_HERO_SLIDER",
+    DELETE_HERO_SLIDER: "home/actions/DELETE_HERO_SLIDER",
+    UPDATE_HERO_SLIDER: "home/actions/UPDATE_HERO_SLIDER"
+  }
+};
+
 export default {
   app,
   user,
@@ -255,5 +269,6 @@ export default {
   sponsors,
   about,
   contact,
-  team
+  team,
+  home
 };

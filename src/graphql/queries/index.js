@@ -28,6 +28,8 @@ import CONTACT from "./Contact/Contact";
 
 import TEAM from "./Team/Team";
 
+import HOME_HERO_SLIDES from "./Home/HomeHeroSlides";
+
 export default {
   DEPARTMENTS,
   JOB_APPLICATION,
@@ -50,5 +52,6 @@ export default {
   ABOUT,
   ABOUT_WEBSITE,
   TEAM,
-  CONTACT
+  CONTACT,
+  HOME_HERO_SLIDES
 };

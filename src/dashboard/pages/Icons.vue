@@ -17,6 +17,12 @@
               <div class="row">
                 <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-6">
                   <div class="font-icon-detail">
+                    <i class="nc-icon nc-home"></i>
+                    <p>nc-home</p>
+                  </div>
+                </div>
+                <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-6">
+                  <div class="font-icon-detail">
                     <i class="nc-icon nc-air-baloon"></i>
                     <p>nc-air-baloon</p>
                   </div>

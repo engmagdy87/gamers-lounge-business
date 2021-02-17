@@ -6,6 +6,10 @@
         <i class="nc-icon nc-chart-pie-35"></i>
         <p>Dashboard</p>
       </sidebar-link>
+      <!-- <sidebar-link to="/dashboard/home-hero-slides">
+        <i class="nc-icon nc-home"></i>
+        <p>Home Hero Slider</p>
+      </sidebar-link> -->
       <sidebar-link to="/dashboard/departments">
         <i class="nc-icon nc-vector"></i>
         <p>Departments</p>
@@ -37,6 +41,10 @@
       <sidebar-link to="/dashboard/contact">
         <i class="nc-icon nc-mobile"></i>
         <p>Contact</p>
+      </sidebar-link>
+      <sidebar-link to="/dashboard/editorial-team">
+        <i class="nc-icon nc-badge"></i>
+        <p>Editorial Team</p>
       </sidebar-link>
     </side-bar>
     <div class="main-panel">

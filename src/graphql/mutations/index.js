@@ -54,6 +54,10 @@ import DELETE_TEAM_MEMBER from "./Team/DeleteTeamMember";
 import UPDATE_USER_DATA from "./User/UpdateUserData";
 import UPDATE_USER_PASSWORD from "./User/UpdateUserPassword";
 
+import CREATE_HOME_HERO_SLIDE from "./Home/CreateHomeHeroSlide";
+import UPDATE_HOME_HERO_SLIDE from "./Home/UpdateHomeHeroSlider";
+import DELETE_HOME_HERO_SLIDE from "./Home/DeleteHomeHeroSlider";
+
 export default {
   LOGIN,
   CREATE_DEPARTMENT,
@@ -95,5 +99,8 @@ export default {
   UPDATE_TEAM_MEMBER,
   DELETE_TEAM_MEMBER,
   UPDATE_USER_DATA,
-  UPDATE_USER_PASSWORD
+  UPDATE_USER_PASSWORD,
+  CREATE_HOME_HERO_SLIDE,
+  UPDATE_HOME_HERO_SLIDE,
+  DELETE_HOME_HERO_SLIDE
 };

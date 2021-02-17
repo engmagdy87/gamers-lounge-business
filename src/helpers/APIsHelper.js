@@ -926,6 +926,71 @@ const updateUserPassword = async data => {
   }
 };
 
+const fetchHomeHeroSlides = async data => {
+  try {
+    const response = await request({
+      query: QUERY.HOME_HERO_SLIDES(data)
+    });
+    return response.data.data.homeSlides;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const createHomeHeroSlider = async data => {
+  const { imagesData, videosData, ...homeHeroSliderInfo } = data;
+
+  const query = MUTATION.CREATE_HOME_HERO_SLIDE(
+    homeHeroSliderInfo,
+    imagesData,
+    videosData
+  );
+
+  try {
+    const response = await requestMultipart(
+      constructFormDataForArrayOfFiles({ ...imagesData, ...videosData }, query),
+      token
+    );
+    return response.data.data.createHomeSlider;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateHomeHeroSlider = async data => {
+  const { imagesData, videosData, ...homeHeroSliderInfo } = data;
+
+  const query = MUTATION.UPDATE_HOME_HERO_SLIDE(
+    homeHeroSliderInfo,
+    imagesData,
+    videosData
+  );
+
+  try {
+    const response = await requestMultipart(
+      constructFormDataForArrayOfFiles({ ...imagesData, ...videosData }, query),
+      token
+    );
+    return response.data.data.updateHomeSlider;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteHomeHeroSlider = async slideId => {
+  try {
+    const response = await request(
+      {
+        query: MUTATION.DELETE_HOME_HERO_SLIDE(slideId)
+      },
+      token
+    );
+    return response.data.data.deleteHomeSlider;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   fetchDepartments,
   fetchSponsors,
@@ -989,7 +1054,11 @@ export {
   updateTeamMember,
   deleteTeamMember,
   updateUserData,
-  updateUserPassword
+  updateUserPassword,
+  fetchHomeHeroSlides,
+  createHomeHeroSlider,
+  updateHomeHeroSlider,
+  deleteHomeHeroSlider
 };
 
 const logout = () => {

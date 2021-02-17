@@ -171,6 +171,16 @@
         >
         </TeamTabelRow>
       </tbody>
+      <tbody v-if="tableType === 'homeHeroSlideColumns'">
+        <HomeHeroSlideTabelRow
+          v-for="(item, index) in data"
+          :key="index"
+          :rowData="item"
+          :id="index + 1"
+          :setShowDeleteDialogFlag="setShowDeleteDialogFlag"
+        >
+        </HomeHeroSlideTabelRow>
+      </tbody>
     </table>
   </div>
 </template>
@@ -191,6 +201,7 @@ import AboutRowTabelRow from "../components/About/AboutRowTabelRow";
 import AboutColumnTabelRow from "../components/About/AboutColumnTabelRow";
 import SponsorTabelRow from "../components/Sponsors/SponsorTabelRow";
 import TeamTabelRow from "../components/Team/TeamTabelRow";
+import HomeHeroSlideTabelRow from "../components/Home/HomeHeroSlideTabelRow";
 
 export default {
   name: "l-table",
@@ -211,7 +222,8 @@ export default {
     AboutRowTabelRow,
     AboutColumnTabelRow,
     SponsorTabelRow,
-    TeamTabelRow
+    TeamTabelRow,
+    HomeHeroSlideTabelRow
   }
 };
 </script>

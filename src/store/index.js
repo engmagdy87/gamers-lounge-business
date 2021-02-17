@@ -11,6 +11,7 @@ import sponsors from "./modules/sponsors";
 import about from "./modules/about";
 import contact from "./modules/contact";
 import team from "./modules/team";
+import home from "./modules/home";
 
 Vue.use(Vuex);
 
@@ -25,6 +26,7 @@ export default new Vuex.Store({
     sponsors,
     about,
     contact,
-    team
+    team,
+    home
   }
 });

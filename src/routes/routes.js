@@ -193,6 +193,15 @@ const ContactAddEdit = () =>
     /* webpackChunkName: "ContactAddEdit" */ "src/dashboard/pages/Contact/ContactAddEdit.vue"
   );
 
+const HeroSlidesList = () =>
+  import(
+    /* webpackChunkName: "HeroSlidesList" */ "src/dashboard/pages/Home/HeroSlidesList.vue"
+  );
+const HeroSlidesAddEdit = () =>
+  import(
+    /* webpackChunkName: "HeroSlidesAddEdit" */ "src/dashboard/pages/Home/HeroSlidesAddEdit.vue"
+  );
+
 const Login = () =>
   import(/* webpackChunkName: "Login" */ "src/dashboard/pages/Login.vue");
 
@@ -361,6 +370,41 @@ const routes = [
             component: DepartmentsAddEdit,
             beforeEnter(to, from, next) {
               userHasPermission(next, "job.update");
+            }
+          }
+        ]
+      },
+      {
+        path: "home-hero-slides",
+        name: "Home Hero Slides",
+        component: DashboardContent,
+        redirect: "/dashboard/home-hero-slides/list",
+        beforeEnter(to, from, next) {
+          userHasPermission(next, "home_slider.view");
+        },
+        children: [
+          {
+            path: "list",
+            name: "List Home Hero Slides",
+            component: HeroSlidesList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "home_slider.view");
+            }
+          },
+          {
+            path: "create",
+            name: "Create Home Hero Slide",
+            component: HeroSlidesAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "home_slider.create");
+            }
+          },
+          {
+            path: "edit",
+            name: "Edit Home Hero Slide",
+            component: HeroSlidesAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "home_slider.update");
             }
           }
         ]
