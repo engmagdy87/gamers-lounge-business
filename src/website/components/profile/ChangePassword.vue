@@ -135,7 +135,7 @@ export default {
       this.errors = {};
     },
     closeModal() {
-      this.setShowChangePasswordModal(false);
+      this.setShowChangePasswordModal(false, emptyPasswords);
       this.passwords = { ...emptyPasswords };
       this.errors = {};
     }
