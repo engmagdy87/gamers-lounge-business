@@ -116,12 +116,12 @@ self.__precacheManifest = [
     "url": "/js/HeroSlidesList.918f6a42.js"
   },
   {
-    "revision": "fa95c61b40f638500fd9",
-    "url": "/css/Home.4b60006a.css"
+    "revision": "f60ef7e877057fad6d69",
+    "url": "/css/Home.f6f157e3.css"
   },
   {
-    "revision": "fa95c61b40f638500fd9",
-    "url": "/js/Home.2abf1fa2.js"
+    "revision": "f60ef7e877057fad6d69",
+    "url": "/js/Home.79d926bf.js"
   },
   {
     "revision": "a9e8b4afe59d686124d5",
@@ -376,12 +376,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.7f64e606.js"
   },
   {
-    "revision": "a387feff97a76296f800",
+    "revision": "ce558de11e43e106c341",
     "url": "/css/app.9d105750.css"
   },
   {
-    "revision": "a387feff97a76296f800",
-    "url": "/js/app.f2859939.js"
+    "revision": "ce558de11e43e106c341",
+    "url": "/js/app.70cb69c9.js"
   },
   {
     "revision": "bdda8698921ac61af643",
@@ -452,10 +452,6 @@ self.__precacheManifest = [
     "url": "/fonts/nucleo-icons.8224e016.eot"
   },
   {
-    "revision": "ff208b8d733e61a630992ee2b72c9c1c",
-    "url": "/fonts/nucleo-icons.ff208b8d.woff2"
-  },
-  {
     "revision": "b0dc05d015e91e7d28d79cd0056fe555",
     "url": "/fonts/nucleo-icons.b0dc05d0.ttf"
   },
@@ -464,11 +460,15 @@ self.__precacheManifest = [
     "url": "/img/nucleo-icons.ae42fa52.svg"
   },
   {
+    "revision": "ff208b8d733e61a630992ee2b72c9c1c",
+    "url": "/fonts/nucleo-icons.ff208b8d.woff2"
+  },
+  {
     "revision": "c9e7debf1f052891316f621ed282ff5c",
     "url": "/img/next.c9e7debf.svg"
   },
   {
-    "revision": "532779402bfba89d4ad4d7db4678ce13",
+    "revision": "bc942ee811a439c8e4d936b78d214be7",
     "url": "/index.html"
   },
   {
@@ -520,16 +520,24 @@ self.__precacheManifest = [
     "url": "/_redirects"
   },
   {
-    "revision": "a95be6e8a890f1897308ee3122a70aef",
-    "url": "/images/add.svg"
-  },
-  {
     "revision": "5b47b416f6e4dbba80a1ca269adf7580",
     "url": "/images/decrease_font.svg"
   },
   {
+    "revision": "a95be6e8a890f1897308ee3122a70aef",
+    "url": "/images/add.svg"
+  },
+  {
     "revision": "752d64f551b54c06f4b7280d9f74d27c",
     "url": "/images/delete.svg"
+  },
+  {
+    "revision": "533b554da9fa067f3e7e2a631cc83a80",
+    "url": "/images/download.svg"
+  },
+  {
+    "revision": "cd955919d1908c1f33233b0f8e3b05b2",
+    "url": "/images/edit.svg"
   },
   {
     "revision": "658814864a666a3b4cab6cfdc1cf14e1",
@@ -538,10 +546,6 @@ self.__precacheManifest = [
   {
     "revision": "80ab8c35fee0090540b1acde85807338",
     "url": "/images/increase_font.svg"
-  },
-  {
-    "revision": "cd955919d1908c1f33233b0f8e3b05b2",
-    "url": "/images/edit.svg"
   },
   {
     "revision": "0d5b244ec347b92c573030f4514a34f3",
@@ -558,10 +562,6 @@ self.__precacheManifest = [
   {
     "revision": "eb55acdf799a7622a48f50ce42fe93a9",
     "url": "/images/placeholder.png"
-  },
-  {
-    "revision": "533b554da9fa067f3e7e2a631cc83a80",
-    "url": "/images/download.svg"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",

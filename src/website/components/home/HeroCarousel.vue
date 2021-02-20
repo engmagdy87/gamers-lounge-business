@@ -6,7 +6,6 @@
     <SingleClippedShape>
       <template #content>
         <HeroSlider
-          :autoPlay="false"
           :slides="heroSlider"
           customBulletsStyleClass="hero-bullets"
           :timeInMillisecond="4000"

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.839bcf0f43d1a9376b8d75513b2fafb3.js"
+  "/precache-manifest.e57e6f8a0b55680a8f459d0a4dab758c.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "gamers-lounge-business"});
