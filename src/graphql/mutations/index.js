@@ -63,6 +63,10 @@ import UPDATE_ADMIN from "./Admins/UpdateAdmin";
 import DELETE_ADMIN from "./Admins/DeleteAdmin";
 import RESET_ADMIN_PASSWORD from "./Admins/ResetAdminPassword";
 
+import CREATE_SETTING from "./Settings/CreateSetting";
+import UPDATE_SETTING from "./Settings/UpdateSetting";
+import DELETE_SETTING from "./Settings/DeleteSetting";
+
 export default {
   LOGIN,
   CREATE_DEPARTMENT,
@@ -111,5 +115,8 @@ export default {
   CREATE_ADMIN,
   UPDATE_ADMIN,
   DELETE_ADMIN,
-  RESET_ADMIN_PASSWORD
+  RESET_ADMIN_PASSWORD,
+  CREATE_SETTING,
+  UPDATE_SETTING,
+  DELETE_SETTING
 };

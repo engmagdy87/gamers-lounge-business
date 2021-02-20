@@ -35,10 +35,30 @@
                 class="image-placeholder"
               />
             </div>
-
             <div
+              class="work-details-sections__video"
               v-else-if="
-                column.type === WORK_COLUMNS_TYPES.VIDEO && column.fillable
+                column.type === WORK_COLUMNS_TYPES.VIDEO &&
+                  column.fillable &&
+                  column.is_vid_extenral_enabled
+              "
+            >
+              <iframe
+                width="100%"
+                height="100%"
+                :src="getLiveVideoEmbedFormatter(column.vid_extenral)"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              >
+              </iframe>
+            </div>
+            <div
+              class="work-details-sections__video"
+              v-else-if="
+                column.type === WORK_COLUMNS_TYPES.VIDEO &&
+                  column.fillable &&
+                  !column.is_vid_extenral_enabled
               "
               v-for="video in column.vid_content"
               :key="video.id"
@@ -111,6 +131,7 @@ import isDeviceSmart from "../../../helpers/DetectIsDeviceSmart";
 import redirectToNewTab from "../../../helpers/RedirectToNewTab";
 import CustomHalfClipped from "../../shared/CustomHalfClipped";
 import ImageModal from "../../shared/ImageModal";
+import { liveVideoEmbedFormatter } from "../../../helpers/LiveVideoEmbedFormater";
 import * as WORK_COLUMNS_TYPES from "../../../constants/ColumnsContentTypes";
 
 export default {
@@ -137,6 +158,9 @@ export default {
     }
   },
   methods: {
+    getLiveVideoEmbedFormatter(url) {
+      return liveVideoEmbedFormatter(url);
+    },
     toggleFullScreenMode(e, video) {
       if (video.is_auto_play) {
         e.preventDefault();

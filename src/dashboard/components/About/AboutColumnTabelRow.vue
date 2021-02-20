@@ -8,6 +8,11 @@
     </td>
     <td>{{ rowData.ratio }}</td>
     <td>{{ rowData.fillable ? "Yes" : "No" }}</td>
+    <td>{{ rowData.is_vid_extenral_enabled ? "Yes" : "No" }}</td>
+    <td v-if="rowData.is_vid_extenral_enabled">
+      <a :href="rowData.vid_extenral" target="__blank">URL</a>
+    </td>
+    <td v-else></td>
     <td
       v-if="
         rowData.type === MEDIA_TYPES.VIDEO && rowData.vid_content.length > 0

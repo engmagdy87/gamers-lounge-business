@@ -20,7 +20,6 @@
             placeholder="Enter Title"
             v-model="work.title"
             :autofocus="true"
-            :isRequired="true"
           >
           </base-input>
           <ErrorMessage :fieldErrors="errors.title" />
@@ -94,7 +93,7 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label>Description<span class="error-message"> *</span></label>
+            <label>Description</label>
             <vue-pell-editor
               :actions="editorOptions"
               :style-with-css="false"
@@ -289,13 +288,13 @@ export default {
       imageId: null,
       errors: {},
       validation: {
-        title: { isRequired: true },
+        title: { isRequired: false },
         order: { isRequired: true },
         "short description": { isRequired: false },
         is_featured: { isRequired: false },
         is_enabled: { isRequired: false },
         is_admin_mode_enabled: { isRequired: false },
-        description: { isRequired: true },
+        description: { isRequired: false },
         statistics: { isRequired: false },
         "card image": { isRequired: true },
         "cover image": { isRequired: true },

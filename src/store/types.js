@@ -277,6 +277,19 @@ const admins = {
   }
 };
 
+const settings = {
+  mutations: {
+    SET_SETTINGS: "settings/mutations/SET_SETTINGS",
+    SET_IS_SETTINGS_FETCHED: "settings/mutations/SET_IS_SETTINGS_FETCHED"
+  },
+  actions: {
+    FETCH_SETTINGS: "settings/actions/FETCH_SETTINGS",
+    CREATE_SETTING: "settings/actions/CREATE_SETTING",
+    DELETE_SETTING: "settings/actions/DELETE_SETTING",
+    UPDATE_SETTING: "settings/actions/UPDATE_SETTING"
+  }
+};
+
 export default {
   app,
   user,
@@ -289,5 +302,6 @@ export default {
   contact,
   team,
   home,
-  admins
+  admins,
+  settings
 };

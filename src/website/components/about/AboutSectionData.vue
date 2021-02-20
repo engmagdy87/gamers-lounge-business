@@ -28,11 +28,30 @@
             class="about-section-wrapper__inside--is-image"
             :style="{ 'background-image': 'url(' + img.url + ')' }"
           ></div>
-
           <div
             class="work-details-sections__video"
             v-else-if="
-              column.type === ABOUT_COLUMNS_TYPES.VIDEO && column.fillable
+              column.type === ABOUT_COLUMNS_TYPES.VIDEO &&
+                column.fillable &&
+                column.is_vid_extenral_enabled
+            "
+          >
+            <iframe
+              width="100%"
+              height="100%"
+              :src="getLiveVideoEmbedFormatter(column.vid_extenral)"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            >
+            </iframe>
+          </div>
+          <div
+            class="work-details-sections__video"
+            v-else-if="
+              column.type === ABOUT_COLUMNS_TYPES.VIDEO &&
+                column.fillable &&
+                !column.is_vid_extenral_enabled
             "
             v-for="video in column.vid_content"
             :key="video.id"
@@ -96,6 +115,7 @@ import { Carousel3d, Slide } from "vue-carousel-3d";
 import ImageModal from "../../shared/ImageModal";
 import isDeviceSmart from "../../../helpers/DetectIsDeviceSmart";
 import redirectToNewTab from "../../../helpers/RedirectToNewTab";
+import { liveVideoEmbedFormatter } from "../../../helpers/LiveVideoEmbedFormater";
 import * as ABOUT_COLUMNS_TYPES from "../../../constants/ColumnsContentTypes";
 export default {
   props: ["section"],
@@ -120,6 +140,9 @@ export default {
     }
   },
   methods: {
+    getLiveVideoEmbedFormatter(url) {
+      return liveVideoEmbedFormatter(url);
+    },
     getImages(rowId) {
       return this.section.rows[rowId].columns.filter(
         col => col.type === ABOUT_COLUMNS_TYPES.IMAGE

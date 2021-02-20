@@ -33,6 +33,8 @@ import HOME_HERO_SLIDES from "./Home/HomeHeroSlides";
 import ADMINS from "./Admins/admins";
 import ROLES from "./Admins/Roles";
 
+import SETTINGS from "./Settings/Settings";
+
 export default {
   DEPARTMENTS,
   JOB_APPLICATION,
@@ -58,5 +60,6 @@ export default {
   CONTACT,
   HOME_HERO_SLIDES,
   ADMINS,
-  ROLES
+  ROLES,
+  SETTINGS
 };

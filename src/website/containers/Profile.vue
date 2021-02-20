@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-wrapper">
+  <div class="profile-wrapper" v-if="isContactFetched">
     <div class="profile-wrapper__content">
       <div class="row">
         <div class="col-12 col-md-5 profile-wrapper__content__profile-details">
@@ -159,7 +159,8 @@ export default {
   },
   computed: {
     ...mapState({
-      userPersonaData: state => state.user.userPersona
+      userPersonaData: state => state.user.userPersona,
+      isContactFetched: state => state.contact.isContactFetched
     })
   },
   watch: {

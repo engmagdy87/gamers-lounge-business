@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Hero :heroImage="ServicesCoverImage">
+  <div v-if="isSettingsDataFetched">
+    <Hero :heroImage="settings.img_services_cover.url">
       <template #hero-content>
         <div
           class="row align-items-end h-100 justify-content-center services-container"
@@ -24,9 +24,10 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+import types from "../../../store/types";
 import Hero from "../../shared/Hero";
 import HalfClippedShape from "../../shared/HalfClippedShape";
-import ServicesCoverImage from "../../../../public/images/website-our-services-cover.jpg";
 
 export default {
   components: {
@@ -34,9 +35,19 @@ export default {
     HalfClippedShape
   },
   computed: {
-    ServicesCoverImage() {
-      return ServicesCoverImage;
-    }
+    ...mapState({
+      settings: state => state.settings.settings,
+      isSettingsDataFetched: state => state.settings.isSettingsDataFetched
+    })
+  },
+  methods: {
+    ...mapActions({
+      fetchHomeCoverImage: types.settings.actions.FETCH_SETTINGS
+    })
+  },
+  mounted() {
+    if (!this.isSettingsDataFetched)
+      this.fetchHomeCoverImage({ isService: true });
   }
 };
 </script>

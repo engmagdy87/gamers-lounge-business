@@ -208,6 +208,11 @@ const ContactAddEdit = () =>
     /* webpackChunkName: "ContactAddEdit" */ "src/dashboard/pages/Contact/ContactAddEdit.vue"
   );
 
+const SettingsAddEdit = () =>
+  import(
+    /* webpackChunkName: "SettingsAddEdit" */ "src/dashboard/pages/Settings/SettingsAddEdit.vue"
+  );
+
 const HeroSlidesList = () =>
   import(
     /* webpackChunkName: "HeroSlidesList" */ "src/dashboard/pages/Home/HeroSlidesList.vue"
@@ -915,6 +920,25 @@ const routes = [
             component: ContactAddEdit,
             beforeEnter(to, from, next) {
               userHasPermission(next, "contact_us.create");
+            }
+          }
+        ]
+      },
+      {
+        path: "settings",
+        name: "Settings",
+        component: DashboardContent,
+        redirect: "/dashboard/settings/list",
+        beforeEnter(to, from, next) {
+          userHasPermission(next, "setting.view");
+        },
+        children: [
+          {
+            path: "list",
+            name: "Create Settings",
+            component: SettingsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "setting.create");
             }
           }
         ]

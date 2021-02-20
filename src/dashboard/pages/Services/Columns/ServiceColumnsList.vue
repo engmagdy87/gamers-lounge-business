@@ -76,6 +76,8 @@ export default {
           "Content",
           "Width in %",
           "Has Content",
+          "Has External Video",
+          "External Video",
           "Is Video Autoplay",
           "Images Content",
           "Videos Content",

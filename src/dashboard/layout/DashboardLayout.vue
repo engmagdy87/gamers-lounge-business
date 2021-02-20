@@ -46,6 +46,10 @@
         <i class="nc-icon nc-badge"></i>
         <p>Admins</p>
       </sidebar-link>
+      <sidebar-link to="/dashboard/settings">
+        <i class="nc-icon nc-settings-gear-64"></i>
+        <p>Settings</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <TopNavbar></TopNavbar>

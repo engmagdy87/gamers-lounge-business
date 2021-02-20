@@ -1075,6 +1075,71 @@ const deleteAdmin = async id => {
   }
 };
 
+const fetchSettings = async data => {
+  try {
+    const response = await request({
+      query: QUERY.SETTINGS(data)
+    });
+    return response.data.data.setting;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const createSetting = async data => {
+  const { imagesData } = data;
+
+  const query = MUTATION.CREATE_SETTING(imagesData);
+
+  try {
+    const response = await requestMultipart(
+      constructFormDataForMultipleFile(imagesData, query),
+      token
+    );
+    return response.data.data.createSetting;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateSetting = async data => {
+  let response;
+  const { imagesData } = data;
+
+  try {
+    const query = MUTATION.UPDATE_SETTING(data);
+    if (imagesData)
+      response = await requestMultipart(
+        constructFormDataForMultipleFile(imagesData, query),
+        token
+      );
+    else
+      response = await request(
+        {
+          query
+        },
+        token
+      );
+    return response.data.data.updateSetting;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteSetting = async id => {
+  try {
+    const response = await request(
+      {
+        query: MUTATION.DELETE_SETTING(id)
+      },
+      token
+    );
+    return response.data.data.deleteSetting;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   fetchDepartments,
   fetchSponsors,
@@ -1148,7 +1213,11 @@ export {
   resetPassword,
   createAdmin,
   updateAdmin,
-  deleteAdmin
+  deleteAdmin,
+  fetchSettings,
+  createSetting,
+  updateSetting,
+  deleteSetting
 };
 
 const logout = () => {

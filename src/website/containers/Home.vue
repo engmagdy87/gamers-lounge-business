@@ -1,6 +1,6 @@
 <template>
   <div class="home-wrapper" v-if="isHomePageServicesFetched">
-    <Hero :heroImage="HomeCoverImage">
+    <Hero :heroImage="settings.img_home_cover.url" v-if="isSettingsDataFetched">
       <template #hero-content>
         <HeroCarousel />
       </template>
@@ -26,7 +26,6 @@ import ServicesCarousel from "../components/home/ServicesCarousel";
 import WorkCarousel from "../components/home/WorkCarousel";
 import SponsorsCarousel from "../components/home/SponsorsCarousel";
 import Loading from "../../website/shared/Loading";
-import HomeCoverImage from "../../../public/images/website_home_cover.png";
 
 export default {
   data() {
@@ -48,17 +47,17 @@ export default {
       isHomePageWorksFetched: state => state.works.isHomePageWorksFetched,
       isHomePageServicesFetched: state =>
         state.services.isHomePageServicesFetched,
-      isHomePageSponsorsFetched: state => state.sponsors.isSponsorsFetched
-    }),
-    HomeCoverImage() {
-      return HomeCoverImage;
-    }
+      isHomePageSponsorsFetched: state => state.sponsors.isSponsorsFetched,
+      settings: state => state.settings.settings,
+      isSettingsDataFetched: state => state.settings.isSettingsDataFetched
+    })
   },
   methods: {
     ...mapActions({
       fetchHomePageWork: types.works.actions.FETCH_HOME_PAGE_WORKS,
       fetchHomePageServices: types.services.actions.FETCH_HOME_PAGE_SERVICES,
-      fetchHomePageSponsors: types.sponsors.actions.FETCH_WEBSITE_SPONSORS
+      fetchHomePageSponsors: types.sponsors.actions.FETCH_WEBSITE_SPONSORS,
+      fetchHomeCoverImage: types.settings.actions.FETCH_SETTINGS
     }),
     ...mapMutations({
       setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG,
@@ -77,6 +76,8 @@ export default {
   },
   mounted() {
     this.setShowFooterFlag(false);
+
+    if (!this.isSettingsDataFetched) this.fetchHomeCoverImage({ isHome: true });
     if (!this.isHomePageServicesFetched) {
       this.fetchHomePageServices();
     } else if (

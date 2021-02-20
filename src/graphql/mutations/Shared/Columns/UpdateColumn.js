@@ -1,33 +1,40 @@
 const buildQuery = (columnInfo, imagesData, videosData) => {
-   const { columnId, rowId,
-      order,
-      content,
-      type, ratio, fillable } = columnInfo;
+  const {
+    columnId,
+    rowId,
+    order,
+    content,
+    type,
+    ratio,
+    fillable,
+    vid_extenral,
+    is_vid_extenral_enabled
+  } = columnInfo;
 
-   let queryParams = '(';
-   let imagesKeys = 'images: {'
-   let videosKeys = 'videos: {'
+  let queryParams = "(";
+  let imagesKeys = "images: {";
+  let videosKeys = "videos: {";
 
-   if (imagesData.img_content.length > 0) {
-      queryParams += '$img_content: [Upload!],';
-      imagesKeys += 'img_content: { upload: { file: $img_content } }'
-   }
+  if (imagesData.img_content.length > 0) {
+    queryParams += "$img_content: [Upload!],";
+    imagesKeys += "img_content: { upload: { file: $img_content } }";
+  }
 
-   if (videosData.vid_content.length > 0) {
-      queryParams += '$vid_content: [Upload!],';
-      videosKeys += `vid_content: { upload: { file: $vid_content } }`
-   }
+  if (videosData.vid_content.length > 0) {
+    queryParams += "$vid_content: [Upload!],";
+    videosKeys += `vid_content: { upload: { file: $vid_content } }`;
+  }
 
-   if (queryParams === '(') queryParams = ''
-   else queryParams += ')'
+  if (queryParams === "(") queryParams = "";
+  else queryParams += ")";
 
-   if (imagesKeys === 'images: {') imagesKeys = ''
-   else imagesKeys += '}'
+  if (imagesKeys === "images: {") imagesKeys = "";
+  else imagesKeys += "}";
 
-   if (videosKeys === 'videos: {') videosKeys = ''
-   else videosKeys += '}'
+  if (videosKeys === "videos: {") videosKeys = "";
+  else videosKeys += "}";
 
-   return `mutation${queryParams} {
+  return `mutation${queryParams} {
       updateColumn(
          input: {
             column_id: ${columnId}
@@ -37,6 +44,8 @@ const buildQuery = (columnInfo, imagesData, videosData) => {
             type: ${type}
             ratio: ${ratio}
             fillable: ${fillable}
+            vid_extenral: "${vid_extenral}"
+            is_vid_extenral_enabled: ${is_vid_extenral_enabled}
             ${imagesKeys}
             ${videosKeys}
          }
@@ -44,11 +53,10 @@ const buildQuery = (columnInfo, imagesData, videosData) => {
          id
       }
    } 
-    `
-}
+    `;
+};
 
-const UPDATE_COLUMN = (
-   columnInfo, imagesData, videosData
-) => buildQuery(columnInfo, imagesData, videosData)
+const UPDATE_COLUMN = (columnInfo, imagesData, videosData) =>
+  buildQuery(columnInfo, imagesData, videosData);
 
 export default UPDATE_COLUMN;

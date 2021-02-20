@@ -146,6 +146,33 @@
         </div>
       </div>
       <div class="row">
+        <div class="col-12 col-md-6">
+          <base-input
+            type="text"
+            label="External Video Url"
+            placeholder="Enter External Video Url"
+            v-model="aboutColumn.vid_extenral"
+            :isRequired="validation['video external'].isRequired"
+          >
+          </base-input>
+          <ErrorMessage :fieldErrors="errors.vid_extenral" />
+        </div>
+        <div class="col-12 col-md-6 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="is_vid_extenral_enabled"
+              v-model="aboutColumn.is_vid_extenral_enabled"
+              @change="setVideoValidation"
+            />
+            <label class="custom-control-label" for="is_vid_extenral_enabled"
+              >Has External Video</label
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-12">
           <base-input
             type="text"
@@ -251,7 +278,10 @@
           <div>
             <label class="mr-5"
               >Choose Content Videos<span
-                v-if="aboutColumn.type === ABOUT_COLUMNS_CONTENT_TYPES.VIDEO"
+                v-if="
+                  aboutColumn.type === ABOUT_COLUMNS_CONTENT_TYPES.VIDEO &&
+                    validation['videos content'].isRequired
+                "
                 class="error-message"
               >
                 *</span
@@ -329,6 +359,8 @@ const emptyColumnSection = {
   type: "-1",
   title: "",
   description: "",
+  vid_extenral: "",
+  is_vid_extenral_enabled: false,
   ratio: 0,
   fillable: false,
   isAutoPlay: false,
@@ -359,8 +391,10 @@ export default {
         ratio: { isRequired: true },
         fillable: { isRequired: true },
         "is auto play": { isRequired: false },
+        "is video external": { isRequired: false },
         "images content": { isRequired: true },
-        "videos content": { isRequired: true }
+        "videos content": { isRequired: true },
+        "video external": { isRequired: false }
       },
       aliases: {
         order: "order",
@@ -370,8 +404,10 @@ export default {
         ratio: "ratio",
         fillable: "fillable",
         isAutoPlay: "is auto play",
+        is_vid_extenral_enabled: "is video external",
         img_content: "images content",
-        vid_content: "videos content"
+        vid_content: "videos content",
+        vid_extenral: "video external"
       },
       editorOptions
     };
@@ -410,13 +446,27 @@ export default {
         await this.updateVideo(payload);
       }
     },
+    setVideoValidation(e) {
+      if (e.target.checked) {
+        if (this.aboutColumn.type === WORK_COLUMNS_CONTENT_TYPES.VIDEO) {
+          this.validation["video external"].isRequired = true;
+          this.validation["videos content"].isRequired = false;
+        }
+      } else {
+        if (this.aboutColumn.type === WORK_COLUMNS_CONTENT_TYPES.VIDEO) {
+          this.validation["video external"].isRequired = false;
+          this.validation["videos content"].isRequired = true;
+        }
+      }
+    },
     setRequiredFieldsAccrodingToContentType(value) {
       let key;
       const targetKeys = [
         "title",
         "description",
         "images content",
-        "videos content"
+        "videos content",
+        "video external"
       ];
       switch (value) {
         case ABOUT_COLUMNS_CONTENT_TYPES.TITLE:
@@ -432,7 +482,9 @@ export default {
           key = "images content";
           break;
         case ABOUT_COLUMNS_CONTENT_TYPES.VIDEO:
-          key = "videos content";
+          if (this.serviceColumn.is_vid_extenral_enabled)
+            key = "video external";
+          else key = "videos content";
           break;
 
         default:
@@ -508,6 +560,8 @@ export default {
           content,
           ratio: this.aboutColumn.ratio,
           fillable: this.aboutColumn.fillable,
+          is_vid_extenral_enabled: this.aboutColumn.is_vid_extenral_enabled,
+          vid_extenral: this.aboutColumn.vid_extenral,
           imagesData: {
             img_content: this.$refs.img_content.files
           },
@@ -600,6 +654,8 @@ export default {
       this.aboutColumn.type = this.editData.type;
       this.aboutColumn.ratio = this.editData.ratio;
       this.aboutColumn.fillable = this.editData.fillable;
+      this.serviceColumn.is_vid_extenral_enabled = this.editData.is_vid_extenral_enabled;
+      this.serviceColumn.vid_extenral = this.editData.vid_extenral || "";
       this.aboutColumn.isAutoPlay = this.editData.vid_content[0]
         ? this.editData.vid_content[0].is_auto_play
         : false;

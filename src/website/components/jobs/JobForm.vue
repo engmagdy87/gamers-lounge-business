@@ -84,7 +84,7 @@
                 v-model="applicantInfo.behance_link"
               />
             </div>
-            <ErrorMessage :fieldErrors="errors.behance_link" />
+            <!-- <ErrorMessage :fieldErrors="errors.behance_link" /> -->
           </div>
           <div class="form-group">
             <label class="form-group__long-label">Linkedin Link</label>
@@ -95,7 +95,7 @@
                 v-model="applicantInfo.linkedin_link"
               />
             </div>
-            <ErrorMessage :fieldErrors="errors.linkedin_link" />
+            <!-- <ErrorMessage :fieldErrors="errors.linkedin_link" /> -->
           </div>
           <div
             class="form-group d-flex justify-content-start align-items-center"
@@ -161,8 +161,8 @@ export default {
         country: { isRequired: true },
         city: { isRequired: true },
         email: { isEmail: true, isRequired: true },
-        "behance link": { isRequired: true },
-        "linkedin link": { isRequired: true },
+        "behance link": { isRequired: false },
+        "linkedin link": { isRequired: false },
         resume: { isFile: true, isRequired: true }
       },
       aliases: {

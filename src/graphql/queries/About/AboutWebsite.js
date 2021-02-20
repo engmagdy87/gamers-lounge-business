@@ -41,6 +41,8 @@ query {
              content
              ratio
              fillable
+             vid_extenral
+             is_vid_extenral_enabled
              img_content {
                id
                url
