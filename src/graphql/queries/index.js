@@ -30,6 +30,9 @@ import TEAM from "./Team/Team";
 
 import HOME_HERO_SLIDES from "./Home/HomeHeroSlides";
 
+import ADMINS from "./Admins/admins";
+import ROLES from "./Admins/Roles";
+
 export default {
   DEPARTMENTS,
   JOB_APPLICATION,
@@ -53,5 +56,7 @@ export default {
   ABOUT_WEBSITE,
   TEAM,
   CONTACT,
-  HOME_HERO_SLIDES
+  HOME_HERO_SLIDES,
+  ADMINS,
+  ROLES
 };

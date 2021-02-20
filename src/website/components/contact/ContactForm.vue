@@ -64,7 +64,7 @@ export default {
       },
       errors: {},
       validation: {
-        name: { minLength: 4 },
+        name: { minLength: 3 },
         email: { isEmail: true },
         message: { minLength: 4 }
       },

@@ -42,9 +42,9 @@
         <i class="nc-icon nc-mobile"></i>
         <p>Contact</p>
       </sidebar-link>
-      <sidebar-link to="/dashboard/editorial-team">
+      <sidebar-link to="/dashboard/admins">
         <i class="nc-icon nc-badge"></i>
-        <p>Editorial Team</p>
+        <p>Admins</p>
       </sidebar-link>
     </side-bar>
     <div class="main-panel">

@@ -1,9 +1,24 @@
+import Vue from "vue";
 import store from "../store/index";
 import types from "../store/types";
-import { getTokenCookie, getUserDataCookie } from "../helpers/CookieHelper";
+import {
+  getTokenCookie,
+  getUserDataCookie,
+  removeTokenCookie,
+  removeUserDataCookie
+} from "../helpers/CookieHelper";
 import { isUserAuthenticated } from "../helpers/APIsHelper";
 
 const userData = getUserDataCookie();
+
+const notifyVue = (message, color) => {
+  Vue.prototype.$notifications.notify({
+    message: `<span>${message}</span>`,
+    horizontalAlign: "right",
+    verticalAlign: "top",
+    type: color
+  });
+};
 
 // Website containers
 const Home = () =>
@@ -202,6 +217,15 @@ const HeroSlidesAddEdit = () =>
     /* webpackChunkName: "HeroSlidesAddEdit" */ "src/dashboard/pages/Home/HeroSlidesAddEdit.vue"
   );
 
+const AdminsList = () =>
+  import(
+    /* webpackChunkName: "AdminsList" */ "src/dashboard/pages/Admins/AdminsList.vue"
+  );
+const AdminsAddEdit = () =>
+  import(
+    /* webpackChunkName: "AdminsAddEdit" */ "src/dashboard/pages/Admins/AdminsAddEdit.vue"
+  );
+
 const Login = () =>
   import(/* webpackChunkName: "Login" */ "src/dashboard/pages/Login.vue");
 
@@ -218,9 +242,8 @@ const showHeaderAndFooterForWebsite = (next, flag = true) => {
   next();
 };
 const userHasPermission = (next, route) => {
-  next();
   if (userData.permissions.includes(route)) next();
-  else next("/dashboard");
+  else notifyVue("You are not authorized to view this page", "danger");
 };
 const getUserAuthenticatedFlag = async () => {
   const response = await isUserAuthenticated();
@@ -256,8 +279,16 @@ const routes = [
     path: "/profile",
     name: "profile",
     component: Profile,
-    beforeEnter(to, from, next) {
+    beforeEnter: async (to, from, next) => {
       showHeaderAndFooterForWebsite(next, true);
+      const token = getTokenCookie();
+      const isUserAuthenticatedFlag = await getUserAuthenticatedFlag();
+      if (token === undefined || isUserAuthenticatedFlag === null) {
+        removeTokenCookie();
+        removeUserDataCookie();
+        store.commit(types.user.mutations.SET_USER_PERSONA, {});
+        next("/");
+      } else next();
     }
   },
   {
@@ -415,6 +446,41 @@ const routes = [
             component: HeroSlidesAddEdit,
             beforeEnter(to, from, next) {
               userHasPermission(next, "home_slider.update");
+            }
+          }
+        ]
+      },
+      {
+        path: "admins",
+        name: "Admins",
+        component: DashboardContent,
+        redirect: "/dashboard/admins/list",
+        beforeEnter(to, from, next) {
+          userHasPermission(next, "admin.view");
+        },
+        children: [
+          {
+            path: "list",
+            name: "List Admins",
+            component: AdminsList,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "admin.view");
+            }
+          },
+          {
+            path: "create",
+            name: "Create Admin",
+            component: AdminsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "admin.create");
+            }
+          },
+          {
+            path: "edit",
+            name: "Edit Admin",
+            component: AdminsAddEdit,
+            beforeEnter(to, from, next) {
+              userHasPermission(next, "admin.update");
             }
           }
         ]

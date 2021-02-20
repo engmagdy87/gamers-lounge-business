@@ -1,7 +1,10 @@
 const IS_USER_AUTHENTICATED = () => `
 query{
     me{
-       id
+      id
+      username
+      roles
+      permissions
     }
  }
 `;

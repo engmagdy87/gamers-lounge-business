@@ -3,7 +3,7 @@
     <div class="profile-wrapper__content">
       <div class="row">
         <div class="col-12 col-md-5 profile-wrapper__content__profile-details">
-          <div>
+          <div class="mb-3">
             <h4>First Name</h4>
             <h4 v-if="!isEditMode">{{ profile.first_name }}</h4>
             <div class="form-group" v-else>
@@ -21,7 +21,7 @@
               <ErrorMessage :fieldErrors="errors.first_name" />
             </div>
           </div>
-          <div>
+          <div class="mb-3">
             <h4>Username</h4>
             <h4 v-if="!isEditMode">{{ profile.username }}</h4>
             <div class="form-group" v-else>
@@ -39,7 +39,7 @@
               <ErrorMessage :fieldErrors="errors.username" />
             </div>
           </div>
-          <div>
+          <div class="mb-3">
             <h4>E-mail</h4>
             <h4 v-if="!isEditMode">{{ profile.email }}</h4>
             <div class="form-group" v-else>
@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="col-12 col-md-5 profile-wrapper__content__profile-details">
-          <div>
+          <div class="mb-3">
             <h4>Last Name</h4>
             <h4 v-if="!isEditMode">{{ profile.last_name }}</h4>
             <div class="form-group" v-else>
@@ -77,7 +77,7 @@
               <ErrorMessage :fieldErrors="errors.last_name" />
             </div>
           </div>
-          <div>
+          <div class="mb-3">
             <h4>Password</h4>
             <h4>********</h4>
           </div>
@@ -122,7 +122,7 @@ import {
 } from "../../helpers/CookieHelper";
 import ErrorMessage from "../shared/ErrorMessage";
 import types from "../../store/types";
-import Hero from "../shared/Hero";
+// import Hero from "../shared/Hero";
 import ChangePassword from "../../website/components/profile/ChangePassword";
 import RequestPassword from "../../website/components/profile/RequestPassword";
 import isValidationErrorExist from "../../helpers/FormValidation";
@@ -144,9 +144,9 @@ export default {
       },
       errors: {},
       validation: {
-        Username: { isRequired: true, minLength: 4 },
-        "First Name": { isRequired: true, minLength: 4 },
-        "Last Name": { isRequired: true, minLength: 4 },
+        Username: { isRequired: true, minLength: 3 },
+        "First Name": { isRequired: true, minLength: 3 },
+        "Last Name": { isRequired: true, minLength: 3 },
         Email: { isRequired: true, isEmail: true }
       },
       aliases: {
@@ -261,48 +261,6 @@ export default {
         this.setIsEditMode(false);
       else this.setShowRequestedPasswordModal(true);
     },
-    // updateProfile: async function() {
-    //   thie.errors = {};
-    //   let formData = new FormData();
-    //   formData.append("first_name", this.profile.first_name);
-    //   formData.append("last_name", this.profile.last_name);
-    //   formData.append("username", this.profile.username);
-    //   formData.append("birthday_date", this.profile.birthday_date);
-    //   formData.append("email", this.profile.email);
-    //   if (this.profile.password !== "")
-    //     formData.append("current_password", this.profile.password);
-
-    //   if (this.profile.img_profile !== "")
-    //     formData.append("img_profile", this.profile.img_profile);
-
-    //   if (this.profile.img_cover_main !== "")
-    //     formData.append("img_cover_main", this.profile.img_cover_main);
-
-    //   formData.append("phone", JSON.stringify(this.profile.phone));
-    //   try {
-    //     const newUserData = await this.updateUserProfile(formData);
-    //     this.setIsEditMode(false);
-    //     store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-    //     // const oldCookie = getUserCookie();
-    //     // oldCookie.user = newUserData;
-    //     // setUserCookie(oldCookie);
-    //   } catch (error) {
-    //     if (
-    //       error.data.errors !== undefined &&
-    //       error.data.message === undefined
-    //     ) {
-    //       this.errors = { ...error.data.errors };
-    //       Object.keys(error.data.errors).forEach(err => {
-    //         const errorMessage = error.data.errors[err][0];
-    //         this.notifyVue(errorMessage, "danger");
-    //         this.errors = { ...this.errors, [err]: errorMessage };
-    //       });
-    //     } else {
-    //       this.notifyVue("Password is incorrect, Please try again!", "danger");
-    //     }
-    //     store.commit(types.home.mutations.SET_SPINNER_FLAG, false);
-    //   }
-    // },
     notifyVue(message, color) {
       this.$notifications.notify({
         message: `<span>${message}</span>`,
@@ -313,17 +271,17 @@ export default {
     }
   },
   components: {
-    Hero,
+    // Hero,
     ChangePassword,
     ErrorMessage,
     RequestPassword
   },
   mounted() {
     const { username, first_name, last_name, email } = getUserDataCookie();
-    this.profile.username = username;
-    this.profile.first_name = first_name;
-    this.profile.last_name = last_name;
-    this.profile.email = email;
+    this.profile.username = username || "";
+    this.profile.first_name = first_name || "";
+    this.profile.last_name = last_name || "";
+    this.profile.email = email || "";
   }
 };
 </script>

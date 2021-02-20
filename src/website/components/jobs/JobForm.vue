@@ -156,7 +156,7 @@ export default {
       selectedIndex: null,
       errors: {},
       validation: {
-        name: { isRequired: true, minLength: 4 },
+        name: { isRequired: true, minLength: 3 },
         phone: { isRequired: true },
         country: { isRequired: true },
         city: { isRequired: true },

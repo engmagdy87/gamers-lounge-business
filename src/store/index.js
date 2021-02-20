@@ -12,6 +12,7 @@ import about from "./modules/about";
 import contact from "./modules/contact";
 import team from "./modules/team";
 import home from "./modules/home";
+import admins from "./modules/admins";
 
 Vue.use(Vuex);
 
@@ -27,6 +28,7 @@ export default new Vuex.Store({
     about,
     contact,
     team,
-    home
+    home,
+    admins
   }
 });

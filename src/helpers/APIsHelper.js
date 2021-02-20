@@ -905,7 +905,7 @@ const updateUserData = async data => {
       },
       token
     );
-    return response.data.data.updatePrfile;
+    return response.data.data.updateProfile;
   } catch (error) {
     throw error;
   }
@@ -920,7 +920,7 @@ const updateUserPassword = async data => {
       },
       token
     );
-    return response.data.data.updatePrfile;
+    return response.data.data.updateProfile;
   } catch (error) {
     throw error;
   }
@@ -986,6 +986,90 @@ const deleteHomeHeroSlider = async slideId => {
       token
     );
     return response.data.data.deleteHomeSlider;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const fetchAdmins = async () => {
+  try {
+    const response = await request(
+      {
+        query: QUERY.ADMINS()
+      },
+      token
+    );
+    return response.data.data.admins;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const fetchRoles = async () => {
+  try {
+    const response = await request(
+      {
+        query: QUERY.ROLES()
+      },
+      token
+    );
+    return response.data.data.createableRoles;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const resetPassword = async id => {
+  try {
+    const response = await request(
+      {
+        query: MUTATION.RESET_ADMIN_PASSWORD(id)
+      },
+      token
+    );
+    return response.data.data.resetAdminPassowrd;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const createAdmin = async data => {
+  try {
+    const response = await request(
+      {
+        query: MUTATION.CREATE_ADMIN(data)
+      },
+      token
+    );
+    return response.data.data.createAdmin;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateAdmin = async data => {
+  try {
+    const response = await request(
+      {
+        query: MUTATION.UPDATE_ADMIN(data)
+      },
+      token
+    );
+    return response.data.data.updateAdmin;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteAdmin = async id => {
+  try {
+    const response = await request(
+      {
+        query: MUTATION.DELETE_ADMIN(id)
+      },
+      token
+    );
+    return response.data.data.deleteAdmin;
   } catch (error) {
     throw error;
   }
@@ -1058,7 +1142,13 @@ export {
   fetchHomeHeroSlides,
   createHomeHeroSlider,
   updateHomeHeroSlider,
-  deleteHomeHeroSlider
+  deleteHomeHeroSlider,
+  fetchAdmins,
+  fetchRoles,
+  resetPassword,
+  createAdmin,
+  updateAdmin,
+  deleteAdmin
 };
 
 const logout = () => {

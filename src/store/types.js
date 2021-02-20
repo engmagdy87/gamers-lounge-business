@@ -259,6 +259,24 @@ const home = {
   }
 };
 
+const admins = {
+  mutations: {
+    SET_ADMINS: "admins/mutations/SET_ADMINS",
+    SET_IS_ADMINS_FETCHED: "admins/mutations/SET_IS_ADMINS_FETCHED",
+    SET_ROLES: "admins/mutations/SET_ROLES",
+    SET_IS_ROLES_FETCHED: "admins/mutations/SET_IS_ROLES_FETCHED",
+    REMOVE_DELETED_ADMIN: "admins/mutations/REMOVE_DELETED_ADMIN"
+  },
+  actions: {
+    FETCH_ADMINS: "admins/actions/FETCH_ADMINS",
+    FETCH_ROLES: "admins/actions/FETCH_ROLES",
+    RESET_ADMIN_PASSWORD: "admins/actions/RESET_ADMIN_PASSWORD",
+    CREATE_ADMIN: "admins/actions/CREATE_ADMIN",
+    DELETE_ADMIN: "admins/actions/DELETE_ADMIN",
+    UPDATE_ADMIN: "admins/actions/UPDATE_ADMIN"
+  }
+};
+
 export default {
   app,
   user,
@@ -270,5 +288,6 @@ export default {
   about,
   contact,
   team,
-  home
+  home,
+  admins
 };

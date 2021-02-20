@@ -316,7 +316,6 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import ErrorMessage from "../../../../website/shared/ErrorMessage";
-import store from "../../../../store/index";
 import types from "../../../../store/types";
 import isValidationErrorExist from "../../../../helpers/FormValidation";
 import editorOptions from "../../../../dashboard/wysiwyg-factory/options";

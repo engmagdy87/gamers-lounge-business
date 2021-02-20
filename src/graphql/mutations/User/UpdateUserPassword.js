@@ -4,7 +4,7 @@ const UPDATE_USER_PASSWORD = ({
   newPasswordConfirmation
 }) => `
 mutation {
-    updatePrfile(input: {
+  updateProfile(input: {
       password: "${password}"
       new_password: "${newPassword}"
       new_password_confirmation: "${newPasswordConfirmation}"

@@ -6,7 +6,7 @@ const UPDATE_USER_DATA = ({
   password
 }) => `
 mutation {
-    updatePrfile(input: {
+  updateProfile(input: {
       username: "${username}"
       first_name: "${first_name}"
       last_name: "${last_name}"

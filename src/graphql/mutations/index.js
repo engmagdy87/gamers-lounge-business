@@ -58,6 +58,11 @@ import CREATE_HOME_HERO_SLIDE from "./Home/CreateHomeHeroSlide";
 import UPDATE_HOME_HERO_SLIDE from "./Home/UpdateHomeHeroSlider";
 import DELETE_HOME_HERO_SLIDE from "./Home/DeleteHomeHeroSlider";
 
+import CREATE_ADMIN from "./Admins/CreateAdmin";
+import UPDATE_ADMIN from "./Admins/UpdateAdmin";
+import DELETE_ADMIN from "./Admins/DeleteAdmin";
+import RESET_ADMIN_PASSWORD from "./Admins/ResetAdminPassword";
+
 export default {
   LOGIN,
   CREATE_DEPARTMENT,
@@ -102,5 +107,9 @@ export default {
   UPDATE_USER_PASSWORD,
   CREATE_HOME_HERO_SLIDE,
   UPDATE_HOME_HERO_SLIDE,
-  DELETE_HOME_HERO_SLIDE
+  DELETE_HOME_HERO_SLIDE,
+  CREATE_ADMIN,
+  UPDATE_ADMIN,
+  DELETE_ADMIN,
+  RESET_ADMIN_PASSWORD
 };
