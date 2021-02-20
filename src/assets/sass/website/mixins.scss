@@ -176,6 +176,28 @@
   );
 }
 
+@mixin single-clipped-shape($width, $height, $clipped-length) {
+  $ratio: $width / $height;
+
+  $horizontal-clipping: (($clipped-length / $width) * 100%);
+  $vertical-clipping: calc((100% - #{($clipped-length / $height) * 100%}));
+
+  $vertical-clipping-with-ratio: calc(
+    (100% - #{(($clipped-length / $height) / #{$ratio}) * 100%})
+  );
+  $horizontal-clipping-with-ratio: ($clipped-length / $width) * 100% * $ratio;
+  clip-path: polygon(
+    100% 0%,
+    100% 0%,
+    100% 0%,
+    100% 0%,
+    100% 100%,
+    $horizontal-clipping 100%,
+    0% $vertical-clipping,
+    0% 0%
+  );
+}
+
 @mixin header-item-hover-effect($width, $height, $opacity) {
   content: "";
   width: $width;

@@ -3,7 +3,7 @@
     <div class="close" role="button" @click="fireDeleteModal">
       &times;
     </div>
-    <video autoplay muted loop style="width: 100%;">
+    <video preload="auto" autoplay muted loop style="width: 100%;">
       <source :src="video.url" type="video/mp4" />
     </video>
   </div>

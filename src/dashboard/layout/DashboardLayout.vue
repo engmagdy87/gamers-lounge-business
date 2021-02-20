@@ -6,10 +6,10 @@
         <i class="nc-icon nc-chart-pie-35"></i>
         <p>Dashboard</p>
       </sidebar-link>
-      <!-- <sidebar-link to="/dashboard/home-hero-slides">
+      <sidebar-link to="/dashboard/home-hero-slides">
         <i class="nc-icon nc-home"></i>
         <p>Home Hero Slider</p>
-      </sidebar-link> -->
+      </sidebar-link>
       <sidebar-link to="/dashboard/departments">
         <i class="nc-icon nc-vector"></i>
         <p>Departments</p>

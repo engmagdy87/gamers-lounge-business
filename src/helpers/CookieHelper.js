@@ -14,8 +14,8 @@ const setTokenCookie = data => {
 };
 
 const removeTokenCookie = () => {
-  const cookies = new Cookies();
-  cookies.remove("glbusiness");
+  document.cookie =
+    "glbusiness=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 };
 
 const getUserDataCookie = () => {
@@ -32,8 +32,8 @@ const setUserDataCookie = data => {
 };
 
 const removeUserDataCookie = () => {
-  const cookies = new Cookies();
-  cookies.remove("glbusiness-user");
+  document.cookie =
+    "glbusiness-user=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 };
 
 export {

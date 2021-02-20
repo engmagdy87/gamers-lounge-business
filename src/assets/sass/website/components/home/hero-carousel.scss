@@ -1,21 +1,75 @@
 @import "../../mixins.scss";
 @import "../../color-palette.scss";
-@import "../../shared/half-clipped-shape.scss";
+@import "../../shared/single-clipped-shape.scss";
 
 .hero-carousel {
   position: absolute;
   bottom: 15%;
   @include is-extra-small-mobile {
-    bottom: 20%;
+    top: 20%;
   }
   @include is-mobile {
-    bottom: 20%;
+    top: 20%;
+  }
+  &__wrapper {
+    display: flex;
+    @include is-extra-small-mobile {
+      display: block;
+    }
+    @include is-mobile {
+      display: block;
+    }
   }
   &__text {
     z-index: 10;
     position: relative;
     height: 100%;
-    width: 100%;
+    width: 60%;
+    @include is-extra-small-mobile {
+      width: 100%;
+      height: 40%;
+    }
+    @include is-mobile {
+      width: 100%;
+      height: 40%;
+    }
+  }
+  &__media {
+    z-index: 10;
+    position: relative;
+    height: 100%;
+    width: 40%;
+    @include is-extra-small-mobile {
+      width: 100%;
+    }
+    @include is-mobile {
+      width: 100%;
+    }
+    img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      @include is-extra-small-mobile {
+        height: 50%;
+      }
+      @include is-mobile {
+        height: 50%;
+      }
+    }
+    video {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      &:focus {
+        outline: none;
+      }
+      @include is-extra-small-mobile {
+        height: 50%;
+      }
+      @include is-mobile {
+        height: 50%;
+      }
+    }
   }
   &__title {
     font-family: "Segoe UI Bold";
@@ -29,9 +83,11 @@
     @include is-extra-small-mobile {
       font-size: 1.3rem;
       padding-top: 0px;
+      padding-left: 0px;
     }
     @include is-mobile {
       font-size: 1.8rem;
+      padding-left: 0px;
     }
     @include is-tablet {
       font-size: 2rem;
@@ -55,6 +111,63 @@
       top: 30px;
       font-size: 0.8rem;
       line-height: 20px;
+      padding-left: 0px;
+    }
+    @include is-mobile {
+      padding-left: 0px;
+    }
+  }
+  &__url {
+    width: 100%;
+    margin: auto;
+    position: absolute;
+    left: 0px;
+    padding-left: 30px;
+    text-align: left;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    @include is-extra-small-mobile {
+      font-size: 16px;
+      padding-left: 0px;
+    }
+    @include is-mobile {
+      font-size: 16px;
+      padding-left: 0px;
+    }
+    span {
+      font-size: 30px;
+      font-weight: bold;
+      margin-left: 5px;
+      @include is-extra-small-mobile {
+        font-size: 20px;
+      }
+      @include is-mobile {
+        font-size: 20px;
+      }
+    }
+    &:hover {
+      color: white;
+    }
+    @include is-extra-small-mobile {
+      bottom: 10px;
+    }
+    @include is-mobile {
+      bottom: 0px;
+    }
+    @include is-tablet {
+      bottom: 20px;
+    }
+    @include is-desktop {
+      bottom: 30px;
+    }
+    @include is-large-desktop {
+      bottom: 20px;
+    }
+    @include is-extra-large-desktop {
+      bottom: 0px;
     }
   }
 }
@@ -73,7 +186,7 @@
 }
 
 @media (min-width: 1400px) and (max-width: 1600px) {
-  /deep/ .half-filled-box {
+  /deep/ .single-filled-box {
     min-height: 300px;
   }
   /deep/ .hero-bullets {
@@ -82,8 +195,8 @@
 }
 
 // All have vw as divide operation units must be the same for all
-$width: 50vw;
-$height: 17vw;
+$width: 55vw;
+$height: 20vw;
 $clipped-length: 3vw;
 
 $widths-and-heights: (
@@ -94,7 +207,7 @@ $widths-and-heights: (
     $width + 45vw
   ),
   clipped-shape-height-xs: (
-    $height + 30vw
+    $height + 90vw
   ),
   clipped-length-xs: $clipped-length,
   clipped-shape-width-sm: (
@@ -120,5 +233,8 @@ $widths-and-heights: (
 
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
-  @include filled-half-clipped-shape($widths-and-heights, rgba($primary, 0.95));
+  @include bottom-single-clipped-shape(
+    $widths-and-heights,
+    rgba($primary, 0.95)
+  );
 }

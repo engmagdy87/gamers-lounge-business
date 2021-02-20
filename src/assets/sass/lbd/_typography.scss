@@ -162,6 +162,9 @@ span {
   div {
     color: white !important;
     word-break: break-word;
+    span {
+      white-space: normal !important;
+    }
   }
   span {
     color: white !important;

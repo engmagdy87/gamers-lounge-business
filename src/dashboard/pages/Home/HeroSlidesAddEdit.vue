@@ -3,151 +3,90 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/dashboard/services">Services</a>
-        </li>
-        <li class="breadcrumb-item">
-          <router-link
-            :to="`/dashboard/services/sections/list/${serviceSections.id}`"
-            >{{ serviceSections.title }} Service Sections</router-link
-          >
-        </li>
-        <li class="breadcrumb-item">
-          <router-link
-            :to="`/dashboard/services/rows/list/${serviceRowsData.id}`"
-            >Section {{ serviceRowsData.order }} Rows</router-link
-          >
-        </li>
-        <li class="breadcrumb-item" aria-current="page">
-          <router-link :to="`/dashboard/services/columns/list/${rowId}`">
-            Columns
-          </router-link>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">
-          {{ operation }}
+          <a href="/dashboard/home-hero-slides">Home Hero Slides</a>
         </li>
       </ol>
     </nav>
-    <div class="alert alert-primary" role="alert">
-      <strong>Hint</strong> Total Width must be less than or equal<strong>
-        100%</strong
-      >
-    </div>
-    <div class="alert alert-dark w-100 m-0 p-0 d-flex" role="alert">
-      <div
-        class="alert alert-info m-0"
-        :style="`width:${calculateTotalWidth()}%`"
-        role="alert"
-        v-if="calculateTotalWidth() > 0"
-      >
-        Used Width:
-        <strong
-          ><h2>{{ calculateTotalWidth() }}%</h2></strong
-        >
-      </div>
-      <div
-        class="alert alert-dark m-0 text-dark"
-        :style="`width:${(100 - calculateTotalWidth()).toFixed(1)}%`"
-        role="alert"
-        v-if="(100 - calculateTotalWidth()).toFixed(1) > 0"
-      >
-        Remain Width:
-        <strong
-          ><h2>{{ (100 - calculateTotalWidth()).toFixed(1) }}%</h2></strong
-        >
-      </div>
-    </div>
     <h4 slot="header" class="card-name">{{ operation }}</h4>
     <form>
-      <div class="row d-flex m-0">
-        <div
-          :class="[
-            'column',
-            currentWidth() === 100 ? 'column--full' : 'column--not-full'
-          ]"
-          v-for="(col, i) in serviceRowData.columns"
-          :key="i"
-          :style="`width:${col.ratio}%`"
-        >
-          <p>{{ col.ratio }}%</p>
-          <p v-if="col.fillable">{{ col.type }}</p>
-          <p v-else></p>
-        </div>
-      </div>
       <div class="row">
         <div class="col-12 col-md-6">
           <base-input
             type="number"
             label="Order"
             placeholder="Enter Order"
-            v-model="serviceColumn.order"
+            v-model="slide.order"
             :autofocus="true"
-            :isRequired="true"
           >
           </base-input>
           <ErrorMessage :fieldErrors="errors.order" />
         </div>
         <div class="col-12 col-md-6">
           <div class="form-group">
-            <label
-              >Column Content Type<span class="error-message"> *</span></label
-            >
+            <label>Media Type</label>
             <select
               class="form-control"
-              v-model="serviceColumn.type"
+              v-model="slide.type"
               @change="
                 e => setRequiredFieldsAccrodingToContentType(e.target.value)
               "
             >
-              <option value="-1">--Please choose content type</option>
               <option
-                v-for="(type, i) in SERVICE_COLUMNS_CONTENT_TYPES"
-                :key="i"
-                ::selected="serviceColumn.type === type"
-                :value="type"
-                >{{ type.toLowerCase() }}</option
+                :selected="slide.type === MEDIA_TYPES.NONE"
+                :value="MEDIA_TYPES.NONE"
+                >none</option
+              >
+              <option
+                :selected="slide.type === MEDIA_TYPES.IMG"
+                :value="MEDIA_TYPES.IMG"
+                >image</option
+              >
+              <option
+                :selected="slide.type === MEDIA_TYPES.VIDEO"
+                :value="MEDIA_TYPES.VIDEO"
+                >video</option
               >
             </select>
             <ErrorMessage :fieldErrors="errors.type" />
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12 col-md-4">
+
+      <div class="row mt-3 mb-3">
+        <div class="col-12 col-md-6">
           <base-input
-            type="number"
-            step="0.1"
-            label="Width in %"
-            placeholder="Enter Width in %"
-            v-model="serviceColumn.ratio"
-            :isRequired="true"
+            type="text"
+            label="More Info URL"
+            placeholder="Enter More Info URL"
+            v-model="slide.url"
           >
           </base-input>
-          <ErrorMessage :fieldErrors="errors.ratio" />
+          <ErrorMessage :fieldErrors="errors.url" />
         </div>
-        <div class="col-12 col-md-4 mt-auto mb-auto">
-          <div class="custom-control custom-switch">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="fillable"
-              v-model="serviceColumn.fillable"
-            />
-            <label class="custom-control-label" for="fillable"
-              >Has Content</label
-            >
-          </div>
-        </div>
-        <div class="col-12 col-md-4 mt-auto mb-auto">
+        <div class="col-12 col-md-3 mt-auto mb-auto">
           <div class="custom-control custom-switch">
             <input
               type="checkbox"
               class="custom-control-input"
               id="isAutoPlay"
-              v-model="serviceColumn.isAutoPlay"
+              v-model="slide.isAutoPlay"
               @change="updateVideoData"
             />
             <label class="custom-control-label" for="isAutoPlay"
               >Is Autoplay Video</label
+            >
+          </div>
+        </div>
+        <div class="col-12 col-md-3 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="isEnabled"
+              v-model="slide.isEnabled"
+            />
+            <label class="custom-control-label" for="isEnabled"
+              >Published</label
             >
           </div>
         </div>
@@ -158,15 +97,11 @@
             type="text"
             label="Tile"
             placeholder="Enter Title"
-            v-model="serviceColumn.title"
-            :isRequired="
-              serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.TITLE
-            "
+            v-model="slide.title"
+            :isRequired="slide.type === MEDIA_TYPES.TITLE"
           >
           </base-input>
-          <div
-            v-if="serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.TITLE"
-          >
+          <div v-if="slide.type === MEDIA_TYPES.TITLE">
             <ErrorMessage :fieldErrors="errors.title" />
           </div>
         </div>
@@ -177,10 +112,7 @@
             <label
               >Description<span
                 class="error-message"
-                v-if="
-                  serviceColumn.type ===
-                    SERVICE_COLUMNS_CONTENT_TYPES.DESCRIPTION
-                "
+                v-if="slide.type === MEDIA_TYPES.DESCRIPTION"
               >
                 *</span
               ></label
@@ -189,13 +121,9 @@
               :actions="editorOptions"
               :style-with-css="false"
               placeholder=""
-              v-model="serviceColumn.description"
+              v-model="slide.description"
             />
-            <div
-              v-if="
-                serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.DESCRIPTION
-              "
-            >
+            <div v-if="slide.type === MEDIA_TYPES.DESCRIPTION">
               <ErrorMessage :fieldErrors="errors.description" />
             </div>
           </div>
@@ -208,8 +136,8 @@
             <label class="mr-5"
               >Choose Content Images<span
                 v-if="
-                  serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.IMAGE ||
-                    serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.SLIDER
+                  slide.type === MEDIA_TYPES.IMG ||
+                    slide.type === MEDIA_TYPES.SLIDER
                 "
                 class="error-message"
               >
@@ -220,38 +148,33 @@
               type="file"
               id="media-images"
               accept="image/png, image/jpeg, image/gif"
-              :multiple="
-                serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.SLIDER
-              "
-              ref="img_content"
-              @change="e => setFile(e, 'img_content')"
+              :multiple="slide.type === MEDIA_TYPES.SLIDER"
+              ref="img_main"
+              @change="e => setFile(e, 'img_main')"
             />
             <br />
             <div
               v-if="
                 editData !== undefined &&
-                  (operation === 'Edit Service Column' ||
-                    (editData.img_content !== null &&
-                      editData.img_content !== null))
+                  operation === 'Edit Home Hero Slide' &&
+                  editData.img_main !== null &&
+                  editData.img_main !== ''
               "
               class="image-preview-list"
             >
               <ImagePreview
-                v-for="(img, index) in editData.img_content"
-                :key="img.id"
-                :image="img"
+                :image="editData.img_main"
                 :setShowDeleteDialogFlag="setImageDataFlag"
-                openedFor="img_content"
-                :imageIndex="index"
+                openedFor="img_main"
               />
             </div>
             <div
               v-if="
-                serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.IMAGE ||
-                  serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.SLIDER
+                slide.type === MEDIA_TYPES.IMG ||
+                  slide.type === MEDIA_TYPES.SLIDER
               "
             >
-              <ErrorMessage :fieldErrors="errors.img_content" />
+              <ErrorMessage :fieldErrors="errors.img_main" />
             </div>
           </div>
         </div>
@@ -263,9 +186,7 @@
           <div>
             <label class="mr-5"
               >Choose Content Videos<span
-                v-if="
-                  serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.VIDEO
-                "
+                v-if="slide.type === MEDIA_TYPES.VIDEO"
                 class="error-message"
               >
                 *</span
@@ -275,32 +196,27 @@
               type="file"
               id="logo"
               accept="video/*"
-              ref="vid_content"
-              @change="e => setFile(e, 'vid_content')"
+              ref="vid_main"
+              @change="e => setFile(e, 'vid_main')"
             />
             <br />
             <div
               v-if="
                 editData !== undefined &&
-                  (operation === 'Edit Service Column' ||
-                    (editData.vid_content !== null &&
-                      editData.vid_content !== null))
+                  operation === 'Edit Home Hero Slide' &&
+                  editData.vid_main !== null &&
+                  editData.vid_main !== ''
               "
               class="image-preview-list"
             >
               <VideoPreview
-                v-for="(vid, index) in editData.vid_content"
-                :key="vid.id"
-                :video="vid"
+                :video="editData.vid_main"
                 :setShowDeleteDialogFlag="setVideoDataFlag"
-                openedFor="vid_content"
-                :videoIndex="index"
+                openedFor="vid_main"
               />
             </div>
-            <div
-              v-if="serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.VIDEO"
-            >
-              <ErrorMessage :fieldErrors="errors.vid_content" />
+            <div v-if="slide.type === MEDIA_TYPES.VIDEO">
+              <ErrorMessage :fieldErrors="errors.vid_main" />
             </div>
           </div>
         </div>
@@ -338,18 +254,18 @@ import ImagePreview from "../../../website/shared/ImagePreview.vue";
 import VideoPreview from "../../../website/shared/VideoPreview";
 import DeleteDialog from "../../../website/shared/DeleteDialog";
 import { reformatHTMLString } from "../../../helpers/StringsHelper";
-import * as SERVICE_COLUMNS_CONTENT_TYPES from "../../../constants/ColumnsContentTypes";
+import * as MEDIA_TYPES from "../../../constants/MediaTypes";
 
-const emptyColumnSection = {
+const emptyHomeHeroSlide = {
   order: 1,
-  type: "-1",
+  type: MEDIA_TYPES.NONE,
   title: "",
+  url: "",
   description: "",
-  ratio: 0,
-  fillable: false,
   isAutoPlay: false,
-  img_content: [],
-  vid_content: []
+  isEnabled: false,
+  img_main: "",
+  vid_main: ""
 };
 
 export default {
@@ -357,8 +273,8 @@ export default {
     return {
       editData: this.$router.history.current.params.data,
       operation: this.$route.name,
-      serviceColumn: {
-        ...emptyColumnSection
+      slide: {
+        ...emptyHomeHeroSlide
       },
       openedFor: "",
       contentType: "",
@@ -368,87 +284,73 @@ export default {
       videoId: null,
       errors: {},
       validation: {
-        order: { isRequired: true },
-        type: { isRequired: true },
-        title: { isRequired: true },
-        description: { isRequired: true },
-        ratio: { isRequired: true },
-        fillable: { isRequired: true },
+        order: { isRequired: false },
+        type: { isRequired: false },
+        url: { isRequired: false },
+        title: { isRequired: false },
+        description: { isRequired: false },
         "is auto play": { isRequired: false },
-        "images content": { isRequired: true },
-        "videos content": { isRequired: true }
+        published: { isRequired: false },
+        "images main": { isRequired: false },
+        "videos main": { isRequired: false }
       },
       aliases: {
         order: "order",
         type: "type",
         title: "title",
+        url: "url",
         description: "description",
-        ratio: "ratio",
-        fillable: "fillable",
         isAutoPlay: "is auto play",
-        img_content: "images content",
-        vid_content: "videos content"
+        isEnabled: "published",
+        img_main: "images main",
+        vid_main: "videos main"
       },
       editorOptions
     };
   },
   computed: {
-    ...mapState({
-      serviceRowData: state => state.services.serviceRow,
-      serviceRowsData: state => state.services.serviceRows,
-      serviceSections: state => state.services.serviceSections
-    }),
-    SERVICE_COLUMNS_CONTENT_TYPES() {
-      return SERVICE_COLUMNS_CONTENT_TYPES;
-    },
-    rowId() {
-      return this.$router.history.current.params.rowId;
+    MEDIA_TYPES() {
+      return MEDIA_TYPES;
     }
   },
   methods: {
     ...mapActions({
-      fetchColumnsRows: types.services.actions.FETCH_SERVICE_COLUMNS,
-      createColumn: types.services.actions.CREATE_SERVICE_COLUMN,
-      updateColumn: types.services.actions.UPDATE_SERVICE_COLUMN,
+      createHomeHeroSlide: types.home.actions.CREATE_HERO_SLIDER,
+      updateHomeHeroSlide: types.home.actions.UPDATE_HERO_SLIDER,
       updateVideo: types.services.actions.UPDATE_VIDEO,
       deleteImage: types.app.actions.DELETE_IMAGE,
       deleteVideo: types.app.actions.DELETE_VIDEO
     }),
     updateVideoData: async function() {
       if (
-        this.operation === "Edit Service Column" &&
-        this.serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.VIDEO
+        this.operation === "Edit Home Hero Slide" &&
+        this.editData.type === MEDIA_TYPES.VIDEO
       ) {
         const payload = {
-          videoId: this.serviceColumn.vid_content[0].id,
-          isAutoPlay: this.serviceColumn.isAutoPlay
+          videoId: this.slide.vid_main.id,
+          isAutoPlay: this.slide.isAutoPlay
         };
         await this.updateVideo(payload);
       }
     },
     setRequiredFieldsAccrodingToContentType(value) {
       let key;
-      const targetKeys = [
-        "title",
-        "description",
-        "images content",
-        "videos content"
-      ];
+      const targetKeys = ["title", "description", "images main", "videos main"];
       switch (value) {
-        case SERVICE_COLUMNS_CONTENT_TYPES.TITLE:
+        case MEDIA_TYPES.TITLE:
           key = "title";
           break;
-        case SERVICE_COLUMNS_CONTENT_TYPES.DESCRIPTION:
+        case MEDIA_TYPES.DESCRIPTION:
           key = "description";
           break;
-        case SERVICE_COLUMNS_CONTENT_TYPES.IMAGE:
-          key = "images content";
+        case MEDIA_TYPES.IMG:
+          key = "images main";
           break;
-        case SERVICE_COLUMNS_CONTENT_TYPES.SLIDER:
-          key = "images content";
+        case MEDIA_TYPES.SLIDER:
+          key = "images main";
           break;
-        case SERVICE_COLUMNS_CONTENT_TYPES.VIDEO:
-          key = "videos content";
+        case MEDIA_TYPES.VIDEO:
+          key = "videos main";
           break;
 
         default:
@@ -461,7 +363,7 @@ export default {
     setFile(e, key) {
       const files = e.target.files;
       if (!files.length) return;
-      this.serviceColumn[key] = files;
+      this.slide[key] = files;
     },
     setImageDataFlag(flag, imageId, openedFor, imageIndex, contentType) {
       this.showFlag = flag;
@@ -477,88 +379,48 @@ export default {
       this.videoIndex = videoIndex;
       this.contentType = contentType;
     },
-    currentWidth() {
-      let sum = 0;
-      if (this.operation === "Edit Service Column")
-        this.serviceRowData.columns.forEach(col => {
-          if (col.id !== this.editData.id) sum += Number.parseFloat(col.ratio);
-        });
-      else
-        this.serviceRowData.columns.forEach(col => {
-          sum += Number.parseFloat(col.ratio);
-        });
-      return sum.toFixed(1);
-    },
-    calculateTotalWidth() {
-      let sum = Number.parseFloat(this.currentWidth());
-
-      sum += Number.parseFloat(this.serviceColumn.ratio);
-
-      return sum.toFixed(1);
-    },
     saveData: async function() {
       const errorObject = isValidationErrorExist(
-        this.serviceColumn,
+        this.slide,
         this.aliases,
         this.validation
       );
       this.errors = { ...errorObject.errors };
       if (errorObject.length !== 0) return;
 
-      if (this.calculateTotalWidth() > 100) {
-        this.notifyVue(
-          "Row Width will be greater than 100%, Please adjust column width",
-          "danger"
-        );
-        return;
-      }
       try {
-        let content = "";
-        if (this.serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.TITLE)
-          content = this.serviceColumn.title;
-        if (
-          this.serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.DESCRIPTION
-        )
-          content = reformatHTMLString(this.serviceColumn.description);
         let payload = {
-          order: this.serviceColumn.order,
-          type: this.serviceColumn.type,
-          content,
-          ratio: this.serviceColumn.ratio,
-          fillable: this.serviceColumn.fillable,
+          title: this.slide.title,
+          description: reformatHTMLString(this.slide.description),
+          order: this.slide.order,
+          url: this.slide.url,
+          type: this.slide.type,
+          isAutoPlay: this.slide.isAutoPlay,
+          isEnabled: this.slide.isEnabled,
           imagesData: {
-            img_content: this.$refs.img_content.files
+            img_main: this.$refs.img_main.files
           },
           videosData: {
-            vid_content: this.$refs.vid_content.files
+            vid_main: this.$refs.vid_main.files
           }
         };
-        const rowId = this.$router.history.current.params.rowId;
-        const { id } = this.serviceRowData;
-        if (this.operation === "Edit Service Column") {
-          await this.updateColumn({
+        if (this.operation === "Edit Home Hero Slide") {
+          await this.updateHomeHeroSlide({
             ...payload,
-            columnId: this.editData.id,
-            rowId
+            slideId: this.editData.id
           });
-          this.notifyVue("Service Column Updated Successfully", "success");
-          this.$router.push(`/dashboard/services/columns/list/${id}`);
+          this.notifyVue("Home Hero Slide Updated Successfully", "success");
         } else {
-          await this.createColumn({
+          await this.createHomeHeroSlide({
             ...payload,
-            rowId,
-            isAutoPlay: this.serviceColumn.isAutoPlay
+            isAutoPlay: this.slide.isAutoPlay
           });
-          const fetchPayload = {
-            rowId: rowId,
-            requestSource: "dashboard"
-          };
-          await this.fetchColumnsRows(fetchPayload);
-          this.notifyVue("Service Column Created Successfully", "success");
+          this.notifyVue("Home Hero Slide Created Successfully", "success");
         }
-        this.serviceColumn = { ...emptyColumnSection };
-        this.$refs.img_content.value = null;
-        this.$refs.vid_content.value = null;
+        this.$router.push("/dashboard/home-hero-slides");
+        this.slide = { ...emptyHomeHeroSlide };
+        this.$refs.img_main.value = null;
+        this.$refs.vid_main.value = null;
       } catch (errors) {
         JSON.parse(errors).forEach(error => {
           this.notifyVue(error.message, "danger");
@@ -569,14 +431,14 @@ export default {
       await this.deleteImage(this.imageId);
 
       switch (this.openedFor) {
-        case "img_content":
-          this.serviceColumn.img_content.splice(this.imageIndex, 1);
+        case "img_main":
+          this.slide.img_main = "";
+          this.editData.img_main = "";
           break;
 
         default:
           break;
       }
-
       this.notifyVue("Image Deleted Successfully", "success");
       this.setImageDataFlag(false, null, "", null, "");
     },
@@ -584,8 +446,9 @@ export default {
       await this.deleteVideo(this.videoId);
 
       switch (this.openedFor) {
-        case "vid_content":
-          this.serviceColumn.vid_content.splice(this.videoIndex, 1);
+        case "vid_main":
+          this.slide.vid_main = "";
+          this.editData.vid_main = "";
           break;
 
         default:
@@ -607,27 +470,25 @@ export default {
   beforeMount() {
     if (
       !this.$router.history.current.params.data &&
-      this.$route.name === "Edit Service Column"
+      this.$route.name === "Edit Home Hero Slide"
     )
       this.$router.push({
-        path: "/dashboard/services"
+        path: "/dashboard/home-hero-slides"
       });
   },
   mounted() {
-    if (this.$route.name === "Edit Service Column") {
-      this.serviceColumn.order = this.editData.order;
-      this.serviceColumn.type = this.editData.type;
-      this.serviceColumn.ratio = this.editData.ratio;
-      this.serviceColumn.fillable = this.editData.fillable;
-      this.serviceColumn.isAutoPlay = this.editData.vid_content[0]
-        ? this.editData.vid_content[0].is_auto_play
+    if (this.$route.name === "Edit Home Hero Slide") {
+      this.slide.title = this.editData.title;
+      this.slide.description = this.editData.description;
+      this.slide.order = this.editData.order;
+      this.slide.url = this.editData.url || "";
+      this.slide.type = this.editData.type;
+      this.slide.isEnabled = this.editData.is_enabled;
+      this.slide.isAutoPlay = this.editData.vid_main
+        ? this.editData.vid_main.is_auto_play
         : false;
-      this.serviceColumn.img_content = this.editData.img_content;
-      this.serviceColumn.vid_content = this.editData.vid_content;
-      if (this.editData.type === SERVICE_COLUMNS_CONTENT_TYPES.TITLE)
-        this.serviceColumn.title = this.editData.content;
-      if (this.editData.type === SERVICE_COLUMNS_CONTENT_TYPES.DESCRIPTION)
-        this.serviceColumn.description = this.editData.content;
+      this.slide.img_main = this.editData.img_main || "";
+      this.slide.vid_main = this.editData.vid_main || "";
       this.setRequiredFieldsAccrodingToContentType(this.editData.type);
     }
   },

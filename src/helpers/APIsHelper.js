@@ -931,7 +931,7 @@ const fetchHomeHeroSlides = async data => {
     const response = await request({
       query: QUERY.HOME_HERO_SLIDES(data)
     });
-    return response.data.data.homeSlides;
+    return response.data.data.homeSliders;
   } catch (error) {
     throw error;
   }

@@ -14,8 +14,13 @@ const mutations = {
     currentState.isHeroSliderFetched = flag;
   },
   [types.home.mutations.REMOVE_DELETED_HERO_SLIDER]: (currentState, index) => {
-    currentState.serviceRow.columns.splice(index, 1);
+    currentState.heroSlider.splice(index, 1);
   }
+};
+
+const showHeaderAndFooter = (commit, flag) => {
+  commit(types.app.mutations.SET_SHOW_HEADER_FLAG, flag);
+  commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, flag);
 };
 
 const fetchHomeHeroSlidesData = async ({ commit }, payload) => {
@@ -23,7 +28,7 @@ const fetchHomeHeroSlidesData = async ({ commit }, payload) => {
   if (showSpinner) commit(types.app.mutations.SET_SPINNER_FLAG, true);
   try {
     const response = await APIs.fetchHomeHeroSlides(data);
-    commit(types.home.mutations.SET_HERO_SLIDES, response);
+    commit(types.home.mutations.SET_HERO_SLIDES, response.data);
     commit(types.home.mutations.SET_IS_HERO_SLIDES_FETCHED, true);
     if (requestSource === "website")
       commit(types.app.mutations.SET_SHOW_HEADER_FLAG, true);

@@ -13,7 +13,6 @@
 
     <div class="work-carousel__carousel-container">
       <WorkSlider
-        :autoPlay="false"
         :slides="homePageWorks"
         :timeInMillisecond="4000"
         customBulletsStyleClass="hero-bullets"

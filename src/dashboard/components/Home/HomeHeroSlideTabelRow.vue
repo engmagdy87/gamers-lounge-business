@@ -6,34 +6,24 @@
       <div class="description" v-html="rowData.description"></div>
     </td>
     <td>{{ rowData.order }}</td>
-    <td>{{ rowData.type.toLowerCase() }}</td>
-    <td>{{ rowData.is_featured ? "Yes" : "No" }}</td>
+    <td v-if="rowData.url">
+      <a :href="rowData.url" target="__blank">URL</a>
+    </td>
+    <td v-else></td>
+    <td v-if="rowData.type">{{ rowData.type.toLowerCase() }}</td>
+    <td v-else></td>
     <td>{{ rowData.is_enabled ? "Yes" : "No" }}</td>
 
-    <td
-      v-if="rowData.type === MEDIA_TYPES.VIDEO && rowData.vid_main.length > 0"
-    >
-      {{ rowData.vid_main[0].is_auto_play ? "Yes" : "No" }}
+    <td v-if="rowData.type === MEDIA_TYPES.VIDEO && rowData.vid_main">
+      {{ rowData.vid_main.is_auto_play ? "Yes" : "No" }}
     </td>
     <td v-else></td>
     <td v-if="rowData.img_main">
-      <a
-        v-for="(img, i) in rowData.img_main"
-        :href="img.url"
-        :key="i"
-        target="__blank"
-        >IMG{{ i + 1 }}</a
-      >
+      <a :href="rowData.img_main.url" target="__blank">IMG</a>
     </td>
     <td v-else />
     <td v-if="rowData.vid_main">
-      <a
-        v-for="(vid, i) in rowData.vid_main"
-        :href="vid.url"
-        :key="i"
-        target="__blank"
-        >VID{{ i + 1 }}</a
-      >
+      <a :href="rowData.vid_main.url" target="__blank">VID</a>
     </td>
     <td v-else />
     <td class="table-actions">

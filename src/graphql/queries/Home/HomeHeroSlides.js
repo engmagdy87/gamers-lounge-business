@@ -1,8 +1,8 @@
-const HOME_HERO_SLIDES = ({ isEnabled = null, isFeatured = null }) => `
+const HOME_HERO_SLIDES = ({ isEnabled = null }) => `
 query{
    homeSliders(first: 100, page: 1,orderBy: { field: "order", order: ASC },${
      isEnabled ? "is_enabled:true" : ""
-   },${isFeatured ? "is_featured:true" : ""}) {       
+   }) {       
        data{
         id
         title
@@ -11,6 +11,7 @@ query{
         is_featured
         is_enabled
         type
+        url
         img_main{
            id
            url

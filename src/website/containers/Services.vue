@@ -1,8 +1,6 @@
 <template>
   <div class="services-wrapper">
-    
     <ServicesMainPage />
-
   </div>
 </template>
 
@@ -20,6 +18,4 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/sass/website/containers/services.scss";
 @import "../../assets/sass/website/color-palette.scss";
-
 </style>
-

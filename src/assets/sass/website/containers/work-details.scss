@@ -5,7 +5,7 @@
 .work-details-wrapper {
   background-color: $primary;
   height: max-content;
-  margin-top: -$header-height;
+  // margin-top: -$header-height;
   min-height: calc(100vh - #{$footer-height});
   @include is-mobile {
     margin-top: -$header-height-mobile - 45;
@@ -19,9 +19,11 @@
     max-height: 730px;
     overflow: hidden;
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 80%;
+    margin: auto;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
     color: $header-item;
     img {
       width: 100%;
@@ -37,9 +39,13 @@
     &__title {
       font-family: "Segoe UI Bold";
       position: absolute;
-      width: 100%;
-      text-align: center;
-      top: 45%;
+      width: 80%;
+      margin: auto;
+      margin-top: 1%;
+      text-align: left;
+      left: 0;
+      bottom: 0;
+      font-size: 1.5rem;
       @include is-extra-small-mobile {
         font-size: 1.5rem;
       }
@@ -54,9 +60,10 @@
       }
     }
     &__description {
-      position: absolute;
-      width: 100%;
-      text-align: center;
+      // position: absolute;
+      width: 80%;
+      // margin: auto;
+      text-align: left;
       margin-top: 10px;
       font-size: 1.2rem;
       @include is-extra-small-mobile {
@@ -74,9 +81,11 @@
     }
   }
   &__cover-statistics {
-    position: absolute;
+    // position: absolute;
     display: flex;
-    bottom: 8%;
+    justify-content: center;
+    align-items: center;
+    // bottom: 0;
     transition: all 0.5s ease-in-out;
     @include is-extra-small-mobile {
       bottom: 1%;
@@ -101,12 +110,12 @@
       font-family: "Segoe UI Bold";
       position: relative;
       text-align: center;
-      padding: 0 50px 0 50px;
+      padding: 0 35px;
       &::after {
         content: "";
         width: 3px;
         height: 60%;
-        background-color: $accent;
+        // background-color: $accent;
         position: absolute;
         right: 0;
         top: 10px;
@@ -128,7 +137,7 @@
       }
       p {
         color: $accent;
-        font-size: 1.5rem;
+        font-size: 1.1rem;
         text-transform: uppercase;
         margin: 0;
         @include is-extra-small-mobile {
@@ -138,10 +147,10 @@
           font-size: 1rem;
         }
         @include is-tablet {
-          font-size: 1.2rem;
+          font-size: 1rem;
         }
         @include is-desktop {
-          font-size: 1.3rem;
+          font-size: 1.1rem;
         }
       }
     }

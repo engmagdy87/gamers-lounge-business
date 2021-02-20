@@ -180,11 +180,12 @@ $carousel-height: 500px;
     &__title {
       font-family: "Segoe UI Bold";
       font-size: 2.4rem;
-      height: 48px;
-      width: max-content;
+      height: max-content;
+      width: 60%;
       position: absolute;
       top: 0;
       margin-top: 0;
+      word-wrap: break-word;
       @include is-extra-small-mobile {
         font-size: 1.2rem;
         left: 0;
@@ -212,7 +213,7 @@ $carousel-height: 500px;
         content: "";
         position: absolute;
         bottom: 0;
-        top: 55px;
+        // top: 55px;
         left: 0px;
         height: 4px;
         width: 55%;
@@ -222,6 +223,7 @@ $carousel-height: 500px;
     &__content {
       position: absolute;
       top: 80px;
+      margin-top: 15px;
       width: 50%;
       height: 30%;
       font-size: 1.2rem;
@@ -231,7 +233,7 @@ $carousel-height: 500px;
         font-size: 1rem;
         left: 0;
         * {
-          word-break: break-all;
+          word-wrap: break-word;
         }
       }
       @include is-mobile {

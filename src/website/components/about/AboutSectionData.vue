@@ -7,7 +7,7 @@
         class="row m-0 p-0 w-100"
       >
         <div
-          v-for="(column, colId) in row.columns"
+          v-for="column in row.columns"
           :key="column.index"
           :style="{ width: getWidth(column.ratio) }"
         >
@@ -21,9 +21,9 @@
             v-else-if="
               column.type === ABOUT_COLUMNS_TYPES.IMAGE && column.fillable
             "
-            v-for="img in column.img_content"
+            v-for="(img, i) in column.img_content"
             :key="img.id"
-            @click="openImageModal(rowId, colId)"
+            @click="openImageModal(rowId, i)"
             style="cursor:pointer"
             class="about-section-wrapper__inside--is-image"
             :style="{ 'background-image': 'url(' + img.url + ')' }"
@@ -38,6 +38,7 @@
             :key="video.id"
           >
             <video
+              preload="auto"
               :id="`video${video.id}`"
               :src="video.url"
               width="100%"
@@ -103,7 +104,7 @@ export default {
       showImageModal: false,
       targetImageIndeces: {
         rowId: null,
-        colId: null
+        imageIndex: null
       },
       targetImageUrl: ""
     };
@@ -119,6 +120,11 @@ export default {
     }
   },
   methods: {
+    getImages(rowId) {
+      return this.section.rows[rowId].columns.filter(
+        col => col.type === ABOUT_COLUMNS_TYPES.IMAGE
+      );
+    },
     getWidth(ratio) {
       return isDeviceSmart() ? "100%" : ratio + "%";
     },
@@ -141,32 +147,32 @@ export default {
     setShowImageModal(flag) {
       this.showImageModal = flag;
     },
-    openImageModal(rowId, colId) {
+    openImageModal(rowId, imageIndex) {
       this.targetImageIndeces = {
         ...this.targetImageIndeces,
         rowId,
-        colId
+        imageIndex
       };
-      this.targetImageUrl = this.section.rows[rowId].columns[
-        colId
+      this.targetImageUrl = this.getImages(rowId)[
+        imageIndex
       ].img_content[0].url;
       this.setShowImageModal(true);
     },
     setImageIndex(dir) {
-      const { rowId, colId } = this.targetImageIndeces;
-      const imagesLength = this.section.rows[rowId].columns.length;
+      const { rowId, imageIndex } = this.targetImageIndeces;
+      const imagesLength = this.getImages(rowId).length;
 
       if (dir === "next")
         this.targetImageIndeces = {
           ...this.targetImageIndeces,
-          colId: colId === imagesLength - 1 ? 0 : colId + 1
+          imageIndex: imageIndex === imagesLength - 1 ? 0 : imageIndex + 1
         };
       else
-        this.targetImageIndeces.colId =
-          colId === 0 ? imagesLength - 1 : colId - 1;
+        this.targetImageIndeces.imageIndex =
+          imageIndex === 0 ? imagesLength - 1 : imageIndex - 1;
 
-      this.targetImageUrl = this.section.rows[rowId].columns[
-        this.targetImageIndeces.colId
+      this.targetImageUrl = this.getImages(rowId)[
+        this.targetImageIndeces.imageIndex
       ].img_content[0].url;
     }
   },

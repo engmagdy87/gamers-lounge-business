@@ -2,13 +2,13 @@
   <div>
     <div class="work-details-wrapper" v-if="isWebsiteWorkFetched">
       <div class="work-details-wrapper__cover-container">
-        <img :src="websiteWork.img_cover.url" :alt="websiteWork.title" />
+        <!-- <img :src="websiteWork.img_cover.url" :alt="websiteWork.title" /> -->
         <h1 class="work-details-wrapper__cover-container__title">
           {{ websiteWork.title }}
-          <p
+          <!-- <p
             class="description-container work-details-wrapper__cover-container__description"
             v-html="websiteWork.description"
-          ></p>
+          ></p> -->
         </h1>
 
         <div class="work-details-wrapper__cover-statistics">
@@ -28,9 +28,9 @@
       </div>
       <WorkDetails :websiteWork="websiteWork" v-if="websiteWork.sections" />
     </div>
-    <Intersect @enter="loadMoreWorkSections" v-if="worksPage > 0"
+    <Intersect @enter="loadMoreWorkSections" v-show="worksPage > 0"
       ><div class="threshold">
-        <Loading :showLoading="showLoading" />
+        <Loading :showLoading="showLoading" v-show="worksPage > 1" />
       </div>
     </Intersect>
   </div>

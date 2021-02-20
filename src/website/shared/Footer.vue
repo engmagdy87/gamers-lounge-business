@@ -32,7 +32,7 @@
         </div>
 
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 footer-social-media">
-          <h5 class="footer-followus">Follow US</h5>
+          <h5 class="footer-followus">Follow Us</h5>
 
           <div class="social-media row">
             <div

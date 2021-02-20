@@ -317,7 +317,8 @@ const routes = [
       store.commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, false);
       const token = getTokenCookie();
       const isUserAuthenticatedFlag = await getUserAuthenticatedFlag();
-      if (token && isUserAuthenticatedFlag) next("/dashboard");
+      if (token !== undefined && isUserAuthenticatedFlag !== null)
+        next("/dashboard");
       else next();
     }
   },
@@ -330,14 +331,23 @@ const routes = [
       store.commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, false);
       const token = getTokenCookie();
       const isUserAuthenticatedFlag = await getUserAuthenticatedFlag();
-      if (!token || !isUserAuthenticatedFlag) next("/login");
+      if (token === undefined || isUserAuthenticatedFlag === null)
+        next("/login");
       else next();
     },
     children: [
       {
         path: "overview",
         name: "Overview",
-        component: Overview
+        component: Overview,
+        beforeEnter: async (to, from, next) => {
+          store.commit(types.app.mutations.SET_SHOW_HEADER_FLAG, false);
+          store.commit(types.app.mutations.SET_SHOW_FOOTER_FLAG, false);
+          const token = getTokenCookie();
+          const isUserAuthenticatedFlag = await getUserAuthenticatedFlag();
+          if (!token || !isUserAuthenticatedFlag) next("/login");
+          else next();
+        }
       },
       {
         path: "departments",

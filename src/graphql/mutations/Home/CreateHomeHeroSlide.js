@@ -3,9 +3,9 @@ const buildQuery = (heroSlideInfo, imagesData, videosData) => {
     title,
     description,
     order,
-    is_featured,
-    is_enabled,
+    isEnabled,
     type,
+    url,
     isAutoPlay
   } = heroSlideInfo;
 
@@ -38,8 +38,9 @@ const buildQuery = (heroSlideInfo, imagesData, videosData) => {
            title: "${title}"
            description: "${description}"
            order: ${order}
-           is_featured: ${is_featured}
-           is_enabled: ${is_enabled}
+           url: "${url}"
+           is_featured: false
+           is_enabled: ${isEnabled}
            type: ${type}
            ${imagesKeys}
            ${videosKeys}
