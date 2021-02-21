@@ -8,11 +8,14 @@ const buildQuery = (serviceInfo, imagesData) => {
     is_admin_mode_enabled
   } = serviceInfo;
 
-  let queryParams = "($img_card: Upload!,$img_cover: Upload!,";
+  let queryParams = "($img_card: Upload!,";
   let imagesKeys = `images: {
-            img_card: { upload: { file: $img_card } }
-            img_cover: { upload: { file: $img_cover } }`;
+            img_card: { upload: { file: $img_card } }`;
 
+  if (imagesData.img_cover) {
+    queryParams += "$img_cover: Upload!,";
+    imagesKeys += "img_cover: { upload: { file: $img_cover } }";
+  }
   if (imagesData.img_slider) {
     queryParams += "$img_slider: Upload!,";
     imagesKeys += "img_slider: { upload: { file: $img_slider } }";

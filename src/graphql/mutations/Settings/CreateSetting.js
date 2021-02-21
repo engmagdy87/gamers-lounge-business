@@ -1,4 +1,28 @@
-const buildQuery = imagesData => {
+const buildQuery = (settingsInfo, imagesData) => {
+  const { services_title, services_description } = settingsInfo;
+  if (!imagesData)
+    return `mutation {
+    updateSetting(
+       id: ${id} 
+       input: {          
+          services_title: "${services_title}"
+          services_description: "${services_description}"
+       }
+    ) {
+       id          
+       services_title
+       services_description 
+       img_home_cover {
+        id
+        url
+       }
+       img_services_cover {
+         id
+         url
+       }  
+    }
+ } 
+  `;
   //********************/
   const imagesKeys = Object.keys(imagesData);
   let queryParams = "(";
@@ -19,10 +43,14 @@ const buildQuery = imagesData => {
   return `mutation${queryParams} {
     createSetting(
        input: {          
+          services_title: "${services_title}"
+          services_description: "${services_description}"
           ${queryKeys}
        }
     ) {
        id             
+       services_title
+       services_description
        img_home_cover {
         id
         url
@@ -36,6 +64,7 @@ const buildQuery = imagesData => {
   `;
 };
 
-const CREATE_SETTING = imagesData => buildQuery(imagesData);
+const CREATE_SETTING = (settingsInfo, imagesData) =>
+  buildQuery(settingsInfo, imagesData);
 
 export default CREATE_SETTING;

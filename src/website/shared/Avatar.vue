@@ -18,7 +18,9 @@
     >
       <ul class="avatar-wrapper__navLinks">
         <li>
-          <a href="/dashboard">Dashboard</a>
+          <a href="/dashboard" target="__blank" @click="handleMenuVisibility"
+            >Dashboard</a
+          >
         </li>
         <li>
           <a href="/profile">Profile</a>

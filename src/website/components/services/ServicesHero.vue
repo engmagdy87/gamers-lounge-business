@@ -8,12 +8,8 @@
           <HalfClippedShape>
             <template #content>
               <div class="services-container__heroContent">
-                <h1>FEEL THE EXCITEMENT OF OUR GAMES</h1>
-                <p>
-                  Gamers Lounge is the main catalyst to establish the Esports
-                  scene In the Middle East & North Africa regions, Playing an
-                  important role to unify the gaming community
-                </p>
+                <h1>{{ settings.services_title }}</h1>
+                <p v-html="settings.services_description"></p>
               </div>
             </template>
           </HalfClippedShape>
@@ -42,12 +38,15 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchHomeCoverImage: types.settings.actions.FETCH_SETTINGS
+      fetchHomeCoverImageAndTexts: types.settings.actions.FETCH_SETTINGS
     })
   },
   mounted() {
-    if (!this.isSettingsDataFetched)
-      this.fetchHomeCoverImage({ isService: true });
+    const flags = {
+      isServiceTexts: true,
+      isService: true
+    };
+    if (!this.isSettingsDataFetched) this.fetchHomeCoverImageAndTexts(flags);
   }
 };
 </script>

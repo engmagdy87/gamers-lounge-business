@@ -1087,9 +1087,9 @@ const fetchSettings = async data => {
 };
 
 const createSetting = async data => {
-  const { imagesData } = data;
+  const { imagesData, ...settingsInfo } = data;
 
-  const query = MUTATION.CREATE_SETTING(imagesData);
+  const query = MUTATION.CREATE_SETTING(settingsInfo, imagesData);
 
   try {
     const response = await requestMultipart(
@@ -1104,10 +1104,10 @@ const createSetting = async data => {
 
 const updateSetting = async data => {
   let response;
-  const { imagesData } = data;
+  const { imagesData, ...settingsInfo } = data;
 
   try {
-    const query = MUTATION.UPDATE_SETTING(data);
+    const query = MUTATION.UPDATE_SETTING(settingsInfo, imagesData);
     if (imagesData)
       response = await requestMultipart(
         constructFormDataForMultipleFile(imagesData, query),

@@ -165,14 +165,18 @@ export default {
       if (video.is_auto_play) {
         e.preventDefault();
         let elem = document.getElementById(`video${video.id}`);
-
+        elem.addEventListener("fullscreenchange", () => {
+          elem.muted = !document.fullscreenElement;
+        });
         if (!document.fullscreenElement) {
+          elem.muted = false;
           elem.requestFullscreen().catch(err => {
             alert(
               `Error attempting to enable full-screen mode: ${err.message} (${err.name})`
             );
           });
         } else {
+          elem.muted = true;
           document.exitFullscreen();
         }
       }
@@ -199,7 +203,8 @@ export default {
       ].img_content[0].url;
       this.setShowImageModal(true);
     },
-    setImageIndex(dir) {
+    setImageIndex(e, dir) {
+      e.stopPropagation();
       const { rowId, imageIndex } = this.targetImageIndeces;
       const imagesLength = this.getImages(rowId).length;
 

@@ -1,18 +1,18 @@
 <template>
-  <div ref="imageModal" class="image-modal">
+  <div ref="imageModal" class="image-modal" @click="closeModal">
     <span class="close" @click="closeModal">&times;</span>
     <img
       class="image-modal__previous"
       src="/images/next.svg"
       alt="previous"
-      @click="setImageIndex('prev')"
+      @click="e => setImageIndex(e, 'prev')"
     />
     <img class="image-modal-content" :src="imageUrl" />
     <img
       class="image-modal__next"
       src="/images/next.svg"
       alt="next"
-      @click="setImageIndex('next')"
+      @click="e => setImageIndex(e, 'next')"
     />
   </div>
 </template>

@@ -1,4 +1,8 @@
-const SETTINGS = ({ isService, isWork, isHome, isProfile }) => {
+const SETTINGS = ({ isService, isWork, isHome, isProfile, isServiceTexts }) => {
+  const serviceTextsQuery = isServiceTexts
+    ? `services_title
+       services_description`
+    : "";
   const serviceQuery = isService
     ? `img_services_cover{
         id
@@ -28,6 +32,7 @@ const SETTINGS = ({ isService, isWork, isHome, isProfile }) => {
 query{
     setting{
        id
+       ${serviceTextsQuery}       
        ${serviceQuery}       
        ${homeQuery}       
        ${workQuery}       

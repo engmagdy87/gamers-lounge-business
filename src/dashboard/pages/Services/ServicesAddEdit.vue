@@ -121,9 +121,7 @@
       <div class="row mt-3 mb-3">
         <div class="col">
           <div>
-            <label for="logo" class="mr-5"
-              >Choose Cover Image<span class="error-message"> *</span></label
-            >
+            <label for="logo" class="mr-5">Choose Cover Image</label>
             <input
               type="file"
               id="logo"
@@ -136,13 +134,13 @@
               v-if="
                 editData !== undefined &&
                   operation === 'Edit Service' &&
-                  editData.img_cover !== ''
+                  editData.img_cover !== '' &&
+                  editData.img_cover !== null
               "
               :image="editData.img_cover"
               :setShowDeleteDialogFlag="setImageDataFlag"
               openedFor="img_cover"
             />
-            <ErrorMessage :fieldErrors="errors.img_cover" />
           </div>
         </div>
       </div>
@@ -246,7 +244,7 @@ export default {
         is_admin_mode_enabled: { isRequired: false },
         description: { isRequired: false },
         "card image": { isRequired: true },
-        "cover image": { isRequired: true },
+        "cover image": { isRequired: false },
         "slider image": { isRequired: false }
       },
       aliases: {
@@ -318,14 +316,19 @@ export default {
           await this.updateService({ ...payload, id: this.editData.id });
           this.notifyVue("Service Updated Successfully", "success");
         } else {
+          let imagesData = {};
+          if (this.service.img_cover !== "")
+            imagesData = { ...imagesData, img_cover: this.service.img_cover };
+
           payload = {
             ...payload,
             imagesData: {
+              ...imagesData,
               img_card: this.service.img_card,
-              img_cover: this.service.img_cover,
               img_slider: this.service.img_slider
             }
           };
+
           await this.createService(payload);
           this.notifyVue("Service Created Successfully", "success");
         }

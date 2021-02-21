@@ -21,6 +21,35 @@
       </div>
     </div>
     <form>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <base-input
+            type="text"
+            label="Title"
+            placeholder="Enter Title"
+            v-model="settings.title"
+            :autofocus="true"
+            :disabled="!editMode"
+          >
+          </base-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Description</label>
+            <vue-pell-editor
+              :actions="editorOptions"
+              :style-with-css="false"
+              placeholder=""
+              v-model="settings.description"
+              v-if="editMode"
+              class="about-dashboard"
+            />
+            <div class="description" v-html="settings.description" v-else></div>
+          </div>
+        </div>
+      </div>
       <div class="row mt-3 mb-3">
         <div class="col">
           <div>
@@ -104,12 +133,16 @@
 <script>
 import { mapActions, mapState } from "vuex";
 // import ErrorMessage from "../../../website/shared/ErrorMessage";
+import editorOptions from "../../../dashboard/wysiwyg-factory/options";
 import DeleteDialog from "../../../website/shared/DeleteDialog";
 import ImagePreview from "../../../website/shared/ImagePreview.vue";
 import isValidationErrorExist from "../../../helpers/FormValidation";
+import { reformatHTMLString } from "../../../helpers/StringsHelper";
 import types from "../../../store/types";
 
 const emptySettings = {
+  title: "",
+  description: "",
   img_services_cover: "",
   img_home_cover: ""
 };
@@ -126,13 +159,18 @@ export default {
       imageId: null,
       errors: {},
       validation: {
+        title: { isRequired: false },
+        description: { isRequired: false },
         "home cover image": { isRequired: false },
         "serives cover image": { isRequired: false }
       },
       aliases: {
+        title: "title",
+        description: "description",
         img_home_cover: "home cover image",
         img_services_cover: "serives cover image"
-      }
+      },
+      editorOptions
     };
   },
   computed: {
@@ -144,6 +182,9 @@ export default {
   watch: {
     settingsData() {
       if (this.settingsData) {
+        this.settings.title = this.settingsData.services_title || "";
+        this.settings.description =
+          this.settingsData.services_description || "";
         this.settings.img_home_cover = this.settingsData.img_home_cover || "";
         this.settings.img_services_cover =
           this.settingsData.img_services_cover || "";
@@ -175,7 +216,10 @@ export default {
       this.errors = { ...errorObject.errors };
       if (errorObject.length !== 0) return;
       try {
-        let payload = {};
+        let payload = {
+          services_title: this.settings.title,
+          services_description: reformatHTMLString(this.settings.description)
+        };
         if (Object.keys(this.settingsData).length !== 0) {
           let imagesData = {};
           const { img_home_cover, img_services_cover } = this.settings;
@@ -221,11 +265,18 @@ export default {
         }
         this.editMode = false;
         this.errors = {};
-        const { img_home_cover, img_services_cover } = response;
+        const {
+          img_home_cover,
+          img_services_cover,
+          services_title,
+          services_description
+        } = response;
         this.$refs.img_home_cover.value = null;
         this.$refs.img_services_cover.value = null;
 
         this.settings = {
+          title: services_title,
+          description: services_description,
           img_home_cover,
           img_services_cover
         };
@@ -281,7 +332,8 @@ export default {
     const requestSource = {
       isService: true,
       isHome: true,
-      isProfile: true
+      isProfile: true,
+      isServiceTexts: true
     };
     this.fetchSettings(requestSource);
   },

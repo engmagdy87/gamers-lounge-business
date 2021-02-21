@@ -164,9 +164,7 @@
       <div class="row mt-3 mb-3">
         <div class="col">
           <div>
-            <label for="logo" class="mr-5"
-              >Choose Cover Image<span class="error-message"> *</span></label
-            >
+            <label for="logo" class="mr-5">Choose Cover Image</label>
             <input
               type="file"
               id="logo"
@@ -179,13 +177,13 @@
               v-if="
                 editData !== undefined &&
                   operation === 'Edit Work' &&
-                  editData.img_cover !== ''
+                  editData.img_cover !== '' &&
+                  editData.img_cover !== null
               "
               :image="editData.img_cover"
               :setShowDeleteDialogFlag="setImageDataFlag"
               openedFor="img_cover"
             />
-            <ErrorMessage :fieldErrors="errors.img_cover" />
           </div>
         </div>
       </div>
@@ -297,7 +295,7 @@ export default {
         description: { isRequired: false },
         statistics: { isRequired: false },
         "card image": { isRequired: true },
-        "cover image": { isRequired: true },
+        "cover image": { isRequired: false },
         "slider image": { isRequired: false }
       },
       aliases: {
@@ -373,14 +371,19 @@ export default {
           await this.updateWork({ ...payload, id: this.editData.id });
           this.notifyVue("Work Updated Successfully", "success");
         } else {
+          let imagesData = {};
+          if (this.work.img_cover !== "")
+            imagesData = { ...imagesData, img_cover: this.work.img_cover };
+
           payload = {
             ...payload,
             imagesData: {
+              ...imagesData,
               img_card: this.work.img_card,
-              img_cover: this.work.img_cover,
               img_slider: this.work.img_slider
             }
           };
+
           await this.createWork(payload);
           this.notifyVue("Work Created Successfully", "success");
         }
