@@ -248,7 +248,10 @@ const showHeaderAndFooterForWebsite = (next, flag = true) => {
 };
 const userHasPermission = (next, route) => {
   if (userData.permissions.includes(route)) next();
-  else notifyVue("You are not authorized to view this page", "danger");
+  else {
+    notifyVue("You are not authorized to view this page", "danger");
+    next("/dashboard");
+  }
 };
 const getUserAuthenticatedFlag = async () => {
   const response = await isUserAuthenticated();
