@@ -1,5 +1,6 @@
 @import "../../mixins.scss";
 @import "../../color-palette.scss";
+@import "../../variables.scss";
 @import "../../shared/single-clipped-shape.scss";
 
 .hero-carousel {
@@ -25,6 +26,7 @@
     position: relative;
     height: 100%;
     width: 60%;
+    margin: 0 $half-clipped-shape-padding;
     @include is-extra-small-mobile {
       width: 100%;
       height: 40%;

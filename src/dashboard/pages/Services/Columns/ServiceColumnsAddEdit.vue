@@ -462,12 +462,12 @@ export default {
     },
     setVideoValidation(e) {
       if (e.target.checked) {
-        if (this.serviceColumn.type === WORK_COLUMNS_CONTENT_TYPES.VIDEO) {
+        if (this.serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.VIDEO) {
           this.validation["video external"].isRequired = true;
           this.validation["videos content"].isRequired = false;
         }
       } else {
-        if (this.serviceColumn.type === WORK_COLUMNS_CONTENT_TYPES.VIDEO) {
+        if (this.serviceColumn.type === SERVICE_COLUMNS_CONTENT_TYPES.VIDEO) {
           this.validation["video external"].isRequired = false;
           this.validation["videos content"].isRequired = true;
         }

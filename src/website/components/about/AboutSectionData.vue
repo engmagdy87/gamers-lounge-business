@@ -38,7 +38,7 @@
           >
             <iframe
               width="100%"
-              height="100%"
+              :height="getHeight(column.ratio, row.columns.length)"
               :src="getLiveVideoEmbedFormatter(column.vid_extenral)"
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -150,6 +150,13 @@ export default {
     },
     getWidth(ratio) {
       return isDeviceSmart() ? "100%" : ratio + "%";
+    },
+    getHeight(ratio, columnsCount) {
+      if (columnsCount === 1)
+        return isDeviceSmart()
+          ? "300px"
+          : (document.body.clientHeight * ratio) / 150 + "px";
+      else return "100%";
     },
     toggleFullScreenMode(e, video) {
       if (video.is_auto_play) {
