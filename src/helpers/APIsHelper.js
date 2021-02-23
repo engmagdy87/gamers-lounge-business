@@ -42,10 +42,10 @@ const fetchWebsiteSponsors = async data => {
   }
 };
 
-const fetchJobs = async () => {
+const fetchJobs = async data => {
   try {
     const response = await request({
-      query: QUERY.JOBS()
+      query: QUERY.JOBS(data)
     });
     return response.data.data.jobs;
   } catch (error) {

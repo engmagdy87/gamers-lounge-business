@@ -1,16 +1,18 @@
-const UPDATE_JOB = (
-   { jobId,
-      title,
-      description,
-      requirements,
-      departmentId }
-) => `mutation {
+const UPDATE_JOB = ({
+  jobId,
+  title,
+  description,
+  requirements,
+  departmentId,
+  isEnabled
+}) => `mutation {
     updateJob(
         id: ${jobId},
         input: {
           title: "${title}"
           description: "${description}"
           requirements: "${requirements}"
+          is_enabled: ${isEnabled}
           department: { connect: ${departmentId} }
        }
     ) {

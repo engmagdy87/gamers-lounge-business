@@ -9,6 +9,7 @@
       <div class="description" v-html="rowData.requirements"></div>
     </td>
     <td>{{ rowData.department.name }}</td>
+    <td>{{ rowData.is_enabled ? "Yes" : "No" }}</td>
     <td class="table-actions">
       <img src="/images/edit.svg" alt="edit" @click="redirectTo" />
       <img

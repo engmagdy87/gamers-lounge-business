@@ -45,6 +45,19 @@
             <ErrorMessage :fieldErrors="errors.departmentId" />
           </div>
         </div>
+        <div class="col-12 col-md-6 mt-auto mb-auto">
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="isEnabled"
+              v-model="job.isEnabled"
+            />
+            <label class="custom-control-label" for="isEnabled"
+              >Published</label
+            >
+          </div>
+        </div>
       </div>
       <div class="row">
         <div class="col">
@@ -99,7 +112,8 @@ const emptyJob = {
   title: "",
   description: "",
   requirements: "",
-  departmentId: "-1"
+  departmentId: "-1",
+  isEnabled: false
 };
 
 export default {
@@ -115,13 +129,15 @@ export default {
         title: { isRequired: true },
         description: { isRequired: true },
         requirements: { isRequired: true },
-        departmentId: { isRequired: true }
+        departmentId: { isRequired: true },
+        published: { isRequired: false }
       },
       aliases: {
         title: "title",
         description: "description",
         requirements: "requirements",
-        departmentId: "departmentId"
+        departmentId: "departmentId",
+        isEnabled: "published"
       },
       editorOptions
     };
@@ -152,7 +168,8 @@ export default {
           title: this.job.title,
           description: this.job.description,
           requirements: this.job.requirements,
-          departmentId: this.job.departmentId
+          departmentId: this.job.departmentId,
+          isEnabled: this.job.isEnabled
         };
         if (this.operation === "Edit Job") {
           await this.updateJob({ ...payload, jobId: this.editData.id });
@@ -194,6 +211,7 @@ export default {
       this.job.description = this.editData.description;
       this.job.requirements = this.editData.requirements;
       this.job.departmentId = this.editData.department.id;
+      this.job.isEnabled = this.editData.is_enabled;
     }
   },
   components: {

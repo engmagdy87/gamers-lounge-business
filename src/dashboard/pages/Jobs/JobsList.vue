@@ -51,6 +51,7 @@ export default {
           "Description",
           "Requirements",
           "Department",
+          "Published",
           "Actions"
         ]
       }
@@ -98,7 +99,8 @@ export default {
     DeleteDialog
   },
   mounted() {
-    this.fetchJobs();
+    const payload = { isEnabled: false, requestSource: "dashboard" };
+    this.fetchJobs(payload);
   }
 };
 </script>

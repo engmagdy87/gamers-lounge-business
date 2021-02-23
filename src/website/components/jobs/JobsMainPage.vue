@@ -61,7 +61,8 @@ export default {
     HalfClippedOutlineButton
   },
   mounted() {
-    if (!this.isJobsFetched) this.fetchJobs("website");
+    const payload = { isEnabled: true, requestSource: "website" };
+    if (!this.isJobsFetched) this.fetchJobs(payload);
     else {
       this.setShowHeaderFlag(true);
       this.setShowFooterFlag(true);
