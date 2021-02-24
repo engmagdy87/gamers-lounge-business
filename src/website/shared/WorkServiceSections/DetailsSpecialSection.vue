@@ -89,6 +89,7 @@
                 :height="400"
                 :width="500"
                 :border="0"
+                :onMainSlideClick="e => onMainSlideClick(e, column.img_content)"
               >
                 <Slide
                   v-for="(img, i) in column.img_content"
@@ -121,6 +122,7 @@
       :setShowImageModal="setShowImageModal"
       :imageUrl="targetImageUrl"
       :setImageIndex="setImageIndex"
+      :showNavigation="showNavigation"
     />
   </div>
 </template>
@@ -139,6 +141,7 @@ export default {
   data() {
     return {
       showImageModal: false,
+      showNavigation: false,
       targetImageIndeces: {
         rowId: null,
         colId: null
@@ -158,6 +161,11 @@ export default {
     }
   },
   methods: {
+    onMainSlideClick(e, images) {
+      this.targetImageUrl = images[e.index].url;
+      this.showNavigation = false;
+      this.setShowImageModal(true);
+    },
     getLiveVideoEmbedFormatter(url) {
       return liveVideoEmbedFormatter(url);
     },
@@ -191,13 +199,14 @@ export default {
       if (columnsCount === 1)
         return isDeviceSmart()
           ? "300px"
-          : (document.body.clientHeight * ratio) / 150 + "px";
+          : (document.body.clientHeight * ratio) / 120 + "px";
       else return "100%";
     },
     setShowImageModal(flag) {
       this.showImageModal = flag;
     },
     openImageModal(rowId, colId) {
+      this.showNavigation = true;
       this.targetImageIndeces = {
         ...this.targetImageIndeces,
         rowId,

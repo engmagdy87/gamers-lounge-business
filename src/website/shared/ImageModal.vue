@@ -5,6 +5,7 @@
       class="image-modal__previous"
       src="/images/next.svg"
       alt="previous"
+      v-if="showNavigation"
       @click="e => setImageIndex(e, 'prev')"
     />
     <img class="image-modal-content" :src="imageUrl" />
@@ -12,6 +13,7 @@
       class="image-modal__next"
       src="/images/next.svg"
       alt="next"
+      v-if="showNavigation"
       @click="e => setImageIndex(e, 'next')"
     />
   </div>
@@ -19,7 +21,13 @@
 
 <script>
 export default {
-  props: ["showImageModal", "setShowImageModal", "imageUrl", "setImageIndex"],
+  props: [
+    "showImageModal",
+    "setShowImageModal",
+    "imageUrl",
+    "setImageIndex",
+    "showNavigation"
+  ],
   methods: {
     closeModal() {
       this.setShowImageModal(false);

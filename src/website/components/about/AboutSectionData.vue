@@ -83,6 +83,7 @@
               :height="400"
               :width="500"
               :border="0"
+              :onMainSlideClick="e => onMainSlideClick(e, column.img_content)"
             >
               <Slide v-for="(img, i) in column.img_content" :index="i" :key="i">
                 <img :src="img.url" draggable="false" />
@@ -105,6 +106,7 @@
         :setShowImageModal="setShowImageModal"
         :imageUrl="targetImageUrl"
         :setImageIndex="setImageIndex"
+        :showNavigation="showNavigation"
       />
     </div>
   </div>
@@ -122,6 +124,7 @@ export default {
   data() {
     return {
       showImageModal: false,
+      showNavigation: false,
       targetImageIndeces: {
         rowId: null,
         colId: null
@@ -140,6 +143,11 @@ export default {
     }
   },
   methods: {
+    onMainSlideClick(e, images) {
+      this.targetImageUrl = images[e.index].url;
+      this.showNavigation = false;
+      this.setShowImageModal(true);
+    },
     getLiveVideoEmbedFormatter(url) {
       return liveVideoEmbedFormatter(url);
     },
@@ -153,7 +161,7 @@ export default {
       if (columnsCount === 1)
         return isDeviceSmart()
           ? "300px"
-          : (document.body.clientHeight * ratio) / 150 + "px";
+          : (document.body.clientHeight * ratio) / 120 + "px";
       else return "100%";
     },
     toggleFullScreenMode(e, video) {
@@ -180,6 +188,7 @@ export default {
       this.showImageModal = flag;
     },
     openImageModal(rowId, colId) {
+      this.showNavigation = true;
       this.targetImageIndeces = {
         ...this.targetImageIndeces,
         rowId,
@@ -197,7 +206,7 @@ export default {
         newColId = colId === columns.length - 1 ? 0 : colId + 1;
         let newCol = this.getImages(rowId)[newColId];
         while (1) {
-          if (newCol.type === WORK_COLUMNS_TYPES.IMAGE) break;
+          if (newCol.type === ABOUT_COLUMNS_TYPES.IMAGE) break;
 
           newColId = newColId === columns.length - 1 ? 0 : newColId + 1;
           newCol = this.getImages(rowId)[newColId];
@@ -206,7 +215,7 @@ export default {
         newColId = colId === 0 ? columns.length - 1 : colId - 1;
         let newCol = this.getImages(rowId)[newColId];
         while (1) {
-          if (newCol.type === WORK_COLUMNS_TYPES.IMAGE) break;
+          if (newCol.type === ABOUT_COLUMNS_TYPES.IMAGE) break;
 
           newColId = newColId === 0 ? columns.length - 1 : newColId - 1;
           newCol = this.getImages(rowId)[newColId];

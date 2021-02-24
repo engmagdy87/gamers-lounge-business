@@ -1,12 +1,12 @@
 <template>
   <header class="header-wrapper" v-if="isContactFetched">
     <div class="row header-wrapper__social-media">
-      <div class="col-12 col-sm-6 d-flex justify-content-center d-sm-block">
+      <!-- <div class="col-12 col-sm-6 d-flex justify-content-center d-sm-block">
         <a href="https://www.google.com" target="__blank" v-if="false">
           <HalfClippedOutlineButton text="GL Games" />
         </a>
-      </div>
-      <div class="col-6 d-none d-sm-flex justify-content-end">
+      </div> -->
+      <div class="w-100 d-none d-sm-flex justify-content-end">
         <div class="header-wrapper__social-media__logos">
           <img
             class="fb-logo"
@@ -48,7 +48,9 @@
             v-if="contact.img_twitch && contact.information.twitch_link !== ''"
           />
         </div>
-        <Avatar />
+        <div class="header-wrapper__avatar">
+          <Avatar />
+        </div>
       </div>
     </div>
     <div class="header-wrapper__main">
