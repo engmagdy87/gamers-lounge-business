@@ -41,6 +41,12 @@
               contact.img_youtube && contact.information.youtube_link !== ''
             "
           />
+          <img
+            :src="contact.img_twitch.url"
+            @click="goToLink(contact.information.twitch_link)"
+            alt="twitch"
+            v-if="contact.img_twitch && contact.information.twitch_link !== ''"
+          />
         </div>
         <Avatar />
       </div>

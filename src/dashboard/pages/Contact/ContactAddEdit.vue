@@ -96,12 +96,21 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12">
+        <div class="col-12 col-md-6">
           <base-input
             type="url"
             label="Google Maps Link"
             placeholder="Enter Google Maps Link"
             v-model="contact.googleMapsLink"
+            :disabled="!editMode"
+          />
+        </div>
+        <div class="col-12 col-md-6">
+          <base-input
+            type="text"
+            label="Twitch Link"
+            placeholder="Enter Twitch Link"
+            v-model="contact.twitchLink"
             :disabled="!editMode"
           />
         </div>
@@ -189,6 +198,34 @@
               :disabled="!editMode"
             />
             <!-- <ErrorMessage :fieldErrors="errors.img_twitter" /> -->
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3 mb-3">
+        <div class="col">
+          <div>
+            <label for="logo" class="mr-5">Choose Twitch Image</label>
+            <input
+              type="file"
+              id="logo"
+              accept="image/png, image/jpeg"
+              @change="e => setFile(e, 'img_twitch')"
+              ref="img_twitch"
+              :disabled="!editMode"
+            />
+            <br />
+            <ImagePreview
+              v-if="
+                contact.img_twitch !== '' &&
+                  contact.img_twitch !== null &&
+                  contact.img_twitch.url !== undefined
+              "
+              :image="contact.img_twitch"
+              :setShowDeleteDialogFlag="setImageDataFlag"
+              openedFor="img_twitch"
+              :disabled="!editMode"
+            />
+            <!-- <ErrorMessage :fieldErrors="errors.img_twitch" /> -->
           </div>
         </div>
       </div>
@@ -287,11 +324,13 @@ const emptyContact = {
   facebookLink: "",
   instagramLink: "",
   twitterLink: "",
+  twitchLink: "",
   youtubeLink: "",
   googleMapsLink: "",
   img_cover: "",
   img_facebook: "",
   img_twitter: "",
+  img_twitch: "",
   img_instagram: "",
   img_youtube: ""
 };
@@ -314,10 +353,12 @@ export default {
         facebookLink: { isRequired: false },
         instagramLink: { isRequired: false },
         twitterLink: { isRequired: false },
+        twitchLink: { isRequired: false },
         youtubeLink: { isRequired: false },
         googleMapsLink: { isRequired: false },
         img_facebook: { isRequired: false },
         img_twitter: { isRequired: false },
+        img_twitch: { isRequired: false },
         img_instagram: { isRequired: false },
         img_youtube: { isRequired: false },
         "cover image": { isRequired: true }
@@ -329,10 +370,12 @@ export default {
         facebookLink: "facebookLink",
         instagramLink: "instagramLink",
         twitterLink: "twitterLink",
+        twitchLink: "twitchLink",
         youtubeLink: "youtubeLink",
         googleMapsLink: "googleMapsLink",
         img_facebook: "img_facebook",
         img_twitter: "img_twitter",
+        img_twitch: "img_twitch",
         img_instagram: "img_instagram",
         img_youtube: "img_youtube",
         img_cover: "cover image"
@@ -356,6 +399,7 @@ export default {
           facebook_link,
           instagram_link,
           twitter_link,
+          twitch_link,
           youtube_link
         } = information;
 
@@ -365,12 +409,14 @@ export default {
         this.contact.facebookLink = facebook_link || "";
         this.contact.instagramLink = instagram_link || "";
         this.contact.twitterLink = twitter_link || "";
+        this.contact.twitchLink = twitch_link || "";
         this.contact.youtubeLink = youtube_link || "";
       }
       this.contact.googleMapsLink = this.contactData.map || "";
       this.contact.img_cover = this.contactData.img_cover || "";
       this.contact.img_facebook = this.contactData.img_facebook || "";
       this.contact.img_twitter = this.contactData.img_twitter || "";
+      this.contact.img_twitch = this.contactData.img_twitch || "";
       this.contact.img_instagram = this.contactData.img_instagram || "";
       this.contact.img_youtube = this.contactData.img_youtube || "";
     }
@@ -407,6 +453,7 @@ export default {
           facebookLink: this.contact.facebookLink,
           instagramLink: this.contact.instagramLink,
           twitterLink: this.contact.twitterLink,
+          twitchLink: this.contact.twitchLink,
           youtubeLink: this.contact.youtubeLink,
           map: this.contact.googleMapsLink
         };
@@ -417,6 +464,7 @@ export default {
             img_cover,
             img_facebook,
             img_twitter,
+            img_twitch,
             img_instagram,
             img_youtube
           } = this.contact;
@@ -434,6 +482,12 @@ export default {
             imagesData = {
               ...imagesData,
               img_twitter
+            };
+
+          if (!img_twitch.url && img_twitch !== "")
+            imagesData = {
+              ...imagesData,
+              img_twitch
             };
 
           if (!img_instagram.url && img_instagram !== "")
@@ -462,6 +516,7 @@ export default {
             img_cover,
             img_facebook,
             img_twitter,
+            img_twitch,
             img_instagram,
             img_youtube
           } = this.contact;
@@ -471,6 +526,8 @@ export default {
           if (img_facebook !== "") imagesData = { ...imagesData, img_facebook };
 
           if (img_twitter !== "") imagesData = { ...imagesData, img_twitter };
+
+          if (img_twitch !== "") imagesData = { ...imagesData, img_twitch };
 
           if (img_instagram !== "")
             imagesData = { ...imagesData, img_instagram };
@@ -497,6 +554,7 @@ export default {
         this.$refs.img_cover.value = null;
         this.$refs.img_facebook.value = null;
         this.$refs.img_twitter.value = null;
+        this.$refs.img_twitch.value = null;
         this.$refs.img_instagram.value = null;
         this.$refs.img_youtube.value = null;
 
@@ -507,6 +565,7 @@ export default {
           facebook_link,
           instagram_link,
           twitter_link,
+          twitch_link,
           youtube_link
         } = information;
 
@@ -517,6 +576,7 @@ export default {
           facebookLink: facebook_link,
           instagramLink: instagram_link,
           twitterLink: twitter_link,
+          twitchLink: twitch_link,
           youtubeLink: youtube_link,
           googleMapsLink,
           ...restOfData
@@ -547,6 +607,12 @@ export default {
           this.contactData.img_twitter = "";
           this.contact.img_twitter = "";
           this.$refs.img_twitter.value = null;
+          break;
+
+        case "img_twitch":
+          this.contactData.img_twitch = "";
+          this.contact.img_twitch = "";
+          this.$refs.img_twitch.value = null;
           break;
 
         case "img_instagram":

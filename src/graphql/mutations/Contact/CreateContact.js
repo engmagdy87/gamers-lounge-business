@@ -1,5 +1,6 @@
 const buildQuery = (contactInfo, imagesData) => {
-   if (!imagesData) return `mutation {
+  if (!imagesData)
+    return `mutation {
       createContactUs(
          input: {
             map: "${contactInfo.map}"
@@ -10,6 +11,7 @@ const buildQuery = (contactInfo, imagesData) => {
                facebook_link: "${contactInfo.facebookLink}"
                instagram_link: "${contactInfo.instagramLink}"
                twitter_link: "${contactInfo.twitterLink}"
+               twitch_link: "${contactInfo.twitchLink}"
                youtube_link: "${contactInfo.youtubeLink}"
             }
          }
@@ -23,6 +25,7 @@ const buildQuery = (contactInfo, imagesData) => {
             facebook_link
             instagram_link
             twitter_link
+            twitch_link
             youtube_link            
          }
          img_cover{
@@ -37,6 +40,10 @@ const buildQuery = (contactInfo, imagesData) => {
             id
             url
          }
+         img_twitch{
+            id
+            url
+         }
          img_instagram{
             id
             url
@@ -48,24 +55,24 @@ const buildQuery = (contactInfo, imagesData) => {
       }
    } 
     `;
-   //********************/
-   const imagesKeys = Object.keys(imagesData)
-   let queryParams = '('
-   let queryKeys = ''
-   imagesKeys.forEach(key => {
-      queryParams += `$${key}: Upload!,`
-   })
-   queryParams += ')'
-   //********************/   
-   if (imagesKeys.length > 0) {
-      queryKeys += 'images: {';
-      imagesKeys.forEach(imgKey => {
-         queryKeys += `${imgKey}: { upload: { file: $${imgKey} } }`
-      })
-      queryKeys += '}'
-   }
+  //********************/
+  const imagesKeys = Object.keys(imagesData);
+  let queryParams = "(";
+  let queryKeys = "";
+  imagesKeys.forEach(key => {
+    queryParams += `$${key}: Upload!,`;
+  });
+  queryParams += ")";
+  //********************/
+  if (imagesKeys.length > 0) {
+    queryKeys += "images: {";
+    imagesKeys.forEach(imgKey => {
+      queryKeys += `${imgKey}: { upload: { file: $${imgKey} } }`;
+    });
+    queryKeys += "}";
+  }
 
-   return `mutation${queryParams} {
+  return `mutation${queryParams} {
    createContactUs(
       input: {
          map: "${contactInfo.map}"
@@ -76,6 +83,7 @@ const buildQuery = (contactInfo, imagesData) => {
             facebook_link: "${contactInfo.facebookLink}"
             instagram_link: "${contactInfo.instagramLink}"
             twitter_link: "${contactInfo.twitterLink}"
+            twitch_link: "${contactInfo.twitchLink}"
             youtube_link: "${contactInfo.youtubeLink}"
          }
          ${queryKeys}
@@ -90,6 +98,7 @@ const buildQuery = (contactInfo, imagesData) => {
          facebook_link
          instagram_link
          twitter_link
+         twitch_link
          youtube_link
       }
       img_cover{
@@ -104,6 +113,10 @@ const buildQuery = (contactInfo, imagesData) => {
          id
          url
       }
+      img_twitch{
+         id
+         url
+      }
       img_instagram{
          id
          url
@@ -114,11 +127,10 @@ const buildQuery = (contactInfo, imagesData) => {
       }
    }
 } 
- `
-}
+ `;
+};
 
-const CREATE_CONTACT = (
-   contactInfo, imagesData
-) => buildQuery(contactInfo, imagesData)
+const CREATE_CONTACT = (contactInfo, imagesData) =>
+  buildQuery(contactInfo, imagesData);
 
 export default CREATE_CONTACT;

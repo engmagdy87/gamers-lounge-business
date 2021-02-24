@@ -10,10 +10,10 @@
             />
           </router-link>
           <br /><br />
-          <p>
+          <!-- <p>
             The first official Esports organization in Egypt, founded by <br />
             experienced Gamers to develop Esports in Middle-East & North Africa.
-          </p>
+          </p> -->
           <br />
           <p>
             <img src="../../../public/images/pin-white.svg" />
@@ -78,6 +78,16 @@
               "
             >
               <img :src="contact.img_youtube.url" alt="youtube" />
+            </div>
+
+            <div
+              class="social-logos-container"
+              @click="goToLink(contact.information.twitch_link)"
+              v-if="
+                contact.img_twitch && contact.information.twitch_link !== ''
+              "
+            >
+              <img :src="contact.img_twitch.url" alt="twitch" />
             </div>
           </div>
         </div>

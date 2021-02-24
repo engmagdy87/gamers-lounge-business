@@ -10,6 +10,7 @@ query{
           facebook_link
           instagram_link
           twitter_link
+          twitch_link
           youtube_link
        }
        img_cover{
@@ -21,6 +22,10 @@ query{
           url
        }
        img_twitter{
+          id
+          url
+       }
+       img_twitch{
           id
           url
        }
