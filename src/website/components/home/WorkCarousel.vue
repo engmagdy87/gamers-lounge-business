@@ -1,7 +1,7 @@
 <template>
   <div class="work-carousel">
     <div class="work-header">
-      <h4 class="work-header__sub-text">What we Do?</h4>
+      <!-- <h4 class="work-header__sub-text">What we Do?</h4> -->
       <h1 class="work-header__title">OUR WORK</h1>
       <router-link to="/work" class="work-header__view-link">
         View all

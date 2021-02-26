@@ -104,6 +104,7 @@ export default {
     }
   },
   mounted() {
+    window.scroll(0, 0);
     this.breadcrumbTree.push({
       title: getEntityName(this.$route.params.serviceName),
       path: ""

@@ -120,6 +120,7 @@ export default {
     }
   },
   mounted() {
+    window.scroll(0, 0);
     this.setShowFooterFlag(false);
     this.fetchHeroAndFirstSection();
   },

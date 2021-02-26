@@ -1,6 +1,6 @@
 <template>
   <div class="work-wrapper">
-      <WorkMainPage/>
+    <WorkMainPage />
   </div>
 </template>
 
