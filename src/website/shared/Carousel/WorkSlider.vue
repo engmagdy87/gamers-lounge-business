@@ -5,7 +5,7 @@
       @mouseleave="resetTimer"
       v-for="(slide, i) in slides"
       :key="i"
-      class="carousel-wrapper__slide"
+      class="work-carousel-wrapper__slide"
     >
       <slot
         name="carouselSlide"

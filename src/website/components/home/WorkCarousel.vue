@@ -1,95 +1,104 @@
 <template>
-  <div class="work-carousel">
-    <div class="work-header">
-      <!-- <h4 class="work-header__sub-text">What we Do?</h4> -->
-      <h1 class="work-header__title">OUR WORK</h1>
-      <router-link to="/work" class="work-header__view-link">
+  <div class="services-carousel">
+    <div class="services-header">
+      <!-- <h4 class="services-header__sub-text">What we Serve?</h4> -->
+      <h1 class="services-header__title">OUR WORK</h1>
+      <router-link to="/work" class="services-header__view-link">
         View all
       </router-link>
     </div>
-
-    <div class="work-carousel__bg"></div>
-    <!-- <div class="work-carousel__big-mask"></div> -->
-
-    <div class="work-carousel__carousel-container">
-      <WorkSlider
-        :slides="homePageWorks"
-        :timeInMillisecond="4000"
-        customBulletsStyleClass="hero-bullets"
-        :changeAnimation="changeAnimation"
-      >
-        <template #carouselSlide="{slide,index}">
-          <div class="work-carousel__inside">
-            <transition :name="imageDirection" appear>
-              <div class="work-carousel__inside__img" v-if="index">
-                <img
-                  draggable="false"
-                  :src="slide.img_slider.url"
-                  :alt="slide.title"
-                />
-              </div>
-            </transition>
-            <div class="work-carousel__inside__text">
-              <div class="work-carousel__inside__text-container">
+    <HalfClippedShape>
+      <template #content>
+        <ServiceSlider
+          :slides="homePageWorks"
+          :timeInMillisecond="4000"
+          customBulletsStyleClass="hero-bullets"
+          :changeAnimation="changeAnimation"
+        >
+          <template #carouselSlide="{slide,index}">
+            <div class="row m-0 position-relative">
+              <transition :name="imageDirection" appear>
+                <div
+                  class="col-12 col-md-6 services-carousel__img-wrapper"
+                  v-if="index"
+                >
+                  <img
+                    class="services-carousel__work-img"
+                    draggable="false"
+                    :src="slide.img_slider.url"
+                    :alt="slide.title"
+                  />
+                </div>
+              </transition>
+              <div class="col-12 col-md-6 services-carousel__text p-0">
                 <transition :name="titleDirection" appear>
-                  <h1 v-if="index" class="work-carousel__inside__title">
+                  <h1
+                    v-if="index"
+                    class="services-carousel__title services-carousel__title"
+                  >
                     {{ slide.title }}
                   </h1>
                 </transition>
+
                 <transition :name="contentDirection" appear>
                   <p
                     v-if="index"
-                    class="description-container work-carousel__inside__content"
+                    class="description-container services-carousel__content services-carousel__content"
                     v-html="slide.short_description"
                   ></p>
                 </transition>
+
+                <router-link
+                  :to="`/work/${slide.id}-${reformatURL(slide.title)}`"
+                >
+                  <div class="services-carousel__btn" v-if="index">
+                    <HalfClippedOutlineButton
+                      text="Read More"
+                      :showMaskEffect="true"
+                      :buttonMaskCSSStyle="buttonMaskCSSStyle"
+                    />
+                  </div>
+                </router-link>
               </div>
             </div>
-            <router-link :to="`/work/${slide.id}-${reformatURL(slide.title)}`">
-              <div class="work-carousel__btn" v-if="index">
-                <HalfClippedOutlineButton
-                  text="See More"
-                  :showMaskEffect="true"
-                  :buttonMaskCSSStyle="buttonMaskCSSStyle"
-                />
-              </div>
-            </router-link>
-          </div>
-        </template>
+          </template>
 
-        <template #carouselNavigationButtons="{goToPrev,goToNext}">
-          <div class="carousel-navigation">
-            <button @click="goToPrev">
-              <img src="../../../../public/images/prev.svg" />
-            </button>
-            <button @click="goToNext">
-              <img src="../../../../public/images/next.svg" />
-            </button>
-          </div>
-        </template>
-      </WorkSlider>
-    </div>
+          <template #carouselNavigationButtons="{goToPrev,goToNext}">
+            <div class="work-carousel-navigation">
+              <button @click="goToPrev">
+                <img src="../../../../public/images/prev.svg" />
+              </button>
+              <button @click="goToNext">
+                <img src="../../../../public/images/next.svg" />
+              </button>
+            </div>
+          </template>
+        </ServiceSlider>
+      </template>
+    </HalfClippedShape>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import WorkSlider from "../../shared/Carousel/WorkSlider";
+import ServiceSlider from "../../shared/Carousel/ServiceSlider";
+import HalfClippedShape from "../../shared/HalfClippedShape";
 import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 import redirectToNewTab from "../../../helpers/RedirectToNewTab";
 
 export default {
   components: {
-    WorkSlider,
+    ServiceSlider,
+    HalfClippedShape,
     HalfClippedOutlineButton
   },
   data() {
     return {
-      titleDirection: "work-title-next",
-      contentDirection: "work-content-next",
-      imageDirection: "work-image-next",
-      buttonMaskCSSStyle: "work-button-mask-next"
+      titleDirection: "service-title-next",
+      contentDirection: "service-content-next",
+      imageDirection: "service-image-next",
+      buttonMaskCSSStyle: "service-button-mask-next"
     };
   },
   computed: {
@@ -100,21 +109,21 @@ export default {
   methods: {
     changeAnimation(dir) {
       if (dir === "prev") {
-        this.titleDirection = "work-title-prev";
-        this.contentDirection = "work-content-prev";
-        this.imageDirection = "work-image-prev";
-        this.buttonMaskCSSStyle = "work-button-mask-prev";
+        this.titleDirection = "service-title-prev";
+        this.contentDirection = "service-content-prev";
+        this.imageDirection = "service-image-prev";
+        this.buttonMaskCSSStyle = "service-button-mask-prev";
         setTimeout(() => {
-          this.titleDirection = "work-title-next";
-          this.contentDirection = "work-content-next";
-          this.imageDirection = "work-image-next";
-          this.buttonMaskCSSStyle = "work-button-mask-next";
+          this.titleDirection = "service-title-next";
+          this.contentDirection = "service-content-next";
+          this.imageDirection = "service-image-next";
+          this.buttonMaskCSSStyle = "service-button-mask-next";
         }, 4000);
       } else {
-        this.titleDirection = "work-title-next";
-        this.contentDirection = "work-content-next";
-        this.imageDirection = "work-image-next";
-        this.buttonMaskCSSStyle = "work-button-mask-next";
+        this.titleDirection = "service-title-next";
+        this.contentDirection = "service-content-next";
+        this.imageDirection = "service-image-next";
+        this.buttonMaskCSSStyle = "service-button-mask-next";
       }
     },
     reformatURL(id) {
@@ -128,308 +137,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../assets/sass/website/components/home/work-carousel.scss";
 @import "../../../assets/sass/website/color-palette.scss";
 @import "../../../assets/sass/website/mixins.scss";
+@import "../../../assets/sass/website/components/home/services-carousel.scss";
 
 $time: 3s;
 $delay: 0s;
 $offset: 0.3s;
 
 //********title************************************************************
-.work-title-next-enter-active,
-.work-content-next-enter-active {
-  @include is-extra-small-mobile {
-    @include generateTextAnimation($time, next-enter-bluprint-x-mob);
-  }
-  @include is-mobile {
-    @include generateTextAnimation($time, next-enter-bluprint-mob);
-  }
-  @include is-tablet {
-    @include generateTextAnimation($time, next-enter-bluprint-tab);
-  }
-  @include is-desktop {
-    @include generateTextAnimation($time, next-enter-bluprint-dt);
-  }
-  @include is-large-desktop {
-    @include generateTextAnimation($time, next-enter-bluprint-lg);
-  }
-  @include is-extra-large-desktop {
-    @include generateTextAnimation($time, next-enter-bluprint-extra-lg);
-  }
+.service-title-next-enter-active,
+.service-content-next-enter-active {
+  @include generateTextAnimation($time, next-enter-bluprint);
 }
-.work-title-next-leave-active,
-.work-content-next-leave-active {
-  @include is-extra-small-mobile {
-    @include generateTextAnimation($time, next-leave-bluprint-x-mob);
-  }
-  @include is-mobile {
-    @include generateTextAnimation($time, next-leave-bluprint-mob);
-  }
-  @include is-tablet {
-    @include generateTextAnimation($time, next-leave-bluprint-tab);
-  }
-  @include is-desktop {
-    @include generateTextAnimation($time, next-leave-bluprint-dt);
-  }
-  @include is-large-desktop {
-    @include generateTextAnimation($time, next-leave-bluprint-lg);
-  }
-  @include is-extra-large-desktop {
-    @include generateTextAnimation($time, next-leave-bluprint-extra-lg);
-  }
+.service-title-next-leave-active,
+.service-content-next-leave-active {
+  @include generateTextAnimation($time, next-leave-bluprint);
 }
-.work-title-prev-enter-active,
-.work-content-prev-enter-active {
-  @include is-extra-small-mobile {
-    @include generateTextAnimation($time, prev-enter-bluprint-x-mob);
-  }
-  @include is-mobile {
-    @include generateTextAnimation($time, prev-enter-bluprint-mob);
-  }
-  @include is-tablet {
-    @include generateTextAnimation($time, prev-enter-bluprint-tab);
-  }
-  @include is-desktop {
-    @include generateTextAnimation($time, prev-enter-bluprint-dt);
-  }
-  @include is-large-desktop {
-    @include generateTextAnimation($time, prev-enter-bluprint-lg);
-  }
-  @include is-extra-large-desktop {
-    @include generateTextAnimation($time, prev-enter-bluprint-extra-lg);
-  }
+.service-title-prev-enter-active,
+.service-content-prev-enter-active {
+  @include generateTextAnimation($time, prev-enter-bluprint);
 }
-.work-title-prev-leave-active,
-.work-content-prev-leave-active {
-  @include is-extra-small-mobile {
-    @include generateTextAnimation($time, prev-leave-bluprint-x-mob);
-  }
-  @include is-mobile {
-    @include generateTextAnimation($time, prev-leave-bluprint-mob);
-  }
-  @include is-tablet {
-    @include generateTextAnimation($time, prev-leave-bluprint-tab);
-  }
-  @include is-desktop {
-    @include generateTextAnimation($time, prev-leave-bluprint-dt);
-  }
-  @include is-large-desktop {
-    @include generateTextAnimation($time, prev-leave-bluprint-lg);
-  }
-  @include is-extra-large-desktop {
-    @include generateTextAnimation($time, prev-leave-bluprint-extra-lg);
-  }
+.service-title-prev-leave-active,
+.service-content-prev-leave-active {
+  @include generateTextAnimation($time, prev-leave-bluprint);
 }
 
-@keyframes next-enter-bluprint-dt {
+@keyframes next-enter-bluprint {
   0% {
-    left: 50%;
+    right: -10%;
     opacity: 0;
   }
   100% {
-    left: 10%;
+    right: 0;
     opacity: 1;
   }
 }
-@keyframes next-enter-bluprint-lg {
+@keyframes next-leave-bluprint {
   0% {
-    left: 50%;
-    opacity: 0;
-  }
-  100% {
-    left: 20%;
-    opacity: 1;
-  }
-}
-@keyframes next-enter-bluprint-extra-lg {
-  0% {
-    left: 50%;
-    opacity: 0;
-  }
-  100% {
-    left: 30%;
-    opacity: 1;
-  }
-}
-@keyframes next-enter-bluprint-tab {
-  0% {
-    left: 50%;
-    opacity: 0;
-  }
-  100% {
-    left: 30%;
-    opacity: 1;
-  }
-}
-@keyframes next-enter-bluprint-x-mob {
-  0% {
-    left: 50%;
-    opacity: 0;
-  }
-  100% {
-    left: 0%;
-    opacity: 1;
-  }
-}
-@keyframes next-enter-bluprint-mob {
-  0% {
-    left: 50%;
-    opacity: 0;
-  }
-  100% {
-    left: 30%;
-    opacity: 1;
-  }
-}
-
-@keyframes next-leave-bluprint-dt {
-  0% {
-    opacity: 1;
-    left: 10%;
-  }
-  30% {
-    opacity: 0;
-    left: 5%;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes next-leave-bluprint-lg {
-  0% {
-    opacity: 1;
-    left: 20%;
-  }
-  30% {
-    opacity: 0;
-    left: 10%;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes next-leave-bluprint-extra-lg {
-  0% {
-    opacity: 1;
-    left: 30%;
-  }
-  30% {
-    opacity: 0;
-    left: 10%;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes next-leave-bluprint-tab {
-  0% {
-    opacity: 1;
-    left: 30%;
-  }
-  30% {
-    opacity: 0;
-    left: 10%;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes next-leave-bluprint-mob {
-  0% {
-    opacity: 1;
-    left: 30%;
-  }
-  30% {
-    opacity: 0;
-    left: 10%;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes next-leave-bluprint-x-mob {
-  0% {
-    opacity: 1;
-    left: 0%;
-  }
-  30% {
-    opacity: 0;
-    left: -10%;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes prev-enter-bluprint-dt {
-  0% {
-    left: 5%;
-    opacity: 0;
-  }
-  100% {
-    left: 10%;
-    opacity: 1;
-  }
-}
-@keyframes prev-enter-bluprint-lg {
-  0% {
-    left: 10%;
-    opacity: 0;
-  }
-  100% {
-    left: 20%;
-    opacity: 1;
-  }
-}
-@keyframes prev-enter-bluprint-tab {
-  0% {
-    left: 10%;
-    opacity: 0;
-  }
-  100% {
-    left: 30%;
-    opacity: 1;
-  }
-}
-@keyframes prev-enter-bluprint-mob {
-  0% {
-    left: 10%;
-    opacity: 0;
-  }
-  100% {
-    left: 30%;
-    opacity: 1;
-  }
-}
-@keyframes prev-enter-bluprint-x-mob {
-  0% {
-    left: -10%;
-    opacity: 0;
-  }
-  100% {
-    left: 0%;
-    opacity: 1;
-  }
-}
-@keyframes prev-enter-bluprint-extra-lg {
-  0% {
-    left: 10%;
-    opacity: 0;
-  }
-  100% {
-    left: 30%;
-    opacity: 1;
-  }
-}
-
-@keyframes prev-leave-bluprint-dt {
-  0% {
-    left: 10%;
     opacity: 1;
   }
   30% {
-    left: 50%;
     opacity: 0;
   }
   100% {
@@ -437,66 +185,23 @@ $offset: 0.3s;
   }
 }
 
-@keyframes prev-leave-bluprint-lg {
+@keyframes prev-enter-bluprint {
   0% {
-    left: 20%;
-    opacity: 1;
-  }
-  30% {
-    left: 50%;
+    right: 10%;
     opacity: 0;
   }
   100% {
-    opacity: 0;
+    right: 0;
+    opacity: 1;
   }
 }
-
-@keyframes prev-leave-bluprint-extra-lg {
+@keyframes prev-leave-bluprint {
   0% {
-    left: 30%;
+    right: 0;
     opacity: 1;
   }
   30% {
-    left: 50%;
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes prev-leave-bluprint-tab {
-  0% {
-    left: 30%;
-    opacity: 1;
-  }
-  30% {
-    left: 50%;
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes prev-leave-bluprint-mob {
-  0% {
-    left: 30%;
-    opacity: 1;
-  }
-  30% {
-    left: 50%;
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes prev-leave-bluprint-x-mob {
-  0% {
-    left: 0%;
-    opacity: 1;
-  }
-  30% {
-    left: 50%;
+    right: -10%;
     opacity: 0;
   }
   100% {
@@ -506,18 +211,18 @@ $offset: 0.3s;
 
 // //*********************************************************************
 
-.work-image-next-enter-active,
-.work-image-prev-enter-active {
+.service-image-next-enter-active,
+.service-image-prev-enter-active {
   animation: animateImageEnter;
 }
-.work-image-next-leave-active,
-.work-image-prev-leave-active {
+.service-image-next-leave-active,
+.service-image-prev-leave-active {
   animation: animateImageLeave;
 }
-.work-image-next-enter-active,
-.work-image-next-leave-active,
-.work-image-prev-enter-active,
-.work-image-prev-leave-active {
+.service-image-next-enter-active,
+.service-image-next-leave-active,
+.service-image-prev-enter-active,
+.service-image-prev-leave-active {
   animation-duration: 5s;
   transition: all 3s;
   animation-timing-function: cubic-bezier(0.4, 0.3, 0.5, 1);
@@ -541,19 +246,19 @@ $offset: 0.3s;
 
 // //***********************************/
 
-/deep/ .work-button-mask-next {
+/deep/ .service-button-mask-next {
   width: 200px;
   height: 200px;
-  background-color: $primary;
+  background-color: $dark-accent;
   position: absolute;
   right: 0;
-  animation: work-button-mask-animation-next;
+  animation: service-button-mask-animation-next;
   animation-duration: 1.8 * $time;
   transform: translateX(200px);
   z-index: 9;
 }
 
-@keyframes work-button-mask-animation-next {
+@keyframes service-button-mask-animation-next {
   0% {
     transform: rotate(30deg) translateX(200px);
   }
@@ -562,19 +267,19 @@ $offset: 0.3s;
   }
 }
 
-/deep/ .work-button-mask-prev {
+/deep/ .service-button-mask-prev {
   width: 200px;
   height: 200px;
-  background-color: $primary;
+  background-color: $dark-accent;
   position: absolute;
   right: 0;
-  animation: work-button-mask-animation-prev;
+  animation: service-button-mask-animation-prev;
   animation-duration: 1.8 * $time;
   transform: translateX(-200px);
   z-index: 9;
 }
 
-@keyframes work-button-mask-animation-prev {
+@keyframes service-button-mask-animation-prev {
   0% {
     transform: rotate(30deg) translateX(-200px);
   }

@@ -65,7 +65,11 @@ export default {
     }),
     loadMoreWorks: async function() {
       const data = { places: "HOME" };
-      if (!this.showLoading && this.isHomePageServicesFetched) {
+      if (
+        !this.showLoading &&
+        this.isHomePageServicesFetched &&
+        !this.isHomePageWorksFetched
+      ) {
         this.showLoading = true;
         await this.fetchHomePageWork();
         await this.fetchHomePageSponsors(data);

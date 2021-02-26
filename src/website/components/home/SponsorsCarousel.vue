@@ -1,5 +1,8 @@
 <template>
   <div class="sponsors-carousel-wrapper">
+    <div class="sonsors-header">
+      <h1 class="sonsors-header__title">OUR SPONSORS</h1>
+    </div>
     <HalfClippedShape>
       <template #content>
         <VueSlickCarousel v-bind="settings">
@@ -87,4 +90,14 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../assets/sass/website/components/home/sponsors-carousel.scss";
+.sonsors-header {
+  text-align: center;
+  padding-bottom: 50px;
+  &__title {
+    color: $header-item;
+    font-family: "Segoe UI Bold";
+    font-size: 2.6rem;
+    letter-spacing: 4px;
+  }
+}
 </style>

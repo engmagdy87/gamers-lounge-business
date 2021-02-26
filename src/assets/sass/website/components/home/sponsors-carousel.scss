@@ -24,11 +24,9 @@ $clipped-length: 3vw;
 $total-padding: $half-clipped-shape-padding * 2;
 
 .sponsors-carousel-wrapper {
-  position: absolute;
-  bottom: -$height/2;
-  color: white;
-  left: 0;
-  right: 0;
+  padding-top: 0px;
+  padding-bottom: 100px;
+  position: relative;
   z-index: 1001;
   @include is-extra-small-mobile {
     bottom: -$height-xs/2;

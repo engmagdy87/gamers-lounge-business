@@ -23,7 +23,7 @@
             "
             v-for="img in column.img_content"
             :key="img.id"
-            @click="openImageModal(rowId, colId)"
+            @click="openImageModal(rowId, colId, null, column.type)"
             style="cursor:pointer"
             class="about-section-wrapper__inside--is-image"
             :style="{ 'background-image': 'url(' + img.url + ')' }"
@@ -83,7 +83,9 @@
               :height="400"
               :width="500"
               :border="0"
-              :onMainSlideClick="e => onMainSlideClick(e, column.img_content)"
+              :onMainSlideClick="
+                e => openImageModal(rowId, colId, e.index, column.type)
+              "
             >
               <Slide v-for="(img, i) in column.img_content" :index="i" :key="i">
                 <img :src="img.url" draggable="false" />
@@ -105,7 +107,11 @@
         :showImageModal="showImageModal"
         :setShowImageModal="setShowImageModal"
         :imageUrl="targetImageUrl"
-        :setImageIndex="setImageIndex"
+        :setImageIndex="
+          contentType === WORK_COLUMNS_TYPES.IMAGE
+            ? setImageIndex
+            : setImageForSliderIndex
+        "
         :showNavigation="showNavigation"
       />
     </div>
@@ -127,9 +133,11 @@ export default {
       showNavigation: false,
       targetImageIndeces: {
         rowId: null,
-        colId: null
+        colId: null,
+        imgId: null
       },
-      targetImageUrl: ""
+      targetImageUrl: "",
+      contentType: ""
     };
   },
   components: {
@@ -143,11 +151,6 @@ export default {
     }
   },
   methods: {
-    onMainSlideClick(e, images) {
-      this.targetImageUrl = images[e.index].url;
-      this.showNavigation = false;
-      this.setShowImageModal(true);
-    },
     getLiveVideoEmbedFormatter(url) {
       return liveVideoEmbedFormatter(url);
     },
@@ -187,12 +190,14 @@ export default {
     setShowImageModal(flag) {
       this.showImageModal = flag;
     },
-    openImageModal(rowId, colId) {
+    openImageModal(rowId, colId, imgId, type) {
       this.showNavigation = true;
+      this.contentType = type;
       this.targetImageIndeces = {
         ...this.targetImageIndeces,
         rowId,
-        colId
+        colId,
+        imgId
       };
       this.targetImageUrl = this.getImages(rowId)[colId].img_content[0].url;
       this.setShowImageModal(true);
@@ -223,6 +228,18 @@ export default {
       }
       this.targetImageIndeces.colId = newColId;
       this.targetImageUrl = this.getImages(rowId)[newColId].img_content[0].url;
+    },
+    setImageForSliderIndex(e, dir) {
+      e.stopPropagation();
+      const { rowId, colId, imgId } = this.targetImageIndeces;
+      const images = this.getImages(rowId)[colId].img_content;
+      let newImgId;
+      if (dir === "next")
+        newImgId = imgId === images.length - 1 ? 0 : imgId + 1;
+      else newImgId = imgId === 0 ? images.length - 1 : imgId - 1;
+
+      this.targetImageIndeces.imgId = newImgId;
+      this.targetImageUrl = images[newImgId].url;
     }
   },
   updated() {

@@ -127,9 +127,9 @@ $time: 0.5s;
 .carousel-wrapper {
   @include initializePageStyle;
   position: relative;
-  height: 100%;
+  height: 100% !important;
   width: 100%;
-  min-height: inherit;
+  min-height: 100% !important;
   margin: 0;
   &__slide {
     position: absolute;

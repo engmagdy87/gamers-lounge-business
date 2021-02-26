@@ -52,16 +52,61 @@
       height: 98%;
     }
     @include is-extra-large-desktop {
-      height: 96%;
+      height: 100%;
     }
   }
   &__img {
     object-fit: cover;
-    width: 90%;
-    height: 96%;
+    width: 100%;
+    height: 100%;
     position: absolute;
-    left: 5%;
-    top: 0px;
+    right: 0;
+    top: 0;
+    @include is-extra-small-mobile {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      left: -23%;
+      transform: scale(1.1);
+      filter: brightness(30%);
+    }
+    @include is-mobile {
+      position: relative;
+      width: 95vw;
+      left: -23%;
+      transform: scale(1.1);
+      height: 100%;
+      filter: brightness(30%);
+    }
+    @include is-tablet {
+      position: relative;
+      width: 95vw;
+      left: -23%;
+      transform: scale(1.1);
+      height: 100%;
+      filter: brightness(30%);
+    }
+    @include is-desktop {
+      height: 97%;
+    }
+    @include is-large-desktop {
+      height: 98%;
+    }
+    @media (min-width: 1400px) and (max-width: 1599px) {
+      height: 98%;
+    }
+    @media (min-width: 1600px) {
+      height: 100%;
+    }
+  }
+  &__work-img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-right: 20px;
     @include is-extra-small-mobile {
       position: relative;
       width: 100vw;
@@ -134,6 +179,7 @@
     top: 170px;
     color: white;
     z-index: 10;
+    padding-right: 10px;
     @include is-extra-small-mobile {
       padding-top: 10px;
       font-size: 0.9rem;
@@ -213,6 +259,15 @@
   }
 }
 /deep/ .carousel-wrapper__slide {
+  padding-right: 40px;
+  @include is-extra-small-mobile {
+    padding-right: 0px;
+  }
+  @include is-mobile {
+    padding-right: 0px;
+  }
+}
+/deep/ .work-carousel-wrapper__slide {
   padding-left: 40px;
   @include is-extra-small-mobile {
     padding-left: 0px;
@@ -221,9 +276,24 @@
     padding-left: 0px;
   }
 }
+/deep/ .work-carousel-navigation {
+  position: absolute;
+  right: 2%;
+  margin-top: 25px;
+  z-index: 120;
+  button {
+    margin: 20px 20px 20px 10px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    img {
+      width: 85%;
+    }
+  }
+}
 /deep/ .carousel-navigation {
   position: absolute;
-  left: 2%;
+  left: 1.5%;
   margin-top: 25px;
   z-index: 120;
   button {
