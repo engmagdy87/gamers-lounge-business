@@ -1,5 +1,5 @@
 <template>
-  <div class="carousel-wrapper">
+  <div class="work-carousel-wrapper">
     <div
       @mouseover="stopTimer"
       @mouseleave="resetTimer"
@@ -14,13 +14,13 @@
       ></slot>
     </div>
     <div
-      :class="`carousel-wrapper__bullets ${customBulletsStyleClass}`"
+      :class="`work-carousel-wrapper__bullets ${customBulletsStyleClass}`"
       v-if="showBullets"
     >
       <button
         v-for="(slide, i) in slides"
         :key="i"
-        :class="isSlideVisible(i) && 'carousel-wrapper__bullets--active'"
+        :class="isSlideVisible(i) && 'work-carousel-wrapper__bullets--active'"
         @click="() => setSlide(i)"
       ></button>
     </div>
@@ -124,12 +124,12 @@ export default {
 
 $time: 0.5s;
 
-.carousel-wrapper {
+.work-carousel-wrapper {
   @include initializePageStyle;
   position: relative;
-  height: 100%;
+  height: 100% !important;
   width: 100%;
-  min-height: inherit;
+  min-height: 100% !important;
   margin: 0;
   &__slide {
     position: absolute;
@@ -156,7 +156,7 @@ $time: 0.5s;
   }
 }
 
-button.carousel-wrapper__bullets--active {
+button.work-carousel-wrapper__bullets--active {
   background-color: $accent;
   width: 56px;
   height: 13px;

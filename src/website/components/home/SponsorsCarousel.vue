@@ -33,7 +33,7 @@ export default {
     return {
       settings: {
         dots: false,
-        arrows: false,
+        arrows: true,
         slidesToShow: 6,
         slidesToScroll: 1,
         infinite: true,
@@ -99,5 +99,9 @@ export default {
     font-size: 2.6rem;
     letter-spacing: 4px;
   }
+}
+
+.sponsors-carousel-wrapper > div.half-filled-box {
+  padding: 20px 40px;
 }
 </style>

@@ -448,6 +448,11 @@ $carousel-height: 500px;
   margin-top: 0;
   min-height: auto;
 }
+
+/deep/ .work-carousel-wrapper {
+  margin-top: 0;
+  min-height: auto;
+}
 // All have vw as divide operation units must be the same for all
 $width: 750px;
 $height: 750px;

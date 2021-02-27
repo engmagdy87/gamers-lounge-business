@@ -119,6 +119,7 @@ $time: 2s;
 .carousel-wrapper {
   @include initializePageStyle;
   overflow-x: hidden;
+  overflow-y: hidden;
   position: relative;
   height: 100%;
   width: 100%;

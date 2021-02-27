@@ -9,7 +9,7 @@
     </div>
     <HalfClippedShape>
       <template #content>
-        <ServiceSlider
+        <WorkSlider
           :slides="homePageWorks"
           :timeInMillisecond="4000"
           customBulletsStyleClass="hero-bullets"
@@ -73,7 +73,7 @@
               </button>
             </div>
           </template>
-        </ServiceSlider>
+        </WorkSlider>
       </template>
     </HalfClippedShape>
   </div>
@@ -81,7 +81,7 @@
 
 <script>
 import { mapState } from "vuex";
-import ServiceSlider from "../../shared/Carousel/ServiceSlider";
+import WorkSlider from "../../shared/Carousel/WorkSlider";
 import HalfClippedShape from "../../shared/HalfClippedShape";
 import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
@@ -89,7 +89,7 @@ import redirectToNewTab from "../../../helpers/RedirectToNewTab";
 
 export default {
   components: {
-    ServiceSlider,
+    WorkSlider,
     HalfClippedShape,
     HalfClippedOutlineButton
   },

@@ -8,7 +8,7 @@
     height: map-get($widths-and-heights, clipped-shape-height);
     background-color: $bg-color;
     color: $header-item;
-    padding: $half-clipped-shape-padding 0;
+    padding: $half-clipped-shape-padding;
     text-align: center;
     margin: auto;
     @include single-clipped-shape(
