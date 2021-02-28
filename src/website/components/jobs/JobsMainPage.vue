@@ -4,7 +4,7 @@
       <div class="col-12 p-0 job-main-content-wrapper__title">
         <h1>let's work together</h1>
         <p>
-          We're always looking for freah talents in eSports(Casters - Analysis -
+          We're always looking for fresh talents in eSports(Casters - Analysis -
           Designers - Video Editors ) if you're an eSports fan and think you
           have what it takes
         </p>

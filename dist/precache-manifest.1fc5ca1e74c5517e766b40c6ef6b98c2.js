@@ -164,12 +164,12 @@ self.__precacheManifest = [
     "url": "/js/JobDetails.8ea981ae.js"
   },
   {
-    "revision": "6f148118b7cea8057f24",
-    "url": "/css/Jobs.514f6748.css"
+    "revision": "8bcdb69f63b285016bde",
+    "url": "/css/Jobs.285daa4f.css"
   },
   {
-    "revision": "6f148118b7cea8057f24",
-    "url": "/js/Jobs.1d0155ac.js"
+    "revision": "8bcdb69f63b285016bde",
+    "url": "/js/Jobs.095612f5.js"
   },
   {
     "revision": "d4af7a34581cefb81246",
@@ -404,12 +404,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.7f64e606.js"
   },
   {
-    "revision": "f7aaac15465246ddd9d9",
+    "revision": "f9e48fae8c948afbd126",
     "url": "/css/app.f6abf938.css"
   },
   {
-    "revision": "f7aaac15465246ddd9d9",
-    "url": "/js/app.a5e00617.js"
+    "revision": "f9e48fae8c948afbd126",
+    "url": "/js/app.2ab47f6a.js"
   },
   {
     "revision": "bdda8698921ac61af643",
@@ -488,7 +488,7 @@ self.__precacheManifest = [
     "url": "/img/next.c9e7debf.svg"
   },
   {
-    "revision": "fe5675c39c103518aa8bd4db1ee7dfa2",
+    "revision": "7559f987735d94dfffb7a9f2ae1616d1",
     "url": "/index.html"
   },
   {
@@ -524,20 +524,16 @@ self.__precacheManifest = [
     "url": "/images/top-arrow.svg"
   },
   {
-    "revision": "6a02faf7ea2a9584134ffe15779a0e44",
-    "url": "/_redirects"
-  },
-  {
     "revision": "d41d8cd98f00b204e9800998ecf8427e",
     "url": "/.gitkeep"
   },
   {
-    "revision": "a95be6e8a890f1897308ee3122a70aef",
-    "url": "/images/add.svg"
+    "revision": "6a02faf7ea2a9584134ffe15779a0e44",
+    "url": "/_redirects"
   },
   {
-    "revision": "5b47b416f6e4dbba80a1ca269adf7580",
-    "url": "/images/decrease_font.svg"
+    "revision": "a95be6e8a890f1897308ee3122a70aef",
+    "url": "/images/add.svg"
   },
   {
     "revision": "752d64f551b54c06f4b7280d9f74d27c",
@@ -564,20 +560,24 @@ self.__precacheManifest = [
     "url": "/images/phone.svg"
   },
   {
-    "revision": "6ba855e58d163e941e34e5df303e01b8",
-    "url": "/images/pin.svg"
-  },
-  {
     "revision": "eb55acdf799a7622a48f50ce42fe93a9",
     "url": "/images/placeholder.png"
   },
   {
-    "revision": "17e1f669c620a22cdb3f7b0e5cc5ed48",
-    "url": "/images/reset.svg"
+    "revision": "6ba855e58d163e941e34e5df303e01b8",
+    "url": "/images/pin.svg"
   },
   {
     "revision": "8ab7e03c6fd3405f3ebfd157b2b71240",
     "url": "/images/visibility.svg"
+  },
+  {
+    "revision": "5b47b416f6e4dbba80a1ca269adf7580",
+    "url": "/images/decrease_font.svg"
+  },
+  {
+    "revision": "17e1f669c620a22cdb3f7b0e5cc5ed48",
+    "url": "/images/reset.svg"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
