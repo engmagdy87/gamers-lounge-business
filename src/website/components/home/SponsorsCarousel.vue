@@ -1,7 +1,7 @@
 <template>
   <div class="sponsors-carousel-wrapper">
     <div class="sonsors-header">
-      <h1 class="sonsors-header__title">OUR SPONSORS</h1>
+      <h1 class="sonsors-header__title">OUR CLIENTS</h1>
     </div>
     <HalfClippedShape>
       <template #content>

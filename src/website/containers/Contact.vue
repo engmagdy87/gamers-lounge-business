@@ -39,7 +39,7 @@
             ]"
           >
             <ContactDataBox
-              title="Our Mail"
+              title="Our EMail"
               icon="images/env.svg"
               type="email"
               :content="contact.information.email"
