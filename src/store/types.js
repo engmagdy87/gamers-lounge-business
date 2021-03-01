@@ -280,7 +280,13 @@ const admins = {
 const settings = {
   mutations: {
     SET_SETTINGS: "settings/mutations/SET_SETTINGS",
-    SET_IS_SETTINGS_FETCHED: "settings/mutations/SET_IS_SETTINGS_FETCHED"
+    SET_IS_SETTINGS_FETCHED: "settings/mutations/SET_IS_SETTINGS_FETCHED",
+    SET_HOME_SETTINGS: "settings/mutations/SET_HOME_SETTINGS",
+    SET_IS_HOME_SETTINGS_FETCHED:
+      "settings/mutations/SET_IS_HOME_SETTINGS_FETCHED",
+    SET_SERVICES_SETTINGS: "settings/mutations/SET_SERVICES_SETTINGS",
+    SET_IS_SERVICES_SETTINGS_FETCHED:
+      "settings/mutations/SET_IS_SERVICES_SETTINGS_FETCHED"
   },
   actions: {
     FETCH_SETTINGS: "settings/actions/FETCH_SETTINGS",

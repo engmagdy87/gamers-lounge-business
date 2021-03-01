@@ -48,8 +48,8 @@ export default {
       isHomePageServicesFetched: state =>
         state.services.isHomePageServicesFetched,
       isHomePageSponsorsFetched: state => state.sponsors.isSponsorsFetched,
-      settings: state => state.settings.settings,
-      isSettingsDataFetched: state => state.settings.isSettingsDataFetched
+      settings: state => state.settings.homeSettings,
+      isSettingsDataFetched: state => state.settings.isHomeSettingsDataFetched
     })
   },
   methods: {

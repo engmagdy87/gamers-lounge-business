@@ -1,8 +1,8 @@
 <template>
-  <div v-if="isServicesFetched">
+  <div>
     <ServicesHero />
 
-    <div class="services-page-wrapper row">
+    <div class="services-page-wrapper row" v-if="isServicesFetched">
       <div
         v-for="service in services.data"
         :key="service.id"
@@ -23,12 +23,12 @@
           </div>
         </router-link>
       </div>
+      <Intersect @enter="loadMoreWorks"
+        ><div class="threshold">
+          <Loading :showLoading="showLoading" />
+        </div>
+      </Intersect>
     </div>
-    <Intersect @enter="loadMoreWorks"
-      ><div class="threshold">
-        <Loading :showLoading="showLoading" />
-      </div>
-    </Intersect>
   </div>
 </template>
 

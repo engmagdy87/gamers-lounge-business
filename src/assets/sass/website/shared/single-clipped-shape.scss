@@ -4,6 +4,7 @@
 
 @mixin bottom-single-clipped-shape($widths-and-heights, $bg-color) {
   .single-filled-box {
+    cursor: auto;
     width: map-get($widths-and-heights, clipped-shape-width);
     height: map-get($widths-and-heights, clipped-shape-height);
     background-color: $bg-color;

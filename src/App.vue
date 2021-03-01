@@ -1,5 +1,8 @@
 <template>
-  <div :class="['app-wrapper', { 'nav-open': $sidebar.showSidebar }]">
+  <div
+    id="app-wrapper"
+    :class="['app-wrapper', { 'nav-open': $sidebar.showSidebar }]"
+  >
     <Header id="top" :activeItem="headerActiveItem" v-if="showHeader" />
     <notifications></notifications>
     <router-view></router-view>

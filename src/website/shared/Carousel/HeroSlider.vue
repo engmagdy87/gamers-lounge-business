@@ -1,9 +1,7 @@
 <template>
-  <div class="carousel-wrapper">
+  <div class="carousel-wrapper" @mouseover="stopTimer" @mouseleave="resetTimer">
     <transition-group name="hero-slide">
       <div
-        @mouseover="stopTimer"
-        @mouseleave="resetTimer"
         v-for="(slide, i) in slides"
         :key="i"
         v-if="isSlideVisible(i)"

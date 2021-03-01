@@ -13,44 +13,45 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
  */
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import App from './App.vue'
-import store from './store/index'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import App from "./App.vue";
+import store from "./store/index";
 
 // LightBootstrap plugin
-import LightBootstrap from './light-bootstrap-main'
+import LightBootstrap from "./light-bootstrap-main";
 
 // router setup
-import routes from './routes/routes'
+import routes from "./routes/routes";
 
-import './assets/sass/website/fonts.scss'
-import './registerServiceWorker'
-import VuePellEditor from 'vue-pell-editor'
+import "./assets/sass/website/fonts.scss";
+import "./registerServiceWorker";
+import VuePellEditor from "vue-pell-editor";
 
-Vue.use(VuePellEditor)
+Vue.use(VuePellEditor);
 // plugin setup
-Vue.use(VueRouter)
-Vue.use(LightBootstrap)
+Vue.use(VueRouter);
+Vue.use(LightBootstrap);
 
 // configure router
 const router = new VueRouter({
   routes, // short for routes: routes
-  mode: 'history',
-  linkActiveClass: 'nav-item active',
-  scrollBehavior: (to) => {
+  mode: "history",
+  linkActiveClass: "nav-item active",
+  scrollBehavior: to => {
+    document.getElementById("app-wrapper").scroll(0, 0);
     if (to.hash) {
-      return { selector: to.hash }
+      return { selector: to.hash };
     } else {
-      return { x: 0, y: 0 }
+      return { x: 0, y: 0 };
     }
   }
-})
+});
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
+  el: "#app",
   render: h => h(App),
   router,
   store
-})
+});

@@ -6,6 +6,7 @@
     <SingleClippedShape>
       <template #content>
         <HeroSlider
+          :autoPlay="false"
           :slides="heroSlider"
           customBulletsStyleClass="hero-bullets"
           :timeInMillisecond="4000"
@@ -35,7 +36,7 @@
                     class="hero-carousel__url"
                     :href="slide.url"
                     target="__blank"
-                    >Continue reading <span>&#187;</span></a
+                    >Register Now <span>&#187;</span></a
                   >
                 </transition>
               </div>
@@ -75,18 +76,12 @@ import types from "../../../store/types";
 import HeroSlider from "../../shared/Carousel/HeroSlider";
 import SingleClippedShape from "../../shared/SingleClippedShape";
 import * as MEDIA_TYPES from "../../../constants/MediaTypes";
-// import heroCarouselData from "../../../assets/json/HeroCarousel.json";
 
 export default {
   components: {
     HeroSlider,
     SingleClippedShape
   },
-  // data() {
-  //   return {
-  //     slides: heroCarouselData
-  //   };
-  // },
   computed: {
     ...mapState({
       heroSlider: state => state.home.heroSlider,

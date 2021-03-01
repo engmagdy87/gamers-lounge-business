@@ -108,7 +108,7 @@
         :setShowImageModal="setShowImageModal"
         :imageUrl="targetImageUrl"
         :setImageIndex="
-          contentType === WORK_COLUMNS_TYPES.IMAGE
+          contentType === ABOUT_COLUMNS_TYPES.IMAGE
             ? setImageIndex
             : setImageForSliderIndex
         "

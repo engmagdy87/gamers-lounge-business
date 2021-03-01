@@ -32,8 +32,9 @@ export default {
   },
   computed: {
     ...mapState({
-      settings: state => state.settings.settings,
-      isSettingsDataFetched: state => state.settings.isSettingsDataFetched
+      settings: state => state.settings.servicesSettings,
+      isSettingsDataFetched: state =>
+        state.settings.isServicesSettingsDataFetched
     })
   },
   methods: {
