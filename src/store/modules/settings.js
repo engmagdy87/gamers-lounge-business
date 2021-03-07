@@ -48,17 +48,16 @@ const fetchSettingsData = async ({ commit }, data) => {
   commit(types.app.mutations.SET_SPINNER_FLAG, true);
   try {
     const response = await APIs.fetchSettings(data);
-    if (isService && isServiceTexts) {
+    if (isService && isHome && isProfile && isServiceTexts) {
+      commit(types.settings.mutations.SET_SETTINGS, response);
+      commit(types.settings.mutations.SET_IS_SETTINGS_FETCHED, true);
+    } else if (isService && isServiceTexts) {
       commit(types.settings.mutations.SET_SERVICES_SETTINGS, response);
       commit(types.settings.mutations.SET_IS_SERVICES_SETTINGS_FETCHED, true);
     } else if (isHome) {
       commit(types.settings.mutations.SET_HOME_SETTINGS, response);
       commit(types.settings.mutations.SET_IS_HOME_SETTINGS_FETCHED, true);
-    } else {
-      commit(types.settings.mutations.SET_SETTINGS, response);
-      commit(types.settings.mutations.SET_IS_SETTINGS_FETCHED, true);
     }
-
     commit(types.app.mutations.SET_SPINNER_FLAG, false);
   } catch (error) {
     commit(types.settings.mutations.SET_IS_SERVICES_SETTINGS_FETCHED, false);

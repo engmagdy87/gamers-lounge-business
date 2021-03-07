@@ -5,6 +5,13 @@
         <HeroCarousel />
       </template>
     </Hero>
+    <div class="home-wrapper__text">
+      <h1 class="home-wrapper__title">WHO WE ARE</h1>
+      <p class="home-wrapper__content">
+        Egypt’s first Eesports organization, founded by hardcore gamers to take
+        the gaming scene in the MENA region to the next level!
+      </p>
+    </div>
     <ServicesCarousel />
     <WorkCarousel v-if="isHomePageWorksFetched" />
     <SponsorsCarousel v-if="isHomePageSponsorsFetched" />
