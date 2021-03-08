@@ -8,7 +8,7 @@
     <div class="home-wrapper__text">
       <h1 class="home-wrapper__title">WHO WE ARE</h1>
       <p class="home-wrapper__content">
-        Egypt’s first Eesports organization, founded by hardcore gamers to take
+        Egypt’s first Esports organization, founded by hardcore gamers to take
         the gaming scene in the MENA region to the next level!
       </p>
     </div>
