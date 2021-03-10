@@ -4,6 +4,7 @@
 
 @mixin filled-half-clipped-shape($widths-and-heights, $bg-color) {
   .half-filled-box {
+    cursor: auto;
     width: map-get($widths-and-heights, clipped-shape-width);
     height: map-get($widths-and-heights, clipped-shape-height);
     background-color: $bg-color;

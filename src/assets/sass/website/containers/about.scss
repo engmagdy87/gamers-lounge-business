@@ -37,6 +37,7 @@
   }
   .about-container {
     .half-filled-box {
+      cursor: auto;
       margin: 0;
       margin-bottom: 100px;
       @include is-large-desktop {
