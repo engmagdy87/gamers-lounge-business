@@ -11,6 +11,7 @@
         Egypt’s first Esports organization, founded by hardcore gamers to take
         the gaming scene in the MENA region to the next level!
       </p>
+      <div class="home-wrapper__divider"></div>
     </div>
     <ServicesCarousel />
     <WorkCarousel v-if="isHomePageWorksFetched" />

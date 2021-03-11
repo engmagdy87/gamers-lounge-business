@@ -3,9 +3,6 @@
     <div class="services-header">
       <!-- <h4 class="services-header__sub-text">What we Serve?</h4> -->
       <h1 class="services-header__title">OUR SERVICES</h1>
-      <router-link to="/services" class="services-header__view-link">
-        View all
-      </router-link>
     </div>
     <HalfClippedShape>
       <template #content>

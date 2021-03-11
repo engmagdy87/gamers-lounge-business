@@ -1,65 +1,9 @@
 <template>
   <header class="header-wrapper" v-if="isContactFetched">
-    <div class="row header-wrapper__social-media">
-      <!-- <div class="col-12 col-sm-6 d-flex justify-content-center d-sm-block">
-        <a href="https://www.google.com" target="__blank" v-if="false">
-          <HalfClippedOutlineButton text="GL Games" />
-        </a>
-      </div> -->
-      <div class="w-100 d-none d-sm-flex justify-content-end">
-        <div class="header-wrapper__social-media__logos">
-          <img
-            class="fb-logo"
-            :src="contact.img_facebook.url"
-            @click="goToLink(contact.information.facebook_link)"
-            alt="facebook"
-            v-if="
-              contact.img_facebook && contact.information.facebook_link !== ''
-            "
-          />
-          <img
-            :src="contact.img_instagram.url"
-            @click="goToLink(contact.information.instagram_link)"
-            alt="instagram"
-            v-if="
-              contact.img_instagram && contact.information.instagram_link !== ''
-            "
-          />
-          <img
-            :src="contact.img_twitter.url"
-            @click="goToLink(contact.information.twitter_link)"
-            alt="twitter"
-            v-if="
-              contact.img_twitter && contact.information.twitter_link !== ''
-            "
-          />
-          <img
-            :src="contact.img_youtube.url"
-            @click="goToLink(contact.information.youtube_link)"
-            alt="youtube"
-            v-if="
-              contact.img_youtube && contact.information.youtube_link !== ''
-            "
-          />
-          <img
-            :src="contact.img_twitch.url"
-            @click="goToLink(contact.information.twitch_link)"
-            alt="twitch"
-            v-if="contact.img_twitch && contact.information.twitch_link !== ''"
-          />
-        </div>
-        <div class="header-wrapper__avatar">
-          <Avatar />
-        </div>
-      </div>
-    </div>
     <div class="header-wrapper__main">
       <div class="header-wrapper__logo">
         <a href="/">
-          <img
-            src="../../../public/images/GL-logo.png"
-            alt="gamers lounge logo"
-          />
+          <img src="../../../public/images/logo.png" alt="gamers lounge logo" />
         </a>
       </div>
       <!-- DESKTOP UI -->
@@ -204,6 +148,63 @@
         <span class="hamburger-menu" @click="openNav">
           &#9776;
         </span>
+      </div>
+
+      <div class="row header-wrapper__social-media">
+        <!-- <div class="col-12 col-sm-6 d-flex justify-content-center d-sm-block">
+        <a href="https://www.google.com" target="__blank" v-if="false">
+          <HalfClippedOutlineButton text="GL Games" />
+        </a>
+      </div> -->
+        <div class="w-100 d-none d-sm-flex justify-content-end">
+          <div class="header-wrapper__social-media__logos">
+            <img
+              class="fb-logo"
+              :src="contact.img_facebook.url"
+              @click="goToLink(contact.information.facebook_link)"
+              alt="facebook"
+              v-if="
+                contact.img_facebook && contact.information.facebook_link !== ''
+              "
+            />
+            <img
+              :src="contact.img_instagram.url"
+              @click="goToLink(contact.information.instagram_link)"
+              alt="instagram"
+              v-if="
+                contact.img_instagram &&
+                  contact.information.instagram_link !== ''
+              "
+            />
+            <img
+              :src="contact.img_twitter.url"
+              @click="goToLink(contact.information.twitter_link)"
+              alt="twitter"
+              v-if="
+                contact.img_twitter && contact.information.twitter_link !== ''
+              "
+            />
+            <img
+              :src="contact.img_youtube.url"
+              @click="goToLink(contact.information.youtube_link)"
+              alt="youtube"
+              v-if="
+                contact.img_youtube && contact.information.youtube_link !== ''
+              "
+            />
+            <img
+              :src="contact.img_twitch.url"
+              @click="goToLink(contact.information.twitch_link)"
+              alt="twitch"
+              v-if="
+                contact.img_twitch && contact.information.twitch_link !== ''
+              "
+            />
+          </div>
+          <div class="header-wrapper__avatar">
+            <Avatar />
+          </div>
+        </div>
       </div>
     </div>
   </header>
