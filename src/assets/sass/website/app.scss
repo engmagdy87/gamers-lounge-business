@@ -9,10 +9,6 @@ body {
 
 body {
   height: 100vh;
-}
-
-.app-wrapper {
-  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -25,6 +21,12 @@ body {
     background-color: $accent !important;
     border-radius: 20px !important;
   }
+}
+
+.app-wrapper {
+  height: 100%;
+  width: 70%;
+  margin: 0 auto;
 }
 .vue-notifyjs.notifications {
   .list-move {

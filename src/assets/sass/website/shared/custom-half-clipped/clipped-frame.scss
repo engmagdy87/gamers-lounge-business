@@ -3,53 +3,53 @@
 @import "../../color-palette.scss";
 
 $shape-width: 60%;
-$shape-height:100%;
+$shape-height: 100%;
 
-.top-clip-container{
-    margin: 100px 0px -1px 0px;
-    height: 100px;
-    width: 100%;
-    display: flex;
+.top-clip-container {
+  margin: 100px 0px -1px 0px;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  @include is-extra-small-mobile {
+    height: 50px;
+  }
+  @include is-mobile {
+    height: 70px;
+  }
+  @include is-tablet {
+    height: 80px;
+  }
+  @include is-desktop {
+    height: 80px;
+  }
+  &__shape-body {
+    background-color: $primary;
+    width: 100% - $shape-width + 5%;
+    height: $shape-height;
+  }
+  &__shape {
+    background-color: $primary;
+    width: $shape-width;
+    height: $shape-height;
+    clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%, 0 97%);
     @include is-extra-small-mobile {
-      height: 50px;
+      clip-path: polygon(25% 0, 100% 0, 100% 100%, 0 100%, 0 95%);
     }
     @include is-mobile {
-      height: 70px;
+      clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%, 0 90%);
     }
     @include is-tablet {
-      height: 80px;
+      clip-path: polygon(17% 0, 100% 0, 100% 100%, 0 100%, 0 90%);
     }
     @include is-desktop {
-      height: 80px;
+      clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%, 0 90%);
     }
-    &__shape-body{
-        background-color: $dark-background;
-        width: 100% - $shape-width + 5%;
-        height: $shape-height;
+    @include is-large-desktop {
+      clip-path: polygon(17% 0, 100% 0, 100% 100%, 0 100%, 0 90%);
     }
-    &__shape{
-        background-color: $dark-background;
-        width: $shape-width;
-        height: $shape-height;
-        clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%, 0 97%);
-        @include is-extra-small-mobile {
-            clip-path: polygon(25% 0, 100% 0, 100% 100%, 0 100%, 0 95%);
-          }
-          @include is-mobile {
-            clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%, 0 90%);
-          }
-          @include is-tablet {
-            clip-path: polygon(17% 0, 100% 0, 100% 100%, 0 100%, 0 90%);
-          }
-          @include is-desktop {
-            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%, 0 90%);
-          }
-          @include is-large-desktop{
-            clip-path: polygon(17% 0, 100% 0, 100% 100%, 0 100%, 0 90%);
-          }
-    }
+  }
 }
-.bottomframe{
-    transform: rotateZ(180deg);
-    margin: 0;
+.bottomframe {
+  transform: rotateZ(180deg);
+  margin: 0;
 }

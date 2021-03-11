@@ -7,14 +7,14 @@
   width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: $dark-background;
+  background: $primary;
 }
 ::-webkit-scrollbar-thumb {
   background-color: $accent;
 }
 .work-details-sections {
   &__container {
-    background-color: $dark-background;
+    background-color: $primary;
     padding: 0 110px 0 110px;
     @include is-extra-small-mobile {
       padding: 0 20px 0 20px;
