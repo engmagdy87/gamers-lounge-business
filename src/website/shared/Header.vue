@@ -34,6 +34,17 @@
           <li>
             <a
               :class="[
+                activeItem === 'work' || activeItem === 'works'
+                  ? 'header-wrapper__navLinks--active'
+                  : 'header-wrapper__navLinks--inactive'
+              ]"
+              href="/work"
+              >Our Work</a
+            >
+          </li>
+          <li>
+            <a
+              :class="[
                 activeItem === 'about'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
@@ -51,17 +62,6 @@
               ]"
               href="/contact"
               >Contact Us</a
-            >
-          </li>
-          <li>
-            <a
-              :class="[
-                activeItem === 'work' || activeItem === 'works'
-                  ? 'header-wrapper__navLinks--active'
-                  : 'header-wrapper__navLinks--inactive'
-              ]"
-              href="/work"
-              >Our Work</a
             >
           </li>
           <li>
@@ -108,6 +108,15 @@
             </li>
             <li
               :class="[
+                activeItem === 'work'
+                  ? 'header-wrapper__navLinks--active'
+                  : 'header-wrapper__navLinks--inactive'
+              ]"
+            >
+              <a href="/work" @click="closeNav">Our Work</a>
+            </li>
+            <li
+              :class="[
                 activeItem === 'about'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
@@ -123,15 +132,6 @@
               ]"
             >
               <a href="/contact" @click="closeNav">Contact Us</a>
-            </li>
-            <li
-              :class="[
-                activeItem === 'work'
-                  ? 'header-wrapper__navLinks--active'
-                  : 'header-wrapper__navLinks--inactive'
-              ]"
-            >
-              <a href="/work" @click="closeNav">Our Work</a>
             </li>
             <li
               :class="[

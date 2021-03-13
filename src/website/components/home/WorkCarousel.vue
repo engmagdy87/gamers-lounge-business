@@ -3,13 +3,10 @@
     <div class="services-header">
       <!-- <h4 class="services-header__sub-text">What we Serve?</h4> -->
       <h1 class="services-header__title">OUR WORK</h1>
-      <router-link to="/work" class="services-header__view-link">
-        View all
-      </router-link>
     </div>
     <HalfClippedShape>
       <template #content>
-        <WorkSlider
+        <ServiceSlider
           :slides="homePageWorks"
           :timeInMillisecond="4000"
           customBulletsStyleClass="hero-bullets"
@@ -17,20 +14,7 @@
         >
           <template #carouselSlide="{slide,index}">
             <div class="row m-0 position-relative">
-              <transition :name="imageDirection" appear>
-                <div
-                  class="col-12 col-md-6 services-carousel__img-wrapper"
-                  v-if="index"
-                >
-                  <img
-                    class="services-carousel__work-img"
-                    draggable="false"
-                    :src="slide.img_slider.url"
-                    :alt="slide.title"
-                  />
-                </div>
-              </transition>
-              <div class="col-12 col-md-6 services-carousel__text p-0">
+              <div class="col-12 col-md-8 services-carousel__text p-0">
                 <transition :name="titleDirection" appear>
                   <h1
                     v-if="index"
@@ -49,22 +33,31 @@
                 </transition>
 
                 <router-link
-                  :to="`/work/${slide.id}-${reformatURL(slide.title)}`"
+                  :to="`/services/${slide.id}-${reformatURL(slide.title)}`"
                 >
-                  <div class="services-carousel__btn" v-if="index">
-                    <HalfClippedOutlineButton
-                      text="Read More"
-                      :showMaskEffect="true"
-                      :buttonMaskCSSStyle="buttonMaskCSSStyle"
-                    />
-                  </div>
+                  <button class="services-carousel__btn" v-if="index">
+                    See More
+                  </button>
                 </router-link>
               </div>
+              <transition :name="imageDirection" appear>
+                <div
+                  class="col-12 col-md-4 services-carousel__img-wrapper p-0"
+                  v-if="index"
+                >
+                  <img
+                    class="services-carousel__img"
+                    draggable="false"
+                    :src="slide.img_slider.url"
+                    :alt="slide.title"
+                  />
+                </div>
+              </transition>
             </div>
           </template>
 
           <template #carouselNavigationButtons="{goToPrev,goToNext}">
-            <div class="work-carousel-navigation">
+            <div class="carousel-navigation">
               <button @click="goToPrev">
                 <img src="../../../../public/images/prev.svg" />
               </button>
@@ -73,7 +66,7 @@
               </button>
             </div>
           </template>
-        </WorkSlider>
+        </ServiceSlider>
       </template>
     </HalfClippedShape>
   </div>
@@ -81,17 +74,15 @@
 
 <script>
 import { mapState } from "vuex";
-import WorkSlider from "../../shared/Carousel/WorkSlider";
+import ServiceSlider from "../../shared/Carousel/ServiceSlider";
 import HalfClippedShape from "../../shared/HalfClippedShape";
-import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 import redirectToNewTab from "../../../helpers/RedirectToNewTab";
 
 export default {
   components: {
-    WorkSlider,
-    HalfClippedShape,
-    HalfClippedOutlineButton
+    ServiceSlider,
+    HalfClippedShape
   },
   data() {
     return {
@@ -165,11 +156,11 @@ $offset: 0.3s;
 
 @keyframes next-enter-bluprint {
   0% {
-    right: -10%;
+    // right: -10%;
     opacity: 0;
   }
   100% {
-    right: 0;
+    // right: 0;
     opacity: 1;
   }
 }
@@ -187,21 +178,21 @@ $offset: 0.3s;
 
 @keyframes prev-enter-bluprint {
   0% {
-    right: 10%;
+    // right: 10%;
     opacity: 0;
   }
   100% {
-    right: 0;
+    // right: 0;
     opacity: 1;
   }
 }
 @keyframes prev-leave-bluprint {
   0% {
-    right: 0;
+    // right: 0;
     opacity: 1;
   }
   30% {
-    right: -10%;
+    // right: -10%;
     opacity: 0;
   }
   100% {
