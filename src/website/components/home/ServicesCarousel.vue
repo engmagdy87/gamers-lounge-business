@@ -14,7 +14,7 @@
         >
           <template #carouselSlide="{slide,index}">
             <div class="row m-0 position-relative">
-              <div class="col-12 col-md-6 services-carousel__text p-0">
+              <div class="col-12 col-md-8 services-carousel__text p-0">
                 <transition :name="titleDirection" appear>
                   <h1
                     v-if="index"
@@ -35,18 +35,14 @@
                 <router-link
                   :to="`/services/${slide.id}-${reformatURL(slide.title)}`"
                 >
-                  <div class="services-carousel__btn" v-if="index">
-                    <HalfClippedOutlineButton
-                      text="Read More"
-                      :showMaskEffect="true"
-                      :buttonMaskCSSStyle="buttonMaskCSSStyle"
-                    />
-                  </div>
+                  <button class="services-carousel__btn" v-if="index">
+                    See More
+                  </button>
                 </router-link>
               </div>
               <transition :name="imageDirection" appear>
                 <div
-                  class="col-12 col-md-6 services-carousel__img-wrapper"
+                  class="col-12 col-md-4 services-carousel__img-wrapper p-0"
                   v-if="index"
                 >
                   <img
@@ -80,15 +76,13 @@
 import { mapState } from "vuex";
 import ServiceSlider from "../../shared/Carousel/ServiceSlider";
 import HalfClippedShape from "../../shared/HalfClippedShape";
-import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 import redirectToNewTab from "../../../helpers/RedirectToNewTab";
 
 export default {
   components: {
     ServiceSlider,
-    HalfClippedShape,
-    HalfClippedOutlineButton
+    HalfClippedShape
   },
   data() {
     return {
@@ -162,11 +156,11 @@ $offset: 0.3s;
 
 @keyframes next-enter-bluprint {
   0% {
-    right: -10%;
+    // right: -10%;
     opacity: 0;
   }
   100% {
-    right: 0;
+    // right: 0;
     opacity: 1;
   }
 }
@@ -184,21 +178,21 @@ $offset: 0.3s;
 
 @keyframes prev-enter-bluprint {
   0% {
-    right: 10%;
+    // right: 10%;
     opacity: 0;
   }
   100% {
-    right: 0;
+    // right: 0;
     opacity: 1;
   }
 }
 @keyframes prev-leave-bluprint {
   0% {
-    right: 0;
+    // right: 0;
     opacity: 1;
   }
   30% {
-    right: -10%;
+    // right: -10%;
     opacity: 0;
   }
   100% {
