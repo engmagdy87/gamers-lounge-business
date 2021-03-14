@@ -70,3 +70,14 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+.slick-list,
+.slick-track {
+  height: 100% !important;
+}
+
+.slick-slide {
+  div {
+    height: 100% !important;
+  }
+}

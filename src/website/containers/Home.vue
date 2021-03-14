@@ -72,6 +72,9 @@ export default {
       setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG
     }),
     loadMoreWorks: async function() {
+      console.log("====================================");
+      console.log("sa");
+      console.log("====================================");
       const data = { places: "HOME" };
       if (
         !this.showLoading &&
