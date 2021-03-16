@@ -36,7 +36,8 @@
     }
     h1 {
       position: absolute;
-      font-family: "Segoe UI Bold";
+      font-family: Arial;
+    font-weight: bold;
       top: 45%;
       @include is-extra-small-mobile {
         font-size: 1.8rem;

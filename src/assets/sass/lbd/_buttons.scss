@@ -1,7 +1,7 @@
 .btn{
     border-width: $border-thick;
     background-color: $transparent-bg;
-    font-weight: $font-weight-normal;
+font-weight: $font-weight-normal;
 
     @include opacity(.8);
     padding: $padding-base-vertical $padding-base-horizontal;

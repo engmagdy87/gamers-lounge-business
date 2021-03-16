@@ -53,7 +53,7 @@
   .card-category,
   label {
     font-size: $font-size-base;
-    font-weight: $font-weight-normal;
+font-weight: $font-weight-normal;
     margin-bottom: 0px;
     i {
       font-size: $font-paragraph;
@@ -69,7 +69,7 @@
   .card-title {
     margin: $none;
     color: $black-color;
-    font-weight: $font-weight-light;
+font-weight: $font-weight-light;
   }
   .avatar {
     width: 30px;
@@ -107,7 +107,7 @@
 
   .author {
     font-size: $font-size-small;
-    font-weight: $font-weight-bold;
+font-weight: $font-weight-bold;
     text-transform: uppercase;
   }
   .author i {
@@ -180,7 +180,7 @@
     min-height: 64px;
 
     i {
-      font-weight: 400;
+  font-weight: 400;
       line-height: 59px;
     }
   }

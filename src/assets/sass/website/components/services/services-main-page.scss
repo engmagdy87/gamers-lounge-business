@@ -81,7 +81,8 @@
     width: 100%;
     bottom: 0%;
     h2 {
-      font-family: "Segoe UI Bold";
+      font-family: Arial;
+    font-weight: bold;
       font-size: 1.4rem;
       text-transform: uppercase;
       @include is-extra-small-mobile {
