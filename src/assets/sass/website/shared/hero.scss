@@ -8,6 +8,7 @@
   position: relative;
   display: flex;
   justify-content: center;
+  z-index: 101;
   @include cover-image();
   @include is-extra-small-mobile {
     padding-top: $header-height-mobile;

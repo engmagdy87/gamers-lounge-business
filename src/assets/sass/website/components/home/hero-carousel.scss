@@ -73,7 +73,8 @@
     }
   }
   &__title {
-    font-family: "Segoe UI Bold";
+    font-family: Arial;
+    font-weight: bold;
     position: absolute;
     width: 100%;
     text-align: left;
@@ -142,7 +143,7 @@
     }
     span {
       font-size: 30px;
-      font-weight: bold;
+  font-weight: bold;
       margin-left: 5px;
       @include is-extra-small-mobile {
         font-size: 20px;

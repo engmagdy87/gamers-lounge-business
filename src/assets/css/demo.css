@@ -18,7 +18,7 @@
     bottom: 10px;
     color: #9A9A9A;
     display: block;
-    font-weight: 400;
+font-weight: 400;
     font-size: 14px;
     line-height: 13px;
     left: 5px;
@@ -196,7 +196,7 @@
     height: 30px;
     line-height: 25px;
     font-size: 12px;
-    font-weight: 600;
+font-weight: 600;
     text-transform: uppercase;
 }
 
@@ -271,7 +271,7 @@
     display: block;
     width: 48%;
     float: left;
-    font-weight: 600;
+font-weight: 600;
 }
 
 .fixed-plugin .btn-social i {
@@ -767,7 +767,7 @@
 .brand .h1-seo {
     font-size: 2.8em;
     text-transform: uppercase;
-    font-weight: 300;
+font-weight: 300;
 }
 
 .brand .n-logo {

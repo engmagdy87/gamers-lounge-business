@@ -22,6 +22,7 @@ export default {
 .half-filled-box .half-filled-box--is-button {
   font-size: 20px;
   text-transform: uppercase;
-  font-family: "Segoe UI Bold";
+  font-family: Arial;
+  font-weight: bold;
 }
 </style>

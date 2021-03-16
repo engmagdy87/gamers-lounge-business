@@ -59,20 +59,20 @@ $total-padding: $half-clipped-shape-padding * 2;
   }
   &__body {
     background-color: $form-background;
-    width: 90%;
+    width: 70%;
     margin: 0 auto;
     border-radius: 100px;
     height: 80px;
     div {
-      width: 92%;
+      width: 86%;
       height: 100%;
       margin: auto;
     }
     .custom-arrow.slick-prev {
-      margin-left: -12px;
+      margin-left: -20px;
     }
     .custom-arrow.slick-next {
-      margin-right: -12px;
+      margin-right: -20px;
     }
     .custom-arrow {
       width: fit-content;

@@ -4,24 +4,26 @@
 @import "../../shared/half-clipped-shape.scss";
 
 $left: 25px;
-$shift: 80px;
+$shift: 40px;
 
 $extra-lg-dim: calc(#{$slide-height} + #{$shift});
 
 .services-carousel {
-  // padding-top: 100px;
   padding-bottom: 0;
   position: relative;
+  z-index: 101;
   .services-header {
-    margin: 50px 0 20px 12%;
+    margin: 50px 0 0 17%;
     &__sub-text {
       color: $header-item;
     }
     &__title {
       color: $black-text;
-      font-family: "Segoe UI Bold";
-      font-size: 2.6rem;
+      font-family: "Arial Bold";
+      font-weight: bolder;
+      font-size: 2rem;
       letter-spacing: 4px;
+      margin-bottom: 0;
     }
     &__view-link {
       color: $accent;
@@ -100,8 +102,8 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
     }
     @include is-extra-large-desktop {
       height: $extra-lg-dim;
-      width: $extra-lg-dim;
-      max-width: $extra-lg-dim;
+      width: $extra-lg-dim+50px;
+      max-width: $extra-lg-dim+50px;
       min-width: $extra-lg-dim;
     }
     @media (min-width: 1400px) and (max-width: 1599px) {
@@ -161,14 +163,15 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
   }
   &__title {
     width: fit-content;
-    font-family: "Segoe UI Bold";
+    font-family: Arial;
+    font-weight: bold;
     position: absolute;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
-    font-size: 2rem;
+    font-size: 1.6rem;
     text-align: left;
     color: $white-text;
     margin-bottom: 0;
@@ -190,9 +193,9 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
   &__content {
     width: calc(100% - #{$left});
     text-align: left;
-    font-family: "Segoe UI";
+    font-family: Arial;
     font-size: 1.2rem;
-    // line-height: 35px;
+    line-height: 20px;
     margin-top: 10px;
     position: absolute;
     top: 60px;
@@ -223,13 +226,14 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
   }
   &__btn {
     position: absolute;
-    bottom: 10px;
+    bottom: 16px;
     right: 20px;
+    font-size: 0.8rem;
     cursor: pointer;
     z-index: 100;
     color: $black-text;
     background-color: $white-text;
-    padding: 8px 20px;
+    padding: 5px 12px;
     border-radius: 5px;
     border: 1px $blue-stroke solid;
     outline: none;
@@ -365,7 +369,7 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
   }
 }
 // All have vw as divide operation units must be the same for all
-$width: 80%;
+$width: 70%;
 $height: $slide-height;
 
 $widths-and-heights: (

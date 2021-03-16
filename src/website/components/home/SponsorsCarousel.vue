@@ -100,8 +100,9 @@ export default {
   text-align: center;
   &__title {
     color: $black-text;
-    font-family: "Segoe UI Bold";
-    font-size: 2.6rem;
+    font-family: "Arial Bold";
+    font-weight: bolder;
+    font-size: 2rem;
     letter-spacing: 4px;
     margin-top: 0;
   }

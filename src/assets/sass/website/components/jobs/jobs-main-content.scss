@@ -16,7 +16,8 @@
         width: 70%;
         h1{
             text-transform: uppercase;
-            font-family: "Segoe UI Bold";
+            font-family: Arial;
+    font-weight: bold;
             color: $header-item;
             @include is-mobile {
                 font-size: 2rem;
@@ -80,7 +81,8 @@
        }
        h3{
         color: $header-item; 
-        font-family: "Segoe UI Bold"; 
+        font-family: Arial;
+    font-weight: bold; 
         margin: 0px 0 50px;
        }
    } 
