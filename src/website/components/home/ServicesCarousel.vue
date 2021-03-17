@@ -6,7 +6,6 @@
     <HalfClippedShape>
       <template #content>
         <ServiceSlider
-          :autoPlay="false"
           :slides="homePageServices"
           :timeInMillisecond="4000"
           customBulletsStyleClass="hero-bullets"
@@ -37,7 +36,7 @@
                   </button>
                 </router-link>
               </div>
-              <transition appear name="slide-fade" mode="out-in">
+              <transition appear>
                 <div
                   class="col-12 col-md-4 services-carousel__img-wrapper p-0"
                   v-if="index"
