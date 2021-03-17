@@ -13,7 +13,7 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
   position: relative;
   z-index: 101;
   .services-header {
-    margin: 50px 0 0 17%;
+    margin: 50px 0 0 12%;
     &__sub-text {
       color: $header-item;
     }
@@ -102,8 +102,8 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
     }
     @include is-extra-large-desktop {
       height: $extra-lg-dim;
-      width: $extra-lg-dim+50px;
-      max-width: $extra-lg-dim+50px;
+      width: $extra-lg-dim + 50px;
+      max-width: $extra-lg-dim + 50px;
       min-width: $extra-lg-dim;
     }
     @media (min-width: 1400px) and (max-width: 1599px) {
@@ -226,8 +226,8 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
   }
   &__btn {
     position: absolute;
-    bottom: 16px;
-    right: 20px;
+    bottom: 20px;
+    right: 35px;
     font-size: 0.8rem;
     cursor: pointer;
     z-index: 100;
@@ -369,7 +369,7 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
   }
 }
 // All have vw as divide operation units must be the same for all
-$width: 70%;
+$width: 80%;
 $height: $slide-height;
 
 $widths-and-heights: (
