@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div class="services-page">
+    <div
+      v-if="isSettingsDataFetched"
+      class="services-page__bg"
+      :style="`background-image: url(${settings.img_services_cover.url};`"
+    ></div>
     <ServicesHero />
 
     <div class="services-page-wrapper row" v-if="isServicesFetched">
@@ -54,7 +59,10 @@ export default {
   computed: {
     ...mapState({
       services: state => state.services.services,
-      isServicesFetched: state => state.services.isServicesFetched
+      isServicesFetched: state => state.services.isServicesFetched,
+      settings: state => state.settings.servicesSettings,
+      isSettingsDataFetched: state =>
+        state.settings.isServicesSettingsDataFetched
     })
   },
   methods: {
@@ -124,4 +132,16 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../assets/sass/website/components/services/services-main-page.scss";
+
+.services-page {
+  &__bg {
+    width: 69.8%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    z-index: 100;
+    padding-top: $header-height;
+  }
+}
 </style>

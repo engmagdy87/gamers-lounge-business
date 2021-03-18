@@ -1,6 +1,6 @@
 <template>
   <div v-if="isSettingsDataFetched">
-    <Hero :heroImage="settings.img_services_cover.url">
+    <Hero>
       <template #hero-content>
         <div
           class="row align-items-end h-100 justify-content-center services-container"
