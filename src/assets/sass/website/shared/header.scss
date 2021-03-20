@@ -160,7 +160,7 @@ $around-nav-width: calc(100% - #{$nav-width});
     }
     &--active {
       font-size: $header-active-item-font;
-  font-weight: bold;
+      font-weight: bold;
       &::before {
         @include is-extra-small-mobile {
           @include header-item-hover-effect(

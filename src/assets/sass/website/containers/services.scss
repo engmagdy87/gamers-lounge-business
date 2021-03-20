@@ -59,8 +59,12 @@
       margin: auto;
       text-align: center;
       overflow: hidden;
-      // overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       h1 {
+        width: 100%;
         color: $header-item;
         user-select: none;
         font-size: 2.5rem;
@@ -76,7 +80,8 @@
           font-size: 1.5rem;
         }
       }
-      p {
+      div {
+        width: 100%;
         color: $sub-text;
         user-select: none;
         font-size: 1.1rem;
