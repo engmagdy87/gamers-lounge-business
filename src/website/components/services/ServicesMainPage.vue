@@ -11,7 +11,7 @@
       <div
         v-for="service in services.data"
         :key="service.id"
-        class="services-page-wrapper__content-wrapper col-xs-12 col-sm-12 col-md-6 col-lg-4"
+        class="services-page-wrapper__content-wrapper col-xs-12 col-sm-12 col-md-6 col-lg-3 p-0"
       >
         <router-link
           :to="`/services/${service.id}-${reformatURL(service.title)}`"
@@ -132,6 +132,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../../assets/sass/website/components/services/services-main-page.scss";
+@import "../../../assets/sass/website/mixins.scss";
 
 .services-page {
   &__bg {
@@ -142,6 +143,9 @@ export default {
     position: fixed;
     z-index: 100;
     padding-top: $header-height;
+    @include is-extra-small-mobile {
+      width: 68.8%;
+    }
   }
 }
 </style>

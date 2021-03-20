@@ -14,3 +14,19 @@
     padding-top: $header-height-mobile;
   }
 }
+
+.hero-wrapper-services {
+  width: 100%;
+  height: 60vh;
+  padding-top: $header-height;
+  background-attachment: fixed;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  z-index: 101;
+  background-color: rgba(0, 0, 0, 0.5);
+  @include cover-image();
+  @include is-extra-small-mobile {
+    padding-top: $header-height-mobile;
+  }
+}
