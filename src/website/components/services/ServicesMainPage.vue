@@ -9,17 +9,15 @@
 
     <div class="services-page-wrapper row" v-if="isServicesFetched">
       <div
-        v-for="service in services.data"
+        v-for="(service, index) in services.data"
         :key="service.id"
         class="services-page-wrapper__content-wrapper col-xs-12 col-sm-12 col-md-6 col-lg-3 p-0"
+        @click="getSelectedService(index)"
       >
         <router-link
           :to="`/services/${service.id}-${reformatURL(service.title)}`"
         >
-          <div
-            class="services-page-wrapper__content"
-            @click="setIsServiceFetched(false)"
-          >
+          <div class="services-page-wrapper__content" @click="serviceClicked">
             <img :src="service.img_card.url" draggable="false" />
 
             <div class="services-page-wrapper__text">
@@ -34,6 +32,11 @@
         </div>
       </Intersect>
     </div>
+    <Modal
+      :showModal="showModal"
+      :setShowModal="setShowModal"
+      :navigateTo="navigateTo"
+    />
   </div>
 </template>
 
@@ -44,17 +47,22 @@ import Intersect from "vue-intersect";
 import Loading from "../../../website/shared/Loading";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
 import ServicesHero from "../../components/services/ServicesHero";
+import Modal from "../../shared/Modal";
+
 export default {
   data() {
     return {
+      showModal: false,
       queriedServicesCounts: 8,
-      showLoading: false
+      showLoading: false,
+      selectedService: null
     };
   },
   components: {
     ServicesHero,
     Intersect,
-    Loading
+    Loading,
+    Modal
   },
   computed: {
     ...mapState({
@@ -70,6 +78,8 @@ export default {
       fetchServices: types.services.actions.FETCH_SERVICES
     }),
     ...mapMutations({
+      setWebsiteServiceFetched:
+        types.services.mutations.SET_IS_WEBSITE_SERVICE_FETCHED,
       setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG,
       setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG,
       setIsServiceFetched:
@@ -77,6 +87,29 @@ export default {
     }),
     reformatURL(id) {
       return reformatStringToBeInURL(id);
+    },
+    getSelectedService(id) {
+      this.selectedService = id;
+    },
+    navigateTo(dir) {
+      this.setWebsiteServiceFetched(false);
+      let service;
+      if (dir == "next")
+        this.selectedService =
+          this.selectedService === this.services.data.length - 1
+            ? 0
+            : this.selectedService + 1;
+      else
+        this.selectedService =
+          this.selectedService === 0
+            ? this.services.data.length - 1
+            : this.selectedService - 1;
+
+      service = this.services.data[this.selectedService];
+
+      this.$router.replace(
+        `/services/${service.id}-${this.reformatURL(service.title)}`
+      );
     },
     generateWorkPayload(showSpinner) {
       const data = {
@@ -104,6 +137,13 @@ export default {
           this.showLoading = false;
         }
       }
+    },
+    setShowModal(flag) {
+      this.showModal = flag;
+    },
+    serviceClicked() {
+      this.setIsServiceFetched(false);
+      this.setShowModal(true);
     }
   },
   mounted() {
