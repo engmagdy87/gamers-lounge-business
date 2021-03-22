@@ -25,14 +25,14 @@
             <p>{{ statistic.key }}</p>
           </div>
         </div>
+        <WorkDetails :websiteWork="websiteWork" v-if="websiteWork.sections" />
       </div>
-      <WorkDetails :websiteWork="websiteWork" v-if="websiteWork.sections" />
+      <Intersect @enter="loadMoreWorkSections" v-show="worksPage > 0"
+        ><div class="threshold">
+          <Loading :showLoading="showLoading" />
+        </div>
+      </Intersect>
     </div>
-    <Intersect @enter="loadMoreWorkSections" v-show="worksPage > 0"
-      ><div class="threshold">
-        <Loading :showLoading="showLoading" v-show="worksPage > 1" />
-      </div>
-    </Intersect>
   </div>
 </template>
 

@@ -40,13 +40,10 @@
     &__title {
       font-family: Arial;
       font-weight: bold;
-      position: absolute;
       width: 80%;
       margin: auto;
       margin-top: 1%;
       text-align: left;
-      left: 0;
-      bottom: 0;
       font-size: 1.5rem;
       @include is-extra-small-mobile {
         font-size: 1.5rem;
