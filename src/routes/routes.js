@@ -340,15 +340,18 @@ const routes = [
     component: OurWorks,
     beforeEnter(to, from, next) {
       showHeaderAndFooterForWebsite(next, false);
-    }
-  },
-  {
-    path: "/work/:workName",
-    name: "work",
-    component: OurWorkDetails,
-    beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false);
-    }
+    },
+    children: [
+      {
+        path: "/work/:workName",
+        name: "work",
+        component: OurWorkDetails,
+        props: true,
+        beforeEnter(to, from, next) {
+          showHeaderAndFooterForWebsite(next, false);
+        }
+      }
+    ]
   },
   {
     path: "/login",

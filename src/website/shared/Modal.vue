@@ -1,6 +1,6 @@
 <template>
   <div ref="Modal" class="modal">
-    <div class="overlay-bg" @click="closeModal"></div>
+    <div class="overlay-bg overlay-bg__left" @click="closeModal"></div>
     <div class="modal-content">
       <router-view :key="$route.fullPath"></router-view>
       <div
@@ -22,7 +22,7 @@
         <span>Next</span>
       </div>
     </div>
-    <div class="overlay-bg" @click="closeModal"></div>
+    <div class="overlay-bg overlay-bg__right" @click="closeModal"></div>
   </div>
 </template>
 
@@ -56,6 +56,7 @@ $width: 72%;
   position: fixed;
   bottom: 20px;
   text-align: center;
+  z-index: 1;
   &__next {
     bottom: 20px;
     right: calc((#{100%} - #{$width}) / 3);
@@ -73,7 +74,14 @@ $width: 72%;
 }
 .overlay-bg {
   width: calc((#{100%} - #{$width}) / 2);
-  height: 100vh;
+  height: 100%;
+  position: fixed;
+  &__left {
+    left: 0;
+  }
+  &__right {
+    right: 0;
+  }
 }
 .modal {
   display: none; /* Hidden by default */

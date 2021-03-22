@@ -6,7 +6,7 @@
   background-color: $primary;
   height: max-content;
   // margin-top: -$header-height;
-  min-height: calc(100vh - #{$footer-height});
+  min-height: 100vh;
   @include is-mobile {
     margin-top: -$header-height-mobile - 45;
     min-height: calc(100vh - #{$footer-height-mobile});
@@ -39,7 +39,7 @@
     }
     &__title {
       font-family: Arial;
-    font-weight: bold;
+      font-weight: bold;
       position: absolute;
       width: 80%;
       margin: auto;
@@ -110,7 +110,7 @@
     }
     div {
       font-family: Arial;
-    font-weight: bold;
+      font-weight: bold;
       position: relative;
       text-align: center;
       padding: 0 35px;

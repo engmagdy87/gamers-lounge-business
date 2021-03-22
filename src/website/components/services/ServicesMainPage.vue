@@ -26,7 +26,7 @@
           </div>
         </router-link>
       </div>
-      <Intersect @enter="loadMoreWorks"
+      <Intersect @enter="loadMoreWorks" v-if="isServicesFetched"
         ><div class="threshold">
           <Loading :showLoading="showLoading" />
         </div>

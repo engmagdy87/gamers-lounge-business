@@ -6,7 +6,7 @@
   background-color: $primary;
   height: max-content;
   margin-top: -$header-height;
-  min-height: calc(100vh - #{$footer-height});
+  min-height: 100vh;
   @include is-mobile {
     margin-top: -$header-height-mobile - 45;
     min-height: calc(100vh - #{$footer-height-mobile});
@@ -37,7 +37,7 @@
     h1 {
       position: absolute;
       font-family: Arial;
-    font-weight: bold;
+      font-weight: bold;
       top: 45%;
       @include is-extra-small-mobile {
         font-size: 1.8rem;
