@@ -321,15 +321,18 @@ const routes = [
     component: Services,
     beforeEnter(to, from, next) {
       showHeaderAndFooterForWebsite(next, false);
-    }
-  },
-  {
-    path: "/services/:serviceName",
-    name: "service",
-    component: ServicesDetails,
-    beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false);
-    }
+    },
+    children: [
+      {
+        path: "/services/:serviceName",
+        name: "service",
+        component: ServicesDetails,
+        props: true,
+        beforeEnter(to, from, next) {
+          showHeaderAndFooterForWebsite(next, false);
+        }
+      }
+    ]
   },
   {
     path: "/work",

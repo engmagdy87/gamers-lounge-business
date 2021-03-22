@@ -13,12 +13,9 @@
 
 <script>
 import { mapState } from "vuex";
-import store from "./store/index";
-import types from "./store/types";
 import Header from "./website/shared/Header";
 import Footer from "./website/shared/Footer";
 import Spinner from "./website/shared/Spinner";
-import { getTokenCookie } from "./helpers/CookieHelper";
 
 export default {
   data() {
