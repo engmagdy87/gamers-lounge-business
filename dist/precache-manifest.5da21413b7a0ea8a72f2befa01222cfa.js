@@ -156,12 +156,12 @@ self.__precacheManifest = [
     "url": "/js/JobApplicantsList.6be6acde.js"
   },
   {
-    "revision": "beb681dd1342a71bf5a8",
-    "url": "/css/JobDetails.6e06639b.css"
+    "revision": "ef21e8c7b1d82e1d9785",
+    "url": "/css/JobDetails.f00b5c6e.css"
   },
   {
-    "revision": "beb681dd1342a71bf5a8",
-    "url": "/js/JobDetails.8ea981ae.js"
+    "revision": "ef21e8c7b1d82e1d9785",
+    "url": "/js/JobDetails.52a2a1bf.js"
   },
   {
     "revision": "8bcdb69f63b285016bde",
@@ -404,12 +404,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.7f64e606.js"
   },
   {
-    "revision": "6ad0ba9477e7ff92075b",
+    "revision": "90f740f7fb4272f0d94d",
     "url": "/css/app.bc0a62ef.css"
   },
   {
-    "revision": "6ad0ba9477e7ff92075b",
-    "url": "/js/app.6d0eea06.js"
+    "revision": "90f740f7fb4272f0d94d",
+    "url": "/js/app.f814e477.js"
   },
   {
     "revision": "bdda8698921ac61af643",
@@ -468,12 +468,12 @@ self.__precacheManifest = [
     "url": "/img/top-arrow.973d1b85.svg"
   },
   {
-    "revision": "ff208b8d733e61a630992ee2b72c9c1c",
-    "url": "/fonts/nucleo-icons.ff208b8d.woff2"
-  },
-  {
     "revision": "8224e0160e362e117cbe00495919e2af",
     "url": "/fonts/nucleo-icons.8224e016.eot"
+  },
+  {
+    "revision": "ff208b8d733e61a630992ee2b72c9c1c",
+    "url": "/fonts/nucleo-icons.ff208b8d.woff2"
   },
   {
     "revision": "b0dc05d015e91e7d28d79cd0056fe555",
@@ -488,7 +488,7 @@ self.__precacheManifest = [
     "url": "/img/next.c9e7debf.svg"
   },
   {
-    "revision": "66669f87e3ea8a15223de13210f091c2",
+    "revision": "4b9bae34709156c07a8cdc4b791a64ad",
     "url": "/index.html"
   },
   {

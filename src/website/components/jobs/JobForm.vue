@@ -84,7 +84,7 @@
                 v-model="applicantInfo.behance_link"
               />
             </div>
-            <!-- <ErrorMessage :fieldErrors="errors.behance_link" /> -->
+            <ErrorMessage :fieldErrors="errors.behance_link" />
           </div>
           <div class="form-group">
             <label class="form-group__long-label">Linkedin Link</label>
@@ -95,7 +95,7 @@
                 v-model="applicantInfo.linkedin_link"
               />
             </div>
-            <!-- <ErrorMessage :fieldErrors="errors.linkedin_link" /> -->
+            <ErrorMessage :fieldErrors="errors.linkedin_link" />
           </div>
           <div
             class="form-group d-flex justify-content-start align-items-center"
@@ -135,6 +135,7 @@ import ErrorMessage from "../../shared/ErrorMessage";
 import HalfClippedButton from "../../shared/HalfClippedButton";
 import countryCodes from "../../../assets/json/CountryCodes.json";
 import isValidationErrorExist from "../../../helpers/FormValidation";
+import isWebsiteValid from "../../../helpers/JobWebsitesValidation";
 
 const emptyForm = {
   fullName: "",
@@ -202,6 +203,24 @@ export default {
       );
       this.errors = { ...errorObject.errors };
       if (errorObject.length !== 0) return;
+      if (
+        this.applicantInfo.behance_link !== "" &&
+        !isWebsiteValid(this.applicantInfo.behance_link, "behance.net")
+      )
+        this.errors = { ...this.errors, behance_link: ["Invalid URL"] };
+      else this.errors = { ...this.errors, behance_link: [] };
+      if (
+        this.applicantInfo.linkedin_link !== "" &&
+        !isWebsiteValid(this.applicantInfo.linkedin_link, "linkedin.com")
+      )
+        this.errors = { ...this.errors, linkedin_link: ["Invalid URL"] };
+      else this.errors = { ...this.errors, linkedin_link: [] };
+
+      if (
+        this.errors.linkedin_link.length !== 0 ||
+        this.errors.behance_link.length !== 0
+      )
+        return;
       try {
         await this.applyJob({ ...this.applicantInfo, jobId: this.job.id });
         this.notifyVue(
