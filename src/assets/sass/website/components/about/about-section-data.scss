@@ -2,6 +2,11 @@
 @import "../../variables.scss";
 @import "../../mixins.scss";
 
+$left: 25px;
+$shift: 40px;
+
+$extra-lg-dim: calc(#{$slide-height} + #{$shift});
+
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -22,8 +27,8 @@ $text-minheight-pc: 706px;
     justify-content: center;
   }
   &__inside {
-    padding: 150px 0px 90px 0px;
-    width: 76%;
+    padding: 50px 0px;
+    width: 80%;
     margin: auto;
     &--is-text {
       div {
@@ -34,7 +39,6 @@ $text-minheight-pc: 706px;
       }
       padding: 50px;
       background-color: $form-background;
-      min-height: $text-minheight-pc;
       overflow: hidden;
       overflow-y: auto;
       @include is-mobile {
@@ -51,7 +55,7 @@ $text-minheight-pc: 706px;
         color: $header-item;
         font-size: 2.3rem;
         font-family: Arial;
-    font-weight: bold;
+        font-weight: bold;
         @include is-large-desktop {
           font-size: 2rem;
         }
@@ -100,5 +104,137 @@ $text-minheight-pc: 706px;
         max-height: 500px;
       }
     }
+  }
+  &__title {
+    font-family: "Arial Bold";
+    font-weight: bolder;
+    font-size: 2rem;
+    letter-spacing: 4px;
+    margin-bottom: 0;
+    margin-left: 30px;
+  }
+  &__image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    // position: absolute;
+    // right: 0;
+    // top: 0;
+    @include is-extra-small-mobile {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      left: -23%;
+      transform: scale(1.1);
+      filter: brightness(30%);
+    }
+    @include is-mobile {
+      position: relative;
+      width: 95vw;
+      left: -23%;
+      transform: scale(1.1);
+      // height: 100%;
+      filter: brightness(30%);
+    }
+    @include is-tablet {
+      position: relative;
+      width: 95vw;
+      left: -23%;
+      transform: scale(1.1);
+      // height: 100%;
+      filter: brightness(30%);
+    }
+    @include is-desktop {
+      // height: 97%;
+    }
+    @include is-large-desktop {
+      // height: 98%;
+    }
+    @include is-extra-large-desktop {
+      height: $extra-lg-dim;
+      width: $extra-lg-dim + 50px;
+      max-width: $extra-lg-dim + 50px;
+      min-width: $extra-lg-dim;
+    }
+    @media (min-width: 1400px) and (max-width: 1599px) {
+      // height: 100%;
+    }
+    @media (min-width: 1600px) {
+      // height: 100%;
+    }
+  }
+  &__description {
+    // div {
+    //   max-height: 520px;
+    //   overflow: hidden;
+    //   overflow-y: auto;
+    //   line-height: 33px;
+    // }
+    padding: 20px 10px 20px 15px;
+    height: $slide-height;
+    margin-top: $shift/2;
+    background-color: $form-background;
+    text-align: left;
+    font-family: Arial;
+    // font-size: 1.2rem;
+    line-height: 20px;
+    // margin-top: 10px;
+    color: $white-text;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    // min-height: $text-minheight-pc;
+    // overflow: hidden;
+    // overflow-y: auto;
+    // @include is-mobile {
+    //   min-height: auto;
+    //   max-height: none;
+    //   padding: 20px;
+    // }
+    // @include is-extra-small-mobile {
+    //   min-height: auto;
+    //   max-height: none;
+    //   padding: 20px;
+    // }
+    // h1 {
+    //   color: $header-item;
+    //   font-size: 2.3rem;
+    //   font-family: Arial;
+    //   font-weight: bold;
+    //   @include is-large-desktop {
+    //     font-size: 2rem;
+    //   }
+    //   @include is-desktop {
+    //     font-size: 2rem;
+    //   }
+    //   @include is-tablet {
+    //     font-size: 1.7rem;
+    //   }
+    //   @include is-mobile {
+    //     font-size: 1.5rem;
+    //   }
+    //   @include is-extra-small-mobile {
+    //     font-size: 1.5rem;
+    //   }
+    // }
+    // p {
+    //   color: $sub-text;
+    //   font-size: 1.2rem;
+    //   @include is-large-desktop {
+    //     font-size: 1rem;
+    //   }
+    //   @include is-desktop {
+    //     font-size: 1rem;
+    //   }
+    //   @include is-tablet {
+    //     font-size: 0.9rem;
+    //   }
+    //   @include is-mobile {
+    //     font-size: 0.9rem;
+    //   }
+    //   @include is-extra-small-mobile {
+    //     font-size: 0.9rem;
+    //   }
+    // }
   }
 }

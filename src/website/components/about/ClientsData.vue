@@ -1,11 +1,14 @@
 <template>
   <div class="image-holder">
     <div
-      :class="['image-holder__leftline', showBottomGuard && 'bottomgrid']"
+      :class="['image-holder__leftline', hideBorderLeftBorder && 'hide-border']"
     ></div>
     <img class="image-holder__image" :src="imageUrl" @click="sponsorLink" />
     <div
-      :class="['image-holder__rightline', showBottomGuard && 'bottomgrid']"
+      :class="[
+        'image-holder__rightline',
+        hideBorderRightBorder && 'hide-border'
+      ]"
     ></div>
   </div>
 </template>
@@ -17,7 +20,8 @@ export default {
     imageName: String,
     className: String,
     link: String,
-    showBottomGuard: Boolean
+    hideBorderLeftBorder: Boolean,
+    hideBorderRightBorder: Boolean
   },
   methods: {
     sponsorLink() {

@@ -1,5 +1,6 @@
 <template>
   <div class="about-section-wrapper">
+    <h1 class="about-section-wrapper__title">OUR STORY</h1>
     <div class="about-section-wrapper__container">
       <div
         v-for="(row, rowId) in section.rows"
@@ -13,7 +14,7 @@
         >
           <div
             v-if="column.type === ABOUT_COLUMNS_TYPES.TITLE && column.fillable"
-            class="work-details-sections__title-normal"
+            class="about-section-wrapper__title"
           >
             {{ column.content }}
           </div>
@@ -25,7 +26,7 @@
             :key="img.id"
             @click="openImageModal(rowId, colId, null, column.type)"
             style="cursor:pointer"
-            class="about-section-wrapper__inside--is-image"
+            class="about-section-wrapper__image"
             :style="{ 'background-image': 'url(' + img.url + ')' }"
           ></div>
           <div
@@ -97,7 +98,7 @@
             v-if="
               column.type === ABOUT_COLUMNS_TYPES.DESCRIPTION && column.fillable
             "
-            class="description-container about-section-wrapper__inside--is-text"
+            class="description-container about-section-wrapper__description"
           >
             <div v-html="column.content" />
           </div>

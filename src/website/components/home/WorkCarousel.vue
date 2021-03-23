@@ -14,10 +14,7 @@
             <div class="row m-0 position-relative">
               <div class="col-12 col-md-8 services-carousel__text p-0">
                 <transition appear name="slide-fade" mode="out-in">
-                  <h1
-                    v-if="index"
-                    class="services-carousel__title services-carousel__title"
-                  >
+                  <h1 v-if="index" class="services-carousel__title">
                     {{ slide.title }}
                   </h1>
                 </transition>
@@ -25,7 +22,7 @@
                 <transition appear name="slide-fade" mode="out-in">
                   <p
                     v-if="index"
-                    class="description-container services-carousel__content services-carousel__content"
+                    class="description-container services-carousel__content"
                     v-html="slide.short_description"
                   ></p>
                 </transition>

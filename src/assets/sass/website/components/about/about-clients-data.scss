@@ -2,44 +2,50 @@
 @import "../../variables.scss";
 @import "../../mixins.scss";
 
-.image-holder{
-    display: flex;
-    justify-content:center;
-    :last-child{
-      display: none;
-    }
+.image-holder {
+  display: flex;
+  justify-content: center;
+  :last-child {
+    display: none;
+  }
 
-    &__image{
+  &__image {
     object-fit: contain;
     padding: 30px;
-    width: 65%;
+    width: 70%;
+    max-width: 160px;
+    max-height: 140px;
     margin: auto;
     cursor: pointer;
-        @include is-large-desktop {
-            width: 70%;
-        }
-        @include is-desktop {
-            width: 80%;
-        }
-        @include is-tablet {
-            width: 90%;
-        }
-        @include is-mobile {
-            width: 90%;
-            padding: 15px;
-        }
-        @include is-extra-small-mobile{
-            width: 80%;
-            padding: 10px;
-        }
+    @include is-large-desktop {
+      width: 70%;
     }
-    .bottomgrid{
-    margin-top: 0;
-    margin-bottom: -50px;
+    @include is-desktop {
+      width: 80%;
     }
-    &__rightline, &__leftline{
-    width: .01rem;
-    background-color: rgba($light-gray, .2);
-    margin-top: -50px;
+    @include is-tablet {
+      width: 90%;
     }
+    @include is-mobile {
+      width: 90%;
+      padding: 15px;
+    }
+    @include is-extra-small-mobile {
+      width: 80%;
+      padding: 10px;
+    }
+  }
+  .hide-border {
+    // margin-top: 0;
+    // margin-bottom: -50px;
+    background-color: transparent !important;
+  }
+  &__rightline,
+  &__leftline {
+    width: 1%;
+    height: 80%;
+    margin: auto 0;
+    background-color: white;
+    // margin-top: -50px;
+  }
 }

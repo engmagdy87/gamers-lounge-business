@@ -654,8 +654,8 @@ export default {
       this.aboutColumn.type = this.editData.type;
       this.aboutColumn.ratio = this.editData.ratio;
       this.aboutColumn.fillable = this.editData.fillable;
-      this.serviceColumn.is_vid_extenral_enabled = this.editData.is_vid_extenral_enabled;
-      this.serviceColumn.vid_extenral = this.editData.vid_extenral || "";
+      this.aboutColumn.is_vid_extenral_enabled = this.editData.is_vid_extenral_enabled;
+      this.aboutColumn.vid_extenral = this.editData.vid_extenral || "";
       this.aboutColumn.isAutoPlay = this.editData.vid_content[0]
         ? this.editData.vid_content[0].is_auto_play
         : false;

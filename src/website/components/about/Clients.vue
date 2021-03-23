@@ -4,54 +4,64 @@
       <div class="clients-header">
         <h1>OUR CLIENTS</h1>
       </div>
-      <div v-for="(step, index) in windowSteps" :key="step">
-        <div class="about-clients-wrapper__topline" v-if="index === 0">
-          <div />
-        </div>
+      <div class="clients-wrapper">
+        <div v-for="(step, index) in windowSteps" :key="step">
+          <div class="container">
+            <ClientsData
+              :link="sponsors[step].link"
+              :imageName="sponsors[step].name"
+              :imageUrl="sponsors[step].image.url"
+              :hideBorderLeftBorder="true"
+              :hideBorderRightBorder="false"
+              v-if="step < sponsors.length"
+            />
+            <ClientsData
+              :link="sponsors[step + 1].link"
+              :imageName="sponsors[step + 1].name"
+              :imageUrl="sponsors[step + 1].image.url"
+              :hideBorderLeftBorder="false"
+              :hideBorderRightBorder="false"
+              v-if="step + 1 < sponsors.length"
+            />
+            <ClientsData
+              :link="sponsors[step + 2].link"
+              :imageName="sponsors[step + 2].name"
+              :imageUrl="sponsors[step + 2].image.url"
+              :hideBorderLeftBorder="false"
+              :hideBorderRightBorder="false"
+              v-if="step + 2 < sponsors.length"
+            />
+            <ClientsData
+              :link="sponsors[step + 3].link"
+              :imageName="sponsors[step + 3].name"
+              :imageUrl="sponsors[step + 3].image.url"
+              :hideBorderLeftBorder="false"
+              :hideBorderRightBorder="false"
+              v-if="step + 2 < sponsors.length"
+            />
+            <ClientsData
+              :link="sponsors[step + 4].link"
+              :imageName="sponsors[step + 4].name"
+              :imageUrl="sponsors[step + 4].image.url"
+              :hideBorderLeftBorder="false"
+              :hideBorderRightBorder="true"
+              v-if="step + 3 < sponsors.length"
+            />
+          </div>
 
-        <div class="container">
-          <ClientsData
-            :link="sponsors[step].link"
-            :imageName="sponsors[step].name"
-            :imageUrl="sponsors[step].image.url"
-            :showBottomGuard="step === windowSteps[windowSteps.length - 1]"
-            v-if="step < sponsors.length"
-          />
-          <ClientsData
-            :link="sponsors[step + 1].link"
-            :imageName="sponsors[step + 1].name"
-            :imageUrl="sponsors[step + 1].image.url"
-            :showBottomGuard="step === windowSteps[windowSteps.length - 1]"
-            v-if="step + 1 < sponsors.length"
-          />
-          <ClientsData
-            :link="sponsors[step + 2].link"
-            :imageName="sponsors[step + 2].name"
-            :imageUrl="sponsors[step + 2].image.url"
-            :showBottomGuard="step === windowSteps[windowSteps.length - 1]"
-            v-if="step + 2 < sponsors.length"
-          />
-          <ClientsData
-            :link="sponsors[step + 3].link"
-            :imageName="sponsors[step + 3].name"
-            :imageUrl="sponsors[step + 3].image.url"
-            :showBottomGuard="step === windowSteps[windowSteps.length - 1]"
-            v-if="step + 3 < sponsors.length"
-          />
-        </div>
+          <div
+            class="about-clients-wrapper__linebetween"
+            v-if="index !== 0 || index !== sponsors.length - 1"
+          >
+            <div />
+          </div>
 
-        <div
-          class="about-clients-wrapper__linebetween"
-          v-if="index !== 0 || index !== sponsors.length - 1"
-        >
-          <div />
-        </div>
-
-        <div
-          class="about-clients-wrapper__bottomline"
-          v-if="index === sponsors.length - 1"
-        >
-          <div />
+          <div
+            class="about-clients-wrapper__bottomline"
+            v-if="index === sponsors.length - 1"
+          >
+            <div />
+          </div>
         </div>
       </div>
     </div>
@@ -65,7 +75,7 @@ import ClientsData from "./ClientsData";
 export default {
   data() {
     return {
-      windowSize: 4
+      windowSize: 5
     };
   },
   components: { ClientsData },
