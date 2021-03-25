@@ -1,6 +1,10 @@
 <template>
   <div class="contact-wrapper" v-if="isContactFetched">
-    <Hero :heroImage="contact.img_cover.url">
+    <div
+      class="contact-wrapper__bg"
+      :style="`background-image: url(${contact.img_cover.url};`"
+    ></div>
+    <Hero page="services">
       <template #hero-content>
         <div class="row align-items-end contact-wrapper__contact-box">
           <div
@@ -48,18 +52,20 @@
         </div>
       </template>
     </Hero>
-    <FormContainer />
-    <iframe
-      v-if="contact.map !== ''"
-      :src="contact.map"
-      width="100%"
-      height="600"
-      frameborder="0"
-      style="border:0;"
-      allowfullscreen=""
-      aria-hidden="false"
-      tabindex="0"
-    ></iframe>
+    <div class="contact-wrapper__content">
+      <FormContainer />
+      <iframe
+        v-if="contact.map !== ''"
+        :src="contact.map"
+        width="100%"
+        height="600"
+        frameborder="0"
+        style="border:0;"
+        allowfullscreen=""
+        aria-hidden="false"
+        tabindex="0"
+      ></iframe>
+    </div>
   </div>
 </template>
 

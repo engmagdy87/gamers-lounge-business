@@ -30,7 +30,7 @@
             :style="{ 'background-image': 'url(' + img.url + ')' }"
           ></div>
           <div
-            class="work-details-sections__video"
+            class="about-section-wrapper__video"
             v-else-if="
               column.type === ABOUT_COLUMNS_TYPES.VIDEO &&
                 column.fillable &&
@@ -48,7 +48,7 @@
             </iframe>
           </div>
           <div
-            class="work-details-sections__video"
+            class="about-section-wrapper__video"
             v-else-if="
               column.type === ABOUT_COLUMNS_TYPES.VIDEO &&
                 column.fillable &&
@@ -75,7 +75,7 @@
             v-else-if="
               column.type === ABOUT_COLUMNS_TYPES.SLIDER && column.fillable
             "
-            class="work-details-sections__slider"
+            class="about-section-wrapper__slider"
           >
             <Carousel3d
               :autoplay="true"

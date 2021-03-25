@@ -199,6 +199,52 @@ span {
     height: 200px;
   }
 }
+.description-container-job {
+  word-break: break-word;
+  overflow: hidden;
+  div {
+    color: rgb(21, 26, 32) !important;
+    line-height: 20px;
+    word-break: break-word;
+    span {
+      white-space: normal !important;
+    }
+  }
+  span {
+    color: rgb(21, 26, 32) !important;
+    word-break: break-word;
+    line-height: 20px;
+  }
+  span > * {
+    color: rgb(21, 26, 32) !important;
+    word-break: break-word;
+    line-height: 20px;
+  }
+  h1 > a,
+  h2 > a,
+  h3 > a,
+  h4 > a,
+  h5 > a,
+  h6 > a,
+  p > a,
+  span > a {
+    color: #598cc2 !important;
+    word-break: break-word;
+    text-decoration: underline;
+  }
+  p {
+    @media (max-width: 767px) {
+      flex-flow: wrap-reverse !important;
+      display: flex !important;
+    }
+  }
+  &--expand {
+    height: 100%;
+  }
+  &--limit {
+    height: 200px;
+  }
+}
 
 .pell-content > *,
 .pell-content > p > *,

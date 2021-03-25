@@ -1,44 +1,46 @@
 <template>
-  <div class="contact-form-wrapper mt-5">
-    <HalfClippedShape>
-      <template #content>
-        <form>
-          <div class="form-group">
-            <label class="form-group__name-label">Name</label>
-            <div class="contact-form-wrapper__input-outline-mask">
-              <input type="text" class="form-control" v-model="contact.name" />
-            </div>
-            <ErrorMessage :fieldErrors="errors.name" />
-          </div>
-          <div class="form-group">
-            <label class="form-group__email-label">Email</label>
-            <div class="contact-form-wrapper__input-outline-mask">
-              <input
-                type="text"
-                class="form-control"
-                id="email"
-                aria-describedby="email"
-                v-model="contact.email"
-              />
-            </div>
-            <ErrorMessage :fieldErrors="errors.email" />
-          </div>
-          <div class="form-group">
-            <label class="form-group__message-label">Message</label>
-            <div class="contact-form-wrapper__textarea-outline-mask">
-              <textarea
-                rows="5"
-                class="form-control border-input"
-                v-model="contact.message"
-              >
-              </textarea>
-            </div>
-            <ErrorMessage :fieldErrors="errors.message" />
-          </div>
-          <HalfClippedButton text="Submit" :onClickAction="submitMessage" />
-        </form>
-      </template>
-    </HalfClippedShape>
+  <div class="contact-form-wrapper mt-4">
+    <form>
+      <div class="form-group">
+        <label class="form-group__name-label">Name</label>
+        <div class="contact-form-wrapper__input-outline-mask">
+          <input type="text" class="form-control" v-model="contact.name" />
+        </div>
+        <ErrorMessage :fieldErrors="errors.name" />
+      </div>
+      <div class="form-group">
+        <label class="form-group__email-label">Email</label>
+        <div class="contact-form-wrapper__input-outline-mask">
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            aria-describedby="email"
+            v-model="contact.email"
+          />
+        </div>
+        <ErrorMessage :fieldErrors="errors.email" />
+      </div>
+      <div class="form-group">
+        <label class="form-group__message-label">Message</label>
+        <div class="contact-form-wrapper__textarea-outline-mask">
+          <textarea
+            rows="5"
+            class="form-control border-input"
+            v-model="contact.message"
+          >
+          </textarea>
+        </div>
+        <ErrorMessage :fieldErrors="errors.message" />
+      </div>
+      <div
+        role="button"
+        class="contact-form-wrapper__submit-btn"
+        @click="submitMessage"
+      >
+        SUBMIT
+      </div>
+    </form>
   </div>
 </template>
 
@@ -46,8 +48,6 @@
 import { mapActions } from "vuex";
 import types from "../../../store/types";
 import ErrorMessage from "../../shared/ErrorMessage";
-import HalfClippedShape from "../../shared/HalfClippedShape";
-import HalfClippedButton from "../../shared/HalfClippedButton";
 import isValidationErrorExist from "../../../helpers/FormValidation";
 
 const emptyForm = {
@@ -76,8 +76,6 @@ export default {
     };
   },
   components: {
-    HalfClippedShape,
-    HalfClippedButton,
     ErrorMessage
   },
   methods: {

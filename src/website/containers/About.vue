@@ -6,9 +6,7 @@
     ></div>
     <Hero page="services">
       <template #hero-content>
-        <div
-          class="row align-items-end h-100 justify-content-center about-container__heroContent"
-        >
+        <div class="row about-container__heroContent">
           <h1>OUR VISION</h1>
           <p v-html="about.vision"></p>
 

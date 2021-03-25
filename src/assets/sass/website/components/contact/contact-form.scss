@@ -5,6 +5,10 @@
 
 .contact-form-wrapper {
   form {
+    background: $form-background;
+    width: 70%;
+    border-radius: 10px;
+    margin: auto;
     @include is-extra-small-mobile {
       padding: 10px;
     }
@@ -21,17 +25,20 @@
       padding: 30px;
     }
     @include is-extra-large-desktop {
-      padding: 50px;
+      padding: 30px;
     }
     .form-group {
       position: relative;
       label {
-        background-color: $form-background;
-        position: absolute;
-        top: -10px;
-        left: 50px;
+        background-color: transparent;
+        // position: absolute;
+        // top: -25px;
+        // left: 20px;
         z-index: 1;
+        text-align: left;
         color: white;
+        width: 100%;
+        margin-left: 20px;
       }
       &__name-label {
         width: 60px;
@@ -44,52 +51,94 @@
       }
     }
   }
-  &__input-outline-mask,
-  &__input-outline-mask input {
-    $extra-small-mobile: (
-      clipped-shape-width: 50%,
-      clipped-shape-height: 7%,
-      clipped-length: 3%
-    );
-    $mobile: (
-      clipped-shape-width: 90%,
-      clipped-shape-height: 7%,
-      clipped-length: 3%
-    );
-    $tablet: (
-      clipped-shape-width: 60%,
-      clipped-shape-height: 7%,
-      clipped-length: 3%
-    );
-    $desktop: (
-      clipped-shape-width: 80%,
-      clipped-shape-height: 7%,
-      clipped-length: 3%
-    );
-    $large-desktop: (
-      clipped-shape-width: 90%,
-      clipped-shape-height: 8%,
-      clipped-length: 3%
-    );
-    $extra-large-desktop: (
-      clipped-shape-width: 100%,
-      clipped-shape-height: 7%,
-      clipped-length: 2%
-    );
-    @include set-half-clipped-shape-for-input(
-      $extra-small-mobile,
-      $mobile,
-      $tablet,
-      $desktop,
-      $large-desktop,
-      $extra-large-desktop
-    );
+  // &__input-outline-mask,
+  // &__input-outline-mask input {
+  //   $extra-small-mobile: (
+  //     clipped-shape-width: 50%,
+  //     clipped-shape-height: 7%,
+  //     clipped-length: 3%
+  //   );
+  //   $mobile: (
+  //     clipped-shape-width: 90%,
+  //     clipped-shape-height: 7%,
+  //     clipped-length: 3%
+  //   );
+  //   $tablet: (
+  //     clipped-shape-width: 60%,
+  //     clipped-shape-height: 7%,
+  //     clipped-length: 3%
+  //   );
+  //   $desktop: (
+  //     clipped-shape-width: 80%,
+  //     clipped-shape-height: 7%,
+  //     clipped-length: 3%
+  //   );
+  //   $large-desktop: (
+  //     clipped-shape-width: 90%,
+  //     clipped-shape-height: 8%,
+  //     clipped-length: 3%
+  //   );
+  //   $extra-large-desktop: (
+  //     clipped-shape-width: 100%,
+  //     clipped-shape-height: 7%,
+  //     clipped-length: 2%
+  //   );
+  //   @include set-half-clipped-shape-for-input(
+  //     $extra-small-mobile,
+  //     $mobile,
+  //     $tablet,
+  //     $desktop,
+  //     $large-desktop,
+  //     $extra-large-desktop
+  //   );
+  // }
+  &__submit-btn {
+    width: 120px;
+    height: max-content;
+    margin: auto;
+    text-align: center;
+    // height: 50px;
+    // max-width: 30% !important;
+    // display: flex;
+    // justify-content: flex-end;
+    // align-items: flex-end;
+    // margin-bottom: 10px;
+    // position: absolute;
+    // top: 0;
+    // right: 35px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    z-index: 100;
+    color: black !important;
+    background-color: $white-text;
+    border-radius: 5px;
+    border: 1px $blue-stroke solid;
+    outline: none;
+    padding: 7px 12px;
+    box-shadow: 0 0 10px $blue-stroke;
+    a {
+      color: $black-text;
+      width: 100%;
+      height: 100%;
+      span {
+        padding: 5px 12px;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    @include is-extra-small-mobile {
+      bottom: 0;
+    }
+    @include is-mobile {
+      bottom: 0;
+    }
   }
   &__input-outline-mask {
     position: relative;
-    background-color: $light-white;
+    background-color: $primary;
     width: 100%;
     height: $input-form-height;
+    border-radius: 5px;
 
     input {
       position: absolute;
@@ -106,8 +155,10 @@
   }
   &__textarea-outline-mask {
     position: relative;
-    background-color: $light-white;
+    background-color: $primary;
     width: 100%;
+    height: $input-form-height;
+    border-radius: 5px;
     height: 150px;
 
     textarea {
@@ -123,47 +174,47 @@
       padding: 8px 20px;
     }
   }
-  &__textarea-outline-mask,
-  &__textarea-outline-mask textarea {
-    $extra-small-mobile: (
-      clipped-shape-width: 50%,
-      clipped-shape-height: 25%,
-      clipped-length: 3%
-    );
-    $mobile: (
-      clipped-shape-width: 70%,
-      clipped-shape-height: 20%,
-      clipped-length: 2.5%
-    );
-    $tablet: (
-      clipped-shape-width: 70%,
-      clipped-shape-height: 30%,
-      clipped-length: 4%
-    );
-    $desktop: (
-      clipped-shape-width: 80%,
-      clipped-shape-height: 25%,
-      clipped-length: 3%
-    );
-    $large-desktop: (
-      clipped-shape-width: 90%,
-      clipped-shape-height: 25%,
-      clipped-length: 3%
-    );
-    $extra-large-desktop: (
-      clipped-shape-width: 100%,
-      clipped-shape-height: 20%,
-      clipped-length: 2%
-    );
-    @include set-half-clipped-shape-for-input(
-      $extra-small-mobile,
-      $mobile,
-      $tablet,
-      $desktop,
-      $large-desktop,
-      $extra-large-desktop
-    );
-  }
+  // &__textarea-outline-mask,
+  // &__textarea-outline-mask textarea {
+  //   $extra-small-mobile: (
+  //     clipped-shape-width: 50%,
+  //     clipped-shape-height: 25%,
+  //     clipped-length: 3%
+  //   );
+  //   $mobile: (
+  //     clipped-shape-width: 70%,
+  //     clipped-shape-height: 20%,
+  //     clipped-length: 2.5%
+  //   );
+  //   $tablet: (
+  //     clipped-shape-width: 70%,
+  //     clipped-shape-height: 30%,
+  //     clipped-length: 4%
+  //   );
+  //   $desktop: (
+  //     clipped-shape-width: 80%,
+  //     clipped-shape-height: 25%,
+  //     clipped-length: 3%
+  //   );
+  //   $large-desktop: (
+  //     clipped-shape-width: 90%,
+  //     clipped-shape-height: 25%,
+  //     clipped-length: 3%
+  //   );
+  //   $extra-large-desktop: (
+  //     clipped-shape-width: 100%,
+  //     clipped-shape-height: 20%,
+  //     clipped-length: 2%
+  //   );
+  //   @include set-half-clipped-shape-for-input(
+  //     $extra-small-mobile,
+  //     $mobile,
+  //     $tablet,
+  //     $desktop,
+  //     $large-desktop,
+  //     $extra-large-desktop
+  //   );
+  // }
 }
 
 // All have vw as divide operation units must be the same for all

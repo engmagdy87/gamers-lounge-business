@@ -4,20 +4,29 @@
 
 .job-details-wrapper {
   @include initializePageStyle;
-  background-color: $primary;
-  padding-top: $header-height;
+  background-color: $accent;
+  padding-top: 80px;
+  margin-top: 25px;
+  border-radius: 10px;
+  &__container {
+    width: 90%;
+    margin: auto;
+  }
   &__details {
-    color: $header-item;
+    color: $primary;
     word-break: break-all;
     hr {
-      border: 1px solid $header-item;
+      border: 3px solid $primary;
       margin-bottom: 30px;
+      margin-left: 0;
+      width: 70%;
     }
     h1 {
       font-size: 30px;
     }
     h2 {
-      font-size: 20px;
+      font-size: 2rem;
+      font-weight: bold;
     }
     h3 {
       font-size: 30px;

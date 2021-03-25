@@ -5,7 +5,8 @@
 .contact-data-box-wrapper {
   &__img {
     margin-bottom: 5%;
-    height: 30px;
+    height: 40px;
+
     @include is-extra-small-mobile {
       margin-top: 6%;
     }
@@ -24,24 +25,24 @@
       margin-top: 3%;
     }
     @include is-extra-large-desktop {
-      margin-top: 5%;
+      margin-top: 30%;
     }
     img {
-      max-width: 40px;
+      max-width: 100px;
       height: 100%;
     }
   }
   &__title {
     text-transform: uppercase;
-font-weight: bold;
-    font-size: 1.5rem;
-    margin: 8% 0;
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 5% 0 0 0;
     @include is-extra-small-mobile {
       margin: 5% 0;
     }
   }
   &__details {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     @include is-extra-small-mobile {
       font-size: 0.8rem;
     }
@@ -87,5 +88,5 @@ $widths-and-heights: (
 
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
-  @include filled-half-clipped-shape($widths-and-heights, rgba($primary, 0.95));
+  @include filled-half-clipped-shape($widths-and-heights, transparent);
 }

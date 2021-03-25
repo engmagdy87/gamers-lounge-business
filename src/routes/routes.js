@@ -305,15 +305,18 @@ const routes = [
     component: Jobs,
     beforeEnter(to, from, next) {
       showHeaderAndFooterForWebsite(next, false);
-    }
-  },
-  {
-    path: "/job/:jobName",
-    name: "job",
-    component: JobDetails,
-    beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false);
-    }
+    },
+    children: [
+      {
+        path: "/job/:jobName",
+        name: "job",
+        component: JobDetails,
+        props: true,
+        beforeEnter(to, from, next) {
+          showHeaderAndFooterForWebsite(next, false);
+        }
+      }
+    ]
   },
   {
     path: "/services",
