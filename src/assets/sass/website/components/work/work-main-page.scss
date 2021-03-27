@@ -12,11 +12,13 @@
     padding-right: 15px !important;
     a div img {
       width: 100%;
+      border: 2px solid white;
     }
     &:hover {
       img {
         filter: brightness(50%);
         clip-path: polygon(11% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 11%);
+        border: 2px solid transparent;
       }
       .work-page-wrapper__text {
         bottom: 10%;

@@ -184,7 +184,7 @@ export default {
     z-index: 100;
     padding-top: $header-height;
     @include is-extra-small-mobile {
-      width: 68.8%;
+      width: 99%;
     }
   }
 }

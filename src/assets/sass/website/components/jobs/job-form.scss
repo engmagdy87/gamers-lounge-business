@@ -5,6 +5,7 @@
 @import "../../shared/half-clipped-outline-shape.scss";
 
 .job-form-wrapper {
+  margin-top: 25px;
   form {
     @include is-extra-small-mobile {
       padding: 10px;
@@ -22,7 +23,7 @@
       padding: 30px;
     }
     @include is-extra-large-desktop {
-      padding: 30px;
+      padding: 30px 30px 10px 30px;
     }
     .form-group {
       position: relative;

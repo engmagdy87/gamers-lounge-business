@@ -65,13 +65,13 @@ export default {
           {
             breakpoint: 600,
             settings: {
-              slidesToShow: 3
+              slidesToShow: 2
             }
           },
           {
             breakpoint: 400,
             settings: {
-              slidesToShow: 2
+              slidesToShow: 1
             }
           }
         ]

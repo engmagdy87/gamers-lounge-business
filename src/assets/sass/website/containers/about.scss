@@ -83,11 +83,11 @@
         font-family: Arial;
         font-weight: bold;
         margin-top: 20px;
-        @include max-width-1650 {
-          font-size: 2rem;
+        @include is-extra-small-mobile {
+          font-size: 1.3rem;
         }
         @include is-mobile {
-          font-size: 1.5rem;
+          font-size: 1.3rem;
         }
       }
       p {
@@ -95,9 +95,8 @@
         user-select: none;
         font-size: 1.1rem;
         line-height: 40px;
-        @include max-width-1650 {
+        @include is-extra-small-mobile {
           font-size: 1rem;
-          line-height: 30px;
         }
         @include is-mobile {
           font-size: 1rem;
@@ -114,7 +113,7 @@
     z-index: 100;
     padding-top: $header-height;
     @include is-extra-small-mobile {
-      width: 68.8%;
+      width: 99%;
     }
   }
   &__content {

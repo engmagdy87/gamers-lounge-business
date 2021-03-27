@@ -16,7 +16,7 @@
     z-index: 100;
     padding-top: $header-height;
     @include is-extra-small-mobile {
-      width: 68.8%;
+      width: 99%;
     }
   }
   &__container {
@@ -38,9 +38,11 @@
       height: fit-content;
       margin-top: 120px;
       @include is-mobile {
+        margin-top: 80px;
         font-size: 2rem;
       }
       @include is-extra-small-mobile {
+        margin-top: 80px;
         font-size: 2rem;
       }
     }
@@ -71,18 +73,14 @@
   }
 
   &__jobs {
-    width: 70%;
+    width: 60%;
     margin: 20px auto;
-    // @media (min-width: 992px) {
-    //   .col-lg-4 {
-    //     max-width: 31.333333% !important;
-    //   }
-    // }
-    // @media (min-width: 768px) {
-    //   .col-md-6 {
-    //     max-width: 46%;
-    //   }
-    // }
+    @include is-mobile {
+      width: 90%;
+    }
+    @include is-extra-small-mobile {
+      width: 90%;
+    }
     &__content {
       display: flex;
       background-color: $form-background;
@@ -143,10 +141,10 @@
       }
     }
     @include is-extra-small-mobile {
-      bottom: 0;
+      bottom: 20px;
     }
     @include is-mobile {
-      bottom: 0;
+      bottom: 20px;
     }
   }
 }

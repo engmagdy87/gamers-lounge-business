@@ -1,7 +1,11 @@
 <template>
   <div
     id="app-wrapper"
-    :class="['app-wrapper', { 'nav-open': $sidebar.showSidebar }]"
+    :class="[
+      'app-wrapper',
+      isAdmin && 'app-wrapper__admin',
+      { 'nav-open': $sidebar.showSidebar }
+    ]"
   >
     <Header id="top" :activeItem="headerActiveItem" v-if="showHeader" />
     <notifications></notifications>
@@ -20,7 +24,8 @@ import Spinner from "./website/shared/Spinner";
 export default {
   data() {
     return {
-      headerActiveItem: null
+      headerActiveItem: null,
+      isAdmin: false
     };
   },
   computed: {
@@ -28,6 +33,12 @@ export default {
       showHeader: state => state.app.showHeader,
       showFooter: state => state.app.showFooter
     })
+  },
+  watch: {
+    $route() {
+      const { path } = this.$route;
+      this.isAdmin = path.includes("login") || path.includes("dashboard");
+    }
   },
   components: {
     Header,

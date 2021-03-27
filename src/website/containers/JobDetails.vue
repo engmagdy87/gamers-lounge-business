@@ -1,5 +1,5 @@
 <template>
-  <div class="job-details-wrapper pb-5" v-if="isJobFetched">
+  <div class="job-details-wrapper pb-4" v-if="isJobFetched">
     <div class="job-details-wrapper__container">
       <div class="row">
         <div class="col-12 col-lg-6 job-details-wrapper__details">

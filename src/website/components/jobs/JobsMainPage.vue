@@ -47,6 +47,7 @@
       :showModal="showModal"
       :setShowModal="setShowModal"
       :navigateTo="navigateTo"
+      :isJobPage="true"
     />
   </div>
 </template>

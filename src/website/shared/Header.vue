@@ -108,7 +108,7 @@
             </li>
             <li
               :class="[
-                activeItem === 'work'
+                activeItem === 'work' || activeItem === 'works'
                   ? 'header-wrapper__navLinks--active'
                   : 'header-wrapper__navLinks--inactive'
               ]"
@@ -213,7 +213,6 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import types from "../../store/types";
-import HalfClippedOutlineButton from "./HalfClippedOutlineButton";
 import Avatar from "./Avatar";
 
 export default {
@@ -239,7 +238,6 @@ export default {
     }
   },
   components: {
-    HalfClippedOutlineButton,
     Avatar
   },
   mounted() {

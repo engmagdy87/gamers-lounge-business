@@ -1,124 +1,119 @@
 <template>
   <div>
-    <CustomHalfClipped>
-      <template #content>
+    <div class="work-details-sections__wrapper">
+      <div
+        v-for="(row, rowId) in section.rows"
+        :key="row.id"
+        class="work-details-sections__container row m-0"
+      >
         <div
-          v-for="(row, rowId) in section.rows"
-          :key="row.id"
-          class="work-details-sections__container row m-0"
+          v-for="(column, colId) in row.columns"
+          :key="column.index"
+          :style="{ width: getWidth(column.ratio) }"
         >
           <div
-            v-for="(column, colId) in row.columns"
-            :key="column.index"
-            :style="{ width: getWidth(column.ratio) }"
+            v-if="column.type === WORK_COLUMNS_TYPES.TITLE && column.fillable"
+            class="work-details-sections__title"
           >
-            <div
-              v-if="column.type === WORK_COLUMNS_TYPES.TITLE && column.fillable"
-              class="work-details-sections__title"
-            >
-              {{ column.content }}
-            </div>
+            {{ column.content }}
+          </div>
 
-            <div
-              v-else-if="
-                column.type === WORK_COLUMNS_TYPES.IMAGE && column.fillable
-              "
-              v-for="img in column.img_content"
-              :key="img.id"
-              @click="openImageModal(rowId, colId, null, column.type)"
-              style="cursor:pointer"
-            >
-              <img
-                :src="img.url"
-                width="100%"
-                draggable="false"
-                class="image-placeholder"
-              />
-            </div>
-            <div
-              class="work-details-sections__video"
-              v-else-if="
-                column.type === WORK_COLUMNS_TYPES.VIDEO &&
-                  column.fillable &&
-                  column.is_vid_extenral_enabled
-              "
-            >
-              <iframe
-                width="100%"
-                :height="getHeight(column.ratio, row.columns.length)"
-                :src="getLiveVideoEmbedFormatter(column.vid_extenral)"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              >
-              </iframe>
-            </div>
-            <div
-              class="work-details-sections__video"
-              v-else-if="
-                column.type === WORK_COLUMNS_TYPES.VIDEO &&
-                  column.fillable &&
-                  !column.is_vid_extenral_enabled
-              "
-              v-for="video in column.vid_content"
-              :key="video.id"
-            >
-              <video
-                preload="auto"
-                :id="`video${video.id}`"
-                :src="video.url"
-                width="100%"
-                :style="{ cursor: video.is_auto_play ? 'pointer' : 'unset' }"
-                :controls="!video.is_auto_play"
-                :muted="video.is_auto_play"
-                :loop="video.is_auto_play"
-                :autoplay="video.is_auto_play"
-                @click="e => toggleFullScreenMode(e, video)"
-              ></video>
-            </div>
-
-            <div
-              v-else-if="
-                column.type === WORK_COLUMNS_TYPES.SLIDER && column.fillable
-              "
-            >
-              <Carousel3d
-                :autoplay="true"
-                :autoplay-timeout="3000"
-                :autoplayHoverPause="true"
-                :height="400"
-                :width="500"
-                :border="0"
-                :onMainSlideClick="
-                  e => openImageModal(rowId, colId, e.index, column.type)
-                "
-              >
-                <Slide
-                  v-for="(img, i) in column.img_content"
-                  :index="i"
-                  :key="i"
-                >
-                  <img
-                    :src="img.url"
-                    draggable="false"
-                    class="image-placeholder"
-                  />
-                </Slide>
-              </Carousel3d>
-            </div>
-
-            <div
-              v-if="
-                column.type === WORK_COLUMNS_TYPES.DESCRIPTION &&
-                  column.fillable
-              "
-              class="description-container work-details-sections__description"
-              v-html="column.content"
+          <div
+            v-else-if="
+              column.type === WORK_COLUMNS_TYPES.IMAGE && column.fillable
+            "
+            v-for="img in column.img_content"
+            :key="img.id"
+            @click="openImageModal(rowId, colId, null, column.type)"
+            style="cursor:pointer"
+            class="work-details-sections__image"
+          >
+            <img
+              :src="img.url"
+              width="100%"
+              draggable="false"
+              class="image-placeholder"
             />
           </div>
+          <div
+            class="work-details-sections__video"
+            v-else-if="
+              column.type === WORK_COLUMNS_TYPES.VIDEO &&
+                column.fillable &&
+                column.is_vid_extenral_enabled
+            "
+          >
+            <iframe
+              width="100%"
+              :height="getHeight(column.ratio, row.columns.length)"
+              :src="getLiveVideoEmbedFormatter(column.vid_extenral)"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            >
+            </iframe>
+          </div>
+          <div
+            class="work-details-sections__video"
+            v-else-if="
+              column.type === WORK_COLUMNS_TYPES.VIDEO &&
+                column.fillable &&
+                !column.is_vid_extenral_enabled
+            "
+            v-for="video in column.vid_content"
+            :key="video.id"
+          >
+            <video
+              preload="auto"
+              :id="`video${video.id}`"
+              :src="video.url"
+              width="100%"
+              :style="{ cursor: video.is_auto_play ? 'pointer' : 'unset' }"
+              :controls="!video.is_auto_play"
+              :muted="video.is_auto_play"
+              :loop="video.is_auto_play"
+              :autoplay="video.is_auto_play"
+              @click="e => toggleFullScreenMode(e, video)"
+            ></video>
+          </div>
+
+          <div
+            v-else-if="
+              column.type === WORK_COLUMNS_TYPES.SLIDER && column.fillable
+            "
+          >
+            <Carousel3d
+              :autoplay="true"
+              :autoplay-timeout="3000"
+              :autoplayHoverPause="true"
+              :height="400"
+              :width="500"
+              :border="0"
+              :onMainSlideClick="
+                e => openImageModal(rowId, colId, e.index, column.type)
+              "
+            >
+              <Slide v-for="(img, i) in column.img_content" :index="i" :key="i">
+                <img
+                  :src="img.url"
+                  draggable="false"
+                  class="image-placeholder"
+                />
+              </Slide>
+            </Carousel3d>
+          </div>
+
+          <div
+            v-if="
+              column.type === WORK_COLUMNS_TYPES.DESCRIPTION && column.fillable
+            "
+            class="description-container work-details-sections__description"
+            v-html="column.content"
+          />
         </div>
-      </template>
-    </CustomHalfClipped>
+      </div>
+    </div>
+
     <ImageModal
       :showImageModal="showImageModal"
       :setShowImageModal="setShowImageModal"

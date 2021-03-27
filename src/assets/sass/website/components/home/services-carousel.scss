@@ -7,6 +7,7 @@ $left: 25px;
 $shift: 40px;
 
 $extra-lg-dim: calc(#{$slide-height} + #{$shift});
+$extra-mob-dim: calc(#{$slide-height-mobile} + #{$shift});
 
 .services-carousel {
   padding-bottom: 0;
@@ -36,31 +37,33 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
   &__img-wrapper {
     text-align: right;
     @include is-extra-small-mobile {
+      height: 100%;
       position: absolute;
       top: 0;
       left: 0;
     }
     @include is-mobile {
+      height: 100%;
       position: absolute;
       top: 0;
       left: 0;
     }
-    @include is-tablet {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-    }
-    @include is-desktop {
-      position: relative;
-      height: 100%;
-    }
-    @include is-large-desktop {
-      height: 100%;
-    }
-    @include is-extra-large-desktop {
-      margin-top: -$shift/2;
-    }
+    // @include is-tablet {
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   height: 100%;
+    // }
+    // @include is-desktop {
+    //   position: relative;
+    //   height: 100%;
+    // }
+    // @include is-large-desktop {
+    //   height: 100%;
+    // }
+    // @include is-extra-large-desktop {
+    //   margin-top: -$shift/2;
+    // }
   }
   &__img {
     object-fit: cover;
@@ -72,34 +75,46 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
     // top: 0;
     @include is-extra-small-mobile {
       position: relative;
-      width: 100vw;
-      height: 100vh;
-      left: -23%;
-      transform: scale(1.1);
-      filter: brightness(30%);
+      width: 100%;
+      height: 100%;
+      height: $extra-mob-dim;
+      width: $extra-mob-dim + 50px;
+      max-width: $extra-mob-dim + 50px;
+      min-width: $extra-mob-dim;
+      filter: brightness(50%);
     }
     @include is-mobile {
       position: relative;
-      width: 95vw;
-      left: -23%;
-      transform: scale(1.1);
-      // height: 100%;
-      filter: brightness(30%);
+      width: 100%;
+      height: 100%;
+      height: $extra-mob-dim;
+      width: $extra-mob-dim + 50px;
+      max-width: $extra-mob-dim + 50px;
+      min-width: $extra-mob-dim;
+      filter: brightness(50%);
     }
-    @include is-tablet {
-      position: relative;
-      width: 95vw;
-      left: -23%;
-      transform: scale(1.1);
-      // height: 100%;
-      filter: brightness(30%);
-    }
-    @include is-desktop {
-      // height: 97%;
-    }
-    @include is-large-desktop {
-      // height: 98%;
-    }
+    // @include is-mobile {
+    //   position: relative;
+    //   width: 95vw;
+    //   left: -23%;
+    //   transform: scale(1.1);
+    //   // height: 100%;
+    //   filter: brightness(30%);
+    // }
+    // @include is-tablet {
+    //   position: relative;
+    //   width: 95vw;
+    //   left: -23%;
+    //   transform: scale(1.1);
+    //   // height: 100%;
+    //   filter: brightness(30%);
+    // }
+    // @include is-desktop {
+    //   // height: 97%;
+    // }
+    // @include is-large-desktop {
+    //   // height: 98%;
+    // }
     @include is-extra-large-desktop {
       height: $extra-lg-dim;
       width: $extra-lg-dim + 50px;
@@ -178,10 +193,12 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
     text-transform: uppercase;
     z-index: 10;
     @include is-extra-small-mobile {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
+      margin-top: 80px;
     }
     @include is-mobile {
-      font-size: 1.7rem;
+      font-size: 1.2rem;
+      margin-top: 80px;
     }
     @include is-tablet {
       font-size: 1.7rem;
@@ -204,9 +221,9 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
     z-index: 10;
     padding-right: 10px;
     @include is-extra-small-mobile {
-      padding-top: 10px;
+      padding-top: 60px;
       font-size: 0.9rem;
-      height: 50%;
+      height: 70%;
       overflow-y: scroll;
     }
     @include is-mobile {
@@ -239,10 +256,10 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
     outline: none;
     box-shadow: 0 0 10px $blue-stroke;
     @include is-extra-small-mobile {
-      bottom: 0;
+      bottom: -10px;
     }
     @include is-mobile {
-      bottom: 0;
+      bottom: -10px;
     }
   }
 }
@@ -343,6 +360,14 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
   left: 1%;
   z-index: 120;
   width: 65%;
+  @include is-extra-small-mobile {
+    left: 4%;
+    width: 100%;
+  }
+  @include is-mobile {
+    left: 4%;
+    width: 100%;
+  }
   button {
     margin: 20px 20px 20px 10px;
     background-color: transparent;
@@ -370,31 +395,30 @@ $extra-lg-dim: calc(#{$slide-height} + #{$shift});
 }
 // All have vw as divide operation units must be the same for all
 $width: 80%;
-$height: $slide-height;
 
 $widths-and-heights: (
   clipped-shape-width: $width,
-  clipped-shape-height: $height,
+  clipped-shape-height: $slide-height,
   clipped-shape-width-xs: (
     $width
   ),
   clipped-shape-height-xs: (
-    $height
+    $slide-height-mobile
   ),
   clipped-shape-width-sm: (
     $width
   ),
   clipped-shape-height-sm: (
-    $height
+    $slide-height-mobile
   ),
   clipped-shape-width-md: $width,
-  clipped-shape-height-md: $height,
+  clipped-shape-height-md: $slide-height,
   clipped-shape-width-lg: $width,
-  clipped-shape-height-lg: $height,
+  clipped-shape-height-lg: $slide-height,
   clipped-shape-width-xlg: $width,
-  clipped-shape-height-xlg: $height,
+  clipped-shape-height-xlg: $slide-height,
   clipped-shape-width-xxlg: $width,
-  clipped-shape-height-xxlg: $height
+  clipped-shape-height-xxlg: $slide-height
 );
 
 // use /deep/ to apply scss classes to the child components

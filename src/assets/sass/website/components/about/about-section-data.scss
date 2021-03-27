@@ -6,6 +6,7 @@ $left: 25px;
 $shift: 40px;
 
 $extra-lg-dim: calc(#{$about-container-height} + #{$shift});
+$extra-mob-dim: calc(#{$slide-height-mobile} + #{$shift});
 
 ::-webkit-scrollbar {
   width: 5px;
@@ -126,11 +127,12 @@ $text-minheight-pc: 706px;
     // top: 0;
     @include is-extra-small-mobile {
       position: relative;
-      width: 100vw;
-      height: 100vh;
-      left: -23%;
-      transform: scale(1.1);
-      filter: brightness(30%);
+      height: $extra-mob-dim;
+      width: $extra-mob-dim + 50px;
+      max-width: $extra-mob-dim + 50px;
+      min-width: $extra-mob-dim;
+      filter: brightness(50%);
+      margin-left: -12px;
     }
     @include is-mobile {
       position: relative;
@@ -172,8 +174,8 @@ $text-minheight-pc: 706px;
   }
   &__video {
     height: $extra-lg-dim;
-    border-radius: 10px;
     video {
+      border-radius: 10px;
       height: 100%;
       object-fit: cover;
       &:focus {
@@ -209,16 +211,12 @@ $text-minheight-pc: 706px;
     // min-height: $text-minheight-pc;
     // overflow: hidden;
     // overflow-y: auto;
-    // @include is-mobile {
-    //   min-height: auto;
-    //   max-height: none;
-    //   padding: 20px;
-    // }
-    // @include is-extra-small-mobile {
-    //   min-height: auto;
-    //   max-height: none;
-    //   padding: 20px;
-    // }
+    @include is-mobile {
+      height: max-content;
+    }
+    @include is-extra-small-mobile {
+      height: max-content;
+    }
     // h1 {
     //   color: $header-item;
     //   font-size: 2.3rem;

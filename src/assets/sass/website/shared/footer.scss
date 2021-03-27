@@ -26,6 +26,14 @@ $transition-3: all 0.3s ease-in-out;
     .footer-leftside {
       padding: 20px 0 0 75px;
       display: flex;
+      @include is-mobile {
+        padding: 0;
+        display: block;
+      }
+      @include is-extra-small-mobile {
+        padding: 0;
+        display: block;
+      }
       p,
       p a {
         color: $light-gray !important;
@@ -46,6 +54,14 @@ $transition-3: all 0.3s ease-in-out;
       a img {
         width: 120px;
         margin-right: 50px;
+        @include is-mobile {
+          margin-right: 0;
+          margin-bottom: 10px;
+        }
+        @include is-extra-small-mobile {
+          margin-right: 0;
+          margin-bottom: 10px;
+        }
       }
       img {
         padding-right: 5px;

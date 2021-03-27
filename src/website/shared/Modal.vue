@@ -4,22 +4,38 @@
     <div class="modal-content">
       <router-view :key="$route.fullPath"></router-view>
       <div
-        class="custom-arrow-text custom-arrow-text__prev"
+        :class="[
+          'custom-arrow-text custom-arrow-text__prev',
+          isJobPage ? 'custom-arrow-text__prev--job' : ''
+        ]"
         @click="goto('prev')"
       >
-        <div class="custom-arrow custom-arrow__prev">
+        <div
+          :class="[
+            'custom-arrow custom-arrow__prev',
+            isJobPage ? 'custom-arrow__prev--job' : ''
+          ]"
+        >
           <img src="../../../public/images/prev.svg" />
         </div>
-        <span>Previous</span>
+        <span>PREVIOUS</span>
       </div>
       <div
-        class="custom-arrow-text custom-arrow-text__next"
+        :class="[
+          'custom-arrow-text custom-arrow-text__next',
+          isJobPage ? 'custom-arrow-text__next--job' : ''
+        ]"
         @click="goto('next')"
       >
-        <div class="custom-arrow custom-arrow__next">
+        <div
+          :class="[
+            'custom-arrow custom-arrow__next',
+            isJobPage ? 'custom-arrow__next--job' : ''
+          ]"
+        >
           <img src="../../../public/images/next.svg" />
         </div>
-        <span>Next</span>
+        <span>NEXT</span>
       </div>
     </div>
     <div class="overlay-bg overlay-bg__right" @click="closeModal"></div>
@@ -28,7 +44,7 @@
 
 <script>
 export default {
-  props: ["showModal", "setShowModal", "navigateTo"],
+  props: ["showModal", "setShowModal", "navigateTo", "isJobPage"],
   methods: {
     closeModal() {
       this.$router.go(-1);
@@ -49,21 +65,43 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../assets/sass/website/color-palette.scss";
-$width: 72%;
+@import "../../assets/sass/website/variables.scss";
+@import "../../assets/sass/website/mixins.scss";
+
 .custom-arrow-text {
   cursor: pointer;
   width: fit-content;
   position: fixed;
   bottom: 20px;
   text-align: center;
-  z-index: 1;
+  z-index: 2001;
   &__next {
     bottom: 20px;
-    right: calc((#{100%} - #{$width}) / 3);
+    // right: calc((#{100%} - #{$modal-width}) / 1.7);
+    right: calc((#{100%} - #{$modal-width}) / 1.68);
+    @include is-mobile {
+      bottom: 0;
+    }
+    @include is-extra-small-mobile {
+      bottom: 0;
+    }
+    &--job {
+      right: calc((#{100%} - #{$modal-width}) / 1.33) !important;
+    }
   }
   &__prev {
     bottom: 20px;
-    left: calc((#{100%} - #{$width}) / 3);
+    // left: calc((#{100%} - #{$modal-width}) / 2);
+    left: calc((#{100%} - #{$modal-width}) / 1.78);
+    @include is-mobile {
+      bottom: 0;
+    }
+    @include is-extra-small-mobile {
+      bottom: 0;
+    }
+    &--job {
+      left: calc((#{100%} - #{$modal-width}) / 1.4) !important;
+    }
   }
   div {
     margin-bottom: 5px;
@@ -73,14 +111,16 @@ $width: 72%;
   }
 }
 .overlay-bg {
-  width: calc((#{100%} - #{$width}) / 2);
+  width: calc((#{100%} - #{$modal-width}) / 2);
   height: 100%;
   position: fixed;
   &__left {
     left: 0;
+    z-index: 2000;
   }
   &__right {
     right: 0;
+    z-index: 2000;
   }
 }
 .modal {
@@ -91,7 +131,7 @@ $width: 72%;
   left: 0;
   top: 0;
   // width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  height: max-content;
   // overflow: auto; /* Enable scroll if needed */
   // background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
@@ -122,12 +162,13 @@ $width: 72%;
 
 /* Modal Content () */
 .modal-content {
-  margin: auto;
+  // margin: auto;
   display: block;
   max-height: 100vh;
   height: 100vh;
-  width: $width;
-  margin: 0 auto;
+  overflow: hidden;
+  // width: $modal-width;
+  // padding: 0 calc(calc(100% - #{$modal-width}) / 2);
   position: relative;
   background-color: transparent;
 }

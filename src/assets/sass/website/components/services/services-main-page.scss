@@ -14,11 +14,13 @@
     padding-right: 15px !important;
     a div img {
       width: 100%;
+      border: 2px solid white;
     }
     &:hover {
       img {
         filter: brightness(50%);
         clip-path: polygon(11% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 11%);
+        border: 2px solid transparent;
       }
       .services-page-wrapper__text {
         bottom: 44%;
@@ -81,12 +83,13 @@
     transition: all 0.3s ease-in-out;
     text-align: center;
     position: absolute;
-    width: 100%;
+    width: 90%;
+    left: 5%;
     bottom: 0%;
     h2 {
       font-family: Arial;
       font-weight: bold;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       text-transform: uppercase;
       @include is-extra-small-mobile {
         font-size: 1rem;

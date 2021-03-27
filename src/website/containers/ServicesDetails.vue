@@ -1,55 +1,49 @@
 <template>
   <div class="services-details-wrapper" v-if="isWebsiteServiceFetched">
     <div class="services-details-wrapper__cover-container">
-      <img
+      <h1 class="services-details-wrapper__title">
+        {{ websiteService.title }}
+      </h1>
+      <!-- <img
         v-if="websiteService.img_cover"
         :src="websiteService.img_cover.url"
         :alt="websiteService.title"
       />
-      <h1>{{ websiteService.title }}</h1>
-      <p class="description-container" v-html="websiteService.description"></p>
+      <p class="description-container" v-html="websiteService.description"></p> -->
+      <div class="services-details-wrapper__sections">
+        <ServiceDetails
+          :websiteService="websiteService"
+          v-if="websiteService.sections"
+        />
+      </div>
     </div>
 
-    <div class="services-details-wrapper__service-section pt-5">
-      <div class="col-12 pt-5 pl-0"><Breadcrumb :tree="breadcrumbTree" /></div>
-    </div>
-
-    <ServiceDetails
-      :websiteService="websiteService"
-      v-if="websiteService.sections"
-    />
-
-    <div>
-      <Intersect @enter="loadMoreServiceSections" v-if="servicePage > 0"
-        ><div class="threshold">
-          <Loading :showLoading="showLoading" />
-        </div>
-      </Intersect>
-    </div>
+    <Intersect @enter="loadMoreServiceSections" v-if="servicePage > 0"
+      ><div class="threshold">
+        <Loading :showLoading="showLoading" />
+      </div>
+    </Intersect>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState, mapMutations } from "vuex";
 import types from "../../store/types";
-import Breadcrumb from "../shared/Breadcrumb";
 import ServiceDetails from "../components/services/ServiceDetails";
 import Intersect from "vue-intersect";
 import Loading from "../../website/shared/Loading";
-import { getEntityId, getEntityName } from "../../helpers/StringsHelper";
+import { getEntityId } from "../../helpers/StringsHelper";
 import redirectToNewTab from "../../helpers/RedirectToNewTab";
 
 export default {
   data() {
     return {
-      breadcrumbTree: [{ title: "services", path: "/services" }],
       queriedServiceCounts: 2,
       servicePage: 0,
       showLoading: false
     };
   },
   components: {
-    Breadcrumb,
     ServiceDetails,
     Intersect,
     Loading
@@ -105,10 +99,6 @@ export default {
   },
   mounted() {
     window.scroll(0, 0);
-    this.breadcrumbTree.push({
-      title: getEntityName(this.$route.params.serviceName),
-      path: ""
-    });
 
     this.setShowFooterFlag(false);
     this.fetchHeroAndFirstSection();

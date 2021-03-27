@@ -83,6 +83,12 @@ $total-padding: $half-clipped-shape-padding * 2;
       height: 40px;
       border-radius: 50%;
       border: 2px solid white;
+      @include is-extra-small-mobile {
+        display: none;
+      }
+      @include is-mobile {
+        display: none;
+      }
       img {
         width: auto;
         height: 60%;

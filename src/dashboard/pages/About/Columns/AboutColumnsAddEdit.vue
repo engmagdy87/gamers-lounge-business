@@ -482,8 +482,7 @@ export default {
           key = "images content";
           break;
         case ABOUT_COLUMNS_CONTENT_TYPES.VIDEO:
-          if (this.serviceColumn.is_vid_extenral_enabled)
-            key = "video external";
+          if (this.aboutColumn.is_vid_extenral_enabled) key = "video external";
           else key = "videos content";
           break;
 
