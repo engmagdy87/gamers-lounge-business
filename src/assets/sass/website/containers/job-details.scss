@@ -14,10 +14,12 @@
   @include is-extra-small-mobile {
     overflow-y: auto;
     margin-top: 20px;
+    width: 80%;
   }
   @include is-mobile {
     overflow-y: auto;
     margin-top: 20px;
+    width: 80%;
   }
   &__container {
     margin-top: 170px;
