@@ -36,6 +36,7 @@ $extra-mob-dim: $slide-height-mobile;
   }
   &__img-wrapper {
     text-align: right;
+    z-index: 200;
     @include is-extra-small-mobile {
       height: 100%;
       position: absolute;

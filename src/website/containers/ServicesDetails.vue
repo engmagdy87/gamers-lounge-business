@@ -1,9 +1,9 @@
 <template>
   <div class="services-details-wrapper" v-if="isWebsiteServiceFetched">
+    <h1 class="services-details-wrapper__title">
+      {{ websiteService.title }}
+    </h1>
     <div class="services-details-wrapper__cover-container">
-      <h1 class="services-details-wrapper__title">
-        {{ websiteService.title }}
-      </h1>
       <!-- <img
         v-if="websiteService.img_cover"
         :src="websiteService.img_cover.url"

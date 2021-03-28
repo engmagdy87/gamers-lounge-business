@@ -50,7 +50,7 @@ $around-nav-width: calc(100% - #{$nav-width});
     align-items: center;
     height: $header-height;
     z-index: 100;
-    background: rgba($color: $primary, $alpha: 0.8);
+    background: rgba($color: $primary, $alpha: 0.9);
     @include is-extra-small-mobile {
       height: $header-height-mobile;
     }

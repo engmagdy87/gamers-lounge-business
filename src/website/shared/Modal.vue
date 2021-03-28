@@ -119,13 +119,12 @@ export default {
   width: calc((#{100%} - #{$modal-width}) / 2);
   height: 100%;
   position: fixed;
+  // z-index: 21;
   &__left {
     left: 0;
-    z-index: 2000;
   }
   &__right {
     right: 0;
-    z-index: 2000;
   }
 }
 .modal {
@@ -172,7 +171,7 @@ export default {
   max-height: 100vh;
   height: 100vh;
   overflow: hidden;
-  // width: $modal-width;
+  width: $modal-width;
   // padding: 0 calc(calc(100% - #{$modal-width}) / 2);
   position: relative;
   background-color: transparent;
