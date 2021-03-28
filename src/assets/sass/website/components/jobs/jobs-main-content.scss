@@ -8,7 +8,7 @@
   margin-top: -$header-height;
   min-height: calc(100vh - #{$footer-height});
   &__bg {
-    width: 69.8%;
+    width: 70vw;
     height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
@@ -129,7 +129,7 @@
     border: 1px $blue-stroke solid;
     outline: none;
     padding: 5px 12px;
-    box-shadow: 0 0 10px $blue-stroke;
+    box-shadow: 0 0 3px $blue-stroke;
     a {
       color: $black-text;
       width: 100%;

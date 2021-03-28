@@ -36,6 +36,7 @@
       :showModal="showModal"
       :setShowModal="setShowModal"
       :navigateTo="navigateTo"
+      parentRoute="services"
     />
   </div>
 </template>
@@ -52,7 +53,7 @@ import Modal from "../../shared/Modal";
 export default {
   data() {
     return {
-      showModal: false,
+      showModal: null,
       queriedServicesCounts: 8,
       showLoading: false,
       selectedService: null
@@ -165,6 +166,15 @@ export default {
       if (!this.services.paginatorInfo.hasMorePages) {
         this.setShowFooterFlag(true);
       }
+      const serviceIndex = this.services.data.findIndex(
+        service =>
+          `${service.id}-${this.reformatURL(service.title)}` ===
+          this.$route.params.serviceName
+      );
+      if (serviceIndex !== -1 && this.showModal === null) {
+        this.getSelectedService(serviceIndex);
+        this.setShowModal(true);
+      }
     }
   }
 };
@@ -176,7 +186,7 @@ export default {
 
 .services-page {
   &__bg {
-    width: 69.8%;
+    width: 70vw;
     height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;

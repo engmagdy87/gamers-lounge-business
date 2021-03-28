@@ -113,7 +113,7 @@
     height: 100%;
     padding: 10px;
     video {
-      border: 2px solid black;
+      border: 2px solid white;
       height: 100%;
       object-fit: cover;
       &:focus {
@@ -125,7 +125,7 @@
     }
   }
   &__image {
-    border: 2px solid black;
+    border: 2px solid white;
     margin: 10px;
   }
   &__slider {

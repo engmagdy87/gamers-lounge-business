@@ -48,6 +48,7 @@
       :setShowModal="setShowModal"
       :navigateTo="navigateTo"
       :isJobPage="true"
+      parentRoute="jobs"
     />
   </div>
 </template>

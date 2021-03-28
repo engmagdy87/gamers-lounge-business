@@ -9,7 +9,7 @@
   margin-top: -$header-height;
   min-height: calc(100vh - #{$footer-height});
   &__bg {
-    width: 69.8%;
+    width: 70vw;
     height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
@@ -26,6 +26,9 @@
     @include is-extra-small-mobile {
       padding-bottom: 0px;
       height: max-content;
+    }
+    div {
+      margin-top: 10%;
     }
   }
   &__content {

@@ -3,13 +3,6 @@
     <div class="work-details-wrapper" v-if="isWebsiteWorkFetched">
       <div class="work-details-wrapper__cover-container">
         <!-- <img :src="websiteWork.img_cover.url" :alt="websiteWork.title" /> -->
-        <h1 class="work-details-wrapper__cover-container__title">
-          {{ websiteWork.title }}
-          <!-- <p
-            class="description-container work-details-wrapper__cover-container__description"
-            v-html="websiteWork.description"
-          ></p> -->
-        </h1>
 
         <div class="work-details-wrapper__cover-statistics">
           <div v-for="statistic in statistics" :key="statistic.id">
@@ -25,6 +18,13 @@
             <p>{{ statistic.key }}</p>
           </div>
         </div>
+        <h1 class="work-details-wrapper__cover-container__title">
+          {{ websiteWork.title }}
+          <!-- <p
+            class="description-container work-details-wrapper__cover-container__description"
+            v-html="websiteWork.description"
+          ></p> -->
+        </h1>
         <WorkDetails :websiteWork="websiteWork" v-if="websiteWork.sections" />
       </div>
       <Intersect @enter="loadMoreWorkSections" v-show="worksPage > 0"

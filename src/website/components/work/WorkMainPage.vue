@@ -31,6 +31,7 @@
       :showModal="showModal"
       :setShowModal="setShowModal"
       :navigateTo="navigateTo"
+      parentRoute="work"
     />
   </div>
 </template>
@@ -47,7 +48,7 @@ import Modal from "../../shared/Modal";
 export default {
   data() {
     return {
-      showModal: false,
+      showModal: null,
       queriedWorksCounts: 8,
       showLoading: false,
       selectedWork: null
@@ -150,6 +151,15 @@ export default {
     if (Object.keys(this.ourWorks).length > 0) {
       if (!this.ourWorks.paginatorInfo.hasMorePages) {
         this.setShowFooterFlag(true);
+      }
+      const workIndex = this.ourWorks.data.findIndex(
+        work =>
+          `${work.id}-${this.reformatURL(work.title)}` ===
+          this.$route.params.workName
+      );
+      if (workIndex !== -1 && this.showModal === null) {
+        this.getSelectedWork(workIndex);
+        this.setShowModal(true);
       }
     }
   }

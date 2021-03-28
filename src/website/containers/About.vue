@@ -7,10 +7,10 @@
     <Hero page="services">
       <template #hero-content>
         <div class="row about-container__heroContent">
-          <h1>OUR VISION</h1>
-          <p v-html="about.vision"></p>
+          <!-- <h1>OUR VISION</h1>
+          <p v-html="about.vision"></p> -->
 
-          <h1>OUR MISSION & OBJECTIVES</h1>
+          <h1>OUR MISSION & OUR VISION</h1>
           <p v-html="about.mission"></p>
         </div>
       </template>

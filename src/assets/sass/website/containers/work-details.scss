@@ -52,11 +52,12 @@
       font-family: Arial;
       font-weight: bold;
       width: 80%;
+      margin-top: 0;
       // margin: auto;
       margin-left: 12%;
       text-align: left;
       font-size: 1.5rem;
-      margin-bottom: 0;
+      margin-bottom: 5px;
       @include is-extra-small-mobile {
         font-size: 1.5rem;
       }

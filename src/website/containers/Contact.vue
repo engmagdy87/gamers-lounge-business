@@ -8,7 +8,7 @@
       <template #hero-content>
         <div class="row align-items-end contact-wrapper__contact-box">
           <div
-            class="col-12 col-md-4 d-flex justify-content-center justify-content-md-end mt-2 mb-sm-3 mb-1"
+            class="col-12 col-md-4 d-flex justify-content-center justify-content-md-end mb-sm-3 mb-1"
             v-if="contact.information.phone !== ''"
           >
             <ContactDataBox

@@ -38,7 +38,7 @@
         text-align: left;
         color: white;
         width: 100%;
-        margin-left: 20px;
+        // margin-left: 20px;
       }
       &__name-label {
         width: 60px;
@@ -115,7 +115,7 @@
     border: 1px $blue-stroke solid;
     outline: none;
     padding: 7px 12px;
-    box-shadow: 0 0 10px $blue-stroke;
+    box-shadow: 0 0 3px $blue-stroke;
     a {
       color: $black-text;
       width: 100%;

@@ -18,7 +18,6 @@
         >
           <img src="../../../public/images/prev.svg" />
         </div>
-        <span>PREVIOUS</span>
       </div>
       <div
         :class="[
@@ -35,7 +34,6 @@
         >
           <img src="../../../public/images/next.svg" />
         </div>
-        <span>NEXT</span>
       </div>
     </div>
     <div class="overlay-bg overlay-bg__right" @click="closeModal"></div>
@@ -44,10 +42,17 @@
 
 <script>
 export default {
-  props: ["showModal", "setShowModal", "navigateTo", "isJobPage"],
+  props: [
+    "showModal",
+    "setShowModal",
+    "navigateTo",
+    "isJobPage",
+    "parentRoute"
+  ],
   methods: {
     closeModal() {
-      this.$router.go(-1);
+      const { href } = this.$router.resolve("/" + this.parentRoute);
+      window.history.pushState({}, null, href);
       this.setShowModal(false);
     },
     goto(dir) {
@@ -92,7 +97,7 @@ export default {
   &__prev {
     bottom: 20px;
     // left: calc((#{100%} - #{$modal-width}) / 2);
-    left: calc((#{100%} - #{$modal-width}) / 1.78);
+    left: calc((#{100%} - #{$modal-width}) / 1.68);
     @include is-mobile {
       bottom: 0;
     }
@@ -100,7 +105,7 @@ export default {
       bottom: 0;
     }
     &--job {
-      left: calc((#{100%} - #{$modal-width}) / 1.4) !important;
+      left: calc((#{100%} - #{$modal-width}) / 1.33) !important;
     }
   }
   div {
