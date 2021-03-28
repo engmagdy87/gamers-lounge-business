@@ -7,7 +7,7 @@
       <VueSlickCarousel v-bind="settings">
         <template #prevArrow="">
           <div class="custom-arrow">
-            <img src="../../../../public/images/prev.svg" />
+            <img src="../../../../public/images/prev.png" />
           </div>
         </template>
         <div
@@ -20,7 +20,7 @@
         </div>
         <template #nextArrow="">
           <div class="custom-arrow">
-            <img src="../../../../public/images/next.svg" />
+            <img src="../../../../public/images/next.png" />
           </div>
         </template>
       </VueSlickCarousel>

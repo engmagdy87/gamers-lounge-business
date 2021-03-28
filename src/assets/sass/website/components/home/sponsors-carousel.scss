@@ -82,7 +82,7 @@ $total-padding: $half-clipped-shape-padding * 2;
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      border: 2px solid white;
+      // border: 2px solid white;
       @include is-extra-small-mobile {
         display: none;
       }
@@ -91,8 +91,8 @@ $total-padding: $half-clipped-shape-padding * 2;
       }
       img {
         width: auto;
-        height: 60%;
-        max-height: 60%;
+        height: 100%;
+        // max-height: 60%;
         margin-top: auto;
         margin-bottom: auto;
       }
