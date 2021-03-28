@@ -37,6 +37,7 @@
           </div>
           <div
             class="work-details-sections__video"
+            style="border: 2px solid white;"
             v-else-if="
               column.type === WORK_COLUMNS_TYPES.VIDEO &&
                 column.fillable &&
@@ -55,6 +56,7 @@
           </div>
           <div
             class="work-details-sections__video"
+            style="border: 2px solid white;"
             v-else-if="
               column.type === WORK_COLUMNS_TYPES.VIDEO &&
                 column.fillable &&
