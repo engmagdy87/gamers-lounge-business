@@ -16,7 +16,7 @@
             isJobPage ? 'custom-arrow__prev--job' : ''
           ]"
         >
-          <img src="../../../public/images/prev.svg" />
+          <img src="../../../public/images/prev.png" />
         </div>
       </div>
       <div
@@ -32,7 +32,7 @@
             isJobPage ? 'custom-arrow__next--job' : ''
           ]"
         >
-          <img src="../../../public/images/next.svg" />
+          <img src="../../../public/images/next.png" />
         </div>
       </div>
     </div>
@@ -220,12 +220,12 @@ export default {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 2px solid white;
+  // border: 2px solid white;
   margin: 0 auto;
   img {
     width: auto;
-    height: 60%;
-    max-height: 60%;
+    height: 100%;
+    // max-height: 60%;
     margin-top: auto;
     margin-bottom: auto;
   }
