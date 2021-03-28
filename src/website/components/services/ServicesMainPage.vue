@@ -12,7 +12,12 @@
         v-for="(service, index) in services.data"
         :key="service.id"
         class="services-page-wrapper__content-wrapper col-xs-12 col-sm-12 col-md-6 col-lg-3 p-0"
-        @click="getSelectedService(index)"
+        @click="
+          getSelectedService(
+            index,
+            `/services/${service.id}-${reformatURL(service.title)}`
+          )
+        "
       >
         <router-link
           :to="`/services/${service.id}-${reformatURL(service.title)}`"
@@ -36,6 +41,7 @@
       :showModal="showModal"
       :setShowModal="setShowModal"
       :navigateTo="navigateTo"
+      :currentRoute="currentRoute"
       parentRoute="services"
     />
   </div>
@@ -56,7 +62,8 @@ export default {
       showModal: null,
       queriedServicesCounts: 8,
       showLoading: false,
-      selectedService: null
+      selectedService: null,
+      currentRoute: ""
     };
   },
   components: {
@@ -82,15 +89,14 @@ export default {
       setWebsiteServiceFetched:
         types.services.mutations.SET_IS_WEBSITE_SERVICE_FETCHED,
       setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG,
-      setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG,
-      setIsServiceFetched:
-        types.services.mutations.SET_IS_WEBSITE_SERVICE_FETCHED
+      setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG
     }),
     reformatURL(id) {
       return reformatStringToBeInURL(id);
     },
-    getSelectedService(id) {
+    getSelectedService(id, route) {
       this.selectedService = id;
+      this.currentRoute = route;
     },
     navigateTo(dir) {
       this.setWebsiteServiceFetched(false);
@@ -143,7 +149,6 @@ export default {
       this.showModal = flag;
     },
     serviceClicked() {
-      this.setIsServiceFetched(false);
       this.setShowModal(true);
     }
   },
@@ -172,7 +177,11 @@ export default {
           this.$route.params.serviceName
       );
       if (serviceIndex !== -1 && this.showModal === null) {
-        this.getSelectedService(serviceIndex);
+        const service = this.services.data[serviceIndex];
+        this.getSelectedService(
+          serviceIndex,
+          `/services/${service.id}-${this.reformatURL(service.title)}`
+        );
         this.setShowModal(true);
       }
     }

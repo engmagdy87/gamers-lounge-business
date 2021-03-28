@@ -32,7 +32,9 @@
 
           <button
             class="job-main-content-wrapper__details-btn"
-            @click="getSelectedJob(index)"
+            @click="
+              getSelectedJob(index, `/job/${job.id}-${reformatURL(job.title)}`)
+            "
           >
             <router-link :to="`/job/${job.id}-${reformatURL(job.title)}`">
               <span @click="jobClicked">
@@ -48,6 +50,7 @@
       :setShowModal="setShowModal"
       :navigateTo="navigateTo"
       :isJobPage="true"
+      :currentRoute="currentRoute"
       parentRoute="jobs"
     />
   </div>
@@ -64,7 +67,8 @@ export default {
   data() {
     return {
       showModal: false,
-      selectedJob: null
+      selectedJob: null,
+      currentRoute: ""
     };
   },
   computed: {
@@ -83,14 +87,14 @@ export default {
     }),
     ...mapMutations({
       setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG,
-      setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG,
-      setIsJobFetched: types.jobs.mutations.SET_IS_JOB_FETCHED
+      setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
     }),
     reformatURL(id) {
       return reformatStringToBeInURL(id);
     },
-    getSelectedJob(id) {
+    getSelectedJob(id, route) {
       this.selectedJob = id;
+      this.currentRoute = route;
     },
     navigateTo(dir) {
       this.setIsJobFetched(false);
@@ -110,7 +114,6 @@ export default {
       this.showModal = flag;
     },
     jobClicked() {
-      this.setIsJobFetched(false);
       this.setShowModal(true);
     }
   },

@@ -134,7 +134,6 @@
 import { Carousel3d, Slide } from "vue-carousel-3d";
 import isDeviceSmart from "../../../helpers/DetectIsDeviceSmart";
 import redirectToNewTab from "../../../helpers/RedirectToNewTab";
-import CustomHalfClipped from "../../shared/CustomHalfClipped";
 import ImageModal from "../../shared/ImageModal";
 import { liveVideoEmbedFormatter } from "../../../helpers/LiveVideoEmbedFormater";
 import * as WORK_COLUMNS_TYPES from "../../../constants/ColumnsContentTypes";
@@ -143,6 +142,7 @@ export default {
   props: ["section"],
   data() {
     return {
+      sectionImages: {},
       showImageModal: false,
       showNavigation: false,
       targetImageIndeces: {
@@ -157,7 +157,6 @@ export default {
   components: {
     Carousel3d,
     Slide,
-    CustomHalfClipped,
     ImageModal
   },
   computed: {
@@ -220,29 +219,22 @@ export default {
     setImageIndex(e, dir) {
       e.stopPropagation();
       const { rowId, colId } = this.targetImageIndeces;
-      const columns = this.getImages(rowId);
-      let newColId;
-      if (dir === "next") {
-        newColId = colId === columns.length - 1 ? 0 : colId + 1;
-        let newCol = this.getImages(rowId)[newColId];
-        while (1) {
-          if (newCol.type === WORK_COLUMNS_TYPES.IMAGE) break;
+      const completeIndex = `${rowId}-${colId}`;
+      let keys = Object.keys(this.sectionImages);
+      let nextIndex;
 
-          newColId = newColId === columns.length - 1 ? 0 : newColId + 1;
-          newCol = this.getImages(rowId)[newColId];
-        }
-      } else {
-        newColId = colId === 0 ? columns.length - 1 : colId - 1;
-        let newCol = this.getImages(rowId)[newColId];
-        while (1) {
-          if (newCol.type === WORK_COLUMNS_TYPES.IMAGE) break;
-
-          newColId = newColId === 0 ? columns.length - 1 : newColId - 1;
-          newCol = this.getImages(rowId)[newColId];
-        }
-      }
-      this.targetImageIndeces.colId = newColId;
-      this.targetImageUrl = this.getImages(rowId)[newColId].img_content[0].url;
+      const currentIndex = keys.indexOf(completeIndex);
+      if (dir === "next")
+        nextIndex = currentIndex === keys.length - 1 ? 0 : currentIndex + 1;
+      else nextIndex = currentIndex === 0 ? keys.length - 1 : currentIndex - 1;
+      const newRowId = keys[nextIndex].split("-")[0];
+      const newColId = keys[nextIndex].split("-")[1];
+      this.targetImageIndeces = {
+        ...this.targetImageIndeces,
+        rowId: newRowId,
+        colId: newColId
+      };
+      this.targetImageUrl = this.sectionImages[keys[nextIndex]];
     },
     setImageForSliderIndex(e, dir) {
       e.stopPropagation();
@@ -259,6 +251,17 @@ export default {
   },
   updated() {
     redirectToNewTab("description-container");
+  },
+  mounted() {
+    this.section.rows.forEach((row, rowId) => {
+      row.columns.forEach((col, colId) => {
+        if (col.type === this.WORK_COLUMNS_TYPES.IMAGE && col.fillable)
+          this.sectionImages = {
+            ...this.sectionImages,
+            [`${rowId}-${colId}`]: col.img_content[0].url
+          };
+      });
+    });
   }
 };
 </script>

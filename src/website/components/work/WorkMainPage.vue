@@ -5,7 +5,9 @@
         v-for="(work, index) in ourWorks.data"
         :key="work.id"
         class="work-page-wrapper__content-wrapper col-xs-12 col-sm-12 col-md-6 col-lg-3 p-0"
-        @click="getSelectedWork(index)"
+        @click="
+          getSelectedWork(index), `/work/${work.id}-${reformatURL(work.title)}`
+        "
       >
         <router-link :to="`/work/${work.id}-${reformatURL(work.title)}`">
           <div class="work-page-wrapper__content" @click="workClicked">
@@ -31,6 +33,7 @@
       :showModal="showModal"
       :setShowModal="setShowModal"
       :navigateTo="navigateTo"
+      :currentRoute="currentRoute"
       parentRoute="work"
     />
   </div>
@@ -51,7 +54,8 @@ export default {
       showModal: null,
       queriedWorksCounts: 8,
       showLoading: false,
-      selectedWork: null
+      selectedWork: null,
+      currentRoute: ""
     };
   },
   components: {
@@ -71,14 +75,14 @@ export default {
     }),
     ...mapMutations({
       setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG,
-      setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG,
-      setIsWorkFetched: types.works.mutations.SET_IS_WEBSITE_WORK_FETCHED
+      setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG
     }),
     reformatURL(id) {
       return reformatStringToBeInURL(id);
     },
-    getSelectedWork(id) {
+    getSelectedWork(id, route) {
       this.selectedWork = id;
+      this.currentRoute = route;
     },
     navigateTo(dir) {
       this.setIsWorkFetched(false);
@@ -128,7 +132,6 @@ export default {
       this.showModal = flag;
     },
     workClicked() {
-      this.setIsWorkFetched(false);
       this.setShowModal(true);
     }
   },
@@ -158,7 +161,11 @@ export default {
           this.$route.params.workName
       );
       if (workIndex !== -1 && this.showModal === null) {
-        this.getSelectedWork(workIndex);
+        const work = this.ourWorks.data[workIndex];
+        this.getSelectedWork(
+          workIndex,
+          `/work/${work.id}-${reformatURL(work.title)}`
+        );
         this.setShowModal(true);
       }
     }

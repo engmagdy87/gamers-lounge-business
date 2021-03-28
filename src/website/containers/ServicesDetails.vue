@@ -105,11 +105,6 @@ export default {
   },
   updated() {
     redirectToNewTab("description-container");
-    if (
-      this.websiteService.sections.paginatorInfo &&
-      !this.websiteService.sections.paginatorInfo.hasMorePages
-    )
-      this.setShowFooterFlag(true);
   }
 };
 </script>

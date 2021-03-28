@@ -41,15 +41,25 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+import types from "../../store/types";
+
 export default {
   props: [
     "showModal",
     "setShowModal",
     "navigateTo",
     "isJobPage",
+    "currentRoute",
     "parentRoute"
   ],
   methods: {
+    ...mapMutations({
+      setIsServiceFetched:
+        types.services.mutations.SET_IS_WEBSITE_SERVICE_FETCHED,
+      setIsWorkFetched: types.works.mutations.SET_IS_WEBSITE_WORK_FETCHED,
+      setIsJobFetched: types.jobs.mutations.SET_IS_JOB_FETCHED
+    }),
     closeModal() {
       const { href } = this.$router.resolve("/" + this.parentRoute);
       window.history.pushState({}, null, href);
@@ -64,6 +74,20 @@ export default {
       if (this.showModal) this.$refs.Modal.style.display = "flex";
       else this.$refs.Modal.style.display = "none";
     }
+  },
+  updated() {
+    if (this.$route.name === "service")
+      this.setIsServiceFetched(
+        this.currentRoute === this.$router.currentRoute.path
+      );
+    if (this.$route.name === "work")
+      this.setIsWorkFetched(
+        this.currentRoute === this.$router.currentRoute.path
+      );
+    if (this.$route.name === "jobs")
+      this.setIsJobFetched(
+        this.currentRoute === this.$router.currentRoute.path
+      );
   }
 };
 </script>

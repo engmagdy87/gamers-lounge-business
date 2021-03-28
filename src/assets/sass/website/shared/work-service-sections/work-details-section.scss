@@ -14,7 +14,7 @@
 }
 .work-details-sections {
   &__wrapper {
-    border-radius: 10px;
+    border-radius: 6px;
     background-color: $form-background;
     padding: 30px;
     @include is-extra-small-mobile {
@@ -111,6 +111,7 @@
   }
   &__video {
     height: 100%;
+    margin: 0 8px;
     video {
       height: 100%;
       object-fit: cover;
