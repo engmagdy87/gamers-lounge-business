@@ -197,6 +197,7 @@ export default {
   &__bg {
     width: 70vw;
     height: 100vh;
+    background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     position: fixed;

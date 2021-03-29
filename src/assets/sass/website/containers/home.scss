@@ -8,6 +8,7 @@
   &__bg {
     width: 70vw;
     height: 100vh;
+    background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     position: fixed;
@@ -25,7 +26,7 @@
   &__text {
     text-align: center;
     color: $black-text;
-    margin: 10px auto 0;
+    margin: 0 auto;
     width: 80%;
     padding-top: 20px;
   }

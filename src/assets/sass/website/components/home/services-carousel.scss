@@ -98,15 +98,13 @@ $extra-mob-dim: $slide-height-mobile;
     //   // height: 100%;
     //   filter: brightness(30%);
     // }
-    // @include is-desktop {
-    //   // height: 97%;
-    // }
-    // @include is-large-desktop {
-    //   // height: 98%;
-    // }
+    @include is-desktop {
+      height: $extra-lg-dim;
+      width: calc(#{$extra-lg-dim} + 65px);
+    }
     @include is-extra-large-desktop {
       height: $extra-lg-dim;
-      width: calc(#{$extra-lg-dim} + 150px);
+      width: calc(#{$extra-lg-dim} + 65px);
     }
     @media (min-width: 1400px) and (max-width: 1599px) {
       // height: 100%;
