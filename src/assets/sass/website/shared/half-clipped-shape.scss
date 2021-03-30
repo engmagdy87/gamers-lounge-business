@@ -2,7 +2,11 @@
 @import "../color-palette.scss";
 @import "../variables.scss";
 
-@mixin filled-half-clipped-shape($widths-and-heights, $bg-color) {
+@mixin filled-half-clipped-shape(
+  $widths-and-heights,
+  $bg-color,
+  $green-stroke
+) {
   .half-filled-box {
     cursor: auto;
     width: map-get($widths-and-heights, clipped-shape-width);
@@ -13,6 +17,9 @@
     text-align: center;
     margin: auto;
     border-radius: 10px;
+    border-bottom: 2px $green-stroke solid;
+    border-top: 2px $green-stroke solid;
+    border-left: 2px $green-stroke solid;
     // @include half-clipped-shape(
     //   $width,
     //   $height,

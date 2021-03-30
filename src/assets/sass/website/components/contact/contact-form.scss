@@ -5,7 +5,7 @@
 
 .contact-form-wrapper {
   form {
-    background: $form-background;
+    background-color: #102e2e;
     width: 70%;
     border-radius: 10px;
     margin: auto;
@@ -135,7 +135,7 @@
   }
   &__input-outline-mask {
     position: relative;
-    background-color: $primary;
+    background-color: transparent;
     width: 100%;
     height: $input-form-height;
     border-radius: 5px;
@@ -147,7 +147,7 @@
       border-radius: 0;
       width: calc(100% - 2px);
       height: $input-form-height - 2px;
-      background-color: $form-background;
+      background-color: #0b191c;
       border: transparent;
       color: white;
       padding: 8px 20px;
@@ -155,7 +155,7 @@
   }
   &__textarea-outline-mask {
     position: relative;
-    background-color: $primary;
+    background-color: transparent;
     width: 100%;
     height: $input-form-height;
     border-radius: 5px;
@@ -168,7 +168,7 @@
       border-radius: 0;
       width: calc(100% - 2px);
       height: 148px;
-      background-color: $form-background;
+      background-color: #0b191c;
       border: transparent;
       color: white;
       padding: 8px 20px;
@@ -255,5 +255,9 @@ $widths-and-heights: (
 
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
-  @include filled-half-clipped-shape($widths-and-heights, $form-background);
+  @include filled-half-clipped-shape(
+    $widths-and-heights,
+    $form-background,
+    transparent
+  );
 }

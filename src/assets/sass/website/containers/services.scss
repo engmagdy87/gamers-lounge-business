@@ -68,8 +68,8 @@
         color: $header-item;
         user-select: none;
         font-size: 2.5rem;
-        font-family: Arial;
-        font-weight: bold;
+        font-family: "Arial Bold" !important;
+        text-transform: uppercase;
         @include max-width-1650 {
           font-size: 2rem;
         }
@@ -135,5 +135,9 @@ $widths-and-heights: (
 
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
-  @include filled-half-clipped-shape($widths-and-heights, transparent);
+  @include filled-half-clipped-shape(
+    $widths-and-heights,
+    transparent,
+    transparent
+  );
 }

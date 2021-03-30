@@ -74,6 +74,7 @@ export default {
       fetchWorks: types.works.actions.FETCH_WORKS
     }),
     ...mapMutations({
+      setIsWorkFetched: types.works.mutations.SET_IS_WEBSITE_WORK_FETCHED,
       setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG,
       setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG
     }),
@@ -164,7 +165,7 @@ export default {
         const work = this.ourWorks.data[workIndex];
         this.getSelectedWork(
           workIndex,
-          `/work/${work.id}-${reformatURL(work.title)}`
+          `/work/${work.id}-${this.reformatURL(work.title)}`
         );
         this.setShowModal(true);
       }

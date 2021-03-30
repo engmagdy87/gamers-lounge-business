@@ -86,6 +86,7 @@ export default {
       fetchHomeCoverImageAndTexts: types.settings.actions.FETCH_SETTINGS
     }),
     ...mapMutations({
+      setIsJobFetched: types.jobs.mutations.SET_IS_JOB_FETCHED,
       setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG,
       setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
     }),

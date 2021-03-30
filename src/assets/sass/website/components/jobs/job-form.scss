@@ -7,6 +7,7 @@
 .job-form-wrapper {
   margin-top: 25px;
   form {
+    // background-color: #102e2e;
     @include is-extra-small-mobile {
       padding: 10px;
     }
@@ -166,7 +167,7 @@
   }
   &__input-outline-mask {
     position: relative;
-    background-color: $primary;
+    background-color: transparent;
     width: 100%;
     height: $input-form-height;
     border-radius: 5px;
@@ -179,7 +180,7 @@
       border-radius: 0;
       width: calc(100% - 2px);
       height: $input-form-height - 2px;
-      background-color: $form-background;
+      background-color: #0b191c;
       border: transparent;
       color: white;
       padding: 8px 20px;
@@ -254,10 +255,7 @@ $widths-and-heights: (
 
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
-  @include filled-half-clipped-shape(
-    $widths-and-heights,
-    rgba($form-background, 0.9)
-  );
+  @include filled-half-clipped-shape($widths-and-heights, #102e2e, transparent);
 }
 
 //************************

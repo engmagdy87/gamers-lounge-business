@@ -58,7 +58,7 @@ $total-padding: $half-clipped-shape-padding * 2;
     }
   }
   &__body {
-    background-color: $form-background;
+    background-color: $section-color;
     width: 75%;
     margin: 0 auto;
     border-radius: 100px;
@@ -69,10 +69,10 @@ $total-padding: $half-clipped-shape-padding * 2;
       margin: auto;
     }
     .custom-arrow.slick-prev {
-      margin-left: -35px;
+      margin-left: -25px;
     }
     .custom-arrow.slick-next {
-      margin-right: -35px;
+      margin-right: -25px;
     }
     .custom-arrow {
       width: fit-content;

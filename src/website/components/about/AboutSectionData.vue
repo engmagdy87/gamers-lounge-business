@@ -1,6 +1,8 @@
 <template>
   <div class="about-section-wrapper">
-    <h1 class="about-section-wrapper__title">OUR STORY</h1>
+    <h1 :class="['about-section-wrapper__title', getCssStyle(title)]">
+      {{ title }}
+    </h1>
     <div class="about-section-wrapper__container">
       <div
         v-for="(row, rowId) in section.rows"
@@ -127,7 +129,7 @@ import redirectToNewTab from "../../../helpers/RedirectToNewTab";
 import { liveVideoEmbedFormatter } from "../../../helpers/LiveVideoEmbedFormater";
 import * as ABOUT_COLUMNS_TYPES from "../../../constants/ColumnsContentTypes";
 export default {
-  props: ["section"],
+  props: ["section", "title"],
   data() {
     return {
       sectionImages: {},
@@ -153,6 +155,23 @@ export default {
     }
   },
   methods: {
+    getCssStyle(title) {
+      switch (title) {
+        case "our story":
+        case "our vision":
+          return "";
+
+        case "Meet the founders":
+        case "Testimonials":
+          return "about-section-wrapper__title--center";
+
+        // case "our vision":
+        //   return "about-section-wrapper__title--right";
+
+        default:
+          break;
+      }
+    },
     getLiveVideoEmbedFormatter(url) {
       return liveVideoEmbedFormatter(url);
     },
@@ -193,6 +212,9 @@ export default {
       this.showImageModal = flag;
     },
     openImageModal(rowId, colId, imgId, type) {
+      console.log("====================================");
+      console.log(rowId, colId, imgId, type);
+      console.log("====================================");
       this.showNavigation = true;
       this.contentType = type;
       this.targetImageIndeces = {

@@ -4,10 +4,7 @@
     <div class="modal-content">
       <router-view :key="$route.fullPath"></router-view>
       <div
-        :class="[
-          'custom-arrow-text custom-arrow-text__prev',
-          isJobPage ? 'custom-arrow-text__prev--job' : ''
-        ]"
+        :class="['custom-arrow-text custom-arrow-text__prev']"
         @click="goto('prev')"
       >
         <div
@@ -20,10 +17,7 @@
         </div>
       </div>
       <div
-        :class="[
-          'custom-arrow-text custom-arrow-text__next',
-          isJobPage ? 'custom-arrow-text__next--job' : ''
-        ]"
+        :class="['custom-arrow-text custom-arrow-text__next']"
         @click="goto('next')"
       >
         <div

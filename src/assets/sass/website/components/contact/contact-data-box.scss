@@ -23,7 +23,7 @@
   }
   &__title {
     text-transform: uppercase;
-    font-weight: bold;
+    font-family: "Arial Bold" !important;
     font-size: 2rem;
     margin: 5% 0 0 0;
     @include is-extra-small-mobile {
@@ -76,5 +76,9 @@ $widths-and-heights: (
 
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
-  @include filled-half-clipped-shape($widths-and-heights, transparent);
+  @include filled-half-clipped-shape(
+    $widths-and-heights,
+    transparent,
+    transparent
+  );
 }

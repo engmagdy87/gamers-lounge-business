@@ -45,7 +45,7 @@ $widths-and-heights: (
 
 // use /deep/ to apply scss classes to the child components
 form div /deep/ {
-  @include filled-half-clipped-shape($widths-and-heights, $accent);
+  @include filled-half-clipped-shape($widths-and-heights, $accent, transparent);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -15,7 +15,7 @@
 .work-details-sections {
   &__wrapper {
     border-radius: 6px;
-    background-color: $form-background;
+    background-color: $section-color;
     padding: 30px;
     @include is-extra-small-mobile {
       padding: 10px;

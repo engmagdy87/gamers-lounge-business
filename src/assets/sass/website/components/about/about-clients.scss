@@ -22,12 +22,14 @@
         margin: 0 0 50px 0;
       }
       h1 {
-        font-family: "Arial Bold";
+        font-family: "Arial Bold" !important;
         font-weight: bolder;
         font-size: 2rem;
         letter-spacing: 4px;
         margin-bottom: 5px;
-        margin-left: 30px;
+        // margin-left: 30px;
+        width: 100%;
+        text-align: center;
         @include is-mobile {
           font-size: 2rem;
           margin-top: 0;

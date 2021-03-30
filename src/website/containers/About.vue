@@ -10,8 +10,11 @@
           <!-- <h1>OUR VISION</h1>
           <p v-html="about.vision"></p> -->
 
-          <h1>OUR MISSION & OUR VISION</h1>
-          <p v-html="about.mission"></p>
+          <h1>
+            Creating a better community <br />
+            for gamers by gamers!
+          </h1>
+          <!-- <p v-html="about.mission"></p> -->
         </div>
       </template>
     </Hero>

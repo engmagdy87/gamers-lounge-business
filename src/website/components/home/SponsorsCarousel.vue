@@ -100,10 +100,10 @@ export default {
   text-align: center;
   &__title {
     color: $black-text;
-    font-family: "Arial Bold";
+    font-family: "Arial Bold" !important;
     font-weight: bolder;
     font-size: 2rem;
-    letter-spacing: 4px;
+    // letter-spacing: 4px;
     margin-top: 0;
   }
 }

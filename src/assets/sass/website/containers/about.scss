@@ -75,13 +75,13 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      text-transform: uppercase;
 
       h1 {
         color: $header-item;
         user-select: none;
         font-size: 2.5rem;
-        font-family: Arial;
-        font-weight: bold;
+        font-family: "Arial Bold" !important;
         margin-top: 20px;
         @include is-extra-small-mobile {
           font-size: 1.3rem;

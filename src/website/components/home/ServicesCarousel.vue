@@ -53,10 +53,10 @@
           <template #carouselNavigationButtons="{goToPrev,goToNext}">
             <div class="carousel-navigation">
               <button @click="goToPrev">
-                <img src="../../../../public/images/prev.svg" />
+                <img src="../../../../public/images/prev-solo1.svg" />
               </button>
               <button @click="goToNext">
-                <img src="../../../../public/images/next.svg" />
+                <img src="../../../../public/images/next-solo1.svg" />
               </button>
             </div>
           </template>
