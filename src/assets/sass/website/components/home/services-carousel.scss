@@ -14,7 +14,7 @@ $extra-mob-dim: $slide-height-mobile;
   position: relative;
   z-index: 101;
   .services-header {
-    margin: 50px 0 0 12%;
+    margin: 50px 0 0 14%;
     &__sub-text {
       color: $header-item;
     }
@@ -168,6 +168,7 @@ $extra-mob-dim: $slide-height-mobile;
     position: absolute;
     left: 0;
     right: 0;
+    padding-left: 6%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
@@ -229,7 +230,7 @@ $extra-mob-dim: $slide-height-mobile;
   &__btn {
     position: absolute;
     bottom: 20px;
-    right: 35px;
+    right: -15px;
     font-size: 0.8rem;
     cursor: pointer;
     z-index: 100;
@@ -344,7 +345,7 @@ $extra-mob-dim: $slide-height-mobile;
   position: absolute;
   left: 1%;
   z-index: 120;
-  width: 65%;
+  width: 70%;
   @include is-extra-small-mobile {
     left: 4%;
     width: 100%;
@@ -379,7 +380,7 @@ $extra-mob-dim: $slide-height-mobile;
   }
 }
 // All have vw as divide operation units must be the same for all
-$width: 80%;
+$width: 75%;
 
 $widths-and-heights: (
   clipped-shape-width: $width,
