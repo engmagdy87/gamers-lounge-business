@@ -79,6 +79,7 @@ div /deep/ {
   @include filled-half-clipped-shape(
     $widths-and-heights,
     transparent,
-    transparent
+    transparent,
+    11px
   );
 }

@@ -24,11 +24,11 @@ $around-nav-width: calc(100% - #{$nav-width});
       width: fit-content;
       z-index: 200;
       .fb-logo {
-        width: 12px;
+        // width: 12px;
       }
       img {
         margin: 10px;
-        width: 20px;
+        height: 17.5px;
         &:first-child {
           margin-left: 5px;
         }
@@ -79,6 +79,7 @@ $around-nav-width: calc(100% - #{$nav-width});
     display: flex;
     justify-content: center;
     align-items: baseline;
+    justify-content: start;
     margin-right: auto;
     margin-left: 30px;
     width: $around-nav-width;
@@ -88,7 +89,7 @@ $around-nav-width: calc(100% - #{$nav-width});
       margin-left: 20px;
     }
     img {
-      width: 18%;
+      width: 35px;
       @include is-extra-small-mobile {
         width: 15%;
       }

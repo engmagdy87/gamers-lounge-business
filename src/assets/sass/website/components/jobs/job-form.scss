@@ -5,7 +5,7 @@
 @import "../../shared/half-clipped-outline-shape.scss";
 
 .job-form-wrapper {
-  margin-top: 25px;
+  margin-top: 60px;
   form {
     // background-color: #102e2e;
     @include is-extra-small-mobile {
@@ -24,11 +24,12 @@
       padding: 30px;
     }
     @include is-extra-large-desktop {
-      padding: 30px 30px 10px 30px;
+      padding: 10px 30px;
     }
     .form-group {
       position: relative;
-      // margin-bottom: 35px;
+      margin-bottom: 5px;
+      margin-top: 10px;
       label {
         background-color: transparent;
         // position: absolute;
@@ -42,12 +43,15 @@
       }
       &__short-label {
         width: 60px;
+        margin-bottom: 0;
       }
       &__mid-label {
         width: 80px;
+        margin-bottom: 0;
       }
       &__long-label {
         width: 120px;
+        margin-bottom: 0;
       }
     }
   }
@@ -189,12 +193,17 @@
       appearance: none;
     }
   }
+  &__custom-select {
+    .form-control {
+      padding: 0px 20px;
+    }
+  }
   &__custom-select::after {
     content: "\f078";
     font: normal normal normal 17px/1 FontAwesome;
     color: $header-item;
     right: 10px;
-    padding: 15px 15px 0px 8px;
+    padding: 5px 10px 0px 8px;
     position: absolute;
     pointer-events: none;
   }
@@ -205,12 +214,14 @@
     width: 50%;
     height: max-content;
     text-align: left;
+    margin-top: 10px;
   }
   &__footer-right {
     width: 50%;
     height: max-content;
     display: flex;
     justify-content: flex-end;
+    margin-top: 10px;
   }
 }
 .job-form-wrapper
@@ -255,7 +266,12 @@ $widths-and-heights: (
 
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
-  @include filled-half-clipped-shape($widths-and-heights, #102e2e, transparent);
+  @include filled-half-clipped-shape(
+    $widths-and-heights,
+    #102e2e,
+    transparent,
+    6px
+  );
 }
 
 //************************

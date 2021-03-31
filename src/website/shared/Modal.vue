@@ -99,7 +99,8 @@ export default {
   text-align: center;
   z-index: 2001;
   &__next {
-    bottom: 20px;
+    // bottom: 20px;
+    bottom: 45%;
     // right: calc((#{100%} - #{$modal-width}) / 1.7);
     right: calc((#{100%} - #{$modal-width}) / 1.68);
     @include is-mobile {
@@ -113,7 +114,8 @@ export default {
     }
   }
   &__prev {
-    bottom: 20px;
+    // bottom: 20px;
+    bottom: 45%;
     // left: calc((#{100%} - #{$modal-width}) / 2);
     left: calc((#{100%} - #{$modal-width}) / 1.68);
     @include is-mobile {

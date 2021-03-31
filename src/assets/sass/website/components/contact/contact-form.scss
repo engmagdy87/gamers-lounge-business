@@ -258,6 +258,7 @@ div /deep/ {
   @include filled-half-clipped-shape(
     $widths-and-heights,
     $form-background,
-    transparent
+    transparent,
+    11px
   );
 }

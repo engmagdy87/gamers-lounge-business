@@ -1,5 +1,5 @@
 <template>
-  <div class="job-details-wrapper pb-4" v-if="isJobFetched">
+  <div class="job-details-wrapper" v-if="isJobFetched">
     <div class="job-details-wrapper__container">
       <div class="row">
         <div class="col-12 col-lg-6 job-details-wrapper__details">
@@ -10,7 +10,7 @@
             class="description-container description-container-job"
             v-html="job.description"
           ></div>
-          <h3>Job requirements</h3>
+          <h3>Job Requirements</h3>
           <hr />
           <div
             class="description-container description-container-job"

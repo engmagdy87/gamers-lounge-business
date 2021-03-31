@@ -5,7 +5,8 @@
 @mixin filled-half-clipped-shape(
   $widths-and-heights,
   $bg-color,
-  $green-stroke
+  $green-stroke,
+  $border-rad
 ) {
   .half-filled-box {
     cursor: auto;
@@ -16,7 +17,7 @@
     // padding: $half-clipped-shape-padding;
     text-align: center;
     margin: auto;
-    border-radius: 10px;
+    border-radius: $border-rad;
     border-bottom: 2px $green-stroke solid;
     border-top: 2px $green-stroke solid;
     border-left: 2px $green-stroke solid;

@@ -10,9 +10,9 @@
         <div class="row d-block job-main-content-wrapper__title">
           <h1>let's work together</h1>
           <p>
-            We're always looking for fresh talents in eSports(Casters - Analysis
-            - Designers - Video Editors ) if you're an eSports fan and think you
-            have what it takes
+            If you're an Esports fan and think you have what it takes,<br />
+            we're always looking for fresh talents in Esports (Casters -
+            Analysts)
           </p>
         </div>
       </template>

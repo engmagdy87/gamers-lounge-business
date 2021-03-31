@@ -25,62 +25,65 @@
         </div>
 
         <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 footer-social-media">
-          <h5 class="footer-followus">Follow Us</h5>
+          <div class="footer-social-media__content">
+            <h5 class="footer-followus">Follow Us</h5>
 
-          <div class="social-media row">
-            <div
-              class="social-logos-container"
-              @click="goToLink(contact.information.facebook_link)"
-              v-if="
-                contact.img_facebook && contact.information.facebook_link !== ''
-              "
-            >
-              <img
-                class="fb-logo"
-                :src="contact.img_facebook.url"
-                alt="facebook"
-              />
-            </div>
+            <div class="social-media row">
+              <div
+                class="social-logos-container"
+                @click="goToLink(contact.information.facebook_link)"
+                v-if="
+                  contact.img_facebook &&
+                    contact.information.facebook_link !== ''
+                "
+              >
+                <img
+                  class="fb-logo"
+                  :src="contact.img_facebook.url"
+                  alt="facebook"
+                />
+              </div>
 
-            <div
-              class="social-logos-container"
-              @click="goToLink(contact.information.instagram_link)"
-              v-if="
-                contact.img_instagram &&
-                  contact.information.instagram_link !== ''
-              "
-            >
-              <img :src="contact.img_instagram.url" alt="instagram" />
-            </div>
+              <div
+                class="social-logos-container"
+                @click="goToLink(contact.information.instagram_link)"
+                v-if="
+                  contact.img_instagram &&
+                    contact.information.instagram_link !== ''
+                "
+              >
+                <img :src="contact.img_instagram.url" alt="instagram" />
+              </div>
 
-            <div
-              class="social-logos-container"
-              @click="goToLink(contact.information.twitter_link)"
-              v-if="
-                contact.img_twitter && contact.information.twitter_link !== ''
-              "
-            >
-              <img :src="contact.img_twitter.url" alt="twitter" />
-            </div>
+              <div
+                class="social-logos-container"
+                @click="goToLink(contact.information.twitter_link)"
+                v-if="
+                  contact.img_twitter && contact.information.twitter_link !== ''
+                "
+              >
+                <img :src="contact.img_twitter.url" alt="twitter" />
+              </div>
 
-            <div
-              class="social-logos-container"
-              @click="goToLink(contact.information.youtube_link)"
-              v-if="
-                contact.img_youtube && contact.information.youtube_link !== ''
-              "
-            >
-              <img :src="contact.img_youtube.url" alt="youtube" />
-            </div>
+              <div
+                class="social-logos-container"
+                @click="goToLink(contact.information.youtube_link)"
+                v-if="
+                  contact.img_youtube && contact.information.youtube_link !== ''
+                "
+              >
+                <img :src="contact.img_youtube.url" alt="youtube" />
+              </div>
 
-            <div
-              class="social-logos-container"
-              @click="goToLink(contact.information.twitch_link)"
-              v-if="
-                contact.img_twitch && contact.information.twitch_link !== ''
-              "
-            >
-              <img :src="contact.img_twitch.url" alt="twitch" />
+              <div
+                class="social-logos-container"
+                @click="goToLink(contact.information.twitch_link)"
+                v-if="
+                  contact.img_twitch && contact.information.twitch_link !== ''
+                "
+              >
+                <img :src="contact.img_twitch.url" alt="twitch" />
+              </div>
             </div>
           </div>
         </div>
@@ -113,7 +116,7 @@
     <div class="row copyrights m-0 p-0">
       <h5>
         Copyright © {{ new Date().getFullYear() }}
-        <a href="/"> Gamers lounge </a> For Esports E.S.C All Rights Reserved
+        <a href="/"> Gamers Lounge </a> For Esports E.S.C All Rights Reserved
       </h5>
     </div>
 
