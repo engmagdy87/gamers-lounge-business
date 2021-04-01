@@ -4,9 +4,11 @@
 
 $left: 25px;
 $shift: 40px;
+$offset: 80px;
 
 $extra-lg-dim: calc(#{$about-container-height} + #{$shift});
 $extra-mob-dim: calc(#{$slide-height-mobile} + #{$shift});
+$extra-mob-dim-container: calc(#{$extra-mob-dim} + #{$offset});
 
 ::-webkit-scrollbar {
   width: 5px;
@@ -22,10 +24,24 @@ $text-minheight-mob: 500px;
 $text-minheight-pc: 706px;
 
 .about-section-wrapper {
+  @include is-mobile {
+    height: $extra-mob-dim-container;
+    margin-top: 20px;
+  }
+  @include is-extra-small-mobile {
+    height: $extra-mob-dim-container;
+  }
   &__container {
     width: 100%;
     display: flex;
     justify-content: center;
+    position: relative;
+    @include is-mobile {
+      margin-top: 20px;
+    }
+    @include is-extra-small-mobile {
+      margin-top: 20px;
+    }
   }
   &__inside {
     padding: 15px 0px;
@@ -146,21 +162,22 @@ $text-minheight-pc: 706px;
     // right: 0;
     // top: 0;
     @include is-extra-small-mobile {
-      position: relative;
       height: $extra-mob-dim;
-      width: $extra-mob-dim + 50px;
-      max-width: $extra-mob-dim + 50px;
-      min-width: $extra-mob-dim;
+      max-height: $extra-mob-dim;
+      position: absolute;
+      top: 0;
+      left: 0;
       filter: brightness(50%);
-      margin-left: -12px;
+      z-index: 200;
     }
     @include is-mobile {
-      position: relative;
-      width: 95vw;
-      left: -23%;
-      transform: scale(1.1);
-      // height: 100%;
-      filter: brightness(30%);
+      height: $extra-mob-dim;
+      max-height: $extra-mob-dim;
+      position: absolute;
+      top: 0;
+      left: 0;
+      filter: brightness(50%);
+      z-index: 200;
     }
     @include is-tablet {
       position: relative;
@@ -274,10 +291,46 @@ $text-minheight-pc: 706px;
     // overflow: hidden;
     // overflow-y: auto;
     @include is-mobile {
-      height: max-content;
+      z-index: 2001;
+      margin-top: 0;
+      border: none;
+      border-radius: 15px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 0.5rem !important;
+      height: $extra-mob-dim;
+      max-height: $extra-mob-dim;
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      &::-webkit-scrollbar-thumb {
+        display: none;
+      }
     }
     @include is-extra-small-mobile {
-      height: max-content;
+      z-index: 2001;
+      margin-top: 0;
+      border: none;
+      border-radius: 15px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 0.5rem !important;
+      height: $extra-mob-dim;
+      max-height: $extra-mob-dim;
+      overflow-y: auto;
+      div {
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        &::-webkit-scrollbar-thumb {
+          display: none;
+        }
+        height: 100% !important;
+        overflow: auto;
+      }
     }
     // h1 {
     //   color: $header-item;

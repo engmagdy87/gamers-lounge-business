@@ -39,6 +39,14 @@
       border-radius: 20px !important;
       display: none;
     }
+    @include is-mobile {
+      max-height: calc(100vh - #{80px});
+      // padding: 0 calc(calc(100% - #{$modal-width-mob}) / 2);
+    }
+    @include is-extra-small-mobile {
+      max-height: calc(100vh - #{80px});
+      // padding: 0 calc(calc(100% - #{$modal-width-mob}) / 2);
+    }
     img {
       width: 100%;
       object-fit: cover;

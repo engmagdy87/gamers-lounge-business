@@ -125,5 +125,14 @@
     position: relative;
     background-color: $accent;
     z-index: 102;
+    div:first-child {
+      @include is-extra-small-mobile {
+        width: 100%;
+        // height: 60vh;
+      }
+      @include is-mobile {
+        width: 100%;
+      }
+    }
   }
 }

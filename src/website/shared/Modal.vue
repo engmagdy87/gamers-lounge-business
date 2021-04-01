@@ -1,11 +1,13 @@
 <template>
   <div ref="Modal" class="modal">
+    <span class="close" @click="closeModal">&times;</span>
     <div class="overlay-bg overlay-bg__left" @click="closeModal"></div>
     <div class="modal-content">
       <router-view :key="$route.fullPath"></router-view>
       <div
         :class="['custom-arrow-text custom-arrow-text__prev']"
         @click="goto('prev')"
+        :style="`display: ${isJobPage ? 'none' : 'block'};`"
       >
         <div
           :class="[
@@ -19,6 +21,7 @@
       <div
         :class="['custom-arrow-text custom-arrow-text__next']"
         @click="goto('next')"
+        :style="`display: ${isJobPage ? 'none' : 'block'};`"
       >
         <div
           :class="[
@@ -98,6 +101,12 @@ export default {
   bottom: 20px;
   text-align: center;
   z-index: 2001;
+  @include is-extra-small-mobile {
+    display: none !important;
+  }
+  @include is-mobile {
+    display: none !important;
+  }
   &__next {
     // bottom: 20px;
     bottom: 45%;
@@ -195,6 +204,12 @@ export default {
   // padding: 0 calc(calc(100% - #{$modal-width}) / 2);
   position: relative;
   background-color: transparent;
+  // @include is-extra-small-mobile {
+  //   overflow: auto;
+  // }
+  // @include is-mobile {
+  //   overflow: auto;
+  // }
 }
 
 /* Add Animation */
@@ -248,5 +263,23 @@ export default {
     margin-top: auto;
     margin-bottom: auto;
   }
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>

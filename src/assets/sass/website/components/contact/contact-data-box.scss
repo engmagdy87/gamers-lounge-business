@@ -8,11 +8,11 @@
     height: 40px;
 
     @include is-extra-small-mobile {
-      margin-top: 15%;
+      margin-top: 0%;
       height: 20px;
     }
     @include is-mobile {
-      margin-top: 15%;
+      margin-top: 0%;
       height: 20px;
     }
 

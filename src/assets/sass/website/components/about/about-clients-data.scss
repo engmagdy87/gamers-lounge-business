@@ -15,6 +15,12 @@
     max-height: 80px;
     margin: 10% 22%;
     cursor: pointer;
+    @include is-mobile {
+      margin: 10% 20%;
+    }
+    @include is-extra-small-mobile {
+      margin: 10% 20%;
+    }
   }
   .hide-border {
     // margin-top: 0;

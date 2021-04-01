@@ -8,10 +8,10 @@
   color: $header-item;
   background-color: $primary;
   @include is-extra-small-mobile {
-    width: 90%;
+    width: 100%;
   }
   @include is-mobile {
-    width: 90%;
+    width: 100%;
   }
   &__section {
     // padding: 2% 0 0;

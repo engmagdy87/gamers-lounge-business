@@ -27,9 +27,21 @@
     @include is-extra-small-mobile {
       padding-bottom: 0px;
       height: max-content;
+      margin: auto;
+    }
+    @include is-mobile {
+      margin: auto;
+      padding-bottom: 0px;
+      height: max-content;
     }
     div {
       margin-top: 10%;
+      @include is-extra-small-mobile {
+        margin-top: 5%;
+      }
+      @include is-mobile {
+        margin-top: 5%;
+      }
     }
   }
   &__content {

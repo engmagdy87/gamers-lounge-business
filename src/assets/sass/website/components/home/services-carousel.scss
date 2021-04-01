@@ -183,10 +183,12 @@ $extra-mob-dim: $slide-height-mobile;
     @include is-extra-small-mobile {
       font-size: 1.2rem;
       margin-top: 80px;
+      z-index: 2000;
     }
     @include is-mobile {
       font-size: 1.2rem;
       margin-top: 80px;
+      z-index: 2000;
     }
     @include is-tablet {
       font-size: 1.7rem;
@@ -213,10 +215,12 @@ $extra-mob-dim: $slide-height-mobile;
       font-size: 0.9rem;
       height: 70%;
       overflow-y: scroll;
+      z-index: 2000;
     }
     @include is-mobile {
       padding-top: 10px;
       font-size: 1rem;
+      z-index: 2000;
     }
 
     @include is-tablet {
@@ -245,9 +249,13 @@ $extra-mob-dim: $slide-height-mobile;
     box-shadow: 0 0 3px $blue-stroke;
     @include is-extra-small-mobile {
       bottom: 15px;
+      z-index: 2000;
+      right: 10px;
     }
     @include is-mobile {
+      z-index: 2000;
       bottom: 15px;
+      right: 10px;
     }
   }
 }
@@ -328,11 +336,11 @@ $extra-mob-dim: $slide-height-mobile;
   width: 70%;
   z-index: 2000;
   @include is-extra-small-mobile {
-    left: 4%;
+    left: 0;
     width: 100%;
   }
   @include is-mobile {
-    left: 4%;
+    left: 0;
     width: 100%;
   }
   button {

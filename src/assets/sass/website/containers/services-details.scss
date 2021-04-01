@@ -42,12 +42,12 @@
       display: none;
     }
     @include is-mobile {
-      max-height: calc(100vh - #{$page-margin-mob});
-      padding: 0 calc(calc(100% - #{$modal-width-mob}) / 2);
+      max-height: calc(100vh - #{80px});
+      // padding: 0 calc(calc(100% - #{$modal-width-mob}) / 2);
     }
     @include is-extra-small-mobile {
-      max-height: calc(100vh - #{$page-margin-mob});
-      padding: 0 calc(calc(100% - #{$modal-width-mob}) / 2);
+      max-height: calc(100vh - #{80px});
+      // padding: 0 calc(calc(100% - #{$modal-width-mob}) / 2);
     }
     img {
       width: 80%;
