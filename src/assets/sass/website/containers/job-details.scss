@@ -15,12 +15,14 @@
   @include is-extra-small-mobile {
     overflow-y: auto;
     margin-top: 80px;
-    width: 80%;
+    width: 100%;
+    max-height: calc(100vh - 80px);
   }
   @include is-mobile {
     overflow-y: auto;
     margin-top: 80px;
-    width: 80%;
+    width: 100%;
+    max-height: calc(100vh - 80px);
   }
   &__container {
     width: 100%;

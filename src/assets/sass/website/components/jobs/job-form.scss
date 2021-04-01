@@ -164,8 +164,10 @@
     text-align: center !important;
     @include is-extra-small-mobile {
       bottom: 0;
+      width: fit-content !important;
     }
     @include is-mobile {
+      width: fit-content !important;
       bottom: 0;
     }
   }
@@ -210,18 +212,51 @@
   input[type="file"] {
     display: none;
   }
+  &__footer {
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    @include is-extra-small-mobile {
+      display: block;
+    }
+    @include is-mobile {
+      display: block;
+    }
+  }
   &__footer-left {
     width: 50%;
     height: max-content;
     text-align: left;
     margin-top: 10px;
+    @include is-extra-small-mobile {
+      width: 100%;
+      text-align: center;
+    }
+    @include is-mobile {
+      text-align: center;
+      width: 100%;
+    }
+    span {
+      @include is-extra-small-mobile {
+        width: 50px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
   }
   &__footer-right {
     width: 50%;
     height: max-content;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     margin-top: 10px;
+    @include is-extra-small-mobile {
+      width: 100%;
+    }
+    @include is-mobile {
+      width: 100%;
+    }
   }
 }
 .job-form-wrapper

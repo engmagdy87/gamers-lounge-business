@@ -97,9 +97,7 @@
             </div>
             <ErrorMessage :fieldErrors="errors.linkedin_link" />
           </div>
-          <div
-            class="form-group d-flex justify-content-start align-items-start"
-          >
+          <div class="form-group job-form-wrapper__footer">
             <div class="job-form-wrapper__footer-left">
               <input
                 type="file"
@@ -113,7 +111,9 @@
                 >Upload Resume</label
               >
 
-              <span class="ml-3">{{ applicantInfo.resumeFile.name }}</span>
+              <span class="ml-3" v-if="applicantInfo.resumeFile.name">{{
+                applicantInfo.resumeFile.name
+              }}</span>
               <ErrorMessage :fieldErrors="errors.resumeFile" />
             </div>
             <!-- <HalfClippedButton text="Submit" :onClickAction="applyToJob" /> -->

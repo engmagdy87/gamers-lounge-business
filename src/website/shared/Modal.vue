@@ -274,6 +274,13 @@ export default {
   font-size: 40px;
   font-weight: bold;
   transition: 0.3s;
+  display: none;
+  @include is-extra-small-mobile {
+    display: block;
+  }
+  @include is-mobile {
+    display: block;
+  }
 }
 
 .close:hover,
