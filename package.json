@@ -9,8 +9,7 @@
     "e2e": "node test/e2e/runner.js",
     "lint": "vue-cli-service lint",
     "dev": "vue-cli-service serve --open",
-    "lint-fix": "vue-cli-service lint --fix",
-    "postbuild": "rsync -a --delete dist/* ../../public_html/gamersloungeme.com"
+    "lint-fix": "vue-cli-service lint --fix"
   },
   "dependencies": {
     "axios": "^0.21.1",

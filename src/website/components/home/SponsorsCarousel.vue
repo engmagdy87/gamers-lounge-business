@@ -3,27 +3,34 @@
     <div class="sonsors-header">
       <h1 class="sonsors-header__title">OUR CLIENTS</h1>
     </div>
-    <HalfClippedShape>
-      <template #content>
-        <VueSlickCarousel v-bind="settings">
-          <div
-            class="sponsors-carousel-wrapper__slide"
-            v-for="(sponsor, index) in homePageSponsors"
-            :key="index"
-            @click="goToUrl(sponsor.link)"
-          >
-            <img :src="sponsor.image.url" :alt="sponsor.name" />
+    <div class="sponsors-carousel-wrapper__body">
+      <VueSlickCarousel v-bind="settings">
+        <template #prevArrow="">
+          <div class="custom-arrow">
+            <img src="../../../../public/images/prev.png" />
           </div>
-        </VueSlickCarousel>
-      </template>
-    </HalfClippedShape>
+        </template>
+        <div
+          class="sponsors-carousel-wrapper__slide"
+          v-for="(sponsor, index) in homePageSponsors"
+          :key="index"
+          @click="goToUrl(sponsor.link)"
+        >
+          <img :src="sponsor.image.url" :alt="sponsor.name" />
+        </div>
+        <template #nextArrow="">
+          <div class="custom-arrow">
+            <img src="../../../../public/images/next.png" />
+          </div>
+        </template>
+      </VueSlickCarousel>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import VueSlickCarousel from "vue-slick-carousel";
-import HalfClippedShape from "../../shared/HalfClippedShape";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 // optional style for arrows & dots
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
@@ -58,13 +65,13 @@ export default {
           {
             breakpoint: 600,
             settings: {
-              slidesToShow: 3
+              slidesToShow: 2
             }
           },
           {
             breakpoint: 400,
             settings: {
-              slidesToShow: 2
+              slidesToShow: 1
             }
           }
         ]
@@ -72,8 +79,7 @@ export default {
     };
   },
   components: {
-    VueSlickCarousel,
-    HalfClippedShape
+    VueSlickCarousel
   },
   computed: {
     ...mapState({
@@ -92,16 +98,27 @@ export default {
 @import "../../../assets/sass/website/components/home/sponsors-carousel.scss";
 .sonsors-header {
   text-align: center;
-  padding-bottom: 50px;
   &__title {
-    color: $header-item;
-    font-family: "Segoe UI Bold";
-    font-size: 2.6rem;
-    letter-spacing: 4px;
+    color: $black-text;
+    font-family: "Arial Bold" !important;
+    font-weight: bolder;
+    font-size: 2rem;
+    // letter-spacing: 4px;
+    margin-top: 0;
   }
 }
 
 .sponsors-carousel-wrapper > div.half-filled-box {
   padding: 20px 40px;
+}
+
+.custom-arrow {
+  display: block;
+  width: 50px;
+  height: 50px;
+  color: black;
+  &::before {
+    content: none;
+  }
 }
 </style>

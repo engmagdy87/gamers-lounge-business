@@ -1,5 +1,8 @@
 <template>
-  <div class="hero-wrapper" :style="{ backgroundImage: `url(${heroImage})` }">
+  <div
+    :class="page === 'home' ? 'hero-wrapper' : 'hero-wrapper-services'"
+    :style="{ backgroundImage: `url(${heroImage})` }"
+  >
     <slot name="hero-content"></slot>
   </div>
 </template>
@@ -10,6 +13,10 @@ export default {
     heroImage: {
       type: String,
       default: ""
+    },
+    page: {
+      type: String,
+      default: "home"
     }
   }
 };

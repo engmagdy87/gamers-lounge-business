@@ -1,64 +1,126 @@
 <template>
   <div class="job-main-content-wrapper" v-if="isJobsFetched">
+    <div
+      v-if="isSettingsDataFetched"
+      class="job-main-content-wrapper__bg"
+      :style="`background-image: url(${settings.img_services_cover.url};`"
+    ></div>
+    <Hero page="services">
+      <template #hero-content>
+        <div class="row d-block job-main-content-wrapper__title">
+          <h1>let's work together</h1>
+          <p>
+            If you're an Esports fan and think you have what it takes,<br />
+            we're always looking for fresh talents in Esports (Casters -
+            Analysts)
+          </p>
+        </div>
+      </template>
+    </Hero>
+
     <div class="job-main-content-wrapper__container row">
-      <div class="col-12 p-0 job-main-content-wrapper__title">
-        <h1>let's work together</h1>
-        <p>
-          We're always looking for fresh talents in eSports(Casters - Analysis -
-          Designers - Video Editors ) if you're an eSports fan and think you
-          have what it takes
-        </p>
-      </div>
-
-      <div class="job-main-content-wrapper__jobs row m-0">
+      <div class="job-main-content-wrapper__jobs row">
         <div
-          v-for="job in jobs"
+          v-for="(job, index) in jobs"
           :key="job.id"
-          class="job-main-content-wrapper__jobs__content col-xs-12 col-sm-12 col-md-6 col-lg-4"
+          class="job-main-content-wrapper__jobs__content col-12"
         >
-          <div class="job-main-content-wrapper__job-title col-12">
-            <p>{{ job.department.name }}</p>
-            <h3>{{ job.title }}</h3>
+          <div class="job-main-content-wrapper__job-title ">
+            <h3>{{ job.department.name }}</h3>
+            <p>{{ job.title }}</p>
           </div>
 
-          <div class="job-main-content-wrapper__details-btn col-12">
+          <button
+            class="job-main-content-wrapper__details-btn"
+            @click="
+              getSelectedJob(index, `/job/${job.id}-${reformatURL(job.title)}`)
+            "
+          >
             <router-link :to="`/job/${job.id}-${reformatURL(job.title)}`">
-              <HalfClippedOutlineButton text="View" />
+              <span @click="jobClicked">
+                View
+              </span>
             </router-link>
-          </div>
+          </button>
         </div>
       </div>
     </div>
+    <Modal
+      :showModal="showModal"
+      :setShowModal="setShowModal"
+      :navigateTo="navigateTo"
+      :isJobPage="true"
+      :currentRoute="currentRoute"
+      parentRoute="jobs"
+    />
   </div>
 </template>
 
 <script>
 import { mapActions, mapState, mapMutations } from "vuex";
 import types from "../../../store/types";
-import HalfClippedOutlineButton from "../../shared/HalfClippedOutlineButton";
+import Hero from "../../shared/Hero";
 import { reformatStringToBeInURL } from "../../../helpers/StringsHelper";
+import Modal from "../../shared/Modal";
 
 export default {
+  data() {
+    return {
+      showModal: false,
+      selectedJob: null,
+      currentRoute: ""
+    };
+  },
   computed: {
     ...mapState({
       jobs: state => state.jobs.jobs,
-      isJobsFetched: state => state.jobs.isJobsFetched
+      isJobsFetched: state => state.jobs.isJobsFetched,
+      settings: state => state.settings.servicesSettings,
+      isSettingsDataFetched: state =>
+        state.settings.isServicesSettingsDataFetched
     })
   },
   methods: {
     ...mapActions({
-      fetchJobs: types.jobs.actions.FETCH_JOBS
+      fetchJobs: types.jobs.actions.FETCH_JOBS,
+      fetchHomeCoverImageAndTexts: types.settings.actions.FETCH_SETTINGS
     }),
     ...mapMutations({
+      setIsJobFetched: types.jobs.mutations.SET_IS_JOB_FETCHED,
       setShowHeaderFlag: types.app.mutations.SET_SHOW_HEADER_FLAG,
       setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
     }),
     reformatURL(id) {
       return reformatStringToBeInURL(id);
+    },
+    getSelectedJob(id, route) {
+      this.selectedJob = id;
+      this.currentRoute = route;
+    },
+    navigateTo(dir) {
+      this.setIsJobFetched(false);
+      let job;
+      if (dir == "next")
+        this.selectedJob =
+          this.selectedJob === this.jobs.length - 1 ? 0 : this.selectedJob + 1;
+      else
+        this.selectedJob =
+          this.selectedJob === 0 ? this.jobs.length - 1 : this.selectedJob - 1;
+
+      job = this.jobs[this.selectedJob];
+
+      this.$router.replace(`/job/${job.id}-${this.reformatURL(job.title)}`);
+    },
+    setShowModal(flag) {
+      this.showModal = flag;
+    },
+    jobClicked() {
+      this.setShowModal(true);
     }
   },
   components: {
-    HalfClippedOutlineButton
+    Hero,
+    Modal
   },
   mounted() {
     const payload = { isEnabled: true, requestSource: "website" };
@@ -67,6 +129,11 @@ export default {
       this.setShowHeaderFlag(true);
       this.setShowFooterFlag(true);
     }
+    const flags = {
+      isServiceTexts: true,
+      isService: true
+    };
+    if (!this.isSettingsDataFetched) this.fetchHomeCoverImageAndTexts(flags);
   }
 };
 </script>

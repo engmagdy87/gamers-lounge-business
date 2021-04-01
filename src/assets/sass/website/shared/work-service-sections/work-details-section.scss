@@ -7,15 +7,24 @@
   width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: $dark-background;
+  background: $primary;
 }
 ::-webkit-scrollbar-thumb {
   background-color: $accent;
 }
 .work-details-sections {
+  &__wrapper {
+    border-radius: 6px;
+    background-color: $section-color;
+    padding: 30px;
+    @include is-extra-small-mobile {
+      padding: 10px;
+    }
+    @include is-mobile {
+      padding: 10px;
+    }
+  }
   &__container {
-    background-color: $dark-background;
-    padding: 0 110px 0 110px;
     @include is-extra-small-mobile {
       padding: 0 20px 0 20px;
     }
@@ -31,12 +40,13 @@
   }
   &__title {
     position: relative;
-    color: $accent;
-    font-family: "Segoe UI Bold";
+    color: white;
+    font-family: Arial;
+    font-weight: bold;
     text-align: left;
     font-size: 2.3rem;
     height: 65px;
-    margin-bottom: 35px;
+    // margin-bottom: 35px;
     @include is-extra-small-mobile {
       font-size: 1.1rem;
     }
@@ -49,38 +59,39 @@
     @include is-desktop {
       font-size: 2rem;
     }
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      top: 60px;
-      left: 0px;
-      height: 5px;
-      width: 220px;
-      background: $accent;
-      transition: all 0.5s ease-in-out;
-      @include is-extra-small-mobile {
-        top: 40px;
-        width: 150px;
-      }
-      @include is-mobile {
-        top: 50px;
-        width: 180px;
-      }
-      @include is-tablet {
-        top: 50px;
-        width: 200px;
-      }
-      @include is-desktop {
-        top: 50px;
-        width: 150px;
-      }
-    }
+    // &::after {
+    //   content: "";
+    //   position: absolute;
+    //   bottom: 0;
+    //   top: 60px;
+    //   left: 0px;
+    //   height: 5px;
+    //   width: 220px;
+    //   background: $accent;
+    //   transition: all 0.5s ease-in-out;
+    //   @include is-extra-small-mobile {
+    //     top: 40px;
+    //     width: 150px;
+    //   }
+    //   @include is-mobile {
+    //     top: 50px;
+    //     width: 180px;
+    //   }
+    //   @include is-tablet {
+    //     top: 50px;
+    //     width: 200px;
+    //   }
+    //   @include is-desktop {
+    //     top: 50px;
+    //     width: 150px;
+    //   }
+    // }
   }
   &__title-normal {
     position: relative;
     color: $accent;
-    font-family: "Segoe UI Bold";
+    font-family: Arial;
+    font-weight: bold;
     text-align: center;
     font-size: 2.3rem;
     height: 65px;
@@ -100,6 +111,7 @@
   }
   &__video {
     height: 100%;
+    margin: 0 8px;
     video {
       height: 100%;
       object-fit: cover;
@@ -110,6 +122,10 @@
     iframe {
       min-height: 300px;
     }
+  }
+  &__image {
+    border: 2px solid white;
+    margin: 10px;
   }
   &__slider {
     display: flex;
@@ -122,7 +138,7 @@
     max-height: $template-height/1.25;
     overflow-y: auto;
     line-height: 40px;
-    padding: 20px 20px 0 20px;
+    // padding: 20px 20px 0 20px;
     @include is-extra-small-mobile {
       font-size: 0.8rem;
       max-height: $template-height/2;

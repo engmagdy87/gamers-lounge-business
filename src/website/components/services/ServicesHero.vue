@@ -1,6 +1,6 @@
 <template>
   <div v-if="isSettingsDataFetched">
-    <Hero :heroImage="settings.img_services_cover.url">
+    <Hero page="services">
       <template #hero-content>
         <div
           class="row align-items-end h-100 justify-content-center services-container"
@@ -9,7 +9,7 @@
             <template #content>
               <div class="services-container__heroContent">
                 <h1>{{ settings.services_title }}</h1>
-                <p v-html="settings.services_description"></p>
+                <div v-html="settings.services_description"></div>
               </div>
             </template>
           </HalfClippedShape>

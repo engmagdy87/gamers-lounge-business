@@ -6,6 +6,24 @@
   width: 80%;
   margin: auto;
   color: $header-item;
+  background-color: $primary;
+  @include is-extra-small-mobile {
+    width: 100%;
+  }
+  @include is-mobile {
+    width: 100%;
+  }
+  &__section {
+    // padding: 2% 0 0;
+    // &:last-child {
+    //   padding: 2% 0 2%;
+    // }
+  }
+}
+.service-details-sections {
+  width: 96%;
+  margin: auto;
+  color: $header-item;
   @include is-extra-small-mobile {
     width: 90%;
   }
@@ -13,6 +31,9 @@
     width: 90%;
   }
   &__section {
-    margin: 20px 0 60px 0;
+    padding: 2% 0 0;
+    &:last-child {
+      padding: 2% 0 2%;
+    }
   }
 }

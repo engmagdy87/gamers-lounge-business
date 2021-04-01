@@ -97,29 +97,36 @@
             </div>
             <ErrorMessage :fieldErrors="errors.linkedin_link" />
           </div>
-          <div
-            class="form-group d-flex justify-content-start align-items-center"
-          >
-            <input
-              type="file"
-              id="resume"
-              accept=".pdf,.doc,.docx"
-              ref="resumeFile"
-              @change="e => setFile(e, 'resumeFile')"
-            />
-            <HalfClippedOutlinedShape>
-              <template #content>
-                <label
-                  class="job-form-wrapper__input-file-outline-mask"
-                  for="resume"
-                  >Upload Resume</label
-                >
-              </template>
-            </HalfClippedOutlinedShape>
-            <span class="ml-3">{{ applicantInfo.resumeFile.name }}</span>
+          <div class="form-group job-form-wrapper__footer">
+            <div class="job-form-wrapper__footer-left">
+              <input
+                type="file"
+                id="resume"
+                accept=".pdf,.doc,.docx"
+                ref="resumeFile"
+                @change="e => setFile(e, 'resumeFile')"
+              />
+
+              <label class="job-form-wrapper__upload-btn" for="resume"
+                >Upload Resume</label
+              >
+
+              <span class="ml-3" v-if="applicantInfo.resumeFile.name">{{
+                applicantInfo.resumeFile.name
+              }}</span>
+              <ErrorMessage :fieldErrors="errors.resumeFile" />
+            </div>
+            <!-- <HalfClippedButton text="Submit" :onClickAction="applyToJob" /> -->
+            <div class="job-form-wrapper__footer-right">
+              <div
+                role="button"
+                class="job-form-wrapper__submit-btn"
+                @click="applyToJob"
+              >
+                SUBMIT
+              </div>
+            </div>
           </div>
-          <ErrorMessage :fieldErrors="errors.resumeFile" />
-          <HalfClippedButton text="Submit" :onClickAction="applyToJob" />
         </form>
       </template>
     </HalfClippedShape>
@@ -130,9 +137,7 @@
 import { mapActions } from "vuex";
 import types from "../../../store/types";
 import HalfClippedShape from "../../shared/HalfClippedShape";
-import HalfClippedOutlinedShape from "../../shared/HalfClippedOutlinedShape";
 import ErrorMessage from "../../shared/ErrorMessage";
-import HalfClippedButton from "../../shared/HalfClippedButton";
 import countryCodes from "../../../assets/json/CountryCodes.json";
 import isValidationErrorExist from "../../../helpers/FormValidation";
 import isWebsiteValid from "../../../helpers/JobWebsitesValidation";
@@ -180,8 +185,6 @@ export default {
   },
   components: {
     HalfClippedShape,
-    HalfClippedButton,
-    HalfClippedOutlinedShape,
     ErrorMessage
   },
   computed: {

@@ -1,93 +1,89 @@
 <template>
   <div class="footer-section" v-if="isContactFetched">
     <div class="footer-section__container">
-      <div class="row justify-content-center">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 footer-leftside">
+      <div class="row d-flex">
+        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8 footer-leftside">
           <router-link to="/"
-            ><img
-              src="../../../public/images/GL-logo.png"
-              style="max-width: 200px;"
-            />
+            ><img src="../../../public/images/GL-logo.png" />
           </router-link>
-          <br /><br />
-          <!-- <p>
-            The first official Esports organization in Egypt, founded by <br />
-            experienced Gamers to develop Esports in Middle-East & North Africa.
-          </p> -->
-          <br />
-          <p>
-            <img src="../../../public/images/pin-white.svg" />
-            {{ contact.information.address }}
-          </p>
-          <p v-if="contact.information.phone !== ''">
-            <img src="../../../public/images/phone-white.svg" />
-            {{ contact.information.phone }}
-          </p>
-          <p>
-            <img src="../../../public/images/mail-white.svg" />
-            <a :href="`mailto:${contact.information.email}`">{{
-              contact.information.email
-            }}</a>
-          </p>
+          <div>
+            <p>
+              <img src="../../../public/images/pin-white.svg" />
+              {{ contact.information.address }}
+            </p>
+            <p v-if="contact.information.phone !== ''">
+              <img src="../../../public/images/phone-white.svg" />
+              {{ contact.information.phone }}
+            </p>
+            <p>
+              <img src="../../../public/images/mail-white.svg" />
+              <a :href="`mailto:${contact.information.email}`">{{
+                contact.information.email
+              }}</a>
+            </p>
+          </div>
         </div>
 
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6 footer-social-media">
-          <h5 class="footer-followus">Follow Us</h5>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 footer-social-media">
+          <div class="footer-social-media__content">
+            <h5 class="footer-followus">Follow Us</h5>
 
-          <div class="social-media row">
-            <div
-              class="social-logos-container"
-              @click="goToLink(contact.information.facebook_link)"
-              v-if="
-                contact.img_facebook && contact.information.facebook_link !== ''
-              "
-            >
-              <img
-                class="fb-logo"
-                :src="contact.img_facebook.url"
-                alt="facebook"
-              />
-            </div>
+            <div class="social-media row">
+              <div
+                class="social-logos-container"
+                @click="goToLink(contact.information.facebook_link)"
+                v-if="
+                  contact.img_facebook &&
+                    contact.information.facebook_link !== ''
+                "
+              >
+                <img
+                  class="fb-logo"
+                  :src="contact.img_facebook.url"
+                  alt="facebook"
+                />
+              </div>
 
-            <div
-              class="social-logos-container"
-              @click="goToLink(contact.information.instagram_link)"
-              v-if="
-                contact.img_instagram &&
-                  contact.information.instagram_link !== ''
-              "
-            >
-              <img :src="contact.img_instagram.url" alt="instagram" />
-            </div>
+              <div
+                class="social-logos-container"
+                @click="goToLink(contact.information.instagram_link)"
+                v-if="
+                  contact.img_instagram &&
+                    contact.information.instagram_link !== ''
+                "
+              >
+                <img :src="contact.img_instagram.url" alt="instagram" />
+              </div>
 
-            <div
-              class="social-logos-container"
-              @click="goToLink(contact.information.twitter_link)"
-              v-if="
-                contact.img_twitter && contact.information.twitter_link !== ''
-              "
-            >
-              <img :src="contact.img_twitter.url" alt="twitter" />
-            </div>
+              <div
+                class="social-logos-container"
+                @click="goToLink(contact.information.twitter_link)"
+                v-if="
+                  contact.img_twitter && contact.information.twitter_link !== ''
+                "
+              >
+                <img :src="contact.img_twitter.url" alt="twitter" />
+              </div>
 
-            <div
-              class="social-logos-container"
-              @click="goToLink(contact.information.youtube_link)"
-              v-if="
-                contact.img_youtube && contact.information.youtube_link !== ''
-              "
-            >
-              <img :src="contact.img_youtube.url" alt="youtube" />
-            </div>
+              <div
+                class="social-logos-container"
+                @click="goToLink(contact.information.youtube_link)"
+                v-if="
+                  contact.img_youtube && contact.information.youtube_link !== ''
+                "
+              >
+                <img :src="contact.img_youtube.url" alt="youtube" />
+              </div>
 
-            <div
-              class="social-logos-container"
-              @click="goToLink(contact.information.twitch_link)"
-              v-if="
-                contact.img_twitch && contact.information.twitch_link !== ''
-              "
-            >
-              <img :src="contact.img_twitch.url" alt="twitch" />
+              <div
+                class="social-logos-container"
+                @click="goToLink(contact.information.twitch_link)"
+                v-if="
+                  contact.img_twitch && contact.information.twitch_link !== ''
+                "
+              >
+                <img :src="contact.img_twitch.url" alt="twitch" />
+              </div>
             </div>
           </div>
         </div>
@@ -120,18 +116,18 @@
     <div class="row copyrights m-0 p-0">
       <h5>
         Copyright © {{ new Date().getFullYear() }}
-        <a href="/"> Gamers lounge </a> For Esports E.S.C All Rights Reserved
+        <a href="/"> Gamers Lounge </a> For Esports E.S.C All Rights Reserved
       </h5>
     </div>
 
-    <a href="#top">
+    <!-- <a href="#top">
       <div class="scroll-top-wrapper">
         <div>
           <img src="../../../public/images/top-arrow.svg" alt="up arrow" />
           <img src="../../../public/images/top-arrow.svg" alt="up arrow" />
         </div>
       </div>
-    </a>
+    </a> -->
   </div>
 </template>
 

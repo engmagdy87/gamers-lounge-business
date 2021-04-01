@@ -5,7 +5,9 @@
 @import "../../shared/half-clipped-outline-shape.scss";
 
 .job-form-wrapper {
+  margin-top: 60px;
   form {
+    // background-color: #102e2e;
     @include is-extra-small-mobile {
       padding: 10px;
     }
@@ -22,77 +24,159 @@
       padding: 30px;
     }
     @include is-extra-large-desktop {
-      padding: 50px;
+      padding: 10px 30px;
     }
     .form-group {
       position: relative;
-      margin-bottom: 30px;
+      margin-bottom: 5px;
+      margin-top: 10px;
       label {
-        background-color: $form-background;
-        position: absolute;
-        top: -10px;
-        left: 50px;
+        background-color: transparent;
+        // position: absolute;
+        // top: -25px;
+        // left: 20px;
         z-index: 1;
+        text-align: left;
         color: white;
+        width: 100%;
+        // margin-left: 20px;
       }
       &__short-label {
         width: 60px;
+        margin-bottom: 0;
       }
       &__mid-label {
         width: 80px;
+        margin-bottom: 0;
       }
       &__long-label {
         width: 120px;
+        margin-bottom: 0;
       }
     }
   }
-  &__input-outline-mask,
-  &__input-outline-mask input,
-  &__input-outline-mask select {
-    $extra-small-mobile: (
-      clipped-shape-width: 50%,
-      clipped-shape-height: 7%,
-      clipped-length: 3.5%
-    );
-    $mobile: (
-      clipped-shape-width: 90%,
-      clipped-shape-height: 7%,
-      clipped-length: 3.5%
-    );
-    $tablet: (
-      clipped-shape-width: 90%,
-      clipped-shape-height: 7%,
-      clipped-length: 3.5%
-    );
-    $desktop: (
-      clipped-shape-width: 80%,
-      clipped-shape-height: 7%,
-      clipped-length: 3.5%
-    );
-    $large-desktop: (
-      clipped-shape-width: 90%,
-      clipped-shape-height: 8%,
-      clipped-length: 4%
-    );
-    $extra-large-desktop: (
-      clipped-shape-width: 100%,
-      clipped-shape-height: 8%,
-      clipped-length: 4%
-    );
-    @include set-half-clipped-shape-for-input(
-      $extra-small-mobile,
-      $mobile,
-      $tablet,
-      $desktop,
-      $large-desktop,
-      $extra-large-desktop
-    );
+  // &__input-outline-mask,
+  // &__input-outline-mask input,
+  // &__input-outline-mask select {
+  //   $extra-small-mobile: (
+  //     clipped-shape-width: 50%,
+  //     clipped-shape-height: 7%,
+  //     clipped-length: 3.5%
+  //   );
+  //   $mobile: (
+  //     clipped-shape-width: 90%,
+  //     clipped-shape-height: 7%,
+  //     clipped-length: 3.5%
+  //   );
+  //   $tablet: (
+  //     clipped-shape-width: 90%,
+  //     clipped-shape-height: 7%,
+  //     clipped-length: 3.5%
+  //   );
+  //   $desktop: (
+  //     clipped-shape-width: 80%,
+  //     clipped-shape-height: 7%,
+  //     clipped-length: 3.5%
+  //   );
+  //   $large-desktop: (
+  //     clipped-shape-width: 90%,
+  //     clipped-shape-height: 8%,
+  //     clipped-length: 4%
+  //   );
+  //   $extra-large-desktop: (
+  //     clipped-shape-width: 100%,
+  //     clipped-shape-height: 8%,
+  //     clipped-length: 4%
+  //   );
+  //   @include set-half-clipped-shape-for-input(
+  //     $extra-small-mobile,
+  //     $mobile,
+  //     $tablet,
+  //     $desktop,
+  //     $large-desktop,
+  //     $extra-large-desktop
+  //   );
+  // }
+  &__submit-btn {
+    width: 100px;
+    height: max-content;
+    text-align: center;
+    // height: 50px;
+    // max-width: 30% !important;
+    // display: flex;
+    // justify-content: flex-end;
+    // align-items: flex-end;
+    // margin-bottom: 10px;
+    // position: absolute;
+    // top: 0;
+    // right: 35px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    z-index: 100;
+    color: black !important;
+    background-color: $white-text;
+    border-radius: 5px;
+    border: 1px $blue-stroke solid;
+    outline: none;
+    padding: 7px 12px;
+    box-shadow: 0 0 3px $blue-stroke;
+    a {
+      color: $black-text;
+      width: 100%;
+      height: 100%;
+      span {
+        padding: 5px 12px;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    @include is-extra-small-mobile {
+      bottom: 0;
+    }
+    @include is-mobile {
+      bottom: 0;
+    }
+  }
+  &__upload-btn {
+    width: 70% !important;
+    height: max-content;
+    text-align: center;
+    margin-left: 0 !important;
+    // height: 50px;
+    // max-width: 30% !important;
+    // display: flex;
+    // justify-content: flex-end;
+    // align-items: flex-end;
+    // margin-bottom: 10px;
+    background: white !important;
+    color: black !important;
+    // position: absolute;
+    // bottom: 15px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    z-index: 100;
+    background-color: $white-text;
+    border-radius: 5px;
+    border: 1px $blue-stroke solid;
+    outline: none;
+    padding: 7px 12px;
+    box-shadow: 0 0 3px $blue-stroke;
+    text-align: center !important;
+    @include is-extra-small-mobile {
+      bottom: 0;
+      width: fit-content !important;
+    }
+    @include is-mobile {
+      width: fit-content !important;
+      bottom: 0;
+    }
   }
   &__input-outline-mask {
     position: relative;
-    background-color: $light-white;
+    background-color: transparent;
     width: 100%;
     height: $input-form-height;
+    border-radius: 5px;
 
     input,
     select {
@@ -102,7 +186,7 @@
       border-radius: 0;
       width: calc(100% - 2px);
       height: $input-form-height - 2px;
-      background-color: $form-background;
+      background-color: #0b191c;
       border: transparent;
       color: white;
       padding: 8px 20px;
@@ -111,17 +195,68 @@
       appearance: none;
     }
   }
+  &__custom-select {
+    .form-control {
+      padding: 0px 20px;
+    }
+  }
   &__custom-select::after {
     content: "\f078";
     font: normal normal normal 17px/1 FontAwesome;
     color: $header-item;
     right: 10px;
-    padding: 15px 15px 0px 8px;
+    padding: 5px 10px 0px 8px;
     position: absolute;
     pointer-events: none;
   }
   input[type="file"] {
     display: none;
+  }
+  &__footer {
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    @include is-extra-small-mobile {
+      display: block;
+    }
+    @include is-mobile {
+      display: block;
+    }
+  }
+  &__footer-left {
+    width: 50%;
+    height: max-content;
+    text-align: left;
+    margin-top: 10px;
+    @include is-extra-small-mobile {
+      width: 100%;
+      text-align: center;
+    }
+    @include is-mobile {
+      text-align: center;
+      width: 100%;
+    }
+    span {
+      @include is-extra-small-mobile {
+        width: 50px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  &__footer-right {
+    width: 50%;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    @include is-extra-small-mobile {
+      width: 100%;
+    }
+    @include is-mobile {
+      width: 100%;
+    }
   }
 }
 .job-form-wrapper
@@ -168,7 +303,9 @@ $widths-and-heights: (
 div /deep/ {
   @include filled-half-clipped-shape(
     $widths-and-heights,
-    rgba($form-background, 0.9)
+    #102e2e,
+    transparent,
+    6px
   );
 }
 

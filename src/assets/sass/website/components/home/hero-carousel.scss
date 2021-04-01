@@ -73,14 +73,15 @@
     }
   }
   &__title {
-    font-family: "Segoe UI Bold";
+    font-family: Arial;
+    font-weight: bold;
     position: absolute;
     width: 100%;
     text-align: left;
     margin: auto;
     padding-top: 30px;
     padding-left: 30px;
-    font-size: 3rem;
+    font-size: 2.5rem;
     @include is-extra-small-mobile {
       font-size: 1.3rem;
       padding-top: 0px;

@@ -1,6 +1,6 @@
 /*           Font Smoothing      */
 body {
-  font-family: "Segoe UI";
+  font-family: Arial;
 }
 body,
 h1,
@@ -39,6 +39,7 @@ h4,
 .h4 {
   font-weight: $font-weight-light;
   margin: $margin-large-vertical 0 $margin-base-vertical;
+  font-family: Arial !important;
 }
 
 h1,
@@ -69,21 +70,25 @@ h6,
   font-size: $font-size-h6;
   font-weight: $font-weight-bold;
   text-transform: uppercase;
+  font-family: Arial !important;
 }
 
 .description > p > * {
   color: black !important;
   background-color: transparent !important;
+  font-family: Arial !important;
 }
 
 .description > span {
   font-size: 1rem !important;
   color: black !important;
+  font-family: Arial !important;
 }
 
 .description > span > * > * {
   color: black !important;
   background-color: transparent !important;
+  font-family: Arial !important;
 }
 .description > h1 > span > p > *,
 .description > h2 > span > p > *,
@@ -99,24 +104,30 @@ h6,
 .description > h6 {
   color: black !important;
   background-color: transparent !important;
+  font-family: Arial !important;
 }
 
 .event-tab-wrapper__details__description {
+  font-family: Arial !important;
   span > * {
     font-size: 1rem !important;
+    font-family: Arial !important;
   }
   span {
     font-size: 1rem !important;
+    font-family: Arial !important;
   }
   span > a {
     color: #598cc2 !important;
     text-decoration: underline;
+    font-family: Arial !important;
   }
 }
 
 p {
   font-size: $font-paragraph;
   line-height: $line-height-general;
+  font-family: Arial !important;
 }
 p > *,
 p > div,
@@ -124,8 +135,10 @@ p > div > span {
   color: white !important;
   background-color: transparent !important;
   word-break: break-word;
+  font-family: Arial !important;
 }
 .multiselect__option.multiselect__option--highlight {
+  font-family: Arial !important;
   color: black;
   &:hover {
     background: gray !important;
@@ -133,6 +146,7 @@ p > div > span {
   }
 }
 .multiselect__option {
+  font-family: Arial !important;
   color: black;
   &:hover {
     background: gray !important;
@@ -142,37 +156,50 @@ p > div > span {
 .multiselect__option--selected.multiselect__option--highlight {
   background: gray !important;
   color: white !important;
+  font-family: Arial !important;
 }
 .multiselect.multiselect--active {
   background-color: cadetblue !important;
+  font-family: Arial !important;
 }
 .multiselect__tag {
   background-color: gray !important;
+  font-family: Arial !important;
 }
 .multiselect__tag-icon:after {
   color: white !important;
+  font-family: Arial !important;
 }
 span {
   background-color: transparent !important;
+  font-family: Arial !important;
 }
 
 .description-container {
   word-break: break-word;
   overflow: hidden;
+  font-family: Arial !important;
   div {
-    color: white !important;
     word-break: break-word;
+    color: white !important;
+    font-family: Arial !important;
     span {
       white-space: normal !important;
+      font-family: Arial !important;
+    }
+    font {
+      color: white !important;
     }
   }
   span {
     color: white !important;
     word-break: break-word;
+    font-family: Arial !important;
   }
   span > * {
     color: white !important;
     word-break: break-word;
+    font-family: Arial !important;
   }
   h1 > a,
   h2 > a,
@@ -185,11 +212,66 @@ span {
     color: #598cc2 !important;
     word-break: break-word;
     text-decoration: underline;
+    font-family: Arial !important;
   }
   p {
     @media (max-width: 767px) {
       flex-flow: wrap-reverse !important;
       display: flex !important;
+      font-family: Arial !important;
+    }
+  }
+  &--expand {
+    height: 100%;
+  }
+  &--limit {
+    height: 200px;
+  }
+}
+.description-container-job {
+  word-break: break-word;
+  overflow: hidden;
+  font-family: Arial !important;
+  div {
+    color: rgb(21, 26, 32) !important;
+    line-height: 20px;
+    word-break: break-word;
+    font-family: Arial !important;
+    span {
+      white-space: normal !important;
+      font-family: Arial !important;
+    }
+  }
+  span {
+    color: rgb(21, 26, 32) !important;
+    word-break: break-word;
+    line-height: 20px;
+    font-family: Arial !important;
+  }
+  span > * {
+    color: rgb(21, 26, 32) !important;
+    word-break: break-word;
+    line-height: 20px;
+    font-family: Arial !important;
+  }
+  h1 > a,
+  h2 > a,
+  h3 > a,
+  h4 > a,
+  h5 > a,
+  h6 > a,
+  p > a,
+  span > a {
+    color: #598cc2 !important;
+    word-break: break-word;
+    text-decoration: underline;
+    font-family: Arial !important;
+  }
+  p {
+    @media (max-width: 767px) {
+      flex-flow: wrap-reverse !important;
+      display: flex !important;
+      font-family: Arial !important;
     }
   }
   &--expand {
@@ -204,19 +286,23 @@ span {
 .pell-content > p > *,
 .pell-content > span > *,
 .pell-content > div > * {
-  font-family: "Segoe UI" !important;
+  font-family: Arial !important;
+  font-family: Arial !important;
 }
 .pell-content > p > * {
   color: black !important;
+  font-family: Arial !important;
 }
 .pell-content span {
   color: black !important;
+  font-family: Arial !important;
 }
 
 .pell-content {
   border: 1px solid #e3e3e3;
   border-radius: 4px;
   background: white;
+  font-family: Arial !important;
   &--is-invalid {
     border: 1px solid red !important;
   }
@@ -225,6 +311,7 @@ span {
 .vp-editor.about-dashboard {
   .pell-content {
     height: 150px !important;
+    font-family: Arial !important;
   }
 }
 
@@ -296,7 +383,9 @@ h1 .subtitle {
 }
 
 .work-page-wrapper__text {
+  font-family: Arial !important;
   h2 span {
     color: white !important;
+    font-family: Arial !important;
   }
 }

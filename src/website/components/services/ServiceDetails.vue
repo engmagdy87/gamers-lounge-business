@@ -1,7 +1,7 @@
 <template>
-  <div class="work-details-sections" v-if="isWebsiteServiceFetched">
+  <div class="service-details-sections" v-if="isWebsiteServiceFetched">
     <div
-      class="work-details-sections__section"
+      class="service-details-sections__section"
       v-for="section in websiteService.sections.data"
       :key="section.id"
     >

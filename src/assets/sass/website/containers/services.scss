@@ -12,7 +12,7 @@
   width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: $dark-background;
+  background: $primary;
 }
 ::-webkit-scrollbar-thumb {
   background-color: $accent;
@@ -57,14 +57,19 @@
       width: 80%;
       height: 100%;
       margin: auto;
-      text-align: left;
+      text-align: center;
       overflow: hidden;
-      // overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       h1 {
+        width: 100%;
         color: $header-item;
         user-select: none;
         font-size: 2.5rem;
-        font-family: "Segoe UI Bold";
+        font-family: "Arial Bold" !important;
+        text-transform: uppercase;
         @include max-width-1650 {
           font-size: 2rem;
         }
@@ -75,7 +80,8 @@
           font-size: 1.5rem;
         }
       }
-      p {
+      div {
+        width: 100%;
         color: $sub-text;
         user-select: none;
         font-size: 1.1rem;
@@ -129,5 +135,10 @@ $widths-and-heights: (
 
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
-  @include filled-half-clipped-shape($widths-and-heights, rgba($primary, 0.95));
+  @include filled-half-clipped-shape(
+    $widths-and-heights,
+    transparent,
+    transparent,
+    11px
+  );
 }

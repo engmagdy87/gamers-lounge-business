@@ -149,7 +149,7 @@ $bs-datetimepicker-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !default;
     .timepicker-hour, .timepicker-minute, .timepicker-second {
         width: 56px;
         height: 56px;
-        font-weight: $font-weight-light;
+    font-weight: $font-weight-light;
         font-size: $font-size-h4;
         margin: 3px;
         border-radius: 50%;
@@ -295,7 +295,7 @@ $bs-datetimepicker-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !default;
                 font-size: $font-size-small;
                 text-transform: uppercase;
                 color: $dark-gray;
-                font-weight: $font-weight-normal;
+            font-weight: $font-weight-normal;
                 padding-bottom: 5px;
                 padding-top: $padding-default-vertical;
             }

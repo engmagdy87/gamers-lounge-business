@@ -448,12 +448,12 @@ export default {
     },
     setVideoValidation(e) {
       if (e.target.checked) {
-        if (this.aboutColumn.type === WORK_COLUMNS_CONTENT_TYPES.VIDEO) {
+        if (this.aboutColumn.type === ABOUT_COLUMNS_CONTENT_TYPES.VIDEO) {
           this.validation["video external"].isRequired = true;
           this.validation["videos content"].isRequired = false;
         }
       } else {
-        if (this.aboutColumn.type === WORK_COLUMNS_CONTENT_TYPES.VIDEO) {
+        if (this.aboutColumn.type === ABOUT_COLUMNS_CONTENT_TYPES.VIDEO) {
           this.validation["video external"].isRequired = false;
           this.validation["videos content"].isRequired = true;
         }
@@ -482,8 +482,7 @@ export default {
           key = "images content";
           break;
         case ABOUT_COLUMNS_CONTENT_TYPES.VIDEO:
-          if (this.serviceColumn.is_vid_extenral_enabled)
-            key = "video external";
+          if (this.aboutColumn.is_vid_extenral_enabled) key = "video external";
           else key = "videos content";
           break;
 
@@ -654,8 +653,8 @@ export default {
       this.aboutColumn.type = this.editData.type;
       this.aboutColumn.ratio = this.editData.ratio;
       this.aboutColumn.fillable = this.editData.fillable;
-      this.serviceColumn.is_vid_extenral_enabled = this.editData.is_vid_extenral_enabled;
-      this.serviceColumn.vid_extenral = this.editData.vid_extenral || "";
+      this.aboutColumn.is_vid_extenral_enabled = this.editData.is_vid_extenral_enabled;
+      this.aboutColumn.vid_extenral = this.editData.vid_extenral || "";
       this.aboutColumn.isAutoPlay = this.editData.vid_content[0]
         ? this.editData.vid_content[0].is_auto_play
         : false;

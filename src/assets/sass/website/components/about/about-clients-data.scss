@@ -2,44 +2,37 @@
 @import "../../variables.scss";
 @import "../../mixins.scss";
 
-.image-holder{
-    display: flex;
-    justify-content:center;
-    :last-child{
-      display: none;
-    }
+.image-holder {
+  display: flex;
+  justify-content: center;
+  :last-child {
+    display: none;
+  }
 
-    &__image{
+  &__image {
     object-fit: contain;
-    padding: 30px;
-    width: 65%;
-    margin: auto;
+    width: 56%;
+    max-height: 80px;
+    margin: 10% 22%;
     cursor: pointer;
-        @include is-large-desktop {
-            width: 70%;
-        }
-        @include is-desktop {
-            width: 80%;
-        }
-        @include is-tablet {
-            width: 90%;
-        }
-        @include is-mobile {
-            width: 90%;
-            padding: 15px;
-        }
-        @include is-extra-small-mobile{
-            width: 80%;
-            padding: 10px;
-        }
+    @include is-mobile {
+      margin: 10% 20%;
     }
-    .bottomgrid{
-    margin-top: 0;
-    margin-bottom: -50px;
+    @include is-extra-small-mobile {
+      margin: 10% 20%;
     }
-    &__rightline, &__leftline{
-    width: .01rem;
-    background-color: rgba($light-gray, .2);
-    margin-top: -50px;
-    }
+  }
+  .hide-border {
+    // margin-top: 0;
+    // margin-bottom: -50px;
+    background-color: transparent !important;
+  }
+  &__rightline,
+  &__leftline {
+    width: 2px;
+    height: 60%;
+    margin: auto 0;
+    background-color: white;
+    // margin-top: -50px;
+  }
 }

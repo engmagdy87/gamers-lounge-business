@@ -1,10 +1,14 @@
 <template>
   <div class="contact-wrapper" v-if="isContactFetched">
-    <Hero :heroImage="contact.img_cover.url">
+    <div
+      class="contact-wrapper__bg"
+      :style="`background-image: url(${contact.img_cover.url};`"
+    ></div>
+    <Hero page="services">
       <template #hero-content>
         <div class="row align-items-end contact-wrapper__contact-box">
           <div
-            class="col-12 col-md-4 d-flex justify-content-center justify-content-md-end mt-2 mb-sm-3 mb-1"
+            class="col-12 col-md-4 d-flex justify-content-center justify-content-md-end mb-sm-3 mb-1"
             v-if="contact.information.phone !== ''"
           >
             <ContactDataBox
@@ -48,18 +52,20 @@
         </div>
       </template>
     </Hero>
-    <FormContainer />
-    <iframe
-      v-if="contact.map !== ''"
-      :src="contact.map"
-      width="100%"
-      height="600"
-      frameborder="0"
-      style="border:0;"
-      allowfullscreen=""
-      aria-hidden="false"
-      tabindex="0"
-    ></iframe>
+    <div class="contact-wrapper__content">
+      <FormContainer />
+      <iframe
+        v-if="contact.map !== ''"
+        :src="contact.map"
+        width="100%"
+        height="600"
+        frameborder="0"
+        style="border:0;"
+        allowfullscreen=""
+        aria-hidden="false"
+        tabindex="0"
+      ></iframe>
+    </div>
   </div>
 </template>
 

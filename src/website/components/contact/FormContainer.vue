@@ -1,6 +1,6 @@
 <template>
   <div class="form-container-wrapper">
-    <h2>DON'T HESITATE TO ASK QUESTION</h2>
+    <h2>HAVE SOME QUESTIONS?</h2>
     <p>
       We are always ready to help and answer all your questions or accept your
       suggestions and feedback

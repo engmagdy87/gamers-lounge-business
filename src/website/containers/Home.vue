@@ -1,25 +1,32 @@
 <template>
   <div class="home-wrapper" v-if="isHomePageServicesFetched">
-    <Hero :heroImage="settings.img_home_cover.url" v-if="isSettingsDataFetched">
+    <div
+      class="home-wrapper__bg"
+      :style="`background-image: url(${settings.img_home_cover.url};`"
+    ></div>
+    <Hero v-if="isSettingsDataFetched">
       <template #hero-content>
         <HeroCarousel />
       </template>
     </Hero>
-    <div class="home-wrapper__text">
-      <h1 class="home-wrapper__title">WHO WE ARE</h1>
-      <p class="home-wrapper__content">
-        Egypt’s first Esports organization, founded by hardcore gamers to take
-        the gaming scene in the MENA region to the next level!
-      </p>
-    </div>
-    <ServicesCarousel />
-    <WorkCarousel v-if="isHomePageWorksFetched" />
-    <SponsorsCarousel v-if="isHomePageSponsorsFetched" />
-    <Intersect @enter="loadMoreWorks"
-      ><div class="threshold">
-        <Loading :showLoading="showLoading" />
+    <div class="home-wrapper__bg-color">
+      <div class="home-wrapper__text">
+        <h1 class="home-wrapper__title">WHO WE ARE</h1>
+        <p class="home-wrapper__content">
+          Egypt’s first Esports organization, founded by hardcore gamers to take
+          the gaming scene in the MENA region to the next level!
+        </p>
+        <div class="home-wrapper__divider"></div>
       </div>
-    </Intersect>
+      <ServicesCarousel />
+      <WorkCarousel v-if="isHomePageWorksFetched" />
+      <SponsorsCarousel v-if="isHomePageSponsorsFetched" />
+      <Intersect @enter="loadMoreWorks"
+        ><div class="threshold">
+          <Loading :showLoading="showLoading" />
+        </div>
+      </Intersect>
+    </div>
   </div>
 </template>
 

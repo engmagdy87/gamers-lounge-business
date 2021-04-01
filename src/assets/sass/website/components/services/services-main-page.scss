@@ -3,69 +3,74 @@
 @import "../../shared/half-clipped-shape.scss";
 
 .services-page-wrapper {
-  width: 80%;
+  width: 100%;
   margin: auto;
-  padding-top: 100px;
-  padding-bottom: 100px;
   user-select: none;
-  @include is-extra-small-mobile {
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
+  position: relative;
+  background-color: $accent;
+  padding: 15px 0 100px 15px;
+  z-index: 102;
   &__content-wrapper {
+    padding-right: 15px !important;
+    a div img {
+      width: 100%;
+      border: 2px solid white;
+    }
     &:hover {
       img {
         filter: brightness(50%);
         clip-path: polygon(11% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 11%);
+        border: 2px solid transparent;
       }
       .services-page-wrapper__text {
         bottom: 44%;
-        transform: scale(1.2);
+        transform: scale(1.1);
       }
     }
   }
   &__content {
     position: relative;
     color: $header-item;
-    margin: 20px;
-    @media (min-width: 2000px) {
-      width: 490px;
-      height: 490px;
-    }
-    @media (min-width: 1700px) and (max-width: 1999px) {
-      width: 420px;
-      height: 420px;
-    }
-    @media (min-width: 1500px) and (max-width: 1699px) {
-      width: 400px;
-      height: 400px;
-    }
-    @media (min-width: 1300px) and (max-width: 1499px) {
-      width: 330px;
-      height: 330px;
-    }
-    @media (min-width: 1200px) and (max-width: 1299px) {
-      width: 320px;
-      height: 320px;
-    }
-    @media (min-width: 800px) and (max-width: 1199px) {
-      width: 280px;
-      height: 280px;
-    }
-    @media (min-width: 500px) and (max-width: 767px) {
-      width: 380px;
-      height: 380px;
-      margin: 15px auto;
-    }
-    @media (max-width: 499px) {
-      width: 100%;
-      height: auto;
-      margin: 0 0 10px 0;
-    }
+    margin-bottom: 15px;
+    // @media (min-width: 2000px) {
+    //   width: 490px;
+    //   height: 490px;
+    // }
+    // @media (min-width: 1700px) and (max-width: 1999px) {
+    //   width: 380px;
+    //   height: 380px;
+    // }
+    // @media (min-width: 1500px) and (max-width: 1699px) {
+    //   width: 300px;
+    //   height: 300px;
+    // }
+    // @media (min-width: 1300px) and (max-width: 1499px) {
+    //   width: 330px;
+    //   height: 330px;
+    // }
+    // @media (min-width: 1200px) and (max-width: 1299px) {
+    //   width: 320px;
+    //   height: 320px;
+    // }
+    // @media (min-width: 800px) and (max-width: 1199px) {
+    //   width: 280px;
+    //   height: 280px;
+    // }
+    // @media (min-width: 500px) and (max-width: 767px) {
+    //   width: 380px;
+    //   height: 380px;
+    //   margin: 15px auto;
+    // }
+    // @media (max-width: 499px) {
+    //   width: 100%;
+    //   height: auto;
+    //   margin: 0 0 10px 0;
+    // }
 
     img {
       width: 100%;
       height: 100%;
+      border-radius: 10px;
       object-fit: cover;
       clip-path: polygon(0% 0, 100% 0, 100% 100%, 100% 100%, 0 100%, 0 0%);
       transition: all 0.2s ease-in-out;
@@ -78,11 +83,13 @@
     transition: all 0.3s ease-in-out;
     text-align: center;
     position: absolute;
-    width: 100%;
+    width: 90%;
+    left: 5%;
     bottom: 0%;
     h2 {
-      font-family: "Segoe UI Bold";
-      font-size: 1.4rem;
+      font-family: Arial;
+      font-weight: bold;
+      font-size: 1.1rem;
       text-transform: uppercase;
       @include is-extra-small-mobile {
         font-size: 1rem;

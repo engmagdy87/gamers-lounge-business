@@ -1,5 +1,8 @@
 <template>
   <div class="about-section-wrapper">
+    <h1 :class="['about-section-wrapper__title', getCssStyle(title)]">
+      {{ title }}
+    </h1>
     <div class="about-section-wrapper__container">
       <div
         v-for="(row, rowId) in section.rows"
@@ -13,7 +16,7 @@
         >
           <div
             v-if="column.type === ABOUT_COLUMNS_TYPES.TITLE && column.fillable"
-            class="work-details-sections__title-normal"
+            class="about-section-wrapper__title"
           >
             {{ column.content }}
           </div>
@@ -25,11 +28,11 @@
             :key="img.id"
             @click="openImageModal(rowId, colId, null, column.type)"
             style="cursor:pointer"
-            class="about-section-wrapper__inside--is-image"
+            class="about-section-wrapper__image"
             :style="{ 'background-image': 'url(' + img.url + ')' }"
           ></div>
           <div
-            class="work-details-sections__video"
+            class="about-section-wrapper__video"
             v-else-if="
               column.type === ABOUT_COLUMNS_TYPES.VIDEO &&
                 column.fillable &&
@@ -47,7 +50,7 @@
             </iframe>
           </div>
           <div
-            class="work-details-sections__video"
+            class="about-section-wrapper__video"
             v-else-if="
               column.type === ABOUT_COLUMNS_TYPES.VIDEO &&
                 column.fillable &&
@@ -74,7 +77,7 @@
             v-else-if="
               column.type === ABOUT_COLUMNS_TYPES.SLIDER && column.fillable
             "
-            class="work-details-sections__slider"
+            class="about-section-wrapper__slider"
           >
             <Carousel3d
               :autoplay="true"
@@ -97,7 +100,7 @@
             v-if="
               column.type === ABOUT_COLUMNS_TYPES.DESCRIPTION && column.fillable
             "
-            class="description-container about-section-wrapper__inside--is-text"
+            class="description-container about-section-wrapper__description"
           >
             <div v-html="column.content" />
           </div>
@@ -126,9 +129,10 @@ import redirectToNewTab from "../../../helpers/RedirectToNewTab";
 import { liveVideoEmbedFormatter } from "../../../helpers/LiveVideoEmbedFormater";
 import * as ABOUT_COLUMNS_TYPES from "../../../constants/ColumnsContentTypes";
 export default {
-  props: ["section"],
+  props: ["section", "title"],
   data() {
     return {
+      sectionImages: {},
       showImageModal: false,
       showNavigation: false,
       targetImageIndeces: {
@@ -151,6 +155,23 @@ export default {
     }
   },
   methods: {
+    getCssStyle(title) {
+      switch (title) {
+        case "our story":
+        case "our vision":
+          return "";
+
+        case "Meet the founders":
+        case "Testimonials":
+          return "about-section-wrapper__title--center";
+
+        // case "our vision":
+        //   return "about-section-wrapper__title--right";
+
+        default:
+          break;
+      }
+    },
     getLiveVideoEmbedFormatter(url) {
       return liveVideoEmbedFormatter(url);
     },
@@ -191,6 +212,9 @@ export default {
       this.showImageModal = flag;
     },
     openImageModal(rowId, colId, imgId, type) {
+      console.log("====================================");
+      console.log(rowId, colId, imgId, type);
+      console.log("====================================");
       this.showNavigation = true;
       this.contentType = type;
       this.targetImageIndeces = {
@@ -205,29 +229,22 @@ export default {
     setImageIndex(e, dir) {
       e.stopPropagation();
       const { rowId, colId } = this.targetImageIndeces;
-      const columns = this.getImages(rowId);
-      let newColId;
-      if (dir === "next") {
-        newColId = colId === columns.length - 1 ? 0 : colId + 1;
-        let newCol = this.getImages(rowId)[newColId];
-        while (1) {
-          if (newCol.type === ABOUT_COLUMNS_TYPES.IMAGE) break;
+      const completeIndex = `${rowId}-${colId}`;
+      let keys = Object.keys(this.sectionImages);
+      let nextIndex;
 
-          newColId = newColId === columns.length - 1 ? 0 : newColId + 1;
-          newCol = this.getImages(rowId)[newColId];
-        }
-      } else {
-        newColId = colId === 0 ? columns.length - 1 : colId - 1;
-        let newCol = this.getImages(rowId)[newColId];
-        while (1) {
-          if (newCol.type === ABOUT_COLUMNS_TYPES.IMAGE) break;
-
-          newColId = newColId === 0 ? columns.length - 1 : newColId - 1;
-          newCol = this.getImages(rowId)[newColId];
-        }
-      }
-      this.targetImageIndeces.colId = newColId;
-      this.targetImageUrl = this.getImages(rowId)[newColId].img_content[0].url;
+      const currentIndex = keys.indexOf(completeIndex);
+      if (dir === "next")
+        nextIndex = currentIndex === keys.length - 1 ? 0 : currentIndex + 1;
+      else nextIndex = currentIndex === 0 ? keys.length - 1 : currentIndex - 1;
+      const newRowId = keys[nextIndex].split("-")[0];
+      const newColId = keys[nextIndex].split("-")[1];
+      this.targetImageIndeces = {
+        ...this.targetImageIndeces,
+        rowId: newRowId,
+        colId: newColId
+      };
+      this.targetImageUrl = this.sectionImages[keys[nextIndex]];
     },
     setImageForSliderIndex(e, dir) {
       e.stopPropagation();
@@ -244,6 +261,17 @@ export default {
   },
   updated() {
     redirectToNewTab("description-container");
+  },
+  mounted() {
+    this.section.rows.forEach((row, rowId) => {
+      row.columns.forEach((col, colId) => {
+        if (col.type === this.ABOUT_COLUMNS_TYPES.IMAGE && col.fillable)
+          this.sectionImages = {
+            ...this.sectionImages,
+            [`${rowId}-${colId}`]: col.img_content[0].url
+          };
+      });
+    });
   }
 };
 </script>

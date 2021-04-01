@@ -33,7 +33,8 @@ $carousel-height: 500px;
     }
     &__title {
       color: $header-item;
-      font-family: "Segoe UI Bold";
+      font-family: Arial;
+      font-weight: bold;
       font-size: 2.6rem;
       letter-spacing: 4px;
     }
@@ -178,7 +179,8 @@ $carousel-height: 500px;
       }
     }
     &__title {
-      font-family: "Segoe UI Bold";
+      font-family: Arial;
+      font-weight: bold;
       font-size: 2.4rem;
       height: max-content;
       width: 60%;
@@ -492,5 +494,10 @@ $widths-and-heights: (
 
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
-  @include filled-half-clipped-shape($widths-and-heights, transparent);
+  @include filled-half-clipped-shape(
+    $widths-and-heights,
+    transparent,
+    $green-stroke,
+    11px
+  );
 }

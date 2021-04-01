@@ -2,106 +2,130 @@
 @import "../../variables.scss";
 @import "../../mixins.scss";
 
-.about-clients-wrapper{
-    &__inside{
-      padding-bottom: 150px;
+.about-clients-wrapper {
+  width: 80%;
+  margin: auto;
+  @include is-mobile {
+    margin-top: 0;
+  }
+  @include is-extra-small-mobile {
+    margin-top: 0;
+  }
+  &__inside {
+    // padding-bottom: 150px;
 
-    .clients-header{
-      width: 100%;
-      text-align: center;
-      color: $header-item;
-      margin: 100px 0 150px 0;
+    .clients-header {
       @include is-mobile {
-        margin: 100px 0 100px 0;
+        margin: 0 0 5px 0;
       }
-      @include is-extra-small-mobile{
-        margin: 100px 0 100px 0;
+      @include is-extra-small-mobile {
+        margin: 0 0 5px 0;
       }
-      h1{
-        font-family: "Segoe UI Bold";
+      h1 {
+        font-family: "Arial Bold" !important;
+        font-weight: bolder;
+        font-size: 2rem;
+        letter-spacing: 4px;
+        margin-bottom: 5px;
+        // margin-left: 30px;
+        width: 100%;
+        text-align: center;
         @include is-mobile {
           font-size: 2rem;
+          margin-top: 0;
         }
-        @include is-extra-small-mobile{
+        @include is-extra-small-mobile {
           font-size: 2rem;
+          margin-top: 0;
         }
       }
     }
 
-      .container{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr;
-        grid-column-gap: 0px;
-        grid-row-gap: 0px;
-        justify-items: stretch;
-        align-items: stretch;
-          :last-child{
-            .image-holder__image{
-              margin-right: 0;
-            }
-            :last-child{
-              display: block;
-            }
-          }
-
-      }
-  }
-
-  &__topline, &__bottomline{
-    display: flex;
-    justify-content: center;
-    div{
-      width: 65%;
-      height: .01rem;
-      background-color: rgba($light-gray, .2);
-      @include is-extra-large-desktop{
-        width: 70%;
-      }
-      @include is-large-desktop {
-        width: 90%;
-      }
-      @include is-desktop {
-        width: 90%;
-      }
-      @include is-tablet {
-        width: 90%;
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+      justify-items: stretch;
+      align-items: stretch;
+      :last-child {
+        .image-holder__image {
+          margin-right: 0;
+        }
+        :last-child {
+          display: block;
+        }
       }
       @include is-mobile {
-        width: 90%;
+        grid-template-columns: 1fr 1fr 1fr;
       }
-      @include is-extra-small-mobile{
-        width: 100%;
+      @include is-extra-small-mobile {
+        grid-template-columns: 1fr 1fr 1fr;
       }
     }
   }
 
-  &__linebetween{
-    display: flex;
-    justify-content: center;
-    div{
-      height: .01rem;
-      width: 65%;
-      background-color: rgba($light-gray, 0.2);
-      @include is-extra-large-desktop{
-        width: 70%;
-      }
-      @include is-large-desktop {
-        width: 90%;
-      }
-      @include is-desktop {
-        width: 90%;
-      }
-      @include is-tablet {
-        width: 90%;
-      }
-      @include is-mobile {
-        width: 90%;
-      }
-      @include is-extra-small-mobile{
-        width: 100%;
-      }
-    }
-  }
+  // &__topline,
+  // &__bottomline {
+  //   display: flex;
+  //   justify-content: center;
+  //   div {
+  //     width: 65%;
+  //     height: 0.01rem;
+  //     background-color: rgba($light-gray, 0.2);
+  //     @include is-extra-large-desktop {
+  //       width: 70%;
+  //     }
+  //     @include is-large-desktop {
+  //       width: 90%;
+  //     }
+  //     @include is-desktop {
+  //       width: 90%;
+  //     }
+  //     @include is-tablet {
+  //       width: 90%;
+  //     }
+  //     @include is-mobile {
+  //       width: 90%;
+  //     }
+  //     @include is-extra-small-mobile {
+  //       width: 100%;
+  //     }
+  //   }
+  // }
+
+  // &__linebetween {
+  //   display: flex;
+  //   justify-content: center;
+  //   div {
+  //     height: 0.01rem;
+  //     width: 65%;
+  //     background-color: rgba($light-gray, 0.2);
+  //     @include is-extra-large-desktop {
+  //       width: 70%;
+  //     }
+  //     @include is-large-desktop {
+  //       width: 90%;
+  //     }
+  //     @include is-desktop {
+  //       width: 90%;
+  //     }
+  //     @include is-tablet {
+  //       width: 90%;
+  //     }
+  //     @include is-mobile {
+  //       width: 90%;
+  //     }
+  //     @include is-extra-small-mobile {
+  //       width: 100%;
+  //     }
+  //   }
+  // }
 }
 
+.clients-wrapper {
+  background-color: $section-color;
+  border-radius: 10px;
+  padding: 28px 0;
+}

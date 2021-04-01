@@ -305,15 +305,18 @@ const routes = [
     component: Jobs,
     beforeEnter(to, from, next) {
       showHeaderAndFooterForWebsite(next, false);
-    }
-  },
-  {
-    path: "/job/:jobName",
-    name: "job",
-    component: JobDetails,
-    beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false);
-    }
+    },
+    children: [
+      {
+        path: "/job/:jobName",
+        name: "job",
+        component: JobDetails,
+        props: true,
+        beforeEnter(to, from, next) {
+          showHeaderAndFooterForWebsite(next, false);
+        }
+      }
+    ]
   },
   {
     path: "/services",
@@ -321,15 +324,18 @@ const routes = [
     component: Services,
     beforeEnter(to, from, next) {
       showHeaderAndFooterForWebsite(next, false);
-    }
-  },
-  {
-    path: "/services/:serviceName",
-    name: "service",
-    component: ServicesDetails,
-    beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false);
-    }
+    },
+    children: [
+      {
+        path: "/services/:serviceName",
+        name: "service",
+        component: ServicesDetails,
+        props: true,
+        beforeEnter(to, from, next) {
+          showHeaderAndFooterForWebsite(next, false);
+        }
+      }
+    ]
   },
   {
     path: "/work",
@@ -337,15 +343,18 @@ const routes = [
     component: OurWorks,
     beforeEnter(to, from, next) {
       showHeaderAndFooterForWebsite(next, false);
-    }
-  },
-  {
-    path: "/work/:workName",
-    name: "work",
-    component: OurWorkDetails,
-    beforeEnter(to, from, next) {
-      showHeaderAndFooterForWebsite(next, false);
-    }
+    },
+    children: [
+      {
+        path: "/work/:workName",
+        name: "work",
+        component: OurWorkDetails,
+        props: true,
+        beforeEnter(to, from, next) {
+          showHeaderAndFooterForWebsite(next, false);
+        }
+      }
+    ]
   },
   {
     path: "/login",

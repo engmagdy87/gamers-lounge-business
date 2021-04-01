@@ -1,23 +1,30 @@
 @import "../../mixins.scss";
 @import "../../color-palette.scss";
+@import "../../variables.scss";
 @import "../../shared/half-clipped-shape.scss";
 
+$left: 25px;
+$shift: 40px;
+
+$extra-lg-dim: calc(#{$slide-height} + #{$shift});
+$extra-mob-dim: $slide-height-mobile;
+
 .services-carousel {
-  padding-top: 100px;
   padding-bottom: 0;
-  background-color: $primary;
   position: relative;
+  z-index: 101;
   .services-header {
-    text-align: center;
-    padding-bottom: 50px;
+    margin: 50px 0 0 14%;
     &__sub-text {
       color: $header-item;
     }
     &__title {
-      color: $header-item;
-      font-family: "Segoe UI Bold";
-      font-size: 2.6rem;
-      letter-spacing: 4px;
+      color: $black-text;
+      font-family: "Arial Bold" !important;
+      font-weight: bolder;
+      font-size: 2rem;
+      // letter-spacing: 4px;
+      margin-bottom: 0;
     }
     &__view-link {
       color: $accent;
@@ -28,69 +35,78 @@
     height: 100%;
   }
   &__img-wrapper {
+    text-align: right;
+    z-index: 200;
     @include is-extra-small-mobile {
+      height: 100%;
       position: absolute;
       top: 0;
       left: 0;
     }
     @include is-mobile {
+      height: 100%;
       position: absolute;
       top: 0;
       left: 0;
     }
     @include is-tablet {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
+      margin-top: -$shift/2;
     }
     @include is-desktop {
-      position: relative;
-      height: 100%;
+      margin-top: -$shift/2;
     }
     @include is-large-desktop {
-      height: 100%;
+      margin-top: -$shift/2;
     }
     @include is-extra-large-desktop {
-      height: 100%;
+      margin-top: -$shift/2;
     }
   }
   &__img {
     object-fit: cover;
     width: 100%;
     height: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
+    border-radius: 10px;
+    border: 2px $green-stroke solid;
+    margin-right: -2px;
+    // position: absolute;
+    // right: 0;
+    // top: 0;
     @include is-extra-small-mobile {
       position: relative;
-      width: 100vw;
-      height: 100vh;
-      left: -23%;
-      transform: scale(1.1);
-      filter: brightness(30%);
+      height: $extra-mob-dim;
+      width: 100%;
+      filter: brightness(20%);
     }
     @include is-mobile {
       position: relative;
-      width: 95vw;
-      left: -23%;
-      transform: scale(1.1);
-      // height: 100%;
-      filter: brightness(30%);
+      height: $extra-mob-dim;
+      width: 100%;
+      filter: brightness(20%);
     }
-    @include is-tablet {
-      position: relative;
-      width: 95vw;
-      left: -23%;
-      transform: scale(1.1);
-      // height: 100%;
-      filter: brightness(30%);
-    }
+    // @include is-mobile {
+    //   position: relative;
+    //   width: 95vw;
+    //   left: -23%;
+    //   transform: scale(1.1);
+    //   // height: 100%;
+    //   filter: brightness(30%);
+    // }
+    // @include is-tablet {
+    //   position: relative;
+    //   width: 95vw;
+    //   left: -23%;
+    //   transform: scale(1.1);
+    //   // height: 100%;
+    //   filter: brightness(30%);
+    // }
     @include is-desktop {
-      // height: 97%;
+      height: $extra-lg-dim;
+      width: calc(#{$extra-lg-dim} + 65px);
     }
-    @include is-large-desktop {
-      // height: 98%;
+    @include is-extra-large-desktop {
+      height: $extra-lg-dim;
+      width: calc(#{$extra-lg-dim} + 65px);
     }
     @media (min-width: 1400px) and (max-width: 1599px) {
       // height: 100%;
@@ -114,7 +130,7 @@
       height: 100vh;
       left: -23%;
       transform: scale(1.1);
-      filter: brightness(30%);
+      filter: brightness(20%);
     }
     @include is-mobile {
       padding-right: 0px;
@@ -123,7 +139,7 @@
       left: -23%;
       transform: scale(1.1);
       height: 100%;
-      filter: brightness(30%);
+      filter: brightness(20%);
     }
     @include is-tablet {
       padding-right: 0px;
@@ -148,21 +164,31 @@
     }
   }
   &__title {
-    width: 100%;
-    font-family: "Segoe UI Bold";
+    width: fit-content;
+    font-family: Arial;
+    font-weight: bold;
     position: absolute;
-    padding-top: 80px;
-    font-size: 2rem;
+    left: 0;
+    right: 0;
+    padding-left: 6%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    font-size: 1.6rem;
     text-align: left;
-    color: $accent;
+    color: $white-text;
     margin-bottom: 0;
     text-transform: uppercase;
     z-index: 10;
     @include is-extra-small-mobile {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
+      margin-top: 80px;
+      z-index: 2000;
     }
     @include is-mobile {
-      font-size: 1.7rem;
+      font-size: 1.2rem;
+      margin-top: 80px;
+      z-index: 2000;
     }
     @include is-tablet {
       font-size: 1.7rem;
@@ -172,26 +198,29 @@
     }
   }
   &__content {
-    width: 100%;
+    width: calc(100% - #{$left});
     text-align: left;
-    font-family: "Segoe UI";
+    font-family: Arial;
     font-size: 1.2rem;
-    line-height: 35px;
+    line-height: 20px;
     margin-top: 10px;
     position: absolute;
-    top: 170px;
-    color: white;
+    top: 60px;
+    right: 0;
+    color: $white-text;
     z-index: 10;
     padding-right: 10px;
     @include is-extra-small-mobile {
-      padding-top: 10px;
+      padding-top: 60px;
       font-size: 0.9rem;
-      height: 50%;
+      height: 70%;
       overflow-y: scroll;
+      z-index: 2000;
     }
     @include is-mobile {
       padding-top: 10px;
       font-size: 1rem;
+      z-index: 2000;
     }
 
     @include is-tablet {
@@ -206,15 +235,27 @@
   }
   &__btn {
     position: absolute;
-    bottom: 10%;
-    left: 50%;
+    bottom: 20px;
+    right: -15px;
+    font-size: 0.8rem;
     cursor: pointer;
     z-index: 100;
+    color: $black-text;
+    background-color: $white-text;
+    padding: 5px 12px;
+    border-radius: 5px;
+    border: 1px $blue-stroke solid;
+    outline: none;
+    box-shadow: 0 0 3px $blue-stroke;
     @include is-extra-small-mobile {
-      bottom: 0;
+      bottom: 15px;
+      z-index: 2000;
+      right: 10px;
     }
     @include is-mobile {
-      bottom: 0;
+      z-index: 2000;
+      bottom: 15px;
+      right: 10px;
     }
   }
 }
@@ -237,39 +278,16 @@
 /deep/ .hero-bullets {
   display: none;
 }
-/deep/ .half-filled-box {
-  min-height: 555px;
-}
 
-@media (max-width: 1600px) {
-  /deep/ .half-filled-box {
-    min-height: 675px;
-  }
-}
-@media (max-width: 1100px) {
-  /deep/ .half-filled-box {
-    min-height: 820px;
-  }
-}
-@media (max-width: 767px) {
-  /deep/ .half-filled-box {
-    min-height: 993px;
-  }
-}
-@media (max-width: 600px) {
-  /deep/ .half-filled-box {
-    min-height: 90vh;
-  }
-}
-/deep/ .carousel-wrapper__slide {
-  padding-left: 40px;
-  @include is-extra-small-mobile {
-    padding-left: 0px;
-  }
-  @include is-mobile {
-    padding-left: 0px;
-  }
-}
+// /deep/ .carousel-wrapper__slide {
+//   padding-left: 40px;
+//   @include is-extra-small-mobile {
+//     padding-left: 0px;
+//   }
+//   @include is-mobile {
+//     padding-left: 0px;
+//   }
+// }
 /deep/ .work-carousel-wrapper {
   margin-top: 0;
   min-height: auto;
@@ -288,6 +306,7 @@
   right: 2%;
   margin-top: 25px;
   z-index: 120;
+  z-index: 2000;
   @include is-extra-small-mobile {
     left: 1.5%;
     right: unset;
@@ -312,9 +331,18 @@
 }
 /deep/ .carousel-navigation {
   position: absolute;
-  left: 1.5%;
-  margin-top: 25px;
+  left: 1%;
   z-index: 120;
+  width: 70%;
+  z-index: 2000;
+  @include is-extra-small-mobile {
+    left: 0;
+    width: 100%;
+  }
+  @include is-mobile {
+    left: 0;
+    width: 100%;
+  }
   button {
     margin: 20px 20px 20px 10px;
     background-color: transparent;
@@ -322,6 +350,12 @@
     outline: none;
     img {
       width: 85%;
+    }
+    &:nth-child(1) {
+      float: left;
+    }
+    &:nth-child(2) {
+      float: right;
     }
   }
 }
@@ -335,44 +369,39 @@
   }
 }
 // All have vw as divide operation units must be the same for all
-$width: 85vw;
-$height: 20vw;
-$clipped-length: 0vw;
-// $clipped-length: 4vw;
+$width: 75%;
 
 $widths-and-heights: (
   clipped-shape-width: $width,
-  clipped-shape-height: $height,
-  clipped-length: $clipped-length * 0,
+  clipped-shape-height: $slide-height,
   clipped-shape-width-xs: (
-    $width + 10vw
+    $width
   ),
   clipped-shape-height-xs: (
-    $height + 10vw
-  ) * 2,
-  clipped-length-xs: $clipped-length * 0,
+    $slide-height-mobile
+  ),
   clipped-shape-width-sm: (
-    $width + 10vw
+    $width
   ),
   clipped-shape-height-sm: (
-    $height + 5vw
+    $slide-height-mobile
   ),
-  clipped-length-sm: $clipped-length * 0,
-  clipped-shape-width-md: $width + 10vw,
-  clipped-shape-height-md: $height * 2,
-  clipped-length-md: $clipped-length,
-  clipped-shape-width-lg: $width + 10vw,
-  clipped-shape-height-lg: $height + 30vw,
-  clipped-length-lg: $clipped-length,
-  clipped-shape-width-xlg: $width + 5vw,
-  clipped-shape-height-xlg: $height + 30vw,
-  clipped-length-xlg: $clipped-length,
+  clipped-shape-width-md: $width,
+  clipped-shape-height-md: $slide-height,
+  clipped-shape-width-lg: $width,
+  clipped-shape-height-lg: $slide-height,
+  clipped-shape-width-xlg: $width,
+  clipped-shape-height-xlg: $slide-height,
   clipped-shape-width-xxlg: $width,
-  clipped-shape-height-xxlg: $height + 10vw,
-  clipped-length-xxlg: $clipped-length
+  clipped-shape-height-xxlg: $slide-height
 );
 
 // use /deep/ to apply scss classes to the child components
 div /deep/ {
-  @include filled-half-clipped-shape($widths-and-heights, $form-background);
+  @include filled-half-clipped-shape(
+    $widths-and-heights,
+    $section-color,
+    $green-stroke,
+    11px
+  );
 }

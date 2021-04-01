@@ -1,34 +1,32 @@
 <template>
   <div class="about-wrapper" v-if="isWebsiteAboutFetched">
-    <Hero :heroImage="about.img_cover.url">
+    <div
+      class="about-wrapper__bg"
+      :style="`background-image: url(${about.img_cover.url};`"
+    ></div>
+    <Hero page="services">
       <template #hero-content>
-        <div
-          class="row align-items-end h-100 justify-content-center about-container"
-        >
-          <HalfClippedShape>
-            <template #content>
-              <div class="about-container__heroContent">
-                <h1>OUR VISION</h1>
-                <p v-html="about.vision"></p>
+        <div class="row about-container__heroContent">
+          <!-- <h1>OUR VISION</h1>
+          <p v-html="about.vision"></p> -->
 
-                <h1>OUR MISSION & OBJECTIVES</h1>
-                <p v-html="about.mission"></p>
-              </div>
-            </template>
-          </HalfClippedShape>
+          <h1>
+            Creating a better community <br />
+            for gamers by gamers!
+          </h1>
+          <!-- <p v-html="about.mission"></p> -->
         </div>
       </template>
     </Hero>
-
-    <AboutSection :about="about" v-if="about.sections" />
-
-    <Intersect @enter="loadMoreAboutSections" v-if="aboutPage > 0"
-      ><div class="threshold">
-        <Loading :showLoading="showLoading" />
-      </div>
-    </Intersect>
-
-    <Clients />
+    <div class="about-wrapper__content row">
+      <AboutSection :about="about" v-if="about.sections" />
+      <Intersect @enter="loadMoreAboutSections" v-if="aboutPage > 0"
+        ><div class="threshold">
+          <Loading :showLoading="showLoading" />
+        </div>
+      </Intersect>
+      <Clients />
+    </div>
   </div>
 </template>
 
@@ -36,7 +34,6 @@
 import { mapActions, mapState, mapMutations } from "vuex";
 import types from "../../store/types";
 import Hero from "../shared/Hero";
-import HalfClippedShape from "../shared/HalfClippedShape";
 import AboutSection from "../components/about/AboutSection";
 import Clients from "../components/about/Clients";
 import Intersect from "vue-intersect";
@@ -45,7 +42,6 @@ import Loading from "../../website/shared/Loading";
 export default {
   components: {
     Hero,
-    HalfClippedShape,
     AboutSection,
     Clients,
     Intersect,
