@@ -62,6 +62,7 @@ const services = {
   mutations: {
     SET_SERVICES: "services/mutations/SET_SERVICES",
     SET_IS_SERVICES_FETCHED: "services/mutations/SET_IS_SERVICES_FETCHED",
+    CLEAR_WEBSITE_SERVICE: "services/mutations/CLEAR_WEBSITE_SERVICE",
     SET_WEBSITE_SERVICE: "services/mutations/SET_WEBSITE_SERVICE",
     SET_IS_WEBSITE_SERVICE_FETCHED:
       "services/mutations/SET_IS_WEBSITE_SERVICE_FETCHED",

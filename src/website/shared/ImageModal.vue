@@ -35,8 +35,13 @@ export default {
   },
   watch: {
     showImageModal() {
-      if (this.showImageModal) this.$refs.imageModal.style.display = "flex";
-      else this.$refs.imageModal.style.display = "none";
+      if (this.showImageModal) {
+        this.$refs.imageModal.style.display = "flex";
+        document.getElementsByTagName("header")[0].style.opacity = 0;
+      } else {
+        this.$refs.imageModal.style.display = "none";
+        document.getElementsByTagName("header")[0].style.opacity = 1;
+      }
     }
   }
 };

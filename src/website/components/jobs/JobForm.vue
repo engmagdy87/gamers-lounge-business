@@ -111,8 +111,8 @@
                 >Upload Resume</label
               >
 
-              <span class="ml-3" v-if="applicantInfo.resumeFile.name">{{
-                applicantInfo.resumeFile.name
+              <span v-if="applicantInfo.resumeFile.name">{{
+                applicantInfo.resumeFile.name.slice(0, 20) + "..."
               }}</span>
               <ErrorMessage :fieldErrors="errors.resumeFile" />
             </div>

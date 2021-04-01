@@ -67,6 +67,12 @@ $total-padding: $half-clipped-shape-padding * 2;
       width: 86%;
       height: 100%;
       margin: auto;
+      @include is-desktop {
+        width: 80%;
+      }
+      @include is-large-desktop {
+        width: 80%;
+      }
     }
     .custom-arrow.slick-prev {
       margin-left: -25px;

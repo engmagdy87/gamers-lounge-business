@@ -7,7 +7,7 @@ $around-nav-width: calc(100% - #{$nav-width});
 
 .header-wrapper {
   position: relative;
-  z-index: 1000;
+  z-index: 104;
   .row {
     margin-right: 0;
     margin-left: 0;
@@ -36,6 +36,21 @@ $around-nav-width: calc(100% - #{$nav-width});
           margin-right: 5px;
         }
       }
+    }
+    @include is-extra-small-mobile {
+      top: calc(#{$header-height-mobile} / 5);
+    }
+    @include is-mobile {
+      top: calc(#{$header-height-mobile} / 2);
+    }
+    @include is-tablet {
+      top: calc(#{$header-height-mobile} / 2);
+    }
+    @include is-desktop {
+      margin-right: 50px !important;
+    }
+    @include is-large-desktop {
+      margin-right: 50px !important;
     }
   }
   &__avatar {
@@ -207,7 +222,7 @@ $around-nav-width: calc(100% - #{$nav-width});
   cursor: pointer;
   color: white !important;
   position: absolute;
-  top: calc(#{$header-height} / 2.5);
+  top: calc(#{$header-height} / 3);
   right: 24px;
   @include is-extra-small-mobile {
     top: calc(#{$header-height-mobile} / 5);
@@ -227,7 +242,7 @@ $around-nav-width: calc(100% - #{$nav-width});
   height: 0%;
   width: 100%;
   position: fixed;
-  z-index: 500;
+  z-index: 3000;
   top: 0;
   left: 0;
   background-color: $primary;

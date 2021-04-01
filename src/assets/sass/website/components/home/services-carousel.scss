@@ -7,6 +7,7 @@ $left: 25px;
 $shift: 40px;
 
 $extra-lg-dim: calc(#{$slide-height} + #{$shift});
+$extra-dim: calc(#{$slide-height-desktop});
 $extra-mob-dim: $slide-height-mobile;
 
 .services-carousel {
@@ -104,6 +105,10 @@ $extra-mob-dim: $slide-height-mobile;
       height: $extra-lg-dim;
       width: calc(#{$extra-lg-dim} + 65px);
     }
+    @include is-large-desktop {
+      height: $extra-dim;
+      width: calc(#{$extra-dim} + 40px);
+    }
     @include is-extra-large-desktop {
       height: $extra-lg-dim;
       width: calc(#{$extra-lg-dim} + 65px);
@@ -194,7 +199,11 @@ $extra-mob-dim: $slide-height-mobile;
       font-size: 1.7rem;
     }
     @include is-desktop {
+      padding: 0;
       font-size: 1.7rem;
+    }
+    @include is-large-desktop {
+      padding: 0;
     }
   }
   &__content {
@@ -247,6 +256,14 @@ $extra-mob-dim: $slide-height-mobile;
     border: 1px $blue-stroke solid;
     outline: none;
     box-shadow: 0 0 3px $blue-stroke;
+    @include is-desktop {
+      right: 15px;
+      bottom: 10px;
+    }
+    @include is-large-desktop {
+      right: 30px;
+      bottom: 10px;
+    }
     @include is-extra-small-mobile {
       bottom: 15px;
       z-index: 2000;
@@ -335,6 +352,12 @@ $extra-mob-dim: $slide-height-mobile;
   z-index: 120;
   width: 70%;
   z-index: 2000;
+  @include is-desktop {
+    width: 66%;
+  }
+  @include is-large-desktop {
+    width: 66%;
+  }
   @include is-extra-small-mobile {
     left: 0;
     width: 100%;

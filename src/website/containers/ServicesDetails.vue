@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <Intersect @enter="loadMoreServiceSections" v-if="servicePage > 0"
+    <Intersect @enter="loadMoreServiceSections" v-if="servicePage > 1"
       ><div class="threshold">
         <Loading :showLoading="showLoading" />
       </div>
@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       queriedServiceCounts: 2,
-      servicePage: 0,
+      servicePage: 1,
       showLoading: false
     };
   },
@@ -59,23 +59,21 @@ export default {
       fetchServiceSections: types.services.actions.FETCH_WEBSITE_SERVICE
     }),
     ...mapMutations({
-      setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG
+      setShowFooterFlag: types.app.mutations.SET_SHOW_FOOTER_FLAG,
+      clearWebsiteService: types.services.mutations.CLEAR_WEBSITE_SERVICE
     }),
-    fetchHeroAndFirstSection: async function() {
-      let payload = this.generateServicePayload(true, true);
+    fetchFirstSections: async function() {
+      let payload = this.generateServicePayload(true);
       await this.fetchServiceSections(payload);
       this.servicePage++;
     },
-    generateServicePayload(showSpinner, firstFetch) {
+    generateServicePayload(showSpinner) {
       let data = {
-        id: getEntityId(this.$route.params.serviceName)
+        id: getEntityId(this.$route.params.serviceName),
+        first: this.queriedServiceCounts,
+        page: this.servicePage
       };
-      if (!firstFetch)
-        data = {
-          ...data,
-          first: this.queriedServiceCounts,
-          page: this.servicePage
-        };
+
       const requestSource = {
         data,
         showSpinner,
@@ -90,7 +88,7 @@ export default {
           this.websiteService.sections.paginatorInfo.hasMorePages)
       ) {
         this.showLoading = true;
-        const payload = this.generateServicePayload(false, false);
+        const payload = this.generateServicePayload(false);
         await this.fetchServiceSections(payload);
         this.servicePage++;
         this.showLoading = false;
@@ -100,8 +98,9 @@ export default {
   mounted() {
     window.scroll(0, 0);
 
+    this.clearWebsiteService();
     this.setShowFooterFlag(false);
-    this.fetchHeroAndFirstSection();
+    this.fetchFirstSections();
   },
   updated() {
     redirectToNewTab("description-container");

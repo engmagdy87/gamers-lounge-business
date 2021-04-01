@@ -188,10 +188,10 @@ $text-minheight-pc: 706px;
       filter: brightness(30%);
     }
     @include is-desktop {
-      // height: 97%;
+      height: $extra-lg-dim;
     }
     @include is-large-desktop {
-      // height: 98%;
+      height: $extra-lg-dim;
     }
     @include is-extra-large-desktop {
       height: $extra-lg-dim;
@@ -273,6 +273,7 @@ $text-minheight-pc: 706px;
     //   line-height: 33px;
     // }
     padding: 20px;
+    height: $about-container-height;
     max-height: $about-container-height;
     margin-top: $shift/2;
     background-color: $section-color;
@@ -289,7 +290,17 @@ $text-minheight-pc: 706px;
     border-top-left-radius: 15px;
     // min-height: $text-minheight-pc;
     // overflow: hidden;
-    // overflow-y: auto;
+    overflow-y: auto;
+    div {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      &::-webkit-scrollbar-thumb {
+        display: none;
+      }
+      height: 100% !important;
+      overflow: auto;
+    }
     @include is-mobile {
       z-index: 2001;
       margin-top: 0;
@@ -302,11 +313,15 @@ $text-minheight-pc: 706px;
       height: $extra-mob-dim;
       max-height: $extra-mob-dim;
       overflow-y: auto;
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      &::-webkit-scrollbar-thumb {
-        display: none;
+      div {
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        &::-webkit-scrollbar-thumb {
+          display: none;
+        }
+        height: 100% !important;
+        overflow: auto;
       }
     }
     @include is-extra-small-mobile {

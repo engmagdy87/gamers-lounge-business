@@ -6,6 +6,7 @@
     <HalfClippedShape>
       <template #content>
         <ServiceSlider
+          :autoPlay="false"
           :slides="homePageServices"
           :timeInMillisecond="4000"
           customBulletsStyleClass="hero-bullets"
