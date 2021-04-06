@@ -19,7 +19,7 @@
     </Hero>
 
     <div class="job-main-content-wrapper__container row">
-      <div class="job-main-content-wrapper__jobs row">
+      <div class="job-main-content-wrapper__jobs row" v-if="[].length > 0">
         <div
           v-for="(job, index) in jobs"
           :key="job.id"
@@ -44,6 +44,15 @@
           </button>
         </div>
       </div>
+      <h1
+        class="job-main-content-wrapper__jobs row"
+        style="width: fit-content;margin: auto;"
+        v-else
+      >
+        <span>Please send us your updated resume</span><br /><span
+          >hr@gamersloungeme.com</span
+        >
+      </h1>
     </div>
     <Modal
       :showModal="showModal"
