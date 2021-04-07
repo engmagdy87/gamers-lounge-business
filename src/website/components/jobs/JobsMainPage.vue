@@ -19,7 +19,7 @@
     </Hero>
 
     <div class="job-main-content-wrapper__container row">
-      <div class="job-main-content-wrapper__jobs row" v-if="[].length > 0">
+      <div class="job-main-content-wrapper__jobs row" v-if="jobs.length > 0">
         <div
           v-for="(job, index) in jobs"
           :key="job.id"

@@ -164,12 +164,12 @@ self.__precacheManifest = [
     "url": "/js/JobDetails.7389c4de.js"
   },
   {
-    "revision": "47d9029ffce5d884cdca",
-    "url": "/css/Jobs.d97fad93.css"
+    "revision": "887abd7495d93e5e293d",
+    "url": "/css/Jobs.8bfadc26.css"
   },
   {
-    "revision": "47d9029ffce5d884cdca",
-    "url": "/js/Jobs.bbfba3ec.js"
+    "revision": "887abd7495d93e5e293d",
+    "url": "/js/Jobs.e3770de6.js"
   },
   {
     "revision": "d4af7a34581cefb81246",
@@ -404,12 +404,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.7f64e606.js"
   },
   {
-    "revision": "2e96d1c303312cf28c95",
+    "revision": "157829a74168db007c52",
     "url": "/css/app.af9d06de.css"
   },
   {
-    "revision": "2e96d1c303312cf28c95",
-    "url": "/js/app.537ba38e.js"
+    "revision": "157829a74168db007c52",
+    "url": "/js/app.9ac42fd8.js"
   },
   {
     "revision": "bdda8698921ac61af643",
@@ -476,7 +476,7 @@ self.__precacheManifest = [
     "url": "/img/prev-solo1.51cec31f.svg"
   },
   {
-    "revision": "97ff9881622e6dff1972aae5c8d841ec",
+    "revision": "83d429c37fe5a12fdd80e62efaadab35",
     "url": "/index.html"
   },
   {
@@ -520,24 +520,24 @@ self.__precacheManifest = [
     "url": "/images/prev.png"
   },
   {
-    "revision": "6a02faf7ea2a9584134ffe15779a0e44",
-    "url": "/_redirects"
-  },
-  {
     "revision": "d41d8cd98f00b204e9800998ecf8427e",
     "url": "/.gitkeep"
+  },
+  {
+    "revision": "6a02faf7ea2a9584134ffe15779a0e44",
+    "url": "/_redirects"
   },
   {
     "revision": "a95be6e8a890f1897308ee3122a70aef",
     "url": "/images/add.svg"
   },
   {
-    "revision": "5b47b416f6e4dbba80a1ca269adf7580",
-    "url": "/images/decrease_font.svg"
-  },
-  {
     "revision": "752d64f551b54c06f4b7280d9f74d27c",
     "url": "/images/delete.svg"
+  },
+  {
+    "revision": "5b47b416f6e4dbba80a1ca269adf7580",
+    "url": "/images/decrease_font.svg"
   },
   {
     "revision": "533b554da9fa067f3e7e2a631cc83a80",
@@ -572,24 +572,24 @@ self.__precacheManifest = [
     "url": "/images/pin.svg"
   },
   {
-    "revision": "eb55acdf799a7622a48f50ce42fe93a9",
-    "url": "/images/placeholder.png"
-  },
-  {
     "revision": "664865b98abec36c0020a2ae5d8664d4",
     "url": "/images/prev-solo.png"
+  },
+  {
+    "revision": "eb55acdf799a7622a48f50ce42fe93a9",
+    "url": "/images/placeholder.png"
   },
   {
     "revision": "8787c6a53212c3033dc26fb3eb820305",
     "url": "/images/prev.svg"
   },
   {
-    "revision": "17e1f669c620a22cdb3f7b0e5cc5ed48",
-    "url": "/images/reset.svg"
-  },
-  {
     "revision": "973d1b853335d9eb78eaf40e4eb6272d",
     "url": "/images/top-arrow.svg"
+  },
+  {
+    "revision": "17e1f669c620a22cdb3f7b0e5cc5ed48",
+    "url": "/images/reset.svg"
   },
   {
     "revision": "8ab7e03c6fd3405f3ebfd157b2b71240",
