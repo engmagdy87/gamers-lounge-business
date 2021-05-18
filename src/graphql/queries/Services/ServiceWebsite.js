@@ -16,6 +16,7 @@ query {
 const SERVICE_SECTIONS = (id, first, page) => `
 query {
    service(id: ${id}) {
+     title
      sections(enabled:true,first: ${first}, page: ${page}, orderBy: { field: "order", order: ASC }) {
        paginatorInfo{                            
          hasMorePages            

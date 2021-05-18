@@ -31,7 +31,7 @@
           </div>
         </router-link>
       </div>
-      <Intersect @enter="loadMoreWorks" v-if="isServicesFetched"
+      <Intersect @enter="loadMoreServices" v-if="isServicesFetched"
         ><div class="threshold">
           <Loading :showLoading="showLoading" />
         </div>
@@ -134,7 +134,7 @@ export default {
       };
       return requestSource;
     },
-    loadMoreWorks: async function() {
+    loadMoreServices: async function() {
       const payload = this.generateWorkPayload(false);
 
       if (Object.keys(this.services).length > 0) {

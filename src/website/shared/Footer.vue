@@ -104,7 +104,7 @@
             <a class="nav-link">Contact Us</a>
           </router-link>
           <router-link to="/work" tag="li" active-class="active">
-            <a class="nav-link">Our Work</a>
+            <a class="nav-link">Our Projects</a>
           </router-link>
           <router-link to="/jobs" tag="li" active-class="active">
             <a class="nav-link">Jobs</a>

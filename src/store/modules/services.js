@@ -4,7 +4,7 @@ import types from "../types";
 const state = {
   services: {},
   isServicesFetched: false,
-  websiteService: {},
+  websiteService: { sections: { data: [] } },
   isWebsiteServiceFetched: false,
   serviceSections: {},
   isServiceSectionsFetched: false,
@@ -41,20 +41,24 @@ const mutations = {
     currentState,
     websiteService
   ) => {
-    const { sections, ...serviceData } = websiteService;
-    if (!sections)
-      currentState.websiteService = { ...serviceData, sections: { data: [] } };
-    else {
-      const { data, paginatorInfo } = sections;
-      const oldSections = currentState.websiteService.sections.data;
-      currentState.websiteService = {
-        ...currentState.websiteService,
-        sections: {
-          paginatorInfo,
-          data: [...oldSections, ...data]
-        }
-      };
-    }
+    const { title, sections } = websiteService;
+    const { data, paginatorInfo } = sections;
+    const oldSections = currentState.websiteService.sections.data;
+    currentState.websiteService = {
+      ...currentState.websiteService,
+      title,
+      sections: {
+        paginatorInfo,
+        data: [...oldSections, ...data]
+      }
+    };
+  },
+  [types.services.mutations.CLEAR_WEBSITE_SERVICE]: (
+    currentState,
+    emptyService
+  ) => {
+    
+    currentState.websiteService = {...{ sections: { data: [] } }}
   },
   [types.services.mutations.SET_IS_WEBSITE_SERVICE_FETCHED]: (
     currentState,

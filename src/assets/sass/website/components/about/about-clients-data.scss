@@ -11,10 +11,16 @@
 
   &__image {
     object-fit: contain;
-    width: 56%;
+    width: 54%;
     max-height: 80px;
     margin: 10% 22%;
     cursor: pointer;
+    @include is-desktop {
+      width: 53%;
+    }
+    @include is-large-desktop {
+      width: 53%;
+    }
     @include is-mobile {
       margin: 10% 20%;
     }

@@ -236,20 +236,12 @@
       text-align: center;
       width: 100%;
     }
-    span {
-      @include is-extra-small-mobile {
-        width: 50px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
-    }
   }
   &__footer-right {
     width: 50%;
     height: max-content;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     margin-top: 10px;
     @include is-extra-small-mobile {
       width: 100%;

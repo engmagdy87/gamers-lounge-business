@@ -39,7 +39,7 @@
                   : 'header-wrapper__navLinks--inactive'
               ]"
               href="/work"
-              >Our Work</a
+              >Our Projects</a
             >
           </li>
           <li>
@@ -113,7 +113,7 @@
                   : 'header-wrapper__navLinks--inactive'
               ]"
             >
-              <a href="/work" @click="closeNav">Our Work</a>
+              <a href="/work" @click="closeNav">Our Projects</a>
             </li>
             <li
               :class="[

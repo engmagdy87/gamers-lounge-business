@@ -1,7 +1,7 @@
 <template>
   <div class="services-carousel">
     <div class="services-header">
-      <h1 class="services-header__title">OUR WORK</h1>
+      <h1 class="services-header__title">OUR PROJECTS</h1>
     </div>
     <HalfClippedShape>
       <template #content>

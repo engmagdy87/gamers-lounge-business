@@ -212,9 +212,6 @@ export default {
       this.showImageModal = flag;
     },
     openImageModal(rowId, colId, imgId, type) {
-      console.log("====================================");
-      console.log(rowId, colId, imgId, type);
-      console.log("====================================");
       this.showNavigation = true;
       this.contentType = type;
       this.targetImageIndeces = {
