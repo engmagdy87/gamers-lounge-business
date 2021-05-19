@@ -208,12 +208,12 @@ self.__precacheManifest = [
     "url": "/js/OurWorkDetails.b9772fdf.js"
   },
   {
-    "revision": "da5f65e6f7e64056f7b4",
-    "url": "/css/OurWorkDetails~ServicesDetails.606b2e17.css"
+    "revision": "93f25d8be95b3f1a06a3",
+    "url": "/css/OurWorkDetails~ServicesDetails.67fe70ff.css"
   },
   {
-    "revision": "da5f65e6f7e64056f7b4",
-    "url": "/js/OurWorkDetails~ServicesDetails.9ff506fa.js"
+    "revision": "93f25d8be95b3f1a06a3",
+    "url": "/js/OurWorkDetails~ServicesDetails.b489953b.js"
   },
   {
     "revision": "d6af845843b412af5113",
@@ -404,12 +404,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.7f64e606.js"
   },
   {
-    "revision": "240ff2f17c5f593a64cd",
-    "url": "/css/app.1d2ef3c8.css"
+    "revision": "4a261b3781f56766817f",
+    "url": "/css/app.40445a1f.css"
   },
   {
-    "revision": "240ff2f17c5f593a64cd",
-    "url": "/js/app.8a92c529.js"
+    "revision": "4a261b3781f56766817f",
+    "url": "/js/app.421fd748.js"
   },
   {
     "revision": "bdda8698921ac61af643",
@@ -476,7 +476,7 @@ self.__precacheManifest = [
     "url": "/img/prev-solo1.51cec31f.svg"
   },
   {
-    "revision": "22d458709910f23368c9c01012a8738e",
+    "revision": "113e0cee4edc269634509dc9ac5295b7",
     "url": "/index.html"
   },
   {
@@ -556,12 +556,12 @@ self.__precacheManifest = [
     "url": "/images/increase_font.svg"
   },
   {
-    "revision": "c9e7debf1f052891316f621ed282ff5c",
-    "url": "/images/next.svg"
-  },
-  {
     "revision": "a7e2b1e2c4158772c526b5546da5e890",
     "url": "/images/next-solo.png"
+  },
+  {
+    "revision": "c9e7debf1f052891316f621ed282ff5c",
+    "url": "/images/next.svg"
   },
   {
     "revision": "bedc6caff68a7ea0e9d74f7006bc949c",
@@ -584,12 +584,12 @@ self.__precacheManifest = [
     "url": "/images/placeholder.png"
   },
   {
-    "revision": "17e1f669c620a22cdb3f7b0e5cc5ed48",
-    "url": "/images/reset.svg"
-  },
-  {
     "revision": "973d1b853335d9eb78eaf40e4eb6272d",
     "url": "/images/top-arrow.svg"
+  },
+  {
+    "revision": "17e1f669c620a22cdb3f7b0e5cc5ed48",
+    "url": "/images/reset.svg"
   },
   {
     "revision": "8ab7e03c6fd3405f3ebfd157b2b71240",
