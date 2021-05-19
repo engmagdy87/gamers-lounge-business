@@ -26,9 +26,9 @@
             :src="img.url"
             width="100%"
             draggable="false"
-            alt=""
-            class="image-placeholder"
+            @load="onImgLoad"
           />
+          <div v-if="isPlaceholderImageShown" class="image-placeholder" />
         </div>
 
         <div
@@ -133,6 +133,7 @@ export default {
       sectionImages: {},
       showImageModal: false,
       showNavigation: false,
+      isPlaceholderImageShown: true,
       targetImageIndeces: {
         rowId: null,
         colId: null,
@@ -235,6 +236,9 @@ export default {
 
       this.targetImageIndeces.imgId = newImgId;
       this.targetImageUrl = images[newImgId].url;
+    },
+    onImgLoad() {
+      this.isPlaceholderImageShown = false;
     }
   },
   updated() {
