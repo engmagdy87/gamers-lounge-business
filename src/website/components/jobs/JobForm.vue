@@ -102,7 +102,7 @@
               <input
                 type="file"
                 id="resume"
-                accept=".pdf,.doc,.docx"
+                accept=".pdf,.docx,.dot,.odt"
                 ref="resumeFile"
                 @change="e => setFile(e, 'resumeFile')"
               />
