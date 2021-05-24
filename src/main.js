@@ -17,6 +17,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "./App.vue";
 import store from "./store/index";
+import visibility from "vue-visibility-change";
+
+// registry directive
+Vue.use(visibility);
 
 // LightBootstrap plugin
 import LightBootstrap from "./light-bootstrap-main";
