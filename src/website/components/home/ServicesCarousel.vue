@@ -3,65 +3,67 @@
     <div class="services-header">
       <h1 class="services-header__title">OUR SERVICES</h1>
     </div>
-    <HalfClippedShape>
-      <template #content>
-        <ServiceSlider
-          :slides="homePageServices"
-          :timeInMillisecond="4000"
-          customBulletsStyleClass="hero-bullets"
-        >
-          <template #carouselSlide="{slide,index}">
-            <div class="row m-0 position-relative">
-              <div class="col-12 col-md-8 services-carousel__text p-0">
-                <transition appear :name="titleDirection">
-                  <h1 v-if="index" class="services-carousel__title">
-                    {{ slide.title }}
-                  </h1>
-                </transition>
-                <transition appear :name="contentDirection">
-                  <p
-                    v-if="index"
-                    class="description-container services-carousel__content"
-                    v-html="slide.description"
-                  ></p>
-                </transition>
-                <router-link
-                  :to="`/services/${slide.id}-${reformatURL(slide.title)}`"
-                >
-                  <button class="services-carousel__btn" v-if="index">
-                    See More
-                  </button>
-                </router-link>
-              </div>
-              <transition appear name="slide-fade" mode="out-in">
-                <div
-                  class="col-12 col-md-4 services-carousel__img-wrapper p-0"
-                  v-if="index"
-                >
-                  <img
-                    class="services-carousel__img"
-                    draggable="false"
-                    :src="slide.img_slider.url"
-                    :alt="slide.title"
-                  />
+    <div v-visibility-change="visibilityChange">
+      <HalfClippedShape>
+        <template #content>
+          <ServiceSlider
+            :slides="homePageServices"
+            :timeInMillisecond="4000"
+            customBulletsStyleClass="hero-bullets"
+          >
+            <template #carouselSlide="{slide,index}">
+              <div class="row m-0 position-relative">
+                <div class="col-12 col-md-8 services-carousel__text p-0">
+                  <transition appear :name="titleDirection" v-if="isShown">
+                    <h1 v-if="index" class="services-carousel__title">
+                      {{ slide.title }}
+                    </h1>
+                  </transition>
+                  <transition appear :name="contentDirection" v-if="isShown">
+                    <p
+                      v-if="index"
+                      class="description-container services-carousel__content"
+                      v-html="slide.description"
+                    ></p>
+                  </transition>
+                  <router-link
+                    :to="`/services/${slide.id}-${reformatURL(slide.title)}`"
+                  >
+                    <button class="services-carousel__btn" v-if="index">
+                      See More
+                    </button>
+                  </router-link>
                 </div>
-              </transition>
-            </div>
-          </template>
+                <transition appear name="slide-fade" mode="out-in">
+                  <div
+                    class="col-12 col-md-4 services-carousel__img-wrapper p-0"
+                    v-if="index"
+                  >
+                    <img
+                      class="services-carousel__img"
+                      draggable="false"
+                      :src="slide.img_slider.url"
+                      :alt="slide.title"
+                    />
+                  </div>
+                </transition>
+              </div>
+            </template>
 
-          <template #carouselNavigationButtons="{goToPrev,goToNext}">
-            <div class="carousel-navigation">
-              <button @click="goToPrev">
-                <img src="../../../../public/images/prev-solo1.svg" />
-              </button>
-              <button @click="goToNext">
-                <img src="../../../../public/images/next-solo1.svg" />
-              </button>
-            </div>
-          </template>
-        </ServiceSlider>
-      </template>
-    </HalfClippedShape>
+            <template #carouselNavigationButtons="{goToPrev,goToNext}">
+              <div class="carousel-navigation">
+                <button @click="goToPrev">
+                  <img src="../../../../public/images/prev-solo1.svg" />
+                </button>
+                <button @click="goToNext">
+                  <img src="../../../../public/images/next-solo1.svg" />
+                </button>
+              </div>
+            </template>
+          </ServiceSlider>
+        </template>
+      </HalfClippedShape>
+    </div>
   </div>
 </template>
 
@@ -76,7 +78,8 @@ export default {
   data() {
     return {
       titleDirection: "service-title-next",
-      contentDirection: "service-content-next"
+      contentDirection: "service-content-next",
+      isShown: true
     };
   },
   components: {
@@ -104,6 +107,13 @@ export default {
     },
     reformatURL(id) {
       return reformatStringToBeInURL(id);
+    },
+    visibilityChange(evt, hidden) {
+      if (hidden) this.isShown = false;
+      else
+        setTimeout(() => {
+          this.isShown = true;
+        }, 100);
     }
   },
   updated() {
