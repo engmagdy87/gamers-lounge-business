@@ -28,7 +28,11 @@
             draggable="false"
             @load="onImgLoad"
           />
-          <div v-if="isPlaceholderImageShown" class="image-placeholder" />
+          <div
+            v-if="isPlaceholderImageShown"
+            class="image-placeholder"
+            style="min-height: 50vh;"
+          />
         </div>
 
         <div
