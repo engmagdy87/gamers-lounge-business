@@ -13,8 +13,9 @@
       <div class="home-wrapper__text">
         <h1 class="home-wrapper__title">WHO WE ARE</h1>
         <p class="home-wrapper__content">
-          Egypt’s first Esports organization, founded by hardcore gamers to take
-          the gaming scene in the MENA region to the next level!
+          One of the first esports organizations in the MENA ,Founded by Middle
+          Eastern hardcore gamers to take the gaming scene in the region to the
+          next level!
         </p>
         <div class="home-wrapper__divider"></div>
       </div>
