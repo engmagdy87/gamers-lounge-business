@@ -136,12 +136,12 @@ self.__precacheManifest = [
     "url": "/js/HeroSlidesList.805e8955.js"
   },
   {
-    "revision": "6dfb6526cc844e32e6d4",
-    "url": "/css/Home.e18c6385.css"
+    "revision": "922d07486fe1d673ef65",
+    "url": "/css/Home.051e9d29.css"
   },
   {
-    "revision": "6dfb6526cc844e32e6d4",
-    "url": "/js/Home.6d1cf9df.js"
+    "revision": "922d07486fe1d673ef65",
+    "url": "/js/Home.d32504fd.js"
   },
   {
     "revision": "bbc411e6bc49929902c0",
@@ -404,12 +404,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.81079fb5.js"
   },
   {
-    "revision": "16a9aaad2e2a6dc047aa",
+    "revision": "23267aea64808e1b0e4e",
     "url": "/css/app.a2383485.css"
   },
   {
-    "revision": "16a9aaad2e2a6dc047aa",
-    "url": "/js/app.62c3ed33.js"
+    "revision": "23267aea64808e1b0e4e",
+    "url": "/js/app.0e29a7de.js"
   },
   {
     "revision": "e2d928018cb3ba2a805c",
@@ -476,7 +476,7 @@ self.__precacheManifest = [
     "url": "/img/prev-solo1.51cec31f.svg"
   },
   {
-    "revision": "4e9c2486fa33243640b40cbee3f53da8",
+    "revision": "7035e41709541029ab65122100983668",
     "url": "/index.html"
   },
   {
@@ -544,12 +544,12 @@ self.__precacheManifest = [
     "url": "/images/download.svg"
   },
   {
-    "revision": "80ab8c35fee0090540b1acde85807338",
-    "url": "/images/increase_font.svg"
-  },
-  {
     "revision": "cd955919d1908c1f33233b0f8e3b05b2",
     "url": "/images/edit.svg"
+  },
+  {
+    "revision": "80ab8c35fee0090540b1acde85807338",
+    "url": "/images/increase_font.svg"
   },
   {
     "revision": "d4b1a33cc752cc735b55e0a624665a2c",
@@ -588,12 +588,12 @@ self.__precacheManifest = [
     "url": "/images/reset.svg"
   },
   {
-    "revision": "973d1b853335d9eb78eaf40e4eb6272d",
-    "url": "/images/top-arrow.svg"
-  },
-  {
     "revision": "8ab7e03c6fd3405f3ebfd157b2b71240",
     "url": "/images/visibility.svg"
+  },
+  {
+    "revision": "973d1b853335d9eb78eaf40e4eb6272d",
+    "url": "/images/top-arrow.svg"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
