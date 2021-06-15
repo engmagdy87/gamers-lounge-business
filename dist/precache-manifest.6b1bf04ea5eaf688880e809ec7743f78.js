@@ -164,12 +164,12 @@ self.__precacheManifest = [
     "url": "/js/JobDetails.00164e94.js"
   },
   {
-    "revision": "c23273e1c71955d3078e",
-    "url": "/css/Jobs.8bfadc26.css"
+    "revision": "a131d05419ba5b6fda76",
+    "url": "/css/Jobs.02fad14d.css"
   },
   {
-    "revision": "c23273e1c71955d3078e",
-    "url": "/js/Jobs.86faee65.js"
+    "revision": "a131d05419ba5b6fda76",
+    "url": "/js/Jobs.ac15d598.js"
   },
   {
     "revision": "a34e55c7279eff9603dd",
@@ -216,12 +216,12 @@ self.__precacheManifest = [
     "url": "/js/OurWorkDetails~ServicesDetails.673d8b27.js"
   },
   {
-    "revision": "5de475ec9dcbfcf23430",
-    "url": "/css/OurWorks.71d2d542.css"
+    "revision": "cd3fb3e049235bcefbd7",
+    "url": "/css/OurWorks.a14dea88.css"
   },
   {
-    "revision": "5de475ec9dcbfcf23430",
-    "url": "/js/OurWorks.0ce3ec73.js"
+    "revision": "cd3fb3e049235bcefbd7",
+    "url": "/js/OurWorks.c8eb49f6.js"
   },
   {
     "revision": "a016d86e99ebc331ccb0",
@@ -276,12 +276,12 @@ self.__precacheManifest = [
     "url": "/js/ServiceSectionsList.3cb1445f.js"
   },
   {
-    "revision": "56ce1f94c95f4933fefd",
-    "url": "/css/Services.b008ec29.css"
+    "revision": "109e1bd9186a23faa479",
+    "url": "/css/Services.59c0b189.css"
   },
   {
-    "revision": "56ce1f94c95f4933fefd",
-    "url": "/js/Services.6dee37b1.js"
+    "revision": "109e1bd9186a23faa479",
+    "url": "/js/Services.95001431.js"
   },
   {
     "revision": "089b4d349ae8ec979a77",
@@ -404,12 +404,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.81079fb5.js"
   },
   {
-    "revision": "23267aea64808e1b0e4e",
+    "revision": "1371a6e4334e62ae1e43",
     "url": "/css/app.a2383485.css"
   },
   {
-    "revision": "23267aea64808e1b0e4e",
-    "url": "/js/app.0e29a7de.js"
+    "revision": "1371a6e4334e62ae1e43",
+    "url": "/js/app.d2dc431a.js"
   },
   {
     "revision": "e2d928018cb3ba2a805c",
@@ -476,7 +476,7 @@ self.__precacheManifest = [
     "url": "/img/prev-solo1.51cec31f.svg"
   },
   {
-    "revision": "7035e41709541029ab65122100983668",
+    "revision": "9b6221708adc50b37ad2496b7d4b029d",
     "url": "/index.html"
   },
   {
@@ -520,40 +520,32 @@ self.__precacheManifest = [
     "url": "/images/prev.png"
   },
   {
-    "revision": "d41d8cd98f00b204e9800998ecf8427e",
-    "url": "/.gitkeep"
-  },
-  {
-    "revision": "6a02faf7ea2a9584134ffe15779a0e44",
-    "url": "/_redirects"
-  },
-  {
-    "revision": "a95be6e8a890f1897308ee3122a70aef",
-    "url": "/images/add.svg"
-  },
-  {
     "revision": "5b47b416f6e4dbba80a1ca269adf7580",
     "url": "/images/decrease_font.svg"
-  },
-  {
-    "revision": "752d64f551b54c06f4b7280d9f74d27c",
-    "url": "/images/delete.svg"
   },
   {
     "revision": "533b554da9fa067f3e7e2a631cc83a80",
     "url": "/images/download.svg"
   },
   {
+    "revision": "6a02faf7ea2a9584134ffe15779a0e44",
+    "url": "/_redirects"
+  },
+  {
     "revision": "cd955919d1908c1f33233b0f8e3b05b2",
     "url": "/images/edit.svg"
+  },
+  {
+    "revision": "d4b1a33cc752cc735b55e0a624665a2c",
+    "url": "/images/env.svg"
   },
   {
     "revision": "80ab8c35fee0090540b1acde85807338",
     "url": "/images/increase_font.svg"
   },
   {
-    "revision": "d4b1a33cc752cc735b55e0a624665a2c",
-    "url": "/images/env.svg"
+    "revision": "bedc6caff68a7ea0e9d74f7006bc949c",
+    "url": "/images/phone.svg"
   },
   {
     "revision": "a7e2b1e2c4158772c526b5546da5e890",
@@ -564,12 +556,12 @@ self.__precacheManifest = [
     "url": "/images/next.svg"
   },
   {
-    "revision": "bedc6caff68a7ea0e9d74f7006bc949c",
-    "url": "/images/phone.svg"
+    "revision": "d41d8cd98f00b204e9800998ecf8427e",
+    "url": "/.gitkeep"
   },
   {
-    "revision": "fda6dade130f0061fa96e037973946bd",
-    "url": "/images/pin.svg"
+    "revision": "a95be6e8a890f1897308ee3122a70aef",
+    "url": "/images/add.svg"
   },
   {
     "revision": "eb55acdf799a7622a48f50ce42fe93a9",
@@ -580,6 +572,14 @@ self.__precacheManifest = [
     "url": "/images/prev-solo.png"
   },
   {
+    "revision": "fda6dade130f0061fa96e037973946bd",
+    "url": "/images/pin.svg"
+  },
+  {
+    "revision": "752d64f551b54c06f4b7280d9f74d27c",
+    "url": "/images/delete.svg"
+  },
+  {
     "revision": "8787c6a53212c3033dc26fb3eb820305",
     "url": "/images/prev.svg"
   },
@@ -588,12 +588,12 @@ self.__precacheManifest = [
     "url": "/images/reset.svg"
   },
   {
-    "revision": "8ab7e03c6fd3405f3ebfd157b2b71240",
-    "url": "/images/visibility.svg"
-  },
-  {
     "revision": "973d1b853335d9eb78eaf40e4eb6272d",
     "url": "/images/top-arrow.svg"
+  },
+  {
+    "revision": "8ab7e03c6fd3405f3ebfd157b2b71240",
+    "url": "/images/visibility.svg"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
