@@ -85,6 +85,8 @@ export default {
       this.setIsJobFetched(
         this.currentRoute === this.$router.currentRoute.path
       );
+    if (this.$route.name === "services" || this.$route.name === "works")
+      this.closeModal();
   }
 };
 </script>
