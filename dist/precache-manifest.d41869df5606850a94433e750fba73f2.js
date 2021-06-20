@@ -136,11 +136,11 @@ self.__precacheManifest = [
     "url": "/js/HeroSlidesList.805e8955.js"
   },
   {
-    "revision": "922d07486fe1d673ef65",
-    "url": "/css/Home.051e9d29.css"
+    "revision": "a67fcbb02898d66490d4",
+    "url": "/css/Home.96c50e06.css"
   },
   {
-    "revision": "922d07486fe1d673ef65",
+    "revision": "a67fcbb02898d66490d4",
     "url": "/js/Home.d32504fd.js"
   },
   {
@@ -404,12 +404,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.81079fb5.js"
   },
   {
-    "revision": "1371a6e4334e62ae1e43",
+    "revision": "0180b766d832c076d435",
     "url": "/css/app.a2383485.css"
   },
   {
-    "revision": "1371a6e4334e62ae1e43",
-    "url": "/js/app.d2dc431a.js"
+    "revision": "0180b766d832c076d435",
+    "url": "/js/app.86af2de6.js"
   },
   {
     "revision": "e2d928018cb3ba2a805c",
@@ -476,7 +476,7 @@ self.__precacheManifest = [
     "url": "/img/prev-solo1.51cec31f.svg"
   },
   {
-    "revision": "9b6221708adc50b37ad2496b7d4b029d",
+    "revision": "d849de42504ae35a08fd5df9845d99f4",
     "url": "/index.html"
   },
   {
@@ -520,20 +520,32 @@ self.__precacheManifest = [
     "url": "/images/prev.png"
   },
   {
-    "revision": "5b47b416f6e4dbba80a1ca269adf7580",
-    "url": "/images/decrease_font.svg"
-  },
-  {
-    "revision": "533b554da9fa067f3e7e2a631cc83a80",
-    "url": "/images/download.svg"
+    "revision": "d41d8cd98f00b204e9800998ecf8427e",
+    "url": "/.gitkeep"
   },
   {
     "revision": "6a02faf7ea2a9584134ffe15779a0e44",
     "url": "/_redirects"
   },
   {
+    "revision": "5b47b416f6e4dbba80a1ca269adf7580",
+    "url": "/images/decrease_font.svg"
+  },
+  {
+    "revision": "a95be6e8a890f1897308ee3122a70aef",
+    "url": "/images/add.svg"
+  },
+  {
+    "revision": "752d64f551b54c06f4b7280d9f74d27c",
+    "url": "/images/delete.svg"
+  },
+  {
     "revision": "cd955919d1908c1f33233b0f8e3b05b2",
     "url": "/images/edit.svg"
+  },
+  {
+    "revision": "533b554da9fa067f3e7e2a631cc83a80",
+    "url": "/images/download.svg"
   },
   {
     "revision": "d4b1a33cc752cc735b55e0a624665a2c",
@@ -544,56 +556,44 @@ self.__precacheManifest = [
     "url": "/images/increase_font.svg"
   },
   {
-    "revision": "bedc6caff68a7ea0e9d74f7006bc949c",
-    "url": "/images/phone.svg"
+    "revision": "c9e7debf1f052891316f621ed282ff5c",
+    "url": "/images/next.svg"
   },
   {
     "revision": "a7e2b1e2c4158772c526b5546da5e890",
     "url": "/images/next-solo.png"
   },
   {
-    "revision": "c9e7debf1f052891316f621ed282ff5c",
-    "url": "/images/next.svg"
-  },
-  {
-    "revision": "d41d8cd98f00b204e9800998ecf8427e",
-    "url": "/.gitkeep"
-  },
-  {
-    "revision": "a95be6e8a890f1897308ee3122a70aef",
-    "url": "/images/add.svg"
-  },
-  {
-    "revision": "eb55acdf799a7622a48f50ce42fe93a9",
-    "url": "/images/placeholder.png"
-  },
-  {
-    "revision": "664865b98abec36c0020a2ae5d8664d4",
-    "url": "/images/prev-solo.png"
+    "revision": "bedc6caff68a7ea0e9d74f7006bc949c",
+    "url": "/images/phone.svg"
   },
   {
     "revision": "fda6dade130f0061fa96e037973946bd",
     "url": "/images/pin.svg"
   },
   {
-    "revision": "752d64f551b54c06f4b7280d9f74d27c",
-    "url": "/images/delete.svg"
-  },
-  {
     "revision": "8787c6a53212c3033dc26fb3eb820305",
     "url": "/images/prev.svg"
+  },
+  {
+    "revision": "664865b98abec36c0020a2ae5d8664d4",
+    "url": "/images/prev-solo.png"
+  },
+  {
+    "revision": "eb55acdf799a7622a48f50ce42fe93a9",
+    "url": "/images/placeholder.png"
   },
   {
     "revision": "17e1f669c620a22cdb3f7b0e5cc5ed48",
     "url": "/images/reset.svg"
   },
   {
-    "revision": "973d1b853335d9eb78eaf40e4eb6272d",
-    "url": "/images/top-arrow.svg"
-  },
-  {
     "revision": "8ab7e03c6fd3405f3ebfd157b2b71240",
     "url": "/images/visibility.svg"
+  },
+  {
+    "revision": "973d1b853335d9eb78eaf40e4eb6272d",
+    "url": "/images/top-arrow.svg"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
