@@ -35,7 +35,7 @@
                     class="hero-carousel__url"
                     :href="slide.url"
                     target="__blank"
-                    >Register Now <span>&#187;</span></a
+                    >See More <span>&#187;</span></a
                   >
                 </transition>
               </div>
