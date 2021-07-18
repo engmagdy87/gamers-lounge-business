@@ -35,7 +35,12 @@
                     class="hero-carousel__url"
                     :href="slide.url"
                     target="__blank"
-                    >See More <span>&#187;</span></a
+                    >{{
+                      slide.title.toLowerCase().includes("esports summit")
+                        ? "See More"
+                        : "Register Now"
+                    }}
+                    <span>&#187;</span></a
                   >
                 </transition>
               </div>
