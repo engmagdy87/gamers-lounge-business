@@ -136,12 +136,12 @@ self.__precacheManifest = [
     "url": "/js/HeroSlidesList.805e8955.js"
   },
   {
-    "revision": "fbd004e73940d922a94a",
-    "url": "/css/Home.ab7b05b1.css"
+    "revision": "502e5d92a2c2b9f7de97",
+    "url": "/css/Home.15a1b17f.css"
   },
   {
-    "revision": "fbd004e73940d922a94a",
-    "url": "/js/Home.056daf8f.js"
+    "revision": "502e5d92a2c2b9f7de97",
+    "url": "/js/Home.8cb3826d.js"
   },
   {
     "revision": "bbc411e6bc49929902c0",
@@ -404,12 +404,12 @@ self.__precacheManifest = [
     "url": "/js/WorksList.81079fb5.js"
   },
   {
-    "revision": "53c29cdd8179f3359c7e",
+    "revision": "069fd313c7968d5a951b",
     "url": "/css/app.a2383485.css"
   },
   {
-    "revision": "53c29cdd8179f3359c7e",
-    "url": "/js/app.08fabdc4.js"
+    "revision": "069fd313c7968d5a951b",
+    "url": "/js/app.202de1c4.js"
   },
   {
     "revision": "e2d928018cb3ba2a805c",
@@ -456,27 +456,27 @@ self.__precacheManifest = [
     "url": "/img/phone-white.6bf694c1.svg"
   },
   {
-    "revision": "8224e0160e362e117cbe00495919e2af",
-    "url": "/fonts/nucleo-icons.8224e016.eot"
-  },
-  {
     "revision": "ff208b8d733e61a630992ee2b72c9c1c",
     "url": "/fonts/nucleo-icons.ff208b8d.woff2"
   },
   {
-    "revision": "b0dc05d015e91e7d28d79cd0056fe555",
-    "url": "/fonts/nucleo-icons.b0dc05d0.ttf"
+    "revision": "8224e0160e362e117cbe00495919e2af",
+    "url": "/fonts/nucleo-icons.8224e016.eot"
   },
   {
     "revision": "ae42fa524981a56f3f289447cff36eb1",
     "url": "/img/nucleo-icons.ae42fa52.svg"
   },
   {
+    "revision": "b0dc05d015e91e7d28d79cd0056fe555",
+    "url": "/fonts/nucleo-icons.b0dc05d0.ttf"
+  },
+  {
     "revision": "51cec31f8b574a0c25109b5545b993c6",
     "url": "/img/prev-solo1.51cec31f.svg"
   },
   {
-    "revision": "710b4568cc32fef4df4930ef8635eec8",
+    "revision": "1af2bcc20bb7eb2c65db75a2038d1ef2",
     "url": "/index.html"
   },
   {
@@ -520,10 +520,6 @@ self.__precacheManifest = [
     "url": "/images/prev.png"
   },
   {
-    "revision": "d41d8cd98f00b204e9800998ecf8427e",
-    "url": "/.gitkeep"
-  },
-  {
     "revision": "6a02faf7ea2a9584134ffe15779a0e44",
     "url": "/_redirects"
   },
@@ -532,12 +528,16 @@ self.__precacheManifest = [
     "url": "/images/add.svg"
   },
   {
-    "revision": "752d64f551b54c06f4b7280d9f74d27c",
-    "url": "/images/delete.svg"
+    "revision": "d41d8cd98f00b204e9800998ecf8427e",
+    "url": "/.gitkeep"
   },
   {
     "revision": "5b47b416f6e4dbba80a1ca269adf7580",
     "url": "/images/decrease_font.svg"
+  },
+  {
+    "revision": "752d64f551b54c06f4b7280d9f74d27c",
+    "url": "/images/delete.svg"
   },
   {
     "revision": "533b554da9fa067f3e7e2a631cc83a80",
@@ -548,6 +548,10 @@ self.__precacheManifest = [
     "url": "/images/edit.svg"
   },
   {
+    "revision": "d4b1a33cc752cc735b55e0a624665a2c",
+    "url": "/images/env.svg"
+  },
+  {
     "revision": "80ab8c35fee0090540b1acde85807338",
     "url": "/images/increase_font.svg"
   },
@@ -556,40 +560,36 @@ self.__precacheManifest = [
     "url": "/images/next-solo.png"
   },
   {
-    "revision": "d4b1a33cc752cc735b55e0a624665a2c",
-    "url": "/images/env.svg"
-  },
-  {
     "revision": "c9e7debf1f052891316f621ed282ff5c",
     "url": "/images/next.svg"
-  },
-  {
-    "revision": "fda6dade130f0061fa96e037973946bd",
-    "url": "/images/pin.svg"
   },
   {
     "revision": "bedc6caff68a7ea0e9d74f7006bc949c",
     "url": "/images/phone.svg"
   },
   {
-    "revision": "664865b98abec36c0020a2ae5d8664d4",
-    "url": "/images/prev-solo.png"
+    "revision": "fda6dade130f0061fa96e037973946bd",
+    "url": "/images/pin.svg"
   },
   {
     "revision": "eb55acdf799a7622a48f50ce42fe93a9",
     "url": "/images/placeholder.png"
   },
   {
+    "revision": "664865b98abec36c0020a2ae5d8664d4",
+    "url": "/images/prev-solo.png"
+  },
+  {
     "revision": "8787c6a53212c3033dc26fb3eb820305",
     "url": "/images/prev.svg"
   },
   {
-    "revision": "973d1b853335d9eb78eaf40e4eb6272d",
-    "url": "/images/top-arrow.svg"
-  },
-  {
     "revision": "17e1f669c620a22cdb3f7b0e5cc5ed48",
     "url": "/images/reset.svg"
+  },
+  {
+    "revision": "973d1b853335d9eb78eaf40e4eb6272d",
+    "url": "/images/top-arrow.svg"
   },
   {
     "revision": "8ab7e03c6fd3405f3ebfd157b2b71240",
